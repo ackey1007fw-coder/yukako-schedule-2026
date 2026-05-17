@@ -1,0 +1,72 @@
+import { Radio, Sparkles } from "lucide-react";
+import { profile } from "../data/profile";
+import { ExternalButton } from "./ExternalButton";
+import { Photo } from "./Photo";
+import { SectionHeader } from "./SectionHeader";
+import { AvatarGallery } from "./AvatarGallery";
+
+export function ShowroomSection() {
+  return (
+    <section id="showroom" className="bg-white py-16 sm:py-24">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <SectionHeader
+          kicker="SHOWROOM"
+          title="ライブ配信で応援する"
+          copy="ルーム情報、配信の見どころ、アバターをひとつのエリアに整理しました。"
+        />
+
+        <div className="mb-12 grid overflow-hidden border border-rosefog/25 bg-porcelain lg:grid-cols-[0.9fr_1.1fr]">
+          <Photo
+            src={profile.showroom.image}
+            alt="SHOWROOM card"
+            className="min-h-[320px] lg:min-h-[480px]"
+          />
+          <div className="p-6 sm:p-8 lg:p-10">
+            <div className="mb-6 flex items-center gap-3 text-champagne">
+              <span className="grid h-11 w-11 place-items-center border border-champagne/50 bg-white">
+                <Radio className="h-5 w-5" aria-hidden="true" />
+              </span>
+              <div>
+                <p className="text-xs font-bold uppercase">Room</p>
+                <h3 className="font-display text-3xl text-ink">
+                  {profile.showroom.roomName}
+                </h3>
+              </div>
+            </div>
+
+            <p className="text-sm font-bold text-ink/55">
+              {profile.showroom.tagline}
+            </p>
+            <p className="mt-4 text-lg leading-9 text-ink/72">
+              {profile.showroom.message}
+            </p>
+
+            <div className="mt-7 grid grid-cols-2 gap-3 sm:grid-cols-4">
+              {profile.showroom.stats.map((stat) => (
+                <div key={stat.label} className="border border-white bg-white p-4">
+                  <p className="font-display text-3xl text-ink">{stat.value}</p>
+                  <p className="mt-2 text-xs font-bold text-ink/55">{stat.label}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <ExternalButton href={profile.showroom.url} variant="primary">
+                SHOWROOMを開く
+              </ExternalButton>
+              <a
+                href="#links"
+                className="inline-flex min-h-12 items-center justify-center gap-2 border border-rosefog/40 bg-white px-4 py-3 text-sm font-bold text-ink transition hover:bg-porcelain"
+              >
+                <Sparkles className="h-4 w-4" aria-hidden="true" />
+                SNSも見る
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <AvatarGallery />
+      </div>
+    </section>
+  );
+}
