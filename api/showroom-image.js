@@ -20,10 +20,14 @@ export default async function handler(request, response) {
       return;
     }
 
-    if (
+    const isOldShowroomCdn =
       parsedUrl.hostname === "image.showroom-cdn.com" &&
-      !parsedUrl.pathname.startsWith("/showroom-prod/")
-    ) {
+      parsedUrl.pathname.startsWith("/showroom-prod/");
+    const isStaticShowroomAsset =
+      parsedUrl.hostname === "static.showroom-live.com" &&
+      parsedUrl.pathname.startsWith("/image/");
+
+    if (!isOldShowroomCdn && !isStaticShowroomAsset) {
       response.status(400).send("Unsupported image URL");
       return;
     }
