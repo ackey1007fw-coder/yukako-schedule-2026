@@ -1,10 +1,8 @@
 const showroomAsset = (url: string) =>
   `/api/showroom-image?url=${encodeURIComponent(url)}`;
 
-const showroomAvatar = (id: string, version: string) =>
-  showroomAsset(
-    `https://image.showroom-cdn.com/showroom-prod/image/avatar/${id}.png?v=${version}`
-  );
+const showroomAvatar = (id: string, version = "110") =>
+  showroomAsset(`https://static.showroom-live.com/image/avatar/${id}.png?v=${version}`);
 
 export const profile = {
   theme: "Riri Schedule 2026",
@@ -45,6 +43,7 @@ export const profile = {
     ),
     url: "https://www.showroom-live.com/room/profile?room_id=550336",
     stats: [
+      { label: "まいにち配信", value: "377日目" },
       { label: "次回配信", value: "未定" },
       { label: "フォロワー", value: "905" },
       { label: "ルームLv", value: "157" },
@@ -55,49 +54,53 @@ export const profile = {
   },
   avatars: [
     {
-      name: "おばけりりたん",
-      image: showroomAvatar("1000244", "1738408017")
-    },
-    {
-      name: "金ぐりり",
-      image: showroomAvatar("1000090", "1725810395"),
+      name: "りりアバター 01",
+      image: showroomAvatar("1141864"),
       featured: true
     },
     {
-      name: "ちびりり",
-      image: showroomAvatar("1000363", "1740022425")
+      name: "りりアバター 02",
+      image: showroomAvatar("1139413")
     },
     {
-      name: "とりり",
-      image: showroomAvatar("1001254", "1741230010")
+      name: "りりアバター 03",
+      image: showroomAvatar("1139155")
     },
     {
-      name: "りりわん",
-      image: showroomAvatar("1001493", "1741410070")
+      name: "りりアバター 04",
+      image: showroomAvatar("1137154")
     },
     {
-      name: "こうもりり",
-      image: showroomAvatar("1001679", "1743654799")
+      name: "りりアバター 05",
+      image: showroomAvatar("1136628")
     },
     {
-      name: "ひまわりり",
-      image: showroomAvatar("1003280", "1747962189")
+      name: "りりアバター 06",
+      image: showroomAvatar("1135709")
     },
     {
-      name: "なつりり",
-      image: showroomAvatar("1003281", "1747962247")
+      name: "りりアバター 07",
+      image: showroomAvatar("1135202")
     },
     {
-      name: "サーフィンサンサン",
-      image: showroomAvatar("1003282", "1747962336")
+      name: "りりアバター 08",
+      image: showroomAvatar("1133559")
     },
     {
-      name: "サンサン",
-      image: showroomAvatar("1003283", "1747962380")
+      name: "りりアバター 09",
+      image: showroomAvatar("1133436")
     },
     {
-      name: "しょきりり",
-      image: showroomAvatar("1004174", "1750928252")
+      name: "りりアバター 10",
+      image: showroomAvatar("1132347")
+    },
+    {
+      name: "りりアバター 11",
+      image: showroomAvatar("1131522")
+    },
+    {
+      name: "りりアバター 12",
+      image: showroomAvatar("1130485")
     }
   ]
 };
