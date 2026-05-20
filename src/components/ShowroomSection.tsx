@@ -77,6 +77,7 @@ export function ShowroomSection() {
             src={profile.showroom.image}
             alt="夏凪里季 SHOWROOM"
             className="min-h-[320px] lg:min-h-[480px]"
+            loading="eager"
           />
           <div className="p-6 sm:p-8 lg:p-10">
             <div className="mb-6 flex items-center gap-3 text-champagne">
