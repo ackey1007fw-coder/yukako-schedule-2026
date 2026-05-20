@@ -41,7 +41,7 @@ export const profile = {
     roomName: "夏凪里季",
     tagline: "#フレキャン2025 | Entry No.306",
     image: showroomAsset(
-      "https://image.showroom-cdn.com/showroom-prod/image/room/cover/55d2ef24f81c0ade2fd985f3144696638393b41ef2d56b6e721de2ebcbdc94ea_l.jpeg?v=1749278230"
+      "https://static.showroom-live.com/image/room/cover/79fff63b1c4bdbb2fa1bf0507b410abbc3ce07d36111ac3ff3867633fb0d3c80_s.jpeg?v=1779283160"
     ),
     url: "https://www.showroom-live.com/room/profile?room_id=550336",
     stats: [
