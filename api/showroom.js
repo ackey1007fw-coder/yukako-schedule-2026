@@ -24,6 +24,14 @@ const cleanText = (html) =>
 
 const matchText = (text, pattern) => text.match(pattern)?.[1]?.trim();
 
+const normalizeSchedule = (value) => {
+  if (!value || value.toUpperCase() === "TBD") {
+    return "未定";
+  }
+
+  return value;
+};
+
 const parseShowroomProfile = (html) => {
   const text = cleanText(html);
 
@@ -33,7 +41,7 @@ const parseShowroomProfile = (html) => {
     roomLevel: matchText(text, /Room Level\s*\n\s*([\d,]+)/i),
     showRank: matchText(text, /SHOW rank\s*\n\s*([A-Z])/i),
     category: matchText(text, /Category\s*\n\s*([^\n]+)/i),
-    nextShow: matchText(text, /Show\s*:\s*([^\n]+)/i),
+    nextShow: normalizeSchedule(matchText(text, /Show\s*:\s*([^\n]+)/i)),
     updatedAt: new Date().toISOString()
   };
 };
