@@ -1,4 +1,7 @@
-const ALLOWED_HOST = "image.showroom-cdn.com";
+const ALLOWED_HOSTS = new Set([
+  "image.showroom-cdn.com",
+  "static.showroom-live.com"
+]);
 
 export default async function handler(request, response) {
   try {
@@ -12,8 +15,13 @@ export default async function handler(request, response) {
 
     const parsedUrl = new URL(imageUrl);
 
+    if (!ALLOWED_HOSTS.has(parsedUrl.hostname)) {
+      response.status(400).send("Unsupported image URL");
+      return;
+    }
+
     if (
-      parsedUrl.hostname !== ALLOWED_HOST ||
+      parsedUrl.hostname === "image.showroom-cdn.com" &&
       !parsedUrl.pathname.startsWith("/showroom-prod/")
     ) {
       response.status(400).send("Unsupported image URL");
