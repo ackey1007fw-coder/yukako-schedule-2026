@@ -7,6 +7,7 @@ import { SectionHeader } from "./SectionHeader";
 import { AvatarGallery } from "./AvatarGallery";
 
 type ShowroomApiData = {
+  dailyDays?: string;
   followers?: string;
   roomLevel?: string;
   showRank?: string;
@@ -43,6 +44,12 @@ export function ShowroomSection() {
 
   const stats = useMemo(
     () => [
+      {
+        label: "まいにち配信",
+        value: showroomData?.dailyDays
+          ? `${showroomData.dailyDays}日目`
+          : fallbackValue("まいにち配信")
+      },
       {
         label: "次回配信",
         value: showroomData?.nextShow || fallbackValue("次回配信")
@@ -99,7 +106,7 @@ export function ShowroomSection() {
               {profile.showroom.message}
             </p>
 
-            <div className="mt-7 grid grid-cols-2 gap-3 sm:grid-cols-4">
+            <div className="mt-7 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
               {stats.map((stat) => (
                 <div key={stat.label} className="border border-white bg-white p-4">
                   <p className="font-display text-2xl text-ink sm:text-3xl">
