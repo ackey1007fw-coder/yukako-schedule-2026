@@ -1,6 +1,9 @@
 const showroomAsset = (url: string) =>
   `/api/showroom-image?url=${encodeURIComponent(url)}`;
 
+const driveImage = (id: string, size = "w1600") =>
+  `https://drive.google.com/thumbnail?id=${id}&sz=${size}`;
+
 const showroomAvatar = (id: string, version = "110") =>
   showroomAsset(`https://static.showroom-live.com/image/avatar/${id}.png?v=${version}`);
 
@@ -13,8 +16,8 @@ export const profile = {
   catchCopy: "透明感のある笑顔とまっすぐな表現力で、次の舞台へ。",
   intro:
     "出演予定、配信、SNS、プロフィールをひとつにまとめた応援スケジュールです。",
-  heroImage: "/images/riri-hero.jpg",
-  portraitImage: "/images/riri-portrait.jpg",
+  heroImage: driveImage("1-tnOZvazIjzWiOBCrzVdUhaY9mFXCkNp", "w2200"),
+  portraitImage: driveImage("15cmlhmXNpJRzztleLn_Q_97ft1Gffr4j", "w1800"),
   birthday: "2006-06-24",
   birthdayMonthDay: "06-24",
   birthdayLabel: "6月24日",
@@ -53,54 +56,17 @@ export const profile = {
       "朝の配信やイベント前の近況をチェック。コメント、フォロー、ギフトで日々の活動を応援できます。"
   },
   avatars: [
-    {
-      name: "りりアバター 01",
-      image: showroomAvatar("1141864"),
-      featured: true
-    },
-    {
-      name: "りりアバター 02",
-      image: showroomAvatar("1139413")
-    },
-    {
-      name: "りりアバター 03",
-      image: showroomAvatar("1139155")
-    },
-    {
-      name: "りりアバター 04",
-      image: showroomAvatar("1137154")
-    },
-    {
-      name: "りりアバター 05",
-      image: showroomAvatar("1136628")
-    },
-    {
-      name: "りりアバター 06",
-      image: showroomAvatar("1135709")
-    },
-    {
-      name: "りりアバター 07",
-      image: showroomAvatar("1135202")
-    },
-    {
-      name: "りりアバター 08",
-      image: showroomAvatar("1133559")
-    },
-    {
-      name: "りりアバター 09",
-      image: showroomAvatar("1133436")
-    },
-    {
-      name: "りりアバター 10",
-      image: showroomAvatar("1132347")
-    },
-    {
-      name: "りりアバター 11",
-      image: showroomAvatar("1131522")
-    },
-    {
-      name: "りりアバター 12",
-      image: showroomAvatar("1130485")
-    }
+    { name: "りりアバター 01", image: showroomAvatar("1141864"), featured: true },
+    { name: "りりアバター 02", image: showroomAvatar("1139413") },
+    { name: "りりアバター 03", image: showroomAvatar("1139155") },
+    { name: "りりアバター 04", image: showroomAvatar("1137154") },
+    { name: "りりアバター 05", image: showroomAvatar("1136628") },
+    { name: "りりアバター 06", image: showroomAvatar("1135709") },
+    { name: "りりアバター 07", image: showroomAvatar("1135202") },
+    { name: "りりアバター 08", image: showroomAvatar("1133559") },
+    { name: "りりアバター 09", image: showroomAvatar("1133436") },
+    { name: "りりアバター 10", image: showroomAvatar("1132347") },
+    { name: "りりアバター 11", image: showroomAvatar("1131522") },
+    { name: "りりアバター 12", image: showroomAvatar("1130485") }
   ]
 };
