@@ -8,6 +8,7 @@ import { NextEvent } from "./components/NextEvent";
 import { PhotoGallerySection } from "./components/PhotoGallerySection";
 import { ProfileSection } from "./components/ProfileSection";
 import { ScheduleSection } from "./components/ScheduleSection";
+import { SearchSeoSection } from "./components/SearchSeoSection";
 import { ShowroomSection } from "./components/ShowroomSection";
 import { SiteHeader } from "./components/SiteHeader";
 import {
@@ -85,6 +86,7 @@ function App() {
         <BirthdayCountdown />
         <ShowroomSection />
         <ProfileSection />
+        <SearchSeoSection />
         <LinksSection socialLinks={socialLinks} mediaLinks={mediaLinks} />
       </main>
       <Footer
