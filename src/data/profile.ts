@@ -17,7 +17,7 @@ export const profile = {
   intro:
     "出演予定、配信、SNS、プロフィールをひとつにまとめた応援スケジュールです。",
   heroImage: driveImage("1-tnOZvazIjzWiOBCrzVdUhaY9mFXCkNp", "w2200"),
-  portraitImage: driveImage("1MhtYW0KPCOf0E4NITJwUZGlSgj4k3JDQ", "w1800"),
+  portraitImage: driveImage("15cmlhmXNpJRzztleLn_Q_97ft1Gffr4j", "w1800"),
   birthday: "2006-06-24",
   birthdayMonthDay: "06-24",
   birthdayLabel: "6月24日",
@@ -27,16 +27,17 @@ export const profile = {
     { label: "出身", value: "三重県生まれ、神奈川県育ち" },
     { label: "身長", value: "163cm" },
     { label: "夢", value: "世界中の人の心を動かす役者になること" },
+    { label: "受賞", value: "フレキャン2025 審査員特別賞" },
     { label: "部活", value: "陸上部（ハードル）、ダンス部" },
     { label: "趣味", value: "数独、映画鑑賞、スポーツ、お菓子作り" },
     { label: "特技", value: "表情筋を動かすこと" },
     { label: "性格", value: "ESFJ（領事官）" }
   ],
   gallery: [
-    driveImage("1D9t__MTdyoBzSHyK9-gxTWetikuHYnZ7"),
-    driveImage("1tX415Tt5YTCCh9gjnzThVU9djIKP0t-1"),
-    driveImage("1iAMrOBTgGraMgyLXibw93bA3knmDPnO6"),
-    driveImage("1eIuhuqSpiFrztLnHS9vT3zFXYV-d6vn8")
+    "/images/riri-zine-01.jpg",
+    "/images/riri-zine-02.jpg",
+    "/images/riri-zine-03.jpg",
+    "/images/riri-zine-04.jpg"
   ],
   showroom: {
     roomName: "夏凪里季",
@@ -56,17 +57,17 @@ export const profile = {
       "朝の配信やイベント前の近況をチェック。コメント、フォロー、ギフトで日々の活動を応援できます。"
   },
   avatars: [
-    { name: "カルアと里季", image: showroomAvatar("1141864"), featured: true },
-    { name: "おばけりりたん", image: showroomAvatar("1139413") },
-    { name: "金ぐりり", image: showroomAvatar("1139155") },
-    { name: "ちびりり", image: showroomAvatar("1137154") },
-    { name: "とりり", image: showroomAvatar("1136628") },
-    { name: "りりわん", image: showroomAvatar("1135709") },
-    { name: "こうもりり", image: showroomAvatar("1135202") },
-    { name: "ひまわりり", image: showroomAvatar("1133559") },
-    { name: "なつりり", image: showroomAvatar("1133436") },
-    { name: "サーフィンサンサン", image: showroomAvatar("1132347") },
-    { name: "サンサン", image: showroomAvatar("1131522") },
-    { name: "しょきりり", image: showroomAvatar("1130485") }
+    { name: "おばけりりたん", image: showroomAvatar("1141864"), featured: true },
+    { name: "金ぐりり",       image: showroomAvatar("1139413") },
+    { name: "ちびりり",       image: showroomAvatar("1139155") },
+    { name: "とりり",         image: showroomAvatar("1137154") },
+    { name: "りりわん",       image: showroomAvatar("1136628") },
+    { name: "こうもりり",     image: showroomAvatar("1135709") },
+    { name: "ひまわりり",     image: showroomAvatar("1135202") },
+    { name: "なつりり",       image: showroomAvatar("1133559") },
+    { name: "サーフィンサンサン", image: showroomAvatar("1133436") },
+    { name: "サンサン",       image: showroomAvatar("1132347") },
+    { name: "しょきりり",     image: showroomAvatar("1131522") },
+    { name: "カルアと里季",   image: showroomAvatar("1130485") }
   ]
 };
