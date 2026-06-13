@@ -97,7 +97,7 @@ export const events: ScheduleEvent[] = [
     startAt: "2026-06-04T18:00:00+09:00",
     endAt: "2026-06-10T21:59:00+09:00",
     displayDate: "2026年6月4日（木）18:00〜6月10日（水）21:59",
-    image: driveImage("1hg7CCMX-vtLQo1CajCz0rc8_FZCddz-W"),
+    image: driveImage("1R8gptDr0DxZ71Ncuw8koDmgKo-lDjoYi"),
     summary:
       "SHOWROOMのランキングイベント。テーマパークのペアチケットと駅中広告ポスター掲載権をかけて開催されました。たくさんの応援をありがとうございました。",
     badges: ["SHOWROOM", "6/4〜6/10", "ランキング", "終了"],
@@ -122,7 +122,7 @@ export const events: ScheduleEvent[] = [
     startAt: "2026-06-24T00:00:00+09:00",
     endAt: "2026-06-24T23:59:59+09:00",
     displayDate: "2026年6月24日（水）",
-    image: driveImage("1rUFypXYABEcyRUaxhie6o_jaNBTAWR16"),
+    image: driveImage("1CIpjLx59X7Rj3atjiqIT1Pqv44ojE3l4"),
     summary:
       "SNSやSHOWROOMでお祝いの気持ちを届けたい日。カウントダウンと一緒に準備できます。",
     badges: ["特別", "Birthday"],
@@ -173,7 +173,7 @@ export const events: ScheduleEvent[] = [
     startAt: "2026-04-16T12:00:00+09:00",
     endAt: "2026-04-16T13:30:00+09:00",
     displayDate: "2026年4月16日（木）12:00から13:30",
-    image: driveImage("1R8gptDr0DxZ71Ncuw8koDmgKo-lDjoYi"),
+    image: driveImage("1Ld4snjp67PdiNIrN_jDCxjQ-leTV7yMx"),
     summary:
       "SHOWROOMイベントの特典として生放送テレビ出演。お天気コーナーに登場しました。",
     badges: ["テレビ", "生放送", "お天気"],
@@ -193,7 +193,7 @@ export const events: ScheduleEvent[] = [
     startAt: "2026-04-12T23:30:00+09:00",
     endAt: "2026-04-13T00:00:00+09:00",
     displayDate: "2026年4月12日（日）23:30から24:00",
-    image: driveImage("1FM8cYikXk6Z2TtAoHCpBkq_XOT_AmqbS"),
+    image: driveImage("1YC7lBN-STmcpdGYX-Q7fBt1cBj1YUgGn"),
     summary:
       "青学周辺のおすすめグルメなどを語ったラジオ出演回。声の魅力を楽しめる放送です。",
     badges: ["ラジオ", "放送済み", "radiko"],
