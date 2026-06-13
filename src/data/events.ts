@@ -16,7 +16,7 @@ export const events: ScheduleEvent[] = [
     image: driveImage("1A8rODe-N__YMWSjNEL5hNeT0U5gaT7Ka"),
     summary:
       "公開収録と特典会を予定。公開収録は17:00から18:00、特典会は18:15から19:45です。",
-    badges: ["NEXT", "ラジオ", "公開収録", "特典会"],
+    badges: ["ラジオ", "公開収録", "特典会", "終了"],
     links: [
       {
         label: "tigetで予約",
@@ -28,8 +28,7 @@ export const events: ScheduleEvent[] = [
         url: "https://www.wallop.tv/",
         kind: "info"
       }
-    ],
-    isNextFocus: true
+    ]
   },
   {
     id: "theoridea-2026-05-14",
@@ -43,7 +42,7 @@ export const events: ScheduleEvent[] = [
     image: driveImage("1AzWL5zxhUWd2l4_Clk6SfR-eNsjwuRmg"),
     summary:
       "初挑戦の舞台出演。5月16日はSpecial Live公演、5月17日は千秋楽。現地チケットと配信チケットがあります。",
-    badges: ["舞台", "チケット発売中", "配信あり", "重要"],
+    badges: ["舞台", "配信あり", "終了"],
     links: [
       {
         label: "チケット予約",
@@ -75,7 +74,7 @@ export const events: ScheduleEvent[] = [
     image: driveImage("1hPMNv9kiFKfBKgp7CLfjv7zJBtTOKCx_"),
     summary:
       "音楽と演劇が合わさった公演。Asideとして出演予定。全8回公演、前売券は6,000円です。",
-    badges: ["舞台", "先行販売中", "全8回", "アイトキ"],
+    badges: ["舞台", "全8回", "アイトキ", "終了"],
     links: [
       {
         label: "チケット購入",
@@ -100,8 +99,8 @@ export const events: ScheduleEvent[] = [
     displayDate: "2026年6月4日（木）18:00〜6月10日（水）21:59",
     image: driveImage("1hg7CCMX-vtLQo1CajCz0rc8_FZCddz-W"),
     summary:
-      "SHOWROOMのイベントでランキング1位になると夢のテーマパークへのペアチケットをプレゼント！6月10日まで配信を見て全力で応援しよう。",
-    badges: ["SHOWROOM", "開催中", "6/4〜6/10", "ランキング"],
+      "SHOWROOMのランキングイベント。テーマパークのペアチケットと駅中広告ポスター掲載権をかけて開催されました。たくさんの応援をありがとうございました。",
+    badges: ["SHOWROOM", "6/4〜6/10", "ランキング", "終了"],
     links: [
       {
         label: "イベントページ",
@@ -113,8 +112,7 @@ export const events: ScheduleEvent[] = [
         url: "https://www.showroom-live.com/room/profile?room_id=550336",
         kind: "stream"
       }
-    ],
-    isImportant: true
+    ]
   },
   {
     id: "birthday-2026-06-24",

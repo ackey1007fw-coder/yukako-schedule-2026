@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { ActionStrip } from "./components/ActionStrip";
+import { BirthdayBanner } from "./components/BirthdayBanner";
 import { BirthdayCountdown } from "./components/BirthdayCountdown";
 import { Footer } from "./components/Footer";
 import { FanLetterSection } from "./components/FanLetterSection";
@@ -76,6 +77,7 @@ function App() {
             スケジュールを読み込み中です
           </div>
         )}
+        <BirthdayBanner />
         <Hero nextEvent={nextEvent} socialLinks={socialLinks} />
         <ActionStrip nextEvent={nextEvent} socialLinks={socialLinks} />
         <NextEvent event={nextEvent} />
