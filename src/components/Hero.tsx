@@ -2,7 +2,6 @@ import { CalendarCheck, MessageCircleHeart, Ticket, Users } from "lucide-react";
 import { profile } from "../data/profile";
 import type { ScheduleEvent, SocialLink } from "../types";
 import { ExternalButton } from "./ExternalButton";
-import { Photo } from "./Photo";
 
 type HeroProps = {
   nextEvent?: ScheduleEvent;
@@ -33,16 +32,14 @@ export function Hero({ nextEvent, socialLinks }: HeroProps) {
     >
       <div className="mx-auto grid max-w-7xl grid-cols-1 lg:grid-cols-2 lg:items-stretch">
         {/* 写真パネル（モバイルは上、デスクトップは右） */}
-        <div className="relative order-1 min-h-[56svh] sm:min-h-[66svh] lg:order-2 lg:min-h-[90svh]">
-          <Photo
+        <div className="relative order-1 overflow-hidden lg:order-2 lg:min-h-[90svh]">
+          <img
             src={profile.heroImage}
-            alt={`${profile.name}`}
+            alt={profile.name}
             loading="eager"
-            className="absolute inset-0 h-full w-full"
-            imageClassName="object-[50%_20%]"
+            className="block w-full object-cover object-[50%_20%] lg:absolute lg:inset-0 lg:h-full"
           />
-          <div className="absolute inset-x-0 bottom-0 h-20 bg-[linear-gradient(180deg,transparent,#fffafc)] lg:hidden" />
-          <p className="absolute right-4 top-4 hidden origin-right rotate-0 border border-white/60 bg-white/30 px-3 py-1 text-[11px] font-black uppercase tracking-[0.18em] text-ink backdrop-blur lg:block">
+          <p className="absolute right-4 top-4 hidden border border-white/60 bg-white/30 px-3 py-1 text-[11px] font-black uppercase tracking-[0.18em] text-ink backdrop-blur lg:block">
             Fan Schedule / Riri 2026
           </p>
         </div>

@@ -3,7 +3,6 @@ import { categoryMeta } from "../lib/eventMeta";
 import type { ScheduleEvent } from "../types";
 import { Badge } from "./Badge";
 import { ExternalButton } from "./ExternalButton";
-import { Photo } from "./Photo";
 import { SectionHeader } from "./SectionHeader";
 
 type NextEventProps = {
@@ -31,12 +30,11 @@ export function NextEvent({ event }: NextEventProps) {
         />
 
         <article className="zine-panel grid overflow-hidden border border-champagne/70 bg-white lg:grid-cols-[1.12fr_0.88fr]">
-          <div className="relative min-h-[420px] overflow-hidden bg-ink sm:min-h-[560px]">
-            <Photo
+          <div className="relative overflow-hidden bg-ink lg:min-h-[560px]">
+            <img
               src={event.image}
               alt={event.title}
-              className="absolute inset-0 h-full w-full"
-              imageClassName="object-top transition duration-700 hover:scale-[1.025]"
+              className="block w-full object-cover object-top transition duration-700 hover:scale-[1.025] lg:absolute lg:inset-0 lg:h-full"
             />
             <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(49,42,46,0.02),rgba(49,42,46,0.52))]" />
             <div className="absolute left-4 top-4 border border-white/50 bg-white/18 px-3 py-2 text-xs font-black uppercase text-white backdrop-blur">

@@ -3,7 +3,6 @@ import { categoryMeta } from "../lib/eventMeta";
 import type { ScheduleEvent } from "../types";
 import { Badge } from "./Badge";
 import { ExternalButton } from "./ExternalButton";
-import { Photo } from "./Photo";
 
 type EventCardProps = {
   event: ScheduleEvent;
@@ -27,12 +26,14 @@ export function EventCard({ event, isNext = false, compact = false }: EventCardP
         <div className="absolute left-0 top-0 z-10 h-full w-1 bg-champagne" />
       )}
 
-      <Photo
-        src={event.image}
-        alt={event.title}
-        className={`${compact ? "h-44 sm:h-full" : "h-56 sm:h-full"} min-h-full`}
-        imageClassName="object-top"
-      />
+      <div className="relative bg-porcelain">
+        <img
+          src={event.image}
+          alt={event.title}
+          loading="lazy"
+          className="block w-full object-cover object-top sm:absolute sm:inset-0 sm:h-full"
+        />
+      </div>
 
       <div className={`${compact ? "p-5" : "p-6"} flex flex-col`}>
         <div className="mb-4 flex flex-wrap gap-2">
