@@ -14,7 +14,7 @@ export const profile = {
   intro:
     "出演予定、配信、SNS、プロフィールをひとつにまとめた応援スケジュールです。",
   heroImage: "/images/riri-hero.jpg",
-  portraitImage: "/images/riri-portrait.jpg",
+  portraitImage: "/images/riri-profile.jpg",
   birthday: "2006-06-24",
   birthdayMonthDay: "06-24",
   birthdayLabel: "6月24日",
