@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Riri Schedule icon">
+  <defs>
+    <linearGradient id="bg" x1="80" y1="56" x2="440" y2="472" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF8FB"/>
+      <stop offset="0.46" stop-color="#F8DDEB"/>
+      <stop offset="1" stop-color="#E7D8FF"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="150" y1="104" x2="360" y2="408" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F4D58D"/>
+      <stop offset="0.5" stop-color="#C9993B"/>
+      <stop offset="1" stop-color="#8A641E"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="20" flood-color="#8A641E" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="116" fill="url(#bg)"/>
+  <rect x="42" y="42" width="428" height="428" rx="92" fill="none" stroke="#D6A94D" stroke-width="18"/>
+  <circle cx="380" cy="132" r="34" fill="#F7D77E" opacity="0.9"/>
+  <circle cx="132" cy="388" r="28" fill="#E8B8D0" opacity="0.92"/>
+  <path d="M158 372V132h106c55 0 92 32 92 82 0 36-19 63-51 75l61 83h-63l-54-75h-39v75h-52Zm52-119h49c28 0 45-15 45-39 0-25-17-39-45-39h-49v78Z" fill="#3C2F3D" filter="url(#shadow)"/>
+  <path d="M352 342c34-7 57-29 65-62 1-5 8-5 9 0 7 33 30 55 64 62 5 1 5 8 0 9-34 7-57 29-64 62-1 5-8 5-9 0-8-33-31-55-65-62-5-1-5-8 0-9Z" fill="url(#gold)"/>
+</svg>
