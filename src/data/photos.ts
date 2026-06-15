@@ -24,5 +24,6 @@ export const galleryPhotos: GalleryPhoto[] = [
   { src: "/images/gallery/g17.jpg", alt: "パフェを手にした夏凪里季さん" },
   { src: "/images/gallery/g18.jpg", alt: "舞台の楽屋でのオフショットの夏凪里季さん" },
   { src: "/images/gallery/g19.jpg", alt: "シャツ姿でピースサインの夏凪里季さん" },
-  { src: "/images/gallery/g20.jpg", alt: "舞台『月シア別冊』キャストとのオフショット" }
+  { src: "/images/gallery/g20.jpg", alt: "舞台『月シア別冊』キャストとのオフショット" },
+  { src: "/images/gallery/g21.jpg", alt: "去年の誕生日、Happy Birthdayプレートを前に笑顔の夏凪里季さん" }
 ];

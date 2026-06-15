@@ -10,7 +10,7 @@ export const events: ScheduleEvent[] = [
     endAt: "2026-07-19T17:00:00+09:00",
     displayDate: "2026年7月19日（日）14:00〜17:00",
     venue: "都内某所",
-    image: "/images/event-birthday.jpg",
+    image: "/images/event-goudou-birthday.jpg",
     summary:
       "フレキャン2025に出場した夏凪里季さんと、小峰萌楓さん（#ミスサークル2025）の合同誕生祭。今年最初で最後の合同誕生祭として開催されます。",
     badges: ["合同誕生祭", "小峰萌楓", "要申込"],
