@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://riri-schedule-2026.vercel.app/sitemap.xml
