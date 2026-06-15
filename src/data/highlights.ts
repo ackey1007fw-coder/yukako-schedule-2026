@@ -37,6 +37,15 @@ export const highlights: Highlight[] = [
     link: { label: "FRECページ", url: "https://2025.frecam.jp/entry/306" }
   },
   {
+    id: "showroom-khb-cm-2025-09",
+    year: "2025",
+    date: "2025年9月",
+    category: "CM",
+    title: "SHOWROOM×khb50周年 CM",
+    description:
+      "SHOWROOMと東日本放送（khb）50周年のCMに出演。宮城県では地上波でも放映されました。",
+  },
+  {
     id: "modelpress-2025-09",
     year: "2025",
     date: "2025年9月",
@@ -45,6 +54,33 @@ export const highlights: Highlight[] = [
     description:
       "「注目の“日本一可愛い新入生”候補」として、フレキャン2025特集のインタビューに登場しました。",
     link: { label: "モデルプレスで読む", url: "https://mdpr.jp/news/detail/4646978" }
+  },
+  {
+    id: "atarashii-kagi-2025-08",
+    year: "2025",
+    date: "2025年8月",
+    category: "バラエティ",
+    title: "フジテレビ『新しいカギ』2時間SP「超！学校かくれんぼ」",
+    description:
+      "2025年8月16日放送のフジテレビ『新しいカギ』2時間SPの「超！学校かくれんぼ」に女子高生役で出演。TVer・FODで見逃し配信もされました。",
+  },
+  {
+    id: "mazzel-kingkila-mv-2025-04",
+    year: "2025",
+    date: "2025年4月",
+    category: "MV",
+    title: "MAZZEL『King Kila Game』MV",
+    description:
+      "MAZZEL の新曲『King Kila Game』のMVに出演。クレジットにも名前が掲載されました。",
+  },
+  {
+    id: "chuden-cm-2025-04",
+    year: "2025",
+    date: "2025年4月",
+    category: "CM",
+    title: "中部電力CM「藤井聡太なら。吹奏楽篇」",
+    description:
+      "中部電力のCM「藤井聡太なら。吹奏楽篇」に出演しました。",
   },
   {
     id: "adidas-cm-2025-03",
