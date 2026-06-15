@@ -47,6 +47,51 @@ export const highlights: Highlight[] = [
     link: { label: "モデルプレスで読む", url: "https://mdpr.jp/news/detail/4646978" }
   },
   {
+    id: "bakasemaishi-2023-11",
+    year: "2023",
+    date: "2023年11月",
+    category: "バラエティ",
+    title: "フジテレビ『私のバカせまい史』",
+    description:
+      "フジテレビのバラエティ番組『私のバカせまい史』にVTR出演。靴下についてのテーマで登場しました。",
+  },
+  {
+    id: "tokyo-calling-mv-2023-11",
+    year: "2023",
+    date: "2023年11月",
+    category: "MV",
+    title: "新しい学校のリーダーズ『Tokyo Calling』MV",
+    description:
+      "新しい学校のリーダーズの新曲MVに、猫カフェの店員役として出演。クレジットにも名前が掲載されました。",
+  },
+  {
+    id: "fishers-100vs100-2023-10",
+    year: "2023",
+    date: "2023年10月",
+    category: "企画",
+    title: "フィッシャーズ「100人VS100人 野球対決」",
+    description:
+      "人気YouTuberフィッシャーズの大型企画に、赤チームとして参加しました。",
+  },
+  {
+    id: "blackfamilia-2023-10",
+    year: "2023",
+    date: "2023年10月",
+    category: "ドラマ",
+    title: "日本テレビ系『ブラックファミリア〜新堂家の復讐〜』",
+    description:
+      "2023年10月5日放送開始の日本テレビ系深夜ドラマに出演しました。",
+  },
+  {
+    id: "himitsu-shonen-2023-10",
+    year: "2023",
+    date: "2023年10月",
+    category: "ドラマ",
+    title: "日本テレビ 金曜ドラマDEEP『秘密を持った少年たち』",
+    description:
+      "毎週金曜放送の金曜ドラマDEEP『秘密を持った少年たち』に出演しました。",
+  },
+  {
     id: "kimito-koi-drama-2023-10",
     year: "2023",
     date: "2023年10月",
