@@ -17,7 +17,7 @@ export const events: ScheduleEvent[] = [
     links: [
       {
         label: "参加申込フォーム",
-        url: "https://docs.google.com/forms/d/18IAVxuYrpUE2UmYG-unogWLEMN5X4Kjr-UV5ObOshIl/viewform",
+        url: "https://docs.google.com/forms/d/18IAVxuYrpUE2UmYG-unogWLEMN5X4Kjr-UV5ObOshlI/viewform",
         kind: "info"
       }
     ],
