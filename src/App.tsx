@@ -5,6 +5,7 @@ import { BirthdayCountdown } from "./components/BirthdayCountdown";
 import { Footer } from "./components/Footer";
 import { FanLetterSection } from "./components/FanLetterSection";
 import { Hero } from "./components/Hero";
+import { HighlightsSection } from "./components/HighlightsSection";
 import { InterviewSection } from "./components/InterviewSection";
 import { LinksSection } from "./components/LinksSection";
 import { MobileActionDock } from "./components/MobileActionDock";
@@ -90,6 +91,7 @@ function App() {
           allEvents={events}
           monthKeys={monthKeys}
         />
+        <HighlightsSection />
         <PhotoGallerySection />
         <BirthdayCountdown />
         <ShowroomSection />
