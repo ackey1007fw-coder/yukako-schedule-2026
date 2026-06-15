@@ -8,7 +8,7 @@ export const events: ScheduleEvent[] = [
     category: "event",
     startAt: "2026-07-19T14:00:00+09:00",
     endAt: "2026-07-19T17:00:00+09:00",
-    displayDate: "2026年7月19日 14:00〜17:00",
+    displayDate: "2026年7月19日（日）14:00〜17:00",
     venue: "都内某所",
     image: "/images/event-birthday.jpg",
     summary:
