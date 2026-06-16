@@ -26,5 +26,14 @@ export const galleryPhotos: GalleryPhoto[] = [
   { src: "/images/gallery/g19.jpg", alt: "シャツ姿でピースサインの夏凪里季さん" },
   { src: "/images/gallery/g20.jpg", alt: "舞台『月シア別冊』キャストとのオフショット" },
   { src: "/images/gallery/g21.jpg", alt: "去年の誕生日、Happy Birthdayプレートを前に笑顔の夏凪里季さん" },
-  { src: "/images/gallery/g22.jpg", alt: "移動中の車内で撮ったセルフィーの夏凪里季さん" }
+  { src: "/images/gallery/g22.jpg", alt: "移動中の車内で撮ったセルフィーの夏凪里季さん" },
+  { src: "/images/gallery/g23.jpg", alt: "ピクニックでアイスクリームを囲む夏凪里季さんたち" },
+  { src: "/images/gallery/g24.jpg", alt: "ピクニックで大きなアイスクリームを持って笑う夏凪里季さん" }
 ];
+
+// 最新の更新お知らせ（Instagram更新時にここを書き換える）
+export const galleryUpdate = {
+  date: "2026.6.16",
+  note: "Instagramに新しい写真が届きました",
+  url: "https://www.instagram.com/__ririri__24"
+};

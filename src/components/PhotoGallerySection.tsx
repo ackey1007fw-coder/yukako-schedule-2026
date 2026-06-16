@@ -3,12 +3,13 @@ import {
   ChevronLeft,
   ChevronRight,
   Images,
+  Instagram,
   Pause,
   Play,
   Sparkles,
   X
 } from "lucide-react";
-import { galleryPhotos } from "../data/photos";
+import { galleryPhotos, galleryUpdate } from "../data/photos";
 import { SectionHeader } from "./SectionHeader";
 
 const wrapIndex = (index: number) =>
@@ -94,7 +95,26 @@ export function PhotoGallerySection() {
           </div>
         </div>
 
-        <div className="mt-10 columns-2 gap-4 sm:columns-3 lg:columns-4 [&>figure]:mb-4 [&>figure]:break-inside-avoid">
+        <a
+          href={galleryUpdate.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-6 flex items-center gap-3 border border-champagne/40 bg-white px-4 py-3 text-sm font-bold text-ink transition hover:border-champagne hover:bg-porcelain"
+        >
+          <span className="grid h-9 w-9 shrink-0 place-items-center border border-champagne/50 bg-porcelain text-champagne">
+            <Instagram className="h-4 w-4" aria-hidden="true" />
+          </span>
+          <span className="min-w-0">
+            <span className="block text-[11px] font-black uppercase tracking-wide text-champagne">
+              New ・ {galleryUpdate.date}
+            </span>
+            <span className="block leading-snug">
+              {galleryUpdate.note} — Instagramで見る
+            </span>
+          </span>
+        </a>
+
+        <div className="mt-6 columns-2 gap-4 sm:columns-3 lg:columns-4 [&>figure]:mb-4 [&>figure]:break-inside-avoid">
           {galleryPhotos.map((photo, index) => (
             <figure
               key={photo.src}
