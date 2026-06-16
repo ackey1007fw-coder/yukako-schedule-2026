@@ -11,6 +11,7 @@ type HeroProps = {
 const socialShortLabels: Record<string, string> = {
   x: "X",
   instagram: "IG",
+  threads: "Th",
   tiktok: "TT",
   showroom: "SR",
   link: "LN",
@@ -23,7 +24,7 @@ export function Hero({ nextEvent, socialLinks }: HeroProps) {
   const ticketLink =
     nextEvent?.links.find((link) => link.kind === "ticket") ??
     nextEvent?.links[0];
-  const mainSocials = socialLinks.slice(0, 4);
+  const mainSocials = socialLinks.slice(0, 5);
 
   return (
     <section

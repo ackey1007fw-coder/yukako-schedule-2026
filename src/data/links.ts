@@ -16,6 +16,13 @@ export const socialLinks: SocialLink[] = [
     kind: "instagram"
   },
   {
+    label: "Threads",
+    handle: "@__ririri__24",
+    url: "https://www.threads.com/@__ririri__24",
+    description: "ゆるっとした近況のつぶやき",
+    kind: "threads"
+  },
+  {
     label: "TikTok",
     handle: "@ririchannel__",
     url: "https://www.tiktok.com/@ririchannel__",

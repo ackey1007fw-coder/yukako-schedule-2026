@@ -34,5 +34,5 @@ export type SocialLink = {
   handle: string;
   url: string;
   description: string;
-  kind: "x" | "instagram" | "tiktok" | "showroom" | "link" | "note" | "youtube" | "web";
+  kind: "x" | "instagram" | "threads" | "tiktok" | "showroom" | "link" | "note" | "youtube" | "web";
 };
