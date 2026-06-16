@@ -1,5 +1,6 @@
-import { Clock3, MapPin, Ticket } from "lucide-react";
+import { CalendarPlus, Clock3, MapPin, Ticket } from "lucide-react";
 import { categoryMeta } from "../lib/eventMeta";
+import { googleCalendarUrl } from "../lib/share";
 import type { ScheduleEvent } from "../types";
 import { Badge } from "./Badge";
 import { ExternalButton } from "./ExternalButton";
@@ -124,7 +125,7 @@ export function NextEvent({ event }: NextEventProps) {
               )}
             </div>
 
-            <div className="mt-8 grid gap-3 sm:grid-cols-[1fr_auto] sm:items-center">
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
               {ticketLink && (
                 <ExternalButton href={ticketLink.url} variant="gold" className="w-full sm:w-auto">
                   <span className="inline-flex items-center gap-2">
@@ -133,6 +134,15 @@ export function NextEvent({ event }: NextEventProps) {
                   </span>
                 </ExternalButton>
               )}
+              <a
+                href={googleCalendarUrl(event)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex min-h-12 items-center justify-center gap-2 border border-champagne/60 bg-white px-4 py-3 text-sm font-bold text-ink transition hover:border-champagne hover:bg-porcelain"
+              >
+                <CalendarPlus className="h-4 w-4 text-champagne" aria-hidden="true" />
+                カレンダーに追加
+              </a>
               <a
                 href="#schedule"
                 className="inline-flex min-h-12 items-center justify-center border border-rosefog/40 bg-porcelain px-4 py-3 text-sm font-bold text-ink transition hover:bg-white"

@@ -17,6 +17,7 @@ import { PhotoGallerySection } from "./components/PhotoGallerySection";
 import { ProfileSection } from "./components/ProfileSection";
 import { ScheduleSection } from "./components/ScheduleSection";
 import { SearchSeoSection } from "./components/SearchSeoSection";
+import { ShareSection } from "./components/ShareSection";
 import { ShowroomSection } from "./components/ShowroomSection";
 import { SiteHeader } from "./components/SiteHeader";
 import { StructuredData } from "./components/StructuredData";
@@ -103,6 +104,7 @@ function App() {
         <FanLetterSection />
         <SearchSeoSection />
         <LinksSection socialLinks={socialLinks} mediaLinks={mediaLinks} />
+        <ShareSection />
       </main>
       <Footer
         socialLinks={socialLinks}
