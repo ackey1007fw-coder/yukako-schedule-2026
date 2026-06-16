@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { Analytics } from "@vercel/analytics/react";
 import { ActionStrip } from "./components/ActionStrip";
 import { BirthdayBanner } from "./components/BirthdayBanner";
 import { BirthdayCountdown } from "./components/BirthdayCountdown";
@@ -108,6 +109,7 @@ function App() {
         updatedAt={updatedAt}
       />
       <MobileActionDock nextEvent={nextEvent} socialLinks={socialLinks} />
+      <Analytics />
     </div>
   );
 }
