@@ -19,6 +19,7 @@ import { ScheduleSection } from "./components/ScheduleSection";
 import { SearchSeoSection } from "./components/SearchSeoSection";
 import { ShowroomSection } from "./components/ShowroomSection";
 import { SiteHeader } from "./components/SiteHeader";
+import { StructuredData } from "./components/StructuredData";
 import {
   getMonthKeysFromEvents,
   isEventPast,
@@ -109,6 +110,7 @@ function App() {
         updatedAt={updatedAt}
       />
       <MobileActionDock nextEvent={nextEvent} socialLinks={socialLinks} />
+      <StructuredData />
       <Analytics />
     </div>
   );
