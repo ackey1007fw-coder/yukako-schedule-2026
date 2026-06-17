@@ -1,8 +1,9 @@
 import { ArrowUpRight, MessageCircleHeart } from "lucide-react";
 import { SectionHeader } from "./SectionHeader";
 
-// 推薦コメントの掲載先（フレキャン2025 エントリーページ）
-const RECOMMEND_URL = "https://2025.frecam.jp/entry/306";
+// 推薦コメントの掲載先（SHOWROOM ルームプロフィール）
+const RECOMMEND_URL =
+  "https://www.showroom-live.com/room/profile?room_id=550336";
 
 export function SupportersSection() {
   return (
@@ -24,11 +25,11 @@ export function SupportersSection() {
           </span>
           <span className="min-w-0 flex-1">
             <span className="flex items-center gap-2 font-display text-2xl text-ink">
-              フレキャンページで読む
+              SHOWROOMで読む
               <ArrowUpRight className="h-4 w-4 shrink-0 text-champagne" aria-hidden="true" />
             </span>
             <span className="mt-1 block text-sm leading-7 text-ink/65">
-              FRESH CAMPUS CONTEST 2025・Entry No.306 のページで推薦コメントを見られます。
+              SHOWROOMのルームプロフィールで、みんなからの推薦コメントを見られます。
             </span>
           </span>
         </a>
