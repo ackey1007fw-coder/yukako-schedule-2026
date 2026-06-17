@@ -1,4 +1,4 @@
-import { CalendarCheck, MessageCircleHeart, Ticket, Users } from "lucide-react";
+import { CalendarCheck, Images, MessageCircleHeart, Radio, Ticket, Users } from "lucide-react";
 import { profile } from "../data/profile";
 import { getResponsiveImageProps } from "../lib/responsiveImage";
 import type { ScheduleEvent, SocialLink } from "../types";
@@ -66,29 +66,49 @@ export function Hero({ nextEvent, socialLinks }: HeroProps) {
           </p>
           <p className="mt-3 max-w-xl leading-8 text-ink/62">{profile.intro}</p>
 
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-            <a
-              href="#next"
-              className="inline-flex min-h-12 items-center justify-center gap-2 border border-ink bg-ink px-5 py-3 text-sm font-bold text-white shadow-paper transition hover:-translate-y-0.5 hover:bg-[#4a3942]"
-            >
-              <CalendarCheck className="h-4 w-4" aria-hidden="true" />
-              次の出演を見る
-            </a>
-            {ticketLink && (
-              <ExternalButton href={ticketLink.url} variant="gold" className="px-5">
-                <span className="inline-flex items-center gap-2">
-                  <Ticket className="h-4 w-4" aria-hidden="true" />
-                  {ticketLink.kind === "ticket" ? "チケット予約" : ticketLink.label}
-                </span>
-              </ExternalButton>
-            )}
-            <a
-              href="#links"
-              className="inline-flex min-h-12 items-center justify-center gap-2 border border-rosefog/40 bg-white px-5 py-3 text-sm font-bold text-ink shadow-sm transition hover:-translate-y-0.5 hover:border-champagne"
-            >
-              <MessageCircleHeart className="h-4 w-4" aria-hidden="true" />
-              SNSを見る
-            </a>
+          <div className="mt-8 flex flex-col gap-3">
+            {/* 主導線：次の出演＋（あれば）予約 */}
+            <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <a
+                href="#next"
+                className="inline-flex min-h-12 items-center justify-center gap-2 border border-ink bg-ink px-5 py-3 text-sm font-bold text-white shadow-paper transition hover:-translate-y-0.5 hover:bg-[#4a3942]"
+              >
+                <CalendarCheck className="h-4 w-4" aria-hidden="true" />
+                次の出演を見る
+              </a>
+              {ticketLink && (
+                <ExternalButton href={ticketLink.url} variant="gold" className="px-5">
+                  <span className="inline-flex items-center gap-2">
+                    <Ticket className="h-4 w-4" aria-hidden="true" />
+                    {ticketLink.kind === "ticket" ? "チケット予約" : ticketLink.label}
+                  </span>
+                </ExternalButton>
+              )}
+            </div>
+            {/* サブ導線：SHOWROOM／写真／SNS */}
+            <div className="flex flex-wrap gap-2">
+              <a
+                href="#showroom"
+                className="inline-flex min-h-12 items-center justify-center gap-2 border border-rosefog/40 bg-white px-4 py-3 text-sm font-bold text-ink shadow-sm transition hover:-translate-y-0.5 hover:border-champagne"
+              >
+                <Radio className="h-4 w-4 text-champagne" aria-hidden="true" />
+                SHOWROOM
+              </a>
+              <a
+                href="#gallery"
+                className="inline-flex min-h-12 items-center justify-center gap-2 border border-rosefog/40 bg-white px-4 py-3 text-sm font-bold text-ink shadow-sm transition hover:-translate-y-0.5 hover:border-champagne"
+              >
+                <Images className="h-4 w-4 text-champagne" aria-hidden="true" />
+                写真を見る
+              </a>
+              <a
+                href="#links"
+                className="inline-flex min-h-12 items-center justify-center gap-2 border border-rosefog/40 bg-white px-4 py-3 text-sm font-bold text-ink shadow-sm transition hover:-translate-y-0.5 hover:border-champagne"
+              >
+                <MessageCircleHeart className="h-4 w-4 text-champagne" aria-hidden="true" />
+                SNSを見る
+              </a>
+            </div>
           </div>
 
           <div className="mt-7 flex items-center gap-2">

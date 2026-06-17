@@ -36,6 +36,14 @@ export function CharmSection() {
                   loading="lazy"
                   className="block w-full"
                 />
+                <figcaption className="px-1 pb-1 pt-2 leading-snug">
+                  <span className="block text-[10px] font-black uppercase tracking-[0.16em] text-champagne">
+                    {photo.tag}
+                  </span>
+                  <span className="mt-0.5 block text-[11px] font-bold text-ink/55">
+                    {photo.caption}
+                  </span>
+                </figcaption>
               </figure>
             ))}
           </div>

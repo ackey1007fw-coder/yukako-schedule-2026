@@ -3,15 +3,21 @@ import { profile } from "./profile";
 export const charmPhotos = [
   {
     src: profile.gallery[0],
-    alt: "夏凪里季さんのやわらかな表情"
+    alt: "夏凪里季さんのやわらかな表情",
+    tag: "Portrait",
+    caption: "ふとした瞬間の、やわらかい表情。"
   },
   {
     src: profile.gallery[1],
-    alt: "夏凪里季さんの透明感のあるポートレート"
+    alt: "夏凪里季さんの透明感のあるポートレート",
+    tag: "Moment",
+    caption: "透明感のある、まっすぐな眼差し。"
   },
   {
     src: profile.gallery[2],
-    alt: "夏凪里季さんの自然な笑顔"
+    alt: "夏凪里季さんの自然な笑顔",
+    tag: "Smile",
+    caption: "自然体で見せる、明るい笑顔。"
   }
 ];
 
