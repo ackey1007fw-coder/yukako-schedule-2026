@@ -11,14 +11,19 @@ type ShowroomApiData = {
   roomLevel?: string;
   showRank?: string;
   nextShow?: string;
+  coverImage?: string;
   updatedAt?: string;
 };
+
+const proxyImage = (url: string) =>
+  `/api/showroom-image?url=${encodeURIComponent(url)}`;
 
 const fallbackValue = (label: string) =>
   profile.showroom.stats.find((stat) => stat.label === label)?.value ?? "-";
 
 export function ShowroomSection() {
   const [showroomData, setShowroomData] = useState<ShowroomApiData | null>(null);
+  const [coverFailed, setCoverFailed] = useState(false);
 
   useEffect(() => {
     let active = true;
@@ -32,6 +37,12 @@ export function ShowroomSection() {
       });
     return () => { active = false; };
   }, []);
+
+  // SHOWROOMの現在のカバー画像に連動。取得失敗時は既定画像にフォールバック
+  const coverSrc =
+    !coverFailed && showroomData?.coverImage
+      ? proxyImage(showroomData.coverImage)
+      : profile.showroom.image;
 
   const stats = useMemo(
     () => [
@@ -51,9 +62,10 @@ export function ShowroomSection() {
         <div className="mb-12 grid overflow-hidden border border-rosefog/25 bg-porcelain lg:grid-cols-[0.9fr_1.1fr]">
           <div className="relative bg-porcelain lg:min-h-[480px]">
             <img
-              src={profile.showroom.image}
+              src={coverSrc}
               alt="夏凪里季 SHOWROOM"
               loading="eager"
+              onError={() => setCoverFailed(true)}
               className="block w-full object-cover lg:absolute lg:inset-0 lg:h-full"
             />
           </div>

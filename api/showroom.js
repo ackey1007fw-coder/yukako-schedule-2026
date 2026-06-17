@@ -14,7 +14,7 @@ async function fromJson() {
   const r=await fetch(JSON_API,{headers:{'User-Agent':'Mozilla/5.0','Accept':'application/json','Referer':'https://www.showroom-live.com/'}});
   if(!r.ok) throw new Error('JSON API HTTP '+r.status);
   const d=await r.json();
-  return {followerCount:d.follower_num!=null?String(d.follower_num):null,roomLevel:d.room_level!=null?String(d.room_level):null,showRank:d.league_id!=null?leagueToRank(d.league_id):null,streakDays:d.live_continuous_days!=null?String(d.live_continuous_days):null,source:'json'};
+  return {followerCount:d.follower_num!=null?String(d.follower_num):null,roomLevel:d.room_level!=null?String(d.room_level):null,showRank:d.league_id!=null?leagueToRank(d.league_id):null,streakDays:d.live_continuous_days!=null?String(d.live_continuous_days):null,coverImage:d.image_l||d.image||d.main_image||null,source:'json'};
 }
 
 async function fromHtml() {
@@ -22,7 +22,8 @@ async function fromHtml() {
   if(!r.ok) throw new Error('HTML HTTP '+r.status);
   const html=await r.text();
   const g=(re)=>{const x=html.match(re);return x?x[1]:null;};
-  return {followerCount:g(/follower_num["\s:>]+(\d+)/i),roomLevel:g(/room_level["\s:>]+(\d+)/i),showRank:g(/league_name["\s:>"']+([ A-Z][-\d]*)/i),streakDays:g(/live_continuous_days["\s:]+(\d+)/i),source:'html'};
+  const cover=g(/"image_l":"([^"]+)"/);
+  return {followerCount:g(/follower_num["\s:>]+(\d+)/i),roomLevel:g(/room_level["\s:>]+(\d+)/i),showRank:g(/league_name["\s:>"']+([ A-Z][-\d]*)/i),streakDays:g(/live_continuous_days["\s:]+(\d+)/i),coverImage:cover?cover.replace(/\\\//g,'/'):null,source:'html'};
 }
 
 export default async function handler(req,res){
@@ -33,9 +34,9 @@ export default async function handler(req,res){
     let s;
     try{s=await fromJson();}catch(e){console.warn('JSON fail:',e.message);s=await fromHtml();}
     if(!s.followerCount||!s.roomLevel||!s.showRank){
-      try{const h2=await fromHtml();s.followerCount=s.followerCount||h2.followerCount;s.roomLevel=s.roomLevel||h2.roomLevel;s.showRank=s.showRank||h2.showRank;s.streakDays=s.streakDays||h2.streakDays;}catch(_){}
+      try{const h2=await fromHtml();s.followerCount=s.followerCount||h2.followerCount;s.roomLevel=s.roomLevel||h2.roomLevel;s.showRank=s.showRank||h2.showRank;s.streakDays=s.streakDays||h2.streakDays;s.coverImage=s.coverImage||h2.coverImage;}catch(_){}
     }
-    res.status(200).json({ok:true,followerCount:s.followerCount||'—',roomLevel:s.roomLevel||'—',showRank:s.showRank||'—',streakDays:s.streakDays||null,source:s.source,updatedAt:new Date().toISOString()});
+    res.status(200).json({ok:true,followerCount:s.followerCount||'—',roomLevel:s.roomLevel||'—',showRank:s.showRank||'—',streakDays:s.streakDays||null,coverImage:s.coverImage||null,source:s.source,updatedAt:new Date().toISOString()});
   } catch(err){
     res.status(500).json({ok:false,error:err.message});
   }
