@@ -1,5 +1,7 @@
-import { CalendarDays, MapPin } from "lucide-react";
+import { CalendarDays, CalendarPlus, MapPin } from "lucide-react";
 import { categoryMeta } from "../lib/eventMeta";
+import { isEventPast } from "../lib/date";
+import { googleCalendarUrl } from "../lib/share";
 import type { ScheduleEvent } from "../types";
 import { Badge } from "./Badge";
 import { ExternalButton } from "./ExternalButton";
@@ -13,6 +15,7 @@ type EventCardProps = {
 export function EventCard({ event, isNext = false, compact = false }: EventCardProps) {
   const meta = categoryMeta[event.category];
   const Icon = meta.Icon;
+  const upcoming = !isEventPast(event);
 
   return (
     <article
@@ -78,7 +81,7 @@ export function EventCard({ event, isNext = false, compact = false }: EventCardP
           {event.summary}
         </p>
 
-        {event.links.length > 0 && (
+        {(event.links.length > 0 || upcoming) && (
           <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             {event.links.map((link, index) => (
               <ExternalButton
@@ -89,6 +92,17 @@ export function EventCard({ event, isNext = false, compact = false }: EventCardP
                 {link.label}
               </ExternalButton>
             ))}
+            {upcoming && (
+              <a
+                href={googleCalendarUrl(event)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex min-h-12 items-center justify-center gap-2 border border-champagne/60 bg-white px-4 py-3 text-sm font-bold text-ink transition hover:border-champagne hover:bg-porcelain"
+              >
+                <CalendarPlus className="h-4 w-4 text-champagne" aria-hidden="true" />
+                カレンダー
+              </a>
+            )}
           </div>
         )}
       </div>

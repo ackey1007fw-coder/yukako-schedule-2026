@@ -12,6 +12,7 @@ type ShowroomApiData = {
   showRank?: string;
   nextShow?: string;
   coverImage?: string;
+  isLive?: boolean;
   updatedAt?: string;
 };
 
@@ -68,6 +69,12 @@ export function ShowroomSection() {
               onError={() => setCoverFailed(true)}
               className="block w-full object-cover lg:absolute lg:inset-0 lg:h-full"
             />
+            {showroomData?.isLive && (
+              <span className="absolute left-4 top-4 inline-flex items-center gap-2 border border-white/30 bg-[#e0245e] px-3 py-1.5 text-xs font-black uppercase tracking-wide text-white shadow-paper">
+                <span className="h-2 w-2 animate-pulse rounded-full bg-white" aria-hidden="true" />
+                Live 配信中
+              </span>
+            )}
           </div>
           <div className="p-6 sm:p-8 lg:p-10">
             <div className="mb-6 flex items-center gap-3 text-champagne">
