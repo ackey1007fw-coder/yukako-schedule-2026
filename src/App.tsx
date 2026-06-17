@@ -3,6 +3,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { ActionStrip } from "./components/ActionStrip";
 import { BirthdayBanner } from "./components/BirthdayBanner";
 import { BirthdayCountdown } from "./components/BirthdayCountdown";
+import { CharmSection } from "./components/CharmSection";
 import { Footer } from "./components/Footer";
 import { FanLetterSection } from "./components/FanLetterSection";
 import { Hero } from "./components/Hero";
@@ -88,6 +89,7 @@ function App() {
         <BirthdayBanner />
         <Hero nextEvent={nextEvent} socialLinks={socialLinks} />
         <ActionStrip nextEvent={nextEvent} socialLinks={socialLinks} />
+        <CharmSection />
         <Slideshow />
         <NextEvent event={nextEvent} />
         <ScheduleSection
