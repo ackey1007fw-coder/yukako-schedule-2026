@@ -23,6 +23,7 @@ import { ShareSection } from "./components/ShareSection";
 import { ShowroomSection } from "./components/ShowroomSection";
 import { SiteHeader } from "./components/SiteHeader";
 import { StructuredData } from "./components/StructuredData";
+import { SupportersSection } from "./components/SupportersSection";
 import {
   getMonthKeysFromEvents,
   isEventPast,
@@ -106,6 +107,7 @@ function App() {
         <PetSection />
         <InterviewSection />
         <FanLetterSection />
+        <SupportersSection />
         <SearchSeoSection />
         <LinksSection socialLinks={socialLinks} mediaLinks={mediaLinks} />
         <ShareSection />
