@@ -4,6 +4,7 @@ import { profile } from "../data/profile";
 import { ExternalButton } from "./ExternalButton";
 import { SectionHeader } from "./SectionHeader";
 import { AvatarGallery } from "./AvatarGallery";
+import { StreamSchedule } from "./StreamSchedule";
 
 type ShowroomApiData = {
   streakDays?: string;
@@ -92,6 +93,7 @@ export function ShowroomSection() {
             </div>
           </div>
         </div>
+        <StreamSchedule />
         <AvatarGallery />
       </div>
     </section>
