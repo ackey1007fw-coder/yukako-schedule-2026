@@ -13,7 +13,7 @@ export const profile = {
   catchCopy: "透明感のある笑顔とまっすぐな表現力で、次の舞台へ。",
   intro:
     "出演予定も、配信も、SNSも。里季ちゃんを応援する人のための場所です。",
-  heroImage: "/images/riri-hero.jpg",
+  heroImage: "/images/riri-hero-2026.jpg",
   portraitImage: "/images/riri-profile.jpg",
   birthday: "2006-06-24",
   birthdayMonthDay: "06-24",
