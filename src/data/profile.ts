@@ -19,16 +19,23 @@ export const profile = {
   birthdayMonthDay: "06-24",
   birthdayLabel: "6月24日",
   fanName: "ナギイチサマー",
+  fanMark: "🌻🌴",
   facts: [
     { label: "大学", value: "青山学院大学 2年生" },
     { label: "出身", value: "三重県生まれ、神奈川県育ち" },
     { label: "身長", value: "163cm" },
+    { label: "血液型", value: "A型" },
     { label: "夢", value: "世界中の人の心を動かす役者になること" },
     { label: "受賞", value: "フレキャン2025 審査員特別賞" },
     { label: "部活", value: "陸上部（ハードル）、ダンス部" },
     { label: "趣味", value: "数独、映画鑑賞、スポーツ、お菓子作り" },
     { label: "特技", value: "表情筋を動かすこと" },
-    { label: "性格", value: "ESFJ（領事官）" }
+    { label: "利き手", value: "両利き（ご飯は右・鉛筆は左）" },
+    { label: "性格", value: "ESFJ（領事官）" },
+    { label: "カラー/骨格", value: "ブルベ夏・骨格ナチュラル" },
+    { label: "サイズ", value: "トップスM／ボトムスS・M／アウターM・靴24.5〜25cm" },
+    { label: "好きな服", value: "Chico / MURUA / MERCURYDUO / ZARA / rienda / sly / mochea" },
+    { label: "好きなブランド", value: "Dasique / Fwee / CLIO / Rom&nd / DIOR / CELINE / miumiu / VUITTON / SHIRO / JILLSTUART" }
   ],
   gallery: [
     "/images/riri-zine-01.jpg",

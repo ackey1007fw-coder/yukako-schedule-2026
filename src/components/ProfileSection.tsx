@@ -16,7 +16,7 @@ export function ProfileSection() {
             <div className="mb-4 flex items-center gap-3">
               <Star className="h-5 w-5 text-champagne" aria-hidden="true" />
               <p className="text-sm font-bold text-ink/70">
-                ファンネーム：{profile.fanName}
+                ファンネーム：{profile.fanName} ／ ファンマーク {profile.fanMark}
               </p>
             </div>
             <p className="font-display text-4xl text-ink">{profile.name}</p>
@@ -46,7 +46,7 @@ export function ProfileSection() {
             ))}
             <div className="flex items-center gap-3 border border-champagne/40 bg-white p-4 text-sm font-bold leading-7 text-ink/70">
               <HeartHandshake className="h-5 w-5 shrink-0 text-champagne" aria-hidden="true" />
-              応援の入口は、次の出演、配信、SNSの3つを分かりやすく配置しています。
+              ファンマーク {profile.fanMark} をつけて、みんなで一緒に応援しよう。
             </div>
           </div>
         </div>
