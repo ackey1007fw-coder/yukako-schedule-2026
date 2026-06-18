@@ -29,7 +29,7 @@ export function HighlightsSection() {
             return (
               <article
                 key={item.id}
-                className="flex min-h-36 flex-col border border-champagne/40 bg-white p-5"
+                className="riri-card riri-card-interactive flex min-h-36 min-w-0 flex-col border-champagne/40 bg-white p-5"
               >
                 {item.image && (
                   <img

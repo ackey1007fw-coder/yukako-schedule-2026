@@ -19,7 +19,7 @@ export function ScheduleSection({
   const nextId = upcomingEvents[0]?.id;
 
   return (
-    <section id="schedule" className="bg-white py-16 sm:py-24">
+    <section id="schedule" className="scroll-mt-24 bg-white py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeader
           kicker="Schedule"
@@ -71,7 +71,7 @@ export function ScheduleSection({
           </div>
         </div>
 
-        <div>
+        <div id="calendar" className="scroll-mt-32">
           <div className="mb-5 flex items-end justify-between gap-4 border-b border-champagne/25 pb-4">
             <div>
               <p className="text-xs font-bold uppercase text-champagne">Calendar</p>

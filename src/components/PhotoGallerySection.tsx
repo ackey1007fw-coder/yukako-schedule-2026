@@ -73,7 +73,7 @@ export function PhotoGallerySection() {
   }, [selectedIndex]);
 
   return (
-    <section id="gallery" className="bg-white py-16 sm:py-24">
+    <section id="gallery" className="scroll-mt-24 bg-white py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-end">
           <SectionHeader
@@ -119,12 +119,12 @@ export function PhotoGallerySection() {
           {galleryPhotos.map((photo, index) => (
             <figure
               key={photo.src}
-              className="overflow-hidden border border-rosefog/15 bg-porcelain shadow-sm transition hover:shadow-paper"
+              className="photo-gallery-card riri-card overflow-hidden border-rosefog/15 bg-porcelain"
             >
               <button
                 type="button"
                 onClick={() => openPhoto(index)}
-                className="group block w-full text-left"
+                className="group block w-full text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-champagne"
                 aria-label={`${photo.alt}を大きく表示`}
               >
                 <img
@@ -134,7 +134,7 @@ export function PhotoGallerySection() {
                   )}
                   alt={photo.alt}
                   loading="lazy"
-                  className="block w-full transition duration-500 group-hover:scale-[1.02]"
+                  className="photo-gallery-image block w-full"
                 />
               </button>
             </figure>

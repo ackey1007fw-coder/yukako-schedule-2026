@@ -1,5 +1,5 @@
 import { Gift, Heart, PartyPopper, Sparkles } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { profile } from "../data/profile";
 import { getBirthdayCountdown } from "../lib/date";
 import { getResponsiveImageProps } from "../lib/responsiveImage";
@@ -7,9 +7,16 @@ import { SectionHeader } from "./SectionHeader";
 
 const birthYear = Number(profile.birthday.slice(0, 4));
 
-type Spark = { id: number; left: number; delay: number; heart: boolean };
+type Spark = {
+  id: number;
+  left: number;
+  delay: number;
+  heart: boolean;
+};
 
 export function BirthdayCountdown() {
+  const [isCelebrating, setIsCelebrating] = useState(false);
+  const celebrationTimer = useRef<number | null>(null);
   const [countdown, setCountdown] = useState(() =>
     getBirthdayCountdown(profile.birthdayMonthDay, new Date(), birthYear),
   );
@@ -25,18 +32,41 @@ export function BirthdayCountdown() {
     return () => window.clearInterval(timer);
   }, []);
 
+  useEffect(
+    () => () => {
+      if (celebrationTimer.current !== null) {
+        window.clearTimeout(celebrationTimer.current);
+      }
+    },
+    [],
+  );
+
   const celebrate = () => {
     const base = Date.now();
-    const items: Spark[] = Array.from({ length: 8 }, (_, i) => ({
-      id: base + i,
-      left: 6 + Math.random() * 88,
-      delay: Math.random() * 140,
-      heart: i % 2 === 0
+    const items = Array.from({ length: 8 }, (_, index) => ({
+      id: base + index,
+      left: 7 + Math.random() * 86,
+      delay: Math.random() * 120,
+      heart: index % 2 === 0
     }));
-    setSparks((prev) => [...prev, ...items]);
+
+    setIsCelebrating(false);
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => setIsCelebrating(true));
+    });
+    if (celebrationTimer.current !== null) {
+      window.clearTimeout(celebrationTimer.current);
+    }
+    celebrationTimer.current = window.setTimeout(() => {
+      setIsCelebrating(false);
+      celebrationTimer.current = null;
+    }, 620);
+    setSparks((current) => [...current, ...items]);
     window.setTimeout(() => {
-      setSparks((prev) => prev.filter((s) => !items.some((it) => it.id === s.id)));
-    }, 1700);
+      setSparks((current) =>
+        current.filter((spark) => !items.some((item) => item.id === spark.id)),
+      );
+    }, 1300);
   };
 
   const ageLabel =
@@ -64,64 +94,80 @@ export function BirthdayCountdown() {
               ageLabel ? `・${ageLabel}の記念日` : ""
             }まで、あと少し。SNSやSHOWROOMで一緒にお祝いしよう。`}
           />
-          <div className="relative border border-champagne/40 bg-white p-5 shadow-paper sm:p-6">
-            {/* お祝いのキラキラ（絶対配置・クリック不可なのでレイアウトに影響しない） */}
-            <div className="pointer-events-none absolute inset-0 overflow-visible" aria-hidden="true">
+          <div
+            className={`birthday-card riri-card riri-card-interactive relative overflow-hidden border-champagne/40 bg-white p-5 shadow-paper sm:p-6 ${
+              isCelebrating ? "birthday-card-active" : ""
+            }`}
+          >
+            <span className="birthday-glow" aria-hidden="true" />
+            <div
+              className="pointer-events-none absolute inset-0 z-20 overflow-hidden"
+              aria-hidden="true"
+            >
               {sparks.map((spark) => (
                 <span
                   key={spark.id}
-                  className="absolute bottom-16"
+                  className="birthday-confetti absolute bottom-12"
                   style={{
                     left: `${spark.left}%`,
-                    animation: `riri-celebrate 1.5s ease-out ${spark.delay}ms forwards`
+                    animationDelay: `${spark.delay}ms`
                   }}
                 >
                   {spark.heart ? (
-                    <Heart className="h-5 w-5 fill-rosefog text-rosefog" aria-hidden="true" />
+                    <Heart className="h-5 w-5 fill-rosefog text-rosefog" />
                   ) : (
-                    <Sparkles className="h-5 w-5 text-champagne" aria-hidden="true" />
+                    <Sparkles className="h-5 w-5 text-champagne" />
                   )}
                 </span>
               ))}
             </div>
 
-            <div className="mb-5 flex items-center gap-3 text-champagne">
-              <Gift className="h-5 w-5" aria-hidden="true" />
-              <p className="text-sm font-bold">
-                {countdown.targetLabel}
-                {ageLabel ? `・${ageLabel}` : ""}
-              </p>
-            </div>
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-              {values.map((item) => (
-                <div key={item.label} className="border border-rosefog/25 bg-porcelain p-4 text-center">
-                  <span
-                    key={item.value}
-                    className="block font-display text-4xl text-ink sm:text-5xl"
-                    style={{ animation: "riri-pop 500ms ease" }}
+            <div className="relative z-10">
+              <div className="mb-5 flex items-center gap-3 text-champagne">
+                <Gift className="h-5 w-5" aria-hidden="true" />
+                <p className="text-sm font-bold">
+                  {countdown.targetLabel}
+                  {ageLabel ? `・${ageLabel}` : ""}
+                </p>
+              </div>
+              <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+                {values.map((item) => (
+                  <div
+                    key={item.label}
+                    className="birthday-number-card rounded-md border border-rosefog/25 bg-porcelain p-4 text-center"
                   >
-                    {String(item.value).padStart(2, "0")}
-                  </span>
-                  <div className="mt-2 text-xs font-bold text-ink/55">{item.label}</div>
-                </div>
-              ))}
-            </div>
-            <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
-              <p className="flex items-center gap-2 text-sm font-bold text-ink/70">
-                <Heart className="h-4 w-4 text-rosefog" aria-hidden="true" />
-                {countdown.isBirthdayToday
-                  ? "今日はお祝い当日です。"
-                  : "一緒にお祝いの準備を進めよう。"}
-              </p>
-              <button
-                type="button"
-                onClick={celebrate}
-                className="inline-flex min-h-10 items-center gap-2 border border-champagne/60 bg-white px-4 py-2 text-sm font-bold text-ink transition hover:-translate-y-0.5 hover:border-champagne hover:shadow-paper focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-champagne"
-                aria-label="お祝いのキラキラを贈る"
-              >
-                <PartyPopper className="h-4 w-4 text-champagne" aria-hidden="true" />
-                おめでとうを贈る
-              </button>
+                    <span
+                      key={item.value}
+                      className="birthday-number-pop block font-display text-4xl tabular-nums text-ink sm:text-5xl"
+                    >
+                      {String(item.value).padStart(2, "0")}
+                    </span>
+                    <div className="mt-2 text-xs font-bold text-ink/55">
+                      {item.label}
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
+                <p className="flex items-center gap-2 text-sm font-bold text-ink/70">
+                  <Heart className="h-4 w-4 text-rosefog" aria-hidden="true" />
+                  {countdown.isBirthdayToday
+                    ? "今日はお祝い当日です。"
+                    : "一緒にお祝いの準備を進めよう。"}
+                </p>
+                <button
+                  type="button"
+                  onClick={celebrate}
+                  className="riri-lift inline-flex min-h-11 items-center gap-2 rounded-md border border-champagne/60 bg-white px-4 py-2 text-sm font-bold text-ink hover:border-champagne focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-champagne"
+                  aria-label="お祝いのキラキラを贈る"
+                >
+                  <PartyPopper
+                    className="h-4 w-4 text-champagne"
+                    aria-hidden="true"
+                  />
+                  おめでとうを贈る
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -136,7 +182,7 @@ export function BirthdayCountdown() {
               )}
               alt={`${profile.name} gallery ${index + 1}`}
               loading="lazy"
-              className="h-auto w-full border border-white shadow-sm"
+              className="birthday-photo h-auto w-full rounded-md border border-white shadow-sm"
             />
           ))}
         </div>

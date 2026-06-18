@@ -13,7 +13,7 @@ export function CalendarView({ events, monthKeys }: CalendarViewProps) {
   return (
     <div className="grid gap-6 xl:grid-cols-3">
       {monthKeys.map((monthKey) => (
-        <section key={monthKey} className="border border-rosefog/25 bg-white">
+        <section key={monthKey} className="riri-card border-rosefog/25 bg-white">
           <div className="border-b border-rosefog/20 bg-porcelain px-4 py-4">
             <h3 className="font-display text-2xl text-ink">
               {formatMonthTitle(monthKey)}

@@ -52,7 +52,7 @@ export function MobileActionDock({
   return (
     <nav
       aria-label="応援メニュー"
-      className="fixed inset-x-3 bottom-3 z-50 border border-white/80 bg-white/92 p-1.5 shadow-paper backdrop-blur-xl md:hidden"
+      className="fixed inset-x-3 bottom-3 z-50 rounded-md border border-white/80 bg-white/92 p-1.5 shadow-paper backdrop-blur-xl md:hidden"
     >
       <div className="grid grid-cols-4 gap-1">
         {items.map((item) => {
@@ -62,7 +62,7 @@ export function MobileActionDock({
               <span className="text-[11px] font-bold">{item.label}</span>
             </>
           );
-          const className = `flex min-h-14 flex-col items-center justify-center gap-1 border text-center transition ${
+          const className = `flex min-h-14 flex-col items-center justify-center gap-1 rounded border text-center transition ${
             item.featured
               ? "border-champagne bg-champagne text-white"
               : "border-transparent bg-porcelain text-ink hover:border-rosefog/40 hover:bg-white"

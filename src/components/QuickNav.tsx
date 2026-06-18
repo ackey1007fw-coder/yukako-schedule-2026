@@ -1,30 +1,38 @@
-// スマホ用の簡易セクションナビ（PCはヘッダーのナビがあるので lg:hidden）。
-// トップ付近に置き、タップでスムーズスクロール。横スクロールで邪魔にならない。
+import {
+  CalendarDays,
+  CalendarHeart,
+  Images,
+  Sparkles,
+  UserRound
+} from "lucide-react";
+
 const items = [
-  { label: "次の出演", href: "#next" },
-  { label: "スケジュール", href: "#schedule" },
-  { label: "これまで", href: "#highlights" },
-  { label: "ギャラリー", href: "#gallery" },
-  { label: "SHOWROOM", href: "#showroom" },
-  { label: "プロフィール", href: "#profile" }
+  { label: "今日の応援", href: "#today", Icon: Sparkles },
+  { label: "今週の予定", href: "#schedule", Icon: CalendarHeart },
+  { label: "カレンダー", href: "#calendar", Icon: CalendarDays },
+  { label: "ギャラリー", href: "#gallery", Icon: Images },
+  { label: "プロフィール", href: "#profile", Icon: UserRound }
 ];
 
 export function QuickNav() {
   return (
     <nav
-      aria-label="セクションへ移動"
-      className="border-b border-rosefog/15 bg-porcelain/80 backdrop-blur lg:hidden"
+      aria-label="ページ内メニュー"
+      className="border-b border-rosefog/20 bg-white/92 backdrop-blur"
     >
-      <div className="flex gap-2 overflow-x-auto px-4 py-2.5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-        {items.map((item) => (
-          <a
-            key={item.href}
-            href={item.href}
-            className="shrink-0 whitespace-nowrap border border-rosefog/30 bg-white px-3 py-1.5 text-xs font-bold text-ink/75 transition hover:border-champagne hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-champagne"
-          >
-            {item.label}
-          </a>
-        ))}
+      <div className="quick-nav-scroll mx-auto max-w-7xl overflow-x-auto px-4 py-2 sm:px-6 lg:px-8">
+        <div className="flex min-w-max items-center gap-2">
+          {items.map(({ label, href, Icon }) => (
+            <a
+              key={href}
+              href={href}
+              className="quick-nav-link inline-flex min-h-11 items-center gap-2 rounded-md border border-rosefog/25 bg-porcelain px-3.5 py-2 text-xs font-bold text-ink/72 transition-colors hover:border-champagne/60 hover:bg-white hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-champagne sm:text-sm"
+            >
+              <Icon className="h-4 w-4 text-champagne" aria-hidden="true" />
+              {label}
+            </a>
+          ))}
+        </div>
       </div>
     </nav>
   );

@@ -134,7 +134,7 @@ export function TodayDashboard({
   const primary = todayItems[0] ?? agenda[0];
 
   return (
-    <section className="bg-porcelain px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
+    <section id="today" className="scroll-mt-32 bg-porcelain px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
@@ -151,7 +151,7 @@ export function TodayDashboard({
         </div>
 
         <div className="grid gap-4 lg:grid-cols-[1.05fr_0.95fr]">
-          <div className="border border-champagne/50 bg-white p-5 shadow-paper sm:p-7">
+          <div className="riri-card border-champagne/50 bg-white p-5 shadow-paper sm:p-7">
             <div className="flex items-center gap-3">
               <span className="grid h-11 w-11 place-items-center border border-champagne/50 bg-porcelain text-champagne">
                 {primary?.kind === "stream" ? (
@@ -196,7 +196,7 @@ export function TodayDashboard({
             )}
           </div>
 
-          <div className="border border-rosefog/25 bg-white p-5 sm:p-7">
+          <div className="riri-card border-rosefog/25 bg-white p-5 sm:p-7">
             <p className="flex items-center gap-2 text-sm font-black text-ink">
               <Sparkles className="h-4 w-4 text-champagne" aria-hidden="true" />
               今週の応援予定
@@ -228,7 +228,7 @@ export function TodayDashboard({
         </div>
 
         <div className="mt-4 grid gap-4 lg:grid-cols-[1fr_auto]">
-          <div className="border border-rosefog/25 bg-white p-5">
+          <div className="riri-card border-rosefog/25 bg-white p-5">
             <p className="text-xs font-black uppercase tracking-[0.16em] text-champagne">
               Latest Updates
             </p>

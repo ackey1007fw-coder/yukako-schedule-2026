@@ -18,7 +18,7 @@ export function SupportersSection() {
           href={RECOMMEND_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="riri-lift group flex items-center gap-4 border border-champagne/40 bg-white p-5 hover:border-champagne sm:p-6"
+          className="riri-card riri-lift group flex items-center gap-4 border-champagne/40 bg-white p-5 hover:border-champagne sm:p-6"
         >
           <span className="grid h-12 w-12 shrink-0 place-items-center border border-champagne/50 bg-porcelain text-champagne">
             <MessageCircleHeart className="h-5 w-5" aria-hidden="true" />

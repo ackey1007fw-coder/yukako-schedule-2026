@@ -35,7 +35,7 @@ export function AvatarGallery() {
             onClick={() => animateAvatar(index)}
             onAnimationEnd={() => setActiveIndex(null)}
             aria-label={`${avatar.name}を動かす`}
-            className={`avatar-card group relative overflow-hidden border bg-white p-3 text-left transition hover:-translate-y-1 hover:shadow-paper focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-champagne ${
+            className={`avatar-card riri-card group relative overflow-hidden bg-white p-3 text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-champagne ${
               avatar.featured ? "border-champagne/70" : "border-rosefog/25"
             } ${activeIndex === index ? "avatar-card-active" : ""}`}
           >

@@ -25,7 +25,7 @@ export function LinksSection({ socialLinks, mediaLinks }: LinksSectionProps) {
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="riri-lift group flex min-h-32 items-start gap-4 border border-rosefog/25 bg-porcelain p-5 hover:border-champagne hover:bg-white"
+                className="riri-card riri-lift group flex min-h-32 items-start gap-4 border-rosefog/25 bg-porcelain p-5 hover:border-champagne hover:bg-white"
               >
                 <span className="grid h-11 w-11 shrink-0 place-items-center border border-champagne/50 bg-white text-champagne">
                   {link.kind === "showroom" ? (
