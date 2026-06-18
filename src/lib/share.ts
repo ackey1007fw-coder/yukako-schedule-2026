@@ -29,3 +29,6 @@ export const xShareUrl = (text: string, url: string) =>
 
 export const lineShareUrl = (url: string) =>
   `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(url)}`;
+
+export const threadsShareUrl = (text: string, url: string) =>
+  `https://www.threads.net/intent/post?text=${encodeURIComponent(`${text} ${url}`)}`;

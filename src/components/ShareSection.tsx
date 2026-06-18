@@ -1,12 +1,17 @@
-import { useState } from "react";
-import { Check, Copy, Share2 } from "lucide-react";
+import { useEffect, useState } from "react";
+import { AtSign, Check, Copy, Instagram, Share2 } from "lucide-react";
 import { profile } from "../data/profile";
-import { SITE_URL, lineShareUrl, xShareUrl } from "../lib/share";
+import { SITE_URL, lineShareUrl, threadsShareUrl, xShareUrl } from "../lib/share";
 
 export function ShareSection() {
   const [copied, setCopied] = useState(false);
+  const [canNativeShare, setCanNativeShare] = useState(false);
   const url = SITE_URL;
   const text = `${profile.name}（${profile.kana}）さんの応援スケジュール`;
+
+  useEffect(() => {
+    setCanNativeShare(typeof navigator !== "undefined" && !!navigator.share);
+  }, []);
 
   const copyLink = async () => {
     try {
@@ -15,6 +20,14 @@ export function ShareSection() {
       window.setTimeout(() => setCopied(false), 2000);
     } catch {
       /* クリップボード非対応時は何もしない */
+    }
+  };
+
+  const nativeShare = async () => {
+    try {
+      await navigator.share({ title: "Riri Schedule 2026", text, url });
+    } catch {
+      /* キャンセル/非対応時は何もしない */
     }
   };
 
@@ -42,6 +55,15 @@ export function ShareSection() {
             Xでシェア
           </a>
           <a
+            href={threadsShareUrl(text, url)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex min-h-12 w-full items-center justify-center gap-2 border border-ink bg-ink px-5 py-3 text-sm font-bold text-white transition hover:bg-[#4a3942] sm:w-auto"
+          >
+            <AtSign className="h-4 w-4" aria-hidden="true" />
+            Threadsでシェア
+          </a>
+          <a
             href={lineShareUrl(url)}
             target="_blank"
             rel="noopener noreferrer"
@@ -49,6 +71,16 @@ export function ShareSection() {
           >
             LINEで送る
           </a>
+          {canNativeShare && (
+            <button
+              type="button"
+              onClick={nativeShare}
+              className="inline-flex min-h-12 w-full items-center justify-center gap-2 border border-champagne bg-white px-5 py-3 text-sm font-bold text-ink transition hover:bg-porcelain sm:w-auto"
+            >
+              <Instagram className="h-4 w-4 text-champagne" aria-hidden="true" />
+              ストーリーズ等でシェア
+            </button>
+          )}
           <button
             type="button"
             onClick={copyLink}
@@ -62,6 +94,12 @@ export function ShareSection() {
             {copied ? "コピーしました" : "リンクをコピー"}
           </button>
         </div>
+
+        {canNativeShare && (
+          <p className="mt-4 text-xs leading-6 text-ink/45">
+            「ストーリーズ等でシェア」→ 共有メニューから Instagram を選ぶと、ストーリーズに投稿できます。
+          </p>
+        )}
       </div>
     </section>
   );
