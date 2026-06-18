@@ -64,7 +64,7 @@ export function SearchSeoSection() {
               <a
                 key={item.href}
                 href={item.href}
-                className="group flex min-h-36 flex-col justify-between border border-rosefog/25 bg-porcelain p-4 transition hover:border-champagne hover:bg-white"
+                className="riri-lift group flex min-h-36 flex-col justify-between border border-rosefog/25 bg-porcelain p-4 hover:border-champagne hover:bg-white"
               >
                 <span>
                   <span className="text-[11px] font-black uppercase tracking-wide text-champagne">

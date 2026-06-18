@@ -100,7 +100,7 @@ export function PhotoGallerySection() {
           href={galleryUpdate.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-6 flex items-center gap-3 border border-champagne/40 bg-white px-4 py-3 text-sm font-bold text-ink transition hover:border-champagne hover:bg-porcelain"
+          className="riri-lift mt-6 flex items-center gap-3 border border-champagne/40 bg-white px-4 py-3 text-sm font-bold text-ink hover:border-champagne hover:bg-porcelain"
         >
           <span className="grid h-9 w-9 shrink-0 place-items-center border border-champagne/50 bg-porcelain text-champagne">
             <Instagram className="h-4 w-4" aria-hidden="true" />

@@ -53,7 +53,7 @@ export function CharmSection() {
           {charmPoints.map((point) => (
             <article
               key={point.title}
-              className="border-t-2 border-champagne/50 bg-white/70 p-6 backdrop-blur transition hover:bg-white"
+              className="riri-lift border-t-2 border-champagne/50 bg-white/70 p-6 backdrop-blur hover:bg-white"
             >
               <span className="text-[11px] font-black uppercase tracking-[0.18em] text-champagne">
                 {point.label}
