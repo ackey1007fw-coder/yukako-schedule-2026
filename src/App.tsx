@@ -15,6 +15,7 @@ import { MobileActionDock } from "./components/MobileActionDock";
 import { NextEvent } from "./components/NextEvent";
 import { NewsBar } from "./components/NewsBar";
 import { PetSection } from "./components/PetSection";
+import { QuickNav } from "./components/QuickNav";
 import { Slideshow } from "./components/Slideshow";
 import { PhotoGallerySection } from "./components/PhotoGallerySection";
 import { ProfileSection } from "./components/ProfileSection";
@@ -83,6 +84,7 @@ function App() {
     <div className="min-h-screen bg-porcelain pb-24 text-ink md:pb-0">
       <SiteHeader socialLinks={socialLinks} />
       <NewsBar />
+      <QuickNav />
       <main>
         {isLoading && (
           <div className="bg-ink px-4 py-2 text-center text-xs font-bold text-white">

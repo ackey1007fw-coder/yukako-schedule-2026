@@ -95,6 +95,36 @@ img {
   }
 }
 
+/* 誕生日カウントダウン：数字のポップ＆お祝いのキラキラ（レイアウトは動かさない） */
+@keyframes riri-pop {
+  0% {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes riri-celebrate {
+  0% {
+    transform: translateY(0) scale(0.7) rotate(0deg);
+    opacity: 0;
+  }
+  18% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-104px) scale(1.05) rotate(10deg);
+    opacity: 0;
+  }
+}
+
+
 .avatar-card::after {
   pointer-events: none;
   content: "";
