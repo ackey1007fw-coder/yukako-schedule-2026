@@ -32,12 +32,13 @@ export const galleryPhotos: GalleryPhoto[] = [
   { src: "/images/gallery/g25.jpg", alt: "チェック柄シャツでポニーテールのセルフィーの夏凪里季さん" },
   { src: "/images/gallery/g26.jpg", alt: "新宿のレストラン アカシアの店頭" },
   { src: "/images/gallery/g27.jpg", alt: "レストラン アカシアでロールキャベツシチューを前にする夏凪里季さん" },
-  { src: "/images/gallery/g28.jpg", alt: "レストラン アカシアで頬杖をつく夏凪里季さん" }
+  { src: "/images/gallery/g28.jpg", alt: "レストラン アカシアで頬杖をつく夏凪里季さん" },
+  { src: "/images/gallery/g29.jpg", alt: "麻辣湯を前にサムズアップで笑う夏凪里季さん" }
 ];
 
 // 最新の更新お知らせ（Instagram更新時にここを書き換える）
 export const galleryUpdate = {
-  date: "2026.6.18",
-  note: "新宿のレストラン アカシアでロールキャベツシチュー",
-  url: "https://www.instagram.com/p/DZuYXoLiZ2z/"
+  date: "2026.6.19",
+  note: "「麻辣湯に野菜は要らない」笑顔のセルフィー",
+  url: "https://x.com/frecam2025_0306/status/2067775746735820830"
 };
