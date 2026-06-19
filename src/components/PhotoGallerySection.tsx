@@ -22,6 +22,7 @@ export function PhotoGallerySection() {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [showAll, setShowAll] = useState(false);
+  const [loaded, setLoaded] = useState<Record<string, boolean>>({});
   const visiblePhotos = showAll ? galleryPhotos : galleryPhotos.slice(0, 12);
 
   const selectedPhoto =
@@ -126,7 +127,9 @@ export function PhotoGallerySection() {
           {visiblePhotos.map((photo, index) => (
             <figure
               key={photo.src}
-              className="photo-gallery-card riri-card overflow-hidden border-rosefog/15 bg-porcelain"
+              className={`photo-gallery-card riri-card overflow-hidden border-rosefog/15 bg-porcelain ${
+                loaded[photo.src] ? "" : "riri-skeleton"
+              }`}
             >
               <button
                 type="button"
@@ -142,6 +145,11 @@ export function PhotoGallerySection() {
                   alt={photo.alt}
                   loading="lazy"
                   decoding="async"
+                  onLoad={() =>
+                    setLoaded((current) =>
+                      current[photo.src] ? current : { ...current, [photo.src]: true },
+                    )
+                  }
                   className="photo-gallery-image block w-full"
                 />
               </button>
