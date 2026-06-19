@@ -1,4 +1,6 @@
+import { Share2 } from "lucide-react";
 import { profile } from "../data/profile";
+import { SITE_URL, xShareUrl } from "../lib/share";
 import type { SocialLink } from "../types";
 
 type FooterProps = {
@@ -8,31 +10,61 @@ type FooterProps = {
 };
 
 export function Footer({ socialLinks, source, updatedAt }: FooterProps) {
+  const year = new Date().getFullYear();
+
   return (
-    <footer className="border-t border-rosefog/20 bg-ink px-4 py-10 text-white sm:px-6 lg:px-8">
-      <div className="mx-auto flex max-w-7xl flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <p className="font-display text-2xl">{profile.name}</p>
-          <p className="mt-1 text-sm text-white/60">
-            {profile.theme} | 応援スケジュール
-          </p>
-          <p className="mt-2 text-xs text-white/45">
-            Data: {source === "sheets" ? "Google Sheets" : "Fallback"}
-            {updatedAt ? ` / ${new Date(updatedAt).toLocaleString("ja-JP")}` : ""}
-          </p>
+    <footer className="border-t border-rosefog/20 bg-ink px-4 py-12 text-white sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl">
+        <div className="flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between">
+          <div>
+            <p className="font-display text-2xl">{profile.name}</p>
+            <p className="mt-1 text-sm text-white/60">
+              {profile.theme}｜非公式の応援スケジュール（ファン制作）
+            </p>
+            <p className="mt-4 text-xs text-white/45">
+              最終更新：
+              {updatedAt ? new Date(updatedAt).toLocaleString("ja-JP") : "—"}
+              （データ: {source === "sheets" ? "Google Sheets" : "内蔵データ"}）
+            </p>
+          </div>
+
+          <div className="sm:text-right">
+            <p className="mb-3 text-[11px] font-black uppercase tracking-[0.18em] text-champagne">
+              Follow &amp; Share
+            </p>
+            <div className="flex flex-wrap gap-2 sm:justify-end">
+              {socialLinks.map((link) => (
+                <a
+                  key={link.url}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="border border-white/18 px-3 py-2 text-xs font-bold text-white/75 transition hover:border-champagne hover:text-white"
+                >
+                  {link.label}
+                </a>
+              ))}
+              <a
+                href={xShareUrl(
+                  `${profile.name}（${profile.kana}）さんの応援スケジュール`,
+                  SITE_URL,
+                )}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 border border-champagne bg-champagne/15 px-3 py-2 text-xs font-bold text-white transition hover:bg-champagne/25"
+              >
+                <Share2 className="h-3.5 w-3.5" aria-hidden="true" />
+                シェア
+              </a>
+            </div>
+          </div>
         </div>
-        <div className="flex flex-wrap gap-2">
-          {socialLinks.slice(0, 5).map((link) => (
-            <a
-              key={link.url}
-              href={link.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="border border-white/18 px-3 py-2 text-xs font-bold text-white/75 transition hover:border-champagne hover:text-white"
-            >
-              {link.label}
-            </a>
-          ))}
+
+        <div className="mt-10 flex flex-col gap-2 border-t border-white/10 pt-6 text-xs text-white/40 sm:flex-row sm:items-center sm:justify-between">
+          <p>© {year} {profile.romaji} Fan Schedule ・ Produced by あっきー</p>
+          <p>
+            本サイトはファンによる非公式の応援ページです。掲載情報は変更される場合があります。
+          </p>
         </div>
       </div>
     </footer>
