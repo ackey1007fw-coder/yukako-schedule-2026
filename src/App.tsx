@@ -10,6 +10,7 @@ import { Hero } from "./components/Hero";
 import { HighlightsSection } from "./components/HighlightsSection";
 import { InterviewSection } from "./components/InterviewSection";
 import { LinksSection } from "./components/LinksSection";
+import { LiveBanner } from "./components/LiveBanner";
 import { MagazineSpread } from "./components/MagazineSpread";
 import { MobileActionDock } from "./components/MobileActionDock";
 import { NextEvent } from "./components/NextEvent";
@@ -82,6 +83,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-porcelain pb-24 text-ink md:pb-0">
+      <LiveBanner />
       <SiteHeader socialLinks={socialLinks} />
       <NewsBar />
       <QuickNav />
