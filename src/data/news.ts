@@ -8,6 +8,12 @@ export type NewsItem = {
 
 export const news: NewsItem[] = [
   {
+    date: "2026.6.21",
+    label: "X",
+    text: "「今日の夏凪☀️🍉🌻🏊」夏コーデのセルフィー",
+    url: "https://x.com/frecam2025_0306/status/2068651822282408298"
+  },
+  {
     date: "2026.6.20",
     label: "X",
     text: "「JRさん頑張りすぎてない⁉️」過剰謝罪にゆるっとツッコミ",

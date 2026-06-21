@@ -3,6 +3,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { ActionStrip } from "./components/ActionStrip";
 import { BirthdayBanner } from "./components/BirthdayBanner";
 import { BirthdayCountdown } from "./components/BirthdayCountdown";
+import { BirthdayDayBanner } from "./components/BirthdayDayBanner";
 import { CharmSection } from "./components/CharmSection";
 import { Footer } from "./components/Footer";
 import { FanLetterSection } from "./components/FanLetterSection";
@@ -83,6 +84,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-porcelain pb-24 text-ink md:pb-0">
+      <BirthdayDayBanner />
       <LiveBanner />
       <SiteHeader socialLinks={socialLinks} />
       <NewsBar />
