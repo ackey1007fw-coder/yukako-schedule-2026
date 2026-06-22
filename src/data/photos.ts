@@ -35,7 +35,8 @@ export const galleryPhotos: GalleryPhoto[] = [
   { src: "/images/gallery/g28.jpg", alt: "レストラン アカシアで頬杖をつく夏凪里季さん" },
   { src: "/images/gallery/g29.jpg", alt: "麻辣湯を前にサムズアップで笑う夏凪里季さん" },
   { src: "/images/gallery/g30.jpg", alt: "黒ジャケットの夏コーデでほほえむ夏凪里季さん（今日の夏凪）" },
-  { src: "/images/gallery/g31.jpg", alt: "久しぶりのピンクネイルを見せる夏凪里季さん" }
+  { src: "/images/gallery/g31.jpg", alt: "久しぶりのピンクネイルを見せる夏凪里季さん" },
+  { src: "/images/gallery/g32.jpg", alt: "けいかさんの一日店長イベントでチェキスタッフを務めた夏凪里季さんとの集合写真" }
 ];
 
 // 最新のギャラリー更新お知らせ
@@ -45,8 +46,8 @@ export const galleryUpdate: {
   note: string;
   url: string;
 } = {
-  date: "2026.6.22",
+  date: "2026.6.21",
   platform: "X",
-  note: "「1年ぶりくらいにネイルした💅🎶」久しぶりのネイルを見せるセルフィー",
-  url: "https://x.com/frecam2025_0306/status/2068981048361595335"
+  note: "けいかさんの投稿より。一日店長を「夏凪チェキスタッフ」としてお手伝い",
+  url: "https://x.com/keika_1110/status/2068738405291483258"
 };

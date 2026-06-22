@@ -8,6 +8,12 @@ export type NewsItem = {
 
 export const news: NewsItem[] = [
   {
+    date: "2026.6.21",
+    label: "けいかさんのX",
+    text: "一日店長イベントを「夏凪チェキスタッフ」としてお手伝い🍛",
+    url: "https://x.com/keika_1110/status/2068738405291483258"
+  },
+  {
     date: "2026.6.22",
     label: "X",
     text: "「1年ぶりくらいにネイルした💅🎶」久しぶりのネイルを見せるセルフィー",
