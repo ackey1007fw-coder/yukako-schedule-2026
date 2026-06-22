@@ -11,7 +11,7 @@ export const news: NewsItem[] = [
     date: "2026.6.22",
     label: "X",
     text: "「1年ぶりくらいにネイルした💅🎶」久しぶりのネイルを見せるセルフィー",
-    url: "https://x.com/frecam2025_0306"
+    url: "https://x.com/frecam2025_0306/status/2068981048361595335"
   },
   {
     date: "2026.6.21",
