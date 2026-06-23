@@ -11,7 +11,7 @@ export const imageManifest = {
   "/images/event-kyanly.jpg": {"width":1400,"height":1866,"widths":[360,480,720,960,1280,1400]},
   "/images/event-steenz.jpg": {"width":1400,"height":1866,"widths":[360,480,720,960,1280,1400]},
   "/images/event-theoridea.jpg": {"width":1400,"height":1867,"widths":[360,480,720,960,1280,1400]},
-  "/images/event-tvk.jpg": {"width":1400,"height":1867,"widths":[360,480,720,960,1280,1400]},
+  "/images/event-tvk.jpg": {"width":3240,"height":4320,"widths":[360,480,720,960,1280,1600,3240]},
   "/images/event-yofukashi.jpg": {"width":1400,"height":1867,"widths":[360,480,720,960,1280,1400]},
   "/images/event-yumenokuni.jpg": {"width":1400,"height":1867,"widths":[360,480,720,960,1280,1400]},
   "/images/gallery/g01.jpg": {"width":1100,"height":1467,"widths":[360,480,720,960,1100]},
