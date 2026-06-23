@@ -136,6 +136,73 @@ img {
   }
 }
 
+/* 特別配信バナー：シャンパンゴールド〜ピンクの華やかなグラデーションが流れる */
+.riri-special-banner {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(
+    100deg,
+    #f7d9a8 0%,
+    #fbe7d8 22%,
+    #fdeef4 45%,
+    #f8dce8 68%,
+    #f3c6dd 100%
+  );
+  background-size: 220% 100%;
+  animation: riri-special-flow 6s ease-in-out infinite;
+}
+
+.riri-special-banner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(
+    100deg,
+    rgba(255, 255, 255, 0) 38%,
+    rgba(255, 255, 255, 0.7) 50%,
+    rgba(255, 255, 255, 0) 62%
+  );
+  background-size: 220% 100%;
+  animation: riri-special-sheen 4.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes riri-special-flow {
+  0%,
+  100% {
+    background-position: 0% 0;
+  }
+  50% {
+    background-position: 100% 0;
+  }
+}
+
+@keyframes riri-special-sheen {
+  0% {
+    background-position: 220% 0;
+  }
+  60%,
+  100% {
+    background-position: -120% 0;
+  }
+}
+
+.riri-special-twinkle {
+  animation: riri-special-twinkle 2.4s ease-in-out infinite;
+}
+
+@keyframes riri-special-twinkle {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
 .riri-button {
   display: inline-flex;
   align-items: center;

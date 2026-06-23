@@ -26,6 +26,7 @@ import { SearchSeoSection } from "./components/SearchSeoSection";
 import { ShareSection } from "./components/ShareSection";
 import { ShowroomSection } from "./components/ShowroomSection";
 import { SiteHeader } from "./components/SiteHeader";
+import { SpecialStreamBanner } from "./components/SpecialStreamBanner";
 import { StructuredData } from "./components/StructuredData";
 import { SupportersSection } from "./components/SupportersSection";
 import { TodayDashboard } from "./components/TodayDashboard";
@@ -85,6 +86,7 @@ function App() {
   return (
     <div className="min-h-screen bg-porcelain pb-24 text-ink md:pb-0">
       <BirthdayDayBanner />
+      <SpecialStreamBanner />
       <LiveBanner />
       <SiteHeader socialLinks={socialLinks} />
       <NewsBar />

@@ -1,7 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
 import { CalendarClock, Radio } from "lucide-react";
 import { profile } from "../data/profile";
-import { streamSchedule, type StreamSlot } from "../data/streamSchedule";
+import {
+  specialStream,
+  streamSchedule,
+  type StreamSlot
+} from "../data/streamSchedule";
 
 // ページ最上部のステータスバー。
 // ・配信中 → 赤「配信中！」
@@ -112,7 +116,14 @@ export function LiveBanner() {
     );
   }
 
-  if (todayTime) {
+  // 特別配信バナー（SpecialStreamBanner）が同じ枠を華やかに出しているときは、
+  // この「今日の配信 予定」バーは重複するので出さない。
+  const todayIsSpecial =
+    !!specialStream &&
+    todayStream?.date === specialStream.date &&
+    todayStream?.time === specialStream.time;
+
+  if (todayTime && !todayIsSpecial) {
     return (
       <a
         href={profile.showroom.url}
