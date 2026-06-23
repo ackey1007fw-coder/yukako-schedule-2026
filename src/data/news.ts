@@ -9,6 +9,12 @@ export type NewsItem = {
 export const news: NewsItem[] = [
   {
     date: "2026.6.23",
+    label: "Instagram",
+    text: "「10代最後の日🌟思い出ありすぎて選びきれなかった📸」18枚＋動画の思い出ポスト",
+    url: "https://www.instagram.com/p/DZ7SS2gCTv_/"
+  },
+  {
+    date: "2026.6.23",
     label: "TikTok",
     text: "「19歳最後の日」BGMは『真夏の果実（cover）』、20歳前日のショート動画",
     url: "https://vt.tiktok.com/ZSCdDkd6K/"
