@@ -9,6 +9,12 @@ export type NewsItem = {
 export const news: NewsItem[] = [
   {
     date: "2026.6.23",
+    label: "TikTok",
+    text: "「19歳最後の日」BGMは『真夏の果実（cover）』、20歳前日のショート動画",
+    url: "https://vt.tiktok.com/ZSCdDkd6K/"
+  },
+  {
+    date: "2026.6.23",
     label: "X",
     text: "「今日まではノンアルだよ🍸」20歳前日のセルフィー",
     url: "https://x.com/frecam2025_0306/status/2069259662399357205"

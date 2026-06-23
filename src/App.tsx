@@ -5,6 +5,7 @@ import { BirthdayBanner } from "./components/BirthdayBanner";
 import { BirthdayCountdown } from "./components/BirthdayCountdown";
 import { BirthdayDayBanner } from "./components/BirthdayDayBanner";
 import { CharmSection } from "./components/CharmSection";
+import { ClipSection } from "./components/ClipSection";
 import { Footer } from "./components/Footer";
 import { FanLetterSection } from "./components/FanLetterSection";
 import { Hero } from "./components/Hero";
@@ -104,6 +105,7 @@ function App() {
         <MagazineSpread nextEvent={nextEvent} />
         <CharmSection />
         <Slideshow />
+        <ClipSection />
         <NextEvent event={nextEvent} />
         <ScheduleSection
           upcomingEvents={upcomingEvents}
