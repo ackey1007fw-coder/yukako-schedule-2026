@@ -59,7 +59,7 @@ function ClipCard({ clip }: { clip: VideoClip }) {
           disablePictureInPicture
         />
         <span className="pointer-events-none absolute left-3 top-3 rounded-full bg-black/45 px-2 py-0.5 text-[11px] font-black text-white backdrop-blur-sm">
-          TikTok
+          {clip.platform ?? "TikTok"}
         </span>
         <span className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-0 transition group-hover:opacity-100">
           <span className="grid h-12 w-12 place-items-center rounded-full bg-white/85 text-ink shadow-lg">
@@ -82,7 +82,7 @@ function ClipCard({ clip }: { clip: VideoClip }) {
           rel="noopener noreferrer"
           className="inline-flex items-center gap-1 text-xs font-bold text-champagne underline underline-offset-4"
         >
-          {clip.date}・TikTokで見る →
+          {clip.date}・{clip.platform ?? "TikTok"}で見る →
         </a>
       </figcaption>
     </figure>
@@ -103,7 +103,7 @@ export function ClipSection() {
             動く里季ちゃん
           </h2>
           <p className="mt-2 text-sm text-ink/60">
-            TikTokのショート動画。音声はオフで流しているので、本編はタップしてTikTokでどうぞ。
+            ショート動画。音声はオフで流しているので、本編はタップして元の投稿でどうぞ。
           </p>
         </div>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

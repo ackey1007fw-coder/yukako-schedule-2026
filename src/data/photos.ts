@@ -5,6 +5,25 @@ export type GalleryPhoto = {
 
 // メイソンリー（写真をそのまま全体表示）で並べるギャラリー写真
 export const galleryPhotos: GalleryPhoto[] = [
+  // 2026.6.23 インスタ投稿「10代最後の日」より（18枚）。新しい順に先頭へ。
+  { src: "/images/gallery/g34.jpg", alt: "Fresh Campus Contest 2025の審査員特別賞のトロフィーを持つ夏凪里季さん" },
+  { src: "/images/gallery/g35.jpg", alt: "夜の街で黒のマキシ丈ワンピース姿の夏凪里季さん" },
+  { src: "/images/gallery/g36.jpg", alt: "制服姿（白シャツにリボン）のポートレートの夏凪里季さん" },
+  { src: "/images/gallery/g37.jpg", alt: "制服姿で階段でピースサインをする夏凪里季さん" },
+  { src: "/images/gallery/g38.jpg", alt: "キャンパスでグレートップス姿のポートレートの夏凪里季さん" },
+  { src: "/images/gallery/g39.jpg", alt: "白いドット柄ワンピースで壁にもたれる夏凪里季さん（撮影オフショット）" },
+  { src: "/images/gallery/g40.jpg", alt: "ひまわり畑でのセルフィーの夏凪里季さん" },
+  { src: "/images/gallery/g41.jpg", alt: "海辺で浴衣姿で振り返る夏凪里季さん" },
+  { src: "/images/gallery/g42.jpg", alt: "コンテストの様子をモニター越しに映した舞台裏のショット" },
+  { src: "/images/gallery/g43.jpg", alt: "ネイビーのニットポロと白いチュールスカートで屋外に立つ夏凪里季さん" },
+  { src: "/images/gallery/g44.jpg", alt: "和の建物で編みおろしヘアにレースの衣装で微笑む夏凪里季さん" },
+  { src: "/images/gallery/g45.jpg", alt: "夜のイルミネーションを背にしたセルフィーの夏凪里季さん" },
+  { src: "/images/gallery/g46.jpg", alt: "撮影データを選ぶ作業中のノートPC（赤い衣装のポートレート）" },
+  { src: "/images/gallery/g47.jpg", alt: "ベージュコートにレオパード柄スヌードのファッション撮影の夏凪里季さん" },
+  { src: "/images/gallery/g48.jpg", alt: "誕生日のバルーンブーケを抱える夏凪里季さん" },
+  { src: "/images/gallery/g49.jpg", alt: "SHOWROOMゲスト控室の前でピースサインをする夏凪里季さん" },
+  { src: "/images/gallery/g50.jpg", alt: "台本を手にリハーサル中の夏凪里季さん" },
+  { src: "/images/gallery/g51.jpg", alt: "あじさいの前でお散歩する愛犬カルアちゃん" },
   { src: "/images/gallery/g01.jpg", alt: "舞台『月シア別冊』ステージ上の夏凪里季さん" },
   { src: "/images/gallery/g02.jpg", alt: "舞台『テオリデア』の衣装姿の夏凪里季さん" },
   { src: "/images/gallery/g03.jpg", alt: "愛犬カルアちゃんと寄り添う夏凪里季さん" },
@@ -48,7 +67,7 @@ export const galleryUpdate: {
   url: string;
 } = {
   date: "2026.6.23",
-  platform: "X",
-  note: "「今日まではノンアルだよ🍸」20歳前日のセルフィー",
-  url: "https://x.com/frecam2025_0306/status/2069259662399357205"
+  platform: "Instagram",
+  note: "「10代最後の日🌟思い出ありすぎて選びきれなかった📸」18枚の思い出ポスト",
+  url: "https://www.instagram.com/p/DZ7SS2gCTv_/"
 };
