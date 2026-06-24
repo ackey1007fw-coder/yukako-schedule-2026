@@ -17,6 +17,8 @@ type Spark = {
 export function BirthdayCountdown() {
   const [isCelebrating, setIsCelebrating] = useState(false);
   const celebrationTimer = useRef<number | null>(null);
+  const [thanked, setThanked] = useState(false);
+  const thankTimer = useRef<number | null>(null);
   const [countdown, setCountdown] = useState(() =>
     getBirthdayCountdown(profile.birthdayMonthDay, new Date(), birthYear),
   );
@@ -37,18 +39,31 @@ export function BirthdayCountdown() {
       if (celebrationTimer.current !== null) {
         window.clearTimeout(celebrationTimer.current);
       }
+      if (thankTimer.current !== null) {
+        window.clearTimeout(thankTimer.current);
+      }
     },
     [],
   );
 
   const celebrate = () => {
     const base = Date.now();
-    const items = Array.from({ length: 8 }, (_, index) => ({
+    const items = Array.from({ length: 14 }, (_, index) => ({
       id: base + index,
-      left: 7 + Math.random() * 86,
-      delay: Math.random() * 120,
+      left: 6 + Math.random() * 88,
+      delay: Math.random() * 220,
       heart: index % 2 === 0
     }));
+
+    // お礼メッセージは設定（reduced-motion）に関係なく必ず表示する手応え
+    setThanked(true);
+    if (thankTimer.current !== null) {
+      window.clearTimeout(thankTimer.current);
+    }
+    thankTimer.current = window.setTimeout(() => {
+      setThanked(false);
+      thankTimer.current = null;
+    }, 2600);
 
     setIsCelebrating(false);
     window.requestAnimationFrame(() => {
@@ -66,7 +81,7 @@ export function BirthdayCountdown() {
       setSparks((current) =>
         current.filter((spark) => !items.some((item) => item.id === spark.id)),
       );
-    }, 1300);
+    }, 1500);
   };
 
   const ageLabel =
@@ -114,9 +129,9 @@ export function BirthdayCountdown() {
                   }}
                 >
                   {spark.heart ? (
-                    <Heart className="h-5 w-5 fill-rosefog text-rosefog" />
+                    <Heart className="h-6 w-6 fill-rosefog text-rosefog" />
                   ) : (
-                    <Sparkles className="h-5 w-5 text-champagne" />
+                    <Sparkles className="h-6 w-6 text-champagne" />
                   )}
                 </span>
               ))}
@@ -149,11 +164,16 @@ export function BirthdayCountdown() {
                 ))}
               </div>
               <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
-                <p className="flex items-center gap-2 text-sm font-bold text-ink/70">
+                <p
+                  className="flex items-center gap-2 text-sm font-bold text-ink/70"
+                  aria-live="polite"
+                >
                   <Heart className="h-4 w-4 text-rosefog" aria-hidden="true" />
-                  {countdown.isBirthdayToday
-                    ? "今日はお祝い当日です。"
-                    : "一緒にお祝いの準備を進めよう。"}
+                  {thanked
+                    ? "おめでとうを贈りました！🎉 ありがとう♡"
+                    : countdown.isBirthdayToday
+                      ? "今日はお祝い当日です。"
+                      : "一緒にお祝いの準備を進めよう。"}
                 </p>
                 <button
                   type="button"
@@ -165,7 +185,7 @@ export function BirthdayCountdown() {
                     className="h-4 w-4 text-champagne"
                     aria-hidden="true"
                   />
-                  おめでとうを贈る
+                  {thanked ? "ありがとう！" : "おめでとうを贈る"}
                 </button>
               </div>
             </div>
