@@ -5,7 +5,8 @@ export type GalleryPhoto = {
 
 // メイソンリー（写真をそのまま全体表示）で並べるギャラリー写真
 export const galleryPhotos: GalleryPhoto[] = [
-  // 2026.6.24 20歳のお誕生日。振袖姿の記念ポートレート（ご本人X投稿）。
+  // 2026.6.24 20歳のお誕生日。振袖姿の記念ポートレート（ご本人X投稿／インスタストーリー）。
+  { src: "/images/gallery/g54.jpg", alt: "振袖姿で南天の枝を手に振り返る、20歳になった夏凪里季さん（インスタストーリー）" },
   { src: "/images/gallery/g53.jpg", alt: "振袖姿で赤い和傘を手に、20歳の誕生日を迎えた夏凪里季さんの記念ポートレート" },
   // 2026.6.23 インスタ投稿「10代最後の日」より（18枚）。新しい順に先頭へ。
   { src: "/images/gallery/g34.jpg", alt: "Fresh Campus Contest 2025の審査員特別賞のトロフィーを持つ夏凪里季さん" },
