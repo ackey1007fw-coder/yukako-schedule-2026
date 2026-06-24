@@ -70,8 +70,8 @@ export const galleryUpdate: {
   note: string;
   url: string;
 } = {
-  date: "2026.6.23",
-  platform: "Instagram",
-  note: "「10代最後の日🌟思い出ありすぎて選びきれなかった📸」18枚の思い出ポスト",
-  url: "https://www.instagram.com/p/DZ7SS2gCTv_/"
+  date: "2026.6.24",
+  platform: "X",
+  note: "「ハタチになりました㊗️🎂✨️」20歳記念の振袖ポートレート",
+  url: "https://x.com/frecam2025_0306/status/2069622787602538770"
 };
