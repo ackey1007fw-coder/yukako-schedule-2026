@@ -7,6 +7,10 @@ import { SectionHeader } from "./SectionHeader";
 
 const birthYear = Number(profile.birthday.slice(0, 4));
 
+// お誕生日のこの日数以内に近づいたら、カウントダウンのセクションを表示する。
+// （普段＝遠いときは丸ごと非表示。来年まで363日…といった表示を避ける）
+const SHOW_WITHIN_DAYS = 60;
+
 type Spark = {
   id: number;
   left: number;
@@ -97,6 +101,11 @@ export function BirthdayCountdown() {
     { label: "分", value: countdown.minutes },
     { label: "秒", value: countdown.seconds }
   ];
+
+  // お誕生日が近づいたときだけ表示（遠いときはセクションごと非表示）
+  const isApproaching =
+    countdown.isBirthdayToday || countdown.days <= SHOW_WITHIN_DAYS;
+  if (!isApproaching) return null;
 
   return (
     <section id="birthday" className="scroll-mt-24 bg-porcelain py-16 sm:py-24">
