@@ -9,8 +9,14 @@ export type NewsItem = {
 export const news: NewsItem[] = [
   {
     date: "2026.6.25",
+    label: "ファンルーム",
+    text: "「新作飲んだ♪」スターバックスの新作ドリンクを楽しむ近況（ナギイチサマーの集い）",
+    url: "https://www.showroom-live.com/room/profile?room_id=550336"
+  },
+  {
+    date: "2026.6.25",
     label: "X",
-    text: "「たくさんのお祝いありがとうございます🥹💕」20歳のお祝いへの感謝ポスト",
+    text: "「たくさんのお祝いありがとうございます🥹💕 幸せな1年になりそうです」お礼＆20歳バルーンの後ろ姿",
     url: "https://x.com/frecam2025_0306/status/2069937553705419224"
   },
   {
