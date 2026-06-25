@@ -1,26 +1,30 @@
+import { useState } from "react";
 import { ArrowRight, CalendarDays, Camera, Radio } from "lucide-react";
 import { galleryPhotos } from "../data/photos";
 import { profile } from "../data/profile";
 import { getResponsiveImageProps } from "../lib/responsiveImage";
+import { pickShowcasePhotos } from "../lib/showcasePhotos";
 import type { ScheduleEvent } from "../types";
 
 type MagazineSpreadProps = {
   nextEvent?: ScheduleEvent;
 };
 
-const featurePhotos = [
-  galleryPhotos[12]?.src ?? profile.heroImage,
-  galleryPhotos[2]?.src ?? profile.portraitImage,
-  galleryPhotos[20]?.src ?? profile.heroImage
-];
-
-const featureAlts = [
-  galleryPhotos[12]?.alt ?? "夏凪里季さんのポートレート",
-  galleryPhotos[2]?.alt ?? "夏凪里季さんとカルアちゃん",
-  galleryPhotos[20]?.alt ?? "夏凪里季さんの誕生日写真"
+const FALLBACK = [
+  { src: profile.heroImage, alt: "夏凪里季さんのポートレート" },
+  { src: profile.portraitImage, alt: "夏凪里季さんのポートレート" },
+  { src: profile.heroImage, alt: "夏凪里季さんのポートレート" }
 ];
 
 export function MagazineSpread({ nextEvent }: MagazineSpreadProps) {
+  // 開くたびに3枚をランダム選出（Cover Story / 02 / 03）
+  const [feature] = useState(() => {
+    const picked = pickShowcasePhotos(3);
+    return [0, 1, 2].map((i) => picked[i] ?? FALLBACK[i]);
+  });
+  const featurePhotos = feature.map((p) => p.src);
+  const featureAlts = feature.map((p) => p.alt);
+
   return (
     <section className="bg-white py-12 sm:py-16" aria-label="Riri Magazine">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

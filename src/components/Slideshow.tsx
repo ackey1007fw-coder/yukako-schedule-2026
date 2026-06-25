@@ -1,14 +1,16 @@
 import { useCallback, useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
-import { galleryPhotos } from "../data/photos";
 import { getResponsiveImageProps } from "../lib/responsiveImage";
+import { shuffle, showcasePhotos } from "../lib/showcasePhotos";
 
 // トップ付近の自動送りスライドショー。
 // 開いた時点で自動再生され、写真はトリミングせず全体表示（object-contain）。
+// 並び順はページを開くたびにシャッフル（毎回ちがう写真から始まる）。
 const AUTO_MS = 4200;
 
 export function Slideshow() {
-  const count = galleryPhotos.length;
+  const [photos] = useState(() => shuffle(showcasePhotos));
+  const count = photos.length;
   const [index, setIndex] = useState(0);
   const [playing, setPlaying] = useState(true);
 
@@ -33,7 +35,7 @@ export function Slideshow() {
 
   if (count === 0) return null;
 
-  const photo = galleryPhotos[index];
+  const photo = photos[index];
 
   return (
     <section

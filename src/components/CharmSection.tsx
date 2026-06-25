@@ -1,7 +1,12 @@
+import { useState } from "react";
 import { charmPhotos, charmPoints } from "../data/charms";
 import { getResponsiveImageProps } from "../lib/responsiveImage";
+import { pickShowcasePhotos } from "../lib/showcasePhotos";
 
 export function CharmSection() {
+  // タグ（Portrait/Moment/Smile）と説明文はそのまま、写真は開くたびにランダム
+  const [photos] = useState(() => pickShowcasePhotos(charmPhotos.length));
+
   return (
     <section className="bg-[linear-gradient(180deg,#fffafc,#fff4f8_55%,#ffffff)] px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
       <div className="mx-auto max-w-7xl">
@@ -22,30 +27,33 @@ export function CharmSection() {
           </div>
 
           <div className="grid grid-cols-3 items-start gap-3 sm:gap-4">
-            {charmPhotos.map((photo) => (
-              <figure
-                key={photo.src}
-                className="border border-white bg-white p-1.5 shadow-sm"
-              >
-                <img
-                  {...getResponsiveImageProps(
-                    photo.src,
-                    "(min-width: 1024px) 22vw, 33vw",
-                  )}
-                  alt={photo.alt}
-                  loading="lazy"
-                  className="block w-full"
-                />
-                <figcaption className="px-1 pb-1 pt-2 leading-snug">
-                  <span className="block text-[10px] font-black uppercase tracking-[0.16em] text-champagne">
-                    {photo.tag}
-                  </span>
-                  <span className="mt-0.5 block text-[11px] font-bold text-ink/55">
-                    {photo.caption}
-                  </span>
-                </figcaption>
-              </figure>
-            ))}
+            {charmPhotos.map((item, i) => {
+              const pic = photos[i] ?? { src: item.src, alt: item.alt };
+              return (
+                <figure
+                  key={item.tag}
+                  className="border border-white bg-white p-1.5 shadow-sm"
+                >
+                  <img
+                    {...getResponsiveImageProps(
+                      pic.src,
+                      "(min-width: 1024px) 22vw, 33vw",
+                    )}
+                    alt={pic.alt}
+                    loading="lazy"
+                    className="block w-full"
+                  />
+                  <figcaption className="px-1 pb-1 pt-2 leading-snug">
+                    <span className="block text-[10px] font-black uppercase tracking-[0.16em] text-champagne">
+                      {item.tag}
+                    </span>
+                    <span className="mt-0.5 block text-[11px] font-bold text-ink/55">
+                      {item.caption}
+                    </span>
+                  </figcaption>
+                </figure>
+              );
+            })}
           </div>
         </div>
 
