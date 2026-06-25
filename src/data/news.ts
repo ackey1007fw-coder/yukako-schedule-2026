@@ -9,6 +9,12 @@ export type NewsItem = {
 export const news: NewsItem[] = [
   {
     date: "2026.6.25",
+    label: "TikTok",
+    text: "「疲れてるんならやめれば？」アンニュイな表情のショート動画 #06 #女子大生 #aiko",
+    url: "https://vt.tiktok.com/ZSCYwExgF/"
+  },
+  {
+    date: "2026.6.25",
     label: "ファンルーム",
     text: "「新作飲んだ♪」スターバックスの新作ドリンクを楽しむ近況（ナギイチサマーの集い）",
     url: "https://www.showroom-live.com/room/profile?room_id=550336"
