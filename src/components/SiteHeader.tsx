@@ -48,14 +48,14 @@ export function SiteHeader({ socialLinks }: SiteHeaderProps) {
   const activeSection = useActiveSection();
 
   return (
-    <header className="sticky top-0 z-50 border-b border-rosefog/20 bg-porcelain/88 backdrop-blur-xl">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <a href="#top" className="flex items-center gap-3 text-ink">
-          <span className="grid h-9 w-9 place-items-center border border-champagne/60 bg-white">
+    <header className="sticky top-0 z-50 w-full overflow-hidden border-b border-rosefog/20 bg-porcelain/88 backdrop-blur-xl">
+      <div className="mx-auto flex h-16 w-full min-w-0 max-w-7xl items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
+        <a href="#top" className="flex min-w-0 items-center gap-3 text-ink">
+          <span className="grid h-9 w-9 shrink-0 place-items-center border border-champagne/60 bg-white">
             <CalendarDays className="h-4 w-4 text-champagne" aria-hidden="true" />
           </span>
-          <span>
-            <span className="block font-display text-lg leading-none">
+          <span className="min-w-0">
+            <span className="block truncate font-display text-base leading-none min-[430px]:text-lg">
               {profile.theme}
             </span>
             <span className="mt-1 block text-[11px] font-semibold text-ink/55">
@@ -85,9 +85,10 @@ export function SiteHeader({ socialLinks }: SiteHeaderProps) {
             href={showroom.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="riri-button riri-button-gold min-h-10 px-3 text-xs sm:min-h-11 sm:px-4 sm:text-sm"
+            className="riri-button riri-button-gold min-h-10 shrink-0 px-3 text-xs sm:min-h-11 sm:px-4 sm:text-sm"
           >
-            SHOWROOM
+            <span className="hidden min-[430px]:inline">SHOWROOM</span>
+            <span className="min-[430px]:hidden">SR</span>
           </a>
         )}
       </div>

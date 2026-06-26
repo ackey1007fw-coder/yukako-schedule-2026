@@ -1,7 +1,5 @@
-import { useState } from "react";
 import {
   CalendarCheck,
-  Check,
   MessageCircleHeart,
   Radio,
   Share2,
@@ -20,41 +18,14 @@ export function MobileActionDock({
 }: MobileActionDockProps) {
   const ticketLink = nextEvent?.links.find((link) => link.kind === "ticket");
   const showroom = socialLinks.find((link) => link.kind === "showroom");
-  const [copied, setCopied] = useState(false);
-
-  const handleShare = async () => {
-    const url = typeof window !== "undefined" ? window.location.href : "";
-    const shareData = {
-      title: "Riri Schedule 2026",
-      text: "里季ちゃんの出演スケジュール＆ライブ情報まとめ📅",
-      url
-    };
-    try {
-      if (navigator.share) {
-        await navigator.share(shareData);
-        return;
-      }
-    } catch {
-      // 共有シートをキャンセルした等。コピーにフォールバックせず終了。
-      return;
-    }
-    try {
-      await navigator.clipboard.writeText(url);
-      setCopied(true);
-      window.setTimeout(() => setCopied(false), 1800);
-    } catch {
-      // クリップボードも使えない場合は何もしない。
-    }
-  };
 
   type DockItem = {
     label: string;
     Icon: typeof CalendarCheck;
     featured?: boolean;
-  } & (
-    | { href: string; external: boolean; onClick?: never }
-    | { onClick: () => void; href?: never; external?: never }
-  );
+    href: string;
+    external: boolean;
+  };
 
   const items: DockItem[] = [
     {
@@ -83,45 +54,33 @@ export function MobileActionDock({
       external: false
     },
     {
-      label: copied ? "コピー!" : "シェア",
-      Icon: copied ? Check : Share2,
-      onClick: handleShare
+      label: "シェア",
+      href: "#share",
+      Icon: Share2,
+      external: false
     }
   ];
 
   return (
     <nav
       aria-label="応援メニュー"
-      className="fixed inset-x-3 bottom-3 z-50 rounded-md border border-white/80 bg-white/92 p-1.5 shadow-paper backdrop-blur-xl md:hidden"
+      className="fixed bottom-[calc(0.75rem+env(safe-area-inset-bottom))] left-2 z-[70] w-[calc(100vw-1rem)] max-w-[calc(100vw-1rem)] rounded-md border border-white/80 bg-white/92 p-1 shadow-paper backdrop-blur-xl md:hidden"
     >
-      <div className="grid grid-cols-5 gap-1">
+      <div className="grid grid-cols-5 gap-0.5">
         {items.map((item) => {
           const content = (
             <>
               <item.Icon className="h-5 w-5" aria-hidden="true" />
-              <span className="whitespace-nowrap text-[10px] font-bold">
+              <span className="whitespace-nowrap text-[9px] font-bold min-[380px]:text-[10px]">
                 {item.label}
               </span>
             </>
           );
-          const className = `flex min-h-14 flex-col items-center justify-center gap-1 rounded border text-center transition ${
+          const className = `flex min-h-[3.25rem] flex-col items-center justify-center gap-1 rounded border text-center transition min-[380px]:min-h-14 ${
             item.featured
               ? "border-champagne bg-champagne text-white"
               : "border-transparent bg-porcelain text-ink hover:border-rosefog/40 hover:bg-white"
           }`;
-
-          if ("onClick" in item && item.onClick) {
-            return (
-              <button
-                key={item.label}
-                type="button"
-                onClick={item.onClick}
-                className={className}
-              >
-                {content}
-              </button>
-            );
-          }
 
           return item.external ? (
             <a

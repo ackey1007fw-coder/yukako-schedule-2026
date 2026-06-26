@@ -94,7 +94,7 @@ function App() {
   const monthKeys = getMonthKeysFromEvents(events);
 
   return (
-    <div className="min-h-screen bg-porcelain pb-24 text-ink md:pb-0">
+    <div className="min-h-screen bg-porcelain pb-[calc(7rem+env(safe-area-inset-bottom))] text-ink md:pb-0">
       <BirthdayDayBanner />
       <SpecialStreamBanner />
       <LiveBanner />
