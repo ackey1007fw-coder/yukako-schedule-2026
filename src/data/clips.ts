@@ -21,6 +21,15 @@ export const clips: VideoClip[] = [
     url: "https://vt.tiktok.com/ZSCMCTCn4/"
   },
   {
+    src: "/videos/tiktok-2026-06-25.mp4",
+    platform: "TikTok",
+    title: "疲れてるんならやめれば？",
+    caption: "ピンクトップでアンニュイな表情のショート動画。#06 #女子大生 #aiko",
+    bgm: "aiko",
+    date: "2026.6.25",
+    url: "https://vt.tiktok.com/ZSCYwExgF/"
+  },
+  {
     src: "/videos/instagram-2026-06-23.mp4",
     platform: "Instagram",
     title: "10代最後の日",
