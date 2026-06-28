@@ -17,9 +17,9 @@ export const events: ScheduleEvent[] = [
     ],
     displayDate: "2026年7月23日（木）〜27日（月）",
     venue: "Air studio 両国",
-    image: "/images/yukajet-main-visual.jpg",
+    image: "",
     summary:
-      "吉井優花子プロデュース公演 #ゆかJET の第1弾。A/B/C の3班構成で、全日程にわたって上演されます。チケットは各種プレイガイドにて販売予定。",
+      "吉井優花子プロデュース公演 #ゆかJET の記念すべき第1弾。A/B/C の3班構成で全5日間上演。チケット・配信情報は @yukako_produce をチェック。",
     badges: ["舞台", "プロデュース公演", "配信あり", "物販あり", "7/23〜27"],
     links: [
       {

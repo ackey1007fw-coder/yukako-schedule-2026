@@ -9,7 +9,7 @@ export const news: NewsItem[] = [
   {
     date: "2026.6.30",
     label: "お知らせ",
-    text: "吉井優花子さんの活動を追いかけるファンサイトを公開しました",
+    text: "吉井優花子さんの応援スケジュールサイトを公開しました",
     url: "https://yukako-schedule-2026.vercel.app/"
   },
   {

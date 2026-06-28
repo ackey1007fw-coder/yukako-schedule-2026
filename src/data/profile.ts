@@ -7,9 +7,9 @@ export const profile = {
   catchCopy:
     "自分で創って、自分で立つ。プロデューサー兼キャストとして、舞台の最前線へ。",
   intro:
-    "舞台 #ゆかJET の最新情報から、SNSまで。吉井優花子さんの活動を追いかける人のための場所です。",
-  heroImage: "/images/yukajet-main-visual.jpg",
-  portraitImage: "/images/yukajet-main-visual.jpg",
+    "#ゆかJET の公演情報から出演歴、SNSまで。吉井優花子さんの活動をまとめた応援サイトです。",
+  heroImage: "",
+  portraitImage: "",
   birthday: "",
   birthdayMonthDay: "",
   birthdayLabel: "",

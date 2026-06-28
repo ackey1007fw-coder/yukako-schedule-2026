@@ -44,7 +44,7 @@ export const searchFaqs: SearchFaq[] = [
   {
     question: "吉井優花子さんのSNSはどこですか？",
     answer:
-      "プロデュース公演の公式Xアカウント @yukako_produce で最新情報を発信しています。",
+      "プロデュース公演のXアカウント @yukako_produce で最新情報を発信しています。",
     href: "#links",
     linkLabel: "SNSを見る"
   },

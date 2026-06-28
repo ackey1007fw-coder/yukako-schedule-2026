@@ -67,7 +67,7 @@ export const highlights: Highlight[] = [
     category: "メディア",
     title: "モデルプレス掲載",
     description:
-      "「注目の"日本一可愛い新入生"候補」として、フレキャン2025特集のインタビューに登場しました。",
+      "「注目の『日本一可愛い新入生』候補」として、フレキャン2025特集のインタビューに登場しました。",
     link: { label: "モデルプレスで読む", url: "https://mdpr.jp/news/detail/4646978" }
   },
   {

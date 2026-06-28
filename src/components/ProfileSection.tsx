@@ -28,17 +28,19 @@ export function ProfileSection() {
         </div>
 
         <div className="grid gap-5 lg:grid-cols-[0.88fr_1.12fr]">
-          <div className="riri-card relative border-white bg-porcelain lg:min-h-[420px]">
-            <img
-              {...getResponsiveImageProps(
-                profile.portraitImage,
-                "(min-width: 1024px) 34vw, 100vw",
-              )}
-              alt={`${profile.name} portrait`}
-              loading="lazy"
-              className="block h-auto w-full object-contain lg:absolute lg:inset-0 lg:h-full lg:object-cover lg:object-top"
-            />
-          </div>
+          {profile.portraitImage && (
+            <div className="riri-card relative border-white bg-porcelain lg:min-h-[420px]">
+              <img
+                {...getResponsiveImageProps(
+                  profile.portraitImage,
+                  "(min-width: 1024px) 34vw, 100vw",
+                )}
+                alt={`${profile.name} portrait`}
+                loading="lazy"
+                className="block h-auto w-full object-contain lg:absolute lg:inset-0 lg:h-full lg:object-cover lg:object-top"
+              />
+            </div>
+          )}
           <div className="grid gap-3">
             {profile.facts.map((fact) => (
               <div key={fact.label} className="riri-card grid grid-cols-[88px_1fr] border-rosefog/20 bg-white">
