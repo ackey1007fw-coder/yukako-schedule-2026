@@ -1,16 +1,13 @@
 name: Site Identity Guard
 
-# 2サイト取り違え防止。
-# main = 夏凪里季 / yukako/main = 吉井優花子。
-# 対象ブランチに別サイトの内容が入っていたら CI を失敗させて検知する。
-# （2サイトは同一リポジトリ ackey1007fw-coder/riri-schedule-2026 のブランチ違い。
-#  リポジトリ名では区別できないため、profile.ts の中身で判定する。）
+# This repository is the Yoshii Yukako fan portal only.
+# Guard main against accidental copied data from the former Riri shared-repo history.
 
 on:
   pull_request:
-    branches: [main, yukako/main]
+    branches: [main]
   push:
-    branches: [main, yukako/main]
+    branches: [main]
 
 jobs:
   guard:
