@@ -1,52 +1,46 @@
 # 吉井優花子 応援スケジュールサイト — エージェント向けガイド
 
-このブランチ（`yukako/main`）を保守・改善するAIエージェント（Codex / Claude など）向けの共通ガイドです。
-ファン「あっきー」と一緒に、吉井優花子（よしい ゆかこ）さんの**非公式の応援スケジュールサイト**をよくしていきます。
+このリポジトリの `main` ブランチを保守・改善するAIエージェント（Codex / Claude など）向けの共通ガイドです。
+ファン「あっきー」と一緒に、吉井優花子（よしい ゆかこ）さんの**ファン制作の応援ポータル**をよくしていきます。
 
-> 1リポジトリに2サイトが同居しています。**このブランチは優花子サイト専用**です。
-> 里季（夏凪里季）サイトは `main` ブランチ。両者を混同しないこと（人物・SNS・演目・画像すべて別物）。
+> このリポジトリは吉井優花子さんのサイト専用です。
+> 夏凪里季さんのサイトは別リポジトリに独立済みです。移行の経緯上、里季さんのデータが誤ってコピー混入しないよう、CI の Site Identity Guard（`scripts/check-site-identity.mjs`）で検証しています。
 
 ## ⚠️ 作業前チェック（サイト取り違え防止・最重要）
 
-**2サイトは「リポジトリ」ではなく「ブランチ」で分かれています。`git remote -v` では区別できません**
-（里季も優花子も remote は同じ `ackey1007fw-coder/riri-schedule-2026`）。
-したがって「remote 名がyukakoか確認」という方法は無効。**必ず以下で確認すること**:
+**現在は優花子サイト専用の独立リポジトリです。作業前に remote と中身を両方確認してください。**
 
-1. **基点ブランチ**: 優花子の作業は必ず `yukako/main` を基点にする。
-   `git fetch origin yukako/main && git checkout -B <作業名> origin/yukako/main`
-   （`main` を基点にすると里季サイトを編集してしまう）
+1. **基点ブランチ**: 優花子の作業は `main` を基点に作業ブランチを切る。
+   `git fetch origin main && git checkout -B <作業名> origin/main`
 2. **中身で二重確認**: 編集前に
    `grep -m1 name src/data/profile.ts` が **`吉井 優花子`** であること。
-   もし **`夏凪 里季`** なら里季サイト＝取り違え。**編集せず報告して止まる**。
-3. **PR の宛先**: base は必ず `yukako/main`。`main` に向けない。
+   もし **`夏凪 里季`** が出る場合は移行時の混入または取り違えの可能性があるため、**編集せず報告して止まる**。
+3. **PR の宛先**: base は必ず `main`。
 
 ## リポジトリ / デプロイ
-- GitHub: `ackey1007fw-coder/riri-schedule-2026`
+- GitHub: `ackey1007fw-coder/yukako-schedule-2026`
 
 | ブランチ | サイト | 本番URL | Vercelプロジェクト |
 | :-- | :-- | :-- | :-- |
-| `yukako/main` | 吉井優花子 | https://yukako-schedule-2026.vercel.app/ | yukako-schedule-2026 |
-| `main` | 夏凪里季 | https://riri-schedule-2026.vercel.app/ | riri-schedule-2026 |
+| `main` | 吉井優花子 | https://yukako-schedule-2026.vercel.app/ | yukako-schedule-2026 |
 
-- `yukako/main` に push（マージ）すると **Vercel が自動デプロイ**。
+- `main` に push（マージ）すると **Vercel が自動デプロイ**。
 - ⚠️ **Vercel の Production Branch 設定**: yukako-schedule-2026 プロジェクトの
-  Production Branch が `yukako/main` になっていること（Settings → Git）。`main` を
-  向いていると変更が本番に反映されない。これはオーナーがダッシュボードで設定する。
+  Production Branch が `main` になっていること（Settings → Git）。これはオーナーがダッシュボードで設定する。
 
 ## 共同管理（Codex × Claude）
-- **Codex 自動レビュー**はリポジトリ単位で有効。`yukako/main` 宛ての PR も自動レビュー対象。
+- **Codex 自動レビュー**はリポジトリ単位で有効。`main` 宛ての PR も自動レビュー対象。
   PRに `@codex review`（再レビュー）/ `@codex address that feedback`（修正依頼）が使える。
 - **Claude** は PR を購読（`subscribe_pr_activity`）して CI 失敗・レビューに対応し、
   merged / closed まで見守る。
-- ワークフロー: `yukako/main` から作業ブランチ → 編集 → PR（`yukako/main` 宛て）
+- ワークフロー: `main` から作業ブランチ → 編集 → PR（`main` 宛て）
   → Codex レビュー + Claude 監視 → マージ → Vercel 自動デプロイ。
 - PR は確認不要で即マージしてよい。ただし本番に関わる大きな変更・曖昧な指摘はオーナーに確認する。
 
 ## セットアップ
 ```bash
-git clone https://github.com/ackey1007fw-coder/riri-schedule-2026.git
-cd riri-schedule-2026
-git checkout yukako/main
+git clone https://github.com/ackey1007fw-coder/yukako-schedule-2026.git
+cd yukako-schedule-2026
 git config user.email "ackey1007fw@gmail.com"
 git config user.name "ackey1007fw-coder"
 npm install
@@ -83,8 +77,8 @@ npm run dev   # http://127.0.0.1:5173 でローカル確認
 7. **写真はトリミングしない方針**：モバイルは全体表示（`block w-full`）、PC（`sm:`/`lg:`）だけ `object-cover`。
 8. **差し替え時のキャッシュ対策**：既存ファイルを同名で上書きしない。**新しいファイル名**にして参照パスも更新する（例: `yukako-hero-2026-07.jpg` のように日付や版を入れる）。同名上書きは CDN/ブラウザキャッシュで「変わらない」ように見える原因になる。
 
-## ビジュアル（里季サイトと差別化）— **クリムゾン × ゴールド × アイボリー**
-里季サイトとはテーマを分けてある。レッドカーペット調の暖色。**編集時はこのトーンを維持**すること。
+## ビジュアル — **クリムゾン × ゴールド × アイボリー**
+吉井優花子さんの応援ポータルとして、レッドカーペット調の暖色。**編集時はこのトーンを維持**すること。
 - `tailwind.config.ts` の colors トークン:
   - `porcelain` #fffdf7（アイボリー背景/カード）
   - `rosefog` #c8385a（クリムゾン＝アクセント/ラベル/境界）
@@ -94,18 +88,18 @@ npm run dev   # http://127.0.0.1:5173 でローカル確認
 - `src/index.css`: 背景グラデーション・影・`::selection`・各バナーを暖色で統一。
 - ディスプレイフォント: **Playfair Display**（`index.html` で Google Fonts 読み込み）。
   欧文見出しが華やかに、和文は明朝（Yu Mincho / Hiragino Mincho）にフォールバック。
-- 新規スタイルの直書き hex もこのパレットに合わせる。ピンク/ラベンダー系（里季の色）は使わない。
+- 新規スタイルの直書き hex もこのパレットに合わせる。
 
 ## 絶対ルール
-1. **「公式」「公認」と書かない** →「応援スケジュール」「Fan Schedule」と表記。
+1. **運営元によるものと誤解される表現は使わない** →「応援ポータル」「ファン制作」と表記。
 2. **未確認情報を書かない**（出演歴等は Wikipedia 等で裏取りした事実のみ）。
 3. **優花子さんの顔写真をAI生成しない**（背景・テクスチャのみ可）。
 4. **差分は最小限**。他のエージェント/人の作業を上書きしない。
 5. **画像は切り抜かず全体表示**（上記レスポンシブ方針）。
-6. **里季サイト（`main`）の内容を持ち込まない**。
+6. **別リポジトリのサイト内容を持ち込まない**。
 
 ## 事実メモ（吉井優花子 / よしい ゆかこ / Yoshii Yukako）
-- 1997年4月27日生まれ、秋田県秋田市出身、身長161cm、B型。
+- 1997年4月27日生まれ、秋田県秋田市出身、身長161cm、AB型。
 - 俳優・タレント・モデル・SHOWROOMライバー。元・秋田の公務員。
 - 経歴: 大学卒業後 秋田で公務員 → 2021年 ミス浴衣コンテスト準グランプリ → SHOWROOM開始
   → 2022年3月退職・上京 → 2022年12月 舞台『悪魔の涙』デビュー → 現在は法律事務所勤務と並行して舞台・プロデュース活動。
@@ -118,4 +112,4 @@ npm run dev   # http://127.0.0.1:5173 でローカル確認
 
 ## 着手前に
 README と `src/data/*.ts`・`src/components/` を読んで現状を把握してから作業する。
-可能ならローカル（`npm run dev`）か Vercel のプレビューで見た目を確認してから `yukako/main` にマージする。
+可能ならローカル（`npm run dev`）か Vercel のプレビューで見た目を確認してから `main` にマージする。
