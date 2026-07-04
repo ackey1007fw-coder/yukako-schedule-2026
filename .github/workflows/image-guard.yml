@@ -7,7 +7,7 @@ name: Image Overwrite Guard
 
 on:
   pull_request:
-    branches: [main, yukako/main]
+    branches: [main]
 
 jobs:
   image-guard:

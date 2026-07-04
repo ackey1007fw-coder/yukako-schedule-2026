@@ -1,21 +1,19 @@
 name: Site Identity Guard
 
-# 2サイト取り違え防止。
-# main = 夏凪里季 / yukako/main = 吉井優花子。
-# 対象ブランチに別サイトの内容が入っていたら CI を失敗させて検知する。
-# （2サイトは同一リポジトリ ackey1007fw-coder/riri-schedule-2026 のブランチ違い。
-#  リポジトリ名では区別できないため、profile.ts の中身で判定する。）
+# このリポジトリ（ackey1007fw-coder/yukako-schedule-2026）は吉井優花子さん専用。
+# 旧: riri-schedule-2026 の yukako/main ブランチから独立した経緯があるため、
+# 誤って夏凪里季さん側のデータがコピー混入していないかを検知する。
 
 on:
   pull_request:
-    branches: [main, yukako/main]
+    branches: [main]
   push:
-    branches: [main, yukako/main]
+    branches: [main]
 
 jobs:
   guard:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Check site identity matches branch
-        run: node scripts/check-site-identity.mjs "${{ github.base_ref || github.ref_name }}"
+      - name: Check site identity
+        run: node scripts/check-site-identity.mjs
