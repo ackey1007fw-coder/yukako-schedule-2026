@@ -147,7 +147,7 @@ export function BirthdayCountdown() {
             </div>
 
             <div className="relative z-10">
-              <div className="mb-5 flex items-center gap-3 text-champagne">
+              <div className="mb-5 flex items-center gap-3 text-champagneInk">
                 <Gift className="h-5 w-5" aria-hidden="true" />
                 <p className="text-sm font-bold">
                   {countdown.targetLabel}

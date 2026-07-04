@@ -35,7 +35,7 @@ export function AkitaRootsSection() {
             🌾
           </span>
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.24em] text-champagne">
+            <p className="text-xs font-bold uppercase tracking-[0.24em] text-champagneInk">
               Akita Roots
             </p>
             <h2 className="font-display text-3xl text-ink">秋田との絆</h2>

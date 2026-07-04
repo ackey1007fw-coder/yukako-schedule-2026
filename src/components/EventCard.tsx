@@ -148,7 +148,7 @@ export function EventCard({ event, isNext = false, compact = false }: EventCardP
         )}
 
         <div className="mt-6 border-t border-rosefog/15 pt-5">
-          <p className="mb-3 inline-flex items-center gap-2 text-xs font-black uppercase text-champagne">
+          <p className="mb-3 inline-flex items-center gap-2 text-xs font-black uppercase text-champagneInk">
             {upcoming ? (
               <Share2 className="h-4 w-4" aria-hidden="true" />
             ) : (

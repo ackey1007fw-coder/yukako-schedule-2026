@@ -64,7 +64,7 @@ export function PortalIntroSection() {
                 ["配信", profile.showroom.roomName]
               ].map(([label, value]) => (
                 <div key={label} className="border border-rosefog/20 bg-porcelain px-4 py-3">
-                  <p className="text-xs font-bold text-champagne">{label}</p>
+                  <p className="text-xs font-bold text-champagneInk">{label}</p>
                   <p className="mt-1 text-sm font-bold leading-6 text-ink/75">{value}</p>
                 </div>
               ))}

@@ -11,6 +11,9 @@ export default {
         lavender: "#e7c9a6",
         lilac: "#9a3048",
         champagne: "#c29a4a",
+        // champagneは白背景だと約2.6:1しかコントラストが出ないため、
+        // 本文として読ませるラベル・テキストには濃いめのこちらを使う（装飾・アイコン、暗い背景上はchampagneのまま）。
+        champagneInk: "#8a6d2e",
         ink: "#312a2e",
         moss: "#60705c"
       },

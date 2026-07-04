@@ -130,7 +130,7 @@ export function ActionStrip({
     <section className="relative z-20 bg-porcelain px-4 py-8 sm:px-6 lg:px-8">
       <div className="mx-auto mb-4 flex max-w-7xl items-end justify-between gap-4">
         <div>
-          <p className="text-xs font-black uppercase tracking-[0.18em] text-champagne">
+          <p className="text-xs font-black uppercase tracking-[0.18em] text-champagneInk">
             Support Compass
           </p>
           <h2 className="mt-2 font-display text-2xl text-ink sm:text-3xl">
@@ -152,7 +152,7 @@ export function ActionStrip({
                 <item.Icon className="h-5 w-5" aria-hidden="true" />
               </span>
               <span className="min-w-0">
-                <span className="block text-xs font-black uppercase text-champagne">
+                <span className="block text-xs font-black uppercase text-champagneInk">
                   {item.label}
                 </span>
                 <span className="mt-1 block font-display text-xl leading-tight text-ink">
@@ -194,7 +194,7 @@ export function ActionStrip({
                 <item.Icon className="h-4 w-4" aria-hidden="true" />
               </span>
               <span>
-                <span className="block text-[11px] font-black uppercase tracking-[0.14em] text-champagne">
+                <span className="block text-[11px] font-black uppercase tracking-[0.14em] text-champagneInk">
                   {item.label}
                 </span>
                 <span className="mt-1 block font-display text-xl leading-tight text-ink">

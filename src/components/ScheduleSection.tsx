@@ -151,7 +151,7 @@ export function ScheduleSection({
           <div className="mb-12">
             <div className="mb-5 flex items-end justify-between gap-4 border-b border-champagne/25 pb-4">
               <div>
-                <p className="text-xs font-bold uppercase text-champagne">
+                <p className="text-xs font-bold uppercase text-champagneInk">
                   Pick up
                 </p>
                 <h3 className="mt-1 font-display text-3xl text-ink">
@@ -187,7 +187,7 @@ export function ScheduleSection({
                 }`}
               >
                 {tab.label}
-                <span className={activeTab === tab.id ? "text-white/70" : "text-champagne"}>
+                <span className={activeTab === tab.id ? "text-white/70" : "text-champagneInk"}>
                   {tab.count}
                 </span>
               </button>
@@ -206,7 +206,7 @@ export function ScheduleSection({
               />
             </label>
             <div className="flex min-w-0 flex-wrap items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-[0.14em] text-champagne">
+              <span className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-[0.14em] text-champagneInk">
                 <SlidersHorizontal className="h-4 w-4" aria-hidden="true" />
                 Filter
               </span>
@@ -222,7 +222,7 @@ export function ScheduleSection({
                   }`}
                 >
                   {option.label}
-                  <span className={categoryFilter === option.id ? "text-white/72" : "text-champagne"}>
+                  <span className={categoryFilter === option.id ? "text-white/72" : "text-champagneInk"}>
                     {option.count}
                   </span>
                 </button>
@@ -285,7 +285,7 @@ export function ScheduleSection({
         <details className="group mb-12 border-y border-rosefog/25">
           <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-5 marker:hidden">
             <div>
-              <p className="text-xs font-bold uppercase text-champagne">All upcoming</p>
+              <p className="text-xs font-bold uppercase text-champagneInk">All upcoming</p>
               <h3 className="mt-1 font-display text-3xl text-ink">今後の予定一覧</h3>
               <p className="mt-2 text-sm leading-6 text-ink/55">
                 直近以外も含めて、予定をまとめて確認できます。
@@ -306,7 +306,7 @@ export function ScheduleSection({
         <div id="calendar" className="scroll-mt-32">
           <div className="mb-5 flex items-end justify-between gap-4 border-b border-champagne/25 pb-4">
             <div>
-              <p className="text-xs font-bold uppercase text-champagne">Calendar</p>
+              <p className="text-xs font-bold uppercase text-champagneInk">Calendar</p>
               <h3 className="mt-1 font-display text-3xl text-ink">
                 カレンダー表示
               </h3>
