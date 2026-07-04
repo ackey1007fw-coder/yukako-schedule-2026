@@ -4,6 +4,8 @@ export type GalleryPhoto = {
 };
 
 export const galleryPhotos: GalleryPhoto[] = [
+  { src: "/images/yukako-yukajet-rehearsal-2026-07-04-selfie.jpg", alt: "#ゆかJETの稽古で笑顔を見せる吉井優花子さんとガールズキャストの自撮り写真" },
+  { src: "/images/yukako-yukajet-rehearsal-2026-07-04-girls.jpg", alt: "#ゆかJETの稽古でハートポーズをする吉井優花子さんたちガールズキャストの集合写真" },
   { src: "/images/yukako-selfie-2026-07-01.jpg", alt: "白Tシャツにピンクのベストで微笑む吉井優花子さん（2026.7.1 Xより）" },
   { src: "/images/yukako-stage-back.jpg", alt: "舞台上から客席を見つめる吉井優花子さん" },
   { src: "/images/yukako-stage-front.jpg", alt: "舞台衣装で演技中の吉井優花子さん" },
@@ -25,8 +27,8 @@ export const galleryUpdate: {
   note: string;
   url: string;
 } = {
-  date: "2026.7.1",
+  date: "2026.7.4",
   platform: "X",
-  note: "「絶対観に来てね！」#ゆかJET 想いを込めた朝の投稿",
-  url: "https://x.com/mokoopy/status/2072459071773708413"
+  note: "#ゆかJET 稽古スタート。三班の歌ダンスシーンへの期待が伝わる投稿",
+  url: "https://x.com/mokoopy/status/2073389892433027178"
 };

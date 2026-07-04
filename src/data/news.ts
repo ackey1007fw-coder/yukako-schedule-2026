@@ -7,6 +7,12 @@ export type NewsItem = {
 
 export const news: NewsItem[] = [
   {
+    date: "2026.7.4",
+    label: "X",
+    text: "#ゆかJET 稽古スタート。優花子さんが三班メンバーとの歌ダンスシーンの手応えと楽しみを投稿。",
+    url: "https://x.com/mokoopy/status/2073389892433027178"
+  },
+  {
     date: "2026.7.1",
     label: "X",
     text: "「7月の舞台、チェックしてくれたかな？最高のプロデュース作品にするから絶対観に来てね！」#ゆかJET ホームページも公開🌼",
