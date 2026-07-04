@@ -54,15 +54,17 @@ export function HighlightsSection() {
                         />
                         <div className="yukako-card yukako-card-interactive flex flex-col gap-4 border-rosefog/20 bg-white p-5 sm:flex-row">
                           {item.image && (
-                            <img
-                              {...getResponsiveImageProps(
-                                item.image,
-                                "(min-width: 640px) 160px, 100vw",
-                              )}
-                              alt={item.title}
-                              loading="lazy"
-                              className="block h-40 w-full shrink-0 border border-champagne/30 object-cover sm:h-auto sm:w-32"
-                            />
+                            <div className="flex w-full shrink-0 items-center justify-center border border-champagne/30 bg-porcelain sm:w-32">
+                              <img
+                                {...getResponsiveImageProps(
+                                  item.image,
+                                  "(min-width: 640px) 160px, 100vw",
+                                )}
+                                alt={item.title}
+                                loading="lazy"
+                                className="block h-auto max-h-none w-full object-contain"
+                              />
+                            </div>
                           )}
                           <div className="min-w-0 flex-1">
                             <p className="flex flex-wrap items-center gap-2 text-xs font-bold text-champagne">
