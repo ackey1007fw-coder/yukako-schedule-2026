@@ -10,7 +10,7 @@ export const news: NewsItem[] = [
     date: "2026.7.4",
     label: "X",
     text: "#ゆかJET 稽古スタート。優花子さんが三班メンバーとの歌ダンスシーンの手応えと楽しみを投稿。",
-    url: "https://x.com/mokoopy"
+    url: "https://x.com/mokoopy/status/2073389892433027178"
   },
   {
     date: "2026.7.1",

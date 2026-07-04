@@ -30,5 +30,5 @@ export const galleryUpdate: {
   date: "2026.7.4",
   platform: "X",
   note: "#ゆかJET 稽古スタート。三班の歌ダンスシーンへの期待が伝わる投稿",
-  url: "https://x.com/mokoopy"
+  url: "https://x.com/mokoopy/status/2073389892433027178"
 };
