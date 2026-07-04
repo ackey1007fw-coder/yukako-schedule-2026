@@ -7,6 +7,12 @@ export type NewsItem = {
 
 export const news: NewsItem[] = [
   {
+    date: "2026.7.3",
+    label: "X",
+    text: "#ゆかJET 予約告知を「もっと届いてほしい」と優花子さんが呼びかけ。来場・配信予約で応援できます。",
+    url: "https://x.com/mokoopy/status/2073008837641269562"
+  },
+  {
     date: "2026.7.4",
     label: "X",
     text: "#ゆかJET 稽古スタート。優花子さんが三班メンバーとの歌ダンスシーンの手応えと楽しみを投稿。",

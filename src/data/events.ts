@@ -28,6 +28,11 @@ export const events: ScheduleEvent[] = [
         kind: "ticket"
       },
       {
+        label: "「もっと届いてほしい」呼びかけ（吉井優花子 X）",
+        url: "https://x.com/mokoopy/status/2073008837641269562",
+        kind: "info"
+      },
+      {
         label: "会場の地図を開く",
         url: "https://www.google.com/maps/search/?api=1&query=Air%20studio%20%E4%B8%A1%E5%9B%BD%20%E6%9D%B1%E4%BA%AC%E9%83%BD%E5%A2%A8%E7%94%B0%E5%8C%BA%E4%B8%A1%E5%9B%BD2-18-7",
         kind: "info"
