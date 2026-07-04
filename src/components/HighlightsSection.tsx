@@ -61,7 +61,7 @@ export function HighlightsSection() {
                               )}
                               alt={item.title}
                               loading="lazy"
-                              className="block h-40 w-full shrink-0 border border-champagne/30 object-cover sm:h-auto sm:w-32"
+                              className="block h-auto w-full shrink-0 border border-champagne/30 bg-porcelain object-contain sm:w-32"
                             />
                           )}
                           <div className="min-w-0 flex-1">
