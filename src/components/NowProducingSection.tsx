@@ -1,14 +1,22 @@
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import {
   CalendarPlus,
+  ChevronLeft,
+  ChevronRight,
   Clock3,
+  ExternalLink,
+  Images,
   MapPin,
   Music,
   PenLine,
   Palette,
   Sparkles,
   Ticket,
-  Users
+  Users,
+  X
 } from "lucide-react";
+import { gojetPromoImages } from "../data/gojetPromo";
 import { getResponsiveImageProps } from "../lib/responsiveImage";
 import { googleCalendarUrl } from "../lib/share";
 import type { ScheduleEvent } from "../types";
@@ -27,9 +35,93 @@ const roles = [
   { label: "出演（B班JET / C班早紀）", Icon: Users }
 ];
 
+const wrapIndex = (index: number) =>
+  (index + gojetPromoImages.length) % gojetPromoImages.length;
+
+// 告知資料（相関図・タイムテーブル・チケット案内など）を拡大表示するための軽量ライトボックス。
+// フォトギャラリーの本人スナップとは分け、#ゆかJET特集内だけで完結させる。
+function PromoLightbox({
+  index,
+  onClose
+}: {
+  index: number;
+  onClose: () => void;
+}) {
+  const [current, setCurrent] = useState(index);
+  const photo = gojetPromoImages[current];
+
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+      if (e.key === "ArrowLeft") setCurrent((i) => wrapIndex(i - 1));
+      if (e.key === "ArrowRight") setCurrent((i) => wrapIndex(i + 1));
+    };
+    window.addEventListener("keydown", onKeyDown);
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+      document.body.style.overflow = "";
+    };
+  }, [onClose]);
+
+  // section-reveal の transform が containing block を作ってしまい、通常の
+  // position:fixed だとビューポート基準からズレるため、body直下にPortalで描画する。
+  return createPortal(
+    <div
+      className="fixed inset-0 z-[999] flex h-[100dvh] flex-col overscroll-contain bg-ink/97 px-3 py-4 text-white sm:px-6"
+      role="dialog"
+      aria-modal="true"
+      aria-label="#ゆかJET 告知資料"
+    >
+      <div className="mx-auto flex w-full max-w-5xl items-center justify-between gap-3">
+        <p className="text-xs font-bold uppercase tracking-[0.14em] text-champagne">
+          {current + 1} / {gojetPromoImages.length}
+        </p>
+        <button
+          type="button"
+          onClick={onClose}
+          className="grid h-11 w-11 place-items-center border border-white/20 bg-white/10 transition hover:bg-white/20"
+          aria-label="閉じる"
+        >
+          <X className="h-5 w-5" aria-hidden="true" />
+        </button>
+      </div>
+      <div className="relative mx-auto flex w-full max-w-5xl flex-1 items-center justify-center overflow-hidden py-4">
+        <img
+          {...getResponsiveImageProps(photo.src, "90vw")}
+          alt={photo.alt}
+          className="max-h-full max-w-full object-contain"
+        />
+        <button
+          type="button"
+          onClick={() => setCurrent((i) => wrapIndex(i - 1))}
+          className="absolute left-0 top-1/2 grid h-12 w-12 -translate-y-1/2 place-items-center border border-white/15 bg-ink/70 text-white transition hover:bg-ink"
+          aria-label="前の画像"
+        >
+          <ChevronLeft className="h-5 w-5" aria-hidden="true" />
+        </button>
+        <button
+          type="button"
+          onClick={() => setCurrent((i) => wrapIndex(i + 1))}
+          className="absolute right-0 top-1/2 grid h-12 w-12 -translate-y-1/2 place-items-center border border-white/15 bg-ink/70 text-white transition hover:bg-ink"
+          aria-label="次の画像"
+        >
+          <ChevronRight className="h-5 w-5" aria-hidden="true" />
+        </button>
+      </div>
+      <p className="mx-auto w-full max-w-5xl text-center text-sm leading-6 text-white/75">
+        {photo.alt}
+      </p>
+    </div>,
+    document.body,
+  );
+}
+
 // ヒーロー直下の #ゆかJET 特設ブロック（Now Producing billboard）。
-// ポスター + カウントダウン + 役割リスト + 予約CTA を、舞台看板風の1枚にまとめる。
+// ポスター + カウントダウン + 役割リスト + 予約CTA + 告知資料ギャラリーを、舞台看板風の1枚にまとめる。
 export function NowProducingSection({ event }: NowProducingSectionProps) {
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
   if (!event) {
     return (
       <section id="next" className="scroll-mt-24 bg-ink py-16 sm:py-24">
@@ -48,6 +140,7 @@ export function NowProducingSection({ event }: NowProducingSectionProps) {
 
   const ticketLink =
     event.links.find((link) => link.kind === "ticket") ?? event.links[0];
+  const infoLinks = event.links.filter((link) => link.kind === "info");
 
   return (
     <section id="next" className="scroll-mt-24 bg-ink py-16 sm:py-24">
@@ -140,10 +233,60 @@ export function NowProducingSection({ event }: NowProducingSectionProps) {
                   応援メニューを見る
                 </a>
               </div>
+
+              {infoLinks.length > 0 && (
+                <ul className="mt-6 grid gap-2 border-t border-white/10 pt-6">
+                  {infoLinks.map((link) => (
+                    <li key={link.url}>
+                      <a
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-sm font-semibold text-white/75 underline underline-offset-4 transition hover:text-champagne"
+                      >
+                        {link.label}
+                        <ExternalLink className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
           </div>
+
+          {gojetPromoImages.length > 0 && (
+            <div className="relative z-10 border-t border-white/10 p-6 sm:p-10 lg:p-14 lg:pt-0">
+              <p className="mb-4 flex items-center gap-2 text-xs font-black uppercase tracking-[0.16em] text-champagne">
+                <Images className="h-4 w-4" aria-hidden="true" />
+                告知資料（相関図・タイムテーブル・チケット案内）
+              </p>
+              <div className="grid grid-cols-3 gap-2 sm:grid-cols-6">
+                {gojetPromoImages.map((photo, index) => (
+                  <button
+                    key={photo.src}
+                    type="button"
+                    onClick={() => setLightboxIndex(index)}
+                    className="group relative aspect-[3/4] overflow-hidden border border-white/12 bg-black/20 transition hover:border-champagne/60"
+                    aria-label={`${photo.alt}を拡大表示`}
+                  >
+                    <img
+                      {...getResponsiveImageProps(photo.src, "160px")}
+                      alt={photo.alt}
+                      loading="lazy"
+                      decoding="async"
+                      className="h-full w-full object-cover transition group-hover:scale-105"
+                    />
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
         </article>
       </div>
+
+      {lightboxIndex !== null && (
+        <PromoLightbox index={lightboxIndex} onClose={() => setLightboxIndex(null)} />
+      )}
     </section>
   );
 }
