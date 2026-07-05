@@ -7,6 +7,12 @@ export type NewsItem = {
 
 export const news: NewsItem[] = [
   {
+    date: "2026.7.5",
+    label: "X",
+    text: "#ゆかJET 歌ダンス稽古動画が公開。メグもオリジナル楽曲を歌うこと、LIVEでの楽曲披露も告知されています。",
+    url: "https://x.com/yukako_produce/status/2073768826303631470"
+  },
+  {
     date: "2026.7.3",
     label: "X",
     text: "#ゆかJET 予約告知を「もっと届いてほしい」と優花子さんが呼びかけ。来場・配信予約で応援できます。",
