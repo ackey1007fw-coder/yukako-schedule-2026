@@ -1,24 +1,26 @@
-// サイト取り違え防止ガード（1サイト版）。
-// このリポジトリは吉井優花子さん専用（旧: riri-schedule-2026 の yukako/main ブランチから独立）。
-// 誤って別人（夏凪里季さん）のデータがコピー混入していないかを、複数の hard signal で検査する。
-// ローカルでも `node scripts/check-site-identity.mjs` で確認可能。
 import { readFile } from "node:fs/promises";
 
-const SELF = {
-  label: "吉井優花子 (yukako)",
-  name: "吉井 優花子", // src/data/profile.ts の name
-  roomId: "347571", // SHOWROOM room_id
-  titleIncludes: "吉井優花子", // index.html <title>
-  prodUrl: "yukako-schedule-2026.vercel.app", // 本番URL
+const EXPECTED = {
+  branch: "main",
+  name: "吉井 優花子",
+  roomId: "347571",
+  titleIncludes: "吉井優花子",
+  prodUrl: "yukako-schedule-2026.vercel.app",
 };
 
-const OTHER = {
-  label: "夏凪里季 (riri)",
-  name: "夏凪 里季",
-  roomId: "550336",
-  titleIncludes: "夏凪里季",
-  prodUrl: "riri-schedule-2026.vercel.app",
-};
+const FORBIDDEN = [
+  "夏凪 里季",
+  "riri-schedule-2026.vercel.app",
+  "room_id=550336",
+  "roomId: \"550336\"",
+];
+
+const branch = (process.argv[2] || "").trim();
+
+if (branch !== EXPECTED.branch) {
+  console.log(`site-guard: "${branch}" is not the protected branch (${EXPECTED.branch}); skipping.`);
+  process.exit(0);
+}
 
 const read = async (relative) => {
   try {
@@ -34,50 +36,36 @@ const combined = `${profile}\n${html}`;
 
 const errors = [];
 
-// 1. profile.ts の name（最重要シグナル）
 const nameMatch = profile.match(/^\s{2}name:\s*"([^"]+)"/m);
-const actualName = nameMatch ? nameMatch[1] : "(見つかりません)";
-if (actualName !== SELF.name) {
-  errors.push(`profile.ts の name = "${actualName}"（期待: "${SELF.name}"）`);
-}
-if (actualName === OTHER.name) {
-  errors.push(`profile.ts に別サイトの name「${OTHER.name}」が入っています`);
+const actualName = nameMatch ? nameMatch[1] : "(not found)";
+if (actualName !== EXPECTED.name) {
+  errors.push(`profile.ts name is "${actualName}", expected "${EXPECTED.name}".`);
 }
 
-// 2. SHOWROOM room_id：自分のIDがあり、相手のIDが無いこと
-if (!combined.includes(SELF.roomId)) {
-  errors.push(`SHOWROOM room_id "${SELF.roomId}" が見当たりません`);
-}
-if (combined.includes(OTHER.roomId)) {
-  errors.push(`別サイトの room_id "${OTHER.roomId}" が混入しています`);
+if (!combined.includes(EXPECTED.roomId)) {
+  errors.push(`SHOWROOM room_id "${EXPECTED.roomId}" was not found.`);
 }
 
-// 3. index.html の <title>：自分の名前を含み、相手の名前を含まないこと
 const titleMatch = html.match(/<title>([^<]*)<\/title>/);
 const title = titleMatch ? titleMatch[1] : "";
-if (!title.includes(SELF.titleIncludes)) {
-  errors.push(`index.html の title に「${SELF.titleIncludes}」が含まれていません（title="${title}"）`);
-}
-if (title.includes(OTHER.titleIncludes)) {
-  errors.push(`index.html の title に別サイトの「${OTHER.titleIncludes}」が含まれています`);
+if (!title.includes(EXPECTED.titleIncludes)) {
+  errors.push(`index.html title does not include "${EXPECTED.titleIncludes}" (title="${title}").`);
 }
 
-// 4. 本番URL：自分のURLがあり、相手のURLが無いこと
-if (!combined.includes(SELF.prodUrl)) {
-  errors.push(`本番URL "${SELF.prodUrl}" が見当たりません`);
+if (!combined.includes(EXPECTED.prodUrl)) {
+  errors.push(`Production URL "${EXPECTED.prodUrl}" was not found.`);
 }
-if (combined.includes(OTHER.prodUrl)) {
-  errors.push(`別サイトの本番URL "${OTHER.prodUrl}" が混入しています`);
+
+for (const value of FORBIDDEN) {
+  if (combined.includes(value)) {
+    errors.push(`Forbidden Riri-site signal found: "${value}".`);
+  }
 }
 
 if (errors.length > 0) {
-  console.error(
-    `\n❌ サイト取り違えを検知しました（Site identity mismatch）\n` +
-      `  このリポジトリは ${SELF.label} サイトのはずですが、次の不一致があります:`,
-  );
-  for (const e of errors) console.error(`   - ${e}`);
-  console.error(`\n  → 別サイトのデータが混入している可能性が高いです。マージしないでください。\n`);
+  console.error("\nSite identity mismatch: main must contain the Yoshii Yukako fan portal.");
+  for (const error of errors) console.error(`  - ${error}`);
   process.exit(1);
 }
 
-console.log(`✅ site-guard OK: ${SELF.label} サイトとして全シグナル一致。`);
+console.log("site-guard OK: main matches the Yoshii Yukako fan portal.");

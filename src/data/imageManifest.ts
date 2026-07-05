@@ -95,6 +95,12 @@ export const imageManifest = {
   "/images/yukako-cruise-captain.jpg": {"width":1536,"height":2048,"widths":[360,480,720,960,1280,1536]},
   "/images/yukako-cruise-gym.jpg": {"width":1536,"height":2048,"widths":[360,480,720,960,1280,1536]},
   "/images/yukako-cruise-night.jpg": {"width":1536,"height":2048,"widths":[360,480,720,960,1280,1536]},
+  "/images/yukako-gojet-boost-2026-07-03-chart-schedule.jpg": {"width":1023,"height":1280,"widths":[360,480,720,960,1023]},
+  "/images/yukako-gojet-boost-2026-07-03-main-visual.jpg": {"width":905,"height":1280,"widths":[360,480,720,905]},
+  "/images/yukako-gojet-boost-2026-07-03-message.jpg": {"width":1024,"height":1280,"widths":[360,480,720,960,1024]},
+  "/images/yukako-gojet-boost-2026-07-03-schedule-theater.jpg": {"width":778,"height":1280,"widths":[360,480,720,778]},
+  "/images/yukako-gojet-boost-2026-07-03-support-goods.jpg": {"width":1032,"height":1280,"widths":[360,480,720,960,1032]},
+  "/images/yukako-gojet-boost-2026-07-03-ticket-info.jpg": {"width":886,"height":1280,"widths":[360,480,720,886]},
   "/images/yukako-gojet-poster.jpg": {"width":1448,"height":2048,"widths":[360,480,720,960,1280,1448]},
   "/images/yukako-hero-hall.jpg": {"width":1170,"height":1560,"widths":[360,480,720,960,1170]},
   "/images/yukako-mgj-award.jpg": {"width":1111,"height":1516,"widths":[360,480,720,960,1111]},
@@ -103,7 +109,9 @@ export const imageManifest = {
   "/images/yukako-selfie-2026-07-01.jpg": {"width":1426,"height":2048,"widths":[360,480,720,960,1280,1426]},
   "/images/yukako-shuichi-event.jpg": {"width":1524,"height":2048,"widths":[360,480,720,960,1280,1524]},
   "/images/yukako-stage-back.jpg": {"width":1536,"height":2048,"widths":[360,480,720,960,1280,1536]},
-  "/images/yukako-stage-front.jpg": {"width":1401,"height":1751,"widths":[360,480,720,960,1280,1401]}
+  "/images/yukako-stage-front.jpg": {"width":1401,"height":1751,"widths":[360,480,720,960,1280,1401]},
+  "/images/yukako-yukajet-rehearsal-2026-07-04-girls.jpg": {"width":1148,"height":1140,"widths":[360,480,720,960,1148]},
+  "/images/yukako-yukajet-rehearsal-2026-07-04-selfie.jpg": {"width":1280,"height":960,"widths":[360,480,720,960,1280]}
 } as const;
 
 export type ImageManifestPath = keyof typeof imageManifest;
