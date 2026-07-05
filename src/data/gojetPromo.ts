@@ -5,6 +5,25 @@ export type PromoImage = {
   alt: string;
 };
 
+export type GojetFeatureUpdate = {
+  date: string;
+  label: string;
+  title: string;
+  body: string;
+  postUrl: string;
+  homepageUrl: string;
+};
+
+export const gojetFeatureUpdate: GojetFeatureUpdate = {
+  date: "2026.7.5",
+  label: "歌ダンス稽古",
+  title: "ガールズ & JET & あかね & メグの歌ダンス稽古動画が公開",
+  body:
+    "プロデュース公演アカウントで、キャストがマイクに向かって歌う稽古動画が公開されました。メグもオリジナル楽曲を歌うこと、LIVEでの楽曲披露も告知されています。",
+  postUrl: "https://x.com/yukako_produce/status/2073768826303631470",
+  homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/"
+};
+
 export const gojetPromoImages: PromoImage[] = [
   {
     src: "/images/yukako-yukajet-rehearsal-2026-07-04-selfie.jpg",
