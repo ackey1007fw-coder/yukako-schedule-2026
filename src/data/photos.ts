@@ -3,22 +3,7 @@ export type GalleryPhoto = {
   alt: string;
 };
 
-const contextOnlyPhotoNumbers = new Set([23, 26, 42, 46, 51, 56, 60]);
-
-const archivePhotos: GalleryPhoto[] = Array.from({ length: 65 }, (_, index) => {
-  const number = index + 1;
-  const fileNumber = String(number).padStart(2, "0");
-  return {
-    src: `/images/gallery/g${fileNumber}.jpg`,
-    alt: `吉井優花子さんのフォトアーカイブ（2026年2月〜7月・${number}枚目）`
-  };
-}).filter((photo) => {
-  const match = photo.src.match(/g(\d+)\.jpg$/);
-  return match ? !contextOnlyPhotoNumbers.has(Number(match[1])) : true;
-});
-
 export const galleryPhotos: GalleryPhoto[] = [
-  ...archivePhotos,
   { src: "/images/yukako-selfie-2026-07-01.jpg", alt: "白Tシャツにピンクのベストで微笑む吉井優花子さん（2026.7.1 Xより）" },
   { src: "/images/yukako-stage-back.jpg", alt: "舞台上から客席を見つめる吉井優花子さん" },
   { src: "/images/yukako-stage-front.jpg", alt: "舞台衣装で演技中の吉井優花子さん" },
@@ -40,8 +25,8 @@ export const galleryUpdate: {
   note: string;
   url: string;
 } = {
-  date: "2026.7.5",
+  date: "2026.7.4",
   platform: "Archive",
-  note: "2026年2月〜7月のフォトアーカイブを追加",
-  url: "#photo-selection"
+  note: "#ゆかJET稽古写真は特集コーナーで公開中",
+  url: "#next"
 };
