@@ -653,6 +653,23 @@ img {
   transform: translateY(0);
 }
 
+.yukako-photo-flow {
+  animation: yukako-photo-flow 34s linear infinite;
+}
+
+.yukako-photo-flow:hover {
+  animation-play-state: paused;
+}
+
+@keyframes yukako-photo-flow {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
