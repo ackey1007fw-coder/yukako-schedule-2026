@@ -12,19 +12,37 @@ export type GojetFeatureUpdate = {
   body: string;
   postUrl: string;
   homepageUrl: string;
+  ctaLabel: string;
 };
 
-export const gojetFeatureUpdate: GojetFeatureUpdate = {
-  date: "2026.7.5",
-  label: "歌ダンス稽古",
-  title: "ガールズ & JET & あかね & メグの歌ダンス稽古動画が公開",
-  body:
-    "プロデュース公演アカウントで、キャストがマイクに向かって歌う稽古動画が公開されました。メグもオリジナル楽曲を歌うこと、LIVEでの楽曲披露も告知されています。",
-  postUrl: "https://x.com/yukako_produce/status/2073768826303631470",
-  homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/"
-};
+export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
+  {
+    date: "2026.7.5",
+    label: "メグの歌",
+    title: "優花子さんがメグの歌を制作",
+    body:
+      "優花子さんが、#ゆかJETでメグが歌うオリジナル楽曲を作ったことを投稿。稽古で歌を聴き、本番がさらに楽しみになったと伝えています。",
+    postUrl: "https://x.com/mokoopy/status/2073772074964054080",
+    homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+    ctaLabel: "Xで投稿を見る"
+  },
+  {
+    date: "2026.7.5",
+    label: "歌ダンス稽古",
+    title: "ガールズ & JET & あかね & メグの歌ダンス稽古動画が公開",
+    body:
+      "プロデュース公演アカウントで、キャストがマイクに向かって歌う稽古動画が公開されました。メグもオリジナル楽曲を歌うこと、LIVEでの楽曲披露も告知されています。",
+    postUrl: "https://x.com/yukako_produce/status/2073768826303631470",
+    homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+    ctaLabel: "Xで稽古動画を見る"
+  }
+];
 
 export const gojetPromoImages: PromoImage[] = [
+  {
+    src: "/images/yukako-yukajet-megu-song-rehearsal-2026-07-05.jpg",
+    alt: "#ゆかJETの稽古場でメグのオリジナル楽曲を確認している様子"
+  },
   {
     src: "/images/yukako-yukajet-rehearsal-2026-07-04-selfie.jpg",
     alt: "#ゆかJETの稽古で笑顔を見せる吉井優花子さんとガールズキャストの自撮り写真"

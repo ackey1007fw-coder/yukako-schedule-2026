@@ -16,7 +16,7 @@ import {
   Users,
   X
 } from "lucide-react";
-import { gojetFeatureUpdate, gojetPromoImages } from "../data/gojetPromo";
+import { gojetFeatureUpdates, gojetPromoImages } from "../data/gojetPromo";
 import { getResponsiveImageProps } from "../lib/responsiveImage";
 import { googleCalendarUrl } from "../lib/share";
 import type { ScheduleEvent } from "../types";
@@ -205,36 +205,43 @@ export function NowProducingSection({ event }: NowProducingSectionProps) {
                   ))}
                 </ul>
 
-                <div className="mt-6 border border-champagne/35 bg-white/[0.07] p-4 shadow-paper">
-                  <p className="text-xs font-black uppercase tracking-[0.16em] text-champagne">
-                    New ・ {gojetFeatureUpdate.date} ・ {gojetFeatureUpdate.label}
-                  </p>
-                  <h4 className="mt-2 text-xl font-black leading-tight text-white">
-                    {gojetFeatureUpdate.title}
-                  </h4>
-                  <p className="mt-3 text-sm leading-7 text-white/72">
-                    {gojetFeatureUpdate.body}
-                  </p>
-                  <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
-                    <a
-                      href={gojetFeatureUpdate.postUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="yukako-button yukako-button-gold min-h-12 px-4 py-3 text-sm"
+                <div className="mt-6 grid gap-3">
+                  {gojetFeatureUpdates.map((update, index) => (
+                    <div
+                      key={update.postUrl}
+                      className="border border-champagne/35 bg-white/[0.07] p-4 shadow-paper"
                     >
-                      <Music className="h-4 w-4" aria-hidden="true" />
-                      Xで稽古動画を見る
-                    </a>
-                    <a
-                      href={gojetFeatureUpdate.homepageUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="yukako-button yukako-button-ghost min-h-12 px-4 py-3 text-sm"
-                    >
-                      <ExternalLink className="h-4 w-4 text-champagne" aria-hidden="true" />
-                      公演ホームページへ
-                    </a>
-                  </div>
+                      <p className="text-xs font-black uppercase tracking-[0.16em] text-champagne">
+                        {index === 0 ? "New" : "Update"} ・ {update.date} ・ {update.label}
+                      </p>
+                      <h4 className="mt-2 text-xl font-black leading-tight text-white">
+                        {update.title}
+                      </h4>
+                      <p className="mt-3 text-sm leading-7 text-white/72">
+                        {update.body}
+                      </p>
+                      <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
+                        <a
+                          href={update.postUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="yukako-button yukako-button-gold min-h-12 px-4 py-3 text-sm"
+                        >
+                          <Music className="h-4 w-4" aria-hidden="true" />
+                          {update.ctaLabel}
+                        </a>
+                        <a
+                          href={update.homepageUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="yukako-button yukako-button-ghost min-h-12 px-4 py-3 text-sm"
+                        >
+                          <ExternalLink className="h-4 w-4 text-champagne" aria-hidden="true" />
+                          公演ホームページへ
+                        </a>
+                      </div>
+                    </div>
+                  ))}
                 </div>
 
                 <p className="mt-6 text-base leading-8 text-white/72">{event.summary}</p>

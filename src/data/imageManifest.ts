@@ -234,6 +234,7 @@ export const imageManifest = {
   "/images/yukako-shuichi-event.jpg": {"width":1524,"height":2048,"widths":[360,480,720,960,1280,1524]},
   "/images/yukako-stage-back.jpg": {"width":1536,"height":2048,"widths":[360,480,720,960,1280,1536]},
   "/images/yukako-stage-front.jpg": {"width":1401,"height":1751,"widths":[360,480,720,960,1280,1401]},
+  "/images/yukako-yukajet-megu-song-rehearsal-2026-07-05.jpg": {"width":1169,"height":1169,"widths":[360,480,720,960,1169]},
   "/images/yukako-yukajet-rehearsal-2026-07-04-girls.jpg": {"width":1148,"height":1140,"widths":[360,480,720,960,1148]},
   "/images/yukako-yukajet-rehearsal-2026-07-04-selfie.jpg": {"width":1280,"height":960,"widths":[360,480,720,960,1280]}
 } as const;
