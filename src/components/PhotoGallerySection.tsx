@@ -19,6 +19,19 @@ import { ActHeader } from "./ActHeader";
 const wrapIndex = (index: number) =>
   (index + galleryPhotos.length) % galleryPhotos.length;
 
+const INITIAL_VISIBLE_PHOTOS = 24;
+const LOAD_MORE_PHOTOS = 24;
+const SPOTLIGHT_PHOTOS = 10;
+
+function shufflePhotos<T>(items: readonly T[]): T[] {
+  const shuffled = [...items];
+  for (let index = shuffled.length - 1; index > 0; index -= 1) {
+    const swapIndex = Math.floor(Math.random() * (index + 1));
+    [shuffled[index], shuffled[swapIndex]] = [shuffled[swapIndex], shuffled[index]];
+  }
+  return shuffled;
+}
+
 function useSwipe(onLeft: () => void, onRight: () => void) {
   const startX = useRef(0);
   const startY = useRef(0);
@@ -44,14 +57,19 @@ function useSwipe(onLeft: () => void, onRight: () => void) {
 }
 
 export function PhotoGallerySection() {
+  const [photoOrder] = useState(() => shufflePhotos(galleryPhotos));
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [showAll, setShowAll] = useState(false);
+  const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE_PHOTOS);
+  const [spotlightIndex, setSpotlightIndex] = useState(0);
   const [loaded, setLoaded] = useState<Record<string, boolean>>({});
-  const visiblePhotos = showAll ? galleryPhotos : galleryPhotos.slice(0, 12);
+  const visiblePhotos = photoOrder.slice(0, visibleCount);
+  const spotlightPhotos = photoOrder.slice(0, SPOTLIGHT_PHOTOS);
+  const spotlightPhoto = spotlightPhotos[spotlightIndex];
+  const remainingPhotos = Math.max(photoOrder.length - visiblePhotos.length, 0);
 
   const selectedPhoto =
-    selectedIndex === null ? null : galleryPhotos[selectedIndex];
+    selectedIndex === null ? null : photoOrder[selectedIndex];
   const GalleryUpdateIcon =
     galleryUpdate.platform === "Instagram"
       ? Instagram
@@ -106,6 +124,15 @@ export function PhotoGallerySection() {
     return () => window.clearInterval(timer);
   }, [isPlaying, selectedIndex, showNext]);
 
+  useEffect(() => {
+    if (spotlightPhotos.length <= 1) return;
+
+    const timer = window.setInterval(() => {
+      setSpotlightIndex((current) => (current + 1) % spotlightPhotos.length);
+    }, 3600);
+    return () => window.clearInterval(timer);
+  }, [spotlightPhotos.length]);
+
   const swipeHandlers = useSwipe(showNext, showPrevious);
 
   useEffect(() => {
@@ -128,7 +155,12 @@ export function PhotoGallerySection() {
           <div className="flex flex-col gap-3 border-y border-champagne/30 py-5 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex items-center gap-3 text-sm font-bold text-ink/70">
               <Images className="h-5 w-5 text-champagne" aria-hidden="true" />
-              <span>Photo Selection・{galleryPhotos.length}枚</span>
+              <span>
+                Photo Selection・{photoOrder.length}枚
+                <span className="ml-2 text-xs text-ink/45">
+                  {visiblePhotos.length}枚表示中
+                </span>
+              </span>
             </div>
             <a
               href="#profile"
@@ -158,6 +190,61 @@ export function PhotoGallerySection() {
             </span>
           </span>
         </a>
+
+        {spotlightPhoto && (
+          <div className="mt-8 grid gap-4 lg:grid-cols-[0.92fr_1.08fr] lg:items-stretch">
+            <button
+              type="button"
+              onClick={() => openPhoto(spotlightIndex)}
+              className="group overflow-hidden border border-rosefog/15 bg-porcelain text-left shadow-paper focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-champagne"
+              aria-label={`${spotlightPhoto.alt}を大きく表示`}
+            >
+              <img
+                {...getResponsiveImageProps(
+                  spotlightPhoto.src,
+                  "(min-width: 1024px) 45vw, 100vw",
+                )}
+                alt={spotlightPhoto.alt}
+                loading="lazy"
+                decoding="async"
+                className="block h-auto max-h-[520px] w-full bg-ink/5 object-contain transition duration-700 group-hover:scale-[1.01]"
+              />
+            </button>
+            <div className="flex min-h-full flex-col justify-center border border-champagne/30 bg-white p-5 shadow-paper sm:p-6">
+              <div className="flex items-center gap-2 text-xs font-black uppercase tracking-[0.18em] text-champagneInk">
+                <Play className="h-4 w-4 text-champagne" aria-hidden="true" />
+                Random Slideshow
+              </div>
+              <p className="mt-3 text-2xl font-black leading-tight text-ink sm:text-3xl">
+                開くたびに違う順番で、優花子さんの写真を流します。
+              </p>
+              <p className="mt-3 text-sm leading-7 text-ink/68">
+                追加した写真をランダムに並べて、上の大きな写真は自動で切り替わります。
+              </p>
+              <div className="mt-5 overflow-hidden border-y border-rosefog/10 py-3">
+                <div className="yukako-photo-flow flex w-max gap-3">
+                  {[...spotlightPhotos, ...spotlightPhotos].map((photo, index) => (
+                    <button
+                      key={`${photo.src}-${index}`}
+                      type="button"
+                      onClick={() => openPhoto(index % spotlightPhotos.length)}
+                      className="h-20 w-20 shrink-0 overflow-hidden border border-rosefog/15 bg-porcelain focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-champagne sm:h-24 sm:w-24"
+                      aria-label={`${photo.alt}を大きく表示`}
+                    >
+                      <img
+                        {...getResponsiveImageProps(photo.src, "96px")}
+                        alt=""
+                        loading="lazy"
+                        decoding="async"
+                        className="h-full w-full object-cover"
+                      />
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
         <div
           id="photo-selection"
@@ -195,23 +282,29 @@ export function PhotoGallerySection() {
             </figure>
           ))}
         </div>
-        {galleryPhotos.length > 12 && (
+        {photoOrder.length > INITIAL_VISIBLE_PHOTOS && (
           <div className="mt-7 flex justify-center">
             <button
               type="button"
-              onClick={() => setShowAll((current) => !current)}
+              onClick={() =>
+                remainingPhotos > 0
+                  ? setVisibleCount((current) =>
+                      Math.min(current + LOAD_MORE_PHOTOS, photoOrder.length),
+                    )
+                  : setVisibleCount(INITIAL_VISIBLE_PHOTOS)
+              }
               className="yukako-button yukako-button-soft min-h-12 px-5 py-3 text-sm"
-              aria-expanded={showAll}
+              aria-expanded={remainingPhotos === 0}
               aria-controls="photo-selection"
             >
-              {showAll ? (
+              {remainingPhotos === 0 ? (
                 <ChevronUp className="h-4 w-4 text-champagne" aria-hidden="true" />
               ) : (
                 <ChevronDown className="h-4 w-4 text-champagne" aria-hidden="true" />
               )}
-              {showAll
-                ? "写真をコンパクトに戻す"
-                : `残り${galleryPhotos.length - 12}枚も見る`}
+              {remainingPhotos === 0
+                ? "先頭の写真に戻す"
+                : `さらに${Math.min(LOAD_MORE_PHOTOS, remainingPhotos)}枚見る`}
             </button>
           </div>
         )}
@@ -288,7 +381,7 @@ export function PhotoGallerySection() {
 
             <div className="mt-4 flex items-center justify-between gap-4 text-xs font-bold uppercase tracking-[0.18em] text-white/70">
               <span>
-                {selectedIndex + 1} / {galleryPhotos.length}
+                {selectedIndex + 1} / {photoOrder.length}
               </span>
               <span>{isPlaying ? "Auto Play" : "Paused"}</span>
             </div>
