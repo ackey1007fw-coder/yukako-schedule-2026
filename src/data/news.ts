@@ -9,6 +9,12 @@ export const news: NewsItem[] = [
   {
     date: "2026.7.5",
     label: "X",
+    text: "#ゆかJET メグのオリジナル楽曲を優花子さんが制作。稽古で歌を聴き、本番への楽しみが高まったことを投稿。",
+    url: "https://x.com/mokoopy/status/2073772074964054080"
+  },
+  {
+    date: "2026.7.5",
+    label: "X",
     text: "#ゆかJET 歌ダンス稽古動画が公開。メグもオリジナル楽曲を歌うこと、LIVEでの楽曲披露も告知されています。",
     url: "https://x.com/yukako_produce/status/2073768826303631470"
   },
