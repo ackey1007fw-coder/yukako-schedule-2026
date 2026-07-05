@@ -65,5 +65,31 @@ export const profile = {
     stats: [] as { label: string; value: string }[],
     message: "2021年、秋田で公務員として働きながらミス浴衣コンテストに出場したことがきっかけでSHOWROOMでの配信を開始。2022年に退職・上京し、俳優として舞台や映像へ表現の場を広げています。配信開始通知を受け取るにはSHOWROOMのフォローが便利です。"
   },
-  avatars: [] as { name: string; image: string; featured?: boolean }[]
+  avatars: [
+    {
+      name: "にこにこ柴犬風アバター",
+      image: "/images/showroom-avatars/yukako-showroom-avatar-01.jpg",
+      featured: true
+    },
+    {
+      name: "うさぎ衣装アバター",
+      image: "/images/showroom-avatars/yukako-showroom-avatar-02.jpg"
+    },
+    {
+      name: "おひるね柴犬風アバター",
+      image: "/images/showroom-avatars/yukako-showroom-avatar-03.jpg"
+    },
+    {
+      name: "花束ドレスアバター",
+      image: "/images/showroom-avatars/yukako-showroom-avatar-04.jpg"
+    },
+    {
+      name: "秋田なまはげ風アバター",
+      image: "/images/showroom-avatars/yukako-showroom-avatar-05.jpg"
+    },
+    {
+      name: "浴衣アバター",
+      image: "/images/showroom-avatars/yukako-showroom-avatar-06.jpg"
+    }
+  ] as { name: string; image: string; featured?: boolean }[]
 };
