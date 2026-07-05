@@ -38,7 +38,7 @@ const roles = [
 const wrapIndex = (index: number) =>
   (index + gojetPromoImages.length) % gojetPromoImages.length;
 
-// 告知資料（相関図・タイムテーブル・チケット案内など）を拡大表示するための軽量ライトボックス。
+// 稽古写真・告知資料（相関図・タイムテーブル・チケット案内など）を拡大表示するための軽量ライトボックス。
 // フォトギャラリーの本人スナップとは分け、#ゆかJET特集内だけで完結させる。
 function PromoLightbox({
   index,
@@ -71,7 +71,7 @@ function PromoLightbox({
       className="fixed inset-0 z-[999] flex h-[100dvh] flex-col overscroll-contain bg-ink/97 px-3 py-4 text-white sm:px-6"
       role="dialog"
       aria-modal="true"
-      aria-label="#ゆかJET 告知資料"
+      aria-label="#ゆかJET 特集ギャラリー"
     >
       <div className="mx-auto flex w-full max-w-5xl items-center justify-between gap-3">
         <p className="text-xs font-bold uppercase tracking-[0.14em] text-champagne">
@@ -118,7 +118,7 @@ function PromoLightbox({
 }
 
 // ヒーロー直下の #ゆかJET 特設ブロック（Now Producing billboard）。
-// ポスター + カウントダウン + 役割リスト + 予約CTA + 告知資料ギャラリーを、舞台看板風の1枚にまとめる。
+// ポスター + カウントダウン + 役割リスト + 予約CTA + 特集ギャラリーを、舞台看板風の1枚にまとめる。
 export function NowProducingSection({ event }: NowProducingSectionProps) {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
@@ -258,7 +258,7 @@ export function NowProducingSection({ event }: NowProducingSectionProps) {
             <div className="relative z-10 border-t border-white/10 p-6 sm:p-10 lg:p-14 lg:pt-0">
               <p className="mb-4 flex items-center gap-2 text-xs font-black uppercase tracking-[0.16em] text-champagne">
                 <Images className="h-4 w-4" aria-hidden="true" />
-                告知資料（相関図・タイムテーブル・チケット案内）
+                #ゆかJET 特集（稽古写真・相関図・チケット案内）
               </p>
               <div className="grid grid-cols-3 gap-2 sm:grid-cols-6">
                 {gojetPromoImages.map((photo, index) => (

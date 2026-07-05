@@ -1,11 +1,19 @@
-// #ゆかJET『GO,JET!GO!GO! vol.1 Premium』の告知資料（相関図・タイムテーブル・チケット案内など）。
-// 通常のフォトギャラリー（本人スナップ）とは分け、NowProducingSection内の特集ギャラリーで表示する。
+// #ゆかJET『GO,JET!GO!GO! vol.1 Premium』の稽古写真・告知資料。
+// 通常のフォトギャラリーとは分け、NowProducingSection内の特集ギャラリーで表示する。
 export type PromoImage = {
   src: string;
   alt: string;
 };
 
 export const gojetPromoImages: PromoImage[] = [
+  {
+    src: "/images/yukako-yukajet-rehearsal-2026-07-04-selfie.jpg",
+    alt: "#ゆかJETの稽古で笑顔を見せる吉井優花子さんとガールズキャストの自撮り写真"
+  },
+  {
+    src: "/images/yukako-yukajet-rehearsal-2026-07-04-girls.jpg",
+    alt: "#ゆかJETの稽古でハートポーズをする吉井優花子さんたちガールズキャストの集合写真"
+  },
   {
     src: "/images/yukako-gojet-boost-2026-07-03-message.jpg",
     alt: "#ゆかJETへの想いと配信チケット案内を伝える吉井優花子さんの告知スライド"

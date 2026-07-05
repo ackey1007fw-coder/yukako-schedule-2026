@@ -53,7 +53,16 @@ export function PhotoGallerySection() {
   const selectedPhoto =
     selectedIndex === null ? null : galleryPhotos[selectedIndex];
   const GalleryUpdateIcon =
-    galleryUpdate.platform === "Instagram" ? Instagram : MessageCircle;
+    galleryUpdate.platform === "Instagram"
+      ? Instagram
+      : galleryUpdate.platform === "Archive"
+        ? Images
+        : MessageCircle;
+  const updateLinkIsInternal = galleryUpdate.url.startsWith("#");
+  const updateLinkLabel =
+    galleryUpdate.platform === "Archive"
+      ? "写真を見る"
+      : `${galleryUpdate.platform}で見る`;
 
   const openPhoto = (index: number) => {
     setSelectedIndex(index);
@@ -133,8 +142,8 @@ export function PhotoGallerySection() {
 
         <a
           href={galleryUpdate.url}
-          target="_blank"
-          rel="noopener noreferrer"
+          target={updateLinkIsInternal ? undefined : "_blank"}
+          rel={updateLinkIsInternal ? undefined : "noopener noreferrer"}
           className="yukako-lift mt-6 flex items-center gap-3 border border-champagne/40 bg-white px-4 py-3 text-sm font-bold text-ink hover:border-champagne hover:bg-porcelain"
         >
           <span className="grid h-9 w-9 shrink-0 place-items-center border border-champagne/50 bg-porcelain text-champagne">
@@ -145,7 +154,7 @@ export function PhotoGallerySection() {
               New ・ {galleryUpdate.date}
             </span>
             <span className="block leading-snug">
-              {galleryUpdate.note} — {galleryUpdate.platform}で見る
+              {galleryUpdate.note} — {updateLinkLabel}
             </span>
           </span>
         </a>
