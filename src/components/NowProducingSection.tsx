@@ -274,7 +274,7 @@ export function NowProducingSection({ event }: NowProducingSectionProps) {
                       alt={photo.alt}
                       loading="lazy"
                       decoding="async"
-                      className="h-full w-full object-cover transition group-hover:scale-105"
+                      className="h-full w-full object-contain transition group-hover:scale-105"
                     />
                   </button>
                 ))}
