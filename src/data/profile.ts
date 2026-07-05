@@ -10,6 +10,7 @@ export const profile = {
     "公務員として働いた経験を礎に、舞台・映像・配信・プロデュースへ表現の場を広げる吉井優花子さんの活動情報を整理しています。",
   heroImage: "/images/yukako-hero-hall.jpg",
   portraitImage: "/images/yukako-portrait.jpg",
+  wikipediaUrl: "https://ja.wikipedia.org/wiki/%E5%90%89%E4%BA%95%E5%84%AA%E8%8A%B1%E5%AD%90",
   birthday: "1997-04-27",
   birthdayMonthDay: "04-27",
   birthdayLabel: "4月27日",

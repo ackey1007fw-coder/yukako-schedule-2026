@@ -1,4 +1,4 @@
-import { Share2 } from "lucide-react";
+import { BookOpenText, Share2 } from "lucide-react";
 import { news } from "../data/news";
 import { profile } from "../data/profile";
 import { SITE_URL, xShareUrl } from "../lib/share";
@@ -50,6 +50,15 @@ export function Footer({ socialLinks, source, updatedAt }: FooterProps) {
                   {link.label}
                 </a>
               ))}
+              <a
+                href={profile.wikipediaUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 border border-white/18 px-3 py-2 text-xs font-bold text-white/75 transition hover:border-champagne hover:text-white"
+              >
+                <BookOpenText className="h-3.5 w-3.5" aria-hidden="true" />
+                Wikipedia
+              </a>
               <a
                 href={xShareUrl(
                   `秋田の公務員から俳優へ。${profile.name}さんの応援ポータル`,
