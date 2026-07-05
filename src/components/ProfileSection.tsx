@@ -1,4 +1,4 @@
-import { HeartHandshake, Star } from "lucide-react";
+import { BookOpenText, ExternalLink, HeartHandshake, Star } from "lucide-react";
 import { profile } from "../data/profile";
 import { getResponsiveImageProps } from "../lib/responsiveImage";
 import { ActHeader } from "./ActHeader";
@@ -25,6 +25,16 @@ export function ProfileSection() {
             )}
             <p className="font-display text-4xl text-ink">{profile.name}</p>
             <p className="mt-2 text-lg text-ink/55">{profile.kana}</p>
+            <a
+              href={profile.wikipediaUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-5 inline-flex min-h-12 items-center justify-center gap-2 border border-champagne/50 bg-porcelain px-4 py-3 text-sm font-bold text-ink transition hover:border-champagne hover:bg-white"
+            >
+              <BookOpenText className="h-4 w-4 text-champagne" aria-hidden="true" />
+              Wikipediaで見る
+              <ExternalLink className="h-3.5 w-3.5 text-champagne" aria-hidden="true" />
+            </a>
           </div>
         </div>
 

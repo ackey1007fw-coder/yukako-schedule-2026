@@ -40,6 +40,13 @@ export const socialLinks: SocialLink[] = [
 
 export const mediaLinks: SocialLink[] = [
   {
+    label: "Wikipedia",
+    handle: "吉井優花子",
+    url: "https://ja.wikipedia.org/wiki/%E5%90%89%E4%BA%95%E5%84%AA%E8%8A%B1%E5%AD%90",
+    description: "略歴・出演歴などを確認できるWikipediaページ",
+    kind: "web"
+  },
+  {
     label: "#ゆかJET 公演ホームページ",
     handle: "peraichi",
     url: "https://premiumgoyukajet.hp.peraichi.com",
