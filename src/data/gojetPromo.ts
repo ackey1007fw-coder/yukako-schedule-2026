@@ -18,6 +18,16 @@ export type GojetFeatureUpdate = {
 export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
   {
     date: "2026.7.5",
+    label: "稽古の熱量",
+    title: "キャストが稽古を楽しむ現場づくり",
+    body:
+      "優花子さんが、キャストが稽古を楽しいと思っていることへの嬉しさを投稿。一生懸命で優しくておもしろいメンバーへの信頼と、ちゃんと休んで頑張ろうという温かい呼びかけが伝わります。",
+    postUrl: "https://x.com/mokoopy/status/2073778000177594434",
+    homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+    ctaLabel: "Xで投稿を見る"
+  },
+  {
+    date: "2026.7.5",
     label: "メグの歌",
     title: "優花子さんがメグの歌を制作",
     body:
@@ -39,6 +49,10 @@ export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
 ];
 
 export const gojetPromoImages: PromoImage[] = [
+  {
+    src: "/images/yukako-yukajet-lyrics-card-2026-07-05.jpg",
+    alt: "#ゆかJETの稽古でB4版の歌詞カードを掲げる吉井優花子さん"
+  },
   {
     src: "/images/yukako-yukajet-megu-song-rehearsal-2026-07-05.jpg",
     alt: "#ゆかJETの稽古場でメグのオリジナル楽曲を確認している様子"
