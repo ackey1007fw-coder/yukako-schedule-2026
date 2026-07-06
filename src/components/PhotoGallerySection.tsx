@@ -210,16 +210,18 @@ export function PhotoGallerySection() {
                 className="block h-auto max-h-[520px] w-full bg-ink/5 object-contain transition duration-700 group-hover:scale-[1.01]"
               />
             </button>
-            <div className="flex min-h-full flex-col justify-center border border-champagne/30 bg-white p-5 shadow-paper sm:p-6">
+            {/* min-w-0 必須: 中の w-max サムネイル帯が grid item の最小幅を
+                押し広げ、モバイルで横スクロールが発生する(既知の不具合)。 */}
+            <div className="flex min-h-full min-w-0 flex-col justify-center border border-champagne/30 bg-white p-5 shadow-paper sm:p-6">
               <div className="flex items-center gap-2 text-xs font-black uppercase tracking-[0.18em] text-champagneInk">
                 <Play className="h-4 w-4 text-champagne" aria-hidden="true" />
                 Random Slideshow
               </div>
               <p className="mt-3 text-2xl font-black leading-tight text-ink sm:text-3xl">
-                開くたびに違う順番で、優花子さんの写真を流します。
+                開くたびに、違う並びで。
               </p>
               <p className="mt-3 text-sm leading-7 text-ink/68">
-                追加した写真をランダムに並べて、上の大きな写真は自動で切り替わります。
+                大きな写真は自動で切り替わります。気になる1枚はタップで拡大。
               </p>
               <div className="mt-5 overflow-hidden border-y border-rosefog/10 py-3">
                 <div className="yukako-photo-flow flex w-max gap-3">

@@ -101,7 +101,7 @@ export function ActionStrip({
       title: todayCount ? `今日の予定 ${todayCount}件` : "SHOWROOM・SNSを確認",
       copy: todayCount
         ? "配信・出演の時間を確認して、見逃さないように準備。"
-        : "予定がない日も、配信予定や最新投稿のチェックが応援になります。",
+        : "今日は予定なし。SHOWROOMの配信予定と最新投稿をのぞいてみる？",
       href: todayCount ? "#schedule" : showroom?.url ?? "#showroom",
       external: !todayCount && Boolean(showroom),
       Icon: MessageCircleHeart
@@ -109,7 +109,7 @@ export function ActionStrip({
     {
       label: "今週できる応援",
       title: weekCount ? `今週の予定 ${weekCount}件` : "Xで情報を広げる",
-      copy: "公演情報・配信告知・感想投稿を見つけたら、引用やリポストで届く人を増やす。",
+      copy: "気になる投稿を見つけたら、リポストでもう一人に届ける。",
       href: mainSocial?.url ?? "#links",
       external: Boolean(mainSocial),
       Icon: Send
@@ -118,8 +118,8 @@ export function ActionStrip({
       label: "今月できる応援",
       title: monthCount ? `今月の予定 ${monthCount}件` : "#ゆかJETを予習",
       copy: hasTicket
-        ? "チケットや配信、物販情報を早めに確認して応援の予定を組む。"
-        : "公演情報を読み、気になる導線から舞台・SNS・配信へ進む。",
+        ? "チケット・配信・物販は早めのチェックが吉。"
+        : "まずは公演情報から。気になったらSNS・配信へ。",
       href: ticketLink?.url ?? "#next",
       external: Boolean(ticketLink),
       Icon: CalendarHeart

@@ -4,10 +4,9 @@ export const profile = {
   kana: "よしい ゆかこ",
   romaji: "Yoshii Yukako",
   fanScheduleLabel: "Fan-made Portal",
-  catchCopy:
-    "秋田の公務員から俳優へ。舞台・映像・配信へと表現の場を広げる吉井優花子さんの応援ポータルです。",
+  catchCopy: "秋田の公務員から、俳優へ。舞台も、映像も、配信も。",
   intro:
-    "公務員として働いた経験を礎に、舞台・映像・配信・プロデュースへ表現の場を広げる吉井優花子さんの活動情報を整理しています。",
+    "吉井優花子さんの公演・チケット・配信・写真。応援に使う情報を、ファンの手でここに集めています。",
   heroImage: "/images/yukako-hero-hall.jpg",
   portraitImage: "/images/yukako-portrait.jpg",
   wikipediaUrl: "https://ja.wikipedia.org/wiki/%E5%90%89%E4%BA%95%E5%84%AA%E8%8A%B1%E5%AD%90",

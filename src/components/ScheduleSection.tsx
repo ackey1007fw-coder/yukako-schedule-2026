@@ -144,7 +144,7 @@ export function ScheduleSection({
           act={2}
           eyebrow="Schedule"
           title="今日、どこを応援する？"
-          copy="直近の大事な予定を先に確認し、今日・今週・今月・活動の記録に分けて見られます。"
+          copy="直近の大事な予定から、今日・今週・今月・これまでの記録まで。"
         />
 
         {featuredEvents.length > 0 && (

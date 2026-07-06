@@ -21,7 +21,7 @@ export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
     label: "稽古の熱量",
     title: "キャストが稽古を楽しむ現場づくり",
     body:
-      "優花子さんが、キャストが稽古を楽しいと思っていることへの嬉しさを投稿。一生懸命で優しくておもしろいメンバーへの信頼と、ちゃんと休んで頑張ろうという温かい呼びかけが伝わります。",
+      "一生懸命で、優しくて、おもしろい——そんなキャストが稽古を楽しんでくれているのが何より嬉しい、みんなでちゃんと休んで頑張ろう、という稽古場からのメッセージ。",
     postUrl: "https://x.com/mokoopy/status/2073778000177594434",
     homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
     ctaLabel: "Xで投稿を見る"
@@ -31,7 +31,7 @@ export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
     label: "メグの歌",
     title: "優花子さんがメグの歌を制作",
     body:
-      "優花子さんが、#ゆかJETでメグが歌うオリジナル楽曲を作ったことを投稿。稽古で歌を聴き、本番がさらに楽しみになったと伝えています。",
+      "メグが劇中で歌うオリジナル楽曲は、優花子さんの作。稽古場で初めて歌になった1曲、本番でどう響くかはお楽しみ。",
     postUrl: "https://x.com/mokoopy/status/2073772074964054080",
     homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
     ctaLabel: "Xで投稿を見る"
@@ -41,7 +41,7 @@ export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
     label: "歌ダンス稽古",
     title: "ガールズ & JET & あかね & メグの歌ダンス稽古動画が公開",
     body:
-      "プロデュース公演アカウントで、キャストがマイクに向かって歌う稽古動画が公開されました。メグもオリジナル楽曲を歌うこと、LIVEでの楽曲披露も告知されています。",
+      "キャストがマイクに向かう歌ダンス稽古の動画が公開中。メグのオリジナル楽曲、LIVEコーナーでの披露の予告も。",
     postUrl: "https://x.com/yukako_produce/status/2073768826303631470",
     homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
     ctaLabel: "Xで稽古動画を見る"

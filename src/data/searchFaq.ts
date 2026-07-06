@@ -16,25 +16,25 @@ export const searchIntents: SearchIntent[] = [
   {
     label: "公演情報",
     title: "公演スケジュールを確認する",
-    copy: "#ゆかJET やBaby Shark Liveなど、最新の公演日程を確認できます。",
+    copy: "#ゆかJETやBaby Shark Liveなど、直近の公演日程はこちら。",
     href: "#next"
   },
   {
     label: "出演歴",
     title: "これまでの活動を見る",
-    copy: "舞台、CM、MV、ドラマ、ミスコンなど幅広い活動歴を確認できます。",
+    copy: "舞台、CM、MV、ドラマ、ミスコン。年ごとのタイムラインで。",
     href: "#highlights"
   },
   {
     label: "SNS",
     title: "SNSをチェックする",
-    copy: "X、Instagram、TikTok、SHOWROOMの最新情報を確認できます。",
+    copy: "X・Instagram・TikTok・SHOWROOM。リンクをまとめて。",
     href: "#links"
   },
   {
     label: "プロフィール",
     title: "吉井優花子さんを知る",
-    copy: "プロフィール、経歴、受賞歴を確認できます。",
+    copy: "プロフィール・経歴・受賞歴はこちら。",
     href: "#profile"
   }
 ];
