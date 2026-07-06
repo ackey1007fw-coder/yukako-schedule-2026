@@ -23,10 +23,13 @@
 
 役割分担の詳細な指示書は `docs/` にあります。**自分の指示書を読んでから作業すること**。
 
-| 担当 | 主な仕事 | 指示書 |
+| 担当 | 第一の仕事（最優先レーン） | 指示書 |
 | :-- | :-- | :-- |
-| **Codex** | SNS投稿の反映（news / photos / gojetPromo / events のデータ更新）、画像の取り込み | [docs/CODEX.md](./docs/CODEX.md) |
-| **Claude (Sonnet)** | UI/UX・アクセシビリティ・構造の変更、Codex の PR レビュー、文言の最終チェック、CI/guard 整備 | [docs/SONNET.md](./docs/SONNET.md) |
+| **Codex** | SNS投稿の反映（news / photos / gojetPromo / events）、画像の取り込み。品質ゲートを通せば UI・機能改善も範囲制限なし | [docs/CODEX.md](./docs/CODEX.md) |
+| **Claude (Sonnet)** | UI/UX・アクセシビリティ・構造の変更、PR の相互レビュー、文言の最終チェック、CI/guard 整備 | [docs/SONNET.md](./docs/SONNET.md) |
+
+どちらも**共同運営者**であり、レーンは「専有」ではなく「最優先」。品質ゲート（各指示書参照）を
+通る仕事なら越境してよい。同じファイルを同時に触らないことだけ守る。
 
 - ワークフロー: `main` から作業ブランチ → 編集 → PR（`main` 宛て）→ レビュー → マージ → 自動デプロイ。
 - PR は確認不要で即マージしてよい。ただし本番に関わる大きな変更・曖昧な指摘はオーナーに確認する。
