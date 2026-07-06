@@ -13,9 +13,30 @@ export type GojetFeatureUpdate = {
   postUrl: string;
   homepageUrl: string;
   ctaLabel: string;
+  // 稽古動画などを手元にホストできた場合はカード内で直接再生する
+  video?: {
+    src: string;
+    poster: string;
+    label: string;
+  };
 };
 
 export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
+  {
+    date: "2026.7.6",
+    label: "歌ダンス稽古",
+    title: "美里もプロデューサーオリジナル楽曲",
+    body:
+      "今日はガールズ & JET & あかね & 美里。曲数の多いガールズも踊り慣れてきて、メグに続き美里の歌もオリジナル楽曲に。三班のJET×あかねの雰囲気の違いもお楽しみに——稽古場から57秒の動画つき。",
+    postUrl: "https://x.com/yukako_produce/status/2074136760825885049",
+    homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+    ctaLabel: "Xで投稿を見る",
+    video: {
+      src: "/videos/yukajet-rehearsal-2026-07-06.mp4",
+      poster: "/images/yukako-yukajet-rehearsal-video-poster-2026-07-06.jpg",
+      label: "#ゆかJET 歌ダンス稽古の様子(57秒・音声あり)"
+    }
+  },
   {
     date: "2026.7.5",
     label: "稽古の熱量",
@@ -44,7 +65,12 @@ export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
       "キャストがマイクに向かう歌ダンス稽古の動画が公開中。メグのオリジナル楽曲、LIVEコーナーでの披露の予告も。",
     postUrl: "https://x.com/yukako_produce/status/2073768826303631470",
     homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
-    ctaLabel: "Xで稽古動画を見る"
+    ctaLabel: "Xで稽古動画を見る",
+    video: {
+      src: "/videos/yukajet-rehearsal-2026-07-05.mp4",
+      poster: "/images/yukako-yukajet-rehearsal-video-poster-2026-07-05.jpg",
+      label: "#ゆかJET 歌ダンス稽古の様子(43秒・音声あり)"
+    }
   }
 ];
 

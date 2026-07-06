@@ -220,6 +220,18 @@ export function NowProducingSection({ event }: NowProducingSectionProps) {
                       <p className="mt-3 text-sm leading-7 text-white/72">
                         {update.body}
                       </p>
+                      {update.video && (
+                        <video
+                          controls
+                          playsInline
+                          preload="none"
+                          poster={update.video.poster}
+                          aria-label={update.video.label}
+                          className="mt-4 block max-h-[420px] w-full border border-white/12 bg-black object-contain"
+                        >
+                          <source src={update.video.src} type="video/mp4" />
+                        </video>
+                      )}
                       <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
                         <a
                           href={update.postUrl}
