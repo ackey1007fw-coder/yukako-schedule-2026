@@ -7,6 +7,12 @@ export type NewsItem = {
 
 export const news: NewsItem[] = [
   {
+    date: "2026.7.6",
+    label: "X",
+    text: "#ゆかJET 今日も歌ダンス稽古。メグに続き、美里もプロデューサーオリジナル楽曲に。三班のJET×あかねの雰囲気の違いもお楽しみに。",
+    url: "https://x.com/yukako_produce/status/2074136760825885049"
+  },
+  {
     date: "2026.7.5",
     label: "X",
     text: "#ゆかJET 稽古場より。キャストが稽古を楽しんでくれているのが何より嬉しい——ちゃんと休みつつ、本番へ。",
