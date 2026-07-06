@@ -9,6 +9,12 @@ export const news: NewsItem[] = [
   {
     date: "2026.7.5",
     label: "X",
+    text: "#ゆかJET 稽古を楽しむキャストへの嬉しさと、みんなでちゃんと休んで頑張ろうという優花子さんの投稿。",
+    url: "https://x.com/mokoopy/status/2073778000177594434"
+  },
+  {
+    date: "2026.7.5",
+    label: "X",
     text: "#ゆかJET メグのオリジナル楽曲を優花子さんが制作。稽古で歌を聴き、本番への楽しみが高まったことを投稿。",
     url: "https://x.com/mokoopy/status/2073772074964054080"
   },
