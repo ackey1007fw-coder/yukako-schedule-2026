@@ -65,7 +65,12 @@ export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
       "キャストがマイクに向かう歌ダンス稽古の動画が公開中。メグのオリジナル楽曲、LIVEコーナーでの披露の予告も。",
     postUrl: "https://x.com/yukako_produce/status/2073768826303631470",
     homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
-    ctaLabel: "Xで稽古動画を見る"
+    ctaLabel: "Xで稽古動画を見る",
+    video: {
+      src: "/videos/yukajet-rehearsal-2026-07-05.mp4",
+      poster: "/images/yukako-yukajet-rehearsal-video-poster-2026-07-05.jpg",
+      label: "#ゆかJET 歌ダンス稽古の様子(43秒・音声あり)"
+    }
   }
 ];
 
