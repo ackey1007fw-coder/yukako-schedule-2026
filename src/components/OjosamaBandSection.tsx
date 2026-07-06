@@ -19,7 +19,7 @@ export function OjosamaBandSection() {
               act={4}
               eyebrow="Stage Archive"
               title="お嬢様はバンドがやりたい"
-              copy="2026年5月に出演した劇団ココアのミュージカル作品。A班・黒白院雲雀役として、母娘の物語を歌と芝居で届けた舞台を記録します。"
+              copy="2026年5月、劇団ココアのミュージカル。A班・黒白院雲雀役で出演した舞台のアーカイブ。"
             />
 
             <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
@@ -52,7 +52,7 @@ export function OjosamaBandSection() {
                   母として見守る、深く大きな愛の役
                 </h3>
                 <p className="mt-3 text-sm leading-7 text-ink/70">
-                  主人公すずめの夢をただ止めるのではなく、選択を尊重しながら支える存在として描かれた雲雀。優花子さんは、歌の多い重要な役を心を込めて表現しました。
+                  すずめの夢をただ止めるのではなく、選択を尊重しながら支える存在として描かれた雲雀。歌の多い大役です。
                 </p>
               </div>
               <a
@@ -94,7 +94,7 @@ export function OjosamaBandSection() {
               写真で残す、黒白院雲雀の記録
             </h3>
             <p className="mt-4 text-sm leading-7 text-ink/72">
-              公演後に公開された記録写真を中心に、衣装姿や舞台の余韻をまとめました。ファン制作の応援ポータルとして、これまでの歩みにまだ残せていなかった出演の記憶も大切に残します。
+              公演後に公開された記録写真から。衣装姿も舞台の空気も、ここでいつでも見返せます。
             </p>
           </div>
         </div>

@@ -15,7 +15,7 @@ export function SupportersSection() {
         <SectionHeader
           kicker="Support Menu"
           title="#ゆかJET を応援する"
-          copy="『GO,JET!GO!GO! vol.1 Premium』では、会場でもオンラインでも参加できる応援メニューを用意しています。詳細・お申し込みは特設ページから。"
+          copy="『GO,JET!GO!GO! vol.1 Premium』には、会場でもオンラインでも参加できる応援メニューがあります。詳細・お申し込みは特設ページへ。"
         />
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
