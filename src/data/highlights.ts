@@ -25,6 +25,16 @@ export const highlights: Highlight[] = [
     ]
   },
   {
+    id: "ojosama-band-2026-05",
+    year: "2026",
+    date: "2026年5月",
+    category: "舞台",
+    title: "劇団ココア『お嬢様はバンドがやりたい ♪♪♪』",
+    description:
+      "2026年5月20日〜24日、シアターグリーン Big Tree Theaterにて上演。A班・黒白院雲雀役として出演し、主人公すずめを支える母の深い愛を、歌・感情芝居・コミカルな芝居で表現しました。",
+    image: "/images/ojosama-band-2026/yukako-ojosama-band-2026-01.jpg"
+  },
+  {
     id: "ryoma-kun-2026-04",
     year: "2026",
     date: "2026年4月",

@@ -10,6 +10,7 @@ import { LinksSection } from "./components/LinksSection";
 import { NowProducingSection } from "./components/NowProducingSection";
 import { NewsBar } from "./components/NewsBar";
 import { PhotoGallerySection } from "./components/PhotoGallerySection";
+import { OjosamaBandSection } from "./components/OjosamaBandSection";
 import { PortalIntroSection } from "./components/PortalIntroSection";
 import { QuickNav } from "./components/QuickNav";
 import { ScrollToTop } from "./components/ScrollToTop";
@@ -121,6 +122,9 @@ function App() {
         </SectionReveal>
         <SectionReveal>
           <HighlightsSection />
+        </SectionReveal>
+        <SectionReveal>
+          <OjosamaBandSection />
         </SectionReveal>
         <SectionReveal>
           <ProfileSection />
