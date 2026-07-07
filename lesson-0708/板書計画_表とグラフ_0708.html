@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>板書計画｜3年算数「表とグラフ」7/8公開研</title>
+<style>
+  :root{
+    --board:#2e4b3a; --frame:#7a5c3e; --chalk:#f5f2e8;
+    --yellow:#f7d774; --pink:#f2a6b8; --blue:#9fd0e8;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:"Yu Gothic","Hiragino Kaku Gothic ProN",sans-serif; background:#efe9dc; padding:16px; color:#333;}
+  h1{font-size:18px; margin-bottom:4px;}
+  .sub{font-size:12px; color:#666; margin-bottom:12px;}
+  .board-wrap{overflow-x:auto;}
+  .board{
+    min-width:1080px; background:var(--board); border:14px solid var(--frame);
+    border-radius:6px; padding:18px 20px; color:var(--chalk);
+    display:grid; grid-template-columns:26% 46% 28%; gap:18px;
+    font-size:14px; line-height:1.55;
+  }
+  .zone{display:flex; flex-direction:column; gap:12px; min-width:0;}
+  .zone-label{
+    font-size:11px; letter-spacing:2px; color:#bcd3c5; border-bottom:1px dashed #6f8f7d;
+    padding-bottom:3px;
+  }
+  .chalkbox{border:2px solid var(--chalk); border-radius:4px; padding:8px 10px;}
+  .chalkbox.dashed{border-style:dashed;}
+  .tag{display:inline-block; font-size:11px; padding:1px 8px; border:1px solid currentColor; border-radius:10px; margin-bottom:4px;}
+  .yellow{color:var(--yellow);}
+  .pink{color:var(--pink);}
+  .blue{color:var(--blue);}
+  .small{font-size:12px; color:#cfe0d5;}
+  .meate{font-size:15px; font-weight:bold;}
+  /* 中央: グラフ掲示スペース */
+  .graph-grid{display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px;}
+  .graph-slot{
+    border:2px dashed #b9cfc0; border-radius:4px; height:110px; padding:6px;
+    display:flex; flex-direction:column; justify-content:space-between;
+    font-size:11px; color:#cfe0d5; position:relative;
+  }
+  .graph-slot .magnet{position:absolute; top:-7px; left:calc(50% - 7px); width:14px; height:14px; border-radius:50%; background:#c94f4f; border:2px solid #eee;}
+  .graph-slot b{color:var(--chalk); font-size:12px;}
+  /* 右: 3分類 */
+  .cat{border:2px solid var(--chalk); border-radius:4px; padding:8px 10px;}
+  .cat h3{font-size:14px; margin-bottom:4px;}
+  .cat .space{border-top:1px dashed #8fae9c; margin-top:6px; padding-top:4px; font-size:11px; color:#bcd3c5; min-height:56px;}
+  .cat.mayoi{
+    border:3px solid var(--yellow); background:rgba(247,215,116,.10);
+    box-shadow:0 0 0 3px rgba(247,215,116,.25);
+  }
+  .cat.mayoi h3{color:var(--yellow);}
+  .legend{margin-top:14px; background:#fff; border:1px solid #d8d0bf; border-radius:6px; padding:12px 16px; font-size:12.5px; line-height:1.7;}
+  .legend h2{font-size:14px; margin-bottom:6px;}
+  .legend ol{padding-left:20px;}
+  .chalknote{font-size:11.5px; color:#f7d774;}
+  @media print{
+    body{background:#fff; padding:0;}
+    .board{min-width:0;}
+    @page{size:A4 landscape; margin:10mm;}
+  }
+</style>
+</head>
+<body>
+<h1>板書計画｜3年1組 算数「表とグラフ」</h1>
+<div class="sub">令和8年7月8日（水）5校時・公開研究授業（学びの共同体）／黒板は左・中央・右の3面構成。★＝我慢ポイント</div>
+
+<div class="board-wrap">
+<div class="board">
+
+  <!-- 左 -->
+  <div class="zone">
+    <div class="zone-label">左｜めあて・共有課題</div>
+    <div class="chalkbox">
+      <span class="tag blue">めあて（後書き）</span>
+      <div class="meate">くらべやすいグラフって？</div>
+      <div class="small">※課題と出会ったあと、子どもの言葉で書く。先に与えない</div>
+    </div>
+    <div class="chalkbox dashed">
+      <span class="tag">共有課題</span>
+      <div>すきなスポーツの表とグラフ<br>（拡大掲示・貼るだけ）</div>
+      <div class="small">・グラフだと分かること（子どもの言葉をそのままメモ）<br>・水泳11人／ドッジ10人の小さな差<br>・バスケ＝バレー（同じ高さ）</div>
+    </div>
+    <div class="chalkbox dashed">
+      <span class="tag">ジャンプ課題</span>
+      <div class="small">課題文＋道のりの表（バラバラ順）を拡大掲示<br>★視写させない・読み上げて渡す</div>
+    </div>
+  </div>
+
+  <!-- 中央 -->
+  <div class="zone">
+    <div class="zone-label">中央｜子どものグラフ掲示スペース（マグネットで貼る）</div>
+    <div class="graph-grid">
+      <div class="graph-slot"><span class="magnet"></span><b>班のグラフ①</b><span>表の順のまま／たて</span></div>
+      <div class="graph-slot"><span class="magnet"></span><b>班のグラフ②</b><span>長い順にならべかえ／よこ</span></div>
+      <div class="graph-slot"><span class="magnet"></span><b>班のグラフ③</b><span>1目盛り500m</span></div>
+      <div class="graph-slot"><span class="magnet"></span><b>班のグラフ④</b><span>1目盛り200m</span></div>
+      <div class="graph-slot"><span class="magnet"></span><b>班のグラフ⑤</b><span>（当日の実物）</span></div>
+      <div class="graph-slot"><span class="magnet"></span><b>班のグラフ⑥</b><span>（当日の実物）</span></div>
+    </div>
+    <div class="chalkbox">
+      <div>「同じ表なのに、何がちがう？」</div>
+      <div class="small">→ ちがい・共通点を<b>子どもの言葉のまま</b>チョークでメモ（教師の言葉に直さない）</div>
+    </div>
+    <div class="chalkbox dashed">
+      <span class="chalknote">◎境目の議論は黄色チョーク：「1900m は①？②？」— 何と何をくらべた？をグラフに矢印で書き込む</span>
+    </div>
+  </div>
+
+  <!-- 右 -->
+  <div class="zone">
+    <div class="zone-label">右｜3分類の表（3つのみ・4分類にしない）</div>
+    <div class="cat">
+      <h3>① 見学先の候補にしやすい場所</h3>
+      <div class="space">（班の考えを場所カードで貼る）</div>
+    </div>
+    <div class="cat mayoi">
+      <h3>② 相談して決めたい場所 ⬅ 迷いの置き場</h3>
+      <div class="space">迷った理由をそのまま書く。<br>「②に置けた＝ちゃんと考えた証拠」と価値づけ</div>
+    </div>
+    <div class="cat">
+      <h3>③ 歩いて行くには遠そうな場所</h3>
+      <div class="space">（班の考えを場所カードで貼る）</div>
+    </div>
+    <div class="chalkbox dashed">
+      <span class="tag pink">振り返りの視点</span>
+      <div class="small">・グラフのどこが根きょになった？<br>・友だちとくらべて変わったことは？</div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<div class="legend">
+  <h2>掲示・板書の手順（当日運用メモ）</h2>
+  <ol>
+    <li><b>授業前</b>：左面に共有課題のスポーツグラフ、ジャンプ課題文＋表（バラバラ順）を掲示しておく。中央・右は空けておく。</li>
+    <li><b>0〜3分</b>：課題を読んで出会わせる。めあては子どもの言葉が出てから左上に短く書く（先に板書しない）。</li>
+    <li><b>12〜27分（作図中）</b>：机間で「並べ替えの有無」「目盛りの違い」が対比できる班を記録。掲示は<b>見た目の違いが際立つ組み合わせ</b>を選ぶ。</li>
+    <li><b>32〜42分（全体共有）</b>：班のグラフを中央に貼り、「同じ表なのに何がちがう？」から。場所カードを右の3分類へ移動しながら、割れた場所（1900m等）は黄色チョークで囲み②へ。<b>教師は復唱せず</b>、子どもの言葉のままメモする。</li>
+    <li><b>終末</b>：②に残った場所を消さない。「相談して決めたい＝先生たちへの提案として立派な結論」で締める。</li>
+  </ol>
+</div>
+</body>
+</html>
