@@ -33,6 +33,21 @@ export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
     ctaLabel: "優花子のポストを見る"
   },
   {
+    date: "2026.7.7",
+    label: "全役歌あり",
+    title: "全役集合、なんと全役歌ありのゆかJET",
+    body:
+      "「なんと今回は…全役歌あり⁉️」オリジナル脚色で、歌ダンスたっぷりのゆかJET。みんなで本番に向けて練習中——全キャストが集合して歌う46秒の稽古動画つき。",
+    postUrl: "https://x.com/yukako_produce/status/2074499839531044967",
+    homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+    ctaLabel: "Xで稽古動画を見る",
+    video: {
+      src: "/videos/yukajet-rehearsal-2026-07-07.mp4",
+      poster: "/images/yukako-yukajet-rehearsal-video-poster-2026-07-07.jpg",
+      label: "#ゆかJET 全役集合の歌ダンス稽古の様子(46秒・音声あり)"
+    }
+  },
+  {
     date: "2026.7.6",
     label: "歌ダンス稽古",
     title: "美里もプロデューサーオリジナル楽曲",
