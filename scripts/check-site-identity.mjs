@@ -1,4 +1,6 @@
-import { readFile } from "node:fs/promises";
+import { readFile, readdir } from "node:fs/promises";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 const EXPECTED = {
   branch: "main",
@@ -11,9 +13,25 @@ const EXPECTED = {
 const FORBIDDEN = [
   "夏凪 里季",
   "riri-schedule-2026.vercel.app",
+  "RiriSchedule",
+  "riri-fan-schedule",
   "room_id=550336",
   "roomId: \"550336\"",
+  "550336",
+  "frecam",
+  "kalua",
+  "riri",
 ];
+
+// リポジトリ全体を走査して Riri 由来のシグナルが紛れ込んでいないか確認する
+// （テキスト系ソースのみ。node_modules/dist/public の画像・動画等は対象外）
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const SCAN_DIRS = ["src", "api", "scripts", "."];
+const SCAN_EXTENSIONS = new Set([".ts", ".tsx", ".js", ".mjs", ".cjs", ".json", ".html"]);
+const SKIP_DIRS = new Set([
+  "node_modules", "dist", ".git", "public", ".vercel", "optimized",
+]);
+const SKIP_FILES = new Set(["check-site-identity.mjs", "package-lock.json"]);
 
 const branch = (process.argv[2] || "").trim();
 
@@ -29,6 +47,28 @@ const read = async (relative) => {
     return "";
   }
 };
+
+async function collectFiles(dir, { topLevelOnly = false } = {}) {
+  let entries;
+  try {
+    entries = await readdir(dir, { withFileTypes: true });
+  } catch {
+    return [];
+  }
+  const files = [];
+  for (const entry of entries) {
+    if (SKIP_DIRS.has(entry.name)) continue;
+    const fullPath = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      if (topLevelOnly) continue;
+      files.push(...await collectFiles(fullPath));
+      continue;
+    }
+    if (SKIP_FILES.has(entry.name)) continue;
+    if (SCAN_EXTENSIONS.has(path.extname(entry.name))) files.push(fullPath);
+  }
+  return files;
+}
 
 const profile = await read("../src/data/profile.ts");
 const html = await read("../index.html");
@@ -56,9 +96,20 @@ if (!combined.includes(EXPECTED.prodUrl)) {
   errors.push(`Production URL "${EXPECTED.prodUrl}" was not found.`);
 }
 
-for (const value of FORBIDDEN) {
-  if (combined.includes(value)) {
-    errors.push(`Forbidden Riri-site signal found: "${value}".`);
+// リポジトリ全体（src/api/scripts + ルート直下）を走査
+const scanTargets = [
+  ...(await collectFiles(path.join(root, "src"))),
+  ...(await collectFiles(path.join(root, "api"))),
+  ...(await collectFiles(path.join(root, "scripts"))),
+  ...(await collectFiles(root, { topLevelOnly: true })),
+];
+
+for (const filePath of scanTargets) {
+  const content = await readFile(filePath, "utf8").catch(() => "");
+  for (const value of FORBIDDEN) {
+    if (content.includes(value)) {
+      errors.push(`Forbidden Riri-site signal "${value}" found in ${path.relative(root, filePath)}.`);
+    }
   }
 }
 
