@@ -60,7 +60,7 @@ export function BirthdayBanner() {
           </span>
           <span className="min-w-0">
             <span className="block text-[11px] font-black uppercase tracking-wide text-champagneInk">
-              RiRi Birthday
+              Yukako Birthday
             </span>
             <span className="block font-display text-lg leading-tight sm:text-xl">
               {countdown.isBirthdayToday
