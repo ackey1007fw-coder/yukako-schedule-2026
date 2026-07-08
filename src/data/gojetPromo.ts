@@ -23,6 +23,56 @@ export type GojetFeatureUpdate = {
 
 export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
   {
+    date: "2026.7.8",
+    label: "舞台裏の告白",
+    title: "毎日、撮影と編集もしてるんだ",
+    body:
+      "「毎日、撮影と編集もしてるんだ」——稽古だけでなくプロモーション動画の撮影・編集も自分でこなしていたことを明かした引用ポスト。「会場で生でそのパワーを受けてほしい」、そして「#ゆかJET は新しいGO,JET!を届けます」。",
+    postUrl: "https://x.com/mokoopy/status/2074877458520879482",
+    homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+    ctaLabel: "優花子のポストを見る"
+  },
+  {
+    date: "2026.7.8",
+    label: "本気の呼びかけ",
+    title: "あと20人は来てほしい",
+    body:
+      "「今日も歌ダンス稽古🎶」プロデューサー・C班早紀・B班JETの三役をこなしながら「最後まで思いきり頑張りますよー！！✨」。「絶対みんなに観てほしい舞台です😢 あと20人は来てほしい、、、」——本気の呼びかけとともに50秒のリハーサル映像つき。",
+    postUrl: "https://x.com/mokoopy/status/2074871931430736273",
+    homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+    ctaLabel: "優花子のポストを見る",
+    video: {
+      src: "/videos/yukajet-rehearsal-2026-07-08.mp4",
+      poster: "/images/yukako-yukajet-rehearsal-video-poster-2026-07-08.jpg",
+      label: "#ゆかJET 歌ダンス稽古の様子(50秒・音声あり)"
+    }
+  },
+  {
+    date: "2026.7.7",
+    label: "稽古場より",
+    title: "みんなにとっても思い入れと成長のある舞台に",
+    body:
+      "「睡魔と戦いながら毎日投稿しています😴笑」——プロデュース公式の稽古動画にハートポーズの集合写真を添えて引用。「みんなにとっても、思い入れと成長のある舞台になったら私は嬉しいです」。",
+    postUrl: "https://x.com/mokoopy/status/2074506038041325580",
+    homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+    ctaLabel: "優花子のポストを見る"
+  },
+  {
+    date: "2026.7.7",
+    label: "全役歌あり",
+    title: "全役集合、なんと全役歌ありのゆかJET",
+    body:
+      "「なんと今回は…全役歌あり⁉️」オリジナル脚色で、歌ダンスたっぷりのゆかJET。みんなで本番に向けて練習中——全キャストが集合して歌う46秒の稽古動画つき。",
+    postUrl: "https://x.com/yukako_produce/status/2074499839531044967",
+    homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+    ctaLabel: "Xで稽古動画を見る",
+    video: {
+      src: "/videos/yukajet-rehearsal-2026-07-07.mp4",
+      poster: "/images/yukako-yukajet-rehearsal-video-poster-2026-07-07.jpg",
+      label: "#ゆかJET 全役集合の歌ダンス稽古の様子(46秒・音声あり)"
+    }
+  },
+  {
     date: "2026.7.6",
     label: "歌ダンス稽古",
     title: "美里もプロデューサーオリジナル楽曲",
@@ -75,6 +125,10 @@ export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
 ];
 
 export const gojetPromoImages: PromoImage[] = [
+  {
+    src: "/images/yukako-yukajet-rehearsal-2026-07-07-group.jpg",
+    alt: "#ゆかJETの稽古場でハートポーズをする吉井優花子さんとキャスト・スタッフ総勢の集合写真"
+  },
   {
     src: "/images/yukako-yukajet-lyrics-card-2026-07-05.jpg",
     alt: "#ゆかJETの稽古でB4版の歌詞カードを掲げる吉井優花子さん"
