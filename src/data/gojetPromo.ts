@@ -24,6 +24,16 @@ export type GojetFeatureUpdate = {
 export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
   {
     date: "2026.7.8",
+    label: "舞台裏の告白",
+    title: "毎日、撮影と編集もしてるんだ",
+    body:
+      "「毎日、撮影と編集もしてるんだ」——稽古だけでなくプロモーション動画の撮影・編集も自分でこなしていたことを明かした引用ポスト。「会場で生でそのパワーを受けてほしい」、そして「#ゆかJET は新しいGO,JET!を届けます」。",
+    postUrl: "https://x.com/mokoopy/status/2074877458520879482",
+    homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+    ctaLabel: "優花子のポストを見る"
+  },
+  {
+    date: "2026.7.8",
     label: "本気の呼びかけ",
     title: "あと20人は来てほしい",
     body:
