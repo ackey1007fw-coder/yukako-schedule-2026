@@ -23,6 +23,21 @@ export type GojetFeatureUpdate = {
 
 export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
   {
+    date: "2026.7.8",
+    label: "本気の呼びかけ",
+    title: "あと20人は来てほしい",
+    body:
+      "「今日も歌ダンス稽古🎶」プロデューサー・C班早紀・B班JETの三役をこなしながら「最後まで思いきり頑張りますよー！！✨」。「絶対みんなに観てほしい舞台です😢 あと20人は来てほしい、、、」——本気の呼びかけとともに50秒のリハーサル映像つき。",
+    postUrl: "https://x.com/mokoopy/status/2074871931430736273",
+    homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+    ctaLabel: "優花子のポストを見る",
+    video: {
+      src: "/videos/yukajet-rehearsal-2026-07-08.mp4",
+      poster: "/images/yukako-yukajet-rehearsal-video-poster-2026-07-08.jpg",
+      label: "#ゆかJET 歌ダンス稽古の様子(50秒・音声あり)"
+    }
+  },
+  {
     date: "2026.7.7",
     label: "稽古場より",
     title: "みんなにとっても思い入れと成長のある舞台に",
