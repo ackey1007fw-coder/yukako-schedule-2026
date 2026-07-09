@@ -50,4 +50,4 @@ Vercel Web Analytics is included through `@vercel/analytics/react` in `src/App.t
 
 Access data is not shown on the public site. To view page views and visitor trends, open the Vercel dashboard, select `yukako-schedule-2026`, then open `Analytics`.
 
-If tracking data does not appear, enable Web Analytics for the project in Vercel and redeploy from `yukako/main`.
+If tracking data does not appear, enable Web Analytics for the project in Vercel and redeploy from `main`.
