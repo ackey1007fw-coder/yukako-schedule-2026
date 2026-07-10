@@ -6,6 +6,7 @@ import { Footer } from "./components/Footer";
 import { GojetCountdownBanner } from "./components/GojetCountdownBanner";
 import { Hero } from "./components/Hero";
 import { HighlightsSection } from "./components/HighlightsSection";
+import { LatestInstagramSection } from "./components/LatestInstagramSection";
 import { LinksSection } from "./components/LinksSection";
 import { NowProducingSection } from "./components/NowProducingSection";
 import { NewsBar } from "./components/NewsBar";
@@ -108,6 +109,9 @@ function App() {
         </SectionReveal>
         <SectionReveal>
           <NowProducingSection event={gojetEvent ?? nextEvent} />
+        </SectionReveal>
+        <SectionReveal>
+          <LatestInstagramSection />
         </SectionReveal>
         <SectionReveal>
           <SupportersSection />
