@@ -23,6 +23,16 @@ export type GojetFeatureUpdate = {
 
 export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
   {
+    date: "2026.7.10",
+    label: "本番まであと2週間",
+    title: "「本当にとっても観てほしい舞台」",
+    body:
+      "本番まであと2週間。優花子さんは「みんなで楽しく頑張っています」と稽古の様子を届けつつ、C班早紀・B班JET・千秋楽LIVEそれぞれの見どころと、来場／配信チケットへの想いをまっすぐに呼びかけています。",
+    postUrl: "https://x.com/mokoopy/status/2075595979160707420",
+    homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+    ctaLabel: "優花子のポストを見る"
+  },
+  {
     date: "2026.7.8",
     label: "舞台裏の告白",
     title: "毎日、撮影と編集もしてるんだ",
@@ -125,6 +135,10 @@ export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
 ];
 
 export const gojetPromoImages: PromoImage[] = [
+  {
+    src: "/images/yukako-yukajet-rehearsal-smile-2026-07-10.jpg",
+    alt: "#ゆかJETの稽古場で笑顔を見せる吉井優花子さん。本番まであと2週間のリハーサル風景"
+  },
   {
     src: "/images/yukako-yukajet-rehearsal-2026-07-07-group.jpg",
     alt: "#ゆかJETの稽古場でハートポーズをする吉井優花子さんとキャスト・スタッフ総勢の集合写真"
