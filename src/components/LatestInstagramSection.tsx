@@ -1,4 +1,4 @@
-import { ArrowUpRight, Instagram, Ship, Sparkles } from "lucide-react";
+import { ExternalLink, Sparkles, Video } from "lucide-react";
 import { SectionHeader } from "./SectionHeader";
 
 const reelUrl = "https://www.instagram.com/reel/DaoGHTuSj2U/?igsh=NTFvYzVjdXQ2OHJy";
@@ -30,9 +30,8 @@ export function LatestInstagramSection() {
                 src={drivePreviewUrl}
                 title="吉井優花子さん MSC Bellissima 6泊7日の船旅 リール動画"
                 loading="lazy"
-                allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
+                allow="autoplay; encrypted-media"
                 allowFullScreen
-                referrerPolicy="strict-origin-when-cross-origin"
                 className="h-full w-full"
               />
             </div>
@@ -41,8 +40,8 @@ export function LatestInstagramSection() {
           <div className="flex flex-col justify-center p-6 sm:p-9 lg:p-12">
             <div className="flex flex-wrap items-center gap-2 text-xs font-black uppercase tracking-[0.14em] text-champagneInk">
               <span className="inline-flex items-center gap-1.5 border border-champagne/45 bg-white px-3 py-1.5">
-                <Instagram className="h-4 w-4" aria-hidden="true" />
-                Instagram
+                <Video className="h-4 w-4" aria-hidden="true" />
+                Instagram Reel
               </span>
               <span className="border border-rosefog/35 bg-[#fff1f6] px-3 py-1.5 text-[#8d4260]">
                 PR
@@ -52,7 +51,7 @@ export function LatestInstagramSection() {
 
             <div className="mt-6 flex items-start gap-4">
               <span className="grid h-12 w-12 shrink-0 place-items-center border border-champagne/50 bg-white text-champagne">
-                <Ship className="h-6 w-6" aria-hidden="true" />
+                <Video className="h-6 w-6" aria-hidden="true" />
               </span>
               <div>
                 <p className="text-sm font-bold text-champagneInk">MSC Bellissima</p>
@@ -85,7 +84,7 @@ export function LatestInstagramSection() {
                 rel="noopener noreferrer"
                 className="yukako-button yukako-button-gold min-h-12 px-5 py-3 text-sm"
               >
-                <Instagram className="h-4 w-4" aria-hidden="true" />
+                <Video className="h-4 w-4" aria-hidden="true" />
                 Instagramで動画を見る
               </a>
               <a
@@ -95,7 +94,7 @@ export function LatestInstagramSection() {
                 className="yukako-button min-h-12 border border-champagne bg-white px-5 py-3 text-sm font-bold text-ink transition hover:bg-porcelain"
               >
                 @yoppy_777 を見る
-                <ArrowUpRight className="h-4 w-4 text-champagne" aria-hidden="true" />
+                <ExternalLink className="h-4 w-4 text-champagne" aria-hidden="true" />
               </a>
             </div>
 
