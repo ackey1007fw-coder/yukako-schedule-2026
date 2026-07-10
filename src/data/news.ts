@@ -7,6 +7,12 @@ export type NewsItem = {
 
 export const news: NewsItem[] = [
   {
+    date: "2026.7.11",
+    label: "Instagram",
+    text: "豪華客船 MSC Bellissimaで過ごした6泊7日の船旅。母の日のプレゼントとして贈った、特別なクルーズのリール動画が公開されました。",
+    url: "https://www.instagram.com/reel/DaoGHTuSj2U/?igsh=NTFvYzVjdXQ2OHJy"
+  },
+  {
     date: "2026.7.6",
     label: "X",
     text: "#ゆかJET 今日も歌ダンス稽古。メグに続き、美里もプロデューサーオリジナル楽曲に。三班のJET×あかねの雰囲気の違いもお楽しみに。",
