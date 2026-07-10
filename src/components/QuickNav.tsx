@@ -4,17 +4,17 @@ import {
   CalendarHeart,
   HeartHandshake,
   Images,
-  Instagram,
+  MessageCircle,
   Music2,
   Radio,
   Sparkles,
   UserRound,
-  MessageCircle
+  Video
 } from "lucide-react";
 
 const items = [
   { label: "魅力", href: "#about", id: "about", Icon: Sparkles },
-  { label: "最新動画", href: "#latest-reel", id: "latest-reel", Icon: Instagram },
+  { label: "最新動画", href: "#latest-reel", id: "latest-reel", Icon: Video },
   { label: "公演情報", href: "#next", id: "next", Icon: CalendarHeart },
   { label: "応援", href: "#support", id: "support", Icon: HeartHandshake },
   { label: "予定", href: "#schedule", id: "schedule", Icon: CalendarDays },
