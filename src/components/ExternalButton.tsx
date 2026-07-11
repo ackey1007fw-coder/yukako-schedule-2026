@@ -6,6 +6,7 @@ type ExternalButtonProps = {
   children: ReactNode;
   variant?: "primary" | "light" | "gold" | "ghost";
   className?: string;
+  onClick?: () => void;
 };
 
 const variants = {
@@ -19,13 +20,15 @@ export function ExternalButton({
   href,
   children,
   variant = "light",
-  className = ""
+  className = "",
+  onClick
 }: ExternalButtonProps) {
   return (
     <a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
+      onClick={onClick}
       className={`yukako-button min-h-12 px-4 py-3 text-sm ${variants[variant]} ${className}`}
     >
       <span>{children}</span>

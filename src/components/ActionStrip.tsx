@@ -1,232 +1,44 @@
-import {
-  ArrowUpRight,
-  CalendarDays,
-  CalendarHeart,
-  Images,
-  MessageCircleHeart,
-  Send,
-  Ticket
-} from "lucide-react";
+import { ArrowUpRight, CalendarDays, MessageCircleHeart, Ticket } from "lucide-react";
+import { trackPortalEvent } from "../lib/analytics";
 import type { ScheduleEvent, SocialLink } from "../types";
 
-type ActionStripProps = {
-  nextEvent?: ScheduleEvent;
-  upcomingEvents: ScheduleEvent[];
-  socialLinks: SocialLink[];
-};
+type ActionStripProps = { nextEvent?: ScheduleEvent; upcomingEvents: ScheduleEvent[]; socialLinks: SocialLink[] };
+const dateKey = (date: Date) => new Intl.DateTimeFormat("sv-SE", { timeZone: "Asia/Tokyo", year: "numeric", month: "2-digit", day: "2-digit" }).format(date);
+const addDays = (date: Date, days: number) => { const next = new Date(date); next.setDate(next.getDate() + days); return next; };
+const eventDates = (event: ScheduleEvent) => event.dates?.length ? event.dates : [event.startAt.slice(0, 10), (event.endAt ?? event.startAt).slice(0, 10)];
 
-const dateKey = (date: Date) =>
-  new Intl.DateTimeFormat("sv-SE", {
-    timeZone: "Asia/Tokyo",
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit"
-  }).format(date);
-
-const addDays = (date: Date, days: number) => {
-  const next = new Date(date);
-  next.setDate(next.getDate() + days);
-  return next;
-};
-
-const eventDateKeys = (event: ScheduleEvent) =>
-  event.dates && event.dates.length > 0
-    ? event.dates
-    : [event.startAt.slice(0, 10), (event.endAt ?? event.startAt).slice(0, 10)];
-
-const countInRange = (events: ScheduleEvent[], startKey: string, endKey: string) =>
-  events.filter((event) =>
-    eventDateKeys(event).some((key) => key >= startKey && key <= endKey),
-  ).length;
-
-export function ActionStrip({
-  nextEvent,
-  upcomingEvents,
-  socialLinks
-}: ActionStripProps) {
-  const ticketLink =
-    nextEvent?.links.find((link) => link.kind === "ticket") ??
-    nextEvent?.links[0];
-  const hasTicket = ticketLink?.kind === "ticket";
-  const mainSocial = socialLinks[0];
-  const showroom = socialLinks.find((link) => link.kind === "showroom");
-  const todayKey = dateKey(new Date());
-  const weekEndKey = dateKey(addDays(new Date(), 6));
-  const monthKey = todayKey.slice(0, 7);
-  const todayCount = countInRange(upcomingEvents, todayKey, todayKey);
-  const weekCount = countInRange(upcomingEvents, todayKey, weekEndKey);
-  const monthCount = upcomingEvents.filter((event) =>
-    eventDateKeys(event).some((key) => key.startsWith(monthKey)),
-  ).length;
-
-  const nextLabel = !nextEvent
-    ? "スケジュール"
-    : nextEvent.category === "birthday"
-      ? "次の予定"
-      : nextEvent.category === "event"
-        ? "次のイベント"
-        : "次の公演";
-
-  const items = [
-    {
-      label: nextLabel,
-      title: nextEvent?.shortTitle ?? "予定を見る",
-      copy: nextEvent?.displayDate ?? "これからの予定をチェック。",
-      href: "#next",
-      Icon: CalendarDays,
-      external: false
-    },
-    {
-      label: hasTicket ? "チケット予約" : "詳細・リンク",
-      title: ticketLink?.label ?? "スケジュールへ",
-      copy: hasTicket
-        ? "チケットの予約・詳細はこちら。"
-        : "詳しくはこちらをチェック。",
-      href: ticketLink?.url ?? "#schedule",
-      Icon: hasTicket ? Ticket : ArrowUpRight,
-      external: Boolean(ticketLink)
-    },
-    {
-      label: "SNS",
-      title: mainSocial?.handle ?? "更新をチェック",
-      copy: "最新の公演情報やオフショットをチェック。",
-      href: mainSocial?.url ?? "#links",
-      Icon: Images,
-      external: Boolean(mainSocial)
-    }
-  ];
-  const actionGroups = [
-    {
-      label: "今日できる応援",
-      title: todayCount ? `今日の予定 ${todayCount}件` : "SHOWROOM・SNSを確認",
-      copy: todayCount
-        ? "配信・出演の時間を確認して、見逃さないように準備。"
-        : "今日は予定なし。SHOWROOMの配信予定と最新投稿をのぞいてみる？",
-      href: todayCount ? "#schedule" : showroom?.url ?? "#showroom",
-      external: !todayCount && Boolean(showroom),
-      Icon: MessageCircleHeart
-    },
-    {
-      label: "今週できる応援",
-      title: weekCount ? `今週の予定 ${weekCount}件` : "Xで情報を広げる",
-      copy: "気になる投稿を見つけたら、リポストでもう一人に届ける。",
-      href: mainSocial?.url ?? "#links",
-      external: Boolean(mainSocial),
-      Icon: Send
-    },
-    {
-      label: "今月できる応援",
-      title: monthCount ? `今月の予定 ${monthCount}件` : "#ゆかJETを予習",
-      copy: hasTicket
-        ? "チケット・配信・物販は早めのチェックが吉。"
-        : "まずは公演情報から。気になったらSNS・配信へ。",
-      href: ticketLink?.url ?? "#next",
-      external: Boolean(ticketLink),
-      Icon: CalendarHeart
-    }
+export function ActionStrip({ nextEvent, upcomingEvents, socialLinks }: ActionStripProps) {
+  const primaryLink = nextEvent?.links.find((link) => link.kind === "ticket" || link.kind === "stream") ?? nextEvent?.links.find((link) => link.kind === "info");
+  const social = socialLinks.find((link) => link.kind === "x") ?? socialLinks[0];
+  const today = dateKey(new Date());
+  const weekEnd = dateKey(addDays(new Date(), 6));
+  const month = today.slice(0, 7);
+  const counts = {
+    today: upcomingEvents.filter((event) => eventDates(event).some((date) => date === today)).length,
+    week: upcomingEvents.filter((event) => eventDates(event).some((date) => date >= today && date <= weekEnd)).length,
+    month: upcomingEvents.filter((event) => eventDates(event).some((date) => date.startsWith(month))).length
+  };
+  const actions = [
+    { label: "次の予定", title: nextEvent?.shortTitle ?? "予定を見る", href: "#schedule", Icon: CalendarDays, external: false },
+    { label: "チケット／配信／詳細", title: primaryLink?.label ?? "公演情報を見る", href: primaryLink?.url ?? "#next", Icon: Ticket, external: Boolean(primaryLink), track: primaryLink?.kind === "stream" ? "stream_click" as const : "ticket_click" as const },
+    { label: "SNSで応援", title: social?.handle ?? "公式SNSを見る", href: social?.url ?? "#links", Icon: MessageCircleHeart, external: Boolean(social), track: "sns_click" as const }
   ];
 
   return (
-    <section className="relative z-20 bg-porcelain px-4 py-8 sm:px-6 lg:px-8">
-      <div className="mx-auto mb-4 flex max-w-7xl items-end justify-between gap-4">
-        <div>
-          <p className="text-xs font-black uppercase tracking-[0.18em] text-champagneInk">
-            Support Compass
-          </p>
-          <h2 className="mt-2 font-display text-2xl text-ink sm:text-3xl">
-            今できる応援
-          </h2>
+    <section id="support-actions" className="bg-porcelain px-4 pb-10 pt-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl">
+        <div className="mb-4 flex flex-wrap items-center gap-2 text-xs font-bold text-ink/62" aria-label="予定件数">
+          <span className="border border-rosefog/25 bg-white px-3 py-1.5">今日 {counts.today}件</span>
+          <span className="border border-rosefog/25 bg-white px-3 py-1.5">今週 {counts.week}件</span>
+          <span className="border border-rosefog/25 bg-white px-3 py-1.5">今月 {counts.month}件</span>
         </div>
-      </div>
-      <div className="mx-auto grid max-w-7xl gap-3 sm:grid-cols-3">
-        {items.map((item, index) => {
-          const content = (
-            <>
-              <span
-                className={`flex h-12 w-12 shrink-0 items-center justify-center border ${
-                  index === 1
-                    ? "border-champagne bg-champagne text-white"
-                    : "border-champagne/45 bg-white text-champagne"
-                }`}
-              >
-                <item.Icon className="h-5 w-5" aria-hidden="true" />
-              </span>
-              <span className="min-w-0">
-                <span className="block text-xs font-black uppercase text-champagneInk">
-                  {item.label}
-                </span>
-                <span className="mt-1 block font-display text-xl leading-tight text-ink">
-                  {item.title}
-                </span>
-                <span className="mt-2 block text-sm leading-6 text-ink/62">
-                  {item.copy}
-                </span>
-              </span>
-            </>
-          );
-
-          return item.external ? (
-            <a
-              key={index}
-              href={item.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="yukako-lift flex min-h-36 gap-4 border-l-4 border-champagne bg-white p-5 hover:bg-white sm:min-h-40"
-            >
-              {content}
-            </a>
-          ) : (
-            <a
-              key={index}
-              href={item.href}
-              className="yukako-lift flex min-h-36 gap-4 border-l-4 border-champagne bg-white p-5 hover:bg-white sm:min-h-40"
-            >
-              {content}
-            </a>
-          );
-        })}
-      </div>
-      <div className="mx-auto mt-5 grid max-w-7xl gap-3 lg:grid-cols-3">
-        {actionGroups.map((item) => {
-          const content = (
-            <>
-              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-champagne/45 bg-porcelain text-champagne">
-                <item.Icon className="h-4 w-4" aria-hidden="true" />
-              </span>
-              <span>
-                <span className="block text-[11px] font-black uppercase tracking-[0.14em] text-champagneInk">
-                  {item.label}
-                </span>
-                <span className="mt-1 block font-display text-xl leading-tight text-ink">
-                  {item.title}
-                </span>
-                <span className="mt-2 block text-sm leading-6 text-ink/62">
-                  {item.copy}
-                </span>
-              </span>
-            </>
-          );
-
-          return item.external ? (
-            <a
-              key={item.label}
-              href={item.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="yukako-card yukako-card-interactive flex gap-4 border-rosefog/20 bg-white p-5"
-            >
-              {content}
-            </a>
-          ) : (
-            <a
-              key={item.label}
-              href={item.href}
-              className="yukako-card yukako-card-interactive flex gap-4 border-rosefog/20 bg-white p-5"
-            >
-              {content}
-            </a>
-          );
-        })}
+        <div className="grid gap-3 sm:grid-cols-3">
+          {actions.map((action) => {
+            const className = "yukako-card yukako-lift flex min-w-0 items-center gap-3 border-rosefog/25 bg-white p-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-champagne";
+            const content = <><span className="grid h-10 w-10 shrink-0 place-items-center border border-champagne/45 bg-porcelain text-champagne"><action.Icon className="h-5 w-5" aria-hidden="true" /></span><span className="min-w-0 flex-1"><span className="block text-[11px] font-black uppercase tracking-wide text-champagneInk">{action.label}</span><span className="mt-1 block truncate font-bold text-ink">{action.title}</span></span><ArrowUpRight className="h-4 w-4 shrink-0 text-champagne" aria-hidden="true" /></>;
+            return action.external ? <a key={action.label} href={action.href} target="_blank" rel="noopener noreferrer" className={className} onClick={() => action.track && trackPortalEvent(action.track, { placement: "action_strip" })}>{content}</a> : <a key={action.label} href={action.href} className={className}>{content}</a>;
+          })}
+        </div>
       </div>
     </section>
   );

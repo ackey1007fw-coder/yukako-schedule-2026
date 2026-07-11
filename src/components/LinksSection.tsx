@@ -1,6 +1,7 @@
 import { Link2, MessageCircle, Video } from "lucide-react";
 import type { SocialLink } from "../types";
 import { ActHeader } from "./ActHeader";
+import { trackPortalEvent } from "../lib/analytics";
 
 type LinksSectionProps = {
   socialLinks: SocialLink[];
@@ -26,6 +27,7 @@ export function LinksSection({ socialLinks, mediaLinks }: LinksSectionProps) {
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackPortalEvent("sns_click", { kind: link.kind, placement: "links_section" })}
                 className="yukako-card yukako-lift group flex min-h-32 items-start gap-4 border-rosefog/25 bg-porcelain p-5 hover:border-champagne hover:bg-white"
               >
                 <span className="grid h-11 w-11 shrink-0 place-items-center border border-champagne/50 bg-white text-champagne">

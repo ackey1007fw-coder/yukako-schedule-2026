@@ -6,7 +6,7 @@ import type { SocialLink } from "../types";
 
 type FooterProps = {
   socialLinks: SocialLink[];
-  source?: "fallback" | "sheets";
+  source?: "fallback" | "cache" | "sheets";
   updatedAt?: string;
 };
 
@@ -30,7 +30,7 @@ export function Footer({ socialLinks, source, updatedAt }: FooterProps) {
             </p>
             <p className="mt-4 text-xs text-white/45">
               掲載情報更新：{displayUpdatedAt}
-              （データ: {source === "sheets" ? "Google Sheets" : "内蔵データ"}）
+              （データ: {source === "sheets" ? "Google Sheets" : source === "cache" ? "保存済みデータ" : "内蔵データ"}）
             </p>
           </div>
 

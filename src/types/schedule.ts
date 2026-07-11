@@ -47,5 +47,5 @@ export type ScheduleData = {
   socialLinks: SocialLink[];
   mediaLinks: SocialLink[];
   updatedAt?: string;
-  source: "fallback" | "sheets";
+  source: "fallback" | "cache" | "sheets";
 };

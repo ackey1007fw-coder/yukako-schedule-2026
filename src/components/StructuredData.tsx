@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import { events } from "../data/events";
 import { searchFaqs } from "../data/searchFaq";
+import type { ScheduleEvent } from "../types";
 
 // events.ts の内容を schema.org Event の構造化データ(JSON-LD)として
 // 実行時に <head> へ出力する。データを足すだけで検索向けにも反映される。
@@ -11,7 +11,7 @@ const SCRIPT_ID = "yukako-events-jsonld";
 const toAbsolute = (path: string) =>
   path.startsWith("http") ? path : `${BASE}${path}`;
 
-export function StructuredData() {
+export function StructuredData({ events }: { events: ScheduleEvent[] }) {
   useEffect(() => {
     const graph = events.map((event) => {
       const node: Record<string, unknown> = {
@@ -62,7 +62,7 @@ export function StructuredData() {
     return () => {
       document.getElementById(SCRIPT_ID)?.remove();
     };
-  }, []);
+  }, [events]);
 
   return null;
 }
