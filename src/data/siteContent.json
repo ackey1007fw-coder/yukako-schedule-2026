@@ -1,0 +1,22 @@
+{
+  "latestInstagram": {
+    "publishedAt": "2026.7.11",
+    "reelUrl": "https://www.instagram.com/reel/DaoGHTuSj2U/?igsh=NTFvYzVjdXQ2OHJy",
+    "profileUrl": "https://www.instagram.com/yoppy_777?igsh=MXdkNDZvYnVteTRndw==",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1P1coTEnC2cG2XlN9jbdwHVShoSjV-Akf/preview",
+    "title": "豪華客船 MSC Bellissimaで、6泊7日の船旅へ"
+  },
+  "seasonalOgp": {
+    "expiresAfter": "2026-07-27",
+    "image": "/images/yukako-gojet-poster.jpg",
+    "width": "1448",
+    "height": "2048",
+    "alt": "吉井優花子プロデュース公演 #ゆかJET ポスター"
+  },
+  "defaultOgp": {
+    "image": "/images/yukako-portrait.jpg",
+    "width": "1111",
+    "height": "1516",
+    "alt": "吉井優花子さんのポートレート"
+  }
+}

@@ -1,92 +1,22 @@
-import { useCallback, useEffect, useRef, useState } from "react";
-import {
-  CalendarDays,
-  CalendarHeart,
-  HeartHandshake,
-  Images,
-  MessageCircle,
-  Music2,
-  Radio,
-  Sparkles,
-  UserRound,
-  Video
-} from "lucide-react";
+import { CalendarDays, CalendarHeart, ChevronDown, HeartHandshake, MessageCircle } from "lucide-react";
 
-const items = [
-  { label: "魅力", href: "#about", id: "about", Icon: Sparkles },
-  { label: "最新動画", href: "#latest-reel", id: "latest-reel", Icon: Video },
-  { label: "公演情報", href: "#next", id: "next", Icon: CalendarHeart },
-  { label: "応援", href: "#support", id: "support", Icon: HeartHandshake },
-  { label: "予定", href: "#schedule", id: "schedule", Icon: CalendarDays },
-  { label: "これまでの歩み", href: "#highlights", id: "highlights", Icon: Sparkles },
-  { label: "お嬢様", href: "#ojosama-band", id: "ojosama-band", Icon: Music2 },
-  { label: "プロフィール", href: "#profile", id: "profile", Icon: UserRound },
-  { label: "写真", href: "#gallery", id: "gallery", Icon: Images },
-  { label: "配信", href: "#showroom", id: "showroom", Icon: Radio },
-  { label: "SNS", href: "#links", id: "links", Icon: MessageCircle }
+const mainItems = [
+  { label: "今日", href: "#today", Icon: CalendarDays }, { label: "公演", href: "#next", Icon: CalendarHeart },
+  { label: "予定", href: "#schedule", Icon: CalendarDays }, { label: "応援", href: "#support", Icon: HeartHandshake },
+  { label: "SNS", href: "#links", Icon: MessageCircle }
 ];
-
+const moreItems = [
+  { label: "これまでの歩み", href: "#highlights" }, { label: "その他の出演", href: "#ojosama-band" },
+  { label: "プロフィール", href: "#profile" }, { label: "秋田とのつながり", href: "#akita-roots" },
+  { label: "写真", href: "#gallery" }, { label: "SHOWROOM", href: "#showroom" }
+];
 export function QuickNav() {
-  const [active, setActive] = useState("");
-  const scrollRef = useRef<HTMLDivElement>(null);
-
-  const scrollActiveIntoView = useCallback((id: string) => {
-    const container = scrollRef.current;
-    if (!container) return;
-    const link = container.querySelector(`[data-nav-id="${id}"]`) as HTMLElement | null;
-    if (!link) return;
-    const left = link.offsetLeft - container.offsetWidth / 2 + link.offsetWidth / 2;
-    container.scrollTo({ left, behavior: "smooth" });
-  }, []);
-
-  useEffect(() => {
-    const ids = items.map((item) => item.id);
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
-        if (visible.length > 0) {
-          const id = visible[0].target.id;
-          setActive(id);
-          scrollActiveIntoView(id);
-        }
-      },
-      { rootMargin: "-100px 0px -40% 0px", threshold: 0 },
-    );
-
-    ids.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
-
-    return () => observer.disconnect();
-  }, [scrollActiveIntoView]);
-
-  return (
-    <nav
-      aria-label="ページ内メニュー"
-      className="sticky top-16 z-40 border-b border-rosefog/20 bg-white/92 shadow-sm backdrop-blur-xl lg:hidden"
-    >
-      <div ref={scrollRef} className="quick-nav-scroll mx-auto max-w-7xl overflow-x-auto px-4 py-1.5 sm:px-6 lg:px-8">
-        <div className="flex min-w-max items-center gap-1.5">
-          {items.map(({ label, href, id, Icon }) => (
-            <a
-              key={href}
-              href={href}
-              data-nav-id={id}
-              className={`quick-nav-link inline-flex min-h-10 items-center gap-2 border px-3 py-1.5 text-xs font-bold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-champagne sm:text-sm ${
-                active === id
-                  ? "border-champagne/60 bg-white text-champagneInk"
-                  : "border-rosefog/25 bg-porcelain text-ink/72 hover:border-champagne/60 hover:bg-white hover:text-ink"
-              }`}
-            >
-              <Icon className="h-4 w-4 text-champagne" aria-hidden="true" />
-              {label}
-            </a>
-          ))}
-        </div>
-      </div>
-    </nav>
-  );
+  return <nav aria-label="ページ内メニュー" className="sticky top-16 z-40 border-b border-rosefog/20 bg-white/95 shadow-sm backdrop-blur-xl lg:hidden">
+    <div className="mx-auto grid max-w-2xl grid-cols-6 gap-1 px-2 py-1.5">
+      {mainItems.map(({ label, href, Icon }) => <a key={href} href={href} className="flex min-h-11 min-w-0 flex-col items-center justify-center gap-0.5 text-[10px] font-bold text-ink/72 focus-visible:outline focus-visible:outline-2 focus-visible:outline-champagne min-[380px]:text-xs"><Icon className="h-4 w-4 text-champagne" aria-hidden="true" />{label}</a>)}
+      <details className="group relative"><summary className="flex min-h-11 cursor-pointer list-none flex-col items-center justify-center gap-0.5 text-[10px] font-bold text-ink/72 marker:hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-champagne min-[380px]:text-xs"><ChevronDown className="h-4 w-4 text-champagne transition group-open:rotate-180 motion-reduce:transition-none" aria-hidden="true" />もっと</summary>
+        <div className="absolute right-0 top-full mt-2 grid w-48 border border-rosefog/25 bg-white p-2 shadow-paper">{moreItems.map((item) => <a key={item.href} href={item.href} className="px-3 py-2 text-sm font-bold text-ink/72 hover:bg-porcelain focus-visible:outline focus-visible:outline-2 focus-visible:outline-champagne">{item.label}</a>)}</div>
+      </details>
+    </div>
+  </nav>;
 }

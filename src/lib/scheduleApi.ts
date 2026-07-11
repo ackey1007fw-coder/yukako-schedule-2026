@@ -10,6 +10,8 @@ import type {
 } from "../types/schedule";
 
 const API_URL = import.meta.env.VITE_SCHEDULE_API_URL as string | undefined;
+const CACHE_KEY = "yukako-portal-schedule-v1";
+const FETCH_TIMEOUT_MS = 8000;
 
 const categoryFallback: Record<string, EventCategory> = {
   special: "birthday",
@@ -31,20 +33,51 @@ const socialKinds = new Set<SocialLink["kind"]>([
 ]);
 
 export async function fetchSchedule(): Promise<ScheduleData> {
-  if (!API_URL) return fallbackSchedule();
+  if (!API_URL) return getCachedSchedule() ?? fallbackSchedule();
+
+  const controller = new AbortController();
+  const timeout = window.setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
 
   try {
-    const response = await fetch(API_URL, { cache: "no-store" });
+    const response = await fetch(API_URL, { cache: "no-store", signal: controller.signal });
 
     if (!response.ok) {
       throw new Error(`Schedule API returned ${response.status}`);
     }
 
     const payload = (await response.json()) as ScheduleApiResponse;
-    return normalizeSchedule(payload);
+    const schedule = normalizeSchedule(payload);
+    storeSchedule(schedule);
+    return schedule;
   } catch (error) {
     console.error("Failed to fetch schedule data", error);
-    return fallbackSchedule();
+    return getCachedSchedule() ?? fallbackSchedule();
+  } finally {
+    window.clearTimeout(timeout);
+  }
+}
+
+export function getInitialSchedule(): ScheduleData {
+  return getCachedSchedule() ?? fallbackSchedule();
+}
+
+function getCachedSchedule(): ScheduleData | null {
+  try {
+    const raw = window.localStorage.getItem(CACHE_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw) as ScheduleData;
+    if (!Array.isArray(parsed.events) || !Array.isArray(parsed.socialLinks) || !Array.isArray(parsed.mediaLinks)) return null;
+    return { ...parsed, source: "cache" };
+  } catch {
+    return null;
+  }
+}
+
+function storeSchedule(schedule: ScheduleData) {
+  try {
+    window.localStorage.setItem(CACHE_KEY, JSON.stringify(schedule));
+  } catch {
+    // Storage can be unavailable in private browsing. The live response still renders.
   }
 }
 

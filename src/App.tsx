@@ -1,18 +1,16 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { Analytics } from "@vercel/analytics/react";
 import { ActionStrip } from "./components/ActionStrip";
 import { AkitaRootsSection } from "./components/AkitaRootsSection";
 import { Footer } from "./components/Footer";
-import { GojetCountdownBanner } from "./components/GojetCountdownBanner";
 import { Hero } from "./components/Hero";
 import { HighlightsSection } from "./components/HighlightsSection";
 import { LatestInstagramSection } from "./components/LatestInstagramSection";
 import { LinksSection } from "./components/LinksSection";
 import { NowProducingSection } from "./components/NowProducingSection";
-import { NewsBar } from "./components/NewsBar";
 import { PhotoGallerySection } from "./components/PhotoGallerySection";
 import { OjosamaBandSection } from "./components/OjosamaBandSection";
-import { PortalIntroSection } from "./components/PortalIntroSection";
+import { PriorityBanner } from "./components/PriorityBanner";
 import { QuickNav } from "./components/QuickNav";
 import { ScrollToTop } from "./components/ScrollToTop";
 import { SectionReveal } from "./components/SectionReveal";
@@ -24,18 +22,18 @@ import { ShowroomSection } from "./components/ShowroomSection";
 import { SiteHeader } from "./components/SiteHeader";
 import { SupportersSection } from "./components/SupportersSection";
 import { StructuredData } from "./components/StructuredData";
-import { LiveBanner } from "./components/LiveBanner";
+import { TodayNextPanel } from "./components/TodayNextPanel";
 import {
   getMonthKeysFromEvents,
   isEventPast,
   sortEventsAsc,
   sortEventsDesc
 } from "./lib/date";
-import { fetchSchedule } from "./lib/scheduleApi";
+import { fetchSchedule, getInitialSchedule } from "./lib/scheduleApi";
 import type { ScheduleData } from "./types/schedule";
 
 function App() {
-  const [schedule, setSchedule] = useState<ScheduleData | null>(null);
+  const [schedule, setSchedule] = useState<ScheduleData>(() => getInitialSchedule());
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -52,27 +50,6 @@ function App() {
     };
   }, []);
 
-  if (!schedule) {
-    return (
-      <div className="grid min-h-screen place-items-center bg-porcelain px-6 text-center text-ink">
-        <div className="flex flex-col items-center gap-5">
-          <div className="yukako-skeleton h-16 w-16 rounded-full" />
-          <div>
-            <p className="mb-3 text-xs font-bold uppercase tracking-[0.18em] text-champagne">
-              Yoshii Yukako Portal
-            </p>
-            <p className="font-display text-3xl">スケジュールを準備中です</p>
-          </div>
-          <div className="mt-2 flex gap-3">
-            <div className="yukako-skeleton h-3 w-20 rounded" />
-            <div className="yukako-skeleton h-3 w-16 rounded" />
-            <div className="yukako-skeleton h-3 w-24 rounded" />
-          </div>
-        </div>
-      </div>
-    );
-  }
-
   const { events, socialLinks, mediaLinks, source, updatedAt } = schedule;
   const now = new Date();
   const upcomingEvents = sortEventsAsc(
@@ -82,15 +59,15 @@ function App() {
     events.filter((event) => isEventPast(event, now)),
   );
   const nextEvent = upcomingEvents[0];
+  const todayKey = new Intl.DateTimeFormat("sv-SE", { timeZone: "Asia/Tokyo", year: "numeric", month: "2-digit", day: "2-digit" }).format(now);
+  const todayEvents = upcomingEvents.filter((event) => (event.dates?.length ? event.dates : [event.startAt.slice(0, 10), (event.endAt ?? event.startAt).slice(0, 10)]).includes(todayKey));
   const gojetEvent = events.find((event) => event.id === "yukajet-gojet-2026-07");
   const monthKeys = getMonthKeysFromEvents(events);
 
   return (
     <div className="min-h-screen bg-porcelain text-ink">
       <SiteHeader socialLinks={socialLinks} />
-      <LiveBanner />
-      <NewsBar />
-      <GojetCountdownBanner />
+      <PriorityBanner />
       <QuickNav />
       <main>
         {isLoading && (
@@ -99,22 +76,9 @@ function App() {
           </div>
         )}
         <Hero nextEvent={nextEvent} socialLinks={socialLinks} />
-        <ActionStrip
-          nextEvent={nextEvent}
-          upcomingEvents={upcomingEvents}
-          socialLinks={socialLinks}
-        />
-        <SectionReveal>
-          <PortalIntroSection />
-        </SectionReveal>
+        <TodayNextPanel todayEvents={todayEvents} nextEvent={nextEvent} />
         <SectionReveal>
           <NowProducingSection event={gojetEvent ?? nextEvent} />
-        </SectionReveal>
-        <SectionReveal>
-          <LatestInstagramSection />
-        </SectionReveal>
-        <SectionReveal>
-          <SupportersSection />
         </SectionReveal>
         <SectionReveal>
           <ScheduleSection
@@ -123,6 +87,22 @@ function App() {
             allEvents={events}
             monthKeys={monthKeys}
           />
+        </SectionReveal>
+        <SectionReveal>
+          <LatestInstagramSection />
+        </SectionReveal>
+        <ActionStrip
+          nextEvent={nextEvent}
+          upcomingEvents={upcomingEvents}
+          socialLinks={socialLinks}
+        />
+        {source !== "sheets" && (
+          <p className="bg-porcelain px-4 pb-4 text-center text-xs font-semibold text-ink/55" role="status">
+            {source === "cache" ? "保存済みの予定を表示し、最新情報を確認しています。" : "現在は内蔵の予備データを表示しています。最新情報は各詳細リンクでもご確認ください。"}
+          </p>
+        )}
+        <SectionReveal>
+          <SupportersSection />
         </SectionReveal>
         <SectionReveal>
           <HighlightsSection />
@@ -156,7 +136,7 @@ function App() {
         updatedAt={updatedAt}
       />
       <ScrollToTop />
-      <StructuredData />
+      <StructuredData events={events} />
       <Analytics />
     </div>
   );

@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import type { ScheduleEvent } from "../types";
+import type { EventCategory, ScheduleEvent } from "../types";
 import { CalendarClock, ChevronDown, Search, SlidersHorizontal, Star } from "lucide-react";
 import { ActHeader } from "./ActHeader";
 import { CalendarView } from "./CalendarView";
@@ -12,12 +12,16 @@ type ScheduleSectionProps = {
   monthKeys: string[];
 };
 
-type ScheduleTab = "today" | "week" | "month" | "archive";
-type CategoryFilter = "all" | "stage" | "award" | "tv" | "produce";
+type ScheduleTab = "today" | "week" | "month" | "next" | "archive";
+type CategoryFilter = "all" | EventCategory | "award" | "produce";
 
 const categoryFilterLabels: Record<CategoryFilter, string> = {
   all: "すべて",
   stage: "舞台",
+  radio: "ラジオ",
+  event: "イベント",
+  web: "WEB",
+  birthday: "特別",
   award: "受賞・ミスコン",
   tv: "TV",
   produce: "プロデュース"
@@ -53,12 +57,8 @@ const isProducedEvent = (event: ScheduleEvent) =>
 const matchesCategoryFilter = (event: ScheduleEvent, filter: CategoryFilter) => {
   if (filter === "all") return true;
   if (filter === "produce") return isProducedEvent(event);
-  if (filter === "award") {
-    const haystack = [event.title, event.shortTitle, event.summary, ...event.badges].join(" ");
-    return event.category === "event" || /受賞|ミスコン|Miss|MISS/.test(haystack);
-  }
-  if (filter === "tv") return event.category === "tv";
-  return event.category === "stage";
+  if (filter === "award") return event.badges.includes("受賞") || event.badges.includes("ミスコン");
+  return event.category === filter;
 };
 
 export function ScheduleSection({
@@ -67,9 +67,9 @@ export function ScheduleSection({
   allEvents,
   monthKeys
 }: ScheduleSectionProps) {
-  const [activeTab, setActiveTab] = useState<ScheduleTab>("today");
   const [categoryFilter, setCategoryFilter] = useState<CategoryFilter>("all");
   const [query, setQuery] = useState("");
+  const [filtersOpen, setFiltersOpen] = useState(false);
   const nextId = upcomingEvents[0]?.id;
   const todayKey = tokyoDateKey(new Date());
   const weekEndKey = tokyoDateKey(addDays(new Date(), 6));
@@ -87,6 +87,14 @@ export function ScheduleSection({
     () => upcomingEvents.filter((event) => eventDateKeys(event).some((key) => key.startsWith(monthKey))),
     [monthKey, upcomingEvents],
   );
+  const initialTab: ScheduleTab = todayEvents.length
+    ? "today"
+    : weekEvents.length
+      ? "week"
+      : monthEvents.length
+        ? "month"
+        : "next";
+  const [activeTab, setActiveTab] = useState<ScheduleTab>(initialTab);
   const featuredEvents = useMemo(
     () =>
       upcomingEvents
@@ -99,6 +107,7 @@ export function ScheduleSection({
     { id: "today", label: "今日", count: todayEvents.length, events: todayEvents },
     { id: "week", label: "今週", count: weekEvents.length, events: weekEvents },
     { id: "month", label: "今月", count: monthEvents.length, events: monthEvents },
+    { id: "next", label: "次回", count: upcomingEvents.length ? 1 : 0, events: upcomingEvents.slice(0, 1) },
     { id: "archive", label: "終了した予定", count: pastEvents.length, events: pastEvents }
   ];
   const rawActiveEvents = tabs.find((tab) => tab.id === activeTab)?.events ?? [];
@@ -125,7 +134,13 @@ export function ScheduleSection({
     [categoryFilter, normalizedQuery, rawActiveEvents],
   );
   const categoryOptions = useMemo(() => {
-    const filters: CategoryFilter[] = ["all", "stage", "award", "tv", "produce"];
+    const eventCategories = Array.from(new Set(rawActiveEvents.map((event) => event.category)));
+    const filters: CategoryFilter[] = [
+      "all",
+      ...eventCategories,
+      ...(rawActiveEvents.some((event) => matchesCategoryFilter(event, "award")) ? ["award" as const] : []),
+      ...(rawActiveEvents.some((event) => matchesCategoryFilter(event, "produce")) ? ["produce" as const] : [])
+    ];
     return filters.map((filter) => ({
       id: filter,
       label: categoryFilterLabels[filter],
@@ -194,7 +209,17 @@ export function ScheduleSection({
             ))}
           </div>
 
-          <div className="mb-5 grid gap-3 border-y border-rosefog/15 py-4 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
+          <button
+            type="button"
+            onClick={() => setFiltersOpen((open) => !open)}
+            aria-expanded={filtersOpen}
+            aria-controls="schedule-filters"
+            className="mb-3 flex min-h-11 w-full items-center justify-between border border-rosefog/25 bg-porcelain px-4 py-2 text-sm font-bold text-ink lg:hidden"
+          >
+            <span className="inline-flex items-center gap-2"><SlidersHorizontal className="h-4 w-4 text-champagne" aria-hidden="true" />検索・絞り込み</span>
+            <ChevronDown className={`h-4 w-4 transition motion-reduce:transition-none ${filtersOpen ? "rotate-180" : ""}`} aria-hidden="true" />
+          </button>
+          <div id="schedule-filters" className={`mb-5 gap-3 border-y border-rosefog/15 py-4 lg:grid lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center ${filtersOpen ? "grid" : "hidden"}`}>
             <label className="relative block">
               <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-champagne" aria-hidden="true" />
               <input

@@ -1,9 +1,8 @@
 import { SectionHeader } from "./SectionHeader";
+import siteContent from "../data/siteContent.json";
+import { trackPortalEvent } from "../lib/analytics";
 
-const reelUrl = "https://www.instagram.com/reel/DaoGHTuSj2U/?igsh=NTFvYzVjdXQ2OHJy";
-const profileUrl = "https://www.instagram.com/yoppy_777?igsh=MXdkNDZvYnVteTRndw==";
-const drivePreviewUrl =
-  "https://drive.google.com/file/d/1P1coTEnC2cG2XlN9jbdwHVShoSjV-Akf/preview";
+const { reelUrl, profileUrl, drivePreviewUrl, publishedAt, title } = siteContent.latestInstagram;
 
 export function LatestInstagramSection() {
   return (
@@ -11,7 +10,7 @@ export function LatestInstagramSection() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeader
           kicker="Latest Instagram Reel"
-          title="豪華客船 MSC Bellissimaで、6泊7日の船旅へ"
+          title={title}
           copy="吉井優花子さんのInstagramに、クルーズ旅行の新しいリール動画が公開されました。船上で過ごした充実の時間と、大切な人へ贈った特別な旅の思い出をご覧ください。"
         />
 
@@ -36,7 +35,7 @@ export function LatestInstagramSection() {
               <span className="border border-rosefog/35 bg-[#fff1f6] px-3 py-1.5 text-[#8d4260]">
                 PR
               </span>
-              <span className="text-ink/45">2026.7.11</span>
+              <span className="text-ink/45">{publishedAt}</span>
             </div>
 
             <p className="mt-6 text-sm font-bold text-champagneInk">MSC Bellissima</p>
@@ -56,6 +55,7 @@ export function LatestInstagramSection() {
                 href={reelUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackPortalEvent("sns_click", { kind: "instagram", placement: "latest_instagram" })}
                 className="yukako-button yukako-button-gold min-h-12 px-5 py-3 text-sm"
               >
                 Instagramで動画を見る
@@ -64,6 +64,7 @@ export function LatestInstagramSection() {
                 href={profileUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackPortalEvent("sns_click", { kind: "instagram", placement: "latest_instagram_profile" })}
                 className="yukako-button min-h-12 border border-champagne bg-white px-5 py-3 text-sm font-bold text-ink transition hover:bg-porcelain"
               >
                 @yoppy_777 を見る
