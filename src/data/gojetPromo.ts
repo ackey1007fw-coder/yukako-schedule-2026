@@ -43,6 +43,21 @@ export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
     ctaLabel: "優花子のポストを見る"
   },
   {
+    date: "2026.7.10",
+    label: "芝居稽古初日",
+    title: "まずはC班・B班",
+    body:
+      "歌ダンス稽古を終え、芝居稽古がスタート。「個性ありありだと再感しています🤭byプロデューサー」——班ごとに雰囲気の異なるおもしろい作品をお届けします、29秒の稽古映像つき。",
+    postUrl: "https://x.com/yukako_produce/status/2075593021048193231",
+    homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+    ctaLabel: "Xで稽古動画を見る",
+    video: {
+      src: "/videos/yukajet-rehearsal-2026-07-10.mp4",
+      poster: "/images/yukako-yukajet-rehearsal-video-poster-2026-07-10.jpg",
+      label: "#ゆかJET 芝居稽古初日の様子(29秒・音声あり)"
+    }
+  },
+  {
     date: "2026.7.8",
     label: "舞台裏の告白",
     title: "毎日、撮影と編集もしてるんだ",
