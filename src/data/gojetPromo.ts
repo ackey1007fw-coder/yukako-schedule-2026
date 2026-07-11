@@ -23,6 +23,16 @@ export type GojetFeatureUpdate = {
 
 export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
   {
+    date: "2026.7.11",
+    label: "エールカード受付中",
+    title: "「最後だから」優花子デザインのエールカードを届けてほしい",
+    body:
+      "今日も#ゆかJETの稽古へ。プロデューサーに加え、B班JET・C班早紀の二役を務める優花子さんが、「最後だから」と、自らデザインしたエールカードへの応援を呼びかけています。エールカードは劇場に掲示されたあと、本人からのメッセージ付きで返送。メッセージ動画などの応援コンテンツも受付中です。",
+    postUrl: "https://x.com/mokoopy/status/2075702367643910204",
+    homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+    ctaLabel: "エールカードの投稿を見る"
+  },
+  {
     date: "2026.7.10",
     label: "本番まであと2週間",
     title: "「本当にとっても観てほしい舞台」",
