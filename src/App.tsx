@@ -3,6 +3,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { ActionStrip } from "./components/ActionStrip";
 import { AkitaRootsSection } from "./components/AkitaRootsSection";
 import { Footer } from "./components/Footer";
+import { GojetBTeamUpdate } from "./components/GojetBTeamUpdate";
 import { Hero } from "./components/Hero";
 import { HighlightsSection } from "./components/HighlightsSection";
 import { LatestInstagramSection } from "./components/LatestInstagramSection";
@@ -79,6 +80,9 @@ function App() {
         <TodayNextPanel todayEvents={todayEvents} nextEvent={nextEvent} />
         <SectionReveal>
           <NowProducingSection event={gojetEvent ?? nextEvent} />
+        </SectionReveal>
+        <SectionReveal>
+          <GojetBTeamUpdate />
         </SectionReveal>
         <SectionReveal>
           <ScheduleSection
