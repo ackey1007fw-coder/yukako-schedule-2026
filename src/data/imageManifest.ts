@@ -245,7 +245,8 @@ export const imageManifest = {
   "/images/yukako-yukajet-rehearsal-video-poster-2026-07-05.jpg": {"width":720,"height":890,"widths":[360,480,720]},
   "/images/yukako-yukajet-rehearsal-video-poster-2026-07-06.jpg": {"width":720,"height":900,"widths":[360,480,720]},
   "/images/yukako-yukajet-rehearsal-video-poster-2026-07-07.jpg": {"width":720,"height":900,"widths":[360,480,720]},
-  "/images/yukako-yukajet-rehearsal-video-poster-2026-07-08.jpg": {"width":540,"height":674,"widths":[360,480,540]}
+  "/images/yukako-yukajet-rehearsal-video-poster-2026-07-08.jpg": {"width":540,"height":674,"widths":[360,480,540]},
+  "/images/yukako-yukajet-rehearsal-video-poster-2026-07-10.jpg": {"width":1080,"height":1350,"widths":[360,480,720,960,1080]}
 } as const;
 
 export type ImageManifestPath = keyof typeof imageManifest;
