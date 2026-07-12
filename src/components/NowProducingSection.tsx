@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import {
   CalendarPlus,
+  ChevronDown,
   ChevronLeft,
   ChevronRight,
+  ChevronUp,
   Clock3,
   ExternalLink,
   Images,
@@ -26,6 +28,8 @@ import { ExternalButton } from "./ExternalButton";
 type NowProducingSectionProps = {
   event?: ScheduleEvent;
 };
+
+const INITIAL_VISIBLE_UPDATES = 2;
 
 const roles = [
   { label: "プロデュース", Icon: Sparkles },
@@ -121,6 +125,14 @@ function PromoLightbox({
 // ポスター + カウントダウン + 役割リスト + 予約CTA + 特集ギャラリーを、舞台看板風の1枚にまとめる。
 export function NowProducingSection({ event }: NowProducingSectionProps) {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const [showAllUpdates, setShowAllUpdates] = useState(false);
+  const visibleUpdates = showAllUpdates
+    ? gojetFeatureUpdates
+    : gojetFeatureUpdates.slice(0, INITIAL_VISIBLE_UPDATES);
+  const remainingUpdates = Math.max(
+    gojetFeatureUpdates.length - INITIAL_VISIBLE_UPDATES,
+    0,
+  );
 
   if (!event) {
     return (
@@ -143,7 +155,7 @@ export function NowProducingSection({ event }: NowProducingSectionProps) {
   const infoLinks = event.links.filter((link) => link.kind === "info");
 
   return (
-    <section id="next" className="scroll-mt-24 bg-ink py-16 sm:py-24">
+    <section id="next" className="scroll-mt-24 bg-ink py-8 sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <ActHeader
           act={1}
@@ -155,7 +167,7 @@ export function NowProducingSection({ event }: NowProducingSectionProps) {
 
         <article className="yukako-billboard border border-champagne/30">
           <span className="yukako-billboard-spotlight" aria-hidden="true" />
-          <div className="relative z-10 grid gap-8 p-6 sm:p-10 lg:grid-cols-[0.86fr_1.14fr] lg:p-14">
+          <div className="relative z-10 grid gap-6 p-4 sm:gap-8 sm:p-10 lg:grid-cols-[0.86fr_1.14fr] lg:p-14">
             <div className="relative overflow-hidden border border-champagne/40 bg-black/20">
               {event.image ? (
                 <img
@@ -205,11 +217,11 @@ export function NowProducingSection({ event }: NowProducingSectionProps) {
                   ))}
                 </ul>
 
-                <div className="mt-6 grid gap-3">
-                  {gojetFeatureUpdates.map((update, index) => (
+                <div id="gojet-feature-updates" className="mt-5 grid gap-3 sm:mt-6">
+                  {visibleUpdates.map((update, index) => (
                     <div
                       key={update.postUrl}
-                      className="border border-champagne/35 bg-white/[0.07] p-4 shadow-paper"
+                      className="border border-champagne/35 bg-white/[0.07] p-3 shadow-paper sm:p-4"
                     >
                       <p className="text-xs font-black uppercase tracking-[0.16em] text-champagne">
                         {index === 0 ? "New" : "Update"} ・ {update.date} ・ {update.label}
@@ -217,7 +229,7 @@ export function NowProducingSection({ event }: NowProducingSectionProps) {
                       <h4 className="mt-2 text-xl font-black leading-tight text-white">
                         {update.title}
                       </h4>
-                      <p className="mt-3 text-sm leading-7 text-white/72">
+                      <p className="mt-3 text-sm leading-6 text-white/72 sm:leading-7">
                         {update.body}
                       </p>
                       {update.video && (
@@ -255,6 +267,26 @@ export function NowProducingSection({ event }: NowProducingSectionProps) {
                     </div>
                   ))}
                 </div>
+                {remainingUpdates > 0 && (
+                  <div className="mt-4 flex justify-center">
+                    <button
+                      type="button"
+                      onClick={() => setShowAllUpdates((current) => !current)}
+                      className="yukako-button yukako-button-ghost min-h-12 px-5 py-3 text-sm"
+                      aria-expanded={showAllUpdates}
+                      aria-controls="gojet-feature-updates"
+                    >
+                      {showAllUpdates ? (
+                        <ChevronUp className="h-4 w-4 text-champagne" aria-hidden="true" />
+                      ) : (
+                        <ChevronDown className="h-4 w-4 text-champagne" aria-hidden="true" />
+                      )}
+                      {showAllUpdates
+                        ? "最新のお知らせだけ表示"
+                        : `過去の稽古場だより一覧を見る（残り${remainingUpdates}件）`}
+                    </button>
+                  </div>
+                )}
 
                 <p className="mt-6 text-base leading-8 text-white/72">{event.summary}</p>
               </div>
@@ -306,7 +338,7 @@ export function NowProducingSection({ event }: NowProducingSectionProps) {
           </div>
 
           {gojetPromoImages.length > 0 && (
-            <div className="relative z-10 border-t border-white/10 p-6 sm:p-10 lg:p-14 lg:pt-0">
+            <div className="relative z-10 border-t border-white/10 p-4 sm:p-10 lg:p-14 lg:pt-0">
               <p className="mb-4 flex items-center gap-2 text-xs font-black uppercase tracking-[0.16em] text-champagne">
                 <Images className="h-4 w-4" aria-hidden="true" />
                 #ゆかJET 特集（稽古写真・相関図・チケット案内）
