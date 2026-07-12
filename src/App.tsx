@@ -3,8 +3,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { ActionStrip } from "./components/ActionStrip";
 import { AkitaRootsSection } from "./components/AkitaRootsSection";
 import { Footer } from "./components/Footer";
-import { GojetATeamUpdate } from "./components/GojetATeamUpdate";
-import { GojetBTeamUpdate } from "./components/GojetBTeamUpdate";
+import { GojetTeamUpdate } from "./components/GojetTeamUpdate";
 import { Hero } from "./components/Hero";
 import { HighlightsSection } from "./components/HighlightsSection";
 import { LatestInstagramSection } from "./components/LatestInstagramSection";
@@ -25,6 +24,7 @@ import { SiteHeader } from "./components/SiteHeader";
 import { SupportersSection } from "./components/SupportersSection";
 import { StructuredData } from "./components/StructuredData";
 import { TodayNextPanel } from "./components/TodayNextPanel";
+import { gojetTeamUpdates } from "./data/gojetPromo";
 import {
   getMonthKeysFromEvents,
   isEventPast,
@@ -82,12 +82,11 @@ function App() {
         <SectionReveal>
           <NowProducingSection event={gojetEvent ?? nextEvent} />
         </SectionReveal>
-        <SectionReveal>
-          <GojetATeamUpdate />
-        </SectionReveal>
-        <SectionReveal>
-          <GojetBTeamUpdate />
-        </SectionReveal>
+        {gojetTeamUpdates.map((update) => (
+          <SectionReveal key={update.id}>
+            <GojetTeamUpdate update={update} />
+          </SectionReveal>
+        ))}
         <SectionReveal>
           <ScheduleSection
             upcomingEvents={upcomingEvents}
