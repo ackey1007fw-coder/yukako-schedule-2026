@@ -236,6 +236,7 @@ export function PhotoGallerySection() {
                       <img
                         {...getResponsiveImageProps(photo.src, "96px")}
                         alt=""
+                        aria-hidden="true"
                         loading="lazy"
                         decoding="async"
                         className="h-full w-full object-cover"
