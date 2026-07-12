@@ -7,6 +7,18 @@ export type NewsItem = {
 
 export const news: NewsItem[] = [
   {
+    date: "2026.7.13",
+    label: "X",
+    text: "#ゆかJET A班キャスト紹介へ「混ざりたい🥺笑」。共演しない班にも、プロデューサーとして大切に想うエールを。",
+    url: "https://x.com/mokoopy/status/2076341467841445980"
+  },
+  {
+    date: "2026.7.12",
+    label: "X",
+    text: "#ゆかJET B班キャスト紹介。「毎日撮って編集しております🥺」——大笑いの稽古場と、最後まで決まるオチも。",
+    url: "https://x.com/mokoopy/status/2076121780398563659"
+  },
+  {
     date: "2026.7.11",
     label: "Instagram",
     text: "豪華客船 MSC Bellissimaで過ごした6泊7日の船旅。母の日のプレゼントとして贈った、特別なクルーズのリール動画が公開されました。",
