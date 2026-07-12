@@ -21,6 +21,25 @@ export type GojetFeatureUpdate = {
   };
 };
 
+export type GojetTeamUpdate = {
+  id: string;
+  team: "A" | "B" | "C";
+  date: string;
+  label: string;
+  title: string;
+  quote: string;
+  body: string;
+  yukakoPostUrl: string;
+  originalPostUrl: string;
+  homepageUrl: string;
+  photo?: PromoImage;
+  video: {
+    src: string;
+    poster: string;
+    label: string;
+  };
+};
+
 export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
   {
     date: "2026.7.11",
@@ -155,6 +174,51 @@ export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
       src: "/videos/yukajet-rehearsal-2026-07-05.mp4",
       poster: "/images/yukako-yukajet-rehearsal-video-poster-2026-07-05.jpg",
       label: "#ゆかJET 歌ダンス稽古の様子(43秒・音声あり)"
+    }
+  }
+];
+
+export const gojetTeamUpdates: GojetTeamUpdate[] = [
+  {
+    id: "gojet-a-team-2026-07-13",
+    team: "A",
+    date: "2026.7.13",
+    label: "優花子からのメッセージ",
+    title: "混ざりたい🥺笑 A班への想い",
+    quote:
+      "「混ざりたい🥺笑」——共演しないA班にも、優花子さんから「プロデューサーとしてみんなのことをとっても大切に想っています」と温かいエール。芝居稽古初日を迎えたA班の紹介動画を引用しての投稿です。",
+    body:
+      "プロデュースアカウントが公開したA班キャスト紹介動画と、優花子さん自身が撮ったA班との集合セルフィーをあわせて掲載します。フレッシュでおもしろい雰囲気に注目です。",
+    yukakoPostUrl: "https://x.com/mokoopy/status/2076341467841445980",
+    originalPostUrl: "",
+    homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+    photo: {
+      src: "/images/yukako-yukajet-aban-cast-2026-07-13-selfie.jpg",
+      alt: "#ゆかJET A班キャストと集合セルフィーを撮る吉井優花子さん"
+    },
+    video: {
+      src: "/videos/yukajet-aban-cast-2026-07-13.mp4",
+      poster: "/images/yukako-yukajet-aban-cast-video-poster-2026-07-13.jpg",
+      label: "#ゆかJET A班キャスト紹介動画(2分3秒・音声あり)"
+    }
+  },
+  {
+    id: "gojet-b-team-2026-07-12",
+    team: "B",
+    date: "2026.7.12",
+    label: "優花子からのメッセージ",
+    title: "毎日撮影・編集。大笑いのB班を届けます",
+    quote:
+      "「毎日撮って編集しております🥺」「私が大爆笑すぎる」——優花子さん自身が、撮影・編集を続けながら届けているB班キャスト紹介。笑いの絶えない稽古場の空気と、最後までしっかり決まるオチにも注目です。",
+    body:
+      "GO,JET!史上初となる女性のみのB班。荒井映里乃さん、冬雪咲百夏さん、月島ほたるさん、吉井優花子さん、清水桃香さん、中城遥さんが笑顔で登場し、自己紹介から芝居・ダンス稽古まで約2分で紹介します。優花子さんは来場・拡散に加え、エールカードやメッセージ動画などの応援コンテンツも呼びかけています。",
+    yukakoPostUrl: "https://x.com/mokoopy/status/2076121780398563659",
+    originalPostUrl: "https://x.com/yukako_produce/status/2075952839856386054",
+    homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+    video: {
+      src: "/videos/yukajet-bban-cast-2026-07-12.mp4",
+      poster: "/images/yukako-yukajet-bban-cast-video-poster-2026-07-12.jpg",
+      label: "#ゆかJET B班キャスト紹介動画(約2分・音声あり)"
     }
   }
 ];
