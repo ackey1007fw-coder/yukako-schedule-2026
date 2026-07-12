@@ -56,10 +56,10 @@ export function PriorityBanner() {
     const todayTime = scheduled?.time ?? todayTimeFromNextShow(nextShow);
     const gojet = getGojetStatus(today);
     const items: Announcement[] = [];
-    if (isLive) items.push({ id: "live", label: "配信中", text: "ただいまSHOWROOMで配信中。いますぐ見る", href: profile.showroom.url, tone: "bg-[#e0245e] text-white", Icon: Radio, tracking: "stream_click" });
-    if (todayTime) items.push({ id: "stream", label: "今日の配信", text: `${todayTime}〜 予定${scheduled?.note ? `・${scheduled.note}` : ""}`, href: profile.showroom.url, tone: "bg-[#fbeef0] text-ink", Icon: CalendarClock, tracking: "stream_click" });
-    if (gojet.phase === "today") items.push({ id: "gojet-today", label: "本日の #ゆかJET", text: gojet.day.performances.map((show) => `${show.time}〜 ${show.team}`).join(" / "), href: gojetTicketUrl, tone: "bg-gradient-to-r from-[#fbeef0] to-[#faf3e2] text-ink", Icon: PartyPopper, tracking: "ticket_click" });
-    if (gojet.phase === "before") items.push({ id: "gojet-countdown", label: "#ゆかJET", text: `公演まであと${gojet.daysLeft}日・チケット／配信を確認`, href: gojetTicketUrl, tone: "bg-gradient-to-r from-[#fbeef0] to-[#faf3e2] text-ink", Icon: Ticket, tracking: "ticket_click" });
+    if (isLive) items.push({ id: "live", label: "配信中", text: "ただいまSHOWROOMで配信中。いますぐ見る", href: profile.showroom.url, tone: "bg-rosefog text-white", Icon: Radio, tracking: "stream_click" });
+    if (todayTime) items.push({ id: "stream", label: "今日の配信", text: `${todayTime}〜 予定${scheduled?.note ? `・${scheduled.note}` : ""}`, href: profile.showroom.url, tone: "bg-porcelain text-ink", Icon: CalendarClock, tracking: "stream_click" });
+    if (gojet.phase === "today") items.push({ id: "gojet-today", label: "本日の #ゆかJET", text: gojet.day.performances.map((show) => `${show.time}〜 ${show.team}`).join(" / "), href: gojetTicketUrl, tone: "bg-gradient-to-r from-porcelain to-champagne/15 text-ink", Icon: PartyPopper, tracking: "ticket_click" });
+    if (gojet.phase === "before") items.push({ id: "gojet-countdown", label: "#ゆかJET", text: `公演まであと${gojet.daysLeft}日・チケット／配信を確認`, href: gojetTicketUrl, tone: "bg-gradient-to-r from-porcelain to-champagne/15 text-ink", Icon: Ticket, tracking: "ticket_click" });
     if (news[0]) items.push({ id: "news", label: "最新ニュース", text: `${news[0].date}　${news[0].text}`, href: news[0].url, tone: "bg-white text-ink", Icon: Megaphone, tracking: "sns_click" });
     return items;
   }, [isLive, nextShow]);
@@ -73,13 +73,13 @@ export function PriorityBanner() {
       className={`flex min-w-0 items-center gap-3 ${compact ? "border-t border-rosefog/15 px-4 py-3 text-sm" : `px-4 py-2.5 sm:px-6 ${item.tone}`}`}>
       <item.Icon className="h-4 w-4 shrink-0" aria-hidden="true" />
       <span className="shrink-0 text-xs font-black uppercase tracking-wide">{item.label}</span>
-      <span className="min-w-0 flex-1 truncate font-bold">{item.text}</span>
+      <span className={`min-w-0 flex-1 font-bold leading-5 ${compact ? "" : "sm:truncate"}`}>{item.text}</span>
       <ArrowUpRight className="h-4 w-4 shrink-0" aria-hidden="true" />
     </a>
   );
 
   return (
-    <aside aria-label="優先のお知らせ" className="border-b border-champagne/30">
+    <aside aria-label="優先のお知らせ" aria-live="polite" className="border-b border-champagne/30">
       <div className={primary.tone}><div className="mx-auto max-w-7xl">{renderLink(primary)}</div></div>
       {rest.length > 0 && (
         <details className="group bg-porcelain">
