@@ -207,6 +207,8 @@ export const imageManifest = {
   "/images/ojosama-band-2026/yukako-ojosama-band-2026-22.jpg": {"width":1016,"height":1536,"widths":[360,480,720,960,1016]},
   "/images/ojosama-band-2026/yukako-ojosama-band-2026-23.jpg": {"width":1079,"height":858,"widths":[360,480,720,960,1079]},
   "/images/ojosama-band-2026/yukako-ojosama-band-2026-24.jpg": {"width":528,"height":680,"widths":[360,480,528]},
+  "/images/ryoma-kun-2026/yukako-ryoma-kun-2026-cast-schedule.jpg": {"width":904,"height":1280,"widths":[360,480,720,904]},
+  "/images/ryoma-kun-2026/yukako-ryoma-kun-2026-main-visual.jpg": {"width":853,"height":1280,"widths":[360,480,720,853]},
   "/images/showroom-avatars/yukako-showroom-avatar-01.jpg": {"width":512,"height":512,"widths":[360,480,512]},
   "/images/showroom-avatars/yukako-showroom-avatar-02.jpg": {"width":512,"height":512,"widths":[360,480,512]},
   "/images/showroom-avatars/yukako-showroom-avatar-03.jpg": {"width":512,"height":512,"widths":[360,480,512]},

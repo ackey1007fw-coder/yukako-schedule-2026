@@ -44,6 +44,10 @@ export function HighlightsSection() {
                 <div className="space-y-6">
                   {items.map((item) => {
                     const links = item.links ?? (item.link ? [item.link] : []);
+                    const images =
+                      item.images ??
+                      (item.image ? [{ src: item.image, alt: item.title }] : []);
+                    const hasImageGallery = images.length > 1;
                     const isProduce = isProduceItem(item.title, item.description);
 
                     return (
@@ -52,18 +56,42 @@ export function HighlightsSection() {
                           className="absolute -left-[34px] top-2 h-2 w-2 rounded-full bg-rosefog sm:-left-[44px]"
                           aria-hidden="true"
                         />
-                        <div className="yukako-card yukako-card-interactive flex flex-col gap-4 border-rosefog/20 bg-white p-5 sm:flex-row">
-                          {item.image && (
-                            <div className="flex w-full shrink-0 items-center justify-center border border-champagne/30 bg-porcelain sm:w-32">
-                              <img
-                                {...getResponsiveImageProps(
-                                  item.image,
-                                  "(min-width: 640px) 160px, 100vw",
-                                )}
-                                alt={item.title}
-                                loading="lazy"
-                                className="block h-auto max-h-none w-full object-contain"
-                              />
+                        <div
+                          className={`yukako-card yukako-card-interactive flex flex-col gap-4 border-rosefog/20 bg-white p-5 ${
+                            hasImageGallery ? "" : "sm:flex-row"
+                          }`}
+                        >
+                          {images.length > 0 && (
+                            <div
+                              className={
+                                hasImageGallery
+                                  ? "grid w-full gap-3 sm:grid-cols-2"
+                                  : "flex w-full shrink-0 items-center justify-center border border-champagne/30 bg-porcelain sm:w-32"
+                              }
+                            >
+                              {images.map((image) => (
+                                <figure
+                                  key={image.src}
+                                  className={
+                                    hasImageGallery
+                                      ? "overflow-hidden border border-champagne/30 bg-porcelain"
+                                      : "contents"
+                                  }
+                                >
+                                  <img
+                                    {...getResponsiveImageProps(
+                                      image.src,
+                                      hasImageGallery
+                                        ? "(min-width: 640px) 40vw, 100vw"
+                                        : "(min-width: 640px) 160px, 100vw",
+                                    )}
+                                    alt={image.alt}
+                                    loading="lazy"
+                                    decoding="async"
+                                    className="block h-auto max-h-none w-full object-contain"
+                                  />
+                                </figure>
+                              ))}
                             </div>
                           )}
                           <div className="min-w-0 flex-1">

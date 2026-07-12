@@ -6,6 +6,7 @@ export type Highlight = {
   title: string;
   description: string;
   image?: string;
+  images?: { src: string; alt: string }[];
   link?: { label: string; url: string };
   links?: { label: string; url: string }[];
 };
@@ -41,7 +42,17 @@ export const highlights: Highlight[] = [
     category: "舞台",
     title: "『かわええのう、龍馬くん』",
     description:
-      "2026年4月7日〜12日、A-root赤坂にて上演。B班で坂本龍馬役、C班でおりょう役の二役を演じ、アソシエイトプロデューサーも務めました。"
+      "2026年4月7日〜12日、A-root赤坂にて上演。B班で坂本龍馬役、C班でおりょう役の二役を演じ、アソシエイトプロデューサーも務めました。",
+    images: [
+      {
+        src: "/images/ryoma-kun-2026/yukako-ryoma-kun-2026-main-visual.jpg",
+        alt: "舞台『かわええのう、龍馬くん』メインビジュアル"
+      },
+      {
+        src: "/images/ryoma-kun-2026/yukako-ryoma-kun-2026-cast-schedule.jpg",
+        alt: "舞台『かわええのう、龍馬くん』あらすじ・出演者・公演日程"
+      }
+    ]
   },
   {
     id: "littlebraver-tasogare-2025-12",
