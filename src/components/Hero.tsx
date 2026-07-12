@@ -118,7 +118,7 @@ export function Hero({ nextEvent, socialLinks }: HeroProps) {
               )}
               alt={profile.name}
               loading="eager"
-              fetchPriority="high"
+              {...{ fetchpriority: "high" }}
               className="block w-full object-cover object-[50%_18%] lg:absolute lg:inset-2 lg:h-[calc(100%-1rem)] lg:w-[calc(100%-1rem)]"
             />
             <p className="absolute bottom-5 left-5 z-10 border border-white/45 bg-ink/52 px-3 py-2 text-[11px] font-black uppercase tracking-[0.18em] text-white backdrop-blur">
