@@ -28,6 +28,7 @@ const TicketLink = ({
     href={href}
     target="_blank"
     rel="noopener noreferrer"
+    data-ticket-tone={tone}
     onClick={() =>
       trackPortalEvent("ticket_click", {
         placement: "gojet_performance_panel",
@@ -74,8 +75,9 @@ export function GojetPerformancePanel({ now }: GojetPerformancePanelProps) {
   if (status.phase === "archive") {
     return (
       <section
+        id="gojet-live-panel"
         aria-labelledby="gojet-archive-title"
-        className="border-b border-champagne/30 bg-gradient-to-br from-ink via-[#3a2d32] to-[#552b37] px-4 py-5 text-white sm:px-6 lg:px-8"
+        className="scroll-mt-32 border-b border-champagne/30 bg-gradient-to-br from-ink via-[#3a2d32] to-[#552b37] px-4 py-5 text-white sm:px-6 lg:px-8"
       >
         <div className="mx-auto flex max-w-7xl flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="min-w-0">
@@ -106,10 +108,13 @@ export function GojetPerformancePanel({ now }: GojetPerformancePanelProps) {
     );
   }
 
+  const allPerformancesStarted = status.remainingPerformances === 0;
+
   return (
     <section
+      id="gojet-live-panel"
       aria-labelledby="gojet-today-title"
-      className="border-b border-champagne/30 bg-gradient-to-br from-[#fff8f3] via-porcelain to-[#faf3e2] px-4 py-5 sm:px-6 lg:px-8"
+      className="scroll-mt-32 border-b border-champagne/30 bg-gradient-to-br from-[#fff8f3] via-porcelain to-[#faf3e2] px-4 py-5 sm:px-6 lg:px-8"
     >
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
@@ -147,19 +152,24 @@ export function GojetPerformancePanel({ now }: GojetPerformancePanelProps) {
                 {status.day.note}
               </p>
             )}
+            {allPerformancesStarted && (
+              <p className="mt-3 max-w-2xl text-sm font-bold text-rosefog">
+                本日の全公演は開演済みです
+              </p>
+            )}
           </div>
           <div className="grid w-full shrink-0 gap-2 sm:grid-cols-2 lg:w-[34rem]">
             <TicketLink
               href={gojetInPersonTicketUrl}
               label="来場チケット"
               detail="一般席 4,700円〜"
-              tone="primary"
+              tone={allPerformancesStarted ? "secondary" : "primary"}
             />
             <TicketLink
               href={gojetStreamingTicketUrl}
               label="配信チケット"
               detail="3,700円・8/6まで視聴可"
-              tone="secondary"
+              tone={allPerformancesStarted ? "primary" : "secondary"}
             />
           </div>
         </div>
