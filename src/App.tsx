@@ -12,6 +12,7 @@ import { NowProducingSection } from "./components/NowProducingSection";
 import { PhotoGallerySection } from "./components/PhotoGallerySection";
 import { OjosamaBandSection } from "./components/OjosamaBandSection";
 import { PriorityBanner } from "./components/PriorityBanner";
+import { RyomaKunSection } from "./components/RyomaKunSection";
 import { QuickNav } from "./components/QuickNav";
 import { ScrollToTop } from "./components/ScrollToTop";
 import { SectionReveal } from "./components/SectionReveal";
@@ -116,6 +117,9 @@ function App() {
         </SectionReveal>
         <SectionReveal>
           <OjosamaBandSection />
+        </SectionReveal>
+        <SectionReveal>
+          <RyomaKunSection />
         </SectionReveal>
         <SectionReveal>
           <ProfileSection />
