@@ -19,7 +19,7 @@ import { ActHeader } from "./ActHeader";
 const wrapIndex = (index: number) =>
   (index + galleryPhotos.length) % galleryPhotos.length;
 
-const INITIAL_VISIBLE_PHOTOS = 24;
+const INITIAL_VISIBLE_PHOTOS = 12;
 const LOAD_MORE_PHOTOS = 24;
 const SPOTLIGHT_PHOTOS = 10;
 
