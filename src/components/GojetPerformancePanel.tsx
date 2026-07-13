@@ -74,8 +74,9 @@ export function GojetPerformancePanel({ now }: GojetPerformancePanelProps) {
   if (status.phase === "archive") {
     return (
       <section
+        id="gojet-live-panel"
         aria-labelledby="gojet-archive-title"
-        className="border-b border-champagne/30 bg-gradient-to-br from-ink via-[#3a2d32] to-[#552b37] px-4 py-5 text-white sm:px-6 lg:px-8"
+        className="scroll-mt-32 border-b border-champagne/30 bg-gradient-to-br from-ink via-[#3a2d32] to-[#552b37] px-4 py-5 text-white sm:px-6 lg:px-8"
       >
         <div className="mx-auto flex max-w-7xl flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="min-w-0">
@@ -108,8 +109,9 @@ export function GojetPerformancePanel({ now }: GojetPerformancePanelProps) {
 
   return (
     <section
+      id="gojet-live-panel"
       aria-labelledby="gojet-today-title"
-      className="border-b border-champagne/30 bg-gradient-to-br from-[#fff8f3] via-porcelain to-[#faf3e2] px-4 py-5 sm:px-6 lg:px-8"
+      className="scroll-mt-32 border-b border-champagne/30 bg-gradient-to-br from-[#fff8f3] via-porcelain to-[#faf3e2] px-4 py-5 sm:px-6 lg:px-8"
     >
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
