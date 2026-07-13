@@ -46,6 +46,37 @@ try {
   assert.equal(afterFirstStart.phase, "today");
   assert.equal(afterFirstStart.remainingPerformances, 12);
 
+  const beforeFinalStartHtml = renderToStaticMarkup(
+    createElement(GojetPerformancePanel, {
+      now: new Date("2026-07-27T19:59:59+09:00")
+    })
+  );
+  assert.match(beforeFinalStartHtml, /残り1公演/);
+  assert.match(
+    beforeFinalStartHtml,
+    /data-ticket-tone="primary"[^>]*>[\s\S]*?来場チケット[\s\S]*?<\/a>/
+  );
+  assert.match(
+    beforeFinalStartHtml,
+    /data-ticket-tone="secondary"[^>]*>[\s\S]*?配信チケット[\s\S]*?<\/a>/
+  );
+
+  const afterFinalStartHtml = renderToStaticMarkup(
+    createElement(GojetPerformancePanel, {
+      now: new Date("2026-07-27T20:00:01+09:00")
+    })
+  );
+  assert.match(afterFinalStartHtml, /残り0公演/);
+  assert.match(afterFinalStartHtml, /本日の全公演は開演済みです/);
+  assert.match(
+    afterFinalStartHtml,
+    /data-ticket-tone="secondary"[^>]*>[\s\S]*?来場チケット[\s\S]*?<\/a>/
+  );
+  assert.match(
+    afterFinalStartHtml,
+    /data-ticket-tone="primary"[^>]*>[\s\S]*?配信チケット[\s\S]*?<\/a>/
+  );
+
   const closingNightHtml = renderToStaticMarkup(
     createElement(GojetPerformancePanel, {
       now: new Date("2026-07-27T23:59:59+09:00")
