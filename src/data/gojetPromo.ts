@@ -199,7 +199,7 @@ export const gojetTeamUpdates: GojetTeamUpdate[] = [
       "「とってもパワフルです😆💛 オシャレで大笑いできる新しいGO,JET!を模索中💭」——C班の魅力をひとことで伝える投稿。プロデューサー自身もC班で早紀役を演じます。",
     body:
       "早紀（吉井優花子）・夏代（中原楓歌）・美月（来瞳舞夢）・JET（宇佐美翔）・あかね（葉山椎菜）・メグ（沼尾麻由佳）・大地（矢口秀）・マスター（チップ青木）・美里（三村すみか）。約2分54秒のC班キャスト紹介動画つき。",
-    yukakoPostUrl: "https://x.com/yukako_produce/status/2076673958691410143",
+    yukakoPostUrl: "https://x.com/mokoopy/status/2076682572550267389",
     originalPostUrl: "https://x.com/yukako_produce/status/2076674254184263792",
     homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
     video: {
