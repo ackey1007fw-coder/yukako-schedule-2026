@@ -5,11 +5,12 @@ import { getGojetStatus } from "../lib/gojetStatus";
 // #ゆかJET『GO,JET!GO!GO! vol.1 Premium』への導線バナー。
 // ・公演前（〜7/22）：公演まであと◯日
 // ・公演期間中（7/23〜27）：本日の回（班・開演時間）
-// ・7/28以降：自動で非表示
+// ・7/28〜8/6：アーカイブ配信
+// ・8/7以降：自動で非表示
 export function GojetCountdownBanner() {
   const status = getGojetStatus();
 
-  if (status.phase === "after") return null;
+  if (status.phase === "archive" || status.phase === "ended") return null;
 
   const todayShow = status.phase === "today" ? status.day : null;
 

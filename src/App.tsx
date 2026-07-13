@@ -4,6 +4,7 @@ import { ActionStrip } from "./components/ActionStrip";
 import { AkitaRootsSection } from "./components/AkitaRootsSection";
 import { Footer } from "./components/Footer";
 import { GojetTeamUpdate } from "./components/GojetTeamUpdate";
+import { GojetPerformancePanel } from "./components/GojetPerformancePanel";
 import { Hero } from "./components/Hero";
 import { HighlightsSection } from "./components/HighlightsSection";
 import { LatestInstagramSection } from "./components/LatestInstagramSection";
@@ -78,6 +79,7 @@ function App() {
             スケジュールを読み込み中です
           </div>
         )}
+        <GojetPerformancePanel />
         <Hero nextEvent={nextEvent} socialLinks={socialLinks} />
         <TodayNextPanel todayEvents={todayEvents} nextEvent={nextEvent} />
         <SectionReveal>
