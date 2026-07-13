@@ -9,6 +9,12 @@ export const news: NewsItem[] = [
   {
     date: "2026.7.13",
     label: "X",
+    text: "#ゆかJET C班キャスト紹介。「とってもパワフルです😆💛」——オシャレで大笑いできる新しいGO,JET!を模索中。",
+    url: "https://x.com/yukako_produce/status/2076673958691410143"
+  },
+  {
+    date: "2026.7.13",
+    label: "X",
     text: "#ゆかJET A班キャスト紹介へ「混ざりたい🥺笑」。共演しない班にも、プロデューサーとして大切に想うエールを。",
     url: "https://x.com/mokoopy/status/2076341467841445980"
   },

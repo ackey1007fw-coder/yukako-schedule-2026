@@ -180,6 +180,25 @@ export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
 
 export const gojetTeamUpdates: GojetTeamUpdate[] = [
   {
+    id: "gojet-c-team-2026-07-13",
+    team: "C",
+    date: "2026.7.13",
+    label: "優花子からのメッセージ",
+    title: "とってもパワフルです。新しいGO,JET!を模索中",
+    quote:
+      "「とってもパワフルです😆💛 オシャレで大笑いできる新しいGO,JET!を模索中💭」——C班の魅力をひとことで伝える投稿。プロデューサー自身もC班で早紀役を演じます。",
+    body:
+      "早紀（吉井優花子）・夏代（中原楓歌）・美月（来瞳舞夢）・JET（宇佐美翔）・あかね（葉山椎菜）・メグ（沼尾麻由佳）・大地（矢口秀）・マスター（チップ青木）・美里（三村すみか）。約2分54秒のC班キャスト紹介動画つき。",
+    yukakoPostUrl: "https://x.com/yukako_produce/status/2076673958691410143",
+    originalPostUrl: "https://x.com/yukako_produce/status/2076674254184263792",
+    homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+    video: {
+      src: "/videos/yukajet-cban-cast-2026-07-13.mp4",
+      poster: "/images/yukako-yukajet-cban-cast-video-poster-2026-07-13.jpg",
+      label: "#ゆかJET C班キャスト紹介動画(2分54秒・音声あり)"
+    }
+  },
+  {
     id: "gojet-a-team-2026-07-13",
     team: "A",
     date: "2026.7.13",
