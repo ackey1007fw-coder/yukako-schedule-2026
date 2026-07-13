@@ -6,7 +6,8 @@ const mainItems = [
   { label: "SNS", href: "#links", Icon: MessageCircle }
 ];
 const moreItems = [
-  { label: "これまでの歩み", href: "#highlights" }, { label: "その他の出演", href: "#ojosama-band" },
+  { label: "これまでの歩み", href: "#highlights" }, { label: "お嬢様はバンド", href: "#ojosama-band" },
+  { label: "龍馬くん", href: "#ryoma-kun" },
   { label: "プロフィール", href: "#profile" }, { label: "秋田とのつながり", href: "#akita-roots" },
   { label: "写真", href: "#gallery" }, { label: "SHOWROOM", href: "#showroom" }
 ];
