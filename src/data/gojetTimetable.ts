@@ -12,9 +12,15 @@ export type GojetTimetableDay = {
 };
 
 export const gojetTicketUrl = "https://premiumgoyukajet.hp.peraichi.com";
+export const gojetInPersonTicketUrl =
+  "https://torioki.confetti-web.com/form/4827";
+export const gojetStreamingTicketUrl =
+  "https://docs.google.com/forms/d/e/1FAIpQLScsEmjjECWOVKzYuJ_93BRlS1rI8cbzcPFBb0f4mVqWNlLnuQ/viewform";
 
 export const gojetOpeningDate = "2026-07-23";
 export const gojetClosingDate = "2026-07-27";
+export const gojetArchiveStartDate = "2026-07-28";
+export const gojetArchiveEndDate = "2026-08-06";
 
 // タイムテーブル（yukako-gojet-poster.jpg の記載どおり）
 export const gojetTimetable: GojetTimetableDay[] = [

@@ -1,12 +1,14 @@
 import {
+  gojetArchiveEndDate,
+  gojetArchiveStartDate,
   gojetClosingDate,
   gojetOpeningDate,
   gojetTimetable,
   type GojetTimetableDay
 } from "../data/gojetTimetable";
 
-export const gojetTodayKey = () =>
-  new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Tokyo" }).format(new Date());
+export const gojetTodayKey = (now: Date = new Date()) =>
+  new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Tokyo" }).format(now);
 
 export const gojetDaysUntil = (fromKey: string, toKey: string) => {
   const [fy, fm, fd] = fromKey.split("-").map(Number);
@@ -18,18 +20,61 @@ export const gojetDaysUntil = (fromKey: string, toKey: string) => {
 
 export type GojetStatus =
   | { phase: "before"; daysLeft: number }
-  | { phase: "today"; day: GojetTimetableDay }
-  | { phase: "after" };
+  | {
+      phase: "today";
+      day: GojetTimetableDay;
+      remainingPerformances: number;
+    }
+  | { phase: "archive"; archiveEndDate: string }
+  | { phase: "ended" };
+
+const performanceStart = (date: string, time: string) =>
+  new Date(`${date}T${time}:00+09:00`).getTime();
+
+export const countRemainingGojetPerformances = (
+  now: Date,
+  timetable: GojetTimetableDay[] = gojetTimetable
+) => {
+  const nowMs = now.getTime();
+
+  return timetable.reduce(
+    (count, entry) =>
+      count +
+      entry.performances.filter(
+        (performance) => performanceStart(entry.date, performance.time) >= nowMs
+      ).length,
+    0
+  );
+};
 
 // #ゆかJET『GO,JET!GO!GO! vol.1 Premium』の公演フェーズを判定する。
 // ・公演前：あと何日か（before）
 // ・公演期間中（7/23〜27）：本日の回（today）
-// ・7/28以降：終了（after）
-export const getGojetStatus = (today = gojetTodayKey()): GojetStatus => {
-  if (today > gojetClosingDate) return { phase: "after" };
+// ・終演翌日〜8/6：アーカイブ配信（archive）
+// ・8/7以降：終了（ended）
+export const getGojetStatus = (
+  now: Date = new Date(),
+  timetable: GojetTimetableDay[] = gojetTimetable
+): GojetStatus => {
+  const today = gojetTodayKey(now);
 
-  const day = gojetTimetable.find((entry) => entry.date === today);
-  if (day) return { phase: "today", day };
+  if (today > gojetArchiveEndDate) return { phase: "ended" };
+  if (today >= gojetArchiveStartDate) {
+    return { phase: "archive", archiveEndDate: gojetArchiveEndDate };
+  }
+
+  const day = timetable.find((entry) => entry.date === today);
+  if (day) {
+    return {
+      phase: "today",
+      day,
+      remainingPerformances: countRemainingGojetPerformances(now, timetable)
+    };
+  }
+
+  if (today > gojetClosingDate) {
+    return { phase: "archive", archiveEndDate: gojetArchiveEndDate };
+  }
 
   return { phase: "before", daysLeft: gojetDaysUntil(today, gojetOpeningDate) };
 };
