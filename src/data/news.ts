@@ -9,6 +9,12 @@ export const news: NewsItem[] = [
   {
     date: "2026.7.13",
     label: "X",
+    text: "「ワイワイC班😆 最後の早紀、楽しんで演じます✨」——CM枠は7/16（木）23:59まで。",
+    url: "https://x.com/mokoopy/status/2076682572550267389"
+  },
+  {
+    date: "2026.7.13",
+    label: "X",
     text: "#ゆかJET C班キャスト紹介。「とってもパワフルです😆💛」——オシャレで大笑いできる新しいGO,JET!を模索中。",
     url: "https://x.com/yukako_produce/status/2076673958691410143"
   },

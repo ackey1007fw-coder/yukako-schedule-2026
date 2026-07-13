@@ -42,6 +42,16 @@ export type GojetTeamUpdate = {
 
 export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
   {
+    date: "2026.7.13",
+    label: "ワイワイC班",
+    title: "最後の早紀、楽しんで演じます",
+    body:
+      "「ワイワイC班😆 バランス良く新しいものを作れる予感💭」——C班キャスト紹介に応えての一言。「絶対に観てほしい作品です！！！」CM枠は7/16（木）23:59まで、応援コンテンツもお待ちしています。",
+    postUrl: "https://x.com/mokoopy/status/2076682572550267389",
+    homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+    ctaLabel: "優花子のポストを見る"
+  },
+  {
     date: "2026.7.11",
     label: "エールカード受付中",
     title: "「最後だから」優花子デザインのエールカードを届けてほしい",
