@@ -6,6 +6,7 @@ import {
 } from "../data/ryomaKun";
 import { getResponsiveImageProps } from "../lib/responsiveImage";
 import { ActHeader } from "./ActHeader";
+import { CollapsiblePhotoArchive } from "./CollapsiblePhotoArchive";
 
 const featuredPhoto = {
   src: "/images/ryoma-kun-2026/yukako-ryoma-kun-2026-main-visual.jpg",
@@ -121,22 +122,7 @@ export function RyomaKunSection() {
             </a>
           </div>
 
-          <div className="columns-2 gap-4 sm:columns-3 lg:columns-4 [&>figure]:mb-4 [&>figure]:break-inside-avoid">
-            {ryomaKunPhotos.map((photo) => (
-              <figure key={photo.src} className="yukako-card overflow-hidden border-rosefog/15 bg-porcelain">
-                <img
-                  {...getResponsiveImageProps(
-                    photo.src,
-                    "(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw",
-                  )}
-                  alt={photo.alt}
-                  loading="lazy"
-                  decoding="async"
-                  className="block h-auto w-full object-contain"
-                />
-              </figure>
-            ))}
-          </div>
+          <CollapsiblePhotoArchive id="ryoma-kun-photos" photos={ryomaKunPhotos} />
         </div>
       </div>
     </section>
