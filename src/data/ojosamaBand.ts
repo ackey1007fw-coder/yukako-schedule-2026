@@ -3,14 +3,18 @@ export type OjosamaBandPhoto = {
   alt: string;
 };
 
-export const ojosamaBandPhotos: OjosamaBandPhoto[] = Array.from({ length: 24 }, (_, index) => {
-  const number = index + 1;
-  const fileNumber = String(number).padStart(2, "0");
-  return {
-    src: `/images/ojosama-band-2026/yukako-ojosama-band-2026-${fileNumber}.jpg`,
-    alt: `「お嬢様はバンドがやりたい ♪♪♪」黒白院雲雀役の吉井優花子さん 記録写真 ${number}`
-  };
-});
+export const ojosamaBandPhotos: OjosamaBandPhoto[] = Array.from(
+  { length: 24 },
+  (_, index) => index + 1,
+)
+  .filter((number) => number !== 8)
+  .map((number) => {
+    const fileNumber = String(number).padStart(2, "0");
+    return {
+      src: `/images/ojosama-band-2026/yukako-ojosama-band-2026-${fileNumber}.jpg`,
+      alt: `「お嬢様はバンドがやりたい ♪♪♪」黒白院雲雀役の吉井優花子さん 記録写真 ${number}`
+    };
+  });
 
 export const ojosamaBandSchedule = [
   "2026年5月20日(水) 19:00",

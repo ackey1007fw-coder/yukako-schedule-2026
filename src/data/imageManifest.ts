@@ -190,7 +190,6 @@ export const imageManifest = {
   "/images/ojosama-band-2026/yukako-ojosama-band-2026-05.jpg": {"width":1536,"height":2048,"widths":[360,480,720,960,1280,1536]},
   "/images/ojosama-band-2026/yukako-ojosama-band-2026-06.jpg": {"width":1614,"height":2048,"widths":[360,480,720,960,1280,1600,1614]},
   "/images/ojosama-band-2026/yukako-ojosama-band-2026-07.jpg": {"width":1536,"height":2048,"widths":[360,480,720,960,1280,1536]},
-  "/images/ojosama-band-2026/yukako-ojosama-band-2026-08.jpg": {"width":1536,"height":2048,"widths":[360,480,720,960,1280,1536]},
   "/images/ojosama-band-2026/yukako-ojosama-band-2026-09.jpg": {"width":1536,"height":2048,"widths":[360,480,720,960,1280,1536]},
   "/images/ojosama-band-2026/yukako-ojosama-band-2026-10.jpg": {"width":1536,"height":2048,"widths":[360,480,720,960,1280,1536]},
   "/images/ojosama-band-2026/yukako-ojosama-band-2026-11.jpg": {"width":1536,"height":2048,"widths":[360,480,720,960,1280,1536]},
