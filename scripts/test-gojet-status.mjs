@@ -13,6 +13,9 @@ try {
   const { GojetPerformancePanel } = await server.ssrLoadModule(
     "/src/components/GojetPerformancePanel.tsx"
   );
+  const { QuickNav } = await server.ssrLoadModule(
+    "/src/components/QuickNav.tsx"
+  );
 
   const before = getGojetStatus(new Date("2026-07-22T23:59:59+09:00"));
   assert.deepEqual(before, { phase: "before", daysLeft: 1 });
@@ -39,6 +42,27 @@ try {
   assert.match(openingHtml, /残り13公演/);
   assert.match(openingHtml, /来場チケット/);
   assert.match(openingHtml, /配信チケット/);
+  assert.match(openingHtml, /id="gojet-live-panel"/);
+  assert.match(openingHtml, /scroll-mt-32/);
+
+  const beforeQuickNavHtml = renderToStaticMarkup(
+    createElement(QuickNav, {
+      now: new Date("2026-07-22T23:59:59+09:00")
+    })
+  );
+  assert.doesNotMatch(beforeQuickNavHtml, /href="#gojet-live-panel"/);
+
+  const todayQuickNavHtml = renderToStaticMarkup(
+    createElement(QuickNav, {
+      now: new Date("2026-07-24T12:00:00+09:00")
+    })
+  );
+  assert.match(todayQuickNavHtml, /href="#gojet-live-panel"/);
+  assert.match(todayQuickNavHtml, /本日の公演/);
+  assert.ok(
+    todayQuickNavHtml.indexOf('href="#gojet-live-panel"') <
+      todayQuickNavHtml.indexOf('href="#today"')
+  );
 
   const afterFirstStart = getGojetStatus(
     new Date("2026-07-23T15:30:01+09:00")
@@ -92,6 +116,15 @@ try {
   );
   assert.match(archiveHtml, /アーカイブ配信は8\/6（木）まで/);
   assert.match(archiveHtml, /3,700円/);
+  assert.match(archiveHtml, /id="gojet-live-panel"/);
+  assert.match(archiveHtml, /scroll-mt-32/);
+
+  const archiveQuickNavHtml = renderToStaticMarkup(
+    createElement(QuickNav, {
+      now: new Date("2026-07-28T00:00:00+09:00")
+    })
+  );
+  assert.doesNotMatch(archiveQuickNavHtml, /href="#gojet-live-panel"/);
 
   const archiveLastMinute = getGojetStatus(
     new Date("2026-08-06T23:59:59+09:00")
