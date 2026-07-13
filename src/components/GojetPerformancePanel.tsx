@@ -28,6 +28,7 @@ const TicketLink = ({
     href={href}
     target="_blank"
     rel="noopener noreferrer"
+    data-ticket-tone={tone}
     onClick={() =>
       trackPortalEvent("ticket_click", {
         placement: "gojet_performance_panel",
@@ -106,6 +107,8 @@ export function GojetPerformancePanel({ now }: GojetPerformancePanelProps) {
     );
   }
 
+  const allPerformancesStarted = status.remainingPerformances === 0;
+
   return (
     <section
       aria-labelledby="gojet-today-title"
@@ -147,19 +150,24 @@ export function GojetPerformancePanel({ now }: GojetPerformancePanelProps) {
                 {status.day.note}
               </p>
             )}
+            {allPerformancesStarted && (
+              <p className="mt-3 max-w-2xl text-sm font-bold text-rosefog">
+                本日の全公演は開演済みです
+              </p>
+            )}
           </div>
           <div className="grid w-full shrink-0 gap-2 sm:grid-cols-2 lg:w-[34rem]">
             <TicketLink
               href={gojetInPersonTicketUrl}
               label="来場チケット"
               detail="一般席 4,700円〜"
-              tone="primary"
+              tone={allPerformancesStarted ? "secondary" : "primary"}
             />
             <TicketLink
               href={gojetStreamingTicketUrl}
               label="配信チケット"
               detail="3,700円・8/6まで視聴可"
-              tone="secondary"
+              tone={allPerformancesStarted ? "primary" : "secondary"}
             />
           </div>
         </div>
