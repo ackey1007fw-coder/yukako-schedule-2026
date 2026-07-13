@@ -1,4 +1,5 @@
-import { ArrowUpRight } from "lucide-react";
+import { useState } from "react";
+import { ArrowUpRight, ChevronDown, ChevronUp } from "lucide-react";
 import { highlights } from "../data/highlights";
 import { getResponsiveImageProps } from "../lib/responsiveImage";
 import { ActHeader } from "./ActHeader";
@@ -13,9 +14,14 @@ const isProduceItem = (title: string, description: string) =>
   title.includes("#ゆかJET") || description.includes("プロデュース");
 
 export function HighlightsSection() {
+  const [showPastYears, setShowPastYears] = useState(false);
+
   if (sortedHighlights.length === 0) {
     return null;
   }
+
+  const visibleYears = showPastYears ? years : years.slice(0, 1);
+  const remainingYears = Math.max(years.length - 1, 0);
 
   return (
     <section id="highlights" className="scroll-mt-24 bg-porcelain py-16 sm:py-24">
@@ -27,8 +33,11 @@ export function HighlightsSection() {
           copy="女優・舞台人・プロデューサーとしての歩みを、年ごとのタイムラインで振り返ります。"
         />
 
-        <div className="relative border-l-2 border-champagne/40 pl-7 sm:pl-10">
-          {years.map((year) => {
+        <div
+          id="highlights-timeline"
+          className="relative border-l-2 border-champagne/40 pl-7 sm:pl-10"
+        >
+          {visibleYears.map((year) => {
             const items = sortedHighlights.filter((item) => item.year === year);
 
             return (
@@ -139,6 +148,27 @@ export function HighlightsSection() {
             );
           })}
         </div>
+
+        {remainingYears > 0 && (
+          <div className="mt-8 flex justify-center">
+            <button
+              type="button"
+              onClick={() => setShowPastYears((current) => !current)}
+              className="yukako-button min-h-12 border border-rosefog/35 bg-white px-5 py-3 text-sm font-black text-ink transition hover:border-champagne"
+              aria-expanded={showPastYears}
+              aria-controls="highlights-timeline"
+            >
+              {showPastYears ? (
+                <ChevronUp className="h-4 w-4 text-champagne" aria-hidden="true" />
+              ) : (
+                <ChevronDown className="h-4 w-4 text-champagne" aria-hidden="true" />
+              )}
+              {showPastYears
+                ? "最新年だけ表示"
+                : `過去の年を見る（残り${remainingYears}年）`}
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );
