@@ -289,6 +289,7 @@ export const imageManifest = {
   "/images/yukako-yukajet-aban-cast-2026-07-13-selfie.jpg": {"width":2048,"height":1537,"widths":[360,480,720,960,1280,1600,2048]},
   "/images/yukako-yukajet-aban-cast-video-poster-2026-07-13.jpg": {"width":720,"height":900,"widths":[360,480,720]},
   "/images/yukako-yukajet-bban-cast-video-poster-2026-07-12.jpg": {"width":1080,"height":1350,"widths":[360,480,720,960,1080]},
+  "/images/yukako-yukajet-bban-male-cast-story-2026-07-15.jpg": {"width":3510,"height":6240,"widths":[360,480,720,960,1280,1600,3510]},
   "/images/yukako-yukajet-cban-cast-video-poster-2026-07-13.jpg": {"width":720,"height":900,"widths":[360,480,720]},
   "/images/yukako-yukajet-lyrics-card-2026-07-05.jpg": {"width":983,"height":1280,"widths":[360,480,720,960,983]},
   "/images/yukako-yukajet-megu-song-rehearsal-2026-07-05.jpg": {"width":1169,"height":1169,"widths":[360,480,720,960,1169]},
