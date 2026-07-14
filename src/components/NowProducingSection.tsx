@@ -9,6 +9,7 @@ import {
   Clock3,
   ExternalLink,
   Images,
+  Instagram,
   MapPin,
   Music,
   PenLine,
@@ -232,6 +233,20 @@ export function NowProducingSection({ event }: NowProducingSectionProps) {
                       <p className="mt-3 text-sm leading-6 text-white/72 sm:leading-7">
                         {update.body}
                       </p>
+                      {update.photo && (
+                        <div className="mt-4 overflow-hidden border border-white/12 bg-black/20">
+                          <img
+                            {...getResponsiveImageProps(
+                              update.photo.src,
+                              "(min-width: 1024px) 40vw, 100vw",
+                            )}
+                            alt={update.photo.alt}
+                            loading="lazy"
+                            decoding="async"
+                            className="mx-auto block h-auto max-h-[520px] w-auto max-w-full object-contain"
+                          />
+                        </div>
+                      )}
                       {update.video && (
                         <video
                           controls
@@ -251,7 +266,11 @@ export function NowProducingSection({ event }: NowProducingSectionProps) {
                           rel="noopener noreferrer"
                           className="yukako-button yukako-button-gold min-h-12 px-4 py-3 text-sm"
                         >
-                          <Music className="h-4 w-4" aria-hidden="true" />
+                          {update.postUrl.includes("instagram.com") ? (
+                            <Instagram className="h-4 w-4" aria-hidden="true" />
+                          ) : (
+                            <Music className="h-4 w-4" aria-hidden="true" />
+                          )}
                           {update.ctaLabel}
                         </a>
                         <a

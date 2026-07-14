@@ -13,6 +13,8 @@ export type GojetFeatureUpdate = {
   postUrl: string;
   homepageUrl: string;
   ctaLabel: string;
+  // 告知画像・ストーリーズのスクリーンショットなどを自己ホストできた場合に表示する
+  photo?: PromoImage;
   // 稽古動画などを手元にホストできた場合はカード内で直接再生する
   video?: {
     src: string;
@@ -41,6 +43,21 @@ export type GojetTeamUpdate = {
 };
 
 export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
+  {
+    date: "2026.7.15",
+    label: "B班も注目",
+    title: "B班も見逃せない！男役3人の魅力✨",
+    body:
+      "「B班も観ないともったいないよ😭」——JETの親友・大地、主人公JET、バーマスターであるあかねの兄。個性豊かな男役3人が、B班の物語をさらに盛り上げます。「私の最初で最後のGO,JET!プロデュースです❗️三班素晴らしくなります‼️」",
+    postUrl:
+      "https://www.instagram.com/stories/yoppy_777/3941171832056937761?utm_source=ig_story_item_share&igsh=MWozY3Y4ZzFnYzAxNw==",
+    homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+    ctaLabel: "Instagramストーリーズを見る",
+    photo: {
+      src: "/images/yukako-yukajet-bban-male-cast-story-2026-07-15.jpg",
+      alt: "吉井優花子さんのGO,JET!プロデュース公演で、B班の男役3人とそれぞれの役柄を紹介したInstagramストーリーズ画像"
+    }
+  },
   {
     date: "2026.7.13",
     label: "ワイワイC班",
