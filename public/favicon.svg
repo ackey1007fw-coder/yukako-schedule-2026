@@ -10,16 +10,9 @@
       <stop offset="0.45" stop-color="#c29a4a"/>
       <stop offset="1" stop-color="#8a6425"/>
     </linearGradient>
-    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#5f1726" flood-opacity="0.22"/>
-    </filter>
   </defs>
   <rect width="512" height="512" rx="112" fill="url(#bg)"/>
   <rect x="38" y="38" width="436" height="436" rx="92" fill="none" stroke="#c29a4a" stroke-width="16"/>
-  <path d="M154 162l56 126 46-84 46 84 56-126 36 36-72 154v48H194v-48l-72-154 32-36Z" fill="#c8385a" filter="url(#shadow)"/>
-  <path d="M146 134l48 44 62-74 62 74 48-44-16 74H162l-16-74Z" fill="url(#gold)"/>
-  <path d="M206 396h100" stroke="#c29a4a" stroke-width="18" stroke-linecap="round"/>
-  <circle cx="194" cy="178" r="13" fill="#fffdf7"/>
-  <circle cx="256" cy="104" r="15" fill="#fffdf7"/>
-  <circle cx="318" cy="178" r="13" fill="#fffdf7"/>
+  <text x="256" y="342" text-anchor="middle" font-family="'IPAGothic','IPAゴシック',sans-serif" font-size="308" font-weight="700" fill="url(#gold)">優</text>
+  <circle cx="256" cy="100" r="10" fill="#c8385a"/>
 </svg>
