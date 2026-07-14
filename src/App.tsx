@@ -5,6 +5,7 @@ import { AkitaRootsSection } from "./components/AkitaRootsSection";
 import { Footer } from "./components/Footer";
 import { GojetPerformancePanel } from "./components/GojetPerformancePanel";
 import { GojetTeamsSection } from "./components/GojetTeamsSection";
+import { GojetYellCardSection } from "./components/GojetYellCardSection";
 import { Hero } from "./components/Hero";
 import { HighlightsSection } from "./components/HighlightsSection";
 import { LatestInstagramSection } from "./components/LatestInstagramSection";
@@ -86,6 +87,9 @@ function App() {
         </SectionReveal>
         <SectionReveal>
           <GojetTeamsSection />
+        </SectionReveal>
+        <SectionReveal>
+          <GojetYellCardSection />
         </SectionReveal>
         <SectionReveal>
           <ScheduleSection
