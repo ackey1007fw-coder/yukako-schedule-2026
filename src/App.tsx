@@ -3,6 +3,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { ActionStrip } from "./components/ActionStrip";
 import { AkitaRootsSection } from "./components/AkitaRootsSection";
 import { Footer } from "./components/Footer";
+import { GojetHairUpdateSection } from "./components/GojetHairUpdateSection";
 import { GojetPerformancePanel } from "./components/GojetPerformancePanel";
 import { GojetTeamsSection } from "./components/GojetTeamsSection";
 import { GojetYellCardSection } from "./components/GojetYellCardSection";
@@ -90,6 +91,9 @@ function App() {
         </SectionReveal>
         <SectionReveal>
           <GojetYellCardSection />
+        </SectionReveal>
+        <SectionReveal>
+          <GojetHairUpdateSection />
         </SectionReveal>
         <SectionReveal>
           <ScheduleSection
