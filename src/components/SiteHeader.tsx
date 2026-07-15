@@ -4,6 +4,7 @@ import { profile } from "../data/profile";
 import type { SocialLink } from "../types";
 
 const navItems = [
+  { label: "最新情報", href: "#updates", id: "updates" },
   { label: "公演情報", href: "#next", id: "next" },
   { label: "スケジュール", href: "#schedule", id: "schedule" },
   { label: "これまでの歩み", href: "#highlights", id: "highlights" },
