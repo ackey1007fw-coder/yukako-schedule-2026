@@ -15,6 +15,8 @@ export type GojetFeatureUpdate = {
   ctaLabel: string;
   // 告知画像・ストーリーズのスクリーンショットなどを自己ホストできた場合に表示する
   photo?: PromoImage;
+  // 稽古写真を複数枚まとめて見せたい場合はこちら（photoと併用しない）
+  photos?: PromoImage[];
   // 稽古動画などを手元にホストできた場合はカード内で直接再生する
   video?: {
     src: string;
@@ -45,6 +47,34 @@ export type GojetTeamUpdate = {
 export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
   {
     date: "2026.7.15",
+    label: "B班を観てほしい",
+    title: "B班の爆笑リハ公開。「主役JETも観てほしい」",
+    body:
+      "GO,JET!史上初、女性だけのB班。爆笑続きの稽古風景とともに「C早紀はもちろん、B主役JETも観てほしい❗️」とまっすぐな呼びかけ。24日(金)15:30は「私の一人目のお客に…🥺」——優花子さん自身の言葉で予約を待っています。",
+    postUrl: "https://x.com/mokoopy/status/2077285768821911646?s=12",
+    homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+    ctaLabel: "優花子の投稿を見る",
+    photos: [
+      {
+        src: "/images/yukako-yukajet-bban-rehearsal-2026-07-15-group-selfie.jpg",
+        alt: "#ゆかJETの稽古場で、演出の多賀さんの紹介とともに笑顔でピースする吉井優花子さんとキャストの集合セルフィー写真"
+      },
+      {
+        src: "/images/yukako-yukajet-bban-rehearsal-2026-07-15-cast-roles.jpg",
+        alt: "#ゆかJET B班の大地役ももかさん、JET役ゆかこさん（プロデューサー・C班早紀）、マスター役くるめさん（C班美月・だおさん）を紹介する画像"
+      },
+      {
+        src: "/images/yukako-yukajet-bban-rehearsal-2026-07-15-scene-1.jpg",
+        alt: "#ゆかJETの稽古で、芝居の一場面を演じるB班キャストたちの写真"
+      },
+      {
+        src: "/images/yukako-yukajet-bban-rehearsal-2026-07-15-scene-2.jpg",
+        alt: "#ゆかJETの稽古で、床に座って笑い合うB班キャストたちの写真"
+      }
+    ]
+  },
+  {
+    date: "2026.7.13",
     label: "B班も注目",
     title: "B班も見逃せない！男役3人の魅力✨",
     body:

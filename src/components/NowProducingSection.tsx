@@ -247,6 +247,27 @@ export function NowProducingSection({ event }: NowProducingSectionProps) {
                           />
                         </div>
                       )}
+                      {update.photos && update.photos.length > 0 && (
+                        <div className="mt-4 grid grid-cols-2 gap-2">
+                          {update.photos.map((photo) => (
+                            <div
+                              key={photo.src}
+                              className="overflow-hidden border border-white/12 bg-black/20"
+                            >
+                              <img
+                                {...getResponsiveImageProps(
+                                  photo.src,
+                                  "(min-width: 1024px) 20vw, 50vw",
+                                )}
+                                alt={photo.alt}
+                                loading="lazy"
+                                decoding="async"
+                                className="block h-auto w-full"
+                              />
+                            </div>
+                          ))}
+                        </div>
+                      )}
                       {update.video && (
                         <video
                           controls
