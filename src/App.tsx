@@ -10,6 +10,7 @@ import { GojetYellCardSection } from "./components/GojetYellCardSection";
 import { Hero } from "./components/Hero";
 import { HighlightsSection } from "./components/HighlightsSection";
 import { LatestInstagramSection } from "./components/LatestInstagramSection";
+import { LatestUpdatesSection } from "./components/LatestUpdatesSection";
 import { LinksSection } from "./components/LinksSection";
 import { NowProducingSection } from "./components/NowProducingSection";
 import { PhotoGallerySection } from "./components/PhotoGallerySection";
@@ -83,6 +84,9 @@ function App() {
         <GojetPerformancePanel />
         <Hero nextEvent={nextEvent} socialLinks={socialLinks} />
         <TodayNextPanel todayEvents={todayEvents} nextEvent={nextEvent} />
+        <SectionReveal>
+          <LatestUpdatesSection />
+        </SectionReveal>
         <SectionReveal>
           <NowProducingSection event={gojetEvent ?? nextEvent} />
         </SectionReveal>
