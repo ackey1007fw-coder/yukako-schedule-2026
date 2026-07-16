@@ -296,6 +296,8 @@ export const imageManifest = {
   "/images/yukako-yukajet-bban-rehearsal-2026-07-15-scene-1.jpg": {"width":2048,"height":1536,"widths":[360,480,720,960,1280,1600,2048]},
   "/images/yukako-yukajet-bban-rehearsal-2026-07-15-scene-2.jpg": {"width":2048,"height":1536,"widths":[360,480,720,960,1280,1600,2048]},
   "/images/yukako-yukajet-cban-cast-video-poster-2026-07-13.jpg": {"width":720,"height":900,"widths":[360,480,720]},
+  "/images/yukako-yukajet-dual-role-2026-07-16-bban-scene.jpg": {"width":943,"height":1250,"widths":[360,480,720,943]},
+  "/images/yukako-yukajet-dual-role-2026-07-16-cban-battle.jpg": {"width":1170,"height":831,"widths":[360,480,720,960,1170]},
   "/images/yukako-yukajet-joint-rehearsal-2026-07-16-group.jpg": {"width":2048,"height":1536,"widths":[360,480,720,960,1280,1600,2048]},
   "/images/yukako-yukajet-joint-rehearsal-2026-07-16-jump.jpg": {"width":1390,"height":1043,"widths":[360,480,720,960,1280,1390]},
   "/images/yukako-yukajet-joint-rehearsal-2026-07-16-mic.jpg": {"width":1108,"height":849,"widths":[360,480,720,960,1108]},
