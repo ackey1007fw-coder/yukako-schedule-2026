@@ -59,6 +59,18 @@ export type GojetTeamUpdate = {
 
 export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
   {
+    date: "2026.7.17",
+    label: "稽古の舞台裏",
+    title: "笑いをこらえるのも難関？B班稽古の楽しい舞台裏",
+    body:
+      "#ゆかJET B班の稽古で、優花子さん演じるJETが荒井映里乃さん演じる早紀に話しかけた場面。稽古前に整えてもらった髪型が通し稽古の激しい動きで崩れてしまったという荒井映里乃さんの投稿を引用し、「本当はめちゃくちゃ笑い堪えてた」と素直な裏話を明かしています。「耐えられない笑いが多くて、難関すぎるB班」——笑いのツボが多いB班ならではの、テンポの良い稽古場の空気が伝わってきます。本番でも、キャストが笑いをこらえながら磨き上げるB班のコメディにも注目です。",
+    postUrl: "https://x.com/mokoopy/status/2077774797363429483?s=12",
+    homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+    ctaLabel: "優花子さんのX投稿を見る",
+    homepageLabel: "公演の予約・応援ページを見る",
+    roleTags: ["B班：JET", "稽古裏話"]
+  },
+  {
     date: "2026.7.16",
     label: "全班通し完了",
     title: "全班通し完了。優花子さんが語る手応えと本番への自信",
