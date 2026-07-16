@@ -60,6 +60,22 @@ export type GojetTeamUpdate = {
 export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
   {
     date: "2026.7.16",
+    label: "全班通し完了",
+    title: "全班通し完了。優花子さんが語る手応えと本番への自信",
+    body:
+      "#ゆかJETで全班の通し稽古が完了。「早紀もJETもテンション高く激しくやってみました」「まずは上げて出して、後ほど落とすところ落として整理する」——初めての通しで得た手応えを、優花子さんが率直な言葉で共有しています。「絶対おもしろいから観に来てね」という呼びかけとともに、ミッツ役のくるめちゃんと「一緒にやれて嬉しいなあ」という一言にも、稽古場の温かさがにじみます。",
+    postUrl: "https://x.com/mokoopy/status/2077746756226617527",
+    homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+    ctaLabel: "本人のX投稿を見る",
+    homepageLabel: "公演の予約・応援ページを見る",
+    roleTags: ["B班：JET", "C班：早紀"],
+    photo: {
+      src: "/images/yukako-yukajet-all-team-run-2026-07-16-duo-selfie.jpg",
+      alt: "#ゆかJETの通し稽古後に撮影された、吉井優花子さんと共演者のツーショット自撮り写真"
+    }
+  },
+  {
+    date: "2026.7.16",
     label: "合同稽古",
     title: "刺激の多い合同稽古！A・B・C班それぞれの個性に注目",
     body:

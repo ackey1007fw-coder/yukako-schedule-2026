@@ -289,6 +289,7 @@ export const imageManifest = {
   "/images/yukako-stage-front.jpg": {"width":1401,"height":1751,"widths":[360,480,720,960,1280,1401]},
   "/images/yukako-yukajet-aban-cast-2026-07-13-selfie.jpg": {"width":2048,"height":1537,"widths":[360,480,720,960,1280,1600,2048]},
   "/images/yukako-yukajet-aban-cast-video-poster-2026-07-13.jpg": {"width":720,"height":900,"widths":[360,480,720]},
+  "/images/yukako-yukajet-all-team-run-2026-07-16-duo-selfie.jpg": {"width":1536,"height":2048,"widths":[360,480,720,960,1280,1536]},
   "/images/yukako-yukajet-bban-cast-video-poster-2026-07-12.jpg": {"width":1080,"height":1350,"widths":[360,480,720,960,1080]},
   "/images/yukako-yukajet-bban-male-cast-story-2026-07-15.jpg": {"width":3510,"height":6240,"widths":[360,480,720,960,1280,1600,3510]},
   "/images/yukako-yukajet-bban-rehearsal-2026-07-15-cast-roles.jpg": {"width":1170,"height":857,"widths":[360,480,720,960,1170]},
