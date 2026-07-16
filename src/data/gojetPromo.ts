@@ -34,6 +34,8 @@ export type GojetFeatureUpdate = {
     label: string;
   };
   deadline?: GojetDeadline;
+  // 役柄タグ(例: "B班：JET")。見出し下に小さなバッジとして並べる
+  roleTags?: string[];
 };
 
 export type GojetTeamUpdate = {
@@ -87,6 +89,28 @@ export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
       {
         src: "/images/yukako-yukajet-joint-rehearsal-2026-07-16-mic.jpg",
         alt: "マイクを前に歌や演技の稽古を行うキャスト"
+      }
+    ]
+  },
+  {
+    date: "2026.7.16",
+    label: "二役への想い",
+    title: "B班はJET、C班は早紀。二役に挑む優花子さんの想い",
+    body:
+      "#ゆかJETで優花子さんが演じるのは、B班の主役「JET」とC班のガールズ「早紀」の二役。「二役でそれぞれの私が楽しめるから、どちらも絶対観てほしいです」「超研究してます。頑張ってます。良いもの届けます！！！」——本人の言葉です。B班は全員女性キャストならではの空気感、C班は「熱血大乱闘」というキャッチ通りのエネルギッシュさが対照的。二役で違う顔を見せる芝居にも注目です。",
+    postUrl: "https://x.com/mokoopy/status/2077728068668739687",
+    homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+    ctaLabel: "本人のX投稿を見る",
+    homepageLabel: "公演の予約・応援ページを見る",
+    roleTags: ["B班：JET", "C班：早紀"],
+    photos: [
+      {
+        src: "/images/yukako-yukajet-dual-role-2026-07-16-cban-battle.jpg",
+        alt: "「熱血大乱闘C班」の文字入りで、複数のキャストがダイナミックに動く稽古風景"
+      },
+      {
+        src: "/images/yukako-yukajet-dual-role-2026-07-16-bban-scene.jpg",
+        alt: "「全員女性キャストB班」の文字入りで、カウンター越しに会話する稽古シーン"
       }
     ]
   },

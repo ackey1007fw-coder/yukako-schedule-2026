@@ -244,6 +244,19 @@ export function NowProducingSection({ event, now }: NowProducingSectionProps) {
                       <h4 className="mt-2 text-xl font-black leading-tight text-white">
                         {update.title}
                       </h4>
+                      {update.roleTags && update.roleTags.length > 0 && (
+                        <div className="mt-2 flex flex-wrap gap-2">
+                          {update.roleTags.map((tag) => (
+                            <span
+                              key={tag}
+                              className="inline-flex items-center gap-1.5 border border-champagne/40 bg-champagne/10 px-2.5 py-1 text-[11px] font-black text-champagne"
+                            >
+                              <Users className="h-3 w-3 shrink-0" aria-hidden="true" />
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      )}
                       <p className="mt-3 text-sm leading-6 text-white/72 sm:leading-7">
                         {update.body}
                       </p>
