@@ -70,6 +70,11 @@ export const getEventsForDay = (
   });
 };
 
+// ISO8601（タイムゾーンオフセット付き, 例: "2026-07-16T23:59:59+09:00"）の締切を過ぎたか判定する。
+// オフセットを文字列に含めるため、実行環境のタイムゾーン（サーバーのUTC/ブラウザのJST等）に依存しない。
+export const isPastDeadline = (at: string, now: Date = new Date()) =>
+  now.getTime() >= new Date(at).getTime();
+
 export type CountdownParts = {
   days: number;
   hours: number;

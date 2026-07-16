@@ -20,6 +20,7 @@ import {
   X
 } from "lucide-react";
 import { gojetFeatureUpdates, gojetPromoImages } from "../data/gojetPromo";
+import { isPastDeadline } from "../lib/date";
 import { getResponsiveImageProps } from "../lib/responsiveImage";
 import { googleCalendarUrl } from "../lib/share";
 import type { ScheduleEvent } from "../types";
@@ -28,9 +29,11 @@ import { ExternalButton } from "./ExternalButton";
 
 type NowProducingSectionProps = {
   event?: ScheduleEvent;
+  now?: Date;
 };
 
 const INITIAL_VISIBLE_UPDATES = 2;
+const CLOCK_UPDATE_MS = 60000;
 
 const roles = [
   { label: "プロデュース", Icon: Sparkles },
@@ -124,9 +127,20 @@ function PromoLightbox({
 
 // ヒーロー直下の #ゆかJET 特設ブロック（Now Producing billboard）。
 // ポスター + カウントダウン + 役割リスト + 予約CTA + 特集ギャラリーを、舞台看板風の1枚にまとめる。
-export function NowProducingSection({ event }: NowProducingSectionProps) {
+export function NowProducingSection({ event, now }: NowProducingSectionProps) {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [showAllUpdates, setShowAllUpdates] = useState(false);
+  const [currentTime, setCurrentTime] = useState(() => now ?? new Date());
+
+  useEffect(() => {
+    if (now) {
+      setCurrentTime(now);
+      return undefined;
+    }
+
+    const timer = window.setInterval(() => setCurrentTime(new Date()), CLOCK_UPDATE_MS);
+    return () => window.clearInterval(timer);
+  }, [now]);
   const visibleUpdates = showAllUpdates
     ? gojetFeatureUpdates
     : gojetFeatureUpdates.slice(0, INITIAL_VISIBLE_UPDATES);
@@ -280,6 +294,14 @@ export function NowProducingSection({ event }: NowProducingSectionProps) {
                           <source src={update.video.src} type="video/mp4" />
                         </video>
                       )}
+                      {update.deadline && (
+                        <p className="mt-4 inline-flex w-fit items-center gap-2 border border-champagne/50 bg-champagne/10 px-3 py-2 text-xs font-black text-champagne">
+                          <Clock3 className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+                          {isPastDeadline(update.deadline.at, currentTime)
+                            ? update.deadline.afterText
+                            : update.deadline.beforeText}
+                        </p>
+                      )}
                       <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
                         <a
                           href={update.postUrl}
@@ -301,7 +323,7 @@ export function NowProducingSection({ event }: NowProducingSectionProps) {
                           className="yukako-button yukako-button-ghost min-h-12 px-4 py-3 text-sm"
                         >
                           <ExternalLink className="h-4 w-4 text-champagne" aria-hidden="true" />
-                          公演ホームページへ
+                          {update.homepageLabel ?? "公演ホームページへ"}
                         </a>
                       </div>
                     </div>

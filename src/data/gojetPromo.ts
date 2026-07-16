@@ -5,6 +5,14 @@ export type PromoImage = {
   alt: string;
 };
 
+// 応援コンテンツ等の受付締切。指定すると締切前/後でカード内の案内文が自動的に切り替わる。
+export type GojetDeadline = {
+  // ISO8601（タイムゾーンオフセット付き, 例: "2026-07-16T23:59:59+09:00"）
+  at: string;
+  beforeText: string;
+  afterText: string;
+};
+
 export type GojetFeatureUpdate = {
   date: string;
   label: string;
@@ -13,6 +21,8 @@ export type GojetFeatureUpdate = {
   postUrl: string;
   homepageUrl: string;
   ctaLabel: string;
+  // 2つ目のボタン（予約・応援ページ）のラベル。未指定時は「公演ホームページへ」
+  homepageLabel?: string;
   // 告知画像・ストーリーズのスクリーンショットなどを自己ホストできた場合に表示する
   photo?: PromoImage;
   // 稽古写真を複数枚まとめて見せたい場合はこちら（photoと併用しない）
@@ -23,6 +33,7 @@ export type GojetFeatureUpdate = {
     poster: string;
     label: string;
   };
+  deadline?: GojetDeadline;
 };
 
 export type GojetTeamUpdate = {
@@ -45,6 +56,40 @@ export type GojetTeamUpdate = {
 };
 
 export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
+  {
+    date: "2026.7.16",
+    label: "合同稽古",
+    title: "刺激の多い合同稽古！A・B・C班それぞれの個性に注目",
+    body:
+      "#ゆかJETのA・B・C班が集まり、合同稽古を実施。班ごとに雰囲気も個性も大きく異なり、同じ作品でも班ごとに違った魅力を楽しめそうです。全班の見比べはもちろん、千秋楽LIVEにも注目です。笑顔いっぱいの集合写真や、エネルギッシュな稽古風景も公開中。",
+    postUrl: "https://x.com/yukako_produce/status/2077725000291975599",
+    homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+    ctaLabel: "公式Xの投稿を見る",
+    homepageLabel: "公演の予約・応援ページを見る",
+    deadline: {
+      at: "2026-07-16T23:59:59+09:00",
+      beforeText: "キャストCM枠は7月16日（木）23:59まで",
+      afterText: "キャストCM枠の受付は終了しました"
+    },
+    photos: [
+      {
+        src: "/images/yukako-yukajet-joint-rehearsal-2026-07-16-group.jpg",
+        alt: "#ゆかJET合同稽古に参加したキャスト・スタッフの集合写真"
+      },
+      {
+        src: "/images/yukako-yukajet-joint-rehearsal-2026-07-16-jump.jpg",
+        alt: "A・B・C班合同稽古でエネルギッシュに演技するキャスト"
+      },
+      {
+        src: "/images/yukako-yukajet-joint-rehearsal-2026-07-16-prop.jpg",
+        alt: "赤い小道具を使って演技を確認する合同稽古の様子"
+      },
+      {
+        src: "/images/yukako-yukajet-joint-rehearsal-2026-07-16-mic.jpg",
+        alt: "マイクを前に歌や演技の稽古を行うキャスト"
+      }
+    ]
+  },
   {
     date: "2026.7.15",
     label: "B班を観てほしい",
