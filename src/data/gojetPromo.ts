@@ -63,7 +63,7 @@ export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
     label: "本番まであと6日",
     title: "本番まであと6日。物販の郵送対応と稽古場の温かさ",
     body:
-      "#ゆかJET本番まであと6日。公式からは、ここからの変化・成長への期待と、当日ペンライトが使えることが届いています。優花子さんは引用投稿で、物販の郵送対応も自身で行うとお知らせ。「早紀」「JET」の2パターンを用意しているとのことで、当日会場に行けない方にも嬉しい案内です。稽古では写真を撮ってくれた仲間や、ヤクルト・じゃがりこを差し入れてくれた共演者に「みんなの温かさに感謝」とひとこと。本番に向けて支え合う稽古場の空気にも注目です。",
+      "#ゆかJET本番まであと6日。公式から、残りの稽古で各班がさらに変化していきそうだという案内と、当日はペンライトを使えることが届きました。優花子さんは、物販の郵送対応を自身で行うことと、「早紀」「JET」の2パターンを案内。写真を撮ってくれた共演者や差し入れへ、「みんなの温かさに感謝」。笑顔のツーショットも添えられています。",
     postUrl: "https://x.com/mokoopy/status/2078124078461038650?s=12",
     homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
     ctaLabel: "優花子さんのX投稿を見る",
@@ -72,7 +72,7 @@ export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
     photos: [
       {
         src: "/images/yukako-yukajet-countdown-goods-2026-07-17-lemon-drink.jpg",
-        alt: "#ゆかJETの稽古の合間に撮影された、ドリンクを手にした二人の笑顔のツーショット"
+        alt: "#ゆかJETの稽古場で、ドリンクを手に笑顔を見せる二人のツーショット"
       },
       {
         src: "/images/yukako-yukajet-countdown-goods-2026-07-17-snack.jpg",
