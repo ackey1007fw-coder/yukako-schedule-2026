@@ -304,6 +304,7 @@ export const imageManifest = {
   "/images/yukako-yukajet-cban-cast-video-poster-2026-07-13.jpg": {"width":720,"height":900,"widths":[360,480,720]},
   "/images/yukako-yukajet-cban-girls-2026-07-18-mirror.jpg": {"width":1103,"height":1483,"widths":[360,480,720,960,1103]},
   "/images/yukako-yukajet-cban-girls-2026-07-18-selfie.jpg": {"width":2048,"height":1536,"widths":[360,480,720,960,1280,1600,2048]},
+  "/images/yukako-yukajet-company-message-poster-2026-07-19.jpg": {"width":720,"height":1280,"widths":[360,480,720]},
   "/images/yukako-yukajet-countdown-goods-2026-07-17-lemon-drink.jpg": {"width":1536,"height":2048,"widths":[360,480,720,960,1280,1536]},
   "/images/yukako-yukajet-countdown-goods-2026-07-17-snack.jpg": {"width":2048,"height":1536,"widths":[360,480,720,960,1280,1600,2048]},
   "/images/yukako-yukajet-dual-role-2026-07-16-bban-scene.jpg": {"width":943,"height":1250,"widths":[360,480,720,943]},
@@ -327,7 +328,8 @@ export const imageManifest = {
   "/images/yukako-yukajet-rehearsal-video-poster-2026-07-06.jpg": {"width":720,"height":900,"widths":[360,480,720]},
   "/images/yukako-yukajet-rehearsal-video-poster-2026-07-07.jpg": {"width":720,"height":900,"widths":[360,480,720]},
   "/images/yukako-yukajet-rehearsal-video-poster-2026-07-08.jpg": {"width":540,"height":674,"widths":[360,480,540]},
-  "/images/yukako-yukajet-rehearsal-video-poster-2026-07-10.jpg": {"width":1080,"height":1350,"widths":[360,480,720,960,1080]}
+  "/images/yukako-yukajet-rehearsal-video-poster-2026-07-10.jpg": {"width":1080,"height":1350,"widths":[360,480,720,960,1080]},
+  "/images/yukako-yukajet-shiina-message-story-2026-07-19.jpg": {"width":3510,"height":6240,"widths":[360,480,720,960,1280,1600,3510]}
 } as const;
 
 export type ImageManifestPath = keyof typeof imageManifest;
