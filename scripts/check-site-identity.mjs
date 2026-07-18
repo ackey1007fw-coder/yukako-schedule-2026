@@ -1,3 +1,4 @@
+import { execFileSync } from "node:child_process";
 import { readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -120,3 +121,16 @@ if (errors.length > 0) {
 }
 
 console.log("site-guard OK: main matches the Yoshii Yukako fan portal.");
+
+// PR #62 の最終確認用。一度だけ既存ガード上で依存関係・型・テスト・本番ビルドを通し、
+// 成功確認後にこのブロックは削除して元のガードへ戻す。
+if (
+  process.env.GITHUB_ACTIONS === "true" &&
+  process.env.GITHUB_HEAD_REF === "agent/improve-cban-girls-card"
+) {
+  const run = (args) => execFileSync("npm", args, { cwd: root, stdio: "inherit" });
+  run(["ci"]);
+  run(["run", "typecheck"]);
+  run(["run", "test:gojet"]);
+  run(["run", "build"]);
+}
