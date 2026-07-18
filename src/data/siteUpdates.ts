@@ -12,6 +12,7 @@ export type SiteUpdate = {
   title: string;
   summary?: string;
   image?: { src: string; alt: string };
+  imageLayout?: "portrait-preview";
   // 元投稿（X / Instagram など）への外部リンク
   sourceUrl?: string;
   // サイト内で詳しく読めるセクションへのアンカー
@@ -38,13 +39,14 @@ const standaloneUpdates: SiteUpdate[] = [
     id: "gojet-shiina-message-2026-07-19",
     date: "2026.7.19",
     category: "#ゆかJET",
-    title: "“最後まで一緒に、楽しく誠実に”――仲間と育てる #ゆかJET",
+    title: "最後まで一緒に、楽しく誠実に——仲間と育てる #ゆかJET",
     summary:
-      "C班あかね役・しいなさんから寄せられた温かな言葉と、笑顔あふれるカンパニーの集合動画。最後の『GO,JET!』出演・プロデュース公演へ向かう、仲間たちの信頼と和やかな空気です。",
+      "C班・あかね役のしいなさんから寄せられた尊敬の言葉と、優花子さんからの感謝。集合動画には、最後の『GO,JET!』出演へ向かうカンパニーの温かな空気も。",
     image: {
-      src: "/images/yukako-yukajet-shiina-message-story-2026-07-19.jpg",
-      alt: "C班あかね役のしいなさんから吉井優花子さんへ寄せられたメッセージと、二人の写真"
+      src: "/images/yukako-yukajet-shiina-message-story-2026-07-19-web.jpg",
+      alt: "C班・あかね役のしいなさんが寄せたメッセージと、吉井優花子さんが感謝を添えたInstagramストーリーズ"
     },
+    imageLayout: "portrait-preview",
     anchor: "#gojet-shiina-message"
   },
   {

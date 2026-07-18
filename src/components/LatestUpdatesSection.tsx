@@ -45,7 +45,11 @@ export function LatestUpdatesSection() {
                     alt={update.image.alt}
                     loading="lazy"
                     decoding="async"
-                    className="block h-auto w-full sm:aspect-[4/3] sm:object-cover sm:object-top"
+                    className={
+                      update.imageLayout === "portrait-preview"
+                        ? "block aspect-[4/3] w-full object-cover object-top"
+                        : "block h-auto w-full sm:aspect-[4/3] sm:object-cover sm:object-top"
+                    }
                   />
                 </a>
               )}

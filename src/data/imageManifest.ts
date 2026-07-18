@@ -329,6 +329,7 @@ export const imageManifest = {
   "/images/yukako-yukajet-rehearsal-video-poster-2026-07-07.jpg": {"width":720,"height":900,"widths":[360,480,720]},
   "/images/yukako-yukajet-rehearsal-video-poster-2026-07-08.jpg": {"width":540,"height":674,"widths":[360,480,540]},
   "/images/yukako-yukajet-rehearsal-video-poster-2026-07-10.jpg": {"width":1080,"height":1350,"widths":[360,480,720,960,1080]},
+  "/images/yukako-yukajet-shiina-message-story-2026-07-19-web.jpg": {"width":1600,"height":2844,"widths":[360,480,720,960,1280,1600]},
   "/images/yukako-yukajet-shiina-message-story-2026-07-19.jpg": {"width":3510,"height":6240,"widths":[360,480,720,960,1280,1600,3510]}
 } as const;
 
