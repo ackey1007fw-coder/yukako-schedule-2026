@@ -10,13 +10,31 @@ export type DisplayGojetFeatureUpdate = GojetFeatureUpdate & {
   primaryCta?: "post" | "homepage";
 };
 
+const FINAL_GOJET_POST_URL =
+  "https://x.com/mokoopy/status/2078466058168791234";
 const CBAN_GIRLS_POST_URL =
   "https://x.com/mokoopy/status/2078281074199982129";
 
+const finalGojetUpdate: DisplayGojetFeatureUpdate = {
+  date: "2026.7.18",
+  label: "大切なお知らせ",
+  title: "ガールズもGO,JET!も、これが最後。#ゆかJETで大切な幕引きへ",
+  body:
+    "「私は、ガールズもGO,JET!も最後になります」——優花子さんが、今回の#ゆかJETをひとつの節目にすると明かしました。自身がプロデュースする特別で大切な公演で、ガールズとGO,JET!の歩みに幕を下ろします。最後のガールズ、そして最後のGO,JET!を、劇場や配信で見届けたい。",
+  postUrl: FINAL_GOJET_POST_URL,
+  homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+  ctaLabel: "優花子さん本人のメッセージを見る",
+  homepageLabel: "公演日程・予約を見る",
+  roleTags: ["最後のガールズ", "最後のGO,JET!", "引用投稿"],
+  anchorId: "gojet-final-message-2026-07-18",
+  primaryCta: "homepage"
+};
+
 // 元投稿データは維持しつつ、表示上の文章・導線に必要な情報だけを補う。
 // 今後、同様の個別最適化が増えた場合は GojetFeatureUpdate 本体への統合を検討する。
-export const gojetFeatureUpdates: DisplayGojetFeatureUpdate[] = sourceUpdates.map(
-  (update) => {
+const decoratedSourceUpdates: DisplayGojetFeatureUpdate[] = sourceUpdates
+  .filter((update) => update.postUrl !== FINAL_GOJET_POST_URL)
+  .map((update) => {
     if (update.postUrl !== CBAN_GIRLS_POST_URL) return update;
 
     return {
@@ -31,5 +49,9 @@ export const gojetFeatureUpdates: DisplayGojetFeatureUpdate[] = sourceUpdates.ma
       anchorId: "gojet-cban-girls-2026-07-18",
       primaryCta: "homepage"
     };
-  }
-);
+  });
+
+export const gojetFeatureUpdates: DisplayGojetFeatureUpdate[] = [
+  finalGojetUpdate,
+  ...decoratedSourceUpdates
+];
