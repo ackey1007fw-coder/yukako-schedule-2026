@@ -12,6 +12,7 @@ export type DisplayGojetFeatureUpdate = GojetFeatureUpdate & {
 
 const FINAL_GOJET_POST_URL =
   "https://x.com/mokoopy/status/2078466058168791234";
+const YUKAKO_X_PROFILE_URL = "https://x.com/mokoopy";
 const CBAN_GIRLS_POST_URL =
   "https://x.com/mokoopy/status/2078281074199982129";
 
@@ -21,9 +22,10 @@ const finalGojetUpdate: DisplayGojetFeatureUpdate = {
   title: "ガールズもGO,JET!も、これが最後。特別な#ゆかJETへ",
   body:
     "「私は、ガールズもGO,JET!も最後になります」——締めくくりの舞台は、自身でプロデュースする特別な#ゆかJET。最後のガールズ、最後のGO,JET!を、劇場や配信で見届けたい。",
-  postUrl: FINAL_GOJET_POST_URL,
+  // 元投稿は削除済みのため、現在閲覧できる本人プロフィールへ案内する。
+  postUrl: YUKAKO_X_PROFILE_URL,
   homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
-  ctaLabel: "優花子さん本人のメッセージを見る",
+  ctaLabel: "優花子さんのXプロフィールを見る",
   homepageLabel: "公演日程・予約を見る",
   roleTags: ["最後のガールズ", "最後のGO,JET!", "引用投稿"],
   anchorId: "gojet-final-message-2026-07-18",
