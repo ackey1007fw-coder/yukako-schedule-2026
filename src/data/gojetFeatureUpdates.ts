@@ -20,7 +20,7 @@ const finalGojetUpdate: DisplayGojetFeatureUpdate = {
   label: "大切なお知らせ",
   title: "ガールズもGO,JET!も、これが最後。#ゆかJETで大切な幕引きへ",
   body:
-    "「私は、ガールズもGO,JET!も最後になります」——優花子さんが、今回の#ゆかJETをひとつの節目にすると明かしました。自身がプロデュースする特別で大切な公演で、ガールズとGO,JET!の歩みに幕を下ろします。最後のガールズ、そして最後のGO,JET!を、劇場や配信で見届けたい。",
+    "「私は、ガールズもGO,JET!も最後になります」——優花子さんから、大切なお知らせ。自分でプロデュースする特別な#ゆかJETで、ガールズとGO,JET!に幕を下ろします。最後のガールズ、そして最後のGO,JET!を、劇場や配信で見届けたい。",
   postUrl: FINAL_GOJET_POST_URL,
   homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
   ctaLabel: "優花子さん本人のメッセージを見る",
