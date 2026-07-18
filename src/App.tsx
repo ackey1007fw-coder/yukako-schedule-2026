@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { Analytics } from "@vercel/analytics/react";
 import { ActionStrip } from "./components/ActionStrip";
 import { AkitaRootsSection } from "./components/AkitaRootsSection";
@@ -35,27 +34,10 @@ import {
   sortEventsAsc,
   sortEventsDesc
 } from "./lib/date";
-import { fetchSchedule, getInitialSchedule } from "./lib/scheduleApi";
-import type { ScheduleData } from "./types/schedule";
+import { useSchedule } from "./lib/useSchedule";
 
 function App() {
-  const [schedule, setSchedule] = useState<ScheduleData>(() => getInitialSchedule());
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    let isMounted = true;
-
-    fetchSchedule().then((data) => {
-      if (!isMounted) return;
-      setSchedule(data);
-      setIsLoading(false);
-    });
-
-    return () => {
-      isMounted = false;
-    };
-  }, []);
-
+  const { schedule, isLoading } = useSchedule();
   const { events, socialLinks, mediaLinks, source, updatedAt } = schedule;
   const now = new Date();
   const upcomingEvents = sortEventsAsc(

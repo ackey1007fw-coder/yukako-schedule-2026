@@ -8,6 +8,7 @@ const navItems = [
   { label: "公演情報", href: "#next", id: "next" },
   { label: "スケジュール", href: "#schedule", id: "schedule" },
   { label: "これまでの歩み", href: "#highlights", id: "highlights" },
+  { label: "アーカイブ", href: "/archive", id: "archive" },
   { label: "プロフィール", href: "#profile", id: "profile" },
   { label: "SNS", href: "#links", id: "links" }
 ];

@@ -280,6 +280,7 @@ export const imageManifest = {
   "/images/yukako-gojet-poster.jpg": {"width":1448,"height":2048,"widths":[360,480,720,960,1280,1448]},
   "/images/yukako-hero-hall.jpg": {"width":1170,"height":1560,"widths":[360,480,720,960,1170]},
   "/images/yukako-mgj-award.jpg": {"width":1111,"height":1516,"widths":[360,480,720,960,1111]},
+  "/images/yukako-miss-grand-japan-2025-peace-trophy.jpg": {"width":1536,"height":2048,"widths":[360,480,720,960,1280,1536]},
   "/images/yukako-noodles.jpg": {"width":1536,"height":2048,"widths":[360,480,720,960,1280,1536]},
   "/images/yukako-pink-brown-hair-2026-07-15.jpg": {"width":1170,"height":1560,"widths":[360,480,720,960,1170]},
   "/images/yukako-portrait.jpg": {"width":1366,"height":2048,"widths":[360,480,720,960,1280,1366]},

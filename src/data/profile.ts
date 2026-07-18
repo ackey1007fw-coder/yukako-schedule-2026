@@ -34,7 +34,10 @@ export const profile = {
     },
     {
       label: "受賞歴",
-      value: "Miss Grand Japan 2025 MISS PEACE賞 / Miss Cosmo Japan 2024 TOP5（ポイントランキング1位）"
+      value: "Miss Grand Japan 2025 MISS PEACE賞 / Miss Cosmo Japan 2024 TOP5（ポイントランキング1位）",
+      links: [
+        { text: "Miss Grand Japan 2025 MISS PEACE賞", url: "/archive/miss-grand-japan-2025-miss-peace" }
+      ]
     },
     {
       label: "役職",

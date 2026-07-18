@@ -1,7 +1,53 @@
-import { BookOpenText, ExternalLink, HeartHandshake, Star } from "lucide-react";
+import type { ReactNode } from "react";
+import { ArrowUpRight, BookOpenText, ExternalLink, HeartHandshake, Star } from "lucide-react";
 import { profile } from "../data/profile";
 import { getResponsiveImageProps } from "../lib/responsiveImage";
 import { ActHeader } from "./ActHeader";
+
+type FactLink = { text: string; url: string };
+
+// fact.value の中に fact.links で指定した文言があれば、その部分だけをリンクに差し替える。
+// 例:「受賞歴」の中の「Miss Grand Japan 2025 MISS PEACE賞」だけをアーカイブ記事へのリンクにする。
+function renderFactValue(value: string, links?: FactLink[]): ReactNode {
+  if (!links || links.length === 0) return value;
+
+  const nodes: ReactNode[] = [];
+  let remaining = value;
+  let key = 0;
+
+  while (remaining.length > 0) {
+    const next = links
+      .map((link) => ({ link, index: remaining.indexOf(link.text) }))
+      .filter((entry) => entry.index !== -1)
+      .sort((a, b) => a.index - b.index)[0];
+
+    if (!next) {
+      nodes.push(<span key={key++}>{remaining}</span>);
+      break;
+    }
+
+    if (next.index > 0) {
+      nodes.push(<span key={key++}>{remaining.slice(0, next.index)}</span>);
+    }
+
+    const isInternal = next.link.url.startsWith("/");
+    nodes.push(
+      <a
+        key={key++}
+        href={next.link.url}
+        {...(isInternal ? {} : { target: "_blank", rel: "noopener noreferrer" })}
+        className="inline-flex items-center gap-0.5 font-bold text-rosefog underline decoration-champagne decoration-2 underline-offset-2 transition hover:text-champagneInk"
+      >
+        {next.link.text}
+        <ArrowUpRight className="h-3 w-3 shrink-0 text-champagne" aria-hidden="true" />
+      </a>,
+    );
+
+    remaining = remaining.slice(next.index + next.link.text.length);
+  }
+
+  return nodes;
+}
 
 export function ProfileSection() {
   return (
@@ -59,7 +105,7 @@ export function ProfileSection() {
                   {fact.label}
                 </div>
                 <div className="px-4 py-4 text-sm font-semibold leading-7 text-ink/75">
-                  {fact.value}
+                  {renderFactValue(fact.value, "links" in fact ? fact.links : undefined)}
                 </div>
               </div>
             ))}
