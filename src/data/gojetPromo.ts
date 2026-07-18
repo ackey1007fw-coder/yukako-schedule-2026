@@ -59,6 +59,28 @@ export type GojetTeamUpdate = {
 
 export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
   {
+    date: "2026.7.18",
+    label: "C班ガールズ",
+    title: "C班ガールズはまだまだ模索中。3人で目指す「絶対良いもの」",
+    body:
+      "#ゆかJETのC班で早紀を演じる優花子さんが、GO,JET! Girlsの3人で模索を重ねる稽古の現在を投稿。「ガールズもまだまだ模索中なのが新鮮」「絶対良いものになる」と、本番へ向けた期待を伝えています。優花子さん自身が「私にとっては最後のガールズ」と表現し、共演する二人と楽しく頑張る決意も綴りました。明るい3ショットとともに、C班を観てほしいと呼びかけています。",
+    postUrl: "https://x.com/mokoopy/status/2078281074199982129",
+    homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+    ctaLabel: "優花子さんのX投稿を見る",
+    homepageLabel: "C班の公演・予約情報を見る",
+    roleTags: ["C班：早紀", "GO,JET! Girls", "C班"],
+    photos: [
+      {
+        src: "/images/yukako-yukajet-cban-girls-2026-07-18-selfie.jpg",
+        alt: "#ゆかJETのC班で、GO,JET! Girlsの3人がポーズを見せる自撮り写真"
+      },
+      {
+        src: "/images/yukako-yukajet-cban-girls-2026-07-18-mirror.jpg",
+        alt: "#ゆかJETの稽古場で、鏡越しに撮影されたC班のGO,JET! Girls3人の集合写真"
+      }
+    ]
+  },
+  {
     date: "2026.7.17",
     label: "本番まであと6日",
     title: "本番まであと6日。物販の郵送対応と稽古場の温かさ",
