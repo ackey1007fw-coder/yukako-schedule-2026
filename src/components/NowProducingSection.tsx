@@ -194,6 +194,7 @@ function PromoLightbox({
 export function NowProducingSection({ event, now }: NowProducingSectionProps) {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [showAllUpdates, setShowAllUpdates] = useState(false);
+  const [hashTarget, setHashTarget] = useState<string | null>(null);
   const [currentTime, setCurrentTime] = useState(() => now ?? new Date());
 
   useEffect(() => {
@@ -205,6 +206,42 @@ export function NowProducingSection({ event, now }: NowProducingSectionProps) {
     const timer = window.setInterval(() => setCurrentTime(new Date()), CLOCK_UPDATE_MS);
     return () => window.clearInterval(timer);
   }, [now]);
+
+  useEffect(() => {
+    const revealHashTarget = () => {
+      const anchorId = window.location.hash.slice(1);
+      if (!anchorId) return;
+
+      const targetIndex = gojetFeatureUpdates.findIndex(
+        (update) => update.anchorId === anchorId,
+      );
+      if (targetIndex < 0) return;
+
+      if (targetIndex >= INITIAL_VISIBLE_UPDATES) {
+        setShowAllUpdates(true);
+      }
+      setHashTarget(anchorId);
+    };
+
+    revealHashTarget();
+    window.addEventListener("hashchange", revealHashTarget);
+    return () => window.removeEventListener("hashchange", revealHashTarget);
+  }, []);
+
+  useEffect(() => {
+    if (!hashTarget) return undefined;
+
+    // 一覧展開後に対象カードがDOMへ入ってからスクロールする。
+    const frame = window.requestAnimationFrame(() => {
+      const target = document.getElementById(hashTarget);
+      if (!target) return;
+
+      target.scrollIntoView({ behavior: "instant", block: "start" });
+      setHashTarget(null);
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [hashTarget, showAllUpdates]);
+
   const visibleUpdates = showAllUpdates
     ? gojetFeatureUpdates
     : gojetFeatureUpdates.slice(0, INITIAL_VISIBLE_UPDATES);

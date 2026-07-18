@@ -18,9 +18,9 @@ const CBAN_GIRLS_POST_URL =
 const finalGojetUpdate: DisplayGojetFeatureUpdate = {
   date: "2026.7.18",
   label: "大切なお知らせ",
-  title: "ガールズもGO,JET!も、これが最後。#ゆかJETで大切な幕引きへ",
+  title: "ガールズもGO,JET!も、これが最後。特別な#ゆかJETへ",
   body:
-    "「私は、ガールズもGO,JET!も最後になります」——優花子さんから、大切なお知らせ。自分でプロデュースする特別な#ゆかJETで、ガールズとGO,JET!に幕を下ろします。最後のガールズ、そして最後のGO,JET!を、劇場や配信で見届けたい。",
+    "「私は、ガールズもGO,JET!も最後になります」——締めくくりの舞台は、自身でプロデュースする特別な#ゆかJET。最後のガールズ、最後のGO,JET!を、劇場や配信で見届けたい。",
   postUrl: FINAL_GOJET_POST_URL,
   homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
   ctaLabel: "優花子さん本人のメッセージを見る",

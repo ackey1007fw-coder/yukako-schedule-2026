@@ -78,10 +78,6 @@ const standaloneUpdates: SiteUpdate[] = [
   }
 ];
 
-// NowProducingSectionの折りたたみ前にDOMへ載る件数と揃える。
-// 初期表示外の記事は、存在しない固有アンカーではなく特集セクション先頭へ案内する。
-const INITIAL_VISIBLE_GOJET_UPDATES = 2;
-
 const gojetUpdates: SiteUpdate[] = gojetFeatureUpdates.map((update, index) => ({
   id: update.anchorId ?? `gojet-feature-${index}`,
   date: update.date,
@@ -95,10 +91,8 @@ const gojetUpdates: SiteUpdate[] = gojetFeatureUpdates.map((update, index) => ({
       ? { src: update.video.poster, alt: update.video.label }
       : undefined),
   sourceUrl: update.postUrl,
-  anchor:
-    update.anchorId && index < INITIAL_VISIBLE_GOJET_UPDATES
-      ? `#${update.anchorId}`
-      : "#next"
+  // NowProducingSection側でハッシュ対象を自動展開するため、固有アンカーを維持する。
+  anchor: update.anchorId ? `#${update.anchorId}` : "#next"
 }));
 
 // news はトピックが gojetFeatureUpdates や単発セクションと重なるものがあるため、同じ元投稿URLは除外する
