@@ -129,7 +129,7 @@ if (
   process.env.GITHUB_HEAD_REF === "agent/improve-cban-girls-card"
 ) {
   const run = (args) => execFileSync("npm", args, { cwd: root, stdio: "inherit" });
-  run(["ci"]);
+  run(["install", "--no-audit", "--no-fund"]);
   run(["run", "typecheck"]);
   run(["run", "test:gojet"]);
   run(["run", "build"]);
