@@ -82,6 +82,36 @@ export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
   },
   {
     date: "2026.7.17",
+    label: "公式ご来場案内",
+    title: "本番まであと6日。ペンライト・物販などの公式案内",
+    body:
+      "#ゆかJET本番まであと6日。ご来場前に確認しておきたい公式案内がまとまりました。ペンライトは持ち込み・使用OK。基本はオフにし、ノリノリな曲やしっとりした曲で一緒に楽しむ案内です。当日の物販、ご来場時のお願い、相関図と公演日程、A・B・C班のキャスト紹介も4枚で確認できます。",
+    postUrl: "https://x.com/yukako_produce/status/2078114663041208357?s=12",
+    homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+    ctaLabel: "公式Xの投稿を見る",
+    homepageLabel: "公演の予約・物販情報を見る",
+    roleTags: ["公式案内", "ペンライトOK", "物販情報"],
+    photos: [
+      {
+        src: "/images/yukako-yukajet-official-guide-2026-07-17-visitor-info.jpg",
+        alt: "ご来場時の注意とペンライト・撮影・プレゼントなどの観劇マナー案内"
+      },
+      {
+        src: "/images/yukako-yukajet-official-guide-2026-07-17-goods.jpg",
+        alt: "#ゆかJETのブロマイド、チェキ、クリアファイルの物販案内"
+      },
+      {
+        src: "/images/yukako-yukajet-official-guide-2026-07-17-schedule.jpg",
+        alt: "#ゆかJETの相関図とA・B・C班の公演日程案内"
+      },
+      {
+        src: "/images/yukako-yukajet-official-guide-2026-07-17-cast.jpg",
+        alt: "#ゆかJETのA・B・C班キャスト紹介"
+      }
+    ]
+  },
+  {
+    date: "2026.7.17",
     label: "稽古の舞台裏",
     title: "笑いをこらえるのも難関？B班稽古の楽しい舞台裏",
     body:
