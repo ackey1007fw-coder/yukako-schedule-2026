@@ -1,0 +1,280 @@
+name: Temporary improve C班 card
+
+on:
+  push:
+    branches:
+      - agent/improve-cban-girls-card
+
+permissions:
+  contents: write
+
+jobs:
+  improve-card:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: agent/improve-cban-girls-card
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Apply focused UX improvements
+        shell: python
+        run: |
+          from pathlib import Path
+
+          def replace_once(text: str, old: str, new: str, label: str) -> str:
+              count = text.count(old)
+              if count != 1:
+                  raise SystemExit(f"{label}: expected exactly 1 match, found {count}")
+              return text.replace(old, new, 1)
+
+          promo_path = Path("src/data/gojetPromo.ts")
+          promo = promo_path.read_text(encoding="utf-8")
+
+          promo = replace_once(
+              promo,
+              '''  // 役柄タグ(例: "B班：JET")。見出し下に小さなバッジとして並べる
+  roleTags?: string[];
+};''',
+              '''  // 役柄タグ(例: "B班：JET")。見出し下に小さなバッジとして並べる
+  roleTags?: string[];
+  // トップの最新情報から対象カードへ直接移動するための任意アンカー
+  anchorId?: string;
+  // 記事ごとに、公演情報と元投稿のどちらを主CTAにするか指定する
+  primaryCta?: "post" | "homepage";
+};''',
+              "GojetFeatureUpdate fields",
+          )
+
+          promo = replace_once(
+              promo,
+              '''    title: "C班ガールズはまだまだ模索中。3人で目指す「絶対良いもの」",
+    body:
+      "#ゆかJETのC班で早紀を演じる優花子さんが、GO,JET! Girlsの3人で模索を重ねる稽古の現在を投稿。「ガールズもまだまだ模索中なのが新鮮」「絶対良いものになる」と、本番へ向けた期待を伝えています。優花子さん自身が「私にとっては最後のガールズ」と表現し、共演する二人と楽しく頑張る決意も綴りました。明るい3ショットとともに、C班を観てほしいと呼びかけています。",
+    postUrl: "https://x.com/mokoopy/status/2078281074199982129",
+    homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+    ctaLabel: "優花子さんのX投稿を見る",
+    homepageLabel: "C班の公演・予約情報を見る",
+    roleTags: ["C班：早紀", "GO,JET! Girls", "C班"],''',
+              '''    title: "まだ模索中だからこそ面白い。C班ガールズ3人でつくる「絶対良いもの」",
+    body:
+      "#ゆかJETのC班で早紀を演じる優花子さんが、GO,JET! Girlsの3人で稽古に取り組む姿を投稿。「まだまだ模索中なのが新鮮」「絶対良いものになる」と、本番へ向けて試行錯誤する今の空気を伝えています。完成前だからこそ、3人が舞台でどんな関係性を見せるのかが楽しみになる投稿です。写真と本人の言葉はXで、C班の日程・予約は公演ページで確認できます。",
+    postUrl: "https://x.com/mokoopy/status/2078281074199982129",
+    homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+    ctaLabel: "優花子さんの投稿と写真を見る",
+    homepageLabel: "C班の日程・予約を見る",
+    roleTags: ["C班：早紀", "GO,JET! Girls", "引用投稿"],
+    anchorId: "gojet-cban-girls-2026-07-18",
+    primaryCta: "homepage",''',
+              "C班記事 content",
+          )
+          promo_path.write_text(promo, encoding="utf-8")
+
+          site_updates_path = Path("src/data/siteUpdates.ts")
+          site_updates = site_updates_path.read_text(encoding="utf-8")
+          site_updates = replace_once(
+              site_updates,
+              '''const gojetUpdates: SiteUpdate[] = gojetFeatureUpdates.map((update, index) => ({
+  id: `gojet-feature-${index}`,''',
+              '''const gojetUpdates: SiteUpdate[] = gojetFeatureUpdates.map((update, index) => ({
+  id: update.anchorId ?? `gojet-feature-${index}`,''',
+              "site update id",
+          )
+          site_updates = replace_once(
+              site_updates,
+              '''  sourceUrl: update.postUrl,
+  anchor: "#next"
+}));''',
+              '''  sourceUrl: update.postUrl,
+  anchor: update.anchorId ? `#${update.anchorId}` : "#next"
+}));''',
+              "site update anchor",
+          )
+          site_updates_path.write_text(site_updates, encoding="utf-8")
+
+          section_path = Path("src/components/NowProducingSection.tsx")
+          section = section_path.read_text(encoding="utf-8")
+          section = replace_once(
+              section,
+              '''import { gojetFeatureUpdates, gojetPromoImages } from "../data/gojetPromo";''',
+              '''import {
+  gojetFeatureUpdates,
+  gojetPromoImages,
+  type GojetFeatureUpdate
+} from "../data/gojetPromo";''',
+              "gojet import",
+          )
+
+          section = replace_once(
+              section,
+              '''const wrapIndex = (index: number) =>
+  (index + gojetPromoImages.length) % gojetPromoImages.length;
+
+// 稽古写真・告知資料''',
+              '''const wrapIndex = (index: number) =>
+  (index + gojetPromoImages.length) % gojetPromoImages.length;
+
+function PostSourceIcon({ url, className }: { url: string; className?: string }) {
+  if (url.includes("instagram.com")) {
+    return <Instagram className={className} aria-hidden="true" />;
+  }
+
+  return <ExternalLink className={className} aria-hidden="true" />;
+}
+
+function UpdateLinkButtons({ update }: { update: GojetFeatureUpdate }) {
+  const homepageIsPrimary = update.primaryCta === "homepage";
+  const postButton = (
+    <a
+      href={update.postUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`yukako-button min-h-12 px-4 py-3 text-sm ${
+        homepageIsPrimary ? "yukako-button-ghost" : "yukako-button-gold"
+      }`}
+    >
+      <PostSourceIcon
+        url={update.postUrl}
+        className={`h-4 w-4 ${homepageIsPrimary ? "text-champagne" : ""}`}
+      />
+      {update.ctaLabel}
+    </a>
+  );
+  const homepageButton = (
+    <a
+      href={update.homepageUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`yukako-button min-h-12 px-4 py-3 text-sm ${
+        homepageIsPrimary ? "yukako-button-gold" : "yukako-button-ghost"
+      }`}
+    >
+      <ExternalLink
+        className={`h-4 w-4 ${homepageIsPrimary ? "" : "text-champagne"}`}
+        aria-hidden="true"
+      />
+      {update.homepageLabel ?? "公演ホームページへ"}
+    </a>
+  );
+
+  return (
+    <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
+      {homepageIsPrimary ? (
+        <>
+          {homepageButton}
+          {postButton}
+        </>
+      ) : (
+        <>
+          {postButton}
+          {homepageButton}
+        </>
+      )}
+    </div>
+  );
+}
+
+// 稽古写真・告知資料''',
+              "link button helper",
+          )
+
+          section = replace_once(
+              section,
+              '''                    <div
+                      key={update.postUrl}
+                      className="border border-champagne/35 bg-white/[0.07] p-3 shadow-paper sm:p-4"
+                    >''',
+              '''                    <div
+                      id={update.anchorId}
+                      key={update.postUrl}
+                      className="scroll-mt-28 border border-champagne/35 bg-white/[0.07] p-3 shadow-paper sm:p-4"
+                    >''',
+              "update card anchor",
+          )
+
+          section = replace_once(
+              section,
+              '''                      <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
+                        <a
+                          href={update.postUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="yukako-button yukako-button-gold min-h-12 px-4 py-3 text-sm"
+                        >
+                          {update.postUrl.includes("instagram.com") ? (
+                            <Instagram className="h-4 w-4" aria-hidden="true" />
+                          ) : (
+                            <Music className="h-4 w-4" aria-hidden="true" />
+                          )}
+                          {update.ctaLabel}
+                        </a>
+                        <a
+                          href={update.homepageUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="yukako-button yukako-button-ghost min-h-12 px-4 py-3 text-sm"
+                        >
+                          <ExternalLink className="h-4 w-4 text-champagne" aria-hidden="true" />
+                          {update.homepageLabel ?? "公演ホームページへ"}
+                        </a>
+                      </div>''',
+              '''                      <UpdateLinkButtons update={update} />''',
+              "update CTA block",
+          )
+          section_path.write_text(section, encoding="utf-8")
+
+      - name: Validate focused behavior
+        shell: python
+        run: |
+          from pathlib import Path
+
+          promo = Path("src/data/gojetPromo.ts").read_text(encoding="utf-8")
+          section = Path("src/components/NowProducingSection.tsx").read_text(encoding="utf-8")
+          updates = Path("src/data/siteUpdates.ts").read_text(encoding="utf-8")
+
+          checks = {
+              "new title": "まだ模索中だからこそ面白い。C班ガールズ3人でつくる「絶対良いもの」" in promo,
+              "misleading phrase removed from target": "私にとっては最後のガールズ" not in promo,
+              "quote tag": 'roleTags: ["C班：早紀", "GO,JET! Girls", "引用投稿"]' in promo,
+              "anchor id": 'anchorId: "gojet-cban-girls-2026-07-18"' in promo,
+              "homepage primary": 'primaryCta: "homepage"' in promo,
+              "direct anchor mapping": 'anchor: update.anchorId ? `#${update.anchorId}` : "#next"' in updates,
+              "card anchor": "id={update.anchorId}" in section,
+              "scroll offset": "scroll-mt-28" in section,
+              "external source icon": "function PostSourceIcon" in section,
+          }
+          failed = [name for name, passed in checks.items() if not passed]
+          if failed:
+              raise SystemExit("Failed focused checks: " + ", ".join(failed))
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Existing #ゆかJET tests
+        run: npm run test:gojet
+
+      - name: Production build
+        run: npm run build
+
+      - name: Site identity check
+        run: node scripts/check-site-identity.mjs main
+
+      - name: Commit implementation and remove temporary workflow
+        run: |
+          rm .github/workflows/temporary-improve-cban-card.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/gojetPromo.ts src/data/siteUpdates.ts src/components/NowProducingSection.tsx .github/workflows/temporary-improve-cban-card.yml
+          git commit -m "#ゆかJET: C班ガールズ記事の導線と表現を改善"
+          git push origin HEAD:agent/improve-cban-girls-card
