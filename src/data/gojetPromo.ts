@@ -60,6 +60,40 @@ export type GojetTeamUpdate = {
 export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
   {
     date: "2026.7.18",
+    label: "B班稽古",
+    title: "笑いの絶えないB班稽古。女性だけのGO,JET!を劇場で",
+    body:
+      "#ゆかJET B班の稽古の様子。前日投稿した物販案内(早紀・JETの2パターン)を引用し、優花子さんは「写真で伝わるボケの渋滞🍈(毎回)」とコメント。女性のみでGO,JET!を演じるとどんな仕上がりになるのか、「想像以上に良いものが見られるはず」と、B班・C班・千秋楽LIVEへの来場・配信視聴を呼びかけています。",
+    postUrl: "https://x.com/mokoopy/status/2078443764117639635",
+    homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+    ctaLabel: "優花子さんのX投稿を見る",
+    homepageLabel: "B班・C班・LIVEの公演情報を見る",
+    roleTags: ["B班：JET", "女性のみのB班", "引用投稿"],
+    photos: [
+      {
+        src: "/images/yukako-yukajet-bban-rehearsal-2026-07-18-collage-face.jpg",
+        alt: "#ゆかJETの稽古で、黄色い髪飾りをつけコミカルな表情を見せながら、キャストの集合写真を手に持つ吉井優花子さん"
+      },
+      {
+        src: "/images/yukako-yukajet-bban-rehearsal-2026-07-18-floor-chat.jpg",
+        alt: "#ゆかJETの稽古場で、床に座って談笑するB班キャストたちの写真"
+      },
+      {
+        src: "/images/yukako-yukajet-bban-rehearsal-2026-07-18-group-pose.jpg",
+        alt: "#ゆかJETのB班キャストが全員でエネルギッシュにポーズを決める集合写真"
+      },
+      {
+        src: "/images/yukako-yukajet-bban-rehearsal-2026-07-18-lying-down.jpg",
+        alt: "#ゆかJETの稽古場で、床に横たわりくつろぐB班キャストたちの写真"
+      },
+      {
+        src: "/images/yukako-yukajet-bban-rehearsal-2026-07-18-floor-group.jpg",
+        alt: "#ゆかJETの稽古後、床に放射状に横たわるB班キャスト全員の写真"
+      }
+    ]
+  },
+  {
+    date: "2026.7.18",
     label: "C班ガールズ",
     title: "C班ガールズはまだまだ模索中。3人で目指す「絶対良いもの」",
     body:
