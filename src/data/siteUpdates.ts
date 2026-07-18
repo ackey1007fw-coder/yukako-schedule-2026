@@ -1,4 +1,4 @@
-import { gojetFeatureUpdates } from "./gojetPromo";
+import { gojetFeatureUpdates } from "./gojetFeatureUpdates";
 import { news } from "./news";
 import { galleryUpdate } from "./photos";
 import siteContent from "./siteContent.json";
@@ -79,7 +79,7 @@ const standaloneUpdates: SiteUpdate[] = [
 ];
 
 const gojetUpdates: SiteUpdate[] = gojetFeatureUpdates.map((update, index) => ({
-  id: `gojet-feature-${index}`,
+  id: update.anchorId ?? `gojet-feature-${index}`,
   date: update.date,
   category: "#ゆかJET",
   title: update.title,
@@ -91,7 +91,7 @@ const gojetUpdates: SiteUpdate[] = gojetFeatureUpdates.map((update, index) => ({
       ? { src: update.video.poster, alt: update.video.label }
       : undefined),
   sourceUrl: update.postUrl,
-  anchor: "#next"
+  anchor: update.anchorId ? `#${update.anchorId}` : "#next"
 }));
 
 // news はトピックが gojetFeatureUpdates や単発セクションと重なるものがあるため、同じ元投稿URLは除外する

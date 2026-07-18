@@ -19,7 +19,11 @@ import {
   Users,
   X
 } from "lucide-react";
-import { gojetFeatureUpdates, gojetPromoImages } from "../data/gojetPromo";
+import {
+  gojetFeatureUpdates,
+  type DisplayGojetFeatureUpdate
+} from "../data/gojetFeatureUpdates";
+import { gojetPromoImages } from "../data/gojetPromo";
 import { isPastDeadline } from "../lib/date";
 import { getResponsiveImageProps } from "../lib/responsiveImage";
 import { googleCalendarUrl } from "../lib/share";
@@ -45,6 +49,66 @@ const roles = [
 
 const wrapIndex = (index: number) =>
   (index + gojetPromoImages.length) % gojetPromoImages.length;
+
+function PostSourceIcon({ url, className }: { url: string; className?: string }) {
+  if (url.includes("instagram.com")) {
+    return <Instagram className={className} aria-hidden="true" />;
+  }
+
+  return <ExternalLink className={className} aria-hidden="true" />;
+}
+
+function UpdateLinkButtons({ update }: { update: DisplayGojetFeatureUpdate }) {
+  const homepageIsPrimary = update.primaryCta === "homepage";
+  const postButton = (
+    <a
+      href={update.postUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`yukako-button min-h-12 px-4 py-3 text-sm ${
+        homepageIsPrimary ? "yukako-button-ghost" : "yukako-button-gold"
+      }`}
+    >
+      <PostSourceIcon
+        url={update.postUrl}
+        className={`h-4 w-4 ${homepageIsPrimary ? "text-champagne" : ""}`}
+      />
+      {update.ctaLabel}
+    </a>
+  );
+  const homepageButton = (
+    <a
+      href={update.homepageUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`yukako-button min-h-12 px-4 py-3 text-sm ${
+        homepageIsPrimary ? "yukako-button-gold" : "yukako-button-ghost"
+      }`}
+    >
+      <ExternalLink
+        className={`h-4 w-4 ${homepageIsPrimary ? "" : "text-champagne"}`}
+        aria-hidden="true"
+      />
+      {update.homepageLabel ?? "公演ホームページへ"}
+    </a>
+  );
+
+  return (
+    <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
+      {homepageIsPrimary ? (
+        <>
+          {homepageButton}
+          {postButton}
+        </>
+      ) : (
+        <>
+          {postButton}
+          {homepageButton}
+        </>
+      )}
+    </div>
+  );
+}
 
 // 稽古写真・告知資料（相関図・タイムテーブル・チケット案内など）を拡大表示するための軽量ライトボックス。
 // フォトギャラリーの本人スナップとは分け、#ゆかJET特集内だけで完結させる。
@@ -235,8 +299,9 @@ export function NowProducingSection({ event, now }: NowProducingSectionProps) {
                 <div id="gojet-feature-updates" className="mt-5 grid gap-3 sm:mt-6">
                   {visibleUpdates.map((update, index) => (
                     <div
+                      id={update.anchorId}
                       key={update.postUrl}
-                      className="border border-champagne/35 bg-white/[0.07] p-3 shadow-paper sm:p-4"
+                      className="scroll-mt-28 border border-champagne/35 bg-white/[0.07] p-3 shadow-paper sm:p-4"
                     >
                       <p className="text-xs font-black uppercase tracking-[0.16em] text-champagne">
                         {index === 0 ? "New" : "Update"} ・ {update.date} ・ {update.label}
@@ -315,30 +380,7 @@ export function NowProducingSection({ event, now }: NowProducingSectionProps) {
                             : update.deadline.beforeText}
                         </p>
                       )}
-                      <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
-                        <a
-                          href={update.postUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="yukako-button yukako-button-gold min-h-12 px-4 py-3 text-sm"
-                        >
-                          {update.postUrl.includes("instagram.com") ? (
-                            <Instagram className="h-4 w-4" aria-hidden="true" />
-                          ) : (
-                            <Music className="h-4 w-4" aria-hidden="true" />
-                          )}
-                          {update.ctaLabel}
-                        </a>
-                        <a
-                          href={update.homepageUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="yukako-button yukako-button-ghost min-h-12 px-4 py-3 text-sm"
-                        >
-                          <ExternalLink className="h-4 w-4 text-champagne" aria-hidden="true" />
-                          {update.homepageLabel ?? "公演ホームページへ"}
-                        </a>
-                      </div>
+                      <UpdateLinkButtons update={update} />
                     </div>
                   ))}
                 </div>
