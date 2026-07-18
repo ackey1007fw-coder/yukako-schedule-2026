@@ -35,6 +35,19 @@ const sourcePlatform = (url: string) => {
 // 専用セクションを持つ単発トピック。本文は各セクションが持つため、ここは見出しと導線のみ。
 const standaloneUpdates: SiteUpdate[] = [
   {
+    id: "gojet-shiina-message-2026-07-19",
+    date: "2026.7.19",
+    category: "#ゆかJET",
+    title: "“最後まで一緒に、楽しく誠実に”――仲間と育てる #ゆかJET",
+    summary:
+      "C班あかね役・しいなさんから寄せられた温かな言葉と、笑顔あふれるカンパニーの集合動画。最後の『GO,JET!』出演・プロデュース公演へ向かう、仲間たちの信頼と和やかな空気です。",
+    image: {
+      src: "/images/yukako-yukajet-shiina-message-story-2026-07-19.jpg",
+      alt: "C班あかね役のしいなさんから吉井優花子さんへ寄せられたメッセージと、二人の写真"
+    },
+    anchor: "#gojet-shiina-message"
+  },
+  {
     id: "gojet-hair-2026-07-15",
     date: "2026.7.15",
     category: "#ゆかJET",

@@ -60,6 +60,18 @@ export type GojetTeamUpdate = {
 export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
   {
     date: "2026.7.18",
+    label: "ペンライト色分け",
+    title: "早紀はピンク、JETは赤！ペンライト応援ガイド",
+    body:
+      "公式アカウントの案内を引用して、優花子さんが二役の応援カラーを紹介。「早紀のときは、ピンクのペンライト振ってね🥹🩷」「JETのときは、赤色だよー！🫶❤️✨」。使えるのはノリノリな曲としっとりした曲のときだけで、ずっと点けっぱなしではありません。当日の細かい観劇マナーは公式案内もあわせてチェックを。",
+    postUrl: "https://x.com/mokoopy/status/2078467900470599986",
+    homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+    ctaLabel: "優花子さんのX投稿を見る",
+    homepageLabel: "観劇マナー・公演情報を見る",
+    roleTags: ["早紀：ピンク🩷", "JET：赤❤️", "曲に合わせて使用"]
+  },
+  {
+    date: "2026.7.18",
     label: "B班稽古",
     title: "笑いの絶えないB班稽古。女性だけのGO,JET!を劇場で",
     body:
