@@ -5,6 +5,14 @@ export type PromoImage = {
   alt: string;
 };
 
+export type GojetSupportColor = {
+  team: string;
+  role: string;
+  color: string;
+  emoji: string;
+  tone: "pink" | "red";
+};
+
 // 応援コンテンツ等の受付締切。指定すると締切前/後でカード内の案内文が自動的に切り替わる。
 export type GojetDeadline = {
   // ISO8601（タイムゾーンオフセット付き, 例: "2026-07-16T23:59:59+09:00"）
@@ -34,6 +42,8 @@ export type GojetFeatureUpdate = {
     label: string;
   };
   deadline?: GojetDeadline;
+  // 役ごとのペンライトカラーなど、色名も文字で伝える短い実用情報
+  supportColors?: GojetSupportColor[];
   // 役柄タグ(例: "B班：JET")。見出し下に小さなバッジとして並べる
   roleTags?: string[];
 };
@@ -60,15 +70,19 @@ export type GojetTeamUpdate = {
 export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
   {
     date: "2026.7.18",
-    label: "ペンライト色分け",
-    title: "早紀はピンク、JETは赤！ペンライト応援ガイド",
+    label: "ペンライト応援カラー",
+    title: "早紀はピンク、JETは赤。#ゆかJET応援カラー",
     body:
-      "公式アカウントの案内を引用して、優花子さんが二役の応援カラーを紹介。「早紀のときは、ピンクのペンライト振ってね🥹🩷」「JETのときは、赤色だよー！🫶❤️✨」。使えるのはノリノリな曲としっとりした曲のときだけで、ずっと点けっぱなしではありません。当日の細かい観劇マナーは公式案内もあわせてチェックを。",
+      "「早紀のときは、ピンクのペンライト振ってね🥹🩷」「JETのときは、赤色だよー！🫶❤️✨」——優花子さんの#ゆかJET応援カラー案内。ペンライトを振れるのは、ノリノリな曲・しっとりした曲のときだけ。公式の観劇案内では、基本はオフ、暗転中は消灯と案内されています。",
     postUrl: "https://x.com/mokoopy/status/2078467900470599986",
-    homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+    homepageUrl: "https://x.com/yukako_produce/status/2078114663041208357",
     ctaLabel: "優花子さんのX投稿を見る",
-    homepageLabel: "観劇マナー・公演情報を見る",
-    roleTags: ["早紀：ピンク🩷", "JET：赤❤️", "曲に合わせて使用"]
+    homepageLabel: "公式の観劇案内を確認する",
+    supportColors: [
+      { team: "C班", role: "早紀", color: "ピンク", emoji: "🩷", tone: "pink" },
+      { team: "B班", role: "JET", color: "赤", emoji: "❤️", tone: "red" }
+    ],
+    roleTags: ["曲に合わせて使用"]
   },
   {
     date: "2026.7.18",

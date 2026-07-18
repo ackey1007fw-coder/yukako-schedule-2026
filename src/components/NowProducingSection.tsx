@@ -346,6 +346,31 @@ export function NowProducingSection({ event, now }: NowProducingSectionProps) {
                       <h4 className="mt-2 text-xl font-black leading-tight text-white">
                         {update.title}
                       </h4>
+                      {update.supportColors && update.supportColors.length > 0 && (
+                        <dl
+                          aria-label="ペンライト応援カラー"
+                          className="mt-3 grid grid-cols-2 gap-2"
+                        >
+                          {update.supportColors.map((item) => (
+                            <div
+                              key={`${item.team}-${item.role}`}
+                              className={`min-w-0 border px-3 py-2.5 ${
+                                item.tone === "pink"
+                                  ? "border-rosefog/60 bg-rosefog/15"
+                                  : "border-red-400/60 bg-red-950/25"
+                              }`}
+                            >
+                              <dt className="text-[11px] font-bold text-white/65">
+                                {item.team}・{item.role}
+                              </dt>
+                              <dd className="mt-0.5 text-sm font-black text-white">
+                                <span aria-hidden="true">{item.emoji}</span>{" "}
+                                {item.color}
+                              </dd>
+                            </div>
+                          ))}
+                        </dl>
+                      )}
                       {update.roleTags && update.roleTags.length > 0 && (
                         <div className="mt-2 flex flex-wrap gap-2">
                           {update.roleTags.map((tag) => (
