@@ -13,7 +13,7 @@ const searchTopics = [
   {
     icon: CalendarDays,
     title: "公演情報",
-    body: "#ゆかJET やBaby Shark Liveなど、最新の公演日程を確認できます。"
+    body: "#ゆかJET の公演日程や、ベイビーシャークライブの出演記録へ。"
   },
   {
     icon: Radio,

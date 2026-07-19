@@ -1,13 +1,20 @@
 import { writeFile } from "node:fs/promises";
-import { loadArchiveItems } from "./lib/loadArchiveData.mjs";
+import { loadArchiveItems, loadBabySharkLive } from "./lib/loadArchiveData.mjs";
 
 const SITE_URL = "https://yukako-schedule-2026.vercel.app";
 const lastmod = new Date().toISOString().slice(0, 10);
 const archiveItems = await loadArchiveItems();
+const babySharkLive = await loadBabySharkLive();
 
 const urls = [
   { loc: `${SITE_URL}/`, changefreq: "weekly", priority: "1.0", lastmod },
   { loc: `${SITE_URL}/archive`, changefreq: "weekly", priority: "0.8", lastmod },
+  {
+    loc: `${SITE_URL}${babySharkLive.path}`,
+    changefreq: "monthly",
+    priority: "0.8",
+    lastmod
+  },
   ...archiveItems.map((item) => ({
     loc: `${SITE_URL}/archive/${item.slug}`,
     changefreq: "monthly",

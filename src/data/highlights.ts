@@ -66,14 +66,15 @@ export const highlights: Highlight[] = [
       "2025年12月17日〜21日、荻窪小劇場にて上演。花チームに参加。"
   },
   {
-    id: "babyshark-live-2025",
-    year: "2025",
-    date: "2025年〜",
+    id: "babyshark-live-2024",
+    year: "2024",
+    date: "2024年〜",
     category: "舞台",
     title: "BABY SHARK LIVE! -The Hidden Treasure- 全国公演",
     description:
-      "Pinkfongの人気キャラクターたちと歌って踊るファミリーミュージカル。シンガーとして全国各地の公演に出演中。",
-    image: "/images/yukako-babyshark-lobster2.jpg"
+      "ヤドカリのヘッティー、海賊のパールとして出演してきた全国公演のファミリーミュージカル。作品は現在も公演継続中。優花子さんの出演日は告知確認後に更新。",
+    image: "/images/baby-shark/baby-shark-pearl.jpg",
+    link: { label: "出演の記録を見る", url: "/works/baby-shark-live" }
   },
   {
     id: "mgj-2025-miss-peace",

@@ -14,6 +14,7 @@ import { LatestUpdatesSection } from "./components/LatestUpdatesSection";
 import { LinksSection } from "./components/LinksSection";
 import { NowProducingSection } from "./components/NowProducingSection";
 import { PhotoGallerySection } from "./components/PhotoGallerySection";
+import { BabySharkLiveSection } from "./components/BabySharkLiveSection";
 import { OjosamaBandSection } from "./components/OjosamaBandSection";
 import { PriorityBanner } from "./components/PriorityBanner";
 import { RyomaKunSection } from "./components/RyomaKunSection";
@@ -151,6 +152,9 @@ function App() {
         </SectionReveal>
         <SectionReveal>
           <HighlightsSection />
+        </SectionReveal>
+        <SectionReveal>
+          <BabySharkLiveSection />
         </SectionReveal>
         <SectionReveal>
           <OjosamaBandSection />

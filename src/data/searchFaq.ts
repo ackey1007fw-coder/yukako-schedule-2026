@@ -16,7 +16,7 @@ export const searchIntents: SearchIntent[] = [
   {
     label: "公演情報",
     title: "公演スケジュールを確認する",
-    copy: "#ゆかJETやBaby Shark Liveなど、直近の公演日程はこちら。",
+    copy: "#ゆかJETの予定や、ベイビーシャークライブの出演記録はこちら。",
     href: "#next"
   },
   {

@@ -44,6 +44,15 @@ export async function loadArchiveItems() {
   return items;
 }
 
+export async function loadBabySharkLive() {
+  const mod = await loadTsModule("src/data/babySharkLive.ts");
+  const work = mod.babySharkLive;
+  if (!work?.slug || !work?.path || !work?.seoTitle || !work?.seoDescription || !work?.heroImage) {
+    throw new Error("babySharkLive data: required fields are missing");
+  }
+  return work;
+}
+
 export async function loadImageManifest() {
   const mod = await loadTsModule("src/data/imageManifest.ts");
   return mod.imageManifest;

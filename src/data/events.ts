@@ -155,11 +155,17 @@ export const events: ScheduleEvent[] = [
     category: "stage",
     startAt: "2024-02-25T13:00:00+09:00",
     displayDate: "2024年〜",
-    image: "/images/yukako-babyshark-lobster2.jpg",
+    image: "/images/baby-shark/baby-shark-pearl.jpg",
     summary:
-      "Pinkfongの人気キャラクターたちと歌って踊るファミリーミュージカル。シンガーとして全国公演に出演。",
-    badges: ["舞台", "全国公演", "シンガー"],
-    links: []
+      "ヤドカリのヘッティー、海賊のパールとして出演してきた全国公演のファミリーミュージカル。作品は現在も公演継続中。出演記録は特集ページへ。",
+    badges: ["舞台", "全国公演", "代表出演"],
+    links: [
+      {
+        label: "公式サイト",
+        url: "https://babyshark-live-japan.com/",
+        kind: "info"
+      }
+    ]
   },
   {
     id: "cocoa-gan-2023-11",
