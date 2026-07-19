@@ -31,9 +31,15 @@
 どちらも**共同運営者**であり、レーンは「専有」ではなく「最優先」。品質ゲート（各指示書参照）を
 通る仕事なら越境してよい。同じファイルを同時に触らないことだけ守る。
 
-- ワークフロー: `main` から作業ブランチ → 編集 → PR（`main` 宛て）→ レビュー → マージ → 自動デプロイ。
-- PR は確認不要で即マージしてよい。ただし本番に関わる大きな変更・曖昧な指摘はオーナーに確認する。
-- 相手エージェントの作業を上書きしない。コンフリクトしたら**先にマージされた側を優先**し、自分の変更をリベースする。
+### PR / マージ方針（全エージェント共通・必須）
+
+- すべての変更は **`main` から作業ブランチを作成**する。
+- すべての変更は **`main` 宛ての PR** として提出する（Draft 可）。
+- **AIエージェントは絶対にマージしない**。CI が成功しても、人間のオーナーによる明確な承認を待つ。
+- 曖昧な要件、本人情報、写真、引用、デザインの大幅変更は**実装前に確認**する。
+- 別の AI エージェントの**未マージ PR を勝手に上書きしない**。同じファイルを触る必要があるときは先にその PR の方針を確認する。
+- **依頼範囲外の改善を同じ PR へ混ぜない**（別ブランチ・別 PR にする）。
+- コンフリクトしたら、先に `main` へ入った側を正として自分の変更をリベースし、解決内容を PR に書く。
 
 ## 文体ガイド（サイトに載せる日本語・最重要）
 
@@ -68,9 +74,10 @@ git clone https://github.com/ackey1007fw-coder/yukako-schedule-2026.git
 cd yukako-schedule-2026
 git config user.email "ackey1007fw@gmail.com"
 git config user.name "ackey1007fw-coder"
-npm install
-npm run dev   # http://127.0.0.1:5173 でローカル確認
+pnpm install
+pnpm dev   # http://127.0.0.1:5173 でローカル確認
 ```
+- パッケージマネージャは **pnpm**（`pnpm-lock.yaml` 基準）。`npm install` で lock を作り直さない。
 - push 認証は**自分の GitHub 認証／トークンを使う**。トークンを会話やファイルに平文で書かない。
 
 ## 技術スタック
@@ -98,9 +105,9 @@ npm run dev   # http://127.0.0.1:5173 でローカル確認
 
 ## 画像を追加する手順
 1. 画像を `public/images/` に保存（命名: `yukako-なにか.jpg`）。動画は `public/videos/`（`tiktok-YYYY-MM-DD.mp4` 等）。
-2. `npm install`（`sharp` が無いと次のスクリプトが落ちる）。
+2. `pnpm install`（`sharp` が無いと次のスクリプトが落ちる）。
 3. `node scripts/generate-responsive-images.mjs` を実行
-   → `public/images/optimized/` に WebP 生成 + `imageManifest.ts` を自動更新。
+ → `public/images/optimized/` に WebP 生成 + `imageManifest.ts` を自動更新。
 4. データファイル（highlights.ts / profile.ts / photos.ts / gojetPromo.ts 等）でパスを参照。
 5. コード内では `getResponsiveImageProps("/images/yukako-なにか.jpg", "100vw")` で使用。
 6. 既存画像と重複していないか `md5sum` で確認してから追加する。
@@ -148,4 +155,4 @@ npm run dev   # http://127.0.0.1:5173 でローカル確認
 
 ## 着手前に
 README と `src/data/*.ts`・`src/components/` を読んで現状を把握してから作業する。
-可能ならローカル（`npm run dev`）か Vercel のプレビューで見た目を確認してから `main` にマージする。
+可能ならローカル（`pnpm dev`）か Vercel のプレビューで見た目を確認し、**PR として提出してオーナーの承認を待つ**（エージェント自身はマージしない）。
