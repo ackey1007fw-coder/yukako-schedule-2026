@@ -1,4 +1,4 @@
-// postbuild: /works/baby-shark-live の静的HTMLを生成する。
+// postbuild: /works/baby-shark-live と /works/404.html を生成する。
 // archive と同様、SNSクローラー向けに正しい OGP / canonical / JSON-LD を持たせる。
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
@@ -29,6 +29,14 @@ function replaceMetaByAttr(html, attrPattern, newTag, { required = true } = {}) 
   return html.replace(regex, newTag);
 }
 
+function upsertRobotsMeta(html, robots) {
+  const tag = `<meta name="robots" content="${escapeHtml(robots)}" />`;
+  if (/<meta\s+name="robots"/i.test(html)) {
+    return replaceMetaByAttr(html, 'name="robots"', tag);
+  }
+  return html.replace(/<head([^>]*)>/i, `<head$1>\n    ${tag}`);
+}
+
 function applyHead(template, page) {
   let html = template;
 
@@ -39,6 +47,11 @@ function applyHead(template, page) {
     'name="description"',
     `<meta name="description" content="${escapeHtml(page.description)}" />`
   );
+
+  if (page.robots) {
+    html = upsertRobotsMeta(html, page.robots);
+  }
+
   html = html.replace(
     /<link rel="canonical" href="[^"]*" \/>/,
     `<link rel="canonical" href="${page.canonical}" />`
@@ -62,12 +75,31 @@ function applyHead(template, page) {
   return html;
 }
 
+async function writePage(routePath, html) {
+  const outDir = path.join(distDir, routePath);
+  await mkdir(outDir, { recursive: true });
+  await writeFile(path.join(outDir, "index.html"), html, "utf8");
+  console.log(`generated: /${routePath}/`);
+}
+
+async function writeHtmlFile(relativePath, html) {
+  const file = path.join(distDir, relativePath);
+  await mkdir(path.dirname(file), { recursive: true });
+  await writeFile(file, html, "utf8");
+  console.log(`generated: /${relativePath}`);
+}
+
 const template = await readFile(path.join(distDir, "index.html"), "utf8");
 const work = await loadBabySharkLive();
 const imageManifest = await loadImageManifest();
 
+const imageDims = (src) => {
+  const entry = imageManifest[src];
+  return entry ? { width: entry.width, height: entry.height } : { width: 1200, height: 630 };
+};
+
 const ogSrc = work.ogImage ?? work.heroImage;
-const ogDims = imageManifest[ogSrc] ?? { width: 1200, height: 630 };
+const ogDims = imageDims(ogSrc);
 const canonical = `${SITE_URL}${work.path}`;
 
 const jsonLd = {
@@ -113,7 +145,41 @@ const html = applyHead(template, {
   jsonLd
 });
 
-const outDir = path.join(distDir, "works", work.slug);
-await mkdir(outDir, { recursive: true });
-await writeFile(path.join(outDir, "index.html"), html, "utf8");
-console.log(`generated: ${work.path}/`);
+await writePage(`works/${work.slug}`, html);
+
+// --- 未知 /works/* 用フォールバック（Vercel rewrite 先）。正規作品のOGPは流用しない ---
+const notFoundTitle = "作品ページが見つかりません | 吉井優花子 応援ポータル";
+const notFoundDescription =
+  "お探しの作品ページは見つかりませんでした。ホームからご確認ください。";
+const notFoundCanonical = `${SITE_URL}/`;
+const notFoundImage = `${SITE_URL}/images/yukako-portrait.jpg`;
+const notFoundImageDims = imageDims("/images/yukako-portrait.jpg");
+
+const notFoundHtml = applyHead(template, {
+  title: notFoundTitle,
+  description: notFoundDescription,
+  robots: "noindex, nofollow",
+  canonical: notFoundCanonical,
+  ogType: "website",
+  ogImage: notFoundImage,
+  ogImageWidth: String(notFoundImageDims.width),
+  ogImageHeight: String(notFoundImageDims.height),
+  ogImageAlt: "吉井優花子 応援ポータル",
+  jsonLd: {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: notFoundTitle,
+    description: notFoundDescription,
+    url: notFoundCanonical,
+    inLanguage: "ja",
+    isPartOf: {
+      "@type": "WebSite",
+      name: "吉井優花子 応援ポータル",
+      url: `${SITE_URL}/`
+    }
+  }
+});
+
+await writeHtmlFile("works/404.html", notFoundHtml);
+
+console.log(`works pages generated: 1 work page + 404 fallback`);

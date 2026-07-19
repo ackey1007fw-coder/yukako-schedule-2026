@@ -50,6 +50,24 @@ export async function loadBabySharkLive() {
   if (!work?.slug || !work?.path || !work?.seoTitle || !work?.seoDescription || !work?.heroImage) {
     throw new Error("babySharkLive data: required fields are missing");
   }
+
+  const updates = work.updates ?? [];
+  const seenIds = new Set();
+  const seenDates = new Set();
+  for (const update of updates) {
+    if (!update?.id || !update?.date) {
+      throw new Error("babySharkLive data: updates require id and date");
+    }
+    if (seenIds.has(update.id)) {
+      throw new Error(`babySharkLive data: duplicate update id "${update.id}"`);
+    }
+    if (seenDates.has(update.date)) {
+      throw new Error(`babySharkLive data: duplicate update date "${update.date}"`);
+    }
+    seenIds.add(update.id);
+    seenDates.add(update.date);
+  }
+
   return work;
 }
 

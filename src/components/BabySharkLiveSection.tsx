@@ -13,7 +13,7 @@ export function BabySharkLiveSection() {
           act={4}
           eyebrow="Featured Stage"
           title="代表出演作品"
-          copy="全国で公演が続くファミリーミュージカルと、優花子さんの出演記録を分けてまとめています。"
+          copy="全国公演が続くファミリーミュージカル。優花子さんが演じてきた二つの役と、これまでの出演記録を紹介します。"
         />
 
         <a

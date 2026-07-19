@@ -3,7 +3,6 @@ import {
   ArrowLeft,
   CalendarDays,
   ExternalLink,
-  Fish,
   Sparkles,
   Waves
 } from "lucide-react";
@@ -14,7 +13,8 @@ import { ScrollToTop } from "../components/ScrollToTop";
 import { ExternalButton } from "../components/ExternalButton";
 import {
   babySharkGalleryImages,
-  babySharkLive
+  babySharkLive,
+  getBabySharkUpdatesNewestFirst
 } from "../data/babySharkLive";
 import { getResponsiveImageProps } from "../lib/responsiveImage";
 import { useSchedule } from "../lib/useSchedule";
@@ -24,6 +24,7 @@ const work = babySharkLive;
 export function BabySharkLivePage() {
   const { schedule } = useSchedule();
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const updates = getBabySharkUpdatesNewestFirst();
 
   useEffect(() => {
     document.title = work.seoTitle;
@@ -40,8 +41,6 @@ export function BabySharkLivePage() {
       }
     };
   }, []);
-
-  const firstUpdate = work.updates[0];
 
   return (
     <div className="min-h-screen bg-porcelain text-ink">
@@ -143,14 +142,11 @@ export function BabySharkLivePage() {
             <h2 id="baby-shark-roles" className="mt-3 font-display text-3xl text-ink sm:text-4xl">
               優花子さんが演じた役
             </h2>
-            <p className="mt-4 text-sm leading-7 text-ink/70">
-              二つの役はどちらも大切な出演記録。並び順に優劣はありません。
-            </p>
-            <div className="mt-8 grid gap-5 sm:grid-cols-2">
+            <div className="mt-8 grid gap-5 sm:grid-cols-2 sm:items-stretch">
               {work.roles.map((role) => (
                 <article
                   key={role.id}
-                  className="overflow-hidden border border-rosefog/15 bg-white shadow-paper"
+                  className="flex h-full flex-col overflow-hidden border border-rosefog/15 bg-white shadow-paper"
                 >
                   <img
                     {...getResponsiveImageProps(role.image, "(min-width: 640px) 40vw, 100vw")}
@@ -160,7 +156,7 @@ export function BabySharkLivePage() {
                     className="block h-auto max-h-[360px] w-full object-contain object-center sm:max-h-[400px]"
                     style={{ objectPosition: role.objectPosition }}
                   />
-                  <div className="p-5">
+                  <div className="flex flex-1 flex-col p-5">
                     <p className="text-xs font-black uppercase tracking-[0.14em] text-[#2f5f78]">
                       {role.nameEn}
                     </p>
@@ -172,42 +168,52 @@ export function BabySharkLivePage() {
             </div>
           </section>
 
-          {/* 4. 活動記録 */}
-          {firstUpdate && (
+          {/* 4. 活動記録（updates 全件・新しい順） */}
+          {updates.length > 0 && (
             <section aria-labelledby="baby-shark-record" className="mt-16">
               <p className="text-xs font-black uppercase tracking-[0.18em] text-champagneInk">
                 Activity Record
               </p>
               <h2 id="baby-shark-record" className="mt-3 font-display text-3xl text-ink sm:text-4xl">
-                {firstUpdate.dateLabel}の活動記録
+                活動記録
               </h2>
-              <article className="mt-6 border border-champagne/30 bg-white p-5 shadow-paper sm:p-7">
-                <p className="flex items-center gap-2 text-xs font-black uppercase tracking-[0.14em] text-champagneInk">
-                  <Sparkles className="h-4 w-4 text-champagne" aria-hidden="true" />
-                  {firstUpdate.title}
-                </p>
-                <div className="mt-4 space-y-3">
-                  {firstUpdate.body.map((paragraph) => (
-                    <p key={paragraph} className="leading-8 text-ink/75">
-                      {paragraph}
-                    </p>
-                  ))}
-                </div>
-                {firstUpdate.sourceUrl && (
-                  <a
-                    href={firstUpdate.sourceUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-5 inline-flex min-h-12 items-center gap-2 border border-rosefog/35 bg-porcelain px-4 py-3 text-sm font-bold text-ink transition hover:border-champagne hover:bg-white"
+              <div className={`grid gap-5 ${updates.length > 1 ? "mt-8" : "mt-6"}`}>
+                {updates.map((update) => (
+                  <article
+                    key={update.id}
+                    className="border border-champagne/30 bg-white p-5 shadow-paper sm:p-7"
                   >
-                    {firstUpdate.sourceLabel ?? "元投稿を見る"}
-                    <ExternalLink className="h-4 w-4 text-champagne" aria-hidden="true" />
-                  </a>
-                )}
-                <p className="mt-4 text-xs text-ink/50">
-                  投稿者：吉井優花子さん（Instagram {work.sourceHandle}）
-                </p>
-              </article>
+                    <time
+                      dateTime={update.date}
+                      className="text-xs font-bold uppercase tracking-[0.12em] text-ink/45"
+                    >
+                      {update.dateLabel}
+                    </time>
+                    <p className="mt-3 flex items-center gap-2 text-xs font-black uppercase tracking-[0.14em] text-champagneInk">
+                      <Sparkles className="h-4 w-4 text-champagne" aria-hidden="true" />
+                      {update.title}
+                    </p>
+                    <div className="mt-4 space-y-3">
+                      {update.body.map((paragraph) => (
+                        <p key={paragraph} className="leading-8 text-ink/75">
+                          {paragraph}
+                        </p>
+                      ))}
+                    </div>
+                    {update.sourceUrl && (
+                      <a
+                        href={update.sourceUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-5 inline-flex min-h-12 items-center gap-2 border border-rosefog/35 bg-porcelain px-4 py-3 text-sm font-bold text-ink transition hover:border-champagne hover:bg-white"
+                      >
+                        {update.sourceLabel ?? "元投稿を見る"}
+                        <ExternalLink className="h-4 w-4 text-champagne" aria-hidden="true" />
+                      </a>
+                    )}
+                  </article>
+                ))}
+              </div>
             </section>
           )}
 
@@ -350,12 +356,7 @@ export function BabySharkLivePage() {
               今後の更新
             </h2>
             <p className="mt-4 leading-8 text-ink/75">{work.futureUpdateNote}</p>
-            {work.upcomingAppearances.length === 0 ? (
-              <p className="mt-4 flex items-start gap-2 text-sm leading-7 text-ink/60">
-                <Fish className="mt-0.5 h-4 w-4 shrink-0 text-[#7aa8c4]" aria-hidden="true" />
-                現時点でサイトに掲載できる、優花子さん個人の出演予定は未確認です。
-              </p>
-            ) : (
+            {work.upcomingAppearances.length > 0 && (
               <ul className="mt-4 grid gap-2">
                 {work.upcomingAppearances.map((item) => (
                   <li

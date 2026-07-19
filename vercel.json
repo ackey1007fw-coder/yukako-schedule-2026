@@ -1,6 +1,6 @@
 {
   "rewrites": [
     { "source": "/archive/:path*", "destination": "/archive/404.html" },
-    { "source": "/works/:path*", "destination": "/index.html" }
+    { "source": "/works/:path*", "destination": "/works/404.html" }
   ]
 }

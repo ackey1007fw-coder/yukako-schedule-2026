@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite --host 127.0.0.1",
     "images:build": "node scripts/generate-responsive-images.mjs",
+    "images:og:baby-shark": "node scripts/generate-baby-shark-og-image.mjs",
     "add:news": "node scripts/add-news.mjs",
     "test:add-news": "node scripts/test-add-news.mjs",
     "test:gojet": "node scripts/test-gojet-status.mjs",

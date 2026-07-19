@@ -5,6 +5,7 @@ import App from "./App";
 import { ArchiveListPage } from "./pages/ArchiveListPage";
 import { ArchiveDetailPage } from "./pages/ArchiveDetailPage";
 import { BabySharkLivePage } from "./pages/BabySharkLivePage";
+import { WorksNotFoundPage } from "./pages/WorksNotFoundPage";
 import "./index.css";
 
 // このサイトにはルーターを導入していない（元々1ページのSPAだったため）。
@@ -25,6 +26,10 @@ function Root() {
 
   if (path === "/works/baby-shark-live") {
     return <BabySharkLivePage />;
+  }
+
+  if (path.startsWith("/works/")) {
+    return <WorksNotFoundPage />;
   }
 
   return <App />;

@@ -1,5 +1,6 @@
 // BABY SHARK LIVE！ The Hidden Treasure — 代表出演作品特集
 // 新しい出演告知・写真・コメントを足すときは、このファイルの配列へ追記するだけでよい。
+// updates / upcomingAppearances は配列末尾へ追加してよい（表示は新しい順に並び替える）。
 
 export type BabySharkRole = {
   id: string;
@@ -45,6 +46,14 @@ export type BabySharkArchiveDate = {
   venue: string;
 };
 
+export type BabySharkAppearance = {
+  id: string;
+  dateLabel: string;
+  venue?: string;
+  note?: string;
+  sourceUrl?: string;
+};
+
 export const babySharkLive = {
   id: "baby-shark-live-hidden-treasure",
   slug: "baby-shark-live",
@@ -55,7 +64,7 @@ export const babySharkLive = {
   category: "舞台／ミュージカル／ファミリーエンターテインメント",
   label: "代表出演作品",
   /** 作品自体の継続状況（優花子さん個人の出演状況ではない） */
-  workStatus: "作品は現在も全国で公演継続中",
+  workStatus: "作品は全国公演継続中",
   /** 優花子さん個人の出演予定についての注記 */
   appearanceNote: "優花子さんの出演日は、本人からの告知確認後に更新します",
   firstPerformanceDate: "2024-02-25",
@@ -70,8 +79,8 @@ export const babySharkLive = {
   heroImage: "/images/baby-shark/baby-shark-pearl.jpg",
   heroAlt: "海賊のパール役の衣装を着た吉井優花子さん",
   heroObjectPosition: "center 18%",
-  ogImage: "/images/baby-shark/baby-shark-pearl.jpg",
-  ogImageAlt: "海賊のパール役の衣装を着た吉井優花子さん",
+  ogImage: "/images/og/yukako-baby-shark-live-1200x630.jpg",
+  ogImageAlt: "BABY SHARK LIVE！ 吉井優花子 出演記録",
   cardSummary:
     "ヤドカリのヘッティーと海賊のパールとして出演してきた、全国公演のファミリーミュージカル。",
   summary: [
@@ -82,7 +91,6 @@ export const babySharkLive = {
     "全国公演『BABY SHARK LIVE！ The Hidden Treasure』。",
     "吉井優花子さんは、ヤドカリのヘッティー、そして海賊のパールとして出演。",
     "2024年2月25日に初日公演を迎え、海の仲間たちとともに、全国の子どもたちへ歌とダンス、物語の楽しさを届けてきました。",
-    "終演後には、キャラクターや出演者によるお見送りが実施される公演もあり、舞台の上だけでなく、最後まで観客の笑顔を大切にする作品です。",
     "作品自体は現在も全国で公演が続いています。吉井優花子さんの出演日については、本人からの告知が確認でき次第、このサイトでも更新します。"
   ],
   seoTitle: "ベイビーシャークライブ出演記録｜吉井優花子 応援ポータル",
@@ -111,7 +119,7 @@ export const babySharkLive = {
   ] satisfies BabySharkRole[],
   /**
    * フォトギャラリーに出す画像。
-   * 追加時は public/images/baby-shark/ に配置 → npm run images:build → ここへ追記。
+   * 追加時は public/images/baby-shark/ に配置 → pnpm images:build → ここへ追記。
    *
    * 未配置（オーナー提供の添付がリポジトリ未投入）:
    * - baby-shark-stage-wide.jpg
@@ -195,6 +203,7 @@ export const babySharkLive = {
       venue: "神戸国際会館 こくさいホール"
     }
   ] satisfies BabySharkArchiveDate[],
+  /** 新しい活動記録は配列の末尾へ追加。表示は date の新しい順。 */
   updates: [
     {
       id: "instagram-2024-03-01",
@@ -202,8 +211,8 @@ export const babySharkLive = {
       dateLabel: "2024年3月1日",
       title: "初日を迎えて",
       body: [
-        "初日公演のあと——ヤドカリのヘッティーと海賊のパールとして、お客様と会えたこと、楽しんでいる笑顔を見られたことがとても嬉しい、と。",
-        "全国の皆さんに会いたい、という一文も。"
+        "初日公演を終え、ヤドカリのヘッティーと海賊のパールとして皆さんに会えたこと、楽しそうな笑顔を見られたことへの喜びを綴っています。",
+        "「この後も、海の仲間たちとの冒険は続きます」と、全国公演への期待も伝えました。"
       ],
       sourceUrl:
         "https://www.instagram.com/p/C3-IholvnW4/?img_index=4&igsh=aGhuc2Z0NGZlbWc3",
@@ -211,17 +220,16 @@ export const babySharkLive = {
       kind: "comment"
     }
   ] satisfies BabySharkUpdate[],
-  /** 今後の出演日・告知を足す用の空配列（確定情報のみ追記） */
-  upcomingAppearances: [] as {
-    id: string;
-    dateLabel: string;
-    venue?: string;
-    note?: string;
-    sourceUrl?: string;
-  }[],
+  /** 今後の出演日・告知を足す用（確定情報のみ追記）。空のときは一覧を出さない。 */
+  upcomingAppearances: [] as BabySharkAppearance[],
   futureUpdateNote: "優花子さんの出演情報が発表され次第、こちらで更新します。"
 } as const;
 
 export const babySharkGalleryImages = babySharkLive.images.filter(
   (image) => image.kind === "gallery" || image.kind === "experience"
 );
+
+/** 活動記録を date の新しい順で返す（配列末尾追加でも表示は新しい順） */
+export function getBabySharkUpdatesNewestFirst(): BabySharkUpdate[] {
+  return [...babySharkLive.updates].sort((a, b) => b.date.localeCompare(a.date));
+}
