@@ -15,8 +15,8 @@ OGP/JSON-LDが自動で反映されます。
 3. ホームの「これまでの歩み」にも載せたい場合は `src/data/highlights.ts` に1件追加し、
    `link: { label: "続きを見る", url: "/archive/<slug>" }` でこの記事につなぐ
    （`mgj-2025-miss-peace` の例を参照）。
-4. `npx tsc --noEmit` と `npm run build` を実行して確認する
-   （`npm run build` の postbuild で `/archive` 系の静的HTMLも生成される）。
+4. `pnpm typecheck` と `pnpm build` を実行して確認する
+   （`pnpm build` の postbuild で `/archive` 系の静的HTMLも生成される）。
    同じ `slug` を重複登録するとbuild時にエラーになるため、URLの衝突にも気づける。
 
 ## テンプレート
