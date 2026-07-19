@@ -30,7 +30,9 @@ const gojetLiveItem = {
 const updatesItem = { label: "更新", href: "#updates", Icon: Megaphone };
 const moreItems = [
   { label: "最新情報", href: "#updates" },
-  { label: "これまでの歩み", href: "#highlights" }, { label: "お嬢様はバンド", href: "#ojosama-band" },
+  { label: "これまでの歩み", href: "#highlights" },
+  { label: "ベイビーシャーク", href: "#baby-shark-live" },
+  { label: "お嬢様はバンド", href: "#ojosama-band" },
   { label: "龍馬くん", href: "#ryoma-kun" },
   { label: "プロフィール", href: "#profile" }, { label: "秋田とのつながり", href: "#akita-roots" },
   { label: "写真", href: "#gallery" }, { label: "SHOWROOM", href: "#showroom" }

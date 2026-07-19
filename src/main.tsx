@@ -4,10 +4,13 @@ import { Analytics } from "@vercel/analytics/react";
 import App from "./App";
 import { ArchiveListPage } from "./pages/ArchiveListPage";
 import { ArchiveDetailPage } from "./pages/ArchiveDetailPage";
+import { BabySharkLivePage } from "./pages/BabySharkLivePage";
+import { WorksNotFoundPage } from "./pages/WorksNotFoundPage";
 import "./index.css";
 
 // このサイトにはルーターを導入していない（元々1ページのSPAだったため）。
-// /archive 系は本番ではビルド後に実ファイルとして書き出す（scripts/generate-archive-pages.mjs）ので、
+// /archive・/works 系は本番ではビルド後に実ファイルとして書き出す
+// （scripts/generate-archive-pages.mjs / generate-works-pages.mjs）ので、
 // クライアント側では location.pathname を見て表示するコンポーネントを切り替えるだけでよい。
 function Root() {
   const path = window.location.pathname.replace(/\/+$/, "") || "/";
@@ -19,6 +22,14 @@ function Root() {
   if (path.startsWith("/archive/")) {
     const slug = path.slice("/archive/".length);
     return <ArchiveDetailPage slug={slug} />;
+  }
+
+  if (path === "/works/baby-shark-live") {
+    return <BabySharkLivePage />;
+  }
+
+  if (path.startsWith("/works/")) {
+    return <WorksNotFoundPage />;
   }
 
   return <App />;

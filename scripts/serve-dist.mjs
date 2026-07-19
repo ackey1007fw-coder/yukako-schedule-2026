@@ -101,6 +101,20 @@ const server = createServer(async (request, response) => {
     }
   }
 
+  // 正規の /works/<slug>/ は resolveFile で静的HTMLが優先。未知パスだけ works/404.html へ。
+  if (cleanUrl === "/works" || cleanUrl.startsWith("/works/")) {
+    const worksFallback = path.join(root, "works", "404.html");
+    try {
+      const info = await stat(worksFallback);
+      if (info.isFile()) {
+        serveFile(request, response, worksFallback, info.size);
+        return;
+      }
+    } catch {
+      // 続行してホームへ
+    }
+  }
+
   const fallback = path.join(root, "index.html");
   const info = await stat(fallback);
   serveFile(request, response, fallback, info.size);

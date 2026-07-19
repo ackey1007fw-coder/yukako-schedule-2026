@@ -6,13 +6,15 @@
   "scripts": {
     "dev": "vite --host 127.0.0.1",
     "images:build": "node scripts/generate-responsive-images.mjs",
+    "images:og:baby-shark": "node scripts/generate-baby-shark-og-image.mjs",
     "add:news": "node scripts/add-news.mjs",
     "test:add-news": "node scripts/test-add-news.mjs",
+    "test:baby-shark-updates": "node scripts/test-baby-shark-updates.mjs",
     "test:gojet": "node scripts/test-gojet-status.mjs",
     "prebuild": "node scripts/generate-responsive-images.mjs && node scripts/generate-sitemap.mjs",
     "typecheck": "tsc -b",
     "build": "tsc -b && node node_modules/vite/bin/vite.js build",
-    "postbuild": "node scripts/generate-archive-pages.mjs",
+    "postbuild": "node scripts/generate-archive-pages.mjs && node scripts/generate-works-pages.mjs",
     "preview": "vite preview --host 127.0.0.1",
     "serve:dist": "node scripts/serve-dist.mjs"
   },
