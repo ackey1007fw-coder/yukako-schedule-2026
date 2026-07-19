@@ -9,12 +9,12 @@ export function BabySharkLiveSection() {
   return (
     <section id="baby-shark-live" className="scroll-mt-24 bg-[#f3f8fb] py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <ActHeader
-          act={3}
-          eyebrow="Featured Stage"
-          title="代表出演作品"
-          copy="全国で公演が続くファミリーミュージカルと、優花子さんの出演記録を分けてまとめています。"
-        />
+            <ActHeader
+              act={4}
+              eyebrow="Featured Stage"
+              title="代表出演作品"
+              copy="全国で公演が続くファミリーミュージカルと、優花子さんの出演記録を分けてまとめています。"
+            />
 
         <a
           href={work.path}
