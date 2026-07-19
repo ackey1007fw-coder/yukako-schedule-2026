@@ -133,8 +133,54 @@ export function validateUrl(url) {
   return null;
 }
 
+/** 追跡・共有用として重複比較時だけ落とす query（表示/保存URLは変えない） */
+const TRACKING_QUERY_PARAMS = new Set([
+  "utm_source",
+  "utm_medium",
+  "utm_campaign",
+  "utm_term",
+  "utm_content",
+  "utm_id"
+]);
+const X_SHARE_QUERY_PARAMS = new Set(["s", "t"]);
+const INSTAGRAM_SHARE_QUERY_PARAMS = new Set(["igsh", "igshid"]);
+
+/**
+ * 重複判定専用のURL正規化。元の文字列は書き換えない。
+ * - hostname 小文字化、先頭 www. 除去、hash 除去、末尾スラッシュ統一
+ * - x.com と twitter.com を同一ホストとして扱う
+ * - X/Instagram の共有用 query、一般的な utm_* のみ除去
+ */
+export function normalizeUrlForCompare(url) {
+  let parsed;
+  try {
+    parsed = new URL(String(url).trim());
+  } catch {
+    return String(url).trim().replace(/\/+$/, "");
+  }
+
+  let host = parsed.hostname.toLowerCase();
+  if (host.startsWith("www.")) host = host.slice(4);
+  if (host === "twitter.com") host = "x.com";
+
+  const kept = new URLSearchParams();
+  for (const [key, value] of parsed.searchParams) {
+    const lower = key.toLowerCase();
+    if (TRACKING_QUERY_PARAMS.has(lower)) continue;
+    if (host === "x.com" && X_SHARE_QUERY_PARAMS.has(lower)) continue;
+    if (host === "instagram.com" && INSTAGRAM_SHARE_QUERY_PARAMS.has(lower)) continue;
+    kept.append(key, value);
+  }
+  kept.sort();
+
+  const pathname = parsed.pathname.replace(/\/+$/, "") || "";
+  const search = kept.toString();
+  return `https://${host}${pathname}${search ? `?${search}` : ""}`;
+}
+
+/** @deprecated 重複比較は normalizeUrlForCompare を使う。互換のため残す。 */
 export function normalizeUrl(url) {
-  return url.trim().replace(/\/+$/, "");
+  return normalizeUrlForCompare(url);
 }
 
 export function normalizeTextForCompare(text) {
@@ -171,8 +217,8 @@ function unescapeTsString(value) {
 }
 
 export function findDuplicateUrl(items, url) {
-  const target = normalizeUrl(url);
-  return items.find((item) => normalizeUrl(item.url) === target) ?? null;
+  const target = normalizeUrlForCompare(url);
+  return items.find((item) => normalizeUrlForCompare(item.url) === target) ?? null;
 }
 
 export function findSimilarText(items, text) {

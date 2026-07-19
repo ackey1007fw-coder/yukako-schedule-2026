@@ -7,7 +7,9 @@ import {
   ALLOWED_LABELS,
   escapeTsString,
   extractNewsItems,
+  findDuplicateUrl,
   formatDryRunReport,
+  normalizeUrlForCompare,
   prepareNewsAddition,
   validateDate,
   validateLabel,
@@ -191,6 +193,118 @@ try {
 } finally {
   rmSync(tempDir, { recursive: true, force: true });
 }
+
+// --- SNS共有URLの重複判定 ---
+assert.equal(
+  normalizeUrlForCompare("https://www.instagram.com/reel/abc/?igsh=NTFvYzVjdXQ2OHJy"),
+  normalizeUrlForCompare("https://instagram.com/reel/abc")
+);
+assert.equal(
+  normalizeUrlForCompare("https://x.com/mokoopy/status/123?s=12"),
+  normalizeUrlForCompare("https://x.com/mokoopy/status/123")
+);
+assert.equal(
+  normalizeUrlForCompare("https://twitter.com/mokoopy/status/123"),
+  normalizeUrlForCompare("https://x.com/mokoopy/status/123")
+);
+assert.notEqual(
+  normalizeUrlForCompare("https://x.com/mokoopy/status/123"),
+  normalizeUrlForCompare("https://x.com/mokoopy/status/456")
+);
+assert.notEqual(
+  normalizeUrlForCompare("https://example.com/page?id=1"),
+  normalizeUrlForCompare("https://example.com/page?id=2")
+);
+// 機能用queryは維持し、utmだけ落とす
+assert.equal(
+  normalizeUrlForCompare("https://example.com/page?id=1&utm_source=x&utm_medium=social"),
+  normalizeUrlForCompare("https://example.com/page?id=1")
+);
+
+const snsSource = `export type NewsItem = {
+  date: string;
+  label: string;
+  text: string;
+  url: string;
+};
+
+export const news: NewsItem[] = [
+  {
+    date: "2026.7.11",
+    label: "Instagram",
+    text: "リール本文",
+    url: "https://www.instagram.com/reel/DaoGHTuSj2U/"
+  },
+  {
+    date: "2026.7.13",
+    label: "X",
+    text: "X本文",
+    url: "https://x.com/mokoopy/status/2076682572550267389"
+  }
+];
+`;
+
+const igDup = prepareNewsAddition({
+  source: snsSource,
+  filePath: "/tmp/sns-news.ts",
+  date: "2026.7.19",
+  label: "Instagram",
+  text: "別文言でも同じ投稿",
+  url: "https://www.instagram.com/reel/DaoGHTuSj2U/?igsh=NTFvYzVjdXQ2OHJy",
+  write: false
+});
+assert.equal(igDup.ok, false);
+assert.match(igDup.errors.join("\n"), /同一URL/);
+
+const xShareDup = prepareNewsAddition({
+  source: snsSource,
+  filePath: "/tmp/sns-news.ts",
+  date: "2026.7.19",
+  label: "X",
+  text: "共有パラメータ付き",
+  url: "https://x.com/mokoopy/status/2076682572550267389?s=12",
+  write: false
+});
+assert.equal(xShareDup.ok, false);
+assert.match(xShareDup.errors.join("\n"), /同一URL/);
+
+const twitterDup = prepareNewsAddition({
+  source: snsSource,
+  filePath: "/tmp/sns-news.ts",
+  date: "2026.7.19",
+  label: "X",
+  text: "twitter.comドメイン",
+  url: "https://twitter.com/mokoopy/status/2076682572550267389",
+  write: false
+});
+assert.equal(twitterDup.ok, false);
+assert.match(twitterDup.errors.join("\n"), /同一URL/);
+
+const differentStatus = prepareNewsAddition({
+  source: snsSource,
+  filePath: "/tmp/sns-news.ts",
+  date: "2026.7.19",
+  label: "X",
+  text: "別status",
+  url: "https://x.com/mokoopy/status/9999999999999999999",
+  write: false
+});
+assert.equal(differentStatus.ok, true);
+
+const functionalQueryKept = prepareNewsAddition({
+  source: snsSource,
+  filePath: "/tmp/sns-news.ts",
+  date: "2026.7.19",
+  label: "お知らせ",
+  text: "機能用queryは別URL",
+  url: "https://example.com/ticket?seat=A1",
+  write: false
+});
+assert.equal(functionalQueryKept.ok, true);
+assert.equal(
+  findDuplicateUrl([{ url: "https://example.com/ticket?seat=A2" }], "https://example.com/ticket?seat=A1"),
+  null
+);
 
 // --- 本物の news.ts がテストで壊れていないこと ---
 const afterReal = readFileSync(realNewsPath, "utf8");
