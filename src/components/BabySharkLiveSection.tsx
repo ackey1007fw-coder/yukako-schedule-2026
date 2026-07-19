@@ -9,29 +9,25 @@ export function BabySharkLiveSection() {
   return (
     <section id="baby-shark-live" className="scroll-mt-24 bg-[#f3f8fb] py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <ActHeader
-              act={4}
-              eyebrow="Featured Stage"
-              title="代表出演作品"
-              copy="全国で公演が続くファミリーミュージカルと、優花子さんの出演記録を分けてまとめています。"
-            />
+        <ActHeader
+          act={4}
+          eyebrow="Featured Stage"
+          title="代表出演作品"
+          copy="全国で公演が続くファミリーミュージカルと、優花子さんの出演記録を分けてまとめています。"
+        />
 
         <a
           href={work.path}
           className="group yukako-card yukako-card-interactive relative grid overflow-hidden border-rosefog/15 bg-white shadow-paper transition hover:border-champagne/50 lg:grid-cols-[0.95fr_1.05fr]"
         >
-          <div className="relative min-h-[240px] overflow-hidden bg-[#dceef5] lg:min-h-full">
+          <div className="relative overflow-hidden bg-[#dceef5]">
             <img
               {...getResponsiveImageProps(work.heroImage, "(min-width: 1024px) 46vw, 100vw")}
               alt={work.heroAlt}
               loading="lazy"
               decoding="async"
-              className="block h-full w-full object-contain object-center sm:object-cover"
+              className="block h-auto max-h-[360px] w-full object-contain object-center sm:max-h-[420px] lg:max-h-none lg:h-full lg:min-h-[320px] lg:object-cover"
               style={{ objectPosition: work.heroObjectPosition }}
-            />
-            <div
-              className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0b3a52]/25 via-transparent to-transparent"
-              aria-hidden="true"
             />
           </div>
 

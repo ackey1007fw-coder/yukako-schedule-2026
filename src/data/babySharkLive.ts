@@ -156,7 +156,7 @@ export const babySharkLive = {
   ] satisfies BabySharkImage[],
   /** 2024年当時の作品公演スケジュール（優花子さん個人の出演確定日ではない） */
   archiveScheduleNote:
-    "以下は2024年当時の作品公演情報のアーカイブです。現在の公演日程ではありません。最新の公演情報は公式サイトへ。",
+    "こちらは2024年当時の公演情報です。現在の公演情報は公式サイトをご確認ください。",
   archiveScheduleImage: {
     src: "/images/baby-shark/baby-shark-schedule-2024.jpg",
     alt: "ベイビーシャークライブ2024年当時の公演日程",

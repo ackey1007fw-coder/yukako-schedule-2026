@@ -90,11 +90,11 @@ export function BabySharkLivePage() {
               <p className="mt-3 max-w-xl text-sm leading-7 text-white/70">{work.appearanceNote}</p>
             </div>
 
-            <figure className="overflow-hidden border border-white/15 bg-[#124a66] shadow-paper">
+            <figure className="mx-auto w-full max-w-md overflow-hidden border border-white/15 bg-[#124a66] shadow-paper lg:max-w-none">
               <img
                 {...getResponsiveImageProps(work.heroImage, "(min-width: 1024px) 42vw, 100vw")}
                 alt={work.heroAlt}
-                className="block h-auto w-full object-contain object-center sm:max-h-[520px] sm:object-cover"
+                className="block h-auto max-h-[420px] w-full object-contain object-center sm:max-h-[480px] lg:max-h-[520px]"
                 style={{ objectPosition: work.heroObjectPosition }}
                 fetchPriority="high"
               />
@@ -157,7 +157,7 @@ export function BabySharkLivePage() {
                     alt={role.alt}
                     loading="lazy"
                     decoding="async"
-                    className="block h-auto w-full object-contain object-center sm:h-80 sm:object-cover"
+                    className="block h-auto max-h-[360px] w-full object-contain object-center sm:max-h-[400px]"
                     style={{ objectPosition: role.objectPosition }}
                   />
                   <div className="p-5">
@@ -237,7 +237,7 @@ export function BabySharkLivePage() {
                       alt={image.alt}
                       loading="lazy"
                       decoding="async"
-                      className="block h-auto w-full object-contain object-center sm:h-64 sm:object-cover"
+                      className="block h-auto max-h-[320px] w-full object-contain object-center sm:max-h-[280px]"
                       style={
                         image.objectPosition
                           ? { objectPosition: image.objectPosition }
@@ -265,14 +265,13 @@ export function BabySharkLivePage() {
               2024年当時の公演日程
             </h2>
             <div
-              className="mt-4 border border-[#c29a4a]/40 bg-[#fff8e8] px-4 py-3 text-sm leading-7 text-ink/80"
+              className="mt-4 border-2 border-[#c29a4a]/55 bg-[#fff8e8] px-4 py-4 text-sm leading-7 text-ink/85"
               role="note"
             >
-              <strong className="font-bold">2024年当時の公演情報・アーカイブ</strong>
-              <span className="mt-1 block">{work.archiveScheduleNote}</span>
-              <span className="mt-1 block text-ink/60">
-                ※ ここに載せた日程は作品の公演スケジュールであり、優花子さん個人の出演確定日ではありません。
-              </span>
+              <p className="text-base font-bold text-ink">{work.archiveScheduleNote}</p>
+              <p className="mt-2 text-ink/65">
+                ※ 掲載の日程は作品の公演スケジュール（アーカイブ）であり、優花子さん個人の出演確定日ではありません。
+              </p>
             </div>
 
             {work.archiveScheduleImage.available ? (
