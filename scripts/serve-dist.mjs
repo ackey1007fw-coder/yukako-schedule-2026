@@ -86,6 +86,21 @@ const server = createServer(async (request, response) => {
     return;
   }
 
+  // Vercel と同様: /archive/* で静的ファイルが無いときは archive/404.html を返す
+  // （正規の /archive と /archive/<slug>/ は上の resolveFile で index.html が先に当たる）
+  if (cleanUrl === "/archive" || cleanUrl.startsWith("/archive/")) {
+    const archiveFallback = path.join(root, "archive", "404.html");
+    try {
+      const info = await stat(archiveFallback);
+      if (info.isFile()) {
+        serveFile(request, response, archiveFallback, info.size);
+        return;
+      }
+    } catch {
+      // 404.html がまだ無いビルドでもホームへフォールバックできるよう続行
+    }
+  }
+
   const fallback = path.join(root, "index.html");
   const info = await stat(fallback);
   serveFile(request, response, fallback, info.size);

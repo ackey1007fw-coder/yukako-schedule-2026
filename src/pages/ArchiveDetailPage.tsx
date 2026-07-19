@@ -23,12 +23,31 @@ export function ArchiveDetailPage({ slug }: ArchiveDetailPageProps) {
     }
 
     document.title = "記事が見つかりません | 吉井優花子 応援ポータル";
-    const robots = document.querySelector<HTMLMetaElement>('meta[name="robots"]');
-    const previousRobots = robots?.content;
-    robots?.setAttribute("content", "noindex, nofollow");
+    const robotsContent = "noindex, nofollow";
+    let robots = document.querySelector<HTMLMetaElement>('meta[name="robots"]');
+    let createdRobots = false;
+    let previousRobots: string | null = null;
+
+    if (robots) {
+      previousRobots = robots.content;
+      robots.content = robotsContent;
+    } else {
+      robots = document.createElement("meta");
+      robots.name = "robots";
+      robots.content = robotsContent;
+      document.head.appendChild(robots);
+      createdRobots = true;
+    }
 
     return () => {
-      if (robots && previousRobots) robots.content = previousRobots;
+      if (!robots) return;
+      if (createdRobots) {
+        robots.remove();
+        return;
+      }
+      if (previousRobots !== null) {
+        robots.content = previousRobots;
+      }
     };
   }, [item]);
 

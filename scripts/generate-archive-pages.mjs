@@ -32,6 +32,15 @@ function replaceMetaByAttr(html, attrPattern, newTag, { required = true } = {}) 
   return html.replace(regex, newTag);
 }
 
+function upsertRobotsMeta(html, robots) {
+  const tag = `<meta name="robots" content="${escapeHtml(robots)}" />`;
+  if (/<meta\s+name="robots"/i.test(html)) {
+    return replaceMetaByAttr(html, 'name="robots"', tag);
+  }
+  // 既存テンプレに無い場合だけ head 先頭付近へ追加する
+  return html.replace(/<head([^>]*)>/i, `<head$1>\n    ${tag}`);
+}
+
 function applyHead(template, page) {
   let html = template;
 
@@ -45,6 +54,10 @@ function applyHead(template, page) {
     'name="description"',
     `<meta name="description" content="${escapeHtml(page.description)}" />`
   );
+
+  if (page.robots) {
+    html = upsertRobotsMeta(html, page.robots);
+  }
 
   html = html.replace(
     /<link rel="canonical" href="[^"]*" \/>/,
@@ -77,6 +90,13 @@ async function writePage(routePath, html) {
   await mkdir(outDir, { recursive: true });
   await writeFile(path.join(outDir, "index.html"), html, "utf8");
   console.log(`generated: /${routePath}/`);
+}
+
+async function writeHtmlFile(relativePath, html) {
+  const file = path.join(distDir, relativePath);
+  await mkdir(path.dirname(file), { recursive: true });
+  await writeFile(file, html, "utf8");
+  console.log(`generated: /${relativePath}`);
 }
 
 const template = await readFile(path.join(distDir, "index.html"), "utf8");
@@ -172,7 +192,15 @@ for (const item of archiveItems) {
         datePublished: item.datePublished,
         dateModified: item.dateModified,
         inLanguage: "ja",
-        author: { "@type": "Person", name: "吉井優花子" },
+        author: {
+          "@type": "Organization",
+          name: "吉井優花子 応援ポータル",
+          url: `${SITE_URL}/`
+        },
+        about: {
+          "@type": "Person",
+          name: "吉井優花子"
+        },
         publisher: {
           "@type": "Organization",
           name: "吉井優花子 応援ポータル",
@@ -198,4 +226,40 @@ for (const item of archiveItems) {
   await writePage(`archive/${item.slug}`, html);
 }
 
-console.log(`archive pages generated: 1 list + ${archiveItems.length} article(s)`);
+// --- 未知slug用フォールバック（Vercel rewrite 先）。一覧・正規記事のOGPは流用しない ---
+const notFoundTitle = "記事が見つかりません | 吉井優花子 応援ポータル";
+const notFoundDescription =
+  "お探しのアーカイブ記事は見つかりませんでした。一覧からご確認ください。";
+const notFoundCanonical = `${SITE_URL}/archive`;
+// 記事専用OG（MISS PEACEカード）や一覧featured画像は使わず、サイト共通のポートレートのみ
+const notFoundImage = `${SITE_URL}/images/yukako-portrait.jpg`;
+const notFoundImageDims = imageDims("/images/yukako-portrait.jpg");
+
+const notFoundHtml = applyHead(template, {
+  title: notFoundTitle,
+  description: notFoundDescription,
+  robots: "noindex, nofollow",
+  canonical: notFoundCanonical,
+  ogType: "website",
+  ogImage: notFoundImage,
+  ogImageWidth: String(notFoundImageDims.width),
+  ogImageHeight: String(notFoundImageDims.height),
+  ogImageAlt: "吉井優花子 応援ポータル",
+  jsonLd: {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: notFoundTitle,
+    description: notFoundDescription,
+    url: notFoundCanonical,
+    inLanguage: "ja",
+    isPartOf: {
+      "@type": "WebSite",
+      name: "吉井優花子 応援ポータル",
+      url: `${SITE_URL}/`
+    }
+  }
+});
+
+await writeHtmlFile("archive/404.html", notFoundHtml);
+
+console.log(`archive pages generated: 1 list + ${archiveItems.length} article(s) + 404 fallback`);
