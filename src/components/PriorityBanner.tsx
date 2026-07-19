@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { ArrowUpRight, CalendarClock, ChevronDown, Megaphone, PartyPopper, Radio, Ticket } from "lucide-react";
-import { news } from "../data/news";
 import { profile } from "../data/profile";
+import { siteUpdates } from "../data/siteUpdates";
 import { specialStream, streamSchedule } from "../data/streamSchedule";
 import { gojetStreamingTicketUrl, gojetTicketUrl } from "../data/gojetTimetable";
 import { getGojetStatus } from "../lib/gojetStatus";
@@ -16,6 +16,8 @@ type Announcement = {
   Icon: typeof Radio;
   tracking?: "stream_click" | "ticket_click" | "sns_click";
 };
+
+const isInternalHref = (href: string) => href.startsWith("#");
 
 const POLL_MS = 60000;
 const todayKey = (now: Date = new Date()) =>
@@ -66,23 +68,42 @@ export function PriorityBanner() {
     if (todayTime) items.push({ id: "stream", label: "今日の配信", text: `${todayTime}〜 予定${scheduled?.note ? `・${scheduled.note}` : ""}`, href: profile.showroom.url, tone: "bg-[#fbeef0] text-ink", Icon: CalendarClock, tracking: "stream_click" });
     if (gojet.phase === "before") items.push({ id: "gojet-countdown", label: "#ゆかJET", text: `公演まであと${gojet.daysLeft}日・チケット／配信を確認`, href: gojetTicketUrl, tone: "bg-gradient-to-r from-[#fbeef0] to-[#faf3e2] text-ink", Icon: Ticket, tracking: "ticket_click" });
     if (gojet.phase === "archive") items.push({ id: "gojet-archive", label: "#ゆかJET 配信", text: "アーカイブ配信は8/6（木）まで・配信チケット 3,700円", href: gojetStreamingTicketUrl, tone: "bg-gradient-to-r from-[#fbeef0] to-[#faf3e2] text-ink", Icon: Radio, tracking: "ticket_click" });
-    if (news[0]) items.push({ id: "news", label: "最新ニュース", text: `${news[0].date}　${news[0].text}`, href: news[0].url, tone: "bg-white text-ink", Icon: Megaphone, tracking: "sns_click" });
+    const latestUpdate = siteUpdates[0];
+    const latestHref = latestUpdate?.anchor || latestUpdate?.sourceUrl;
+    if (latestUpdate && latestHref) {
+      items.push({
+        id: "news",
+        label: "最新ニュース",
+        text: `${latestUpdate.date}　${latestUpdate.category}　${latestUpdate.title}`,
+        href: latestHref,
+        tone: "bg-white text-ink",
+        Icon: Megaphone,
+        tracking: "sns_click"
+      });
+    }
     return items;
   }, [isLive, nextShow, now]);
 
   const primary = announcements[0];
   if (!primary) return null;
   const rest = announcements.slice(1);
-  const renderLink = (item: Announcement, compact = false) => (
-    <a key={item.id} href={item.href} target="_blank" rel="noopener noreferrer"
-      onClick={() => item.tracking && trackPortalEvent(item.tracking, { placement: "priority_banner", item: item.id })}
-      className={`flex min-w-0 items-center gap-3 ${compact ? "border-t border-rosefog/15 px-4 py-3 text-sm" : `px-4 py-2.5 sm:px-6 ${item.tone}`}`}>
-      <item.Icon className="h-4 w-4 shrink-0" aria-hidden="true" />
-      <span className="shrink-0 text-xs font-black uppercase tracking-wide">{item.label}</span>
-      <span className="min-w-0 flex-1 truncate font-bold">{item.text}</span>
-      <ArrowUpRight className="h-4 w-4 shrink-0" aria-hidden="true" />
-    </a>
-  );
+  const renderLink = (item: Announcement, compact = false) => {
+    const internal = isInternalHref(item.href);
+    return (
+      <a
+        key={item.id}
+        href={item.href}
+        {...(internal ? {} : { target: "_blank", rel: "noopener noreferrer" })}
+        onClick={() => item.tracking && trackPortalEvent(item.tracking, { placement: "priority_banner", item: item.id })}
+        className={`flex min-w-0 items-center gap-3 ${compact ? "border-t border-rosefog/15 px-4 py-3 text-sm" : `px-4 py-2.5 sm:px-6 ${item.tone}`}`}
+      >
+        <item.Icon className="h-4 w-4 shrink-0" aria-hidden="true" />
+        <span className="shrink-0 text-xs font-black uppercase tracking-wide">{item.label}</span>
+        <span className="min-w-0 flex-1 truncate font-bold">{item.text}</span>
+        <ArrowUpRight className="h-4 w-4 shrink-0" aria-hidden="true" />
+      </a>
+    );
+  };
 
   return (
     <aside aria-label="優先のお知らせ" className="border-b border-champagne/30">
