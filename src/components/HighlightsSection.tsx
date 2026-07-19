@@ -114,6 +114,11 @@ export function HighlightsSection() {
                                   プロデュース
                                 </span>
                               )}
+                              {item.badge && (
+                                <span className="border border-champagne bg-champagne/15 px-2 py-0.5 text-[#8f6826]">
+                                  {item.badge}
+                                </span>
+                              )}
                             </p>
                             <h3 className="mt-2 font-display text-2xl leading-tight text-ink">
                               {item.title}
@@ -124,18 +129,26 @@ export function HighlightsSection() {
 
                             {links.length > 0 && (
                               <div className="mt-4 flex flex-wrap gap-2">
-                                {links.map((link) => (
-                                  <a
-                                    key={link.url}
-                                    href={link.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="inline-flex items-center gap-1 border border-rosefog/40 bg-porcelain px-3 py-1.5 text-xs font-bold text-ink transition hover:border-champagne hover:bg-white"
-                                  >
-                                    {link.label}
-                                    <ArrowUpRight className="h-3.5 w-3.5 text-champagne" aria-hidden="true" />
-                                  </a>
-                                ))}
+                                {links.map((link) => {
+                                  const isInternal = link.url.startsWith("/");
+                                  return (
+                                    <a
+                                      key={link.url}
+                                      href={link.url}
+                                      {...(isInternal
+                                        ? {}
+                                        : { target: "_blank", rel: "noopener noreferrer" })}
+                                      className={`inline-flex items-center gap-1 border px-3 py-1.5 text-xs font-bold transition ${
+                                        isInternal
+                                          ? "border-champagne bg-champagne/15 text-[#8f6826] hover:bg-champagne/25"
+                                          : "border-rosefog/40 bg-porcelain text-ink hover:border-champagne hover:bg-white"
+                                      }`}
+                                    >
+                                      {link.label}
+                                      <ArrowUpRight className="h-3.5 w-3.5 text-champagne" aria-hidden="true" />
+                                    </a>
+                                  );
+                                })}
                               </div>
                             )}
                           </div>

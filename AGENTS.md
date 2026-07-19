@@ -83,6 +83,8 @@ npm run dev   # http://127.0.0.1:5173 でローカル確認
 - `src/data/events.ts` … 公演・イベント一覧（`VITE_SCHEDULE_API_URL` 未設定時はこれがそのまま表示される）。
 - `src/data/profile.ts` … プロフィール、`heroImage` / `portraitImage`、facts、SHOWROOM設定・統計フォールバック。
 - `src/data/highlights.ts` … 「これまでの歩み」（受賞・舞台・メディアなど）。**新しい順**に配列。
+- `src/data/archive.ts` … 「YUKAKO STORY ARCHIVE｜活動の軌跡」（`/archive`, `/archive/<slug>`）のファン編集記事。
+  追加手順は [docs/ARCHIVE_TEMPLATE.md](./docs/ARCHIVE_TEMPLATE.md) を参照。
 - `src/data/news.ts` … トップのお知らせバー。新しいものを**配列の先頭**に。
 - `src/data/photos.ts` … フォトギャラリー＋ `galleryUpdate`（更新お知らせ）。**本人のスナップのみ**。
 - `src/data/gojetPromo.ts` … #ゆかJET特集（`NowProducingSection`）の更新カードと告知資料。
@@ -134,7 +136,7 @@ npm run dev   # http://127.0.0.1:5173 でローカル確認
 7. **文体ガイドに従う**（上記）。
 
 ## 事実メモ（吉井優花子 / よしい ゆかこ / Yoshii Yukako）
-- 1997年4月27日生まれ、秋田県秋田市出身、身長161cm、B型。
+- 1997年4月27日生まれ、秋田県秋田市出身、身長161cm、AB型。
 - 俳優・タレント・モデル・SHOWROOMライバー。元・秋田の公務員。
 - 経歴: 大学卒業後 秋田で公務員 → 2021年 ミス浴衣コンテスト準グランプリ → SHOWROOM開始
   → 2022年3月退職・上京 → 2022年12月 舞台『悪魔の涙』デビュー → 現在は法律事務所勤務と並行して舞台・プロデュース活動。

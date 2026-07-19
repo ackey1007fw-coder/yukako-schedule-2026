@@ -9,6 +9,8 @@ export type Highlight = {
   images?: { src: string; alt: string }[];
   link?: { label: string; url: string };
   links?: { label: string; url: string }[];
+  /** 受賞などを示す短いバッジ（例: "MISS PEACE賞"） */
+  badge?: string;
 };
 
 export const highlights: Highlight[] = [
@@ -78,10 +80,12 @@ export const highlights: Highlight[] = [
     year: "2025",
     date: "2025年9月",
     category: "受賞",
-    title: "Miss Grand Japan 2025 MISS PEACE賞",
+    title: "MISS GRAND JAPAN 2025 MISS PEACE賞受賞",
     description:
-      "ミス・グランド・ジャパン2025にて、平和的活動を積極的に行ったファイナリストに贈られるMISS PEACE賞を受賞。大会はMSCベリッシマ号で開催。2026年からは同協会の代表補佐・運営マネジメントを務めています。",
-    image: "/images/yukako-mgj-award.jpg"
+      "「誰もが安心して輝ける社会」への思いを胸に大会へ挑戦。仲間への姿勢と平和的な活動が認められ、MISS PEACE賞を受賞しました。",
+    image: "/images/yukako-mgj-award.jpg",
+    badge: "MISS PEACE賞",
+    link: { label: "受賞までの物語を見る", url: "/archive/miss-grand-japan-2025-miss-peace" }
   },
   {
     id: "akt-tokyo-komachi-2025",
