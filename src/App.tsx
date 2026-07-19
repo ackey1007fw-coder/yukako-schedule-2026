@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import { Analytics } from "@vercel/analytics/react";
+import { useEffect } from "react";
 import { ActionStrip } from "./components/ActionStrip";
 import { AkitaRootsSection } from "./components/AkitaRootsSection";
 import { Footer } from "./components/Footer";
@@ -36,28 +35,51 @@ import {
   sortEventsAsc,
   sortEventsDesc
 } from "./lib/date";
-import { fetchSchedule, getInitialSchedule } from "./lib/scheduleApi";
-import type { ScheduleData } from "./types/schedule";
+import { useSchedule } from "./lib/useSchedule";
 
 function App() {
-  const [schedule, setSchedule] = useState<ScheduleData>(() => getInitialSchedule());
-  const [isLoading, setIsLoading] = useState(true);
+  const { schedule, isLoading } = useSchedule();
+  const { events, socialLinks, mediaLinks, source, updatedAt } = schedule;
 
+  // /archive などから "/#highlights" の形で戻ってきたとき、セクションはReactの描画後に
+  // 現れるためブラウザ標準のフラグメントスクロールが効かない。描画後とスケジュール読込完了後に
+  // 同じ対象へ移動し、読込表示の高さが変わっても着地点を保つ。
   useEffect(() => {
-    let isMounted = true;
+    const id = window.location.hash.slice(1);
+    if (!id) return;
+    const target = document.getElementById(id);
+    if (!target) return;
 
-    fetchSchedule().then((data) => {
-      if (!isMounted) return;
-      setSchedule(data);
-      setIsLoading(false);
-    });
+    let stopped = false;
+    let frameId = 0;
+    const alignTarget = () => {
+      if (stopped) return;
+      cancelAnimationFrame(frameId);
+      frameId = requestAnimationFrame(() => target.scrollIntoView());
+    };
+    const stopFollowingLayout = () => {
+      stopped = true;
+      resizeObserver.disconnect();
+    };
+
+    // 画像やAPIデータでページ上部の高さが変わる間だけ、同じ見出しへ再調整する。
+    // ユーザーが操作を始めた後はスクロール位置を奪わない。
+    const resizeObserver = new ResizeObserver(alignTarget);
+    resizeObserver.observe(document.body);
+    alignTarget();
+    window.addEventListener("wheel", stopFollowingLayout, { passive: true, once: true });
+    window.addEventListener("touchstart", stopFollowingLayout, { passive: true, once: true });
+    const timeoutId = window.setTimeout(stopFollowingLayout, 2500);
 
     return () => {
-      isMounted = false;
+      stopped = true;
+      cancelAnimationFrame(frameId);
+      window.clearTimeout(timeoutId);
+      resizeObserver.disconnect();
+      window.removeEventListener("wheel", stopFollowingLayout);
+      window.removeEventListener("touchstart", stopFollowingLayout);
     };
-  }, []);
-
-  const { events, socialLinks, mediaLinks, source, updatedAt } = schedule;
+  }, [isLoading]);
   const now = new Date();
   const upcomingEvents = sortEventsAsc(
     events.filter((event) => !isEventPast(event, now)),
@@ -163,7 +185,6 @@ function App() {
       />
       <ScrollToTop />
       <StructuredData events={events} />
-      <Analytics />
     </div>
   );
 }

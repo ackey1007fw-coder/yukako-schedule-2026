@@ -1,0 +1,5 @@
+{
+  "rewrites": [
+    { "source": "/archive/:path*", "destination": "/archive/404.html" }
+  ]
+}
