@@ -117,9 +117,21 @@ export function ArchiveDetailPage({ slug }: ArchiveDetailPageProps) {
               </time>
             </div>
 
+            {item.journeyMark && (
+              <p className="mt-3 text-sm font-bold tracking-wide text-champagneInk/90">
+                {item.journeyMark}
+              </p>
+            )}
+
             <h1 className="mt-4 font-display text-[1.75rem] leading-tight text-ink sm:text-4xl">
               {item.title}
             </h1>
+
+            {item.subtitle && (
+              <p className="mt-4 text-base leading-8 text-ink/72 sm:text-lg sm:leading-9">
+                {item.subtitle}
+              </p>
+            )}
 
             {item.award && (
               <div className="mt-5 flex flex-wrap items-center gap-2">
@@ -182,6 +194,54 @@ export function ArchiveDetailPage({ slug }: ArchiveDetailPageProps) {
               <ArchiveVideoBlock video={item.video} />
             )}
 
+            {item.originalPost && (
+              <details className="group mt-12 border border-champagne/35 bg-white open:shadow-paper">
+                <summary className="cursor-pointer list-none px-5 py-4 marker:content-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-champagne">
+                  <span className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
+                    <span className="font-display text-xl text-ink sm:text-2xl">
+                      {item.originalPost.heading}
+                    </span>
+                    <span className="text-xs font-bold text-champagneInk">
+                      {item.originalPost.dateLabel
+                        ? `${item.originalPost.dateLabel}の投稿全文`
+                        : "投稿全文"}
+                      <span className="ml-2 text-ink/45 group-open:hidden">（開く）</span>
+                      <span className="ml-2 hidden text-ink/45 group-open:inline">（閉じる）</span>
+                    </span>
+                  </span>
+                </summary>
+                <div className="border-t border-champagne/25 px-5 py-5">
+                  {(item.originalPost.authorLabel ||
+                    item.originalPost.dateLabel ||
+                    item.originalPost.platformLabel) && (
+                    <dl className="mb-5 space-y-1 text-xs leading-6 text-ink/55">
+                      {item.originalPost.authorLabel && (
+                        <div className="flex flex-wrap gap-x-2">
+                          <dt className="font-bold text-ink/45">投稿者</dt>
+                          <dd>{item.originalPost.authorLabel}</dd>
+                        </div>
+                      )}
+                      {item.originalPost.dateLabel && (
+                        <div className="flex flex-wrap gap-x-2">
+                          <dt className="font-bold text-ink/45">投稿年月日</dt>
+                          <dd>{item.originalPost.dateLabel}</dd>
+                        </div>
+                      )}
+                      {item.originalPost.platformLabel && (
+                        <div className="flex flex-wrap gap-x-2">
+                          <dt className="font-bold text-ink/45">出典</dt>
+                          <dd>{item.originalPost.platformLabel}</dd>
+                        </div>
+                      )}
+                    </dl>
+                  )}
+                  <pre className="whitespace-pre-wrap break-words font-sans text-sm leading-8 text-ink/80">
+                    {item.originalPost.body}
+                  </pre>
+                </div>
+              </details>
+            )}
+
             <div className="mt-12 border-t border-rosefog/20 pt-8">
               <p className="text-xs font-bold uppercase tracking-[0.14em] text-ink/45">
                 元投稿・関連リンク
@@ -196,22 +256,31 @@ export function ArchiveDetailPage({ slug }: ArchiveDetailPageProps) {
                   {item.sourceUrl.label}
                   <ExternalLink className="h-4 w-4" aria-hidden="true" />
                 </a>
-                {item.relatedUrls.map((related) => (
-                  <a
-                    key={related.url}
-                    href={related.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="yukako-button min-h-12 border border-champagne bg-white px-5 py-3 text-sm font-bold text-ink transition hover:bg-porcelain"
-                  >
-                    {related.label}
-                    <ExternalLink className="h-4 w-4 text-champagne" aria-hidden="true" />
-                  </a>
-                ))}
+                {item.relatedUrls.map((related) => {
+                  const isInternal = related.url.startsWith("/") || related.url.startsWith("#");
+                  return (
+                    <a
+                      key={related.url}
+                      href={related.url}
+                      {...(isInternal
+                        ? {}
+                        : { target: "_blank", rel: "noopener noreferrer" })}
+                      className="yukako-button min-h-12 border border-champagne bg-white px-5 py-3 text-sm font-bold text-ink transition hover:bg-porcelain"
+                    >
+                      {related.label}
+                      {!isInternal && (
+                        <ExternalLink className="h-4 w-4 text-champagne" aria-hidden="true" />
+                      )}
+                    </a>
+                  );
+                })}
               </div>
               {item.credit && (
                 <p className="mt-6 text-xs text-ink/45">{item.credit}</p>
               )}
+              <p className="mt-6 text-xs leading-6 text-ink/45">
+                ファン制作の応援サイトであり、掲載内容の権利は各権利者に帰属します。
+              </p>
             </div>
 
             <a

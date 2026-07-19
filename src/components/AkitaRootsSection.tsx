@@ -2,6 +2,8 @@ type RootItem = {
   emoji: string;
   title: string;
   copy: string;
+  href?: string;
+  linkLabel?: string;
 };
 
 // 確認済みの事実のみ掲載（未確認の秋田エピソードは書かない）。
@@ -9,7 +11,9 @@ const roots: RootItem[] = [
   {
     emoji: "🌾",
     title: "秋田から、上京",
-    copy: "秋田県秋田市出身。秋田で公務員として働きながら、2021年にミス浴衣コンテストで準グランプリを受賞。これをきっかけに上京し、俳優の道へ。"
+    copy: "秋田県秋田市出身。秋田で公務員として働きながら、2021年にミス浴衣コンテストで準グランプリを受賞。2022年10月1日、俳優として本格的に挑むため東京へ拠点を移した。",
+    href: "/archive/2022-10-01-akita-to-tokyo",
+    linkLabel: "原点となった一日を読む"
   },
   {
     emoji: "📺",
@@ -51,9 +55,38 @@ export function AkitaRootsSection() {
                 {item.title}
               </h4>
               <p className="mt-2 text-sm leading-6 text-ink/68">{item.copy}</p>
+              {item.href && item.linkLabel && (
+                <a
+                  href={item.href}
+                  className="mt-4 inline-flex text-sm font-bold text-champagneInk underline-offset-4 hover:underline"
+                >
+                  {item.linkLabel}
+                </a>
+              )}
             </div>
           ))}
         </div>
+
+        <aside className="mt-8 border border-champagne/35 bg-porcelain p-5 sm:p-6">
+          <p className="text-[11px] font-black uppercase tracking-[0.18em] text-champagneInk">
+            Origin
+          </p>
+          <h3 className="mt-2 font-display text-2xl leading-tight text-ink">
+            俳優への道を歩み始めた日
+          </h3>
+          <p className="mt-3 max-w-3xl text-sm leading-7 text-ink/70">
+            2022年10月1日。公務員を終え、初舞台へ向かうために秋田から東京へ。家族と故郷への思いを胸に、夢への一歩を記した原点の記録です。
+          </p>
+          <p className="mt-2 text-xs font-bold text-ink/45" aria-hidden="true">
+            秋田 👹🌾 → 東京 🗼✨
+          </p>
+          <a
+            href="/archive/2022-10-01-akita-to-tokyo"
+            className="yukako-button yukako-button-gold mt-5 inline-flex min-h-11 px-4 py-2.5 text-sm"
+          >
+            原点となった一日を読む
+          </a>
+        </aside>
       </div>
     </section>
   );

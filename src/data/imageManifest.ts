@@ -294,6 +294,7 @@ export const imageManifest = {
   "/images/yukako-shuichi-event.jpg": {"width":1524,"height":2048,"widths":[360,480,720,960,1280,1524]},
   "/images/yukako-stage-back.jpg": {"width":1536,"height":2048,"widths":[360,480,720,960,1280,1536]},
   "/images/yukako-stage-front.jpg": {"width":1401,"height":1751,"widths":[360,480,720,960,1280,1401]},
+  "/images/yukako-tokyo-20221001.jpg": {"width":1080,"height":1328,"widths":[360,480,720,960,1080]},
   "/images/yukako-yukajet-aban-cast-2026-07-13-selfie.jpg": {"width":2048,"height":1537,"widths":[360,480,720,960,1280,1600,2048]},
   "/images/yukako-yukajet-aban-cast-video-poster-2026-07-13.jpg": {"width":720,"height":900,"widths":[360,480,720]},
   "/images/yukako-yukajet-all-team-run-2026-07-16-duo-selfie.jpg": {"width":1536,"height":2048,"widths":[360,480,720,960,1280,1536]},
