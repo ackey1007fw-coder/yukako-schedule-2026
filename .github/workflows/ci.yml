@@ -37,6 +37,9 @@ jobs:
       - name: Typecheck
         run: pnpm typecheck
 
+      - name: Add news CLI tests
+        run: pnpm test:add-news
+
       - name: Gojet status tests
         run: pnpm test:gojet
 
