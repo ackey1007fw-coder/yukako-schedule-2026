@@ -174,9 +174,8 @@ export function QuickNav({ now }: QuickNavProps) {
 
       {isMoreOpen && (
         <>
-          <button
-            type="button"
-            aria-label="メニューを閉じる"
+          <div
+            aria-hidden="true"
             className="fixed inset-x-0 bottom-0 z-[39] bg-ink/35"
             style={{ top: overlayTop }}
             onClick={() => closeMoreMenu()}
