@@ -24,7 +24,13 @@ export const profile = {
     { label: "特技", value: "スポーツ全般、歌唱、字を書く、絵を描く、料理、写真撮影" },
     {
       label: "経歴",
-      value: "秋田で公務員 → 2022年退職・上京 → 俳優活動を本格化 → プロデュース公演主宰"
+      value: "秋田で公務員 → 2022年退職・上京 → 俳優活動を本格化 → プロデュース公演主宰",
+      links: [
+        {
+          text: "2022年退職・上京",
+          url: "/archive/2022-10-01-akita-to-tokyo"
+        }
+      ]
     },
     { label: "主な出演", value: "Baby Shark Live 全国公演、舞台、映像、CM、MV、ドラマ" },
     { label: "CM・PR", value: "リポビタンD、鹿角市PR動画 ほか" },

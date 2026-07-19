@@ -117,9 +117,21 @@ export function ArchiveDetailPage({ slug }: ArchiveDetailPageProps) {
               </time>
             </div>
 
+            {item.journeyMark && (
+              <p className="mt-3 text-sm font-bold tracking-wide text-champagneInk/90">
+                {item.journeyMark}
+              </p>
+            )}
+
             <h1 className="mt-4 font-display text-[1.75rem] leading-tight text-ink sm:text-4xl">
               {item.title}
             </h1>
+
+            {item.subtitle && (
+              <p className="mt-4 text-base leading-8 text-ink/72 sm:text-lg sm:leading-9">
+                {item.subtitle}
+              </p>
+            )}
 
             {item.award && (
               <div className="mt-5 flex flex-wrap items-center gap-2">
@@ -135,20 +147,21 @@ export function ArchiveDetailPage({ slug }: ArchiveDetailPageProps) {
               </div>
             )}
 
-            <div className="mt-6 space-y-4">
-              {item.lead.map((paragraph) => (
-                <p key={paragraph} className="font-display text-xl leading-relaxed text-ink/85 sm:text-2xl">
-                  {paragraph}
-                </p>
-              ))}
-            </div>
-
             <div className="mx-auto mt-8 max-w-sm">
               <ArchivePhotoFrame
                 src={item.images[0].src}
                 alt={item.images[0].alt}
                 sizes="(min-width: 640px) 384px, 100vw"
+                loading="eager"
               />
+            </div>
+
+            <div className="mt-8 space-y-4">
+              {item.lead.map((paragraph) => (
+                <p key={paragraph} className="font-display text-xl leading-relaxed text-ink/85 sm:text-2xl">
+                  {paragraph}
+                </p>
+              ))}
             </div>
 
             {leadQuotes.map((quote) => (
@@ -186,6 +199,9 @@ export function ArchiveDetailPage({ slug }: ArchiveDetailPageProps) {
               <p className="text-xs font-bold uppercase tracking-[0.14em] text-ink/45">
                 元投稿・関連リンク
               </p>
+              {item.sourceNote && (
+                <p className="mt-4 text-sm leading-7 text-ink/72">{item.sourceNote}</p>
+              )}
               <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                 <a
                   href={item.sourceUrl.url}
@@ -196,22 +212,31 @@ export function ArchiveDetailPage({ slug }: ArchiveDetailPageProps) {
                   {item.sourceUrl.label}
                   <ExternalLink className="h-4 w-4" aria-hidden="true" />
                 </a>
-                {item.relatedUrls.map((related) => (
-                  <a
-                    key={related.url}
-                    href={related.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="yukako-button min-h-12 border border-champagne bg-white px-5 py-3 text-sm font-bold text-ink transition hover:bg-porcelain"
-                  >
-                    {related.label}
-                    <ExternalLink className="h-4 w-4 text-champagne" aria-hidden="true" />
-                  </a>
-                ))}
+                {item.relatedUrls.map((related) => {
+                  const isInternal = related.url.startsWith("/") || related.url.startsWith("#");
+                  return (
+                    <a
+                      key={related.url}
+                      href={related.url}
+                      {...(isInternal
+                        ? {}
+                        : { target: "_blank", rel: "noopener noreferrer" })}
+                      className="yukako-button min-h-12 border border-champagne bg-white px-5 py-3 text-sm font-bold text-ink transition hover:bg-porcelain"
+                    >
+                      {related.label}
+                      {!isInternal && (
+                        <ExternalLink className="h-4 w-4 text-champagne" aria-hidden="true" />
+                      )}
+                    </a>
+                  );
+                })}
               </div>
               {item.credit && (
                 <p className="mt-6 text-xs text-ink/45">{item.credit}</p>
               )}
+              <p className="mt-6 text-xs leading-6 text-ink/45">
+                ファン制作の応援サイトであり、掲載内容の権利は各権利者に帰属します。
+              </p>
             </div>
 
             <a
