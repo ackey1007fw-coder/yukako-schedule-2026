@@ -79,6 +79,8 @@ export type ArchiveItem = {
   quotes: ArchiveQuote[];
   /** images[0] を記事冒頭のメインビジュアルとして使用 */
   images: ArchiveImage[];
+  /** images[1] 以降をリード文の直後に掲載する記事のみ指定 */
+  showAdditionalImages?: boolean;
   /** OGP/SNSカードに使う画像（images内のsrcを指定）。省略時は images[0] */
   ogImage?: string;
   /** 専用OG画像を使う場合の具体的な代替テキスト。省略時は同じsrcのimages項目かimages[0]を使う */
@@ -105,7 +107,7 @@ export const archiveItems: ArchiveItem[] = [
   {
     slug: "2026-06-11-gojet-produce-announce",
     title:
-      "思い出の舞台を、今度はプロデューサーとして― 『GO,JET!GO!GO! vol.1 Premium』始動",
+      "思い出の舞台を、今度はプロデューサーとして――『GO,JET!GO!GO! vol.1 Premium』始動",
     shortTitle: "『GO,JET!GO!GO!』プロデュース発表",
     subtitle: "ゆかJETの始まり。出演者として挑んだ作品へ、プロデューサーとして向き合う発表の記録。",
     date: "2026.06.11",
@@ -138,9 +140,6 @@ export const archiveItems: ArchiveItem[] = [
           "脚本も一部変更したり、歌を増やしたり、オリジナルにしますよ。",
           "『かわええのう、龍馬くん』に引き続き、愛と挑戦のあるおもしろい舞台にします。",
           "［本番は7月23日(木)〜7月27日(月)］ぜひ観に来てください。配信でもご視聴いただけます。",
-          "若干名、役者を募集しています。キャスティングと配役にはこだわっています。そして、私はご本人のやる気を大切にしています。",
-          "「即戦力です！」「挑戦したい！」という方は、お気軽にご連絡ください。",
-          "☆7月に限らず、拡大させながら舞台を作っていきます！☆男役希望の女性にも、たくさん巡り逢いたいです。",
           "✿ 2026.6.11 ✿ #yukakophoto #舞台 #キャスティング #gojet #ミュージカル"
         ]
       },
@@ -184,12 +183,13 @@ export const archiveItems: ArchiveItem[] = [
         alt: "吉井優花子プロデュース『GO,JET!GO!GO! vol.1 Premium』公演紹介"
       }
     ],
+    showAdditionalImages: true,
     sourceUrl: {
       label: "Instagramで元の投稿を見る",
       url: "https://www.instagram.com/p/DZch0STFB0M/?igsh=MWt2amJ6djV3ZGZnaA=="
     },
     sourceNote:
-      "2026年6月11日時点の発表投稿です。投稿内の出演者募集は当時の案内であり、現在の募集状況を示すものではありません。最新の公演・チケット情報はゆかJET特集と公演ページへ。",
+      "この投稿では、発表当時の出演者募集についても案内されていました。現在の募集状況を示すものではありません。最新の公演・チケット情報はゆかJET特集と公演ページへ。",
     relatedUrls: [
       {
         label: "ゆかJET特集を見る",
@@ -209,7 +209,7 @@ export const archiveItems: ArchiveItem[] = [
     seoDescription:
       "吉井優花子さんが、思い出の舞台『GO,JET!GO!GO!』をプロデュースすることを発表。出演者として挑戦した作品へ、今度はプロデューサーとして向き合う新たな一歩を紹介します。",
     datePublished: "2026-06-11",
-    dateModified: "2026-07-19"
+    dateModified: "2026-07-20"
   },
   {
     slug: "miss-grand-japan-2025-miss-peace",

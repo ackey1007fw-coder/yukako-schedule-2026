@@ -67,7 +67,7 @@ const decoratedSourceUpdates: DisplayGojetFeatureUpdate[] = sourceUpdates
 const penlightUpdate = decoratedSourceUpdates.find(
   (update) => update.postUrl === PENLIGHT_POST_URL
 );
-const produceAnnounceUpdate = decoratedSourceUpdates.find(
+export const gojetOriginUpdate = decoratedSourceUpdates.find(
   (update) => update.postUrl === PRODUCE_ANNOUNCE_POST_URL
 );
 const remainingSourceUpdates = decoratedSourceUpdates.filter(
@@ -76,20 +76,9 @@ const remainingSourceUpdates = decoratedSourceUpdates.filter(
     update.postUrl !== PRODUCE_ANNOUNCE_POST_URL
 );
 
-const pinnedProduceAnnounceUpdate: DisplayGojetFeatureUpdate | undefined =
-  produceAnnounceUpdate
-    ? {
-        ...produceAnnounceUpdate,
-        anchorId: "gojet-produce-announce-2026-06-11",
-        primaryCta: "homepage"
-      }
-    : undefined;
-
 // 22:12のペンライト投稿を、22:04の「最後」の投稿より上に表示する。
-// 6/11のプロデュース発表は#ゆかJETの原点として、特集上部にも固定表示する。
 export const gojetFeatureUpdates: DisplayGojetFeatureUpdate[] = [
   ...(penlightUpdate ? [penlightUpdate] : []),
   finalGojetUpdate,
-  ...(pinnedProduceAnnounceUpdate ? [pinnedProduceAnnounceUpdate] : []),
   ...remainingSourceUpdates
 ];

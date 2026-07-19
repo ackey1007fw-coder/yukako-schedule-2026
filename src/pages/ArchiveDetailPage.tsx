@@ -164,7 +164,7 @@ export function ArchiveDetailPage({ slug }: ArchiveDetailPageProps) {
               ))}
             </div>
 
-            {item.images.length > 1 && (
+            {item.showAdditionalImages && item.images.length > 1 && (
               <div className="mt-10 grid gap-6">
                 {item.images.slice(1).map((image) => (
                   <div key={image.src} className="mx-auto w-full max-w-lg">
