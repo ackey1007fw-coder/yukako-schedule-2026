@@ -152,6 +152,7 @@ export function ArchiveDetailPage({ slug }: ArchiveDetailPageProps) {
                 src={item.images[0].src}
                 alt={item.images[0].alt}
                 sizes="(min-width: 640px) 384px, 100vw"
+                loading="eager"
               />
             </div>
 
