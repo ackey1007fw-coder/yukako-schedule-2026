@@ -21,6 +21,7 @@ import {
 } from "lucide-react";
 import {
   gojetFeatureUpdates,
+  gojetOriginUpdate,
   type DisplayGojetFeatureUpdate
 } from "../data/gojetFeatureUpdates";
 import { gojetPromoImages } from "../data/gojetPromo";
@@ -58,13 +59,20 @@ function PostSourceIcon({ url, className }: { url: string; className?: string })
   return <ExternalLink className={className} aria-hidden="true" />;
 }
 
+function isInternalHref(url: string) {
+  return url.startsWith("/") || url.startsWith("#");
+}
+
 function UpdateLinkButtons({ update }: { update: DisplayGojetFeatureUpdate }) {
   const homepageIsPrimary = update.primaryCta === "homepage";
+  const postIsInternal = isInternalHref(update.postUrl);
+  const homepageIsInternal = isInternalHref(update.homepageUrl);
   const postButton = (
     <a
       href={update.postUrl}
-      target="_blank"
-      rel="noopener noreferrer"
+      {...(postIsInternal
+        ? {}
+        : { target: "_blank", rel: "noopener noreferrer" })}
       className={`yukako-button min-h-12 px-4 py-3 text-sm ${
         homepageIsPrimary ? "yukako-button-ghost" : "yukako-button-gold"
       }`}
@@ -79,16 +87,19 @@ function UpdateLinkButtons({ update }: { update: DisplayGojetFeatureUpdate }) {
   const homepageButton = (
     <a
       href={update.homepageUrl}
-      target="_blank"
-      rel="noopener noreferrer"
+      {...(homepageIsInternal
+        ? {}
+        : { target: "_blank", rel: "noopener noreferrer" })}
       className={`yukako-button min-h-12 px-4 py-3 text-sm ${
         homepageIsPrimary ? "yukako-button-gold" : "yukako-button-ghost"
       }`}
     >
-      <ExternalLink
-        className={`h-4 w-4 ${homepageIsPrimary ? "" : "text-champagne"}`}
-        aria-hidden="true"
-      />
+      {!homepageIsInternal && (
+        <ExternalLink
+          className={`h-4 w-4 ${homepageIsPrimary ? "" : "text-champagne"}`}
+          aria-hidden="true"
+        />
+      )}
       {update.homepageLabel ?? "公演ホームページへ"}
     </a>
   );
@@ -333,7 +344,53 @@ export function NowProducingSection({ event, now }: NowProducingSectionProps) {
                   ))}
                 </ul>
 
-                <div id="gojet-feature-updates" className="mt-5 grid gap-3 sm:mt-6">
+                {gojetOriginUpdate && (
+                  <aside
+                    id="gojet-produce-announce-2026-06-11"
+                    className="mt-5 scroll-mt-28 border border-champagne/45 bg-champagne/10 p-3 shadow-paper sm:mt-6 sm:p-4"
+                    aria-labelledby="gojet-origin-title"
+                  >
+                    <div className="grid grid-cols-[72px_minmax(0,1fr)] gap-3 sm:grid-cols-[88px_minmax(0,1fr)] sm:gap-4">
+                      {gojetOriginUpdate.photos?.[0] && (
+                        <img
+                          {...getResponsiveImageProps(
+                            gojetOriginUpdate.photos[0].src,
+                            "88px",
+                          )}
+                          alt={gojetOriginUpdate.photos[0].alt}
+                          loading="lazy"
+                          decoding="async"
+                          className="aspect-[3/4] h-auto w-full object-contain"
+                        />
+                      )}
+                      <div className="min-w-0">
+                        <p className="text-[11px] font-black uppercase tracking-[0.14em] text-champagne">
+                          #ゆかJETの原点 ・ {gojetOriginUpdate.date}
+                        </p>
+                        <h4
+                          id="gojet-origin-title"
+                          className="mt-1.5 text-base font-black leading-snug text-white sm:text-lg"
+                        >
+                          『GO,JET!GO!GO!』プロデュース発表
+                        </h4>
+                        <p className="mt-2 text-xs leading-5 text-white/72 sm:text-sm sm:leading-6">
+                          出演者として挑んだ思い出の舞台を、今度はプロデューサーとして立ち上げた始まりの記録。
+                        </p>
+                      </div>
+                    </div>
+                    <a
+                      href={gojetOriginUpdate.homepageUrl}
+                      className="yukako-button yukako-button-gold mt-3 min-h-11 w-full px-4 py-2.5 text-sm sm:w-auto"
+                    >
+                      {gojetOriginUpdate.homepageLabel}
+                    </a>
+                  </aside>
+                )}
+
+                <p className="mt-5 text-xs font-black uppercase tracking-[0.16em] text-champagne sm:mt-6">
+                  最新の活動記録
+                </p>
+                <div id="gojet-feature-updates" className="mt-3 grid gap-3">
                   {visibleUpdates.map((update, index) => (
                     <div
                       id={update.anchorId}
