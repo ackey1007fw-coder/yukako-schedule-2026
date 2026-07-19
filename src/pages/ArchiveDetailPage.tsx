@@ -147,20 +147,20 @@ export function ArchiveDetailPage({ slug }: ArchiveDetailPageProps) {
               </div>
             )}
 
-            <div className="mt-6 space-y-4">
-              {item.lead.map((paragraph) => (
-                <p key={paragraph} className="font-display text-xl leading-relaxed text-ink/85 sm:text-2xl">
-                  {paragraph}
-                </p>
-              ))}
-            </div>
-
             <div className="mx-auto mt-8 max-w-sm">
               <ArchivePhotoFrame
                 src={item.images[0].src}
                 alt={item.images[0].alt}
                 sizes="(min-width: 640px) 384px, 100vw"
               />
+            </div>
+
+            <div className="mt-8 space-y-4">
+              {item.lead.map((paragraph) => (
+                <p key={paragraph} className="font-display text-xl leading-relaxed text-ink/85 sm:text-2xl">
+                  {paragraph}
+                </p>
+              ))}
             </div>
 
             {leadQuotes.map((quote) => (

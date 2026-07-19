@@ -231,7 +231,12 @@ export const highlights: Highlight[] = [
     title: "秋田から東京へ――俳優として歩み出した日",
     description:
       "公務員を退職し、初舞台の稽古にできる限り参加するため、秋田から東京へ拠点を移した日。家族や故郷への思いと、俳優として夢に挑み続ける覚悟を綴った原点の記録。",
-    image: "/images/yukako-tokyo-20221001.jpg",
+    images: [
+      {
+        src: "/images/yukako-tokyo-20221001.jpg",
+        alt: "東京への移住を開始した2022年10月1日、秋田犬の大型ぬいぐるみと撮影した吉井優花子さん"
+      }
+    ],
     badge: "原点",
     link: {
       label: "原点となった一日を読む",
