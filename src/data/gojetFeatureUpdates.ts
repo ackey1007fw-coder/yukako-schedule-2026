@@ -15,6 +15,8 @@ const FINAL_GOJET_POST_URL =
 const YUKAKO_X_PROFILE_URL = "https://x.com/mokoopy";
 const CBAN_GIRLS_POST_URL =
   "https://x.com/mokoopy/status/2078281074199982129";
+const PENLIGHT_POST_URL =
+  "https://x.com/mokoopy/status/2078467900470599986";
 
 const finalGojetUpdate: DisplayGojetFeatureUpdate = {
   date: "2026.7.18",
@@ -37,6 +39,13 @@ const finalGojetUpdate: DisplayGojetFeatureUpdate = {
 const decoratedSourceUpdates: DisplayGojetFeatureUpdate[] = sourceUpdates
   .filter((update) => update.postUrl !== FINAL_GOJET_POST_URL)
   .map((update) => {
+    if (update.postUrl === PENLIGHT_POST_URL) {
+      return {
+        ...update,
+        anchorId: "gojet-penlight-colors-2026-07-18"
+      };
+    }
+
     if (update.postUrl !== CBAN_GIRLS_POST_URL) return update;
 
     return {
@@ -53,7 +62,16 @@ const decoratedSourceUpdates: DisplayGojetFeatureUpdate[] = sourceUpdates
     };
   });
 
+const penlightUpdate = decoratedSourceUpdates.find(
+  (update) => update.postUrl === PENLIGHT_POST_URL
+);
+const remainingSourceUpdates = decoratedSourceUpdates.filter(
+  (update) => update.postUrl !== PENLIGHT_POST_URL
+);
+
+// 22:12のペンライト投稿を、22:04の「最後」の投稿より上に表示する。
 export const gojetFeatureUpdates: DisplayGojetFeatureUpdate[] = [
+  ...(penlightUpdate ? [penlightUpdate] : []),
   finalGojetUpdate,
-  ...decoratedSourceUpdates
+  ...remainingSourceUpdates
 ];
