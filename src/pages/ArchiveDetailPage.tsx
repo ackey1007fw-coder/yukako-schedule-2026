@@ -195,58 +195,13 @@ export function ArchiveDetailPage({ slug }: ArchiveDetailPageProps) {
               <ArchiveVideoBlock video={item.video} />
             )}
 
-            {item.originalPost && (
-              <details className="group mt-12 border border-champagne/35 bg-white open:shadow-paper">
-                <summary className="cursor-pointer list-none px-5 py-4 marker:content-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-champagne">
-                  <span className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
-                    <span className="font-display text-xl text-ink sm:text-2xl">
-                      {item.originalPost.heading}
-                    </span>
-                    <span className="text-xs font-bold text-champagneInk">
-                      {item.originalPost.dateLabel
-                        ? `${item.originalPost.dateLabel}の投稿全文`
-                        : "投稿全文"}
-                      <span className="ml-2 text-ink/45 group-open:hidden">（開く）</span>
-                      <span className="ml-2 hidden text-ink/45 group-open:inline">（閉じる）</span>
-                    </span>
-                  </span>
-                </summary>
-                <div className="border-t border-champagne/25 px-5 py-5">
-                  {(item.originalPost.authorLabel ||
-                    item.originalPost.dateLabel ||
-                    item.originalPost.platformLabel) && (
-                    <dl className="mb-5 space-y-1 text-xs leading-6 text-ink/55">
-                      {item.originalPost.authorLabel && (
-                        <div className="flex flex-wrap gap-x-2">
-                          <dt className="font-bold text-ink/45">投稿者</dt>
-                          <dd>{item.originalPost.authorLabel}</dd>
-                        </div>
-                      )}
-                      {item.originalPost.dateLabel && (
-                        <div className="flex flex-wrap gap-x-2">
-                          <dt className="font-bold text-ink/45">投稿年月日</dt>
-                          <dd>{item.originalPost.dateLabel}</dd>
-                        </div>
-                      )}
-                      {item.originalPost.platformLabel && (
-                        <div className="flex flex-wrap gap-x-2">
-                          <dt className="font-bold text-ink/45">出典</dt>
-                          <dd>{item.originalPost.platformLabel}</dd>
-                        </div>
-                      )}
-                    </dl>
-                  )}
-                  <pre className="whitespace-pre-wrap break-words font-sans text-sm leading-8 text-ink/80">
-                    {item.originalPost.body}
-                  </pre>
-                </div>
-              </details>
-            )}
-
             <div className="mt-12 border-t border-rosefog/20 pt-8">
               <p className="text-xs font-bold uppercase tracking-[0.14em] text-ink/45">
                 元投稿・関連リンク
               </p>
+              {item.sourceNote && (
+                <p className="mt-4 text-sm leading-7 text-ink/72">{item.sourceNote}</p>
+              )}
               <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                 <a
                   href={item.sourceUrl.url}

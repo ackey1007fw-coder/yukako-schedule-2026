@@ -1,5 +1,4 @@
 import {
-  BookOpen,
   CalendarDays,
   Clapperboard,
   HeartHandshake,
@@ -21,8 +20,7 @@ const charmCards = [
   {
     title: "秋田の公務員から俳優へ",
     copy: "公務員として働いた経験を礎に、上京して舞台・映像へ表現の場を広げる歩み。",
-    Icon: Sparkles,
-    href: "/archive/2022-10-01-akita-to-tokyo"
+    Icon: Sparkles
   },
   {
     title: "優しく楽しく柔らかく",
@@ -40,7 +38,6 @@ const guideCards = [
   { label: "まずプロフィールを見る", href: "#profile", Icon: UserRound },
   { label: "今日の配信・予定を見る", href: "#schedule", Icon: CalendarDays },
   { label: "出演・公演情報を見る", href: "#next", Icon: Clapperboard },
-  { label: "原点の一日を読む", href: "/archive/2022-10-01-akita-to-tokyo", Icon: BookOpen },
   { label: "SNSをフォローする", href: "#links", Icon: Share2 },
   { label: "応援方法を見る", href: "#showroom", Icon: HeartHandshake }
 ];
@@ -81,38 +78,17 @@ export function PortalIntroSection() {
               copy="俳優としての信頼感と、配信で伝わるやわらかい空気。その両方が吉井優花子さんの魅力です。"
             />
             <div className="grid gap-3 sm:grid-cols-2">
-              {charmCards.map(({ title, copy, Icon, href }) => {
-                const content = (
-                  <>
-                    <span className="grid h-11 w-11 place-items-center rounded-full border border-champagne/45 bg-porcelain text-champagne">
-                      <Icon className="h-5 w-5" aria-hidden="true" />
-                    </span>
-                    <h3 className="mt-4 font-display text-2xl leading-tight text-ink">
-                      {title}
-                    </h3>
-                    <p className="mt-3 text-sm leading-7 text-ink/68">{copy}</p>
-                    {href && (
-                      <span className="mt-3 inline-flex text-xs font-bold text-champagneInk">
-                        原点となった一日を読む
-                      </span>
-                    )}
-                  </>
-                );
-
-                return href ? (
-                  <a
-                    key={title}
-                    href={href}
-                    className="yukako-card yukako-card-interactive block border-rosefog/20 bg-white p-5"
-                  >
-                    {content}
-                  </a>
-                ) : (
-                  <article key={title} className="yukako-card border-rosefog/20 bg-white p-5">
-                    {content}
-                  </article>
-                );
-              })}
+              {charmCards.map(({ title, copy, Icon }) => (
+                <article key={title} className="yukako-card border-rosefog/20 bg-white p-5">
+                  <span className="grid h-11 w-11 place-items-center rounded-full border border-champagne/45 bg-porcelain text-champagne">
+                    <Icon className="h-5 w-5" aria-hidden="true" />
+                  </span>
+                  <h3 className="mt-4 font-display text-2xl leading-tight text-ink">
+                    {title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-7 text-ink/68">{copy}</p>
+                </article>
+              ))}
             </div>
           </div>
         </div>
@@ -123,7 +99,7 @@ export function PortalIntroSection() {
             title="はじめての方へ"
             copy="気になったところから見られるように、入口を分けました。"
           />
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
             {guideCards.map(({ label, href, Icon }) => (
               <a
                 key={label}
