@@ -1,7 +1,7 @@
 // YUKAKO STORY ARCHIVE｜活動の軌跡
 // 吉井優花子さんのSNS投稿・活動記録を、ファン編集記事としてまとめるアーカイブのデータソース。
 // 新しい記事を追加するときは `docs/ARCHIVE_TEMPLATE.md` を参照。配列末尾に追加すればよい
-// （表示順は date の新しい順に自動で並び替わる）。
+// （表示順は featured → datePublished の新しい順に自動で並び替わる）。
 
 export type ArchiveCategory =
   | "受賞・ミスコン"
@@ -75,6 +75,8 @@ export type ArchiveItem = {
   quotes: ArchiveQuote[];
   /** images[0] を記事冒頭のメインビジュアルとして使用 */
   images: ArchiveImage[];
+  /** OGP/SNSカードに使う画像（images内のsrcを指定）。省略時は images[0] */
+  ogImage?: string;
   video?: ArchiveVideo;
   /** このインデックス（0始まり）の sections の直後に動画を表示。省略時は本文の末尾 */
   videoAfterSectionIndex?: number;
@@ -167,6 +169,7 @@ export const archiveItems: ArchiveItem[] = [
         alt: "MISS GRAND JAPAN 2025のステージで、赤いイブニングガウンを着てMISS PEACE賞のトロフィーを持つ吉井優花子さん"
       }
     ],
+    ogImage: "/images/yukako-mgj-award.jpg",
     video: {
       type: "local",
       src: "/videos/miss-grand-japan-2025-stage-720.mp4",
@@ -207,6 +210,10 @@ export const archiveItems: ArchiveItem[] = [
 export const getArchiveItemBySlug = (slug: string) =>
   archiveItems.find((item) => item.slug === slug);
 
-export const sortedArchiveItems = [...archiveItems].sort((a, b) =>
-  b.date.localeCompare(a.date)
-);
+// 一覧の表示順: featured を先頭に固定し、あとは datePublished（ISO形式なので文字列比較で正しく並ぶ）の新しい順。
+// 表示用の date（"2025.09.11"）はゼロ埋め忘れで並びが壊れるため、ソートには使わない。
+export const sortedArchiveItems = [...archiveItems].sort((a, b) => {
+  const featuredDiff = Number(b.featured ?? false) - Number(a.featured ?? false);
+  if (featuredDiff !== 0) return featuredDiff;
+  return b.datePublished.localeCompare(a.datePublished);
+});

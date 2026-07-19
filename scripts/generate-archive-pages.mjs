@@ -35,6 +35,9 @@ function replaceMetaByAttr(html, attrPattern, newTag, { required = true } = {}) 
 function applyHead(template, page) {
   let html = template;
 
+  // ホーム用のヒーロー画像preloadはアーカイブページでは使わないので外す（無駄な先読みを防ぐ）
+  html = html.replace(/\s*<link\s+rel="preload"\s+as="image"[\s\S]*?\/>/, "");
+
   html = html.replace(/<title>[\s\S]*?<\/title>/, `<title>${escapeHtml(page.title)}</title>`);
 
   html = replaceMetaByAttr(
@@ -85,13 +88,20 @@ const imageDims = (src) => {
   return entry ? { width: entry.width, height: entry.height } : { width: 1200, height: 630 };
 };
 
+// OGP画像は item.ogImage（省略時は images[0]）。altはimages内の同じsrcのものを使う
+const ogImageFor = (item) => {
+  const src = item.ogImage ?? item.images[0].src;
+  const match = item.images.find((image) => image.src === src);
+  return { src, alt: match?.alt ?? item.images[0].alt };
+};
+
 const listCanonical = `${SITE_URL}/archive`;
 const listTitle = "YUKAKO STORY ARCHIVE｜活動の軌跡 | 吉井優花子 応援ポータル";
 const listDescription =
   "舞台、映像、モデル、ミスコン、配信。吉井優花子さんが重ねてきた挑戦を、SNS投稿とともに振り返る活動アーカイブです。";
 
 const featured = archiveItems.find((item) => item.featured) ?? archiveItems[0];
-const featuredImage = featured?.images[0];
+const featuredImage = featured ? ogImageFor(featured) : null;
 const featuredDims = featuredImage ? imageDims(featuredImage.src) : { width: 1200, height: 630 };
 
 // --- /archive 一覧ページ ---
@@ -139,8 +149,8 @@ await writePage("archive", listHtml);
 // --- /archive/<slug> 個別記事ページ ---
 for (const item of archiveItems) {
   const canonical = `${SITE_URL}/archive/${item.slug}`;
-  const heroImage = item.images[0];
-  const heroDims = imageDims(heroImage.src);
+  const ogImage = ogImageFor(item);
+  const ogDims = imageDims(ogImage.src);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -158,7 +168,7 @@ for (const item of archiveItems) {
         "@id": `${canonical}#article`,
         headline: item.title,
         description: item.seoDescription,
-        image: [toAbsolute(heroImage.src)],
+        image: [...new Set([toAbsolute(item.images[0].src), toAbsolute(ogImage.src)])],
         datePublished: item.datePublished,
         dateModified: item.dateModified,
         inLanguage: "ja",
@@ -178,10 +188,10 @@ for (const item of archiveItems) {
     description: item.seoDescription,
     canonical,
     ogType: "article",
-    ogImage: toAbsolute(heroImage.src),
-    ogImageWidth: String(heroDims.width),
-    ogImageHeight: String(heroDims.height),
-    ogImageAlt: heroImage.alt,
+    ogImage: toAbsolute(ogImage.src),
+    ogImageWidth: String(ogDims.width),
+    ogImageHeight: String(ogDims.height),
+    ogImageAlt: ogImage.alt,
     jsonLd
   });
 

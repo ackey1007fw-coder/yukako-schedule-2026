@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { ArchiveVideo } from "../data/archive";
+import { getOptimizedImageUrl } from "../lib/responsiveImage";
 
 type ArchiveVideoBlockProps = {
   video: ArchiveVideo;
@@ -26,6 +27,8 @@ export function ArchiveVideoBlock({ video }: ArchiveVideoBlockProps) {
           </div>
         ) : (
           <div className="aspect-[3/4] overflow-hidden border border-white/12 bg-black">
+            {/* videoのsrcは<source>子要素ではなく本体属性で指定する。<source>だと読み込み失敗の
+                errorイベントがsource側で発火し、onErrorフォールバックが動かない */}
             {video.type === "drive" ? (
               <iframe
                 src={video.src}
@@ -36,16 +39,15 @@ export function ArchiveVideoBlock({ video }: ArchiveVideoBlockProps) {
               />
             ) : (
               <video
+                src={video.src}
                 controls
                 playsInline
                 preload="none"
-                poster={video.poster}
+                poster={getOptimizedImageUrl(video.poster)}
                 aria-label={video.label}
                 className="block h-full w-full object-contain"
                 onError={() => setHasError(true)}
-              >
-                <source src={video.src} type="video/mp4" />
-              </video>
+              />
             )}
           </div>
         )}

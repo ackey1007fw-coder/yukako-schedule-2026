@@ -41,11 +41,13 @@ OGP/JSON-LDが自動で反映されます。
   images: [
     { src: "/images/yukako-xxx.jpg", alt: "事実描写のalt（文体ガイドは適用しない）" }
   ],
+  ogImage: "/images/yukako-xxx.jpg", // SNSカード用（images内のsrcを指定）。省略時はimages[0]
+
   // 動画がなければ省略可
   video: {
     type: "local", // ローカルmp4なら"local"、Googleドライブ埋め込みなら"drive"
     src: "/videos/xxx.mp4",
-    poster: "/images/yukako-xxx.jpg",
+    poster: "/images/yukako-xxx.jpg", // 元パスでよい（表示時に最適化WebPへ自動変換される）
     heading: "Stage Movie",
     subheading: "動画セクションの見出し",
     description: "動画の説明文",

@@ -9,14 +9,16 @@ type FactLink = { text: string; url: string };
 // fact.value の中に fact.links で指定した文言があれば、その部分だけをリンクに差し替える。
 // 例:「受賞歴」の中の「Miss Grand Japan 2025 MISS PEACE賞」だけをアーカイブ記事へのリンクにする。
 function renderFactValue(value: string, links?: FactLink[]): ReactNode {
-  if (!links || links.length === 0) return value;
+  // 空文字のtextはindexOfが常に0を返して無限ループするため除外
+  const usableLinks = links?.filter((link) => link.text.length > 0) ?? [];
+  if (usableLinks.length === 0) return value;
 
   const nodes: ReactNode[] = [];
   let remaining = value;
   let key = 0;
 
   while (remaining.length > 0) {
-    const next = links
+    const next = usableLinks
       .map((link) => ({ link, index: remaining.indexOf(link.text) }))
       .filter((entry) => entry.index !== -1)
       .sort((a, b) => a.index - b.index)[0];

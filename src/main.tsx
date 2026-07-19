@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { Analytics } from "@vercel/analytics/react";
 import App from "./App";
 import { ArchiveListPage } from "./pages/ArchiveListPage";
 import { ArchiveDetailPage } from "./pages/ArchiveDetailPage";
@@ -26,5 +27,7 @@ function Root() {
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <Root />
+    {/* 計測はホーム・アーカイブ全ページ共通なのでApp内ではなくここに置く */}
+    <Analytics />
   </React.StrictMode>,
 );

@@ -1,4 +1,4 @@
-import { Analytics } from "@vercel/analytics/react";
+import { useEffect } from "react";
 import { ActionStrip } from "./components/ActionStrip";
 import { AkitaRootsSection } from "./components/AkitaRootsSection";
 import { Footer } from "./components/Footer";
@@ -39,6 +39,16 @@ import { useSchedule } from "./lib/useSchedule";
 function App() {
   const { schedule, isLoading } = useSchedule();
   const { events, socialLinks, mediaLinks, source, updatedAt } = schedule;
+
+  // /archive などから "/#highlights" の形で戻ってきたとき、セクションはReactの描画後に
+  // 現れるためブラウザ標準のフラグメントスクロールが効かない。初回マウント時に自前で移動する。
+  useEffect(() => {
+    const id = window.location.hash.slice(1);
+    if (!id) return;
+    const target = document.getElementById(id);
+    if (!target) return;
+    requestAnimationFrame(() => target.scrollIntoView());
+  }, []);
   const now = new Date();
   const upcomingEvents = sortEventsAsc(
     events.filter((event) => !isEventPast(event, now)),
@@ -141,7 +151,6 @@ function App() {
       />
       <ScrollToTop />
       <StructuredData events={events} />
-      <Analytics />
     </div>
   );
 }
