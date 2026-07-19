@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "vite --host 127.0.0.1",
     "images:build": "node scripts/generate-responsive-images.mjs",
+    "add:news": "node scripts/add-news.mjs",
+    "test:add-news": "node scripts/test-add-news.mjs",
     "test:gojet": "node scripts/test-gojet-status.mjs",
     "prebuild": "node scripts/generate-responsive-images.mjs && node scripts/generate-sitemap.mjs",
     "typecheck": "tsc -b",
