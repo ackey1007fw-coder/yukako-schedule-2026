@@ -9,6 +9,18 @@ const optimizedSrc = (src: string, width: number) => {
   return `${directory}${base}-${width}.webp`;
 };
 
+// srcSetを使えない単一URLの場面（<video>のposter等）向けに、最適化WebPのURLを1つ返す。
+// manifestに無い画像はそのまま返す。
+export function getOptimizedImageUrl(src: string, targetWidth = 720): string {
+  const image = imageManifest[src as keyof typeof imageManifest];
+  if (!image) return src;
+
+  const width =
+    image.widths.find((candidate) => candidate >= targetWidth) ??
+    image.widths[image.widths.length - 1];
+  return optimizedSrc(src, width);
+}
+
 export function getResponsiveImageProps(
   src: string,
   sizes = "100vw",

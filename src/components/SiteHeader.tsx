@@ -3,13 +3,17 @@ import { Mic2 } from "lucide-react";
 import { profile } from "../data/profile";
 import type { SocialLink } from "../types";
 
+// ホーム以外のページ（/archive など）にも同じヘッダーを出すため、
+// セクションリンクは "#updates" ではなく "/#updates"（どのページからでもホームの該当セクションへ飛べる。
+// ホーム上ではパスが同じなのでリロードせずスクロールだけが起きる）。
 const navItems = [
-  { label: "最新情報", href: "#updates", id: "updates" },
-  { label: "公演情報", href: "#next", id: "next" },
-  { label: "スケジュール", href: "#schedule", id: "schedule" },
-  { label: "これまでの歩み", href: "#highlights", id: "highlights" },
-  { label: "プロフィール", href: "#profile", id: "profile" },
-  { label: "SNS", href: "#links", id: "links" }
+  { label: "最新情報", href: "/#updates", id: "updates" },
+  { label: "公演情報", href: "/#next", id: "next" },
+  { label: "スケジュール", href: "/#schedule", id: "schedule" },
+  { label: "これまでの歩み", href: "/#highlights", id: "highlights" },
+  { label: "アーカイブ", href: "/archive", id: "archive" },
+  { label: "プロフィール", href: "/#profile", id: "profile" },
+  { label: "SNS", href: "/#links", id: "links" }
 ];
 
 function useActiveSection() {
@@ -49,9 +53,9 @@ export function SiteHeader({ socialLinks }: SiteHeaderProps) {
   const activeSection = useActiveSection();
 
   return (
-    <header className="sticky top-0 z-50 w-full overflow-hidden border-b border-champagne/25 bg-porcelain/90 backdrop-blur-xl">
+    <header className="safe-area-header sticky top-0 z-50 w-full overflow-hidden border-b border-champagne/25 bg-porcelain/90 backdrop-blur-xl">
       <div className="mx-auto flex h-16 w-full min-w-0 max-w-7xl items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
-        <a href="#top" className="flex min-w-0 items-center gap-3 text-ink">
+        <a href="/#top" className="flex min-w-0 items-center gap-3 text-ink">
           <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-champagne/60 bg-ink text-champagne">
             <Mic2 className="h-4 w-4" aria-hidden="true" />
           </span>

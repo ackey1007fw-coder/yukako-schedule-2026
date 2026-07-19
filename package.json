@@ -10,6 +10,7 @@
     "prebuild": "node scripts/generate-responsive-images.mjs && node scripts/generate-sitemap.mjs",
     "typecheck": "tsc -b",
     "build": "tsc -b && node node_modules/vite/bin/vite.js build",
+    "postbuild": "node scripts/generate-archive-pages.mjs",
     "preview": "vite preview --host 127.0.0.1",
     "serve:dist": "node scripts/serve-dist.mjs"
   },
@@ -26,6 +27,7 @@
     "@types/react": "^18.3.17",
     "@types/react-dom": "^18.3.5",
     "autoprefixer": "latest",
+    "esbuild": "^0.21.5",
     "postcss": "latest",
     "sharp": "^0.35.1",
     "tailwindcss": "^3.4.17"

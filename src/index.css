@@ -13,6 +13,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: calc(5rem + env(safe-area-inset-top));
 }
 
 body {
@@ -56,6 +57,10 @@ body::before {
 
 img {
   max-width: 100%;
+}
+
+.safe-area-header {
+  padding-top: env(safe-area-inset-top);
 }
 
 ::selection {
