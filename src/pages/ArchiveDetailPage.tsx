@@ -164,6 +164,25 @@ export function ArchiveDetailPage({ slug }: ArchiveDetailPageProps) {
               ))}
             </div>
 
+            {item.images.length > 1 && (
+              <div className="mt-10 grid gap-6">
+                {item.images.slice(1).map((image) => (
+                  <div key={image.src} className="mx-auto w-full max-w-lg">
+                    <ArchivePhotoFrame
+                      src={image.src}
+                      alt={image.alt}
+                      sizes="(min-width: 640px) 512px, 100vw"
+                    />
+                    {image.caption && (
+                      <p className="mt-2 text-center text-xs leading-6 text-ink/55">
+                        {image.caption}
+                      </p>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
+
             {leadQuotes.map((quote) => (
               <ArchiveQuoteBlock key={quote.text} text={quote.text} />
             ))}

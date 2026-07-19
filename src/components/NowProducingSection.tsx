@@ -36,7 +36,8 @@ type NowProducingSectionProps = {
   now?: Date;
 };
 
-const INITIAL_VISIBLE_UPDATES = 2;
+// 最新更新に加え、#ゆかJETの原点（プロデュース発表）が折りたたみ前にも見える件数。
+const INITIAL_VISIBLE_UPDATES = 3;
 const CLOCK_UPDATE_MS = 60000;
 
 const roles = [
@@ -58,13 +59,20 @@ function PostSourceIcon({ url, className }: { url: string; className?: string })
   return <ExternalLink className={className} aria-hidden="true" />;
 }
 
+function isInternalHref(url: string) {
+  return url.startsWith("/") || url.startsWith("#");
+}
+
 function UpdateLinkButtons({ update }: { update: DisplayGojetFeatureUpdate }) {
   const homepageIsPrimary = update.primaryCta === "homepage";
+  const postIsInternal = isInternalHref(update.postUrl);
+  const homepageIsInternal = isInternalHref(update.homepageUrl);
   const postButton = (
     <a
       href={update.postUrl}
-      target="_blank"
-      rel="noopener noreferrer"
+      {...(postIsInternal
+        ? {}
+        : { target: "_blank", rel: "noopener noreferrer" })}
       className={`yukako-button min-h-12 px-4 py-3 text-sm ${
         homepageIsPrimary ? "yukako-button-ghost" : "yukako-button-gold"
       }`}
@@ -79,16 +87,19 @@ function UpdateLinkButtons({ update }: { update: DisplayGojetFeatureUpdate }) {
   const homepageButton = (
     <a
       href={update.homepageUrl}
-      target="_blank"
-      rel="noopener noreferrer"
+      {...(homepageIsInternal
+        ? {}
+        : { target: "_blank", rel: "noopener noreferrer" })}
       className={`yukako-button min-h-12 px-4 py-3 text-sm ${
         homepageIsPrimary ? "yukako-button-gold" : "yukako-button-ghost"
       }`}
     >
-      <ExternalLink
-        className={`h-4 w-4 ${homepageIsPrimary ? "" : "text-champagne"}`}
-        aria-hidden="true"
-      />
+      {!homepageIsInternal && (
+        <ExternalLink
+          className={`h-4 w-4 ${homepageIsPrimary ? "" : "text-champagne"}`}
+          aria-hidden="true"
+        />
+      )}
       {update.homepageLabel ?? "公演ホームページへ"}
     </a>
   );
@@ -416,7 +427,7 @@ export function NowProducingSection({ event, now }: NowProducingSectionProps) {
                                 alt={photo.alt}
                                 loading="lazy"
                                 decoding="async"
-                                className="block h-auto w-full"
+                                className="mx-auto block h-auto max-h-[520px] w-auto max-w-full object-contain"
                               />
                             </div>
                           ))}

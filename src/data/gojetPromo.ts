@@ -463,6 +463,32 @@ export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
       poster: "/images/yukako-yukajet-rehearsal-video-poster-2026-07-05.jpg",
       label: "#ゆかJET 歌ダンス稽古の様子(43秒・音声あり)"
     }
+  },
+  {
+    date: "2026.6.11",
+    label: "プロデュース発表",
+    title: "思い出の舞台を、今度はプロデューサーとして",
+    body:
+      "#ゆかJETの原点。2026年6月11日、吉井優花子さんが思い出の舞台『GO,JET!GO!GO!』をプロデュースすることを発表。歌×ダンス×コメディ、脚本の一部変更とオリジナル楽曲——出演者として挑んだ作品へ、今度はプロデューサーとして向き合う始まりの投稿です。投稿内の出演者募集は当時の案内です。",
+    postUrl: "https://www.instagram.com/p/DZch0STFB0M/?igsh=MWt2amJ6djV3ZGZnaA==",
+    homepageUrl: "/archive/2026-06-11-gojet-produce-announce",
+    ctaLabel: "Instagramで元の投稿を見る",
+    homepageLabel: "活動の軌跡で詳しく読む",
+    roleTags: ["ゆかJETの始まり", "『GO,JET!GO!GO!』の原点"],
+    photos: [
+      {
+        src: "/images/yukako-gojet-produce-announce-microphone-2026-06-11.jpg",
+        alt: "ヴィンテージ風のステージでマイクを持つ吉井優花子さん"
+      },
+      {
+        src: "/images/yukako-gojet-produce-announce-message-2026-06-11.jpg",
+        alt: "GO,JET!への思いと愛のある作品づくりについて記された吉井優花子さんのメッセージ"
+      },
+      {
+        src: "/images/yukako-gojet-produce-announce-flyer-2026-06-11.jpg",
+        alt: "吉井優花子プロデュース『GO,JET!GO!GO! vol.1 Premium』公演紹介"
+      }
+    ]
   }
 ];
 

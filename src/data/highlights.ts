@@ -28,6 +28,21 @@ export const highlights: Highlight[] = [
     ]
   },
   {
+    id: "yukajet-produce-announce-2026-06-11",
+    year: "2026",
+    date: "2026年6月11日",
+    category: "舞台",
+    title: "『GO,JET!GO!GO!』プロデュース発表 ― #ゆかJETの始まり",
+    description:
+      "思い出の舞台『GO,JET!GO!GO!』を、今度はプロデューサーとして立ち上げることを発表。出演者として挑んだ作品へ向き合う、#ゆかJETの原点。",
+    image: "/images/yukako-gojet-produce-announce-microphone-2026-06-11.jpg",
+    badge: "プロデュース発表",
+    link: {
+      label: "活動の軌跡で読む",
+      url: "/archive/2026-06-11-gojet-produce-announce"
+    }
+  },
+  {
     id: "ojosama-band-2026-05",
     year: "2026",
     date: "2026年5月",
