@@ -9,6 +9,7 @@
     "images:og:baby-shark": "node scripts/generate-baby-shark-og-image.mjs",
     "add:news": "node scripts/add-news.mjs",
     "test:add-news": "node scripts/test-add-news.mjs",
+    "test:baby-shark-updates": "node scripts/test-baby-shark-updates.mjs",
     "test:gojet": "node scripts/test-gojet-status.mjs",
     "prebuild": "node scripts/generate-responsive-images.mjs && node scripts/generate-sitemap.mjs",
     "typecheck": "tsc -b",
