@@ -95,6 +95,40 @@ export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
     ]
   },
   {
+    date: "2026.7.19",
+    label: "キャストのオフショット",
+    title: "最終稽古で生まれた謎のノリ「ペロッ、青酸カリ、ガーハハハハ、バタッ」",
+    body:
+      "B班で早紀を演じる荒井映里乃さんが届けてくれた、最終稽古のオフショット。「ペロッ、青酸カリ、ガーハハハハ、バタッ」——謎のノリをそのまま収めた5枚で、本人いわく「本編とは全く関係ありません」。本番直前まで笑いの絶えない、#ゆかJETの稽古場です。",
+    postUrl: "https://x.com/eri_no_a/status/2078858134647628147",
+    homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+    ctaLabel: "荒井映里乃さんのX投稿を見る",
+    homepageLabel: "公演の予約・応援ページを見る",
+    roleTags: ["キャスト投稿", "B班", "稽古オフショット"],
+    photos: [
+      {
+        src: "/images/yukako-yukajet-final-rehearsal-2026-07-19-pero.jpg",
+        alt: "最終稽古の稽古場で指を口元に当ててポーズを取る#ゆかJETのキャスト"
+      },
+      {
+        src: "/images/yukako-yukajet-final-rehearsal-2026-07-19-pointing.jpg",
+        alt: "最終稽古の稽古場で床を指さして笑う#ゆかJETのキャスト"
+      },
+      {
+        src: "/images/yukako-yukajet-final-rehearsal-2026-07-19-circle-pose.jpg",
+        alt: "最終稽古の稽古場で輪になってポーズを取る#ゆかJETのキャスト"
+      },
+      {
+        src: "/images/yukako-yukajet-final-rehearsal-2026-07-19-laugh.jpg",
+        alt: "最終稽古の稽古場で手を広げて大笑いする#ゆかJETのキャスト"
+      },
+      {
+        src: "/images/yukako-yukajet-final-rehearsal-2026-07-19-collapse.jpg",
+        alt: "最終稽古の稽古場で円を描くように床へ倒れ込む#ゆかJETのキャスト"
+      }
+    ]
+  },
+  {
     date: "2026.7.18",
     label: "ペンライト応援カラー",
     title: "早紀はピンク、JETは赤。#ゆかJET応援カラー",
