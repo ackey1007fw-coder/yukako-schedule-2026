@@ -17,6 +17,8 @@ const CBAN_GIRLS_POST_URL =
   "https://x.com/mokoopy/status/2078281074199982129";
 const PENLIGHT_POST_URL =
   "https://x.com/mokoopy/status/2078467900470599986";
+const COUNTDOWN_3DAYS_20260720_POST_URL =
+  "https://x.com/mokoopy/status/2079223875905491204";
 const COUNTDOWN_3DAYS_POST_URL =
   "https://x.com/mokoopy/status/2078869508970995791?s=12";
 const PRODUCE_ANNOUNCE_POST_URL =
@@ -69,6 +71,9 @@ const decoratedSourceUpdates: DisplayGojetFeatureUpdate[] = sourceUpdates
 const penlightUpdate = decoratedSourceUpdates.find(
   (update) => update.postUrl === PENLIGHT_POST_URL
 );
+const countdown3Days20260720Update = decoratedSourceUpdates.find(
+  (update) => update.postUrl === COUNTDOWN_3DAYS_20260720_POST_URL
+);
 const countdown3DaysUpdate = decoratedSourceUpdates.find(
   (update) => update.postUrl === COUNTDOWN_3DAYS_POST_URL
 );
@@ -77,10 +82,21 @@ export const gojetOriginUpdate = decoratedSourceUpdates.find(
 );
 const remainingSourceUpdates = decoratedSourceUpdates.filter(
   (update) =>
+    update.postUrl !== COUNTDOWN_3DAYS_20260720_POST_URL &&
     update.postUrl !== COUNTDOWN_3DAYS_POST_URL &&
     update.postUrl !== PENLIGHT_POST_URL &&
     update.postUrl !== PRODUCE_ANNOUNCE_POST_URL
 );
+
+const featuredCountdown3Days20260720Update:
+  | DisplayGojetFeatureUpdate
+  | undefined = countdown3Days20260720Update
+  ? {
+      ...countdown3Days20260720Update,
+      anchorId: "gojet-countdown-3days-2026-07-20",
+      primaryCta: "homepage"
+    }
+  : undefined;
 
 const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
   countdown3DaysUpdate
@@ -93,6 +109,9 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
 
 // 22:12のペンライト投稿を、22:04の「最後」の投稿より上に表示する。
 export const gojetFeatureUpdates: DisplayGojetFeatureUpdate[] = [
+  ...(featuredCountdown3Days20260720Update
+    ? [featuredCountdown3Days20260720Update]
+    : []),
   ...(featuredCountdown3DaysUpdate ? [featuredCountdown3DaysUpdate] : []),
   ...(penlightUpdate ? [penlightUpdate] : []),
   finalGojetUpdate,

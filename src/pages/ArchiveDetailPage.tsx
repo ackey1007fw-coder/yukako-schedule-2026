@@ -194,7 +194,7 @@ export function ArchiveDetailPage({ slug }: ArchiveDetailPageProps) {
                     {section.heading}
                   </h2>
                   {section.body.map((paragraph) => (
-                    <p key={paragraph} className="mt-4 leading-8 text-ink/75">
+                    <p key={paragraph} className="mt-4 whitespace-pre-line leading-8 text-ink/75">
                       {paragraph}
                     </p>
                   ))}
