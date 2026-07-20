@@ -19,6 +19,8 @@ const PENLIGHT_POST_URL =
   "https://x.com/mokoopy/status/2078467900470599986";
 const COUNTDOWN_3DAYS_20260720_POST_URL =
   "https://x.com/mokoopy/status/2079223875905491204";
+const PREMIUM_PROMO_VIDEO_POST_URL =
+  "https://x.com/yukako_produce/status/2079205943192191096";
 const COUNTDOWN_3DAYS_POST_URL =
   "https://x.com/mokoopy/status/2078869508970995791?s=12";
 const PRODUCE_ANNOUNCE_POST_URL =
@@ -74,6 +76,9 @@ const penlightUpdate = decoratedSourceUpdates.find(
 const countdown3Days20260720Update = decoratedSourceUpdates.find(
   (update) => update.postUrl === COUNTDOWN_3DAYS_20260720_POST_URL
 );
+const premiumPromoVideoUpdate = decoratedSourceUpdates.find(
+  (update) => update.postUrl === PREMIUM_PROMO_VIDEO_POST_URL
+);
 const countdown3DaysUpdate = decoratedSourceUpdates.find(
   (update) => update.postUrl === COUNTDOWN_3DAYS_POST_URL
 );
@@ -83,6 +88,7 @@ export const gojetOriginUpdate = decoratedSourceUpdates.find(
 const remainingSourceUpdates = decoratedSourceUpdates.filter(
   (update) =>
     update.postUrl !== COUNTDOWN_3DAYS_20260720_POST_URL &&
+    update.postUrl !== PREMIUM_PROMO_VIDEO_POST_URL &&
     update.postUrl !== COUNTDOWN_3DAYS_POST_URL &&
     update.postUrl !== PENLIGHT_POST_URL &&
     update.postUrl !== PRODUCE_ANNOUNCE_POST_URL
@@ -95,6 +101,16 @@ const featuredCountdown3Days20260720Update:
       ...countdown3Days20260720Update,
       anchorId: "gojet-countdown-3days-2026-07-20",
       primaryCta: "homepage"
+    }
+  : undefined;
+
+const featuredPremiumPromoVideoUpdate:
+  | DisplayGojetFeatureUpdate
+  | undefined = premiumPromoVideoUpdate
+  ? {
+      ...premiumPromoVideoUpdate,
+      anchorId: "gojet-premium-promo-video-2026-07-20",
+      primaryCta: "post"
     }
   : undefined;
 
@@ -111,6 +127,9 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
 export const gojetFeatureUpdates: DisplayGojetFeatureUpdate[] = [
   ...(featuredCountdown3Days20260720Update
     ? [featuredCountdown3Days20260720Update]
+    : []),
+  ...(featuredPremiumPromoVideoUpdate
+    ? [featuredPremiumPromoVideoUpdate]
     : []),
   ...(featuredCountdown3DaysUpdate ? [featuredCountdown3DaysUpdate] : []),
   ...(penlightUpdate ? [penlightUpdate] : []),

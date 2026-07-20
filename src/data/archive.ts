@@ -506,6 +506,137 @@ export const archiveItems: ArchiveItem[] = [
       "『GO,JET!GO!GO! vol.1 Premium』開幕3日前。プロデューサー、制作、B班JET・C班早紀の二役を担う吉井優花子さんの言葉を紹介します。",
     datePublished: "2026-07-20",
     dateModified: "2026-07-20"
+  },
+  {
+    slug: "2026-07-20-yukajet-premium-promo-video",
+    title:
+      "日ごとに増す、役としての輝き――開幕3日前の #ゆかJET プロモーション映像",
+    shortTitle: "開幕3日前、Premiumへ進むキャストたち",
+    subtitle:
+      "歌、ダンス、芝居、公演の世界観。開幕直前の熱量を映像で届けた記録。",
+    date: "2026.07.20",
+    year: "2026",
+    platform: "X",
+    category: "舞台・出演",
+    tags: [
+      "ゆかJET",
+      "GOJET",
+      "Premium",
+      "プロモーション動画",
+      "稽古",
+      "全キャスト",
+      "本番まであと3日",
+      "舞台",
+      "配信",
+      "吉井優花子プロデュース"
+    ],
+    summary:
+      "『GO,JET!GO!GO! vol.1 Premium』開幕まであと3日。役としての輝きを増す全キャストの姿や、公演の世界観を紹介するプロモーション映像が公開されました。",
+    lead: [
+      "『GO,JET!GO!GO! vol.1 Premium』の開幕まで、あと3日。",
+      "吉井優花子プロデュース公演アカウントから、キャストの稽古風景や作品の世界観、公演情報をまとめたプロモーション映像が公開されました。",
+      "投稿では、全キャストが日ごとに役としての輝きを増していること、そして本番へ向けてさらに“Premium”なクオリティを目指していることが伝えられています。",
+      "劇場での観劇だけでなく配信も用意され、新たな『GO,JET!GO!GO! vol.1』を幅広い形で楽しめることを案内しています。"
+    ],
+    sections: [
+      {
+        heading: "投稿本文（2026年7月20日）",
+        body: [
+          "【#ゆかJET 本番まであと３日‼️✨】",
+          "全キャスト、日ごとに役としての輝きが増しております☺️✨\nここからさらに、“Premium”なクオリティへ🔥🔥",
+          "ぜひ、新たな”GO,JET!GO!GO! vol.1”を観に来てください🎶\n配信もあります✨",
+          "⬇️ご予約・応援、お待ちしております！\nhttps://premiumgoyukajet.hp.peraichi.com/"
+        ]
+      },
+      {
+        heading: "動画で紹介されている内容",
+        body: [
+          "冒頭は、全キャストの集合とともにタイトル『GO,JET!GO!GO! vol.1 Premium』と、7月23日から27日まで（会場：Air studio 両国）の公演日程が示されます。",
+          "続いて、GO,JET! Girlsをはじめとする登場人物の相関図で、作品の世界観と役どうしの関係が紹介されます。",
+          "稽古の様子として、マイクに向かう歌唱、大きく体を動かすダンス、掛け合いのある芝居のシーンが次々と映し出されます。",
+          "役に取り組むキャストの表情や、笑顔の絶えない稽古場の空気も収められています。",
+          "ラストは公演のキービジュアルと、A・B・C班のキャスト一覧、タイムテーブル、来場・配信チケットの案内でしめくくられます。"
+        ]
+      },
+      {
+        heading: "日ごとに増す「役としての輝き」",
+        body: [
+          "投稿では、稽古を重ねる中で全キャストが日ごとに役としての輝きを増していることが伝えられています。",
+          "本番直前まで積み重ねられる稽古の熱量が、映像からも伝わってきます。"
+        ]
+      },
+      {
+        heading: "“Premium”な新しいGO,JET!",
+        body: [
+          "『GO,JET!GO!GO! vol.1 Premium』は、これまでのGO,JET!をさらに磨いた“Premium”版として届けられます。",
+          "歌やダンスを増やしたオリジナル構成で、新たな『GO,JET!GO!GO! vol.1』の世界が描かれます。"
+        ]
+      },
+      {
+        heading: "劇場・配信への案内",
+        body: [
+          "新たな『GO,JET!GO!GO! vol.1 Premium』は、劇場での観劇に加えて配信でも楽しめます。",
+          "公演は2026年7月23日（木）から27日（月）まで、Air studio 両国で上演。チケットや配信、応援に関する最新情報は、公演詳細ページで確認できます。"
+        ]
+      }
+    ],
+    quotes: [
+      {
+        text: "全キャスト、日ごとに役としての輝きが増しております",
+        afterSectionIndex: 2
+      },
+      {
+        text: "ここからさらに、“Premium”なクオリティへ",
+        afterSectionIndex: 3
+      }
+    ],
+    images: [
+      {
+        src: "/images/yukako-yukajet-premium-countdown-3days-video-poster-2026-07-20.jpg",
+        alt: "『GO,JET!GO!GO! vol.1 Premium』の全キャストが稽古場で集合した、タイトルと公演日程入りのプロモーション映像の一場面"
+      }
+    ],
+    video: {
+      type: "local",
+      src: "/videos/yukajet-premium-countdown-3days-2026-07-20.mp4",
+      poster:
+        "/images/yukako-yukajet-premium-countdown-3days-video-poster-2026-07-20.jpg",
+      heading: "Promotion Movie",
+      subheading: "歌・ダンス・芝居――映像で伝わるPremiumの世界",
+      description:
+        "冒頭は全キャストの集合とタイトル『GO,JET!GO!GO! vol.1 Premium』・公演日程、続いて登場人物の相関図、そして歌・ダンス・芝居の稽古風景が映し出され、ラストは公演のキービジュアルとキャスト・公演情報でしめくくられます。約1分50秒・音声あり。再生ボタンを押すと動画が始まります。",
+      label:
+        "#ゆかJET本番3日前に公開された、キャストの稽古風景と公演情報を紹介するプロモーション動画（約1分50秒・音声あり）",
+      fallbackUrl: "https://x.com/yukako_produce/status/2079205943192191096"
+    },
+    videoAfterSectionIndex: 0,
+    sourceUrl: {
+      label: "Xで動画付き投稿を見る",
+      url: "https://x.com/yukako_produce/status/2079205943192191096"
+    },
+    sourceNote:
+      "この記事の紹介文と動画解説は、投稿内容および添付動画をもとにファンが編集しています。公演アカウントの原文は「投稿本文」に分けて掲載しています。",
+    relatedUrls: [
+      {
+        label: "公演詳細・チケット",
+        url: "https://premiumgoyukajet.hp.peraichi.com/"
+      },
+      {
+        label: "#ゆかJET 特集を見る",
+        url: "/#gojet-feature-updates"
+      },
+      {
+        label: "開幕直前に綴った優花子さんの決意",
+        url: "/archive/2026-07-20-yukajet-countdown-3days"
+      }
+    ],
+    featured: true,
+    seoTitle:
+      "日ごとに増す、役としての輝き――#ゆかJET プロモーション映像｜活動アーカイブ",
+    seoDescription:
+      "『GO,JET!GO!GO! vol.1 Premium』開幕3日前に公開されたプロモーション映像。歌、ダンス、芝居、公演の世界観と、役として輝きを増すキャストの姿を紹介します。",
+    datePublished: "2026-07-20",
+    dateModified: "2026-07-20"
   }
 ];
 
