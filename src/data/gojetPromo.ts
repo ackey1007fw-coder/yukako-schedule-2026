@@ -70,10 +70,10 @@ export type GojetTeamUpdate = {
 export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
   {
     date: "2026.7.20",
-    label: "本番まであと3日",
-    title: "本番まであと3日――制作・二役で駆け抜ける #ゆかJET",
+    label: "開幕直前の決意",
+    title: "「親切に」を胸に、最後まで――開幕直前の #ゆかJET",
     body:
-      "本番まであと3日。プロデューサー、制作、B班JET・C班早紀の二役を担う吉井優花子さん。「いつでもお客様とキャストとスタッフに親切に」を胸に、最後まで走ります。吉井優花子プロデュース公演アカウントの投稿を引用した、ラストGO,JET!への呼びかけです。",
+      "開幕まであと3日。プロデューサー、制作、B班JET・C班早紀の二役を担う吉井優花子さん。「いつでもお客様とキャストとスタッフに親切に」という言葉を胸に、温かいキャストとともに最後まで走ります。ラストGO,JET!となるPremium舞台への来場を呼びかけた投稿です。",
     postUrl: "https://x.com/mokoopy/status/2079223875905491204",
     homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
     ctaLabel: "Xで元の投稿を見る",

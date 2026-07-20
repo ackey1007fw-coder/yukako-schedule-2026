@@ -412,11 +412,10 @@ export const archiveItems: ArchiveItem[] = [
   },
   {
     slug: "2026-07-20-yukajet-countdown-3days",
-    title:
-      "本番まであと3日――プロデューサー・制作・二役で駆け抜ける #ゆかJET",
-    shortTitle: "本番まであと3日！優花子さんの決意",
+    title: "「親切に」を胸に、最後まで――開幕直前の #ゆかJET",
+    shortTitle: "開幕直前に綴った、優花子さんの決意",
     subtitle:
-      "プロデューサー、制作、B班JET・C班早紀。開幕直前に綴った言葉の記録。",
+      "プロデューサー、制作、B班JET・C班早紀。大切にする姿勢を言葉にした開幕直前の記録。",
     date: "2026.07.20",
     year: "2026",
     platform: "X",
@@ -502,7 +501,7 @@ export const archiveItems: ArchiveItem[] = [
       }
     ],
     featured: true,
-    seoTitle: "本番まであと3日――制作・二役で駆け抜ける #ゆかJET｜活動アーカイブ",
+    seoTitle: "「親切に」を胸に、最後まで――開幕直前の #ゆかJET｜活動アーカイブ",
     seoDescription:
       "『GO,JET!GO!GO! vol.1 Premium』開幕3日前。プロデューサー、制作、B班JET・C班早紀の二役を担う吉井優花子さんの言葉を紹介します。",
     datePublished: "2026-07-20",
