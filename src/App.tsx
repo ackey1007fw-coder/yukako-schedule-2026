@@ -105,12 +105,16 @@ function App() {
             スケジュールを読み込み中です
           </div>
         )}
+
+        {/* 1. 入口：今日・次の予定・最新情報を最短で確認する */}
         <GojetPerformancePanel />
         <Hero nextEvent={nextEvent} socialLinks={socialLinks} />
         <TodayNextPanel todayEvents={todayEvents} nextEvent={nextEvent} />
         <SectionReveal>
           <LatestUpdatesSection />
         </SectionReveal>
+
+        {/* 2. 現在進行中の最優先企画：概要 → 班紹介 → 新しいトピック順 */}
         <SectionReveal>
           <NowProducingSection event={gojetEvent ?? nextEvent} />
         </SectionReveal>
@@ -118,14 +122,16 @@ function App() {
           <GojetTeamsSection />
         </SectionReveal>
         <SectionReveal>
-          <GojetYellCardSection />
+          <GojetCastMessageSection />
         </SectionReveal>
         <SectionReveal>
           <GojetHairUpdateSection />
         </SectionReveal>
         <SectionReveal>
-          <GojetCastMessageSection />
+          <GojetYellCardSection />
         </SectionReveal>
+
+        {/* 3. 行動導線：予定を確認してから、応援・SNSへ進む */}
         <SectionReveal>
           <ScheduleSection
             upcomingEvents={upcomingEvents}
@@ -133,9 +139,6 @@ function App() {
             allEvents={events}
             monthKeys={monthKeys}
           />
-        </SectionReveal>
-        <SectionReveal>
-          <LatestInstagramSection />
         </SectionReveal>
         <ActionStrip
           nextEvent={nextEvent}
@@ -151,6 +154,11 @@ function App() {
           <SupportersSection />
         </SectionReveal>
         <SectionReveal>
+          <LatestInstagramSection />
+        </SectionReveal>
+
+        {/* 4. アーカイブ：これまでの歩みと代表出演作品 */}
+        <SectionReveal>
           <HighlightsSection />
         </SectionReveal>
         <SectionReveal>
@@ -162,6 +170,8 @@ function App() {
         <SectionReveal>
           <RyomaKunSection />
         </SectionReveal>
+
+        {/* 5. 人物像・恒常情報 */}
         <SectionReveal>
           <ProfileSection />
         </SectionReveal>
