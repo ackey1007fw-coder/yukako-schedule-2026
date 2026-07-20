@@ -17,6 +17,8 @@ const CBAN_GIRLS_POST_URL =
   "https://x.com/mokoopy/status/2078281074199982129";
 const PENLIGHT_POST_URL =
   "https://x.com/mokoopy/status/2078467900470599986";
+const COUNTDOWN_3DAYS_POST_URL =
+  "https://x.com/mokoopy/status/2078869508970995791?s=12";
 const PRODUCE_ANNOUNCE_POST_URL =
   "https://www.instagram.com/p/DZch0STFB0M/?igsh=MWt2amJ6djV3ZGZnaA==";
 
@@ -67,17 +69,31 @@ const decoratedSourceUpdates: DisplayGojetFeatureUpdate[] = sourceUpdates
 const penlightUpdate = decoratedSourceUpdates.find(
   (update) => update.postUrl === PENLIGHT_POST_URL
 );
+const countdown3DaysUpdate = decoratedSourceUpdates.find(
+  (update) => update.postUrl === COUNTDOWN_3DAYS_POST_URL
+);
 export const gojetOriginUpdate = decoratedSourceUpdates.find(
   (update) => update.postUrl === PRODUCE_ANNOUNCE_POST_URL
 );
 const remainingSourceUpdates = decoratedSourceUpdates.filter(
   (update) =>
+    update.postUrl !== COUNTDOWN_3DAYS_POST_URL &&
     update.postUrl !== PENLIGHT_POST_URL &&
     update.postUrl !== PRODUCE_ANNOUNCE_POST_URL
 );
 
+const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
+  countdown3DaysUpdate
+    ? {
+        ...countdown3DaysUpdate,
+        anchorId: "gojet-countdown-3days-2026-07-19",
+        primaryCta: "homepage"
+      }
+    : undefined;
+
 // 22:12のペンライト投稿を、22:04の「最後」の投稿より上に表示する。
 export const gojetFeatureUpdates: DisplayGojetFeatureUpdate[] = [
+  ...(featuredCountdown3DaysUpdate ? [featuredCountdown3DaysUpdate] : []),
   ...(penlightUpdate ? [penlightUpdate] : []),
   finalGojetUpdate,
   ...remainingSourceUpdates

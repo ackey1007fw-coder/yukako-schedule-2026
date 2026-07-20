@@ -69,6 +69,32 @@ export type GojetTeamUpdate = {
 
 export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
   {
+    date: "2026.7.19",
+    label: "本番まであと3日",
+    title: "本番まであと3日。二役とプロデュースで挑む #ゆかJET",
+    body:
+      "本番まであと3日。プロデューサー、B班JET、C班早紀の三つの立場で舞台へ。自身がこだわった脚色と楽曲、多賀雅人さんの緻密な演出、温かいキャストとつくる『GO,JET! Premium』——「きっと心に残る舞台になります。どうか観に来てください」。出演はB班が7/23 19:00、7/24 15:30、7/25 12:00、7/26 19:00。C班が7/24 12:00、7/25 19:00、7/26 12:00、7/27 18:00。7/27 20:00は全キャストLIVE。投稿時点の「予約少なめ」は、7/24 B班、7/26・27 C班、全キャストLIVE。",
+    postUrl: "https://x.com/mokoopy/status/2078869508970995791?s=12",
+    homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+    ctaLabel: "優花子さんの投稿を見る",
+    homepageLabel: "公演日程・予約を見る",
+    roleTags: ["プロデューサー", "B班：JET", "C班：早紀", "本番まであと3日"],
+    photos: [
+      {
+        src: "/images/yukako-gojet-countdown-3days-2026-07-19-smile.jpg",
+        alt: "リハーサル室で男性キャストと並び、笑顔でピースサインをする吉井優花子さん"
+      },
+      {
+        src: "/images/yukako-gojet-countdown-3days-2026-07-19-b-jet.jpg",
+        alt: "B班JET役としてリハーサルで大きく腕を広げて踊る吉井優花子さん"
+      },
+      {
+        src: "/images/yukako-gojet-countdown-3days-2026-07-19-c-saki.jpg",
+        alt: "C班早紀役としてキャストとともにダイナミックに動く吉井優花子さんのリハーサル写真"
+      }
+    ]
+  },
+  {
     date: "2026.7.18",
     label: "ペンライト応援カラー",
     title: "早紀はピンク、JETは赤。#ゆかJET応援カラー",
