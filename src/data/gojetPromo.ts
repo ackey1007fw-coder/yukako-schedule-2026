@@ -69,6 +69,27 @@ export type GojetTeamUpdate = {
 
 export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
   {
+    date: "2026.7.20",
+    label: "本番まであと3日",
+    title: "本番まであと3日――制作・二役で駆け抜ける #ゆかJET",
+    body:
+      "本番まであと3日。プロデューサー、制作、B班JET・C班早紀の二役を担う吉井優花子さん。「いつでもお客様とキャストとスタッフに親切に」を胸に、最後まで走ります。吉井優花子プロデュース公演アカウントの投稿を引用した、ラストGO,JET!への呼びかけです。",
+    postUrl: "https://x.com/mokoopy/status/2079223875905491204",
+    homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+    ctaLabel: "Xで元の投稿を見る",
+    homepageLabel: "公演詳細・チケット",
+    roleTags: [
+      "プロデューサー・制作",
+      "B班：JET",
+      "C班：早紀",
+      "本番まであと3日"
+    ],
+    photo: {
+      src: "/images/yukako-yukajet-countdown-3days-2026-07-20.jpg",
+      alt: "吉井優花子さんが犬のぬいぐるみを抱えた、GO,JET!GO!GO! vol.1 Premiumの出演スケジュール告知画像"
+    }
+  },
+  {
     date: "2026.7.19",
     label: "本番まであと3日",
     title: "本番まであと3日。二役とプロデュースで挑む #ゆかJET",
