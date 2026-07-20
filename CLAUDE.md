@@ -24,5 +24,6 @@
 - ルール: 「公式/公認」と書かない・未確認情報を書かない・顔をAI生成しない・差分最小・里季の内容を持ち込まない。
 - **共同管理**: Codex＝データ更新（docs/CODEX.md）、Claude＝実装・レビュー・文言（docs/SONNET.md）。
   作業ブランチ → PR（`main` 宛て・Draft可）→ CI → **オーナー承認後にマージ** → 自動デプロイ。
-  **AIエージェントは絶対にマージしない**（詳細は AGENTS.md の PR / マージ方針）。
+  **AIは自律的にマージしない**。オーナーが対象PRを特定して明確にマージ指示した場合のみ、
+  CI・競合・レビュー状態を確認して squash merge 可（詳細は AGENTS.md の PR / マージ方針）。
 - `/api/*` は ESM（`export default handler`）で書く。`module.exports` は使わない。SHOWROOM は `room_id=347571`。
