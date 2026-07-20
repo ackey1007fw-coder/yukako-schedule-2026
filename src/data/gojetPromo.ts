@@ -90,6 +90,31 @@ export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
     }
   },
   {
+    date: "2026.7.20",
+    label: "Premiumへ、あと3日",
+    title: "日ごとに増す、役としての輝き――#ゆかJET プロモーション映像",
+    body:
+      "開幕まであと3日。稽古を重ねる中で、全キャストが日ごとに役としての輝きを増していることを伝えるプロモーション映像が公開されました。歌、ダンス、芝居、キャラクターたちの関係性など、新たな『GO,JET!GO!GO! vol.1 Premium』の世界を映像で紹介しています。劇場観劇に加えて配信でも楽しめます。",
+    postUrl: "https://x.com/yukako_produce/status/2079205943192191096",
+    homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+    ctaLabel: "Xで動画付き投稿を見る",
+    homepageLabel: "公演詳細・チケット",
+    roleTags: [
+      "プロモーション動画",
+      "本番まであと3日",
+      "全キャスト",
+      "Premium",
+      "劇場・配信"
+    ],
+    video: {
+      src: "/videos/yukajet-premium-countdown-3days-2026-07-20.mp4",
+      poster:
+        "/images/yukako-yukajet-premium-countdown-3days-video-poster-2026-07-20.jpg",
+      label:
+        "#ゆかJET本番3日前に公開された、キャストの稽古風景と公演情報を紹介するプロモーション動画（約1分50秒・音声あり）"
+    }
+  },
+  {
     date: "2026.7.19",
     label: "本番まであと3日",
     title: "本番まであと3日。二役とプロデュースで挑む #ゆかJET",

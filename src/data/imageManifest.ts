@@ -340,6 +340,7 @@ export const imageManifest = {
   "/images/yukako-yukajet-official-guide-2026-07-17-goods.jpg": {"width":904,"height":1280,"widths":[360,480,720,904]},
   "/images/yukako-yukajet-official-guide-2026-07-17-schedule.jpg": {"width":774,"height":1280,"widths":[360,480,720,774]},
   "/images/yukako-yukajet-official-guide-2026-07-17-visitor-info.jpg": {"width":853,"height":1280,"widths":[360,480,720,853]},
+  "/images/yukako-yukajet-premium-countdown-3days-video-poster-2026-07-20.jpg": {"width":540,"height":674,"widths":[360,480,540]},
   "/images/yukako-yukajet-rehearsal-2026-07-04-girls.jpg": {"width":1148,"height":1140,"widths":[360,480,720,960,1148]},
   "/images/yukako-yukajet-rehearsal-2026-07-04-selfie.jpg": {"width":1280,"height":960,"widths":[360,480,720,960,1280]},
   "/images/yukako-yukajet-rehearsal-2026-07-07-group.jpg": {"width":2048,"height":1424,"widths":[360,480,720,960,1280,1600,2048]},
