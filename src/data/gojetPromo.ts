@@ -69,6 +69,33 @@ export type GojetTeamUpdate = {
 
 export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
   {
+    date: "2026.7.21",
+    label: "関係者投稿・演出家コメント",
+    title: "演出・多賀雅人さんが称賛――「初プロデュースとは思えぬ気配り」",
+    body:
+      "演出を担当する多賀雅人さんが、Premiumな台本脚色とオリジナル楽曲、初プロデュースとは思えぬ気配りを称賛。「素敵な現場を作っていただいてます」——プロデューサーとしての仕事ぶりに加え、幅のある演技や歌もぜひ劇場で。",
+    postUrl: "https://x.com/ryuburan_taga/status/2079368211527790758",
+    homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+    ctaLabel: "多賀雅人さんのX投稿を見る",
+    homepageLabel: "#ゆかJET 公演HP",
+    roleTags: [
+      "関係者投稿",
+      "演出・多賀雅人さん",
+      "@ryuburan_taga",
+      "引用投稿"
+    ],
+    photos: [
+      {
+        src: "/images/yukako-yukajet-taga-director-2026-07-21-01.jpg",
+        alt: "演出の多賀雅人さんと笑顔でピースをする吉井優花子さん"
+      },
+      {
+        src: "/images/yukako-yukajet-taga-director-2026-07-21-02.jpg",
+        alt: "コミカルな表情でピースをする多賀雅人さんと吉井優花子さん"
+      }
+    ]
+  },
+  {
     date: "2026.7.20",
     label: "開幕直前の決意",
     title: "「親切に」を胸に、最後まで――開幕直前の #ゆかJET",

@@ -17,6 +17,8 @@ const CBAN_GIRLS_POST_URL =
   "https://x.com/mokoopy/status/2078281074199982129";
 const PENLIGHT_POST_URL =
   "https://x.com/mokoopy/status/2078467900470599986";
+const TAGA_DIRECTOR_COMMENT_POST_URL =
+  "https://x.com/ryuburan_taga/status/2079368211527790758";
 const COUNTDOWN_3DAYS_20260720_POST_URL =
   "https://x.com/mokoopy/status/2079223875905491204";
 const PREMIUM_PROMO_VIDEO_POST_URL =
@@ -73,6 +75,9 @@ const decoratedSourceUpdates: DisplayGojetFeatureUpdate[] = sourceUpdates
 const penlightUpdate = decoratedSourceUpdates.find(
   (update) => update.postUrl === PENLIGHT_POST_URL
 );
+const tagaDirectorCommentUpdate = decoratedSourceUpdates.find(
+  (update) => update.postUrl === TAGA_DIRECTOR_COMMENT_POST_URL
+);
 const countdown3Days20260720Update = decoratedSourceUpdates.find(
   (update) => update.postUrl === COUNTDOWN_3DAYS_20260720_POST_URL
 );
@@ -87,12 +92,23 @@ export const gojetOriginUpdate = decoratedSourceUpdates.find(
 );
 const remainingSourceUpdates = decoratedSourceUpdates.filter(
   (update) =>
+    update.postUrl !== TAGA_DIRECTOR_COMMENT_POST_URL &&
     update.postUrl !== COUNTDOWN_3DAYS_20260720_POST_URL &&
     update.postUrl !== PREMIUM_PROMO_VIDEO_POST_URL &&
     update.postUrl !== COUNTDOWN_3DAYS_POST_URL &&
     update.postUrl !== PENLIGHT_POST_URL &&
     update.postUrl !== PRODUCE_ANNOUNCE_POST_URL
 );
+
+const featuredTagaDirectorCommentUpdate:
+  | DisplayGojetFeatureUpdate
+  | undefined = tagaDirectorCommentUpdate
+  ? {
+      ...tagaDirectorCommentUpdate,
+      anchorId: "gojet-taga-director-comment-2026-07-21",
+      primaryCta: "post"
+    }
+  : undefined;
 
 const featuredCountdown3Days20260720Update:
   | DisplayGojetFeatureUpdate
@@ -125,6 +141,9 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
 
 // 22:12のペンライト投稿を、22:04の「最後」の投稿より上に表示する。
 export const gojetFeatureUpdates: DisplayGojetFeatureUpdate[] = [
+  ...(featuredTagaDirectorCommentUpdate
+    ? [featuredTagaDirectorCommentUpdate]
+    : []),
   ...(featuredCountdown3Days20260720Update
     ? [featuredCountdown3Days20260720Update]
     : []),
