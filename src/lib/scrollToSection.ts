@@ -5,7 +5,7 @@ type ScrollToSectionOptions = {
 
 const DEFAULT_GAP = 12;
 
-function getVisibleBottom(selector: string) {
+function getStickyBottom(selector: string) {
   const element = document.querySelector<HTMLElement>(selector);
   if (!element) return 0;
 
@@ -13,7 +13,18 @@ function getVisibleBottom(selector: string) {
   if (style.display === "none" || style.visibility === "hidden") return 0;
 
   const rect = element.getBoundingClientRect();
-  return rect.width > 0 && rect.height > 0 ? rect.bottom : 0;
+  if (rect.width <= 0 || rect.height <= 0) return 0;
+
+  // タップ時点でQuickNavがPriorityBannerの下にあり、まだsticky位置へ到達して
+  // いなくても、移動完了後の top + height を使って着地点を計算する。
+  if (style.position === "sticky" || style.position === "fixed") {
+    const stickyTop = Number.parseFloat(style.top);
+    if (Number.isFinite(stickyTop)) {
+      return Math.max(0, stickyTop) + rect.height;
+    }
+  }
+
+  return rect.bottom;
 }
 
 function getDocumentTop(element: HTMLElement) {
@@ -32,8 +43,8 @@ function getDocumentTop(element: HTMLElement) {
 
 export function getStickyNavigationBottom() {
   return Math.max(
-    getVisibleBottom("[data-sticky-site-header]"),
-    getVisibleBottom("[data-sticky-quick-nav]"),
+    getStickyBottom("[data-sticky-site-header]"),
+    getStickyBottom("[data-sticky-quick-nav]"),
     0,
   );
 }
