@@ -19,6 +19,7 @@ export type ArchiveImage = {
   src: string;
   alt: string;
   caption?: string;
+  aspectRatio?: "3/4" | "9/16";
 };
 
 export type ArchiveVideo = {
@@ -61,6 +62,8 @@ export type ArchiveItem = {
   slug: string;
   title: string;
   shortTitle: string;
+  /** 本人以外の投稿など、一覧・詳細で出典区分を明示する短いラベル（任意） */
+  attributionLabel?: string;
   /** タイトル直下のサブタイトル（任意） */
   subtitle?: string;
   /** 日付付近に添える短い移動記号など（任意） */
@@ -741,6 +744,94 @@ export const archiveItems: ArchiveItem[] = [
       "演出・多賀雅人さんが称賛――優花子さんの初プロデュース｜活動アーカイブ",
     seoDescription:
       "『GO,JET!GO!GO! vol.1 Premium』演出の多賀雅人さんが、吉井優花子さんの台本脚色、オリジナル楽曲、現場での気配り、幅のある演技と歌に寄せた言葉を紹介します。",
+    datePublished: "2026-07-21",
+    dateModified: "2026-07-21"
+  },
+  {
+    slug: "2026-07-21-eri1408-saki-three-shot-story",
+    title: "3人の“早紀ちゃん”がそろった、貴重な3ショット",
+    shortTitle: "3人の“早紀ちゃん”がそろった3ショット",
+    attributionLabel: "共演者投稿",
+    subtitle:
+      "@eri_1408_さんのInstagramストーリーに登場した、3者3様の「早紀」をつなぐ一枚。",
+    date: "2026.07.21 取得",
+    year: "2026",
+    platform: "Instagram",
+    category: "オフショット",
+    tags: [
+      "ゆかJET",
+      "Instagramストーリー",
+      "共演者投稿",
+      "稽古場オフショット",
+      "早紀"
+    ],
+    summary:
+      "@eri_1408_さんのInstagramストーリーに、『早紀』役の3人が並んだ3ショットが登場。ストーリーにはB班の出演日程と、会場へ行けない方に向けた応援コンテンツも記されています。",
+    lead: [
+      "『早紀』役の3人が、稽古場でそろって3ショット。",
+      "#ゆかJETのB班に出演する@eri_1408_さんのInstagramストーリーに、3者3様の“早紀ちゃん”を劇場で見てほしいというメッセージが添えられました。"
+    ],
+    sections: [
+      {
+        heading: "3者3様の“早紀ちゃん”",
+        body: [
+          "ストーリーでは、この一枚を「最初で最後の3ショットになってるぅ」と紹介。3人それぞれが演じる「早紀」への来場を呼びかけています。"
+        ]
+      },
+      {
+        heading: "ストーリー掲載情報｜B班出演日程",
+        body: [
+          "2026年7月23日 19:00\n2026年7月24日 15:30\n2026年7月25日 12:00\n2026年7月26日 19:00\n2026年7月27日 20:00 全班合同LIVE",
+          "掲載された日程は、サイト内の#ゆかJET公演データと一致しています。"
+        ]
+      },
+      {
+        heading: "会場へ行けないときの応援",
+        body: [
+          "会場へ足を運ぶことが難しい方へ、エールカード、メッセージ動画、応援チケットの3つも案内されています。",
+          "3つの応援コンテンツは、#ゆかJET公演特設ページから案内されています。"
+        ]
+      }
+    ],
+    quotes: [
+      {
+        text: "3者3様の早紀ちゃんをぜひ劇場にてご覧ください！",
+        afterSectionIndex: 0
+      }
+    ],
+    images: [
+      {
+        src: "/images/yukajet/2026-07-21-eri1408-saki-three-shot-story.jpg",
+        alt: "『早紀』役の3人が稽古場で並んで撮影したInstagramストーリー画像",
+        caption: "@eri_1408_さんのInstagramストーリーより／2026年7月21日取得",
+        aspectRatio: "9/16"
+      }
+    ],
+    sourceUrl: {
+      label: "投稿者のInstagramを見る",
+      url: "https://www.instagram.com/eri_1408_/"
+    },
+    sourceNote:
+      "共演者の@eri_1408_さんによる投稿で、吉井優花子さん本人の投稿ではありません。Instagramストーリーは公開を終了している場合があります。",
+    relatedUrls: [
+      {
+        label: "元ストーリーを開く",
+        url: "https://www.instagram.com/stories/eri_1408_/3945289180455925938/"
+      },
+      {
+        label: "応援コンテンツを見る",
+        url: "https://premiumgoyukajet.hp.peraichi.com"
+      },
+      {
+        label: "#ゆかJET 特集を見る",
+        url: "/#gojet-eri1408-saki-story-2026-07-21"
+      }
+    ],
+    featured: true,
+    seoTitle:
+      "3人の“早紀ちゃん”がそろった3ショット｜#ゆかJET 活動アーカイブ",
+    seoDescription:
+      "#ゆかJETの共演者@eri_1408_さんのInstagramストーリーをアーカイブ。『早紀』役3人の稽古場3ショットとB班日程、応援コンテンツを紹介します。",
     datePublished: "2026-07-21",
     dateModified: "2026-07-21"
   }

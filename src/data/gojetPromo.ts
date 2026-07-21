@@ -69,6 +69,22 @@ export type GojetTeamUpdate = {
 
 export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
   {
+    date: "2026.7.21 取得",
+    label: "共演者投稿・Instagram Story",
+    title: "3人の“早紀ちゃん”がそろった、貴重な3ショット",
+    body:
+      "@eri_1408_さんのInstagramストーリーより。『早紀』役の3人が稽古場で並んだ一枚に、3者3様の“早紀ちゃん”を劇場で見てほしいというメッセージが添えられました。B班の出演日程と、エールカード・メッセージ動画・応援チケットの案内も。",
+    postUrl: "https://www.instagram.com/eri_1408_/",
+    homepageUrl: "/archive/2026-07-21-eri1408-saki-three-shot-story",
+    ctaLabel: "投稿者のInstagramを見る",
+    homepageLabel: "ストーリーの記録を詳しく見る",
+    roleTags: ["共演者投稿", "Instagram Story", "稽古場オフショット", "早紀"],
+    photo: {
+      src: "/images/yukajet/2026-07-21-eri1408-saki-three-shot-story.jpg",
+      alt: "『早紀』役の3人が稽古場で並んで撮影したInstagramストーリー画像"
+    }
+  },
+  {
     date: "2026.7.21",
     label: "関係者投稿・演出家コメント",
     title: "演出・多賀雅人さんが称賛――「初プロデュースとは思えぬ気配り」",

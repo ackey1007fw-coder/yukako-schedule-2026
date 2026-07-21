@@ -5,21 +5,27 @@ type ArchivePhotoFrameProps = {
   alt: string;
   sizes: string;
   className?: string;
+  aspectRatio?: "3/4" | "9/16";
   /** 記事冒頭のメインビジュアルなどは eager を推奨 */
   loading?: "lazy" | "eager";
 };
 
 // 受賞写真など「絶対に切り抜かない」写真専用の表示枠。
-// aspect-[3/4] の枠に object-contain で収めるので、どの画面幅でも全身が欠けない。
+// 通常は3:4、ストーリー画像は9:16の枠にobject-containで収め、内容を欠けさせない。
 export function ArchivePhotoFrame({
   src,
   alt,
   sizes,
   className = "",
+  aspectRatio = "3/4",
   loading = "lazy"
 }: ArchivePhotoFrameProps) {
   return (
-    <div className={`aspect-[3/4] w-full overflow-hidden bg-porcelain ${className}`}>
+    <div
+      className={`${
+        aspectRatio === "9/16" ? "aspect-[9/16]" : "aspect-[3/4]"
+      } w-full overflow-hidden bg-porcelain ${className}`}
+    >
       <img
         {...getResponsiveImageProps(src, sizes)}
         alt={alt}

@@ -111,6 +111,11 @@ export function ArchiveDetailPage({ slug }: ArchiveDetailPageProps) {
 
             <div className="flex flex-wrap items-center gap-2 text-[11px] font-black uppercase tracking-[0.14em] text-champagneInk">
               <span className="border border-champagne/45 bg-white px-2.5 py-1">{item.category}</span>
+              {item.attributionLabel && (
+                <span className="border border-rosefog/45 bg-rosefog/10 px-2.5 py-1 text-rosefog">
+                  {item.attributionLabel}
+                </span>
+              )}
               <span className="text-ink/45">{item.platform}</span>
               <time dateTime={item.datePublished} className="text-ink/45">
                 {item.date}
@@ -147,14 +152,32 @@ export function ArchiveDetailPage({ slug }: ArchiveDetailPageProps) {
               </div>
             )}
 
-            <div className="mx-auto mt-8 max-w-sm">
+            <div
+              className={`mx-auto mt-8 w-full ${
+                item.images[0].aspectRatio === "9/16" ? "max-w-[420px]" : "max-w-sm"
+              }`}
+            >
               <ArchivePhotoFrame
                 src={item.images[0].src}
                 alt={item.images[0].alt}
-                sizes="(min-width: 640px) 384px, 100vw"
+                sizes={
+                  item.images[0].aspectRatio === "9/16"
+                    ? "(min-width: 640px) 420px, calc(100vw - 2rem)"
+                    : "(min-width: 640px) 384px, 100vw"
+                }
+                aspectRatio={item.images[0].aspectRatio}
                 loading="eager"
               />
             </div>
+            {item.images[0].caption && (
+              <p
+                className={`mx-auto mt-2 text-center text-xs leading-6 text-ink/55 ${
+                  item.images[0].aspectRatio === "9/16" ? "max-w-[420px]" : "max-w-sm"
+                }`}
+              >
+                {item.images[0].caption}
+              </p>
+            )}
 
             <div className="mt-8 space-y-4">
               {item.lead.map((paragraph) => (
@@ -172,6 +195,7 @@ export function ArchiveDetailPage({ slug }: ArchiveDetailPageProps) {
                       src={image.src}
                       alt={image.alt}
                       sizes="(min-width: 640px) 512px, 100vw"
+                      aspectRatio={image.aspectRatio}
                     />
                     {image.caption && (
                       <p className="mt-2 text-center text-xs leading-6 text-ink/55">
