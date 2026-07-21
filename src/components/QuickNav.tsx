@@ -1,4 +1,5 @@
 import { useEffect, useId, useRef, useState } from "react";
+import type { MouseEvent } from "react";
 import {
   CalendarDays,
   CalendarHeart,
@@ -10,6 +11,7 @@ import {
   X
 } from "lucide-react";
 import { getGojetStatus } from "../lib/gojetStatus";
+import { scrollToSection } from "../lib/scrollToSection";
 
 type QuickNavProps = {
   now?: Date;
@@ -131,14 +133,38 @@ export function QuickNav({ now }: QuickNavProps) {
     setIsMoreOpen(true);
   };
 
-  const handleMenuLinkClick = () => {
-    // リンク遷移前に閉じて、開きっぱなしを防ぐ
-    closeMoreMenu({ restoreFocus: false });
+  const handleSectionLinkClick = (
+    event: MouseEvent<HTMLAnchorElement>,
+    href: string,
+    options?: { closeMenu?: boolean },
+  ) => {
+    const id = href.split("#")[1];
+    if (!id || !document.getElementById(id)) return;
+
+    event.preventDefault();
+    if (options?.closeMenu) {
+      closeMoreMenu({ restoreFocus: false });
+    }
+
+    const hash = `#${id}`;
+    if (window.location.hash === hash) {
+      window.history.replaceState(null, "", hash);
+    } else {
+      window.history.pushState(null, "", hash);
+    }
+
+    const align = () => scrollToSection(id, { behavior: "smooth" });
+    if (options?.closeMenu) {
+      window.requestAnimationFrame(() => window.requestAnimationFrame(align));
+    } else {
+      align();
+    }
   };
 
   return (
     <nav
       ref={navRef}
+      data-sticky-quick-nav
       aria-label="ページ内メニュー"
       className="sticky top-16 z-40 border-b border-rosefog/20 bg-white/95 shadow-sm backdrop-blur-xl lg:hidden"
     >
@@ -147,6 +173,7 @@ export function QuickNav({ now }: QuickNavProps) {
           <a
             key={href}
             href={href}
+            onClick={(event) => handleSectionLinkClick(event, href)}
             className="flex min-h-11 min-w-0 flex-col items-center justify-center gap-0.5 text-center text-[10px] font-bold leading-tight text-ink/72 focus-visible:outline focus-visible:outline-2 focus-visible:outline-champagne min-[420px]:text-xs"
           >
             <Icon className="h-4 w-4 text-champagne" aria-hidden="true" />
@@ -205,7 +232,9 @@ export function QuickNav({ now }: QuickNavProps) {
                     <li key={item.href} className="min-w-0">
                       <a
                         href={item.href}
-                        onClick={handleMenuLinkClick}
+                        onClick={(event) =>
+                          handleSectionLinkClick(event, item.href, { closeMenu: true })
+                        }
                         className="flex min-h-11 items-center px-3 py-2 text-sm font-bold leading-snug text-ink/78 hover:bg-porcelain focus-visible:outline focus-visible:outline-2 focus-visible:outline-champagne"
                       >
                         {item.label}

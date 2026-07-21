@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
+import type { MouseEvent } from "react";
 import { Mic2 } from "lucide-react";
 import { profile } from "../data/profile";
+import { scrollToSection } from "../lib/scrollToSection";
 import type { SocialLink } from "../types";
 
 // ホーム以外のページ（/archive など）にも同じヘッダーを出すため、
@@ -52,8 +54,30 @@ export function SiteHeader({ socialLinks }: SiteHeaderProps) {
   const showroom = socialLinks.find((link) => link.kind === "showroom");
   const activeSection = useActiveSection();
 
+  const handleSectionLinkClick = (
+    event: MouseEvent<HTMLAnchorElement>,
+    href: string,
+  ) => {
+    if (window.location.pathname !== "/") return;
+
+    const id = href.split("#")[1];
+    if (!id || !document.getElementById(id)) return;
+
+    event.preventDefault();
+    const hash = `#${id}`;
+    if (window.location.hash === hash) {
+      window.history.replaceState(null, "", hash);
+    } else {
+      window.history.pushState(null, "", hash);
+    }
+    scrollToSection(id, { behavior: "smooth" });
+  };
+
   return (
-    <header className="safe-area-header sticky top-0 z-50 w-full overflow-hidden border-b border-champagne/25 bg-porcelain/90 backdrop-blur-xl">
+    <header
+      data-sticky-site-header
+      className="safe-area-header sticky top-0 z-50 w-full overflow-hidden border-b border-champagne/25 bg-porcelain/90 backdrop-blur-xl"
+    >
       <div className="mx-auto flex h-16 w-full min-w-0 max-w-7xl items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
         <a href="/#top" className="flex min-w-0 items-center gap-3 text-ink">
           <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-champagne/60 bg-ink text-champagne">
@@ -74,6 +98,7 @@ export function SiteHeader({ socialLinks }: SiteHeaderProps) {
             <a
               key={item.href}
               href={item.href}
+              onClick={(event) => handleSectionLinkClick(event, item.href)}
               className={`transition-colors ${
                 activeSection === item.id
                   ? "text-champagneInk"

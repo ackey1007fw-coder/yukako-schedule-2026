@@ -5,7 +5,7 @@ type ScrollToSectionOptions = {
 
 const DEFAULT_GAP = 12;
 
-function getVisibleBottom(selector: string) {
+function getStickyBottom(selector: string) {
   const element = document.querySelector<HTMLElement>(selector);
   if (!element) return 0;
 
@@ -13,13 +13,38 @@ function getVisibleBottom(selector: string) {
   if (style.display === "none" || style.visibility === "hidden") return 0;
 
   const rect = element.getBoundingClientRect();
-  return rect.width > 0 && rect.height > 0 ? rect.bottom : 0;
+  if (rect.width <= 0 || rect.height <= 0) return 0;
+
+  // タップ時点でQuickNavがPriorityBannerの下にあり、まだsticky位置へ到達して
+  // いなくても、移動完了後の top + height を使って着地点を計算する。
+  if (style.position === "sticky" || style.position === "fixed") {
+    const stickyTop = Number.parseFloat(style.top);
+    if (Number.isFinite(stickyTop)) {
+      return Math.max(0, stickyTop) + rect.height;
+    }
+  }
+
+  return rect.bottom;
+}
+
+function getDocumentTop(element: HTMLElement) {
+  let top = 0;
+  let current: HTMLElement | null = element;
+
+  // offsetTop は CSS transform を含まないため、SectionReveal の初期
+  // translateY(24px) が解除された後も着地点がずれない。
+  while (current) {
+    top += current.offsetTop;
+    current = current.offsetParent as HTMLElement | null;
+  }
+
+  return top;
 }
 
 export function getStickyNavigationBottom() {
   return Math.max(
-    getVisibleBottom("[data-sticky-site-header]"),
-    getVisibleBottom("[data-sticky-quick-nav]"),
+    getStickyBottom("[data-sticky-site-header]"),
+    getStickyBottom("[data-sticky-quick-nav]"),
     0,
   );
 }
@@ -31,8 +56,10 @@ export function scrollToSection(
   const target = document.getElementById(id);
   if (!target) return false;
 
-  const targetTop = window.scrollY + target.getBoundingClientRect().top;
-  const top = Math.max(0, targetTop - getStickyNavigationBottom() - gap);
+  const top = Math.max(
+    0,
+    getDocumentTop(target) - getStickyNavigationBottom() - gap,
+  );
   window.scrollTo({ top, behavior });
   return true;
 }

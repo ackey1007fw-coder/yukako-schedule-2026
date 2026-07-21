@@ -36,6 +36,7 @@ import {
   sortEventsAsc,
   sortEventsDesc
 } from "./lib/date";
+import { scrollToSection } from "./lib/scrollToSection";
 import { useSchedule } from "./lib/useSchedule";
 
 function App() {
@@ -47,16 +48,16 @@ function App() {
   // 同じ対象へ移動し、読込表示の高さが変わっても着地点を保つ。
   useEffect(() => {
     const id = window.location.hash.slice(1);
-    if (!id) return;
-    const target = document.getElementById(id);
-    if (!target) return;
+    if (!id || !document.getElementById(id)) return;
 
     let stopped = false;
     let frameId = 0;
     const alignTarget = () => {
       if (stopped) return;
       cancelAnimationFrame(frameId);
-      frameId = requestAnimationFrame(() => target.scrollIntoView());
+      frameId = requestAnimationFrame(() =>
+        scrollToSection(id, { behavior: "auto" }),
+      );
     };
     const stopFollowingLayout = () => {
       stopped = true;
