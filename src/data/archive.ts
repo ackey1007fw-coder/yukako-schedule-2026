@@ -725,7 +725,7 @@ export const archiveItems: ArchiveItem[] = [
       url: "https://x.com/ryuburan_taga/status/2079368211527790758"
     },
     sourceNote:
-      "多賀雅人さんによる関係者投稿です。本文は投稿内容をもとにファンが編集し、本人の言葉は引用欄に分けて掲載しています。",
+      "多賀雅人さんによる関係者投稿です。本文は投稿内容をもとにファンが編集し、多賀さんの言葉は引用欄に分けて掲載しています。",
     relatedUrls: [
       {
         label: "#ゆかJET 公演HP",
