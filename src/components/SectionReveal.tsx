@@ -37,6 +37,10 @@ export function SectionReveal({ children, className = "" }: SectionRevealProps) 
     <div
       ref={ref}
       className={`section-reveal ${revealed ? "section-revealed" : ""} ${className}`}
+      // iOS Safariでは、表示後もtransform / will-changeを残すと、
+      // overflow-hiddenとアニメーションを含む大きなカードの上部が欠けることがある。
+      // none / autoへ戻して恒常的な合成レイヤーを解除する。
+      style={revealed ? { transform: "none", willChange: "auto" } : undefined}
     >
       {children}
     </div>
