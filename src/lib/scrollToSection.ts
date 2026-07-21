@@ -16,6 +16,20 @@ function getVisibleBottom(selector: string) {
   return rect.width > 0 && rect.height > 0 ? rect.bottom : 0;
 }
 
+function getDocumentTop(element: HTMLElement) {
+  let top = 0;
+  let current: HTMLElement | null = element;
+
+  // offsetTop は CSS transform を含まないため、SectionReveal の初期
+  // translateY(24px) が解除された後も着地点がずれない。
+  while (current) {
+    top += current.offsetTop;
+    current = current.offsetParent as HTMLElement | null;
+  }
+
+  return top;
+}
+
 export function getStickyNavigationBottom() {
   return Math.max(
     getVisibleBottom("[data-sticky-site-header]"),
@@ -31,8 +45,10 @@ export function scrollToSection(
   const target = document.getElementById(id);
   if (!target) return false;
 
-  const targetTop = window.scrollY + target.getBoundingClientRect().top;
-  const top = Math.max(0, targetTop - getStickyNavigationBottom() - gap);
+  const top = Math.max(
+    0,
+    getDocumentTop(target) - getStickyNavigationBottom() - gap,
+  );
   window.scrollTo({ top, behavior });
   return true;
 }
