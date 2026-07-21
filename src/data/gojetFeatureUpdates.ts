@@ -32,6 +32,25 @@ const COUNTDOWN_3DAYS_POST_URL =
 const PRODUCE_ANNOUNCE_POST_URL =
   "https://www.instagram.com/p/DZch0STFB0M/?igsh=MWt2amJ6djV3ZGZnaA==";
 
+const yukakoTheaterEntryUpdate: DisplayGojetFeatureUpdate = {
+  date: "2026.7.22",
+  label: "吉井優花子さん本人・劇場入り",
+  title: "ついに劇場へ。新たな「早紀」と「JET」を本番で",
+  body:
+    "#ゆかJETがついに劇場へ。素敵なメンバーが集まり、こだわった脚色や楽曲ができた喜びとともに、「私の魂の芝居で、GO,JET!に幕を下ろす」と来場を呼びかけています。新たな「早紀」と「JET」をお楽しみに。",
+  postUrl: "https://x.com/mokoopy/status/2079594085653070145",
+  homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+  ctaLabel: "元の投稿を見る",
+  homepageLabel: "応援・予約ページを見る",
+  roleTags: ["吉井優花子さん本人", "B班：JET", "C班：早紀", "引用投稿"],
+  photo: {
+    src: "/images/yukajet/2026-07-22-mokoopy-2079594085653070145-01.jpg",
+    alt: "#ゆかJETのステージで、両手を広げるチップ青木さんとマイクの前で歌う吉井優花子さん"
+  },
+  anchorId: "gojet-yukako-theater-entry-2026-07-22",
+  primaryCta: "post"
+};
+
 const finalGojetUpdate: DisplayGojetFeatureUpdate = {
   date: "2026.7.18",
   label: "大切なお知らせ",
@@ -173,6 +192,7 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
 
 // 22:12のペンライト投稿を、22:04の「最後」の投稿より上に表示する。
 export const gojetFeatureUpdates: DisplayGojetFeatureUpdate[] = [
+  yukakoTheaterEntryUpdate,
   ...(featuredTheaterEntry20260722Update
     ? [featuredTheaterEntry20260722Update]
     : []),
