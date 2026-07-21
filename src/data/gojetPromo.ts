@@ -70,18 +70,18 @@ export type GojetTeamUpdate = {
 export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
   {
     date: "2026.7.22",
-    label: "吉井優花子さん本人・劇場入り",
-    title: "ついに劇場へ。新たな「早紀」と「JET」を本番で",
+    label: "本番まであと2日",
+    title: "劇場入り！本番まであと2日",
     body:
-      "#ゆかJETがついに劇場へ。素敵なメンバーが集まり、こだわった脚色や楽曲ができた喜びとともに、「私の魂の芝居で、GO,JET!に幕を下ろす」と来場を呼びかけています。新たな「早紀」と「JET」をお楽しみに。",
-    postUrl: "https://x.com/mokoopy/status/2079594085653070145",
+      "#ゆかJET がAir studio 両国へ劇場入り。本番まであと2日となり、赤を基調にしたレトロアメリカンな舞台セットも公開されました。A・B・C班それぞれの本編と、全キャストによるLIVEに向けて、いよいよ最終準備が進んでいます。",
+    postUrl: "https://x.com/yukako_produce/status/2079581898372968725",
     homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
-    ctaLabel: "元の投稿を見る",
-    homepageLabel: "応援・予約ページを見る",
-    roleTags: ["吉井優花子さん本人", "B班：JET", "C班：早紀", "引用投稿"],
+    ctaLabel: "#ゆかJET公式のX投稿を見る",
+    homepageLabel: "公演・予約・応援ページを見る",
+    roleTags: ["劇場入り", "本番まであと2日", "レトロアメリカンな舞台セット"],
     photo: {
-      src: "/images/yukajet/2026-07-22-mokoopy-2079594085653070145-01.jpg",
-      alt: "#ゆかJETのステージで、両手を広げるチップ青木さんとマイクの前で歌う吉井優花子さん"
+      src: "/images/yukajet/2026-07-22-theater-entry.jpg",
+      alt: "赤を基調としたレトロアメリカン風のGO,JET!舞台セット。手前にヴィンテージマイク、中央に公演ロゴ、Route 66やコカ・コーラの装飾が並んでいる"
     }
   },
   {
