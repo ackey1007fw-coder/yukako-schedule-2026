@@ -69,6 +69,22 @@ export type GojetTeamUpdate = {
 
 export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
   {
+    date: "2026.7.22",
+    label: "本番まであと2日",
+    title: "劇場入り！本番まであと2日",
+    body:
+      "#ゆかJET がAir studio 両国へ劇場入り。本番まであと2日となり、赤を基調にしたレトロアメリカンな舞台セットも公開されました。A・B・C班それぞれの本編と、全キャストによるLIVEに向けて、いよいよ最終準備が進んでいます。",
+    postUrl: "https://x.com/yukako_produce/status/2079581898372968725",
+    homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+    ctaLabel: "#ゆかJET公式のX投稿を見る",
+    homepageLabel: "公演・予約・応援ページを見る",
+    roleTags: ["劇場入り", "本番まであと2日", "レトロアメリカンな舞台セット"],
+    photo: {
+      src: "/images/yukajet/2026-07-22-theater-entry.jpg",
+      alt: "赤を基調としたレトロアメリカン風のGO,JET!舞台セット。手前にヴィンテージマイク、中央に公演ロゴ、Route 66やコカ・コーラの装飾が並んでいる"
+    }
+  },
+  {
     date: "2026.7.21 取得",
     label: "共演者投稿・Instagram Story",
     title: "3人の“早紀ちゃん”がそろった、貴重な3ショット",
