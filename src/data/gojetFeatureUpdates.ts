@@ -14,7 +14,7 @@ const FINAL_GOJET_POST_URL =
   "https://x.com/mokoopy/status/2078466058168791234";
 const YUKAKO_X_PROFILE_URL = "https://x.com/mokoopy";
 const ERI1408_INSTAGRAM_PROFILE_URL =
-  "https://www.instagram.com/eri_1408_?igsh=amRyMW00b3p0bHFm";
+  "https://www.instagram.com/eri_1408_/";
 const CBAN_GIRLS_POST_URL =
   "https://x.com/mokoopy/status/2078281074199982129";
 const PENLIGHT_POST_URL =

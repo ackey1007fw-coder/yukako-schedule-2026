@@ -19,6 +19,7 @@ export type ArchiveImage = {
   src: string;
   alt: string;
   caption?: string;
+  aspectRatio?: "3/4" | "9/16";
 };
 
 export type ArchiveVideo = {
@@ -750,7 +751,7 @@ export const archiveItems: ArchiveItem[] = [
     slug: "2026-07-21-eri1408-saki-three-shot-story",
     title: "3人の“早紀ちゃん”がそろった、貴重な3ショット",
     shortTitle: "3人の“早紀ちゃん”がそろった3ショット",
-    attributionLabel: "キャスト投稿",
+    attributionLabel: "共演者投稿",
     subtitle:
       "@eri_1408_さんのInstagramストーリーに登場した、3者3様の「早紀」をつなぐ一枚。",
     date: "2026.07.21 取得",
@@ -760,15 +761,15 @@ export const archiveItems: ArchiveItem[] = [
     tags: [
       "ゆかJET",
       "Instagramストーリー",
-      "キャスト投稿",
+      "共演者投稿",
       "稽古場オフショット",
       "早紀"
     ],
     summary:
-      "@eri_1408_さんのInstagramストーリーに、『早紀』役の3人が並んだ3ショットが登場。ストーリーにはB班の出演日程と、会場外から参加できる応援コンテンツも記されています。",
+      "@eri_1408_さんのInstagramストーリーに、『早紀』役の3人が並んだ3ショットが登場。ストーリーにはB班の出演日程と、会場へ行けない方に向けた応援コンテンツも記されています。",
     lead: [
       "『早紀』役の3人が、稽古場でそろって3ショット。",
-      "#ゆかJETのキャスト・関係者である@eri_1408_さんのInstagramストーリーに、3者3様の“早紀ちゃん”を劇場で見てほしいというメッセージが添えられました。"
+      "#ゆかJETのB班に出演する@eri_1408_さんのInstagramストーリーに、3者3様の“早紀ちゃん”を劇場で見てほしいというメッセージが添えられました。"
     ],
     sections: [
       {
@@ -802,19 +803,20 @@ export const archiveItems: ArchiveItem[] = [
       {
         src: "/images/yukajet/2026-07-21-eri1408-saki-three-shot-story.jpg",
         alt: "『早紀』役の3人が稽古場で並んで撮影したInstagramストーリー画像",
-        caption: "@eri_1408_さんのInstagramストーリーより／2026年7月21日取得"
+        caption: "@eri_1408_さんのInstagramストーリーより／2026年7月21日取得",
+        aspectRatio: "9/16"
       }
     ],
     sourceUrl: {
       label: "投稿者のInstagramを見る",
-      url: "https://www.instagram.com/eri_1408_?igsh=amRyMW00b3p0bHFm"
+      url: "https://www.instagram.com/eri_1408_/"
     },
     sourceNote:
-      "キャスト・関係者の@eri_1408_さんによる投稿で、吉井優花子さん本人の投稿ではありません。Instagramストーリーは公開を終了している場合があります。",
+      "共演者の@eri_1408_さんによる投稿で、吉井優花子さん本人の投稿ではありません。Instagramストーリーは公開を終了している場合があります。",
     relatedUrls: [
       {
         label: "元ストーリーを開く",
-        url: "https://www.instagram.com/stories/eri_1408_/3945289180455925938?utm_source=ig_story_item_share&igsh=cHYwd2luZnB4YmR1"
+        url: "https://www.instagram.com/stories/eri_1408_/3945289180455925938/"
       },
       {
         label: "応援コンテンツを見る",
@@ -829,7 +831,7 @@ export const archiveItems: ArchiveItem[] = [
     seoTitle:
       "3人の“早紀ちゃん”がそろった3ショット｜#ゆかJET 活動アーカイブ",
     seoDescription:
-      "#ゆかJETのキャスト・関係者@eri_1408_さんのInstagramストーリーをアーカイブ。『早紀』役3人の稽古場3ショットとB班日程、応援コンテンツを紹介します。",
+      "#ゆかJETの共演者@eri_1408_さんのInstagramストーリーをアーカイブ。『早紀』役3人の稽古場3ショットとB班日程、応援コンテンツを紹介します。",
     datePublished: "2026-07-21",
     dateModified: "2026-07-21"
   }

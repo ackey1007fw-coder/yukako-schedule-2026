@@ -152,16 +152,29 @@ export function ArchiveDetailPage({ slug }: ArchiveDetailPageProps) {
               </div>
             )}
 
-            <div className="mx-auto mt-8 max-w-sm">
+            <div
+              className={`mx-auto mt-8 w-full ${
+                item.images[0].aspectRatio === "9/16" ? "max-w-[420px]" : "max-w-sm"
+              }`}
+            >
               <ArchivePhotoFrame
                 src={item.images[0].src}
                 alt={item.images[0].alt}
-                sizes="(min-width: 640px) 384px, 100vw"
+                sizes={
+                  item.images[0].aspectRatio === "9/16"
+                    ? "(min-width: 640px) 420px, calc(100vw - 2rem)"
+                    : "(min-width: 640px) 384px, 100vw"
+                }
+                aspectRatio={item.images[0].aspectRatio}
                 loading="eager"
               />
             </div>
             {item.images[0].caption && (
-              <p className="mx-auto mt-2 max-w-sm text-center text-xs leading-6 text-ink/55">
+              <p
+                className={`mx-auto mt-2 text-center text-xs leading-6 text-ink/55 ${
+                  item.images[0].aspectRatio === "9/16" ? "max-w-[420px]" : "max-w-sm"
+                }`}
+              >
                 {item.images[0].caption}
               </p>
             )}
@@ -182,6 +195,7 @@ export function ArchiveDetailPage({ slug }: ArchiveDetailPageProps) {
                       src={image.src}
                       alt={image.alt}
                       sizes="(min-width: 640px) 512px, 100vw"
+                      aspectRatio={image.aspectRatio}
                     />
                     {image.caption && (
                       <p className="mt-2 text-center text-xs leading-6 text-ink/55">
