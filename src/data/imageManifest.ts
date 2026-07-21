@@ -271,6 +271,7 @@ export const imageManifest = {
   "/images/showroom-avatars/yukako-showroom-avatar-05.jpg": {"width":512,"height":512,"widths":[360,480,512]},
   "/images/showroom-avatars/yukako-showroom-avatar-06.jpg": {"width":512,"height":512,"widths":[360,480,512]},
   "/images/yukajet/2026-07-21-eri1408-saki-three-shot-story.jpg": {"width":1179,"height":2096,"widths":[360,480,720,960,1179]},
+  "/images/yukajet/2026-07-22-theater-entry.jpg": {"width":2048,"height":1536,"widths":[360,480,720,960,1280,1600,2048]},
   "/images/yukako-babyshark-character.jpg": {"width":1600,"height":2048,"widths":[360,480,720,960,1280,1600]},
   "/images/yukako-babyshark-lobster.jpg": {"width":941,"height":1176,"widths":[360,480,720,941]},
   "/images/yukako-babyshark-lobster2.jpg": {"width":1170,"height":1560,"widths":[360,480,720,960,1170]},
