@@ -29,6 +29,8 @@ const COUNTDOWN_3DAYS_POST_URL =
   "https://x.com/mokoopy/status/2078869508970995791?s=12";
 const PRODUCE_ANNOUNCE_POST_URL =
   "https://www.instagram.com/p/DZch0STFB0M/?igsh=MWt2amJ6djV3ZGZnaA==";
+const THEATER_ENTRY_POST_URL =
+  "https://x.com/mokoopy/status/2079594085653070145";
 
 const finalGojetUpdate: DisplayGojetFeatureUpdate = {
   date: "2026.7.18",
@@ -92,11 +94,15 @@ const premiumPromoVideoUpdate = decoratedSourceUpdates.find(
 const countdown3DaysUpdate = decoratedSourceUpdates.find(
   (update) => update.postUrl === COUNTDOWN_3DAYS_POST_URL
 );
+const theaterEntryUpdate = decoratedSourceUpdates.find(
+  (update) => update.postUrl === THEATER_ENTRY_POST_URL
+);
 export const gojetOriginUpdate = decoratedSourceUpdates.find(
   (update) => update.postUrl === PRODUCE_ANNOUNCE_POST_URL
 );
 const remainingSourceUpdates = decoratedSourceUpdates.filter(
   (update) =>
+    update.postUrl !== THEATER_ENTRY_POST_URL &&
     update.postUrl !== ERI1408_INSTAGRAM_PROFILE_URL &&
     update.postUrl !== TAGA_DIRECTOR_COMMENT_POST_URL &&
     update.postUrl !== COUNTDOWN_3DAYS_20260720_POST_URL &&
@@ -155,8 +161,18 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
       }
     : undefined;
 
+const featuredTheaterEntryUpdate: DisplayGojetFeatureUpdate | undefined =
+  theaterEntryUpdate
+    ? {
+        ...theaterEntryUpdate,
+        anchorId: "gojet-theater-entry-2026-07-22",
+        primaryCta: "post"
+      }
+    : undefined;
+
 // 22:12のペンライト投稿を、22:04の「最後」の投稿より上に表示する。
 export const gojetFeatureUpdates: DisplayGojetFeatureUpdate[] = [
+  ...(featuredTheaterEntryUpdate ? [featuredTheaterEntryUpdate] : []),
   ...(featuredEri1408SakiStoryUpdate ? [featuredEri1408SakiStoryUpdate] : []),
   ...(featuredTagaDirectorCommentUpdate
     ? [featuredTagaDirectorCommentUpdate]

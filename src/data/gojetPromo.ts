@@ -69,6 +69,22 @@ export type GojetTeamUpdate = {
 
 export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
   {
+    date: "2026.7.22",
+    label: "吉井優花子さん本人・劇場入り",
+    title: "ついに劇場へ。新たな「早紀」と「JET」を本番で",
+    body:
+      "#ゆかJETがついに劇場へ。素敵なメンバーが集まり、こだわった脚色や楽曲ができた喜びとともに、「私の魂の芝居で、GO,JET!に幕を下ろす」と来場を呼びかけています。新たな「早紀」と「JET」をお楽しみに。",
+    postUrl: "https://x.com/mokoopy/status/2079594085653070145",
+    homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+    ctaLabel: "元の投稿を見る",
+    homepageLabel: "応援・予約ページを見る",
+    roleTags: ["吉井優花子さん本人", "B班：JET", "C班：早紀", "引用投稿"],
+    photo: {
+      src: "/images/yukajet/2026-07-22-mokoopy-2079594085653070145-01.jpg",
+      alt: "#ゆかJETのステージで、両手を広げるチップ青木さんとマイクの前で歌う吉井優花子さん"
+    }
+  },
+  {
     date: "2026.7.21 取得",
     label: "共演者投稿・Instagram Story",
     title: "3人の“早紀ちゃん”がそろった、貴重な3ショット",
