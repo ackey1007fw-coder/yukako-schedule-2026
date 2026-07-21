@@ -80,6 +80,11 @@ export function ArchiveListPage() {
                       <span className="border border-champagne/45 bg-porcelain px-2 py-1">
                         {item.category}
                       </span>
+                      {item.attributionLabel && (
+                        <span className="border border-rosefog/45 bg-rosefog/10 px-2 py-1 text-rosefog">
+                          {item.attributionLabel}
+                        </span>
+                      )}
                       <span className="text-ink/45">{item.platform}</span>
                       <span className="text-ink/45">{item.date}</span>
                     </div>

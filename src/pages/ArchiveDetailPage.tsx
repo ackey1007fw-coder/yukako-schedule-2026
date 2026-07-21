@@ -111,6 +111,11 @@ export function ArchiveDetailPage({ slug }: ArchiveDetailPageProps) {
 
             <div className="flex flex-wrap items-center gap-2 text-[11px] font-black uppercase tracking-[0.14em] text-champagneInk">
               <span className="border border-champagne/45 bg-white px-2.5 py-1">{item.category}</span>
+              {item.attributionLabel && (
+                <span className="border border-rosefog/45 bg-rosefog/10 px-2.5 py-1 text-rosefog">
+                  {item.attributionLabel}
+                </span>
+              )}
               <span className="text-ink/45">{item.platform}</span>
               <time dateTime={item.datePublished} className="text-ink/45">
                 {item.date}
@@ -155,6 +160,11 @@ export function ArchiveDetailPage({ slug }: ArchiveDetailPageProps) {
                 loading="eager"
               />
             </div>
+            {item.images[0].caption && (
+              <p className="mx-auto mt-2 max-w-sm text-center text-xs leading-6 text-ink/55">
+                {item.images[0].caption}
+              </p>
+            )}
 
             <div className="mt-8 space-y-4">
               {item.lead.map((paragraph) => (

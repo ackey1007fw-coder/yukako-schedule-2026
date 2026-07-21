@@ -13,6 +13,8 @@ export type DisplayGojetFeatureUpdate = GojetFeatureUpdate & {
 const FINAL_GOJET_POST_URL =
   "https://x.com/mokoopy/status/2078466058168791234";
 const YUKAKO_X_PROFILE_URL = "https://x.com/mokoopy";
+const ERI1408_INSTAGRAM_PROFILE_URL =
+  "https://www.instagram.com/eri_1408_?igsh=amRyMW00b3p0bHFm";
 const CBAN_GIRLS_POST_URL =
   "https://x.com/mokoopy/status/2078281074199982129";
 const PENLIGHT_POST_URL =
@@ -75,6 +77,9 @@ const decoratedSourceUpdates: DisplayGojetFeatureUpdate[] = sourceUpdates
 const penlightUpdate = decoratedSourceUpdates.find(
   (update) => update.postUrl === PENLIGHT_POST_URL
 );
+const eri1408SakiStoryUpdate = decoratedSourceUpdates.find(
+  (update) => update.postUrl === ERI1408_INSTAGRAM_PROFILE_URL
+);
 const tagaDirectorCommentUpdate = decoratedSourceUpdates.find(
   (update) => update.postUrl === TAGA_DIRECTOR_COMMENT_POST_URL
 );
@@ -92,6 +97,7 @@ export const gojetOriginUpdate = decoratedSourceUpdates.find(
 );
 const remainingSourceUpdates = decoratedSourceUpdates.filter(
   (update) =>
+    update.postUrl !== ERI1408_INSTAGRAM_PROFILE_URL &&
     update.postUrl !== TAGA_DIRECTOR_COMMENT_POST_URL &&
     update.postUrl !== COUNTDOWN_3DAYS_20260720_POST_URL &&
     update.postUrl !== PREMIUM_PROMO_VIDEO_POST_URL &&
@@ -99,6 +105,16 @@ const remainingSourceUpdates = decoratedSourceUpdates.filter(
     update.postUrl !== PENLIGHT_POST_URL &&
     update.postUrl !== PRODUCE_ANNOUNCE_POST_URL
 );
+
+const featuredEri1408SakiStoryUpdate:
+  | DisplayGojetFeatureUpdate
+  | undefined = eri1408SakiStoryUpdate
+  ? {
+      ...eri1408SakiStoryUpdate,
+      anchorId: "gojet-eri1408-saki-story-2026-07-21",
+      primaryCta: "homepage"
+    }
+  : undefined;
 
 const featuredTagaDirectorCommentUpdate:
   | DisplayGojetFeatureUpdate
@@ -141,6 +157,7 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
 
 // 22:12のペンライト投稿を、22:04の「最後」の投稿より上に表示する。
 export const gojetFeatureUpdates: DisplayGojetFeatureUpdate[] = [
+  ...(featuredEri1408SakiStoryUpdate ? [featuredEri1408SakiStoryUpdate] : []),
   ...(featuredTagaDirectorCommentUpdate
     ? [featuredTagaDirectorCommentUpdate]
     : []),
