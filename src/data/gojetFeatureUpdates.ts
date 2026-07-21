@@ -21,6 +21,8 @@ const PENLIGHT_POST_URL =
   "https://x.com/mokoopy/status/2078467900470599986";
 const TAGA_DIRECTOR_COMMENT_POST_URL =
   "https://x.com/ryuburan_taga/status/2079368211527790758";
+const THEATER_ENTRY_20260722_POST_URL =
+  "https://x.com/yukako_produce/status/2079581898372968725";
 const COUNTDOWN_3DAYS_20260720_POST_URL =
   "https://x.com/mokoopy/status/2079223875905491204";
 const PREMIUM_PROMO_VIDEO_POST_URL =
@@ -29,8 +31,25 @@ const COUNTDOWN_3DAYS_POST_URL =
   "https://x.com/mokoopy/status/2078869508970995791?s=12";
 const PRODUCE_ANNOUNCE_POST_URL =
   "https://www.instagram.com/p/DZch0STFB0M/?igsh=MWt2amJ6djV3ZGZnaA==";
-const THEATER_ENTRY_POST_URL =
-  "https://x.com/mokoopy/status/2079594085653070145";
+
+const yukakoTheaterEntryUpdate: DisplayGojetFeatureUpdate = {
+  date: "2026.7.22",
+  label: "吉井優花子さん本人・劇場入り",
+  title: "ついに劇場へ。新たな「早紀」と「JET」を本番で",
+  body:
+    "#ゆかJETがついに劇場へ。素敵なメンバーが集まり、こだわった脚色や楽曲ができた喜びとともに、「私の魂の芝居で、GO,JET!に幕を下ろす」と来場を呼びかけています。新たな「早紀」と「JET」をお楽しみに。",
+  postUrl: "https://x.com/mokoopy/status/2079594085653070145",
+  homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+  ctaLabel: "元の投稿を見る",
+  homepageLabel: "応援・予約ページを見る",
+  roleTags: ["吉井優花子さん本人", "B班：JET", "C班：早紀", "引用投稿"],
+  photo: {
+    src: "/images/yukajet/2026-07-22-mokoopy-2079594085653070145-01.jpg",
+    alt: "#ゆかJETのステージで、両手を広げるチップ青木さんとマイクの前で歌う吉井優花子さん"
+  },
+  anchorId: "gojet-yukako-theater-entry-2026-07-22",
+  primaryCta: "post"
+};
 
 const finalGojetUpdate: DisplayGojetFeatureUpdate = {
   date: "2026.7.18",
@@ -79,6 +98,9 @@ const decoratedSourceUpdates: DisplayGojetFeatureUpdate[] = sourceUpdates
 const penlightUpdate = decoratedSourceUpdates.find(
   (update) => update.postUrl === PENLIGHT_POST_URL
 );
+const theaterEntry20260722Update = decoratedSourceUpdates.find(
+  (update) => update.postUrl === THEATER_ENTRY_20260722_POST_URL
+);
 const eri1408SakiStoryUpdate = decoratedSourceUpdates.find(
   (update) => update.postUrl === ERI1408_INSTAGRAM_PROFILE_URL
 );
@@ -94,15 +116,12 @@ const premiumPromoVideoUpdate = decoratedSourceUpdates.find(
 const countdown3DaysUpdate = decoratedSourceUpdates.find(
   (update) => update.postUrl === COUNTDOWN_3DAYS_POST_URL
 );
-const theaterEntryUpdate = decoratedSourceUpdates.find(
-  (update) => update.postUrl === THEATER_ENTRY_POST_URL
-);
 export const gojetOriginUpdate = decoratedSourceUpdates.find(
   (update) => update.postUrl === PRODUCE_ANNOUNCE_POST_URL
 );
 const remainingSourceUpdates = decoratedSourceUpdates.filter(
   (update) =>
-    update.postUrl !== THEATER_ENTRY_POST_URL &&
+    update.postUrl !== THEATER_ENTRY_20260722_POST_URL &&
     update.postUrl !== ERI1408_INSTAGRAM_PROFILE_URL &&
     update.postUrl !== TAGA_DIRECTOR_COMMENT_POST_URL &&
     update.postUrl !== COUNTDOWN_3DAYS_20260720_POST_URL &&
@@ -111,6 +130,16 @@ const remainingSourceUpdates = decoratedSourceUpdates.filter(
     update.postUrl !== PENLIGHT_POST_URL &&
     update.postUrl !== PRODUCE_ANNOUNCE_POST_URL
 );
+
+const featuredTheaterEntry20260722Update:
+  | DisplayGojetFeatureUpdate
+  | undefined = theaterEntry20260722Update
+  ? {
+      ...theaterEntry20260722Update,
+      anchorId: "gojet-theater-entry-2026-07-22",
+      primaryCta: "post"
+    }
+  : undefined;
 
 const featuredEri1408SakiStoryUpdate:
   | DisplayGojetFeatureUpdate
@@ -161,18 +190,12 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
       }
     : undefined;
 
-const featuredTheaterEntryUpdate: DisplayGojetFeatureUpdate | undefined =
-  theaterEntryUpdate
-    ? {
-        ...theaterEntryUpdate,
-        anchorId: "gojet-theater-entry-2026-07-22",
-        primaryCta: "post"
-      }
-    : undefined;
-
 // 22:12のペンライト投稿を、22:04の「最後」の投稿より上に表示する。
 export const gojetFeatureUpdates: DisplayGojetFeatureUpdate[] = [
-  ...(featuredTheaterEntryUpdate ? [featuredTheaterEntryUpdate] : []),
+  yukakoTheaterEntryUpdate,
+  ...(featuredTheaterEntry20260722Update
+    ? [featuredTheaterEntry20260722Update]
+    : []),
   ...(featuredEri1408SakiStoryUpdate ? [featuredEri1408SakiStoryUpdate] : []),
   ...(featuredTagaDirectorCommentUpdate
     ? [featuredTagaDirectorCommentUpdate]
