@@ -25,6 +25,8 @@ const THEATER_ENTRY_20260722_POST_URL =
   "https://x.com/yukako_produce/status/2079581898372968725";
 const OPENING_EVE_20260722_POST_URL =
   "https://x.com/yukako_produce/status/2079928926068260939";
+const INSTAGRAM_OPENING_20260723_POST_URL =
+  "https://www.instagram.com/p/DbGY3XDgT_5/?igsh=MXVyamZ0MWJjaDg0dA==";
 const COUNTDOWN_3DAYS_20260720_POST_URL =
   "https://x.com/mokoopy/status/2079223875905491204";
 const PREMIUM_PROMO_VIDEO_POST_URL =
@@ -106,6 +108,9 @@ const theaterEntry20260722Update = decoratedSourceUpdates.find(
 const openingEve20260722Update = decoratedSourceUpdates.find(
   (update) => update.postUrl === OPENING_EVE_20260722_POST_URL
 );
+const instagramOpening20260723Update = decoratedSourceUpdates.find(
+  (update) => update.postUrl === INSTAGRAM_OPENING_20260723_POST_URL
+);
 const eri1408SakiStoryUpdate = decoratedSourceUpdates.find(
   (update) => update.postUrl === ERI1408_INSTAGRAM_PROFILE_URL
 );
@@ -126,6 +131,7 @@ export const gojetOriginUpdate = decoratedSourceUpdates.find(
 );
 const remainingSourceUpdates = decoratedSourceUpdates.filter(
   (update) =>
+    update.postUrl !== INSTAGRAM_OPENING_20260723_POST_URL &&
     update.postUrl !== OPENING_EVE_20260722_POST_URL &&
     update.postUrl !== THEATER_ENTRY_20260722_POST_URL &&
     update.postUrl !== ERI1408_INSTAGRAM_PROFILE_URL &&
@@ -136,6 +142,16 @@ const remainingSourceUpdates = decoratedSourceUpdates.filter(
     update.postUrl !== PENLIGHT_POST_URL &&
     update.postUrl !== PRODUCE_ANNOUNCE_POST_URL
 );
+
+const featuredInstagramOpening20260723Update:
+  | DisplayGojetFeatureUpdate
+  | undefined = instagramOpening20260723Update
+  ? {
+      ...instagramOpening20260723Update,
+      anchorId: "gojet-instagram-opening-2026-07-23",
+      primaryCta: "post"
+    }
+  : undefined;
 
 const featuredOpeningEve20260722Update:
   | DisplayGojetFeatureUpdate
@@ -208,6 +224,9 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
 
 // 22:12のペンライト投稿を、22:04の「最後」の投稿より上に表示する。
 export const gojetFeatureUpdates: DisplayGojetFeatureUpdate[] = [
+  ...(featuredInstagramOpening20260723Update
+    ? [featuredInstagramOpening20260723Update]
+    : []),
   ...(featuredOpeningEve20260722Update
     ? [featuredOpeningEve20260722Update]
     : []),
