@@ -63,6 +63,28 @@ function isInternalHref(url: string) {
   return url.startsWith("/") || url.startsWith("#");
 }
 
+function LinkedBodyText({ text }: { text: string }) {
+  return (
+    <>
+      {text.split(/(https?:\/\/[^\s]+)/g).map((part, index) =>
+        part.startsWith("http") ? (
+          <a
+            key={`${part}-${index}`}
+            href={part}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-semibold text-champagne underline underline-offset-4 transition hover:text-white"
+          >
+            {part}
+          </a>
+        ) : (
+          part
+        ),
+      )}
+    </>
+  );
+}
+
 function UpdateLinkButtons({ update }: { update: DisplayGojetFeatureUpdate }) {
   const homepageIsPrimary = update.primaryCta === "homepage";
   const postIsInternal = isInternalHref(update.postUrl);
@@ -441,8 +463,8 @@ export function NowProducingSection({ event, now }: NowProducingSectionProps) {
                           ))}
                         </div>
                       )}
-                      <p className="mt-3 text-sm leading-6 text-white/72 sm:leading-7">
-                        {update.body}
+                      <p className="mt-3 whitespace-pre-line text-sm leading-6 text-white/72 sm:leading-7">
+                        <LinkedBodyText text={update.body} />
                       </p>
                       {update.photo && (
                         <div className="mt-4 overflow-hidden border border-white/12 bg-black/20">
