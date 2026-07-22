@@ -1,11 +1,12 @@
 import { useEffect } from "react";
-import { ArrowLeft, ExternalLink, Trophy } from "lucide-react";
+import { ArrowLeft, ExternalLink, Share2, Trophy } from "lucide-react";
 import { SiteHeader } from "../components/SiteHeader";
 import { Footer } from "../components/Footer";
 import { ArchivePhotoFrame } from "../components/ArchivePhotoFrame";
 import { ArchiveVideoBlock } from "../components/ArchiveVideoBlock";
 import { ScrollToTop } from "../components/ScrollToTop";
 import { getArchiveItemBySlug } from "../data/archive";
+import { SITE_URL, xShareUrl } from "../lib/share";
 import { useSchedule } from "../lib/useSchedule";
 
 type ArchiveDetailPageProps = {
@@ -246,6 +247,19 @@ export function ArchiveDetailPage({ slug }: ArchiveDetailPageProps) {
                 <p className="mt-4 text-sm leading-7 text-ink/72">{item.sourceNote}</p>
               )}
               <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                <a
+                  href={xShareUrl(
+                    `${item.shortTitle}｜YUKAKO STORY ARCHIVE`,
+                    `${SITE_URL}archive/${item.slug}`,
+                    `archive_${item.slug}`,
+                  )}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="yukako-button min-h-12 border border-ink bg-ink px-5 py-3 text-sm font-bold text-white"
+                >
+                  <Share2 className="h-4 w-4 text-champagne" aria-hidden="true" />
+                  Xでこの記事を共有
+                </a>
                 <a
                   href={item.sourceUrl.url}
                   target="_blank"

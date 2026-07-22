@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { AtSign, Check, Copy, Instagram, Share2 } from "lucide-react";
 import { profile } from "../data/profile";
+import { addShareUtm } from "../lib/engagement";
 import { SITE_URL, lineShareUrl, threadsShareUrl, xShareUrl } from "../lib/share";
 
 export function ShareSection() {
   const [copied, setCopied] = useState(false);
   const [canNativeShare, setCanNativeShare] = useState(false);
   const url = SITE_URL;
+  const nativeShareUrl = addShareUtm(url, "home_share", "native_share");
   const text = `${profile.name}（${profile.kana}）さんの応援スケジュール`;
 
   useEffect(() => {
@@ -25,7 +27,7 @@ export function ShareSection() {
 
   const nativeShare = async () => {
     try {
-      await navigator.share({ title: "吉井優花子 応援ポータル", text, url });
+      await navigator.share({ title: "吉井優花子 応援ポータル", text, url: nativeShareUrl });
     } catch {
       /* キャンセル/非対応時は何もしない */
     }

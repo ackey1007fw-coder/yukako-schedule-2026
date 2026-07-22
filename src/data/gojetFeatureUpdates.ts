@@ -2,6 +2,7 @@ import {
   gojetFeatureUpdates as sourceUpdates,
   type GojetFeatureUpdate
 } from "./gojetPromo";
+import { getStableGojetAnchorId } from "../lib/engagement";
 
 export type DisplayGojetFeatureUpdate = GojetFeatureUpdate & {
   // トップの最新情報から対象カードへ直接移動するための任意アンカー
@@ -239,7 +240,7 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
     : undefined;
 
 // 22:12のペンライト投稿を、22:04の「最後」の投稿より上に表示する。
-export const gojetFeatureUpdates: DisplayGojetFeatureUpdate[] = [
+const orderedGojetFeatureUpdates: DisplayGojetFeatureUpdate[] = [
   ...(featuredInstagramOpening20260723Update
     ? [featuredInstagramOpening20260723Update]
     : []),
@@ -266,3 +267,10 @@ export const gojetFeatureUpdates: DisplayGojetFeatureUpdate[] = [
   finalGojetUpdate,
   ...remainingSourceUpdates
 ];
+
+// 既存アンカーはそのまま維持し、未設定の投稿だけ元URL等から安定IDを補う。
+export const gojetFeatureUpdates: DisplayGojetFeatureUpdate[] =
+  orderedGojetFeatureUpdates.map((update) => ({
+    ...update,
+    anchorId: getStableGojetAnchorId(update)
+  }));
