@@ -32,6 +32,45 @@ const COUNTDOWN_3DAYS_POST_URL =
 const PRODUCE_ANNOUNCE_POST_URL =
   "https://www.instagram.com/p/DZch0STFB0M/?igsh=MWt2amJ6djV3ZGZnaA==";
 
+const openingEve20260722Update: DisplayGojetFeatureUpdate = {
+  date: "2026.7.22",
+  label: "#ゆかJET公式・本番前夜",
+  title: "#ゆかJET ついに明日が本番です！",
+  body:
+    "いよいよ翌日に開幕を迎える「#ゆかJET」。23日(木)はA班15:30〜・B班19:00〜、24日(金)はC班12:00〜の上演で、A・B・C班で異なる本編に加え、全キャストによるLIVEも楽しめます。「たくさんの人に観ていただきたいクオリティになっています」と本番直前の手応えを添え、観劇を呼びかけています。本番直前のキャストたちの明るい集合写真も公開されました。エールカードの受付は25日まで。",
+  postUrl: "https://x.com/yukako_produce/status/2079928926068260939",
+  homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+  ctaLabel: "#ゆかJET公式のX投稿を見る",
+  homepageLabel: "ご予約・応援ページを見る",
+  roleTags: [
+    "#ゆかJET",
+    "公演情報",
+    "本番直前",
+    "GO,JET!GO!GO!",
+    "吉井優花子プロデュース公演"
+  ],
+  photos: [
+    {
+      src: "/images/yukajet/2026-07-22-opening-eve/yukajet-opening-eve-01.jpeg",
+      alt: "ピンク・黄色・水色の衣装を着た女性キャスト3名が、アメリカンダイナー風の舞台セットでポーズを取る集合写真"
+    },
+    {
+      src: "/images/yukajet/2026-07-22-opening-eve/yukajet-opening-eve-02.jpeg",
+      alt: "水色の衣装、赤いシャツと眼鏡、アロハシャツ姿のキャスト3名が舞台セットで撮影した写真"
+    },
+    {
+      src: "/images/yukajet/2026-07-22-opening-eve/yukajet-opening-eve-03.jpeg",
+      alt: "本番直前の舞台セットで、色鮮やかな衣装を着たキャストたちが集まった集合写真"
+    },
+    {
+      src: "/images/yukajet/2026-07-22-opening-eve/yukajet-opening-eve-04.jpeg",
+      alt: "ピンクや水色のリボンなどを身につけた多数のキャストによる、本番直前の自撮り風集合写真"
+    }
+  ],
+  anchorId: "gojet-opening-eve-2026-07-22",
+  primaryCta: "post"
+};
+
 const yukakoTheaterEntryUpdate: DisplayGojetFeatureUpdate = {
   date: "2026.7.22",
   label: "吉井優花子さん本人・劇場入り",
@@ -192,6 +231,7 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
 
 // 22:12のペンライト投稿を、22:04の「最後」の投稿より上に表示する。
 export const gojetFeatureUpdates: DisplayGojetFeatureUpdate[] = [
+  openingEve20260722Update,
   yukakoTheaterEntryUpdate,
   ...(featuredTheaterEntry20260722Update
     ? [featuredTheaterEntry20260722Update]
