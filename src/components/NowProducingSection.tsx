@@ -24,7 +24,7 @@ import {
   gojetOriginUpdate,
   type DisplayGojetFeatureUpdate
 } from "../data/gojetFeatureUpdates";
-import { gojetPromoImages } from "../data/gojetPromo";
+import { gojetPromoImages, type PromoImage } from "../data/gojetPromo";
 import { isPastDeadline } from "../lib/date";
 import { getResponsiveImageProps } from "../lib/responsiveImage";
 import { googleCalendarUrl } from "../lib/share";
@@ -48,8 +48,7 @@ const roles = [
   { label: "出演（B班JET / C班早紀）", Icon: Users }
 ];
 
-const wrapIndex = (index: number) =>
-  (index + gojetPromoImages.length) % gojetPromoImages.length;
+const wrapIndex = (index: number, length: number) => (index + length) % length;
 
 function PostSourceIcon({ url, className }: { url: string; className?: string }) {
   if (url.includes("instagram.com")) {
@@ -146,20 +145,24 @@ function UpdateLinkButtons({ update }: { update: DisplayGojetFeatureUpdate }) {
 // 稽古写真・告知資料（相関図・タイムテーブル・チケット案内など）を拡大表示するための軽量ライトボックス。
 // フォトギャラリーの本人スナップとは分け、#ゆかJET特集内だけで完結させる。
 function PromoLightbox({
+  photos,
   index,
-  onClose
+  onClose,
+  label
 }: {
+  photos: PromoImage[];
   index: number;
   onClose: () => void;
+  label: string;
 }) {
   const [current, setCurrent] = useState(index);
-  const photo = gojetPromoImages[current];
+  const photo = photos[current];
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
-      if (e.key === "ArrowLeft") setCurrent((i) => wrapIndex(i - 1));
-      if (e.key === "ArrowRight") setCurrent((i) => wrapIndex(i + 1));
+      if (e.key === "ArrowLeft") setCurrent((i) => wrapIndex(i - 1, photos.length));
+      if (e.key === "ArrowRight") setCurrent((i) => wrapIndex(i + 1, photos.length));
     };
     window.addEventListener("keydown", onKeyDown);
     document.body.style.overflow = "hidden";
@@ -167,7 +170,7 @@ function PromoLightbox({
       window.removeEventListener("keydown", onKeyDown);
       document.body.style.overflow = "";
     };
-  }, [onClose]);
+  }, [onClose, photos.length]);
 
   // section-reveal の transform が containing block を作ってしまい、通常の
   // position:fixed だとビューポート基準からズレるため、body直下にPortalで描画する。
@@ -176,11 +179,11 @@ function PromoLightbox({
       className="fixed inset-0 z-[999] flex h-[100dvh] flex-col overscroll-contain bg-ink/97 px-3 py-4 text-white sm:px-6"
       role="dialog"
       aria-modal="true"
-      aria-label="#ゆかJET 特集ギャラリー"
+      aria-label={label}
     >
       <div className="mx-auto flex w-full max-w-5xl items-center justify-between gap-3">
         <p className="text-xs font-bold uppercase tracking-[0.14em] text-champagne">
-          {current + 1} / {gojetPromoImages.length}
+          {current + 1} / {photos.length}
         </p>
         <button
           type="button"
@@ -199,7 +202,7 @@ function PromoLightbox({
         />
         <button
           type="button"
-          onClick={() => setCurrent((i) => wrapIndex(i - 1))}
+          onClick={() => setCurrent((i) => wrapIndex(i - 1, photos.length))}
           className="absolute left-0 top-1/2 grid h-12 w-12 -translate-y-1/2 place-items-center border border-white/15 bg-ink/70 text-white transition hover:bg-ink"
           aria-label="前の画像"
         >
@@ -207,7 +210,7 @@ function PromoLightbox({
         </button>
         <button
           type="button"
-          onClick={() => setCurrent((i) => wrapIndex(i + 1))}
+          onClick={() => setCurrent((i) => wrapIndex(i + 1, photos.length))}
           className="absolute right-0 top-1/2 grid h-12 w-12 -translate-y-1/2 place-items-center border border-white/15 bg-ink/70 text-white transition hover:bg-ink"
           aria-label="次の画像"
         >
@@ -225,7 +228,11 @@ function PromoLightbox({
 // ヒーロー直下の #ゆかJET 特設ブロック（Now Producing billboard）。
 // ポスター + カウントダウン + 役割リスト + 予約CTA + 特集ギャラリーを、舞台看板風の1枚にまとめる。
 export function NowProducingSection({ event, now }: NowProducingSectionProps) {
-  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const [lightbox, setLightbox] = useState<{
+    photos: PromoImage[];
+    index: number;
+    label: string;
+  } | null>(null);
   const [showAllUpdates, setShowAllUpdates] = useState(false);
   const [hashTarget, setHashTarget] = useState<string | null>(null);
   const [currentTime, setCurrentTime] = useState(() => now ?? new Date());
@@ -466,6 +473,16 @@ export function NowProducingSection({ event, now }: NowProducingSectionProps) {
                       <p className="mt-3 whitespace-pre-line text-sm leading-6 text-white/72 sm:leading-7">
                         <LinkedBodyText text={update.body} />
                       </p>
+                      {update.caption && (
+                        <details className="mt-3 border border-white/12 bg-black/15 p-3">
+                          <summary className="cursor-pointer text-sm font-bold text-champagne">
+                            投稿本文を読む
+                          </summary>
+                          <p className="mt-3 whitespace-pre-line text-sm leading-6 text-white/72 sm:leading-7">
+                            <LinkedBodyText text={update.caption} />
+                          </p>
+                        </details>
+                      )}
                       {update.photo && (
                         <div className="mt-4 overflow-hidden border border-white/12 bg-black/20">
                           <img
@@ -482,10 +499,19 @@ export function NowProducingSection({ event, now }: NowProducingSectionProps) {
                       )}
                       {update.photos && update.photos.length > 0 && (
                         <div className="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-2">
-                          {update.photos.map((photo) => (
-                            <div
+                          {update.photos.map((photo, photoIndex) => (
+                            <button
                               key={photo.src}
+                              type="button"
+                              onClick={() =>
+                                setLightbox({
+                                  photos: update.photos ?? [],
+                                  index: photoIndex,
+                                  label: `${update.title} 画像ギャラリー`
+                                })
+                              }
                               className="overflow-hidden border border-white/12 bg-black/20"
+                              aria-label={`${photo.alt}を拡大表示`}
                             >
                               <img
                                 {...getResponsiveImageProps(
@@ -495,9 +521,9 @@ export function NowProducingSection({ event, now }: NowProducingSectionProps) {
                                 alt={photo.alt}
                                 loading="lazy"
                                 decoding="async"
-                                className="block h-auto w-full"
+                                className="block h-auto w-full object-contain"
                               />
-                            </div>
+                            </button>
                           ))}
                         </div>
                       )}
@@ -606,7 +632,13 @@ export function NowProducingSection({ event, now }: NowProducingSectionProps) {
                   <button
                     key={photo.src}
                     type="button"
-                    onClick={() => setLightboxIndex(index)}
+                    onClick={() =>
+                      setLightbox({
+                        photos: gojetPromoImages,
+                        index,
+                        label: "#ゆかJET 特集ギャラリー"
+                      })
+                    }
                     className="group relative aspect-[3/4] overflow-hidden border border-white/12 bg-black/20 transition hover:border-champagne/60"
                     aria-label={`${photo.alt}を拡大表示`}
                   >
@@ -625,8 +657,13 @@ export function NowProducingSection({ event, now }: NowProducingSectionProps) {
         </article>
       </div>
 
-      {lightboxIndex !== null && (
-        <PromoLightbox index={lightboxIndex} onClose={() => setLightboxIndex(null)} />
+      {lightbox && (
+        <PromoLightbox
+          photos={lightbox.photos}
+          index={lightbox.index}
+          label={lightbox.label}
+          onClose={() => setLightbox(null)}
+        />
       )}
     </section>
   );

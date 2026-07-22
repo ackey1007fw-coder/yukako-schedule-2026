@@ -26,6 +26,8 @@ export type GojetFeatureUpdate = {
   label: string;
   title: string;
   body: string;
+  // 元投稿の本文をカード内で全文掲載する場合に使用する
+  caption?: string;
   postUrl: string;
   homepageUrl: string;
   ctaLabel: string;
@@ -68,6 +70,61 @@ export type GojetTeamUpdate = {
 };
 
 export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
+  {
+    date: "2026.7.23",
+    label: "吉井優花子・Instagram",
+    title: "ついに開幕！最後のGO,JET!「#ゆかJET」本番スタート",
+    body:
+      "吉井優花子さんプロデュース公演「GO,JET!GO!GO! vol.1 Premium」が、2026年7月23日に開幕。優花子さんはプロデューサーに加え、B班では主役JET、C班ではガールズ早紀を演じる。歌とダンスを盛り込んだ、こだわりのPremium版公演を紹介する投稿。",
+    caption:
+      "ついに‼️23日から #ゆかJET 本番を迎えます✨\n最後のGO,JET!の幕開けです😭\n最高のプロデュース舞台になる予感☺️\n来られない方は『配信チケット』でご覧ください🙇‍♀️！！！\n\nプロデューサー・B班主役JET・C班ガールズ早紀\nかなり大変ですが、充実しております✨\n最後までもがき続けて、私やみんな、そしてお客様にとって良い舞台にします❤️‍🔥\n\n歌ダンス盛りだくさんのドタバタラブコメです🎙️\n今回は特に、こだわりの脚色をして楽曲も追加しているので\n本当に観てほしい！！\n\nご予約、エールカードなどの応援も\n心よりお待ちしています🙇‍♀️✨✨\n\n🔍 #ゆかJET",
+    postUrl:
+      "https://www.instagram.com/p/DbGY3XDgT_5/?igsh=MXVyamZ0MWJjaDg0dA==",
+    homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+    ctaLabel: "Instagramで元の投稿を見る",
+    homepageLabel: "#ゆかJET 公演情報・チケットを見る",
+    roleTags: [
+      "#ゆかJET",
+      "#yukakophoto",
+      "Repost元：@yoppy_777",
+      "B班：JET",
+      "C班：早紀"
+    ],
+    photos: [
+      {
+        src: "/images/yukajet/2026-07-23-instagram-opening/01-yukako-as-jet.jpg",
+        alt: "B班の主役JET役として、赤い衣装と丸眼鏡を身につけた吉井優花子さん"
+      },
+      {
+        src: "/images/yukajet/2026-07-23-instagram-opening/02-yukajet-cast-schedule.jpg",
+        alt: "#ゆかJETの全キャスト、タイムテーブル、チケット情報をまとめた公演案内"
+      },
+      {
+        src: "/images/yukajet/2026-07-23-instagram-opening/03-yukajet-main-visual.jpg",
+        alt: "GO,JET!GO!GO! vol.1 Premiumの公演名、日程、劇場を記したメインビジュアル"
+      },
+      {
+        src: "/images/yukajet/2026-07-23-instagram-opening/04-yukajet-relationship-schedule.jpg",
+        alt: "#ゆかJETの登場人物相関図とA・B・C班の公演スケジュール"
+      },
+      {
+        src: "/images/yukajet/2026-07-23-instagram-opening/05-yukajet-story.jpg",
+        alt: "BAR Samasamaを舞台にしたあらすじとPremium版の見どころ"
+      },
+      {
+        src: "/images/yukajet/2026-07-23-instagram-opening/06-yukajet-tickets.jpg",
+        alt: "#ゆかJETの来場チケットと配信チケットの料金・視聴案内"
+      },
+      {
+        src: "/images/yukajet/2026-07-23-instagram-opening/07-yukajet-support-content.jpg",
+        alt: "エールカード、メッセージ動画、キャストCM、応援チケットの案内"
+      },
+      {
+        src: "/images/yukajet/2026-07-23-instagram-opening/08-yukajet-visitor-guide.jpg",
+        alt: "来場時間、撮影、ペンライト、プレゼント、面会などの観劇案内"
+      }
+    ]
+  },
   {
     date: "2026.7.22 22:57",
     label: "吉井優花子プロデュース公演公式",
