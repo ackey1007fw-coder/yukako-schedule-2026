@@ -23,6 +23,8 @@ const TAGA_DIRECTOR_COMMENT_POST_URL =
   "https://x.com/ryuburan_taga/status/2079368211527790758";
 const THEATER_ENTRY_20260722_POST_URL =
   "https://x.com/yukako_produce/status/2079581898372968725";
+const OPENING_EVE_20260722_POST_URL =
+  "https://x.com/yukako_produce/status/2079928926068260939";
 const COUNTDOWN_3DAYS_20260720_POST_URL =
   "https://x.com/mokoopy/status/2079223875905491204";
 const PREMIUM_PROMO_VIDEO_POST_URL =
@@ -101,6 +103,9 @@ const penlightUpdate = decoratedSourceUpdates.find(
 const theaterEntry20260722Update = decoratedSourceUpdates.find(
   (update) => update.postUrl === THEATER_ENTRY_20260722_POST_URL
 );
+const openingEve20260722Update = decoratedSourceUpdates.find(
+  (update) => update.postUrl === OPENING_EVE_20260722_POST_URL
+);
 const eri1408SakiStoryUpdate = decoratedSourceUpdates.find(
   (update) => update.postUrl === ERI1408_INSTAGRAM_PROFILE_URL
 );
@@ -121,6 +126,7 @@ export const gojetOriginUpdate = decoratedSourceUpdates.find(
 );
 const remainingSourceUpdates = decoratedSourceUpdates.filter(
   (update) =>
+    update.postUrl !== OPENING_EVE_20260722_POST_URL &&
     update.postUrl !== THEATER_ENTRY_20260722_POST_URL &&
     update.postUrl !== ERI1408_INSTAGRAM_PROFILE_URL &&
     update.postUrl !== TAGA_DIRECTOR_COMMENT_POST_URL &&
@@ -130,6 +136,16 @@ const remainingSourceUpdates = decoratedSourceUpdates.filter(
     update.postUrl !== PENLIGHT_POST_URL &&
     update.postUrl !== PRODUCE_ANNOUNCE_POST_URL
 );
+
+const featuredOpeningEve20260722Update:
+  | DisplayGojetFeatureUpdate
+  | undefined = openingEve20260722Update
+  ? {
+      ...openingEve20260722Update,
+      anchorId: "gojet-opening-eve-2026-07-22",
+      primaryCta: "post"
+    }
+  : undefined;
 
 const featuredTheaterEntry20260722Update:
   | DisplayGojetFeatureUpdate
@@ -192,6 +208,9 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
 
 // 22:12のペンライト投稿を、22:04の「最後」の投稿より上に表示する。
 export const gojetFeatureUpdates: DisplayGojetFeatureUpdate[] = [
+  ...(featuredOpeningEve20260722Update
+    ? [featuredOpeningEve20260722Update]
+    : []),
   yukakoTheaterEntryUpdate,
   ...(featuredTheaterEntry20260722Update
     ? [featuredTheaterEntry20260722Update]

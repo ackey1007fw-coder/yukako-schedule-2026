@@ -20,8 +20,12 @@ export type SiteUpdate = {
 };
 
 const parseDate = (date: string) => {
-  const [year = 0, month = 0, day = 0] = date.split(".").map(Number);
-  return year * 10000 + month * 100 + day;
+  const [datePart = "", timePart = ""] = date.split(" ");
+  const [year = 0, month = 0, day = 0] = datePart.split(".").map(Number);
+  const timeMatch = timePart.match(/^(\d{1,2}):(\d{2})$/);
+  const hour = timeMatch ? Number(timeMatch[1]) : 0;
+  const minute = timeMatch ? Number(timeMatch[2]) : 0;
+  return (((year * 100 + month) * 100 + day) * 100 + hour) * 100 + minute;
 };
 
 const normalizeUrl = (url: string) => url.split("?")[0].replace(/\/$/, "");
