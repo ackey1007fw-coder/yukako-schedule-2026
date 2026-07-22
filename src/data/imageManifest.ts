@@ -285,6 +285,7 @@ export const imageManifest = {
   "/images/yukajet/2026-07-23-instagram-opening/06-yukajet-tickets.jpg": {"width":2458,"height":3277,"widths":[360,480,720,960,1280,1600,2458]},
   "/images/yukajet/2026-07-23-instagram-opening/07-yukajet-support-content.jpg": {"width":1168,"height":1549,"widths":[360,480,720,960,1168]},
   "/images/yukajet/2026-07-23-instagram-opening/08-yukajet-visitor-guide.jpg": {"width":2458,"height":3260,"widths":[360,480,720,960,1280,1600,2458]},
+  "/images/yukajet/2026-07-23-jet-visual/yukako-jet-visual-20260723.jpg": {"width":1536,"height":2048,"widths":[360,480,720,960,1280,1536]},
   "/images/yukako-babyshark-character.jpg": {"width":1600,"height":2048,"widths":[360,480,720,960,1280,1600]},
   "/images/yukako-babyshark-lobster.jpg": {"width":941,"height":1176,"widths":[360,480,720,941]},
   "/images/yukako-babyshark-lobster2.jpg": {"width":1170,"height":1560,"widths":[360,480,720,960,1170]},

@@ -126,6 +126,26 @@ export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
     ]
   },
   {
+    date: "2026.7.23 00:14",
+    label: "吉井優花子（@mokoopy）・X",
+    title: "B班主役JETのビジュアル解禁！赤黒衣装と丸眼鏡で挑む男役",
+    body:
+      "吉井優花子さんが、プロデュース公演「#ゆかJET」で演じるB班主役・JETのビジュアルを公開。赤黒の衣装、黒髪ショート、丸眼鏡で、龍馬くん2026とはがらりと違う男役JETに。優花子さんはB班・JET役、C班・早紀役、LIVEに出演します。",
+    caption:
+      "#ゆかJET \n【ビジュアル解禁&明日23日から本番‼️】\n\nB班では主役JETを務めます😊\n#龍馬くん2026 の後だと\nびっくりするビジュアル🤓\n観たらもっとびっくりします！！\n絶対楽しめるよ〜\n\nA班 15:30✨\nB班 19:00 JET役🔥\n(C班は24日12:00)\n\n⬇️B班・C班・LIVE出演🎙️\nご予約も(配信も)応援もお待ちしてます🥺\nhttps://t.co/ozR8jr3L7Y\n\n#gojet #男役",
+    postUrl: "https://x.com/mokoopy/status/2079948269850091668",
+    homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+    ctaLabel: "Xで元の投稿を見る",
+    homepageLabel: "#ゆかJET 公演情報・チケットを見る",
+    roleTags: ["B班：主役JET", "C班：早紀", "男役", "ビジュアル解禁", "#ゆかJET"],
+    photos: [
+      {
+        src: "/images/yukajet/2026-07-23-jet-visual/yukako-jet-visual-20260723.jpg",
+        alt: "赤黒の衣装と丸眼鏡を身につけ、B班の主役JET役を演じる吉井優花子さん"
+      }
+    ]
+  },
+  {
     date: "2026.7.22 22:57",
     label: "吉井優花子プロデュース公演公式",
     title: "#ゆかJET ついに明日が本番です！",
