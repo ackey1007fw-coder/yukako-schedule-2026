@@ -24,6 +24,7 @@ export function EventCard({ event, isNext = false, compact = false }: EventCardP
   const primaryLink = uniqueLinks.find((link) => link.kind === "ticket") ?? uniqueLinks.find((link) => link.kind === "stream");
   const infoLink = uniqueLinks.find((link) => link.kind === "info" && link.url !== primaryLink?.url);
   const shareText = upcoming ? `${event.title}を応援しています！` : `${event.title}の活動記録を見ました`;
+  const shareContent = event.id === "yukajet-gojet-2026-07" ? "yukajet_share" : "event_share";
 
   return (
     <article className={`yukako-ticket-card yukako-card yukako-card-interactive group relative grid overflow-hidden bg-white ${event.isImportant || isNext ? "border-champagne/70" : "border-rosefog/25"} ${compact ? "sm:grid-cols-[112px_1fr]" : "sm:grid-cols-[132px_1fr]"}`}>
@@ -55,7 +56,7 @@ export function EventCard({ event, isNext = false, compact = false }: EventCardP
           <summary className="flex min-h-10 cursor-pointer list-none items-center gap-2 text-xs font-bold text-ink/60 marker:hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-champagne">その他の操作<ChevronDown className="h-4 w-4 transition group-open:rotate-180 motion-reduce:transition-none" aria-hidden="true" /></summary>
           <div className="mt-2 flex flex-wrap gap-2">
             <a href={googleCalendarUrl(event)} target="_blank" rel="noopener noreferrer" onClick={() => trackPortalEvent("calendar_add", { event_id: event.id })} className="inline-flex min-h-10 items-center border border-rosefog/25 bg-porcelain px-3 py-2 text-xs font-bold text-ink/72"><CalendarPlus className="mr-1.5 h-4 w-4 text-champagne" aria-hidden="true" />カレンダー追加</a>
-            <a href={xShareUrl(shareText, `${SITE_URL}#event-${event.id}`)} target="_blank" rel="noopener noreferrer" onClick={() => trackPortalEvent("x_share", { event_id: event.id })} className="inline-flex min-h-10 items-center border border-rosefog/25 bg-porcelain px-3 py-2 text-xs font-bold text-ink/72"><Share2 className="mr-1.5 h-4 w-4 text-champagne" aria-hidden="true" />Xで共有</a>
+            <a href={xShareUrl(shareText, `${SITE_URL}#event-${event.id}`, shareContent)} target="_blank" rel="noopener noreferrer" onClick={() => trackPortalEvent("x_share", { event_id: event.id })} className="inline-flex min-h-10 items-center border border-rosefog/25 bg-porcelain px-3 py-2 text-xs font-bold text-ink/72"><Share2 className="mr-1.5 h-4 w-4 text-champagne" aria-hidden="true" />Xで共有</a>
           </div>
         </details>}
       </div>

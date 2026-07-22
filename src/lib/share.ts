@@ -1,4 +1,5 @@
 import type { ScheduleEvent } from "../types";
+import { addShareUtm } from "./engagement";
 
 export const SITE_URL = "https://yukako-schedule-2026.vercel.app/";
 
@@ -24,11 +25,11 @@ export const googleCalendarUrl = (event: ScheduleEvent) => {
   return `https://calendar.google.com/calendar/render?${params.toString()}`;
 };
 
-export const xShareUrl = (text: string, url: string) =>
-  `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
+export const xShareUrl = (text: string, url: string, content = "home_share") =>
+  `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(addShareUtm(url, content, "x"))}`;
 
-export const lineShareUrl = (url: string) =>
-  `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(url)}`;
+export const lineShareUrl = (url: string, content = "home_share") =>
+  `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(addShareUtm(url, content, "line"))}`;
 
-export const threadsShareUrl = (text: string, url: string) =>
-  `https://www.threads.net/intent/post?text=${encodeURIComponent(`${text} ${url}`)}`;
+export const threadsShareUrl = (text: string, url: string, content = "home_share") =>
+  `https://www.threads.net/intent/post?text=${encodeURIComponent(`${text} ${addShareUtm(url, content, "threads")}`)}`;

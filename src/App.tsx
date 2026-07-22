@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { ArrowDownRight } from "lucide-react";
 import { ActionStrip } from "./components/ActionStrip";
 import { AkitaRootsSection } from "./components/AkitaRootsSection";
 import { Footer } from "./components/Footer";
@@ -111,6 +112,40 @@ function App() {
         <GojetPerformancePanel />
         <Hero nextEvent={nextEvent} socialLinks={socialLinks} />
         <TodayNextPanel todayEvents={todayEvents} nextEvent={nextEvent} />
+        <nav aria-label="目的別ナビゲーション" className="bg-porcelain px-4 pb-8 sm:px-6 lg:px-8">
+          <div className="mx-auto grid max-w-7xl gap-3 md:grid-cols-3">
+            {[
+              {
+                href: "#profile",
+                title: "初めての方へ",
+                copy: "吉井優花子さんのプロフィール、これまでの歩み、活動の魅力をご紹介します。"
+              },
+              {
+                href: "#updates",
+                title: "最新情報を見る",
+                copy: "出演、配信、公演、SNSなど、現在進行中の活動をチェックできます。"
+              },
+              {
+                href: "#next",
+                title: "公演・チケット",
+                copy: "最新の出演日程、配信、予約、応援方法をご案内します。"
+              }
+            ].map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className="yukako-card yukako-card-interactive flex min-h-32 min-w-0 flex-col border-rosefog/25 bg-white p-5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-champagne"
+              >
+                <span className="font-display text-xl text-ink">{item.title}</span>
+                <span className="mt-2 text-sm leading-6 text-ink/68">{item.copy}</span>
+                <span className="mt-auto inline-flex items-center gap-1 pt-3 text-sm font-bold text-champagneInk">
+                  {item.title}へ移動
+                  <ArrowDownRight className="h-4 w-4" aria-hidden="true" />
+                </span>
+              </a>
+            ))}
+          </div>
+        </nav>
         <SectionReveal>
           <LatestUpdatesSection />
         </SectionReveal>

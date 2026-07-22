@@ -14,6 +14,7 @@ import {
   Music,
   PenLine,
   Palette,
+  Share2,
   Sparkles,
   Ticket,
   Users,
@@ -26,8 +27,9 @@ import {
 } from "../data/gojetFeatureUpdates";
 import { gojetPromoImages, type PromoImage } from "../data/gojetPromo";
 import { isPastDeadline } from "../lib/date";
+import { getRelatedGojetUpdates } from "../lib/engagement";
 import { getResponsiveImageProps } from "../lib/responsiveImage";
-import { googleCalendarUrl } from "../lib/share";
+import { googleCalendarUrl, SITE_URL, xShareUrl } from "../lib/share";
 import type { ScheduleEvent } from "../types";
 import { ActHeader } from "./ActHeader";
 import { ExternalButton } from "./ExternalButton";
@@ -124,6 +126,21 @@ function UpdateLinkButtons({ update }: { update: DisplayGojetFeatureUpdate }) {
       {update.homepageLabel ?? "公演ホームページへ"}
     </a>
   );
+  const shareButton = update.anchorId ? (
+    <a
+      href={xShareUrl(
+        `${update.title}｜#ゆかJET の活動記録`,
+        `${SITE_URL}#${update.anchorId}`,
+        "yukajet_share",
+      )}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="yukako-button yukako-button-ghost min-h-12 px-4 py-3 text-sm"
+    >
+      <Share2 className="h-4 w-4 text-champagne" aria-hidden="true" />
+      Xで共有
+    </a>
+  ) : null;
 
   return (
     <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
@@ -138,7 +155,39 @@ function UpdateLinkButtons({ update }: { update: DisplayGojetFeatureUpdate }) {
           {homepageButton}
         </>
       )}
+      {shareButton}
     </div>
+  );
+}
+
+function RelatedGojetLinks({ current }: { current: DisplayGojetFeatureUpdate }) {
+  const related = getRelatedGojetUpdates(current, gojetFeatureUpdates);
+  if (related.length === 0) return null;
+
+  return (
+    <aside className="mt-5 border-t border-white/12 pt-4" aria-label="関連する #ゆかJET の記録">
+      <h5 className="text-sm font-black text-white">関連する #ゆかJET の記録</h5>
+      <ul className="mt-3 grid gap-2 sm:grid-cols-3">
+        {related.map(({ candidate, sharedTags }) => (
+          <li key={candidate.anchorId} className="min-w-0">
+            <a
+              href={`#${candidate.anchorId}`}
+              className="flex min-h-24 flex-col border border-white/12 bg-black/15 p-3 text-left transition hover:border-champagne/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-champagne"
+            >
+              <span className="text-[11px] font-bold text-champagne">
+                {candidate.date} ・ {sharedTags[0]}
+              </span>
+              <span className="mt-1.5 line-clamp-2 text-sm font-bold leading-5 text-white/85">
+                {candidate.title}
+              </span>
+              <span className="mt-auto pt-2 text-xs font-bold text-champagne">
+                この記録へ移動
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </aside>
   );
 }
 
@@ -548,6 +597,7 @@ export function NowProducingSection({ event, now }: NowProducingSectionProps) {
                         </p>
                       )}
                       <UpdateLinkButtons update={update} />
+                      <RelatedGojetLinks current={update} />
                     </div>
                   ))}
                 </div>
