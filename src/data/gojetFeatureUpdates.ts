@@ -40,6 +40,8 @@ const OPENING_NIGHT_REPORT_20260723_POST_URL =
   "https://x.com/yukako_produce/status/2080297797144969336";
 const YUKAKO_JET_OPENING_GOODS_20260724_POST_URL =
   "https://x.com/mokoopy/status/2080320822825439518";
+const OFFICIAL_X_NEWS_20260724_POST_URL =
+  "https://x.com/yukako_produce/status/2080313032174174590";
 const COUNTDOWN_3DAYS_20260720_POST_URL =
   "https://x.com/mokoopy/status/2079223875905491204";
 const PREMIUM_PROMO_VIDEO_POST_URL =
@@ -142,6 +144,9 @@ const openingNightReport20260723Update = decoratedSourceUpdates.find(
 const yukakoJetOpeningGoods20260724Update = decoratedSourceUpdates.find(
   (update) => update.postUrl === YUKAKO_JET_OPENING_GOODS_20260724_POST_URL
 );
+const officialXNews20260724Update = decoratedSourceUpdates.find(
+  (update) => update.postUrl === OFFICIAL_X_NEWS_20260724_POST_URL
+);
 const eri1408SakiStoryUpdate = decoratedSourceUpdates.find(
   (update) => update.postUrl === ERI1408_INSTAGRAM_PROFILE_URL
 );
@@ -163,6 +168,7 @@ export const gojetOriginUpdate = decoratedSourceUpdates.find(
 const remainingSourceUpdates = decoratedSourceUpdates.filter(
   (update) =>
     update.postUrl !== YUKAKO_JET_OPENING_GOODS_20260724_POST_URL &&
+    update.postUrl !== OFFICIAL_X_NEWS_20260724_POST_URL &&
     update.postUrl !== OPENING_NIGHT_REPORT_20260723_POST_URL &&
     update.postUrl !== ARAI_ACCESS_VIDEO_20260723_POST_URL &&
     update.postUrl !== OFFICIAL_VISITOR_GOODS_20260723_POST_URL &&
@@ -227,6 +233,16 @@ const featuredYukakoJetOpeningGoods20260724Update:
       ...yukakoJetOpeningGoods20260724Update,
       anchorId: "gojet-yukako-jet-opening-goods-2026-07-24",
       primaryCta: "homepage"
+    }
+  : undefined;
+
+const featuredOfficialXNews20260724Update:
+  | DisplayGojetFeatureUpdate
+  | undefined = officialXNews20260724Update
+  ? {
+      ...officialXNews20260724Update,
+      anchorId: "gojet-official-x-news-2026-07-24",
+      primaryCta: "post"
     }
   : undefined;
 
@@ -323,6 +339,9 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
 const orderedGojetFeatureUpdates: DisplayGojetFeatureUpdate[] = [
   ...(featuredYukakoJetOpeningGoods20260724Update
     ? [featuredYukakoJetOpeningGoods20260724Update]
+    : []),
+  ...(featuredOfficialXNews20260724Update
+    ? [featuredOfficialXNews20260724Update]
     : []),
   ...(featuredOpeningNightReport20260723Update
     ? [featuredOpeningNightReport20260723Update]
