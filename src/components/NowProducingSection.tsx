@@ -14,6 +14,7 @@ import {
   Music,
   PenLine,
   Palette,
+  PlayCircle,
   Share2,
   Sparkles,
   Ticket,
@@ -522,6 +523,66 @@ export function NowProducingSection({ event, now }: NowProducingSectionProps) {
                       <p className="mt-3 whitespace-pre-line text-sm leading-6 text-white/72 sm:leading-7">
                         <LinkedBodyText text={update.body} />
                       </p>
+                      {update.videoGuide && (
+                        <div className="mt-4">
+                          <a
+                            href={update.videoGuide.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={`${update.videoGuide.alt}（Xで開く）`}
+                            className="flex items-center gap-3 border border-champagne/60 bg-champagne/10 p-4 transition hover:border-champagne hover:bg-champagne/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-champagne sm:gap-4"
+                          >
+                            <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-champagne/60 bg-black/25">
+                              <PlayCircle
+                                className="h-7 w-7 text-champagne"
+                                aria-hidden="true"
+                              />
+                            </span>
+                            <span className="min-w-0">
+                              <span className="block text-sm font-black text-white sm:text-base">
+                                劇場までの行き方動画
+                              </span>
+                              {update.videoGuide.note && (
+                                <span className="mt-0.5 block text-xs font-bold text-white/70">
+                                  {update.videoGuide.note}
+                                </span>
+                              )}
+                              <span className="mt-1.5 inline-flex items-center gap-1.5 text-xs font-black text-champagne sm:text-sm">
+                                <ExternalLink
+                                  className="h-4 w-4 shrink-0"
+                                  aria-hidden="true"
+                                />
+                                {update.videoGuide.buttonLabel}
+                              </span>
+                            </span>
+                          </a>
+                          {update.videoGuide.steps &&
+                            update.videoGuide.steps.length > 0 && (
+                              <details className="mt-2 border border-white/12 bg-black/15 p-3">
+                                <summary className="cursor-pointer text-sm font-bold text-champagne">
+                                  道順を詳しく見る
+                                </summary>
+                                <ol className="mt-3 list-decimal space-y-1.5 pl-5 text-sm leading-6 text-white/72 sm:leading-7">
+                                  {update.videoGuide.steps.map((step) => (
+                                    <li key={step}>{step}</li>
+                                  ))}
+                                </ol>
+                                {update.videoGuide.venue && (
+                                  <p className="mt-3 flex items-start gap-1.5 text-sm font-bold text-white/80">
+                                    <MapPin
+                                      className="mt-0.5 h-4 w-4 shrink-0 text-champagne"
+                                      aria-hidden="true"
+                                    />
+                                    <span className="min-w-0">
+                                      {update.videoGuide.venue.name}（
+                                      {update.videoGuide.venue.address}）
+                                    </span>
+                                  </p>
+                                )}
+                              </details>
+                            )}
+                        </div>
+                      )}
                       {update.caption && (
                         <details className="mt-3 border border-white/12 bg-black/15 p-3">
                           <summary className="cursor-pointer text-sm font-bold text-champagne">
