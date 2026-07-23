@@ -683,6 +683,20 @@ export function NowProducingSection({ event, now }: NowProducingSectionProps) {
                           <p className="mt-2 whitespace-pre-line text-sm leading-6 text-white/72 sm:leading-7">
                             {update.quotedPost.body}
                           </p>
+                          {update.quotedPost.url && (
+                            <a
+                              href={update.quotedPost.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="mt-2 inline-flex items-center gap-1.5 text-xs font-black text-champagne underline underline-offset-4 transition hover:text-white"
+                            >
+                              <ExternalLink
+                                className="h-3.5 w-3.5 shrink-0"
+                                aria-hidden="true"
+                              />
+                              {update.quotedPost.urlLabel ?? "引用元の投稿を見る"}
+                            </a>
+                          )}
                         </aside>
                       )}
                       {update.photo && (

@@ -38,6 +38,8 @@ const OFFICIAL_VISITOR_GOODS_20260723_POST_URL =
   "https://x.com/yukako_produce/status/2080130440137232583";
 const OPENING_NIGHT_REPORT_20260723_POST_URL =
   "https://x.com/yukako_produce/status/2080297797144969336";
+const YUKAKO_JET_OPENING_GOODS_20260724_POST_URL =
+  "https://x.com/mokoopy/status/2080320822825439518";
 const COUNTDOWN_3DAYS_20260720_POST_URL =
   "https://x.com/mokoopy/status/2079223875905491204";
 const PREMIUM_PROMO_VIDEO_POST_URL =
@@ -137,6 +139,9 @@ const officialVisitorGoods20260723Update = decoratedSourceUpdates.find(
 const openingNightReport20260723Update = decoratedSourceUpdates.find(
   (update) => update.postUrl === OPENING_NIGHT_REPORT_20260723_POST_URL
 );
+const yukakoJetOpeningGoods20260724Update = decoratedSourceUpdates.find(
+  (update) => update.postUrl === YUKAKO_JET_OPENING_GOODS_20260724_POST_URL
+);
 const eri1408SakiStoryUpdate = decoratedSourceUpdates.find(
   (update) => update.postUrl === ERI1408_INSTAGRAM_PROFILE_URL
 );
@@ -157,6 +162,7 @@ export const gojetOriginUpdate = decoratedSourceUpdates.find(
 );
 const remainingSourceUpdates = decoratedSourceUpdates.filter(
   (update) =>
+    update.postUrl !== YUKAKO_JET_OPENING_GOODS_20260724_POST_URL &&
     update.postUrl !== OPENING_NIGHT_REPORT_20260723_POST_URL &&
     update.postUrl !== ARAI_ACCESS_VIDEO_20260723_POST_URL &&
     update.postUrl !== OFFICIAL_VISITOR_GOODS_20260723_POST_URL &&
@@ -211,6 +217,16 @@ const featuredOpeningNightReport20260723Update:
       ...openingNightReport20260723Update,
       anchorId: "gojet-opening-night-report-2026-07-23",
       primaryCta: "post"
+    }
+  : undefined;
+
+const featuredYukakoJetOpeningGoods20260724Update:
+  | DisplayGojetFeatureUpdate
+  | undefined = yukakoJetOpeningGoods20260724Update
+  ? {
+      ...yukakoJetOpeningGoods20260724Update,
+      anchorId: "gojet-yukako-jet-opening-goods-2026-07-24",
+      primaryCta: "homepage"
     }
   : undefined;
 
@@ -305,6 +321,9 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
 
 // 22:12のペンライト投稿を、22:04の「最後」の投稿より上に表示する。
 const orderedGojetFeatureUpdates: DisplayGojetFeatureUpdate[] = [
+  ...(featuredYukakoJetOpeningGoods20260724Update
+    ? [featuredYukakoJetOpeningGoods20260724Update]
+    : []),
   ...(featuredOpeningNightReport20260723Update
     ? [featuredOpeningNightReport20260723Update]
     : []),
