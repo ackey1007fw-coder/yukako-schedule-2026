@@ -152,6 +152,10 @@ export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
       {
         src: "/images/yukajet/2026-07-24-yukako-jet-opening-goods-sign.jpg",
         alt: "吉井優花子さんと共演者が、サイン特典付きのゆかJETフライヤーカードと記念ステッカーを紹介する写真"
+      },
+      {
+        src: "/images/yukajet/2026-07-24-yukako-jet-opening-cast-selfie.jpg",
+        alt: "#ゆかJET のキャストが、レトロアメリカンな舞台セットで撮影した初日後の集合セルフィー写真"
       }
     ],
     schedule: {
