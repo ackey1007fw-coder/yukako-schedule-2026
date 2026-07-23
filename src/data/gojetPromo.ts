@@ -132,6 +132,7 @@ export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
     date: "2026.7.24 00:55",
     label: "吉井優花子さん本人（@mokoopy）",
     title: "JET役初日を終えて｜もっと多くの方に届けたい #ゆかJET",
+
     body:
       "2026年7月23日のB班初日公演を終え、JET役を務めた吉井優花子さんから、観劇したお客様への感謝が伝えられました。\n\nA班・B班の初日を振り返りながら、「ここからもっと上げていきます」と、公演をさらに良いものへ育てていく意気込みも綴られています。\n\n翌日の7月24日は、12時から自身が早紀役を務めるC班の初日、15時30分からJET役のB班、19時からA班が上演される予定として案内されました。\n\n優花子さんは、「この舞台は本当にたくさんの方に見てもらいたい」と、より多くのお客様へ作品を届けたいという思いも発信しています。\n\n物販では、お好きなキャスト1名からサインを受け取れる「公演フライヤーカード＆記念ステッカーセット」と、本公演オリジナルブロマイドを紹介。プロデューサーとして舞台全体を支えながら、B班ではJET役、C班では早紀役として出演する優花子さんの熱意が伝わる投稿です。",
     postUrl: "https://x.com/mokoopy/status/2080320822825439518",
@@ -191,6 +192,45 @@ export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
         "A班・B班初日終了後の公式報告。翌日公演の案内と物販情報を伝える投稿を、優花子さんが引用してシェアしています。",
       url: "https://x.com/yukako_produce/status/2080297797144969336",
       urlLabel: "引用元の公式投稿を見る"
+    }
+  },
+  {
+    date: "2026.7.24 00:24",
+    label: "吉井優花子プロデュース公演公式（@yukako_produce）",
+    title: "#ゆかJET がX「本日のニュース」に登場｜公式も観劇を呼びかけ",
+    body:
+      "2026年7月23日の初日開幕に合わせて、吉井優花子プロデュース公演『GO,JET!GO!GO! vol.1 Premium ～I LOVE YOUが言えなくて～』が、Xの「本日のニュース」に表示されました。\n\nニュース欄には「ミュージカル『GO,JET!GO!GO! vol.1 Premium』本日両国で初日開幕」という見出しが掲載され、#ゆかJET に関する複数の投稿がまとめられていました。\n\nこの動きを紹介した引用元の投稿に対し、公演公式アカウントは「もちろんです☺️‼️ぜひご観劇ください✨」と反応し、予約・応援ページへつなげました。\n\n初日のタイミングで関連投稿が集まり、X上でも注目が広がっていたこと、そして公式アカウントがそれを観劇案内へつなげた記録です。",
+    caption:
+      "もちろんです☺️‼️ぜひご観劇ください✨\n#ゆかJET\n\nhttps://premiumgoyukajet.hp.peraichi.com/",
+    postUrl: "https://x.com/yukako_produce/status/2080313032174174590",
+    homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+    ctaLabel: "公式投稿を見る",
+    homepageLabel: "公演予約・応援案内を見る",
+    roleTags: [
+      "#ゆかJET",
+      "初日開幕",
+      "Xで話題",
+      "本日のニュース",
+      "公演公式",
+      "観劇案内"
+    ],
+    photos: [
+      {
+        src: "/images/yukajet/2026-07-24-x-news-summary.jpg",
+        alt: "#ゆかJET がXの本日のニュースに掲載されたことを紹介する画像"
+      },
+      {
+        src: "/images/yukajet/2026-07-24-x-todays-news-screen.jpg",
+        alt: "Xの本日のニュースに #ゆかJET 初日開幕が表示された画面"
+      }
+    ],
+    quotedPost: {
+      author: "うえきゃん",
+      handle: "@felicitar_0429",
+      body:
+        "「他のGOJETでは見かけなかったXで話題になるぐらいのお話だろうね」——引用元では、シリーズ内でも目立つ動きとして紹介されていました。",
+      url: "https://x.com/felicitar_0429/status/2080247133488505148",
+      urlLabel: "引用元投稿を見る"
     }
   },
   {
