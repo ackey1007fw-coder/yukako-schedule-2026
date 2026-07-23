@@ -729,6 +729,37 @@ export function NowProducingSection({ event, now }: NowProducingSectionProps) {
                           ))}
                         </div>
                       )}
+                      {update.schedule &&
+                        update.schedule.items.length > 0 && (
+                          <div
+                            className="mt-4 border border-champagne/30 bg-black/20 p-4"
+                            aria-label={update.schedule.heading}
+                          >
+                            <p className="text-xs font-black uppercase tracking-[0.14em] text-champagne">
+                              {update.schedule.heading}
+                            </p>
+                            <ul className="mt-3 grid gap-2">
+                              {update.schedule.items.map((item) => (
+                                <li
+                                  key={`${item.time}-${item.label}`}
+                                  className="flex items-baseline gap-3 border-b border-white/10 pb-2 last:border-0 last:pb-0"
+                                >
+                                  <span className="shrink-0 text-sm font-black text-champagne">
+                                    {item.time}
+                                  </span>
+                                  <span className="min-w-0 text-sm font-bold text-white">
+                                    {item.label}
+                                  </span>
+                                </li>
+                              ))}
+                            </ul>
+                            {update.schedule.note && (
+                              <p className="mt-3 text-xs font-bold text-white/60">
+                                {update.schedule.note}
+                              </p>
+                            )}
+                          </div>
+                        )}
                       {update.goods && update.goods.items.length > 0 && (
                         <div
                           className="mt-4 border border-champagne/30 bg-black/20 p-4"

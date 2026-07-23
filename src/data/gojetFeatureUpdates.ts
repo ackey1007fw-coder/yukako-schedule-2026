@@ -36,6 +36,8 @@ const ARAI_ACCESS_VIDEO_20260723_POST_URL =
   "https://x.com/eri_no_a/status/2080193541503127649";
 const OFFICIAL_VISITOR_GOODS_20260723_POST_URL =
   "https://x.com/yukako_produce/status/2080130440137232583";
+const OPENING_NIGHT_REPORT_20260723_POST_URL =
+  "https://x.com/yukako_produce/status/2080297797144969336";
 const COUNTDOWN_3DAYS_20260720_POST_URL =
   "https://x.com/mokoopy/status/2079223875905491204";
 const PREMIUM_PROMO_VIDEO_POST_URL =
@@ -132,6 +134,9 @@ const araiAccessVideo20260723Update = decoratedSourceUpdates.find(
 const officialVisitorGoods20260723Update = decoratedSourceUpdates.find(
   (update) => update.postUrl === OFFICIAL_VISITOR_GOODS_20260723_POST_URL
 );
+const openingNightReport20260723Update = decoratedSourceUpdates.find(
+  (update) => update.postUrl === OPENING_NIGHT_REPORT_20260723_POST_URL
+);
 const eri1408SakiStoryUpdate = decoratedSourceUpdates.find(
   (update) => update.postUrl === ERI1408_INSTAGRAM_PROFILE_URL
 );
@@ -152,6 +157,7 @@ export const gojetOriginUpdate = decoratedSourceUpdates.find(
 );
 const remainingSourceUpdates = decoratedSourceUpdates.filter(
   (update) =>
+    update.postUrl !== OPENING_NIGHT_REPORT_20260723_POST_URL &&
     update.postUrl !== ARAI_ACCESS_VIDEO_20260723_POST_URL &&
     update.postUrl !== OFFICIAL_VISITOR_GOODS_20260723_POST_URL &&
     update.postUrl !== SHIINA_AKANE_20260723_POST_URL &&
@@ -194,6 +200,16 @@ const featuredAraiAccessVideo20260723Update:
   ? {
       ...araiAccessVideo20260723Update,
       anchorId: "gojet-arai-access-video-2026-07-23",
+      primaryCta: "post"
+    }
+  : undefined;
+
+const featuredOpeningNightReport20260723Update:
+  | DisplayGojetFeatureUpdate
+  | undefined = openingNightReport20260723Update
+  ? {
+      ...openingNightReport20260723Update,
+      anchorId: "gojet-opening-night-report-2026-07-23",
       primaryCta: "post"
     }
   : undefined;
@@ -289,6 +305,9 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
 
 // 22:12のペンライト投稿を、22:04の「最後」の投稿より上に表示する。
 const orderedGojetFeatureUpdates: DisplayGojetFeatureUpdate[] = [
+  ...(featuredOpeningNightReport20260723Update
+    ? [featuredOpeningNightReport20260723Update]
+    : []),
   ...(featuredAraiAccessVideo20260723Update
     ? [featuredAraiAccessVideo20260723Update]
     : []),

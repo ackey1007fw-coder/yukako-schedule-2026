@@ -90,6 +90,16 @@ export type GojetFeatureUpdate = {
       detail?: string;
     }[];
   };
+  // 上演スケジュールなどの時刻付き一覧。画像だけに頼らず文字でも伝える。
+  schedule?: {
+    heading: string;
+    // 補足（例: "開場は開演30分前"）
+    note?: string;
+    items: {
+      time: string;
+      label: string;
+    }[];
+  };
   // 役柄タグ(例: "B班：JET")。見出し下に小さなバッジとして並べる
   roleTags?: string[];
 };
@@ -114,6 +124,64 @@ export type GojetTeamUpdate = {
 };
 
 export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
+  {
+    date: "2026.7.23 23:23",
+    label: "吉井優花子プロデュース公演公式（@yukako_produce）",
+    title: "A班・B班初日終了報告｜翌日公演案内と物販情報",
+    body:
+      "2026年7月23日夜、吉井優花子プロデュース公演『GO,JET!GO!GO! vol.1 Premium 〜I LOVE YOUが言えなくて〜』のA班・B班初日公演終了後に、公式アカウントから感謝と翌日公演の案内が投稿されました。\n\n投稿では、A班・B班の初日公演へのお礼とともに、「まだまだクオリティを上げていきます」と今後に向けた意気込みも綴られています。\n\nあわせて、翌日7月24日の公演予定として、C班初日（12:00〜）、B班（15:30〜）、A班（19:00〜）のスケジュールが案内されました。\n\nまた、物販として「フライヤーカード＆ステッカーセット」も紹介されており、記念に手に取りやすいアイテムとして案内されています。",
+    postUrl: "https://x.com/yukako_produce/status/2080297797144969336",
+    homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+    ctaLabel: "公式の投稿を見る",
+    homepageLabel: "公演予約・応援案内を見る",
+    roleTags: [
+      "#ゆかJET",
+      "初日終了報告",
+      "翌日公演案内",
+      "物販情報",
+      "A班",
+      "B班"
+    ],
+    photos: [
+      {
+        src: "/images/yukajet/2026-07-23-after-opening-selfie-1.jpg",
+        alt: "#ゆかJET A班・B班初日後のキャスト集合写真 1"
+      },
+      {
+        src: "/images/yukajet/2026-07-23-after-opening-selfie-2.jpg",
+        alt: "#ゆかJET A班・B班初日後のキャスト集合写真 2"
+      },
+      {
+        src: "/images/yukajet/2026-07-23-after-opening-goods-flyer-sign.jpg",
+        alt: "#ゆかJET 物販案内とフライヤーカード＆ステッカーの紹介"
+      },
+      {
+        src: "/images/yukajet/2026-07-23-after-opening-relationship-schedule.jpg",
+        alt: "#ゆかJET 相関図と公演日程表"
+      }
+    ],
+    schedule: {
+      heading: "翌日公演スケジュール（2026年7月24日）",
+      note: "会場：Air studio 両国（両国駅 徒歩2分）",
+      items: [
+        { time: "12:00〜", label: "C班（初日）" },
+        { time: "15:30〜", label: "B班" },
+        { time: "19:00〜", label: "A班" }
+      ]
+    },
+    goods: {
+      heading: "物販注目情報",
+      note: "価格は税込です。",
+      items: [
+        {
+          name: "公演フライヤーカード＆ステッカーセット",
+          price: "500円",
+          detail:
+            "B5版両面カラー。面会タイムに、お好きなキャスト1名からサインがもらえる案内あり"
+        }
+      ]
+    }
+  },
   {
     date: "2026.7.23 16:29",
     label: "荒井映里乃さん（@eri_no_a）・劇場アクセス案内",
