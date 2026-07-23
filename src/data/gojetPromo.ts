@@ -60,12 +60,18 @@ export type GojetFeatureUpdate = {
     alt: string;
     // プレースホルダーの補足（例: "約60秒のアクセスガイド"）
     note?: string;
-    // 折りたたみで補足する道順などの箇条書き
+    // 折りたたみで補足する道順・目印の箇条書き（初めての来場者向け）
     steps?: string[];
-    // 会場名と住所（地図アイコン付きで表示）
+    // 会場アクセス情報（地図アイコン付きで表示）
     venue?: {
       name: string;
       address: string;
+      // 地下1階など、建物内での位置を短く補足する
+      floorNote?: string;
+      // 最寄り駅（例: "両国駅"）
+      nearestStation?: string;
+      // Googleマップの検索クエリ。未指定時は「会場名 住所」を使用する
+      mapQuery?: string;
     };
   };
   deadline?: GojetDeadline;
@@ -119,17 +125,19 @@ export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
       alt: "両国駅周辺からAir Studio 両国までの道順を実際に歩いて紹介するアクセス動画",
       note: "約60秒のアクセスガイド",
       steps: [
-        "両国駅周辺から「BECK’S COFFEE」方面へ進む",
-        "「BECK’S COFFEE」を通過し、サンマルクカフェ方面へ向かう",
-        "信号を渡り、並木道や提灯のある通りを進む",
-        "「Beer Club POPEYE」の黄色い看板を目印にする",
-        "看板付近の細い道へ入る",
-        "赤いタイルの階段を下りる",
-        "地下1階のAir Studio 両国に到着"
+        "両国駅から「BECK’S COFFEE」を左へ",
+        "サンマルクカフェ方面へ進む",
+        "信号を渡る",
+        "提灯のある通りを進む",
+        "「Beer Club POPEYE」の黄色い看板が目印",
+        "看板付近の細い道に入り、赤いタイルの階段を降りると地下1階の劇場"
       ],
       venue: {
         name: "Air Studio 両国",
-        address: "東京都墨田区両国2-18-7 ハイツ両国駅前 地下1階"
+        address: "東京都墨田区両国2-18-7 ハイツ両国駅前 地下1階",
+        floorNote: "地下1階の劇場",
+        nearestStation: "両国駅",
+        mapQuery: "Air Studio 両国 東京都墨田区両国2-18-7 ハイツ両国駅前"
       }
     },
     quotedPost: {
