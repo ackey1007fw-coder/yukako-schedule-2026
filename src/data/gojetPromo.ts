@@ -75,6 +75,30 @@ export type GojetTeamUpdate = {
   };
 };
 
+// 両国駅から会場（Air studio 両国）までの徒歩ルート。目印のお店をたどる案内。
+export type GojetAccessGuide = {
+  from: string;
+  to: string;
+  steps: string[];
+  note: string;
+};
+
+export const gojetAccessGuide: GojetAccessGuide = {
+  from: "JR総武線・両国駅",
+  to: "Air studio 両国（東京都墨田区両国2-18-7 地下1階）",
+  steps: [
+    "改札を出て、BECK'S COFFEE を目印に左へ曲がる",
+    "サンマルクカフェを正面に見て、右へ曲がる",
+    "そのまま進んで、信号を渡る",
+    "「焼肉」の看板を目印に、左へ曲がる",
+    "そのあとは道なりに直進する",
+    "「POPEYE」を目印に進む",
+    "『GO,JET!GO!GO!』の看板を通り越す",
+    "階段を降りると劇場（地下1階）",
+  ],
+  note: "ファンが実際に歩いた道順の目安です。目印のお店は変わる場合があります。正確な場所は会場の住所・地図でご確認ください。",
+};
+
 export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
   {
     date: "2026.7.23 11:25",

@@ -25,7 +25,7 @@ import {
   gojetOriginUpdate,
   type DisplayGojetFeatureUpdate
 } from "../data/gojetFeatureUpdates";
-import { gojetPromoImages, type PromoImage } from "../data/gojetPromo";
+import { gojetAccessGuide, gojetPromoImages, type PromoImage } from "../data/gojetPromo";
 import { isPastDeadline } from "../lib/date";
 import { getRelatedGojetUpdates } from "../lib/engagement";
 import { getResponsiveImageProps } from "../lib/responsiveImage";
@@ -665,6 +665,27 @@ export function NowProducingSection({ event, now }: NowProducingSectionProps) {
                 >
                   応援メニューを見る
                 </a>
+              </div>
+
+              <div className="mt-6 border-t border-white/10 pt-6">
+                <p className="mb-1 flex items-center gap-2 text-xs font-black uppercase tracking-[0.16em] text-champagne">
+                  <MapPin className="h-4 w-4" aria-hidden="true" />
+                  会場アクセス（両国駅からの行き方）
+                </p>
+                <p className="mb-4 text-sm text-white/60">
+                  {gojetAccessGuide.from} → {gojetAccessGuide.to}
+                </p>
+                <ol className="grid gap-2">
+                  {gojetAccessGuide.steps.map((step, index) => (
+                    <li key={step} className="flex items-start gap-3">
+                      <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-champagne/50 bg-champagne/10 text-xs font-black text-champagne">
+                        {index + 1}
+                      </span>
+                      <span className="text-sm leading-7 text-white/80">{step}</span>
+                    </li>
+                  ))}
+                </ol>
+                <p className="mt-3 text-xs leading-6 text-white/50">{gojetAccessGuide.note}</p>
               </div>
 
               {infoLinks.length > 0 && (
