@@ -49,6 +49,25 @@ export type GojetFeatureUpdate = {
     poster: string;
     label: string;
   };
+  // 引用元に動画があるが自己ホスト（変換・poster生成）できない場合の代替。
+  // 動画投稿への目立つリンクと、再生アイコン付きのプレースホルダーを表示する。
+  videoGuide?: {
+    // 動画投稿のURL（新しいタブで開く）
+    url: string;
+    // リンクボタンの文言（例: "Xで行き方動画を見る"）
+    buttonLabel: string;
+    // アクセシビリティ用の代替テキスト
+    alt: string;
+    // プレースホルダーの補足（例: "約60秒のアクセスガイド"）
+    note?: string;
+    // 折りたたみで補足する道順などの箇条書き
+    steps?: string[];
+    // 会場名と住所（地図アイコン付きで表示）
+    venue?: {
+      name: string;
+      address: string;
+    };
+  };
   deadline?: GojetDeadline;
   // 役ごとのペンライトカラーなど、色名も文字で伝える短い実用情報
   supportColors?: GojetSupportColor[];
@@ -76,6 +95,50 @@ export type GojetTeamUpdate = {
 };
 
 export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
+  {
+    date: "2026.7.23 16:29",
+    label: "荒井映里乃さん（@eri_no_a）・劇場アクセス案内",
+    title: "B班初日へ！Air Studio 両国までの行き方動画",
+    body:
+      "2026年7月23日、#ゆかJETのB班初日公演を前に、B班で早紀を演じる荒井映里乃さんが、曽原加絵さん制作の「Air Studio 両国までの行き方動画」を紹介しました。動画は両国駅周辺から劇場までを実際に歩いて案内するアクセスガイドで、「BECK’S COFFEE」やサンマルクカフェを通り、「Beer Club POPEYE」の黄色い看板を目印に細い道へ入って、赤いタイルの階段を下りると、地下1階のAir Studio 両国に到着します。投稿では、B班初日19時公演について「まだまだ予約もお待ちしております」「飛び込みも大歓迎」と案内され、ご来場のお客様へ安全に気をつけて来てほしいというメッセージも添えられていました。",
+    postUrl: "https://x.com/eri_no_a/status/2080193541503127649",
+    homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+    ctaLabel: "荒井映里乃さんの投稿を見る",
+    homepageLabel: "公演公式ページを見る",
+    roleTags: [
+      "#ゆかJET",
+      "B班",
+      "劇場アクセス",
+      "キャスト発信",
+      "動画",
+      "Air Studio 両国"
+    ],
+    videoGuide: {
+      url: "https://x.com/kaenomusic/status/2080192412178350103",
+      buttonLabel: "Xで行き方動画を見る",
+      alt: "両国駅周辺からAir Studio 両国までの道順を実際に歩いて紹介するアクセス動画",
+      note: "約60秒のアクセスガイド",
+      steps: [
+        "両国駅周辺から「BECK’S COFFEE」方面へ進む",
+        "「BECK’S COFFEE」を通過し、サンマルクカフェ方面へ向かう",
+        "信号を渡り、並木道や提灯のある通りを進む",
+        "「Beer Club POPEYE」の黄色い看板を目印にする",
+        "看板付近の細い道へ入る",
+        "赤いタイルの階段を下りる",
+        "地下1階のAir Studio 両国に到着"
+      ],
+      venue: {
+        name: "Air Studio 両国",
+        address: "東京都墨田区両国2-18-7 ハイツ両国駅前 地下1階"
+      }
+    },
+    quotedPost: {
+      author: "曽原加絵",
+      handle: "@kaenomusic",
+      body:
+        "両国駅周辺からAir Studio 両国までの行き方を、実際に歩きながら案内する約60秒のアクセス動画。荒井映里乃さんはこの投稿を引用してシェアしています。"
+    }
+  },
   {
     date: "2026.7.23 11:25",
     label: "吉井優花子（@mokoopy）・X引用リポスト",
