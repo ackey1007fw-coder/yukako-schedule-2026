@@ -42,6 +42,10 @@ export type GojetFeatureUpdate = {
     author: string;
     handle: string;
     body: string;
+    // 引用元投稿へのリンク（確認できるURLのみ設定する）
+    url?: string;
+    // リンクのラベル（未指定時は「引用元の投稿を見る」）
+    urlLabel?: string;
   };
   // 稽古動画などを手元にホストできた場合はカード内で直接再生する
   video?: {
@@ -124,6 +128,67 @@ export type GojetTeamUpdate = {
 };
 
 export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
+  {
+    date: "2026.7.24 00:55",
+    label: "吉井優花子さん本人（@mokoopy）",
+    title: "JET役初日を終えて｜もっと多くの方に届けたい #ゆかJET",
+    body:
+      "2026年7月23日のB班初日公演を終え、JET役を務めた吉井優花子さんから、観劇したお客様への感謝が伝えられました。\n\nA班・B班の初日を振り返りながら、「ここからもっと上げていきます」と、公演をさらに良いものへ育てていく意気込みも綴られています。\n\n翌日の7月24日は、12時から自身が早紀役を務めるC班の初日、15時30分からJET役のB班、19時からA班が上演される予定として案内されました。\n\n優花子さんは、「この舞台は本当にたくさんの方に見てもらいたい」と、より多くのお客様へ作品を届けたいという思いも発信しています。\n\n物販では、お好きなキャスト1名からサインを受け取れる「公演フライヤーカード＆記念ステッカーセット」と、本公演オリジナルブロマイドを紹介。プロデューサーとして舞台全体を支えながら、B班ではJET役、C班では早紀役として出演する優花子さんの熱意が伝わる投稿です。",
+    postUrl: "https://x.com/mokoopy/status/2080320822825439518",
+    homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+    ctaLabel: "優花子さんのX投稿を見る",
+    homepageLabel: "公演予約・応援案内を見る",
+    roleTags: [
+      "#ゆかJET",
+      "吉井優花子さん本人",
+      "B班：JET役",
+      "C班：早紀役",
+      "初日終了",
+      "物販情報",
+      "フライヤーカード",
+      "サイン特典"
+    ],
+    photos: [
+      {
+        src: "/images/yukajet/2026-07-24-yukako-jet-opening-goods-sign.jpg",
+        alt: "吉井優花子さんと共演者が、サイン特典付きのゆかJETフライヤーカードと記念ステッカーを紹介する写真"
+      }
+    ],
+    schedule: {
+      heading: "翌日公演スケジュール（2026年7月24日）",
+      note: "会場：Air studio 両国。優花子さんはB班でJET役、C班で早紀役を務めます。",
+      items: [
+        { time: "12:00〜", label: "C班（早紀役・初日）" },
+        { time: "15:30〜", label: "B班（JET役）" },
+        { time: "19:00〜", label: "A班" }
+      ]
+    },
+    goods: {
+      heading: "物販注目情報",
+      note: "価格は税込です。ブロマイドは優花子さん本人が投稿内で「質も良くお得」とおすすめしています。",
+      items: [
+        {
+          name: "公演フライヤーカード＆記念ステッカーセット",
+          price: "500円",
+          detail:
+            "B5版両面カラーのフライヤーカードとオリジナル記念ステッカー。面会タイムに、お好きなキャスト1名からサインを受け取れる案内あり"
+        },
+        {
+          name: "本公演オリジナルブロマイド",
+          price: "2,000円（2枚1組）",
+          detail: "優花子さん本人のおすすめ"
+        }
+      ]
+    },
+    quotedPost: {
+      author: "吉井優花子プロデュース公演公式",
+      handle: "@yukako_produce",
+      body:
+        "A班・B班初日終了後の公式報告。翌日公演の案内と物販情報を伝える投稿を、優花子さんが引用してシェアしています。",
+      url: "https://x.com/yukako_produce/status/2080297797144969336",
+      urlLabel: "引用元の公式投稿を見る"
+    }
+  },
   {
     date: "2026.7.23 23:23",
     label: "吉井優花子プロデュース公演公式（@yukako_produce）",
