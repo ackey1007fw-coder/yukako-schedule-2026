@@ -14,6 +14,7 @@ import {
   Music,
   PenLine,
   Palette,
+  PlayCircle,
   Share2,
   Sparkles,
   Ticket,
@@ -90,6 +91,23 @@ function UpdateLinkButtons({ update }: { update: DisplayGojetFeatureUpdate }) {
   const homepageIsPrimary = update.primaryCta === "homepage";
   const postIsInternal = isInternalHref(update.postUrl);
   const homepageIsInternal = isInternalHref(update.homepageUrl);
+  // 動画投稿リンクなどを最優先で目立たせたい場合は mediaLink をゴールドの主ボタンにし、
+  // 元投稿・公演ページボタンはゴースト表示に下げる。
+  const hasMediaLink = Boolean(update.mediaLink);
+  const postIsGold = !hasMediaLink && !homepageIsPrimary;
+  const homepageIsGold = !hasMediaLink && homepageIsPrimary;
+  const mediaButton = update.mediaLink ? (
+    <a
+      href={update.mediaLink.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={update.mediaLink.ariaLabel ?? update.mediaLink.label}
+      className="yukako-button yukako-button-gold min-h-12 px-4 py-3 text-sm"
+    >
+      <PlayCircle className="h-4 w-4 shrink-0" aria-hidden="true" />
+      {update.mediaLink.label}
+    </a>
+  ) : null;
   const postButton = (
     <a
       href={update.postUrl}
@@ -97,12 +115,12 @@ function UpdateLinkButtons({ update }: { update: DisplayGojetFeatureUpdate }) {
         ? {}
         : { target: "_blank", rel: "noopener noreferrer" })}
       className={`yukako-button min-h-12 px-4 py-3 text-sm ${
-        homepageIsPrimary ? "yukako-button-ghost" : "yukako-button-gold"
+        postIsGold ? "yukako-button-gold" : "yukako-button-ghost"
       }`}
     >
       <PostSourceIcon
         url={update.postUrl}
-        className={`h-4 w-4 ${homepageIsPrimary ? "text-champagne" : ""}`}
+        className={`h-4 w-4 ${postIsGold ? "" : "text-champagne"}`}
       />
       {update.ctaLabel}
     </a>
@@ -114,12 +132,12 @@ function UpdateLinkButtons({ update }: { update: DisplayGojetFeatureUpdate }) {
         ? {}
         : { target: "_blank", rel: "noopener noreferrer" })}
       className={`yukako-button min-h-12 px-4 py-3 text-sm ${
-        homepageIsPrimary ? "yukako-button-gold" : "yukako-button-ghost"
+        homepageIsGold ? "yukako-button-gold" : "yukako-button-ghost"
       }`}
     >
       {!homepageIsInternal && (
         <ExternalLink
-          className={`h-4 w-4 ${homepageIsPrimary ? "" : "text-champagne"}`}
+          className={`h-4 w-4 ${homepageIsGold ? "" : "text-champagne"}`}
           aria-hidden="true"
         />
       )}
@@ -144,6 +162,7 @@ function UpdateLinkButtons({ update }: { update: DisplayGojetFeatureUpdate }) {
 
   return (
     <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
+      {mediaButton}
       {homepageIsPrimary ? (
         <>
           {homepageButton}

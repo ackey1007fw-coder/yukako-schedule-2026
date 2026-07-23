@@ -43,6 +43,14 @@ export type GojetFeatureUpdate = {
     poster: string;
     label: string;
   };
+  // 動画投稿など、カード内で最も目立たせたい外部リンクを1つ足す（ボタン先頭にゴールドで表示）。
+  // 自己ホスト動画を置けない場合の、引用元動画投稿への明示リンクなどに使う。
+  mediaLink?: {
+    url: string;
+    label: string;
+    // スクリーンリーダー向けにリンク先の内容を説明する（未指定時は label を使う）
+    ariaLabel?: string;
+  };
   deadline?: GojetDeadline;
   // 役ごとのペンライトカラーなど、色名も文字で伝える短い実用情報
   supportColors?: GojetSupportColor[];
@@ -70,6 +78,31 @@ export type GojetTeamUpdate = {
 };
 
 export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
+  {
+    date: "2026.7.23 16:29",
+    label: "#ゆかJET キャスト発信・劇場アクセス",
+    title: "B班初日へ！Air Studio 両国までの行き方動画",
+    body:
+      "2026年7月23日、#ゆかJET B班初日を前に、B班で早紀を演じる荒井映里乃さんが、曽原加絵さん制作の「Air Studio 両国までの行き方動画」をシェア。両国駅周辺から歩いてのルート案内で、BECK'S COFFEEやBeer Club POPEYEの黄色い看板を目印に、細い道を入って赤いタイルの階段を下りた地下1階がAir Studio 両国。投稿当時は、19時のB班初日へ「まだまだ予約もお待ちしております」「飛び込みも大歓迎」と案内し、安全に気をつけての来場も呼びかけていました。",
+    mediaLink: {
+      url: "https://x.com/kaenomusic/status/2080192412178350103",
+      label: "Xで行き方動画を見る",
+      ariaLabel:
+        "両国駅周辺からAir Studio 両国までの道順を実際に歩いて紹介するアクセス動画をXで見る"
+    },
+    postUrl: "https://x.com/eri_no_a/status/2080193541503127649",
+    homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+    ctaLabel: "荒井映里乃さんの投稿を見る",
+    homepageLabel: "#ゆかJET 公演情報・チケットを見る",
+    roleTags: [
+      "#ゆかJET",
+      "キャスト発信",
+      "B班",
+      "劇場アクセス",
+      "動画",
+      "Air Studio 両国"
+    ]
+  },
   {
     date: "2026.7.23 11:17",
     label: "吉井優花子（@mokoopy）・X",
