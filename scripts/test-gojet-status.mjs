@@ -16,6 +16,9 @@ try {
   const { QuickNav } = await server.ssrLoadModule(
     "/src/components/QuickNav.tsx"
   );
+  const { TodayNextPanel } = await server.ssrLoadModule(
+    "/src/components/TodayNextPanel.tsx"
+  );
 
   const before = getGojetStatus(new Date("2026-07-22T23:59:59+09:00"));
   assert.deepEqual(before, { phase: "before", daysLeft: 1 });
@@ -44,6 +47,36 @@ try {
   assert.match(openingHtml, /配信チケット/);
   assert.match(openingHtml, /id="gojet-live-panel"/);
   assert.match(openingHtml, /scroll-mt-32/);
+
+  const todayNextHtml = renderToStaticMarkup(
+    createElement(TodayNextPanel, {
+      todayEvents: [],
+      now: new Date("2026-07-23T13:06:00+09:00")
+    })
+  );
+  assert.match(todayNextHtml, /今日の出演/);
+  assert.match(todayNextHtml, /7\/23（木）/);
+  assert.match(todayNextHtml, /19:00/);
+  assert.match(todayNextHtml, /B班/);
+  assert.match(todayNextHtml, /JET役/);
+  assert.match(todayNextHtml, /次の出演/);
+  assert.match(todayNextHtml, /7\/24（金）/);
+  assert.match(todayNextHtml, /12:00/);
+  assert.match(todayNextHtml, /C班/);
+  assert.match(todayNextHtml, /早紀役/);
+  assert.match(todayNextHtml, /出演班：B班・JET役 \/ C班・早紀役/);
+  assert.doesNotMatch(todayNextHtml, /2026年7月23日（木）〜27日（月）/);
+
+  const doubleAppearanceHtml = renderToStaticMarkup(
+    createElement(TodayNextPanel, {
+      todayEvents: [],
+      now: new Date("2026-07-24T10:00:00+09:00")
+    })
+  );
+  assert.match(doubleAppearanceHtml, /12:00/);
+  assert.match(doubleAppearanceHtml, /15:30/);
+  assert.match(doubleAppearanceHtml, /C班/);
+  assert.match(doubleAppearanceHtml, /B班/);
 
   const beforeQuickNavHtml = renderToStaticMarkup(
     createElement(QuickNav, {
