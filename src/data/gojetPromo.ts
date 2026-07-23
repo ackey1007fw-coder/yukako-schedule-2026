@@ -101,7 +101,13 @@ export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
       "劇場アクセス",
       "動画",
       "Air Studio 両国"
-    ]
+    ],
+    // 行き方動画から起こしたポスター静止画（POPEYEの黄色い看板が目印の区間）。
+    // 動画本編は権利者（@kaenomusic）の元投稿へ誘導し、当サイトでは静止画のみ自己ホストする。
+    photo: {
+      src: "/images/yukajet/2026-07-23-access-guide/air-studio-ryogoku-access-guide.jpg",
+      alt: "Air Studio 両国への行き方動画の一場面。細い通り沿いにあるBeer Club POPEYEの黄色い看板が道順の目印になっている"
+    }
   },
   {
     date: "2026.7.23 11:17",

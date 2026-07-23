@@ -277,6 +277,7 @@ export const imageManifest = {
   "/images/yukajet/2026-07-22-opening-eve/yukajet-opening-eve-03.jpg": {"width":1477,"height":1108,"widths":[360,480,720,960,1280,1477]},
   "/images/yukajet/2026-07-22-opening-eve/yukajet-opening-eve-04.jpg": {"width":2048,"height":1536,"widths":[360,480,720,960,1280,1600,2048]},
   "/images/yukajet/2026-07-22-theater-entry.jpg": {"width":2048,"height":1536,"widths":[360,480,720,960,1280,1600,2048]},
+  "/images/yukajet/2026-07-23-access-guide/air-studio-ryogoku-access-guide.jpg": {"width":720,"height":1280,"widths":[360,480,720]},
   "/images/yukajet/2026-07-23-instagram-opening/01-yukako-as-jet.jpg": {"width":1836,"height":2448,"widths":[360,480,720,960,1280,1600,1836]},
   "/images/yukajet/2026-07-23-instagram-opening/02-yukajet-cast-schedule.jpg": {"width":2458,"height":3277,"widths":[360,480,720,960,1280,1600,2458]},
   "/images/yukajet/2026-07-23-instagram-opening/03-yukajet-main-visual.jpg": {"width":2458,"height":3260,"widths":[360,480,720,960,1280,1600,2458]},
