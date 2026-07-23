@@ -71,6 +71,32 @@ export type GojetTeamUpdate = {
 
 export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
   {
+    date: "2026.7.23 11:17",
+    label: "吉井優花子（@mokoopy）・X",
+    title: "#ゆかJET 初日開幕！まずは主役JETから",
+    body:
+      "最後のGO,JET!となるプロデュース公演「#ゆかJET」が、2026年7月23日に初日を迎えました。まずはB班の主役・JETから。短い黒髪に黒縁メガネ、赤と黒の衣装という、龍馬くん2026とはがらりと違う男役で舞台へ。プロデューサーと主役を兼ねる優花子さんは、初日当日には当日券での飛び込み来場も歓迎していました。",
+    caption:
+      "#ゆかJET\n初日です！！！！\nまずはJETから😆✨\n\nまだお席あるので飛び込み大歓迎です！\n観にきてほしいです🥺",
+    postUrl: "https://x.com/mokoopy/status/2080115168948912597",
+    homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+    ctaLabel: "Xで元の投稿を見る",
+    homepageLabel: "#ゆかJET 公演情報・チケットを見る",
+    roleTags: ["#ゆかJET", "B班：主役JET", "初日", "GO,JET!GO!GO!", "男役"],
+    // 元投稿添付のJET役ビジュアル（2026-07-23 00:14の解禁カットとは別カット）。
+    // この環境ではX/pbs.twimg.comへの通信がネットワークポリシーで遮断されており取得できなかったため、
+    // ホットリンクや代替画像は使わず、画像参照は未設定のまま公開する。
+    // 画像入手後は次を配置し `node scripts/generate-responsive-images.mjs` を実行して photos を有効化する:
+    //   public/images/yukajet/2026-07-23-opening-day/yukako-jet-opening-day.jpg
+    //   alt: "短い黒髪と黒縁メガネ、赤と黒の衣装でJET役を演じる吉井優花子さん"
+    // photos: [
+    //   {
+    //     src: "/images/yukajet/2026-07-23-opening-day/yukako-jet-opening-day.jpg",
+    //     alt: "短い黒髪と黒縁メガネ、赤と黒の衣装でJET役を演じる吉井優花子さん"
+    //   }
+    // ]
+  },
+  {
     date: "2026.7.23",
     label: "吉井優花子・Instagram",
     title: "ついに開幕！最後のGO,JET!「#ゆかJET」本番スタート",
