@@ -1,6 +1,8 @@
 export type GojetPerformance = {
   time: string;
   team: string;
+  /** 吉井優花子さんが出演する回だけ、役柄を表示する */
+  yukakoRole?: string;
 };
 
 export type GojetTimetableDay = {
@@ -29,15 +31,15 @@ export const gojetTimetable: GojetTimetableDay[] = [
     label: "7/23（木）",
     performances: [
       { time: "15:30", team: "A班" },
-      { time: "19:00", team: "B班" }
+      { time: "19:00", team: "B班", yukakoRole: "JET役" }
     ]
   },
   {
     date: "2026-07-24",
     label: "7/24（金）",
     performances: [
-      { time: "12:00", team: "C班" },
-      { time: "15:30", team: "B班" },
+      { time: "12:00", team: "C班", yukakoRole: "早紀役" },
+      { time: "15:30", team: "B班", yukakoRole: "JET役" },
       { time: "19:00", team: "A班" }
     ]
   },
@@ -45,9 +47,9 @@ export const gojetTimetable: GojetTimetableDay[] = [
     date: "2026-07-25",
     label: "7/25（土）",
     performances: [
-      { time: "12:00", team: "B班" },
+      { time: "12:00", team: "B班", yukakoRole: "JET役" },
       { time: "15:30", team: "A班" },
-      { time: "19:00", team: "C班" }
+      { time: "19:00", team: "C班", yukakoRole: "早紀役" }
     ],
     note: "25日のみ、A班あかね役は葉山椎菜さんが務めます。"
   },
@@ -55,17 +57,17 @@ export const gojetTimetable: GojetTimetableDay[] = [
     date: "2026-07-26",
     label: "7/26（日）",
     performances: [
-      { time: "12:00", team: "C班" },
+      { time: "12:00", team: "C班", yukakoRole: "早紀役" },
       { time: "15:30", team: "A班" },
-      { time: "19:00", team: "B班" }
+      { time: "19:00", team: "B班", yukakoRole: "JET役" }
     ]
   },
   {
     date: "2026-07-27",
     label: "7/27（月）",
     performances: [
-      { time: "18:00", team: "C班" },
-      { time: "20:00", team: "全班合同LIVE" }
+      { time: "18:00", team: "C班", yukakoRole: "早紀役" },
+      { time: "20:00", team: "全班合同LIVE", yukakoRole: "LIVE出演" }
     ]
   }
 ];
