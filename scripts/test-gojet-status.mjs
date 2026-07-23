@@ -64,7 +64,7 @@ try {
   assert.match(todayNextHtml, /12:00/);
   assert.match(todayNextHtml, /C班/);
   assert.match(todayNextHtml, /早紀役/);
-  assert.match(todayNextHtml, /出演班：B班・JET役 \/ C班・早紀役/);
+  assert.match(todayNextHtml, /出演班：B班・JET役 ／ C班・早紀役/);
   assert.doesNotMatch(todayNextHtml, /2026年7月23日（木）〜27日（月）/);
 
   const doubleAppearanceHtml = renderToStaticMarkup(
