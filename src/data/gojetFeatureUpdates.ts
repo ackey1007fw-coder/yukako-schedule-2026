@@ -30,6 +30,8 @@ const INSTAGRAM_OPENING_20260723_POST_URL =
   "https://www.instagram.com/p/DbGY3XDgT_5/?igsh=MXVyamZ0MWJjaDg0dA==";
 const JET_VISUAL_20260723_POST_URL =
   "https://x.com/mokoopy/status/2079948269850091668";
+const SHIINA_AKANE_20260723_POST_URL =
+  "https://x.com/mokoopy/status/2080116978329763841";
 const COUNTDOWN_3DAYS_20260720_POST_URL =
   "https://x.com/mokoopy/status/2079223875905491204";
 const PREMIUM_PROMO_VIDEO_POST_URL =
@@ -117,6 +119,9 @@ const instagramOpening20260723Update = decoratedSourceUpdates.find(
 const jetVisual20260723Update = decoratedSourceUpdates.find(
   (update) => update.postUrl === JET_VISUAL_20260723_POST_URL
 );
+const shiinaAkane20260723Update = decoratedSourceUpdates.find(
+  (update) => update.postUrl === SHIINA_AKANE_20260723_POST_URL
+);
 const eri1408SakiStoryUpdate = decoratedSourceUpdates.find(
   (update) => update.postUrl === ERI1408_INSTAGRAM_PROFILE_URL
 );
@@ -137,6 +142,7 @@ export const gojetOriginUpdate = decoratedSourceUpdates.find(
 );
 const remainingSourceUpdates = decoratedSourceUpdates.filter(
   (update) =>
+    update.postUrl !== SHIINA_AKANE_20260723_POST_URL &&
     update.postUrl !== INSTAGRAM_OPENING_20260723_POST_URL &&
     update.postUrl !== JET_VISUAL_20260723_POST_URL &&
     update.postUrl !== OPENING_EVE_20260722_POST_URL &&
@@ -156,6 +162,16 @@ const featuredInstagramOpening20260723Update:
   ? {
       ...instagramOpening20260723Update,
       anchorId: "gojet-instagram-opening-2026-07-23",
+      primaryCta: "post"
+    }
+  : undefined;
+
+const featuredShiinaAkane20260723Update:
+  | DisplayGojetFeatureUpdate
+  | undefined = shiinaAkane20260723Update
+  ? {
+      ...shiinaAkane20260723Update,
+      anchorId: "gojet-shiina-akane-2026-07-23",
       primaryCta: "post"
     }
   : undefined;
@@ -241,6 +257,9 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
 
 // 22:12のペンライト投稿を、22:04の「最後」の投稿より上に表示する。
 const orderedGojetFeatureUpdates: DisplayGojetFeatureUpdate[] = [
+  ...(featuredShiinaAkane20260723Update
+    ? [featuredShiinaAkane20260723Update]
+    : []),
   ...(featuredInstagramOpening20260723Update
     ? [featuredInstagramOpening20260723Update]
     : []),
