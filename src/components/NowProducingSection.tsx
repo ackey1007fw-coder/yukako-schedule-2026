@@ -225,7 +225,7 @@ function PromoLightbox({
   // position:fixed だとビューポート基準からズレるため、body直下にPortalで描画する。
   return createPortal(
     <div
-      className="fixed inset-0 z-[999] flex h-[100dvh] flex-col overscroll-contain bg-ink/97 px-3 py-4 text-white sm:px-6"
+      className="fixed inset-0 z-[999] flex h-[100dvh] flex-col overscroll-contain bg-[#312a2e]/[0.97] px-3 py-4 text-white sm:px-6"
       role="dialog"
       aria-modal="true"
       aria-label={label}
@@ -531,6 +531,22 @@ export function NowProducingSection({ event, now }: NowProducingSectionProps) {
                             <LinkedBodyText text={update.caption} />
                           </p>
                         </details>
+                      )}
+                      {update.quotedPost && (
+                        <aside
+                          className="mt-3 border-l-4 border-champagne/70 bg-black/20 p-3 sm:p-4"
+                          aria-label="引用元投稿"
+                        >
+                          <p className="text-xs font-black uppercase tracking-[0.14em] text-champagne">
+                            引用元投稿
+                          </p>
+                          <p className="mt-1 text-sm font-black text-white">
+                            {update.quotedPost.author}（{update.quotedPost.handle}）
+                          </p>
+                          <p className="mt-2 whitespace-pre-line text-sm leading-6 text-white/72 sm:leading-7">
+                            {update.quotedPost.body}
+                          </p>
+                        </aside>
                       )}
                       {update.photo && (
                         <div className="mt-4 overflow-hidden border border-white/12 bg-black/20">

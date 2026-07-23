@@ -37,6 +37,12 @@ export type GojetFeatureUpdate = {
   photo?: PromoImage;
   // 稽古写真を複数枚まとめて見せたい場合はこちら（photoと併用しない）
   photos?: PromoImage[];
+  // 引用リポストなど、リンクを推測せず引用元の投稿者と内容を補足する場合に使用する
+  quotedPost?: {
+    author: string;
+    handle: string;
+    body: string;
+  };
   // 稽古動画などを手元にホストできた場合はカード内で直接再生する
   video?: {
     src: string;
@@ -70,6 +76,42 @@ export type GojetTeamUpdate = {
 };
 
 export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
+  {
+    date: "2026.7.23 11:25",
+    label: "吉井優花子（@mokoopy）・X引用リポスト",
+    title: "「あかねはしいなちゃんだと思った」優花子さんが語るキャスティングへの信頼",
+    body:
+      "2026年7月23日、舞台『GO,JET!GO!GO! vol.1 Premium』の初日を迎えた日に、吉井優花子さんが葉山椎菜さんの投稿を引用しました。\n\n優花子さんは、「#ゆかJET のあかねはしいなちゃんだと思い、お声がけした」と、葉山椎菜さんをあかね役へ迎えた経緯を紹介。さらに、座組全体を温かく支えてくれていることへの感謝を伝えています。\n\n優花子さんと葉山椎菜さんは同じC班。役に対する確かなイメージと、共演者への深い信頼が感じられる、初日ならではの温かなやり取りです。",
+    caption:
+      "こちらこそありがとうだよー😭❤️\n\n#ゆかJET のあかねはしいなちゃんだと思い、お声がけした🙂‍↕️✨\n\nいつも温かい大きな器で全体を支えてくれて感謝です🙏\n\n同じC班で、最後まで頑張るぞ〜！！",
+    quotedPost: {
+      author: "葉山椎菜",
+      handle: "@shiina_style222",
+      body:
+        "#ゆかJETが2026年7月23日に開幕。初日はA班が15:30、B班が19:00に公演し、C班は休演です。ゲネプロや通し稽古で別班の公演を観て感動したこと、この座組へ呼んでもらえたこと、メンバーとの出会い、優花子さんへの感謝が綴られています。"
+    },
+    postUrl: "https://x.com/mokoopy/status/2080116978329763841",
+    homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+    ctaLabel: "Xで吉井優花子さんの投稿を見る",
+    homepageLabel: "#ゆかJET 公演情報を見る",
+    roleTags: [
+      "吉井優花子さん本人",
+      "引用リポスト",
+      "C班",
+      "あかね役：葉山椎菜さん",
+      "#ゆかJET"
+    ],
+    photos: [
+      {
+        src: "/images/yukajet/2026-07-23-shiina-akane-01.jpg",
+        alt: "レトロなアメリカンダイナー風のセットでポーズを取る、ゆかJET出演者3人の集合写真"
+      },
+      {
+        src: "/images/yukajet/2026-07-23-shiina-akane-02.jpg",
+        alt: "赤と白の衣装でレトロな黒電話の受話器に頬を寄せる葉山椎菜さん"
+      }
+    ]
+  },
   {
     date: "2026.7.23",
     label: "吉井優花子・Instagram",
