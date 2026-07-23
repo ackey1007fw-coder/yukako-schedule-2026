@@ -77,6 +77,19 @@ export type GojetFeatureUpdate = {
   deadline?: GojetDeadline;
   // 役ごとのペンライトカラーなど、色名も文字で伝える短い実用情報
   supportColors?: GojetSupportColor[];
+  // 物販商品などの一覧。画像だけに頼らず、名称・価格を文字でも伝える。
+  goods?: {
+    heading: string;
+    // 税込などの補足（例: "価格はすべて税込です。"）
+    note?: string;
+    items: {
+      name: string;
+      // 価格の文字表記（例: "2,000円（2枚1組）"）
+      price: string;
+      // 補足（例: "数量限定"、"終演後にキャストと撮影可能"）
+      detail?: string;
+    }[];
+  };
   // 役柄タグ(例: "B班：JET")。見出し下に小さなバッジとして並べる
   roleTags?: string[];
 };
@@ -145,6 +158,53 @@ export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
       handle: "@kaenomusic",
       body:
         "両国駅周辺からAir Studio 両国までの行き方を、実際に歩きながら案内する約60秒のアクセス動画。荒井映里乃さんはこの投稿を引用してシェアしています。"
+    }
+  },
+  {
+    date: "2026.7.23 12:18",
+    label: "吉井優花子プロデュース公演公式（@yukako_produce）",
+    title: "初日当日の重要案内｜上演時間・観劇マナー・物販情報",
+    body:
+      "2026年7月23日、吉井優花子プロデュース公演『GO,JET!GO!GO! vol.1 Premium 〜I LOVE YOUが言えなくて〜』の初日にあたり、公式アカウントからご来場者向けの案内と物販情報が公開されました。\n\n当初は約1時間20分と案内されていた上演時間は、カーテンコールを含めて約1時間40分に変更。開場時間は本編公演が開演30分前、千秋楽LIVEが開演15分前です。\n\n物販では、予定されていたクリアファイルが「公演フライヤーカード＆記念ステッカー」のセット（500円・税込／数量限定）へ変更されました。\n\n来場案内では、携帯電話・撮影のルール、ペンライトを振れるタイミング（舞台上の看板のライトが点灯している間のみ）、プレゼントの受け渡し、終演後のお見送り・面会やツーショットチェキについても案内されました。",
+    postUrl: "https://x.com/yukako_produce/status/2080130440137232583",
+    homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+    ctaLabel: "公式の投稿を見る",
+    homepageLabel: "公演予約・応援案内を見る",
+    roleTags: [
+      "#ゆかJET",
+      "初日",
+      "来場案内",
+      "観劇マナー",
+      "物販情報",
+      "Air Studio 両国"
+    ],
+    photos: [
+      {
+        src: "/images/yukajet/2026-07-23-visitor-guide.jpg",
+        alt: "ゆかJET ご来場のお客様への案内"
+      },
+      {
+        src: "/images/yukajet/2026-07-23-goods-guide.jpg",
+        alt: "ゆかJET 公演物販の案内"
+      }
+    ],
+    goods: {
+      heading: "物販情報",
+      note: "価格はすべて税込です。",
+      items: [
+        { name: "本公演オリジナルブロマイド", price: "2,000円（2枚1組）" },
+        { name: "ソロチェキ", price: "1,500円（1枚）" },
+        {
+          name: "ツーショットチェキ",
+          price: "2,000円（1枚）",
+          detail: "終演後にキャストと撮影できます"
+        },
+        {
+          name: "公演フライヤーカード＆記念ステッカー",
+          price: "500円（1セット）",
+          detail: "数量限定"
+        }
+      ]
     }
   },
   {
