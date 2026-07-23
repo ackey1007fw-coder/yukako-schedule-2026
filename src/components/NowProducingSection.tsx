@@ -161,6 +161,87 @@ function UpdateLinkButtons({ update }: { update: DisplayGojetFeatureUpdate }) {
   );
 }
 
+type VenueAccessInfo = NonNullable<
+  NonNullable<DisplayGojetFeatureUpdate["videoGuide"]>["venue"]
+>;
+
+// 投稿紹介カードの補足として、会場アクセス（住所・最寄り・目印・地図導線）を表示する。
+// 埋め込み地図は使わず、住所とGoogleマップの外部リンクだけで軽量に案内する。
+function VenueAccess({
+  venue,
+  steps
+}: {
+  venue: VenueAccessInfo;
+  steps?: string[];
+}) {
+  const query = encodeURIComponent(
+    venue.mapQuery ?? `${venue.name} ${venue.address}`
+  );
+  const mapUrl = `https://www.google.com/maps/search/?api=1&query=${query}`;
+  const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${query}`;
+
+  return (
+    <section
+      className="mt-3 border border-champagne/30 bg-black/20 p-4"
+      aria-label="会場アクセス"
+    >
+      <p className="flex items-center gap-1.5 text-xs font-black uppercase tracking-[0.14em] text-champagne">
+        <MapPin className="h-4 w-4 shrink-0" aria-hidden="true" />
+        会場アクセス
+      </p>
+      <p className="mt-2 text-sm font-black leading-6 text-white">
+        {venue.name}
+        {venue.floorNote && (
+          <span className="ml-2 inline-flex items-center border border-champagne/40 bg-champagne/10 px-2 py-0.5 align-middle text-[11px] font-black text-champagne">
+            {venue.floorNote}
+          </span>
+        )}
+      </p>
+      <p className="mt-1 text-sm leading-6 text-white/72">{venue.address}</p>
+      {venue.nearestStation && (
+        <p className="mt-1 text-sm leading-6 text-white/72">
+          最寄り：
+          <span className="font-bold text-white/85">{venue.nearestStation}</span>
+        </p>
+      )}
+      <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
+        <a
+          href={directionsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`現在地から${venue.name}への経路案内を開始する`}
+          className="yukako-button yukako-button-gold min-h-12 px-4 py-3 text-sm"
+        >
+          <MapPin className="h-4 w-4" aria-hidden="true" />
+          経路案内を開始する
+        </a>
+        <a
+          href={mapUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`${venue.name}の地図をGoogleマップで開く`}
+          className="yukako-button yukako-button-ghost min-h-12 px-4 py-3 text-sm"
+        >
+          <ExternalLink className="h-4 w-4 text-champagne" aria-hidden="true" />
+          Googleマップで開く
+        </a>
+      </div>
+      {steps && steps.length > 0 && (
+        <details className="mt-3 border border-white/12 bg-black/15 p-3">
+          <summary className="cursor-pointer text-sm font-bold text-champagne">
+            道順の目印を見る（初めての方向け）
+          </summary>
+          <ol className="mt-3 list-decimal space-y-1.5 pl-5 text-sm leading-6 text-white/72 sm:leading-7">
+            {steps.map((step) => (
+              <li key={step}>{step}</li>
+            ))}
+          </ol>
+        </details>
+      )}
+    </section>
+  );
+}
+
 function RelatedGojetLinks({ current }: { current: DisplayGojetFeatureUpdate }) {
   const related = getRelatedGojetUpdates(current, gojetFeatureUpdates);
   if (related.length === 0) return null;
@@ -556,7 +637,13 @@ export function NowProducingSection({ event, now }: NowProducingSectionProps) {
                               </span>
                             </span>
                           </a>
-                          {update.videoGuide.steps &&
+                          {update.videoGuide.venue ? (
+                            <VenueAccess
+                              venue={update.videoGuide.venue}
+                              steps={update.videoGuide.steps}
+                            />
+                          ) : (
+                            update.videoGuide.steps &&
                             update.videoGuide.steps.length > 0 && (
                               <details className="mt-2 border border-white/12 bg-black/15 p-3">
                                 <summary className="cursor-pointer text-sm font-bold text-champagne">
@@ -567,20 +654,9 @@ export function NowProducingSection({ event, now }: NowProducingSectionProps) {
                                     <li key={step}>{step}</li>
                                   ))}
                                 </ol>
-                                {update.videoGuide.venue && (
-                                  <p className="mt-3 flex items-start gap-1.5 text-sm font-bold text-white/80">
-                                    <MapPin
-                                      className="mt-0.5 h-4 w-4 shrink-0 text-champagne"
-                                      aria-hidden="true"
-                                    />
-                                    <span className="min-w-0">
-                                      {update.videoGuide.venue.name}（
-                                      {update.videoGuide.venue.address}）
-                                    </span>
-                                  </p>
-                                )}
                               </details>
-                            )}
+                            )
+                          )}
                         </div>
                       )}
                       {update.caption && (
