@@ -144,10 +144,6 @@ export function TodayNextPanel({ todayEvents, nextEvent, now = new Date() }: Tod
     );
   }
 
-  const nextDistinctEvent = todayEvents.some((event) => event.id === nextEvent?.id)
-    ? undefined
-    : nextEvent;
-
   return (
     <section id="today" className="bg-porcelain px-4 py-6 sm:px-6 lg:px-8">
       <div className="mx-auto grid max-w-7xl gap-3 sm:grid-cols-2">
@@ -159,7 +155,7 @@ export function TodayNextPanel({ todayEvents, nextEvent, now = new Date() }: Tod
         />
         <Panel
           eyebrow="次の予定"
-          event={nextDistinctEvent}
+          event={nextEvent}
           empty="次回予定を確認中"
           Icon={CalendarDays}
         />
