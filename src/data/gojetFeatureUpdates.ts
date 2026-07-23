@@ -34,6 +34,8 @@ const SHIINA_AKANE_20260723_POST_URL =
   "https://x.com/mokoopy/status/2080116978329763841";
 const ARAI_ACCESS_VIDEO_20260723_POST_URL =
   "https://x.com/eri_no_a/status/2080193541503127649";
+const OFFICIAL_VISITOR_GOODS_20260723_POST_URL =
+  "https://x.com/yukako_produce/status/2080130440137232583";
 const COUNTDOWN_3DAYS_20260720_POST_URL =
   "https://x.com/mokoopy/status/2079223875905491204";
 const PREMIUM_PROMO_VIDEO_POST_URL =
@@ -127,6 +129,9 @@ const shiinaAkane20260723Update = decoratedSourceUpdates.find(
 const araiAccessVideo20260723Update = decoratedSourceUpdates.find(
   (update) => update.postUrl === ARAI_ACCESS_VIDEO_20260723_POST_URL
 );
+const officialVisitorGoods20260723Update = decoratedSourceUpdates.find(
+  (update) => update.postUrl === OFFICIAL_VISITOR_GOODS_20260723_POST_URL
+);
 const eri1408SakiStoryUpdate = decoratedSourceUpdates.find(
   (update) => update.postUrl === ERI1408_INSTAGRAM_PROFILE_URL
 );
@@ -148,6 +153,7 @@ export const gojetOriginUpdate = decoratedSourceUpdates.find(
 const remainingSourceUpdates = decoratedSourceUpdates.filter(
   (update) =>
     update.postUrl !== ARAI_ACCESS_VIDEO_20260723_POST_URL &&
+    update.postUrl !== OFFICIAL_VISITOR_GOODS_20260723_POST_URL &&
     update.postUrl !== SHIINA_AKANE_20260723_POST_URL &&
     update.postUrl !== INSTAGRAM_OPENING_20260723_POST_URL &&
     update.postUrl !== JET_VISUAL_20260723_POST_URL &&
@@ -188,6 +194,16 @@ const featuredAraiAccessVideo20260723Update:
   ? {
       ...araiAccessVideo20260723Update,
       anchorId: "gojet-arai-access-video-2026-07-23",
+      primaryCta: "post"
+    }
+  : undefined;
+
+const featuredOfficialVisitorGoods20260723Update:
+  | DisplayGojetFeatureUpdate
+  | undefined = officialVisitorGoods20260723Update
+  ? {
+      ...officialVisitorGoods20260723Update,
+      anchorId: "gojet-official-visitor-goods-2026-07-23",
       primaryCta: "post"
     }
   : undefined;
@@ -275,6 +291,9 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
 const orderedGojetFeatureUpdates: DisplayGojetFeatureUpdate[] = [
   ...(featuredAraiAccessVideo20260723Update
     ? [featuredAraiAccessVideo20260723Update]
+    : []),
+  ...(featuredOfficialVisitorGoods20260723Update
+    ? [featuredOfficialVisitorGoods20260723Update]
     : []),
   ...(featuredShiinaAkane20260723Update
     ? [featuredShiinaAkane20260723Update]

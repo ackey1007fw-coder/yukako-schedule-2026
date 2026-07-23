@@ -729,6 +729,41 @@ export function NowProducingSection({ event, now }: NowProducingSectionProps) {
                           ))}
                         </div>
                       )}
+                      {update.goods && update.goods.items.length > 0 && (
+                        <div
+                          className="mt-4 border border-champagne/30 bg-black/20 p-4"
+                          aria-label={update.goods.heading}
+                        >
+                          <p className="text-xs font-black uppercase tracking-[0.14em] text-champagne">
+                            {update.goods.heading}
+                          </p>
+                          <ul className="mt-3 grid gap-2">
+                            {update.goods.items.map((item) => (
+                              <li
+                                key={item.name}
+                                className="flex flex-col gap-0.5 border-b border-white/10 pb-2 last:border-0 last:pb-0 sm:flex-row sm:items-baseline sm:justify-between sm:gap-3"
+                              >
+                                <span className="min-w-0 text-sm font-bold text-white">
+                                  {item.name}
+                                  {item.detail && (
+                                    <span className="mt-0.5 block text-xs font-bold text-white/60">
+                                      {item.detail}
+                                    </span>
+                                  )}
+                                </span>
+                                <span className="shrink-0 text-sm font-black text-champagne">
+                                  {item.price}
+                                </span>
+                              </li>
+                            ))}
+                          </ul>
+                          {update.goods.note && (
+                            <p className="mt-3 text-xs font-bold text-white/60">
+                              {update.goods.note}
+                            </p>
+                          )}
+                        </div>
+                      )}
                       {update.video && (
                         <video
                           controls
