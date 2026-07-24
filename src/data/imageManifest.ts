@@ -325,8 +325,6 @@ export const imageManifest = {
   "/images/yukajet/2026-07-24-yukako-jet-opening-cast-selfie.jpg": {"width":2048,"height":1153,"widths":[360,480,720,960,1280,1600,2048]},
   "/images/yukajet/2026-07-24-yukako-jet-opening-goods-sign.jpg": {"width":1536,"height":2048,"widths":[360,480,720,960,1280,1536]},
   "/images/yukajet/2026-07-24-yukako-penlight.jpg": {"width":748,"height":1024,"widths":[360,480,720,748]},
-  "/images/yukajet/2026-07-fan-report-erika-opie-story.jpg": {"width":720,"height":1280,"widths":[360,480,720]},
-  "/images/yukajet/2026-07-fan-report-meeeik-o-story.jpg": {"width":720,"height":1280,"widths":[360,480,720]},
   "/images/yukako-babyshark-character.jpg": {"width":1600,"height":2048,"widths":[360,480,720,960,1280,1600]},
   "/images/yukako-babyshark-lobster.jpg": {"width":941,"height":1176,"widths":[360,480,720,941]},
   "/images/yukako-babyshark-lobster2.jpg": {"width":1170,"height":1560,"widths":[360,480,720,960,1170]},
