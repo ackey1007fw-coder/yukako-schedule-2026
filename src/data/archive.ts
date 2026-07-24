@@ -1031,6 +1031,7 @@ export const archiveItems: ArchiveItem[] = [
         url: "/archive/miss-grand-japan-2025-miss-peace"
       }
     ],
+    featured: true,
     seoTitle: "母へ贈った海の上の8日間｜吉井優花子 MSCベリッシマ船旅",
     seoDescription:
       "吉井優花子さんが母の日旅行として乗船したMSCベリッシマ7泊8日の船旅。鹿児島・済州島、船内体験、仲間との時間をInstagram投稿の全20枚で紹介します。",
