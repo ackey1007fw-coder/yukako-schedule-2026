@@ -40,7 +40,9 @@ type NowProducingSectionProps = {
   now?: Date;
 };
 
-const INITIAL_VISIBLE_UPDATES = 2;
+// 同じ日の夜に投稿が続くことがあるため、初期表示は3件にして
+// 直近の公演レポートが「一覧を見る」を押さずに読めるようにする。
+const INITIAL_VISIBLE_UPDATES = 3;
 const CLOCK_UPDATE_MS = 60000;
 
 const roles = [
@@ -665,7 +667,7 @@ export function NowProducingSection({ event, now }: NowProducingSectionProps) {
                           <summary className="cursor-pointer text-sm font-bold text-champagne">
                             投稿本文を読む
                           </summary>
-                          <p className="mt-3 whitespace-pre-line text-sm leading-6 text-white/72 sm:leading-7">
+                          <p className="mt-3 whitespace-pre-line break-words text-sm leading-6 text-white/72 sm:leading-7">
                             <LinkedBodyText text={update.caption} />
                           </p>
                         </details>
