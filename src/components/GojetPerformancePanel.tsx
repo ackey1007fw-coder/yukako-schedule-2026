@@ -4,7 +4,13 @@ import {
   gojetInPersonTicketUrl,
   gojetStreamingTicketUrl
 } from "../data/gojetTimetable";
-import { getGojetStatus } from "../lib/gojetStatus";
+import {
+  getGojetStatus,
+  getPerformanceLiveStatus,
+  gojetPerformanceLiveStatusLabel,
+  summarizeGojetDayLiveStatus,
+  type GojetPerformanceLiveStatus
+} from "../lib/gojetStatus";
 import { trackPortalEvent } from "../lib/analytics";
 
 type GojetPerformancePanelProps = {
@@ -12,6 +18,44 @@ type GojetPerformancePanelProps = {
 };
 
 const CLOCK_UPDATE_MS = 60000;
+
+// 「上演中」は開演時刻＋想定上演時間から算出した目安であり、外部から実際の
+// 進行状況を取得しているわけではない。控えめなpulseはprefers-reduced-motionで停止する。
+function PerformanceStatusBadge({
+  status
+}: {
+  status: GojetPerformanceLiveStatus;
+}) {
+  const label = gojetPerformanceLiveStatusLabel[status];
+
+  if (status === "live") {
+    return (
+      <span className="inline-flex w-fit items-center gap-1.5 rounded-full border border-rosefog/50 bg-rosefog/10 px-2.5 py-1 text-xs font-black text-rosefog">
+        <span className="relative flex h-2 w-2 shrink-0" aria-hidden="true">
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-rosefog opacity-70 motion-reduce:hidden" />
+          <span className="relative inline-flex h-2 w-2 rounded-full bg-rosefog" />
+        </span>
+        {label}
+      </span>
+    );
+  }
+
+  if (status === "soon") {
+    return (
+      <span className="inline-flex w-fit items-center gap-1.5 rounded-full border border-champagne/50 bg-champagne/10 px-2.5 py-1 text-xs font-black text-champagneInk">
+        <span className="h-2 w-2 shrink-0 rounded-full bg-champagne" aria-hidden="true" />
+        {label}
+      </span>
+    );
+  }
+
+  return (
+    <span className="inline-flex w-fit items-center gap-1.5 rounded-full border border-ink/12 bg-white px-2.5 py-1 text-xs font-bold text-ink/55">
+      <span className="h-2 w-2 shrink-0 rounded-full bg-ink/25" aria-hidden="true" />
+      {label}
+    </span>
+  );
+}
 
 const TicketLink = ({
   href,
@@ -109,6 +153,7 @@ export function GojetPerformancePanel({ now }: GojetPerformancePanelProps) {
   }
 
   const allPerformancesStarted = status.remainingPerformances === 0;
+  const daySummary = summarizeGojetDayLiveStatus(currentTime, status.day);
 
   return (
     <section
@@ -134,19 +179,47 @@ export function GojetPerformancePanel({ now }: GojetPerformancePanelProps) {
             >
               本日の公演
             </h2>
-            <div className="mt-4 flex flex-wrap gap-2" aria-label="本日の開演時刻と班">
+            {daySummary.live ? (
+              <p className="mt-2 inline-flex w-fit items-center gap-2 rounded-full border border-rosefog/50 bg-rosefog/10 px-3 py-1.5 text-sm font-black text-rosefog">
+                <span className="relative flex h-2.5 w-2.5 shrink-0" aria-hidden="true">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-rosefog opacity-70 motion-reduce:hidden" />
+                  <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-rosefog" />
+                </span>
+                現在、{daySummary.live.time} {daySummary.live.team}を上演中
+              </p>
+            ) : (
+              daySummary.next && (
+                <p className="mt-2 inline-flex w-fit items-center gap-2 rounded-full border border-champagne/45 bg-white px-3 py-1.5 text-sm font-bold text-champagneInk">
+                  次の公演　{daySummary.next.time} {daySummary.next.team}
+                </p>
+              )
+            )}
+            <div className="mt-4 flex flex-wrap gap-2" aria-label="本日の開演時刻・班・上演ステータス">
               {status.day.performances.map((performance) => (
                 <div
                   key={`${performance.time}-${performance.team}`}
-                  className="flex min-w-[9rem] items-baseline justify-between gap-3 border border-rosefog/25 bg-white px-4 py-3 shadow-sm"
+                  className="flex min-w-[9.5rem] flex-col gap-2 border border-rosefog/25 bg-white px-4 py-3 shadow-sm"
                 >
-                  <strong className="font-display text-2xl text-rosefog">
-                    {performance.time}
-                  </strong>
-                  <span className="text-sm font-black text-ink">{performance.team}</span>
+                  <div className="flex items-baseline justify-between gap-3">
+                    <strong className="font-display text-2xl text-rosefog">
+                      {performance.time}
+                    </strong>
+                    <span className="text-sm font-black text-ink">{performance.team}</span>
+                  </div>
+                  <PerformanceStatusBadge
+                    status={getPerformanceLiveStatus(
+                      currentTime,
+                      status.day.date,
+                      performance.time,
+                      performance.durationMinutes
+                    )}
+                  />
                 </div>
               ))}
             </div>
+            <p className="mt-2 text-[11px] font-semibold text-ink/40">
+              公演時間をもとにした目安表示です
+            </p>
             {status.day.note && (
               <p className="mt-3 max-w-2xl text-xs font-semibold leading-5 text-ink/65">
                 {status.day.note}
