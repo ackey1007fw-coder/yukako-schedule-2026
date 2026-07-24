@@ -44,6 +44,8 @@ const OFFICIAL_X_NEWS_20260724_POST_URL =
   "https://x.com/yukako_produce/status/2080313032174174590";
 const PENLIGHT_SCHEDULE_20260724_POST_URL =
   "https://x.com/mokoopy/status/2080454389677039811";
+const KAE_YUKAJET_DAY2_20260724_POST_URL =
+  "https://x.com/kaenomusic/status/2080619068445597718";
 const COUNTDOWN_3DAYS_20260720_POST_URL =
   "https://x.com/mokoopy/status/2079223875905491204";
 const PREMIUM_PROMO_VIDEO_POST_URL =
@@ -152,6 +154,9 @@ const officialXNews20260724Update = decoratedSourceUpdates.find(
 const penlightSchedule20260724Update = decoratedSourceUpdates.find(
   (update) => update.postUrl === PENLIGHT_SCHEDULE_20260724_POST_URL
 );
+const kaeYukajetDay220260724Update = decoratedSourceUpdates.find(
+  (update) => update.postUrl === KAE_YUKAJET_DAY2_20260724_POST_URL
+);
 const eri1408SakiStoryUpdate = decoratedSourceUpdates.find(
   (update) => update.postUrl === ERI1408_INSTAGRAM_PROFILE_URL
 );
@@ -172,6 +177,7 @@ export const gojetOriginUpdate = decoratedSourceUpdates.find(
 );
 const remainingSourceUpdates = decoratedSourceUpdates.filter(
   (update) =>
+    update.postUrl !== KAE_YUKAJET_DAY2_20260724_POST_URL &&
     update.postUrl !== PENLIGHT_SCHEDULE_20260724_POST_URL &&
     update.postUrl !== YUKAKO_JET_OPENING_GOODS_20260724_POST_URL &&
     update.postUrl !== OFFICIAL_X_NEWS_20260724_POST_URL &&
@@ -258,6 +264,16 @@ const featuredPenlightSchedule20260724Update:
   ? {
       ...penlightSchedule20260724Update,
       anchorId: "gojet-penlight-schedule-2026-07-24",
+      primaryCta: "post"
+    }
+  : undefined;
+
+const featuredKaeYukajetDay220260724Update:
+  | DisplayGojetFeatureUpdate
+  | undefined = kaeYukajetDay220260724Update
+  ? {
+      ...kaeYukajetDay220260724Update,
+      anchorId: "gojet-kae-yukajet-day2-2026-07-24",
       primaryCta: "post"
     }
   : undefined;
@@ -351,8 +367,11 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
       }
     : undefined;
 
-// 22:12のペンライト投稿を、22:04の「最後」の投稿より上に表示する。
+// 20:40の曽原加絵さん投稿を、同日午前の案内より上に表示する。
 const orderedGojetFeatureUpdates: DisplayGojetFeatureUpdate[] = [
+  ...(featuredKaeYukajetDay220260724Update
+    ? [featuredKaeYukajetDay220260724Update]
+    : []),
   ...(featuredPenlightSchedule20260724Update
     ? [featuredPenlightSchedule20260724Update]
     : []),

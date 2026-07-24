@@ -129,6 +129,46 @@ export type GojetTeamUpdate = {
 
 export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
   {
+    date: "2026.7.24 20:40",
+    label: "曽原加絵さん（@kaenomusic）・B班美里役",
+    title: "「大好きなゆかJET」と仲良しショット！B班2日目終了",
+    body:
+      "『GO,JET!GO!GO! vol.1 Premium』B班・美里役の曽原加絵さん（@kaenomusic）が、2日目公演の終了を報告。来場への感謝とともに、残り「2公演＋LIVE」へ向け「最後まで全力で駆け抜けます」とつづっています。\n\n「大好きな大好きなゆかJET」——B班でJET役を務める吉井優花子さんとの写真を4枚公開。ハートポーズの連続や、笑顔のツーショットも。共演者同士の明るいオフショットです。\n\n※出演者の公開投稿をもとにした、非公式の応援まとめです。",
+    caption:
+      "#ゆかJET\n2日目終わりました！！✨\nご来場いただいた皆さま、ありがとうございました🫶\nあと2公演＋LIVEで終わりだと思うと、本当に寂しい…🥲\n最後まで全力で駆け抜けます！！🔥\n\n今日は大好きな大好きなゆかJETと写真を撮りました💝",
+    postUrl: "https://x.com/kaenomusic/status/2080619068445597718",
+    homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+    ctaLabel: "曽原加絵さんのX投稿を見る",
+    homepageLabel: "公演予約・応援案内を見る",
+    roleTags: [
+      "#ゆかJET",
+      "公演レポート",
+      "キャスト投稿",
+      "舞台裏",
+      "B班",
+      "美里役",
+      "JET役"
+    ],
+    photos: [
+      {
+        src: "/images/yukajet/2026-07-24-kae-yukajet-01.jpg",
+        alt: "BAR Samasamaの舞台セットでハートポーズをする吉井優花子さんと曽原加絵さん"
+      },
+      {
+        src: "/images/yukajet/2026-07-24-kae-yukajet-02.jpg",
+        alt: "コミカルな表情でハートを作る吉井優花子さんと、それを見つめる曽原加絵さん"
+      },
+      {
+        src: "/images/yukajet/2026-07-24-kae-yukajet-03.jpg",
+        alt: "ハートポーズが崩れて驚いた表情を見せる吉井優花子さんと曽原加絵さん"
+      },
+      {
+        src: "/images/yukajet/2026-07-24-kae-yukajet-04.jpg",
+        alt: "BAR Samasamaのセットで笑顔を見せる吉井優花子さんと曽原加絵さん"
+      }
+    ]
+  },
+  {
     date: "2026.7.24 09:45",
     label: "吉井優花子さん本人（@mokoopy）",
     title: "7月24日は早紀役C班初日＆JET役B班に出演！",
