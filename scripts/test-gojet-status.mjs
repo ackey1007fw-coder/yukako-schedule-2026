@@ -9,9 +9,16 @@ const server = await createServer({
 });
 
 try {
-  const { getGojetStatus } = await server.ssrLoadModule("/src/lib/gojetStatus.ts");
+  const {
+    getGojetStatus,
+    getPerformanceLiveStatus,
+    summarizeGojetDayLiveStatus
+  } = await server.ssrLoadModule("/src/lib/gojetStatus.ts");
   const { GojetPerformancePanel } = await server.ssrLoadModule(
     "/src/components/GojetPerformancePanel.tsx"
+  );
+  const { PriorityBanner } = await server.ssrLoadModule(
+    "/src/components/PriorityBanner.tsx"
   );
   const { QuickNav } = await server.ssrLoadModule(
     "/src/components/QuickNav.tsx"
@@ -174,6 +181,153 @@ try {
     ),
     ""
   );
+
+  // --- 公演ライブステータス判定（開演時刻＋想定上演時間 durationMinutes=90 での目安表示） ---
+  assert.equal(
+    getPerformanceLiveStatus(
+      new Date("2026-07-24T11:00:00+09:00"),
+      "2026-07-24",
+      "12:00",
+      90
+    ),
+    "before"
+  );
+  assert.equal(
+    getPerformanceLiveStatus(
+      new Date("2026-07-24T11:40:00+09:00"),
+      "2026-07-24",
+      "12:00",
+      90
+    ),
+    "soon"
+  );
+  assert.equal(
+    getPerformanceLiveStatus(
+      new Date("2026-07-24T12:20:00+09:00"),
+      "2026-07-24",
+      "12:00",
+      90
+    ),
+    "live"
+  );
+  assert.equal(
+    getPerformanceLiveStatus(
+      new Date("2026-07-24T13:40:00+09:00"),
+      "2026-07-24",
+      "12:00",
+      90
+    ),
+    "ended"
+  );
+  assert.equal(
+    getPerformanceLiveStatus(
+      new Date("2026-07-24T15:40:00+09:00"),
+      "2026-07-24",
+      "15:30",
+      90
+    ),
+    "live"
+  );
+  assert.equal(
+    getPerformanceLiveStatus(
+      new Date("2026-07-24T19:20:00+09:00"),
+      "2026-07-24",
+      "19:00",
+      90
+    ),
+    "live"
+  );
+  for (const time of ["12:00", "15:30", "19:00"]) {
+    assert.equal(
+      getPerformanceLiveStatus(
+        new Date("2026-07-24T21:00:00+09:00"),
+        "2026-07-24",
+        time,
+        90
+      ),
+      "ended"
+    );
+  }
+
+  // 前日・翌日の公演には影響しない（対象日以外で「上演中」を出さない）
+  assert.equal(
+    getPerformanceLiveStatus(
+      new Date("2026-07-25T12:20:00+09:00"),
+      "2026-07-24",
+      "12:00",
+      90
+    ),
+    "ended"
+  );
+
+  const day0724 = getGojetStatus(new Date("2026-07-24T12:20:00+09:00"));
+  assert.equal(day0724.phase, "today");
+  const summaryLive = summarizeGojetDayLiveStatus(
+    new Date("2026-07-24T12:20:00+09:00"),
+    day0724.day
+  );
+  assert.equal(summaryLive.live?.time, "12:00");
+  assert.equal(summaryLive.live?.team, "C班");
+  assert.equal(summaryLive.next?.time, "15:30");
+  assert.equal(summaryLive.allEnded, false);
+
+  const summaryAllEnded = summarizeGojetDayLiveStatus(
+    new Date("2026-07-24T21:00:00+09:00"),
+    day0724.day
+  );
+  assert.equal(summaryAllEnded.live, null);
+  assert.equal(summaryAllEnded.next, null);
+  assert.equal(summaryAllEnded.allEnded, true);
+
+  // GojetPerformancePanel: カードのステータス表示・見出し付近の上演中インジケーター
+  const livePanelHtml = renderToStaticMarkup(
+    createElement(GojetPerformancePanel, {
+      now: new Date("2026-07-24T12:20:00+09:00")
+    })
+  );
+  assert.match(livePanelHtml, /現在、12:00 C班を上演中/);
+  assert.match(livePanelHtml, /上演中/);
+  assert.match(livePanelHtml, /まもなく開演|開演前/);
+  assert.match(livePanelHtml, /公演時間をもとにした目安表示です/);
+
+  const beforeNextPanelHtml = renderToStaticMarkup(
+    createElement(GojetPerformancePanel, {
+      now: new Date("2026-07-24T13:40:00+09:00")
+    })
+  );
+  assert.match(beforeNextPanelHtml, /次の公演/);
+  assert.match(beforeNextPanelHtml, /15:30/);
+  assert.match(beforeNextPanelHtml, /B班/);
+  assert.match(beforeNextPanelHtml, /終演/);
+
+  // PriorityBanner: トップのお知らせバーの動的テキスト
+  const bannerBeforeHtml = renderToStaticMarkup(
+    createElement(PriorityBanner, {
+      now: new Date("2026-07-24T11:00:00+09:00")
+    })
+  );
+  assert.match(bannerBeforeHtml, /次回は12:00〜 C班公演/);
+
+  const bannerLiveHtml = renderToStaticMarkup(
+    createElement(PriorityBanner, {
+      now: new Date("2026-07-24T12:20:00+09:00")
+    })
+  );
+  assert.match(bannerLiveHtml, /C班ただいま上演中！ 次回15:30〜B班/);
+
+  const bannerLiveOnlyHtml = renderToStaticMarkup(
+    createElement(PriorityBanner, {
+      now: new Date("2026-07-24T19:20:00+09:00")
+    })
+  );
+  assert.match(bannerLiveOnlyHtml, /ただいま #ゆかJET A班 上演中！/);
+
+  const bannerEndedHtml = renderToStaticMarkup(
+    createElement(PriorityBanner, {
+      now: new Date("2026-07-24T21:00:00+09:00")
+    })
+  );
+  assert.match(bannerEndedHtml, /本日の #ゆかJET 公演は終了しました/);
 
   console.log("gojet-status tests OK");
 } finally {

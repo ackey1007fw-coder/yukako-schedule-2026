@@ -4,7 +4,7 @@ import { profile } from "../data/profile";
 import { siteUpdates } from "../data/siteUpdates";
 import { specialStream, streamSchedule } from "../data/streamSchedule";
 import { gojetStreamingTicketUrl, gojetTicketUrl } from "../data/gojetTimetable";
-import { getGojetStatus } from "../lib/gojetStatus";
+import { getGojetStatus, summarizeGojetDayLiveStatus } from "../lib/gojetStatus";
 import { trackPortalEvent } from "../lib/analytics";
 
 type Announcement = {
@@ -34,12 +34,21 @@ const todayTimeFromNextShow = (nextShow?: string) => {
     : null;
 };
 
-export function PriorityBanner() {
+type PriorityBannerProps = {
+  now?: Date;
+};
+
+export function PriorityBanner({ now: nowProp }: PriorityBannerProps = {}) {
   const [isLive, setIsLive] = useState(false);
   const [nextShow, setNextShow] = useState<string>();
-  const [now, setNow] = useState(() => new Date());
+  const [now, setNow] = useState(() => nowProp ?? new Date());
 
   useEffect(() => {
+    if (nowProp) {
+      setNow(nowProp);
+      return undefined;
+    }
+
     let active = true;
     const check = () => {
       setNow(new Date());
@@ -52,7 +61,7 @@ export function PriorityBanner() {
     check();
     const timer = window.setInterval(check, POLL_MS);
     return () => { active = false; window.clearInterval(timer); };
-  }, []);
+  }, [nowProp]);
 
   const announcements = useMemo<Announcement[]>(() => {
     const today = todayKey(now);
@@ -63,7 +72,27 @@ export function PriorityBanner() {
     const todayTime = scheduled?.time ?? todayTimeFromNextShow(nextShow);
     const gojet = getGojetStatus(now);
     const items: Announcement[] = [];
-    if (gojet.phase === "today") items.push({ id: "gojet-today", label: "本日の #ゆかJET", text: `${gojet.day.performances.map((show) => `${show.time}〜 ${show.team}`).join(" / ")}・残り${gojet.remainingPerformances}公演`, href: gojetTicketUrl, tone: "bg-gradient-to-r from-[#fbeef0] to-[#faf3e2] text-ink", Icon: PartyPopper, tracking: "ticket_click" });
+    if (gojet.phase === "today") {
+      // 「上演中」「次の公演」は開演時刻と想定上演時間（durationMinutes）から算出した
+      // 目安であり、外部から実際の進行状況を取得しているわけではない。
+      const daySummary = summarizeGojetDayLiveStatus(now, gojet.day);
+      const gojetText = daySummary.live
+        ? daySummary.next
+          ? `${daySummary.live.team}ただいま上演中！ 次回${daySummary.next.time}〜${daySummary.next.team}`
+          : `ただいま #ゆかJET ${daySummary.live.team} 上演中！`
+        : daySummary.next
+          ? `次回は${daySummary.next.time}〜 ${daySummary.next.team}公演`
+          : "本日の #ゆかJET 公演は終了しました";
+      items.push({
+        id: "gojet-today",
+        label: "本日の #ゆかJET",
+        text: gojetText,
+        href: gojetTicketUrl,
+        tone: "bg-gradient-to-r from-[#fbeef0] to-[#faf3e2] text-ink",
+        Icon: PartyPopper,
+        tracking: "ticket_click"
+      });
+    }
     if (isLive) items.push({ id: "live", label: "配信中", text: "ただいまSHOWROOMで配信中。いますぐ見る", href: profile.showroom.url, tone: "bg-[#e0245e] text-white", Icon: Radio, tracking: "stream_click" });
     if (todayTime) items.push({ id: "stream", label: "今日の配信", text: `${todayTime}〜 予定${scheduled?.note ? `・${scheduled.note}` : ""}`, href: profile.showroom.url, tone: "bg-[#fbeef0] text-ink", Icon: CalendarClock, tracking: "stream_click" });
     if (gojet.phase === "before") items.push({ id: "gojet-countdown", label: "#ゆかJET", text: `公演まであと${gojet.daysLeft}日・チケット／配信を確認`, href: gojetTicketUrl, tone: "bg-gradient-to-r from-[#fbeef0] to-[#faf3e2] text-ink", Icon: Ticket, tracking: "ticket_click" });
@@ -99,7 +128,7 @@ export function PriorityBanner() {
       >
         <item.Icon className="h-4 w-4 shrink-0" aria-hidden="true" />
         <span className="shrink-0 text-xs font-black uppercase tracking-wide">{item.label}</span>
-        <span className="min-w-0 flex-1 truncate font-bold">{item.text}</span>
+        <span className="min-w-0 flex-1 font-bold leading-snug">{item.text}</span>
         <ArrowUpRight className="h-4 w-4 shrink-0" aria-hidden="true" />
       </a>
     );
