@@ -129,6 +129,43 @@ export type GojetTeamUpdate = {
 
 export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
   {
+    date: "2026.7.24 09:45",
+    label: "吉井優花子さん本人（@mokoopy）",
+    title: "7月24日は早紀役C班初日＆JET役B班に出演！",
+    body:
+      "7月24日の「#ゆかJET」は、吉井優花子さんが二つの役で舞台に立つ特別な一日です。\n\n12時からは、早紀役を務めるC班が初日を迎えます。続く15時30分からは、主役のJETを演じるB班に出演。19時からはA班の公演が行われます。\n\n当日の飛び入り観劇も歓迎されており、来場者へ向けて「ペンライト振ってね〜♪」と明るく呼びかけています。\n\n会場では、ブロマイドやカード＆ステッカーなどの物販も用意されています。観劇とあわせて、舞台の思い出となるグッズにも注目です。",
+    caption:
+      "#ゆかJET\n\n＼24日(金)／\n12:00〜早紀役C班💛(初日✨)\n15:30〜JET役B班💙\n19:00〜A班❤️\n\n飛び入り観劇も大歓迎です‼️\n皆様のご予約・応援、お待ちしています🙇‍♀️\n\nブロマイドとカード&ステッカー！！\nGETして帰ってね〜🫶✨",
+    postUrl: "https://x.com/mokoopy/status/2080454389677039811",
+    homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+    ctaLabel: "Xで元の投稿を見る",
+    homepageLabel: "公演予約・応援案内を見る",
+    roleTags: [
+      "#ゆかJET",
+      "公演情報",
+      "当日案内",
+      "出演情報",
+      "物販情報",
+      "C班初日",
+      "早紀役とJET役の二役",
+      "飛び入り歓迎",
+      "ペンライト応援"
+    ],
+    photo: {
+      src: "/images/yukajet/2026-07-24-yukako-penlight.jpg",
+      alt: "ピンクの衣装で黄色と青色のペンライトを持ち、7月24日のゆかJET公演を案内する吉井優花子さん"
+    },
+    schedule: {
+      heading: "公演スケジュール（2026年7月24日）",
+      note: "会場：Air studio 両国。優花子さんはC班で早紀役、B班でJET役を務めます。",
+      items: [
+        { time: "12:00〜", label: "C班（早紀役・初日）" },
+        { time: "15:30〜", label: "B班（JET役）" },
+        { time: "19:00〜", label: "A班" }
+      ]
+    }
+  },
+  {
     date: "2026.7.24 00:55",
     label: "吉井優花子さん本人（@mokoopy）",
     title: "JET役初日を終えて｜もっと多くの方に届けたい #ゆかJET",
