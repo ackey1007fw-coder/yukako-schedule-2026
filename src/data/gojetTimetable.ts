@@ -7,8 +7,9 @@ export type GojetPerformance = {
   durationMinutes: number;
 };
 
-// 上演時間の目安（分）。将来の変更に備え、公演ごとに個別設定できるようにしている。
-const DEFAULT_PERFORMANCE_DURATION_MINUTES = 90;
+// 上演時間の目安（分）。公式から「1時間20分」→「1時間40分」（カーテンコール込み）へ
+// 変更が案内されたことを反映。将来の変更に備え、公演ごとに個別設定できるようにしている。
+const DEFAULT_PERFORMANCE_DURATION_MINUTES = 100;
 
 export type GojetTimetableDay = {
   /** YYYY-MM-DD（JST） */

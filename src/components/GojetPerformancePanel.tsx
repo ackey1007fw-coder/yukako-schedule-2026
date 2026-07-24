@@ -218,7 +218,7 @@ export function GojetPerformancePanel({ now }: GojetPerformancePanelProps) {
               ))}
             </div>
             <p className="mt-2 text-[11px] font-semibold text-ink/40">
-              上演ステータスは公演時間をもとにした目安表示です
+              公演時間をもとにした目安表示です
             </p>
             {status.day.note && (
               <p className="mt-3 max-w-2xl text-xs font-semibold leading-5 text-ink/65">
