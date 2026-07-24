@@ -22,7 +22,7 @@ export function ArchiveInstagramEmbedBlock({ embed }: ArchiveInstagramEmbedBlock
       <p className="mt-1 text-xs font-bold text-ink/50">{embed.attribution}</p>
       <p className="mt-4 leading-8 text-ink/75">{embed.caption}</p>
 
-      <div className="mt-6">
+      <div className="-mx-5 mt-6 sm:mx-0">
         <InstagramReelEmbed url={embed.url} label={embed.label} />
       </div>
     </div>
