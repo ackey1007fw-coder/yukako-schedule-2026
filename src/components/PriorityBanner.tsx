@@ -34,6 +34,18 @@ const todayTimeFromNextShow = (nextShow?: string) => {
     : null;
 };
 
+const todayTimeFromNextShowAt = (nextShowAt: string | undefined, now: Date) => {
+  if (!nextShowAt) return null;
+  const start = new Date(nextShowAt);
+  if (Number.isNaN(start.getTime()) || todayKey(start) !== todayKey(now)) return null;
+  return new Intl.DateTimeFormat("ja-JP", {
+    timeZone: "Asia/Tokyo",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false
+  }).format(start);
+};
+
 type PriorityBannerProps = {
   now?: Date;
 };
@@ -41,6 +53,7 @@ type PriorityBannerProps = {
 export function PriorityBanner({ now: nowProp }: PriorityBannerProps = {}) {
   const [isLive, setIsLive] = useState(false);
   const [nextShow, setNextShow] = useState<string>();
+  const [nextShowAt, setNextShowAt] = useState<string>();
   const [now, setNow] = useState(() => nowProp ?? new Date());
 
   useEffect(() => {
@@ -52,10 +65,14 @@ export function PriorityBanner({ now: nowProp }: PriorityBannerProps = {}) {
     let active = true;
     const check = () => {
       setNow(new Date());
-      return fetch("/api/showroom")
+      return fetch(`/api/showroom?ts=${Date.now()}`, { cache: "no-store" })
         .then((response) => response.ok ? response.json() : null)
-        .then((data: { isLive?: boolean; nextShow?: string } | null) => {
-          if (active && data) { setIsLive(Boolean(data.isLive)); setNextShow(data.nextShow); }
+        .then((data: { isLive?: boolean; nextShow?: string; nextShowAt?: string } | null) => {
+          if (active && data) {
+            setIsLive(Boolean(data.isLive));
+            setNextShow(data.nextShow);
+            setNextShowAt(data.nextShowAt);
+          }
         }).catch(() => undefined);
     };
     check();
@@ -69,7 +86,9 @@ export function PriorityBanner({ now: nowProp }: PriorityBannerProps = {}) {
       ...streamSchedule.filter((slot) => slot.date === today),
       ...(specialStream?.date === today ? [{ date: specialStream.date, time: specialStream.time, note: specialStream.title }] : [])
     ].sort((a, b) => a.time.localeCompare(b.time))[0];
-    const todayTime = scheduled?.time ?? todayTimeFromNextShow(nextShow);
+    const todayTime = scheduled?.time
+      ?? todayTimeFromNextShowAt(nextShowAt, now)
+      ?? todayTimeFromNextShow(nextShow);
     const gojet = getGojetStatus(now);
     const items: Announcement[] = [];
     if (gojet.phase === "today") {
@@ -111,7 +130,7 @@ export function PriorityBanner({ now: nowProp }: PriorityBannerProps = {}) {
       });
     }
     return items;
-  }, [isLive, nextShow, now]);
+  }, [isLive, nextShow, nextShowAt, now]);
 
   const primary = announcements[0];
   if (!primary) return null;
