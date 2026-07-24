@@ -12,6 +12,7 @@ type ShowroomApiData = {
   roomLevel?: string;
   showRank?: string;
   nextShow?: string;
+  nextShowAt?: string;
   coverImage?: string;
   isLive?: boolean;
   updatedAt?: string;
@@ -29,7 +30,7 @@ export function ShowroomSection() {
 
   useEffect(() => {
     let active = true;
-    fetch("/api/showroom")
+    fetch(`/api/showroom?ts=${Date.now()}`, { cache: "no-store" })
       .then((response) => (response.ok ? response.json() : null))
       .then((data: ShowroomApiData | null) => {
         if (active && data) setShowroomData(data);
