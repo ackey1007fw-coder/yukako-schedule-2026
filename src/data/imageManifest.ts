@@ -322,6 +322,8 @@ export const imageManifest = {
   "/images/yukajet/2026-07-24-kurume-maimu-cast.jpg": {"width":2048,"height":1152,"widths":[360,480,720,960,1280,1600,2048]},
   "/images/yukajet/2026-07-24-x-news-summary.jpg": {"width":1290,"height":2796,"widths":[360,480,720,960,1280,1290]},
   "/images/yukajet/2026-07-24-x-todays-news-screen.jpg": {"width":1290,"height":2796,"widths":[360,480,720,960,1280,1290]},
+  "/images/yukajet/2026-07-24-yukako-cast-group-01.jpg": {"width":1629,"height":2048,"widths":[360,480,720,960,1280,1600,1629]},
+  "/images/yukajet/2026-07-24-yukako-cast-group-02.jpg": {"width":2048,"height":1536,"widths":[360,480,720,960,1280,1600,2048]},
   "/images/yukajet/2026-07-24-yukako-jet-opening-cast-selfie.jpg": {"width":2048,"height":1153,"widths":[360,480,720,960,1280,1600,2048]},
   "/images/yukajet/2026-07-24-yukako-jet-opening-goods-sign.jpg": {"width":1536,"height":2048,"widths":[360,480,720,960,1280,1536]},
   "/images/yukajet/2026-07-24-yukako-penlight.jpg": {"width":748,"height":1024,"widths":[360,480,720,748]},

@@ -44,6 +44,8 @@ const OFFICIAL_X_NEWS_20260724_POST_URL =
   "https://x.com/yukako_produce/status/2080313032174174590";
 const PENLIGHT_SCHEDULE_20260724_POST_URL =
   "https://x.com/mokoopy/status/2080454389677039811";
+const YUKAKO_CBAN_DAY1_THANKS_20260724_POST_URL =
+  "https://x.com/mokoopy/status/2080670012420083748";
 const AOKI_ANNA_DAY2_HEART_20260724_POST_URL =
   "https://x.com/anna_aoki0906/status/2080630150077825528";
 const KAE_YUKAJET_DAY2_20260724_POST_URL =
@@ -158,6 +160,9 @@ const officialXNews20260724Update = decoratedSourceUpdates.find(
 const penlightSchedule20260724Update = decoratedSourceUpdates.find(
   (update) => update.postUrl === PENLIGHT_SCHEDULE_20260724_POST_URL
 );
+const yukakoCbanDay1Thanks20260724Update = decoratedSourceUpdates.find(
+  (update) => update.postUrl === YUKAKO_CBAN_DAY1_THANKS_20260724_POST_URL
+);
 const aokiAnnaDay2Heart20260724Update = decoratedSourceUpdates.find(
   (update) => update.postUrl === AOKI_ANNA_DAY2_HEART_20260724_POST_URL
 );
@@ -190,6 +195,7 @@ const remainingSourceUpdates = decoratedSourceUpdates.filter(
     update.postUrl !== AOKI_ANNA_DAY2_HEART_20260724_POST_URL &&
     update.postUrl !== KAE_YUKAJET_DAY2_20260724_POST_URL &&
     update.postUrl !== KURUME_MAIMU_DAY2_20260724_POST_URL &&
+    update.postUrl !== YUKAKO_CBAN_DAY1_THANKS_20260724_POST_URL &&
     update.postUrl !== PENLIGHT_SCHEDULE_20260724_POST_URL &&
     update.postUrl !== YUKAKO_JET_OPENING_GOODS_20260724_POST_URL &&
     update.postUrl !== OFFICIAL_X_NEWS_20260724_POST_URL &&
@@ -266,6 +272,16 @@ const featuredOfficialXNews20260724Update:
   ? {
       ...officialXNews20260724Update,
       anchorId: "gojet-official-x-news-2026-07-24",
+      primaryCta: "post"
+    }
+  : undefined;
+
+const featuredYukakoCbanDay1Thanks20260724Update:
+  | DisplayGojetFeatureUpdate
+  | undefined = yukakoCbanDay1Thanks20260724Update
+  ? {
+      ...yukakoCbanDay1Thanks20260724Update,
+      anchorId: "gojet-yukako-cban-day1-thanks-2026-07-24",
       primaryCta: "post"
     }
   : undefined;
@@ -399,7 +415,7 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
       }
     : undefined;
 
-// 21:24青木杏奈さん → 20:40曽原加絵さん → 19:06来瞳舞夢さんの順で先頭表示する。
+// 21:24青木杏奈さん → 20:40曽原加絵さん → 19:06来瞳舞夢さん → 15:02優花子さん本人の順で先頭表示する。
 const orderedGojetFeatureUpdates: DisplayGojetFeatureUpdate[] = [
   ...(featuredAokiAnnaDay2Heart20260724Update
     ? [featuredAokiAnnaDay2Heart20260724Update]
@@ -409,6 +425,9 @@ const orderedGojetFeatureUpdates: DisplayGojetFeatureUpdate[] = [
     : []),
   ...(featuredKurumeMaimuDay220260724Update
     ? [featuredKurumeMaimuDay220260724Update]
+    : []),
+  ...(featuredYukakoCbanDay1Thanks20260724Update
+    ? [featuredYukakoCbanDay1Thanks20260724Update]
     : []),
   ...(featuredPenlightSchedule20260724Update
     ? [featuredPenlightSchedule20260724Update]
