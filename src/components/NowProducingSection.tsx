@@ -40,7 +40,9 @@ type NowProducingSectionProps = {
   now?: Date;
 };
 
-const INITIAL_VISIBLE_UPDATES = 2;
+// 同じ日の夜に投稿が続くことがあるため、初期表示は3件にして
+// 直近の公演レポートが「一覧を見る」を押さずに読めるようにする。
+const INITIAL_VISIBLE_UPDATES = 3;
 const CLOCK_UPDATE_MS = 60000;
 
 const roles = [
@@ -552,10 +554,11 @@ export function NowProducingSection({ event, now }: NowProducingSectionProps) {
                 </p>
                 <div id="gojet-feature-updates" className="mt-3 grid gap-3">
                   {visibleUpdates.map((update, index) => (
+                    // min-w-0 がないと本文中の長いURLがグリッド列を押し広げ、カードが画面幅を超える。
                     <div
                       id={update.anchorId}
                       key={update.postUrl}
-                      className="scroll-mt-28 border border-champagne/35 bg-white/[0.07] p-3 shadow-paper sm:p-4"
+                      className="min-w-0 scroll-mt-28 border border-champagne/35 bg-white/[0.07] p-3 shadow-paper sm:p-4"
                     >
                       <p className="text-xs font-black uppercase tracking-[0.16em] text-champagne">
                         {index === 0 ? "New" : "Update"} ・ {update.date} ・ {update.label}
@@ -601,7 +604,7 @@ export function NowProducingSection({ event, now }: NowProducingSectionProps) {
                           ))}
                         </div>
                       )}
-                      <p className="mt-3 whitespace-pre-line text-sm leading-6 text-white/72 sm:leading-7">
+                      <p className="mt-3 whitespace-pre-line break-words text-sm leading-6 text-white/72 sm:leading-7">
                         <LinkedBodyText text={update.body} />
                       </p>
                       {update.videoGuide && (
@@ -664,7 +667,7 @@ export function NowProducingSection({ event, now }: NowProducingSectionProps) {
                           <summary className="cursor-pointer text-sm font-bold text-champagne">
                             投稿本文を読む
                           </summary>
-                          <p className="mt-3 whitespace-pre-line text-sm leading-6 text-white/72 sm:leading-7">
+                          <p className="mt-3 whitespace-pre-line break-words text-sm leading-6 text-white/72 sm:leading-7">
                             <LinkedBodyText text={update.caption} />
                           </p>
                         </details>
@@ -700,18 +703,7 @@ export function NowProducingSection({ event, now }: NowProducingSectionProps) {
                         </aside>
                       )}
                       {update.photo && (
-                        <button
-                          type="button"
-                          onClick={() =>
-                            setLightbox({
-                              photos: [update.photo as PromoImage],
-                              index: 0,
-                              label: `${update.title} 画像`
-                            })
-                          }
-                          className="mt-4 block w-full overflow-hidden border border-white/12 bg-black/20"
-                          aria-label={`${update.photo.alt}を拡大表示`}
-                        >
+                        <div className="mt-4 overflow-hidden border border-white/12 bg-black/20">
                           <img
                             {...getResponsiveImageProps(
                               update.photo.src,
@@ -720,9 +712,9 @@ export function NowProducingSection({ event, now }: NowProducingSectionProps) {
                             alt={update.photo.alt}
                             loading="lazy"
                             decoding="async"
-                            className="mx-auto block h-auto max-h-[520px] w-auto max-w-full object-contain object-top"
+                            className="mx-auto block h-auto max-h-[520px] w-auto max-w-full object-contain"
                           />
-                        </button>
+                        </div>
                       )}
                       {update.photos && update.photos.length > 0 && (
                         <div className="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-2">
