@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { ArrowDownRight } from "lucide-react";
 import { ActionStrip } from "./components/ActionStrip";
 import { AkitaRootsSection } from "./components/AkitaRootsSection";
+import { AudienceReportSection } from "./components/AudienceReportSection";
 import { Footer } from "./components/Footer";
 import { GojetCastMessageSection } from "./components/GojetCastMessageSection";
 import { GojetHairUpdateSection } from "./components/GojetHairUpdateSection";
@@ -165,6 +166,9 @@ function App() {
         </SectionReveal>
         <SectionReveal>
           <GojetYellCardSection />
+        </SectionReveal>
+        <SectionReveal>
+          <AudienceReportSection />
         </SectionReveal>
 
         {/* 3. 行動導線：予定を確認してから、応援・SNSへ進む */}
