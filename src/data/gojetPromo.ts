@@ -200,9 +200,7 @@ export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
     label: "来瞳舞夢さん（@maimu_htk）・B班マスター役／C班美月役",
     title: "C班初日＆B班2日目ありがとうございました！｜来瞳舞夢さん",
     body:
-      "C班初日とB班2日目が終演。来瞳舞夢さんが感謝を伝えるとともに、翌日以降の公演やチケット、各種応援メニューを案内しました。\n\n来瞳舞夢さん：B班マスター役／C班美月役。\n吉井優花子さん：B班JET役／C班早紀役。\n\n投稿時点では公式HPに不具合があったため、直接リンクが案内されました。\n\n【来場チケット】\nhttps://torioki.confetti-web.com/form/4827\n\n【配信チケット】\n申込締切：2026年8月3日／視聴期限：2026年8月10日\nhttps://docs.google.com/forms/d/e/1FAIpQLScsEmjjECWOVKzYuJ_93BRlS1rI8cbzcPFBb0f4mVqWNlLnuQ/viewform\n\n【各種応援メニュー】（一部は7月25日 23:59締切）\n・エールカード https://airstudio.base.ec/items/148071826\n・メッセージ動画 https://airstudio.base.ec/items/148072028\n・応援チケット（チェキ特典付き） https://airstudio.base.ec/items/148071805",
-    caption:
-      "ハロー💋➰💕\n#ゆかJET\n本日はC班初日とB班2日目\nありがとうございました‼️✨\n\n明日もご来場お待ちしてます！\nHPバグってるらしいので\nチケットのご購入は下記からどうぞ⬇️",
+      "来瞳舞夢さんが、7月24日に行われたC班初日とB班2日目の終演を報告しました。\n\n来場した皆さんへの感謝とともに、翌日以降の公演への来場も呼びかけています。\n\n来瞳舞夢さんは、B班ではマスター役、C班では美月役を担当しています。吉井優花子さんは、B班ではJET役、C班では早紀役を務めています。\n\n投稿時点では公演公式HPに不具合があったため、来瞳舞夢さんがチケット購入用の直接リンクを案内しました。\n\n各種応援メニューの詳細は元のX投稿からご確認ください。\n\n【来場チケット】\nhttps://torioki.confetti-web.com/form/4827\n\n【元投稿】\nhttps://x.com/maimu_htk/status/2080595354442137931",
     postUrl: "https://x.com/maimu_htk/status/2080595354442137931",
     homepageUrl: "https://torioki.confetti-web.com/form/4827",
     ctaLabel: "Xで元の投稿を見る",
@@ -212,26 +210,12 @@ export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
       "公演レポート",
       "キャスト投稿",
       "チケット案内",
-      "応援情報",
       "B班：マスター",
       "C班：美月"
     ],
     photo: {
       src: "/images/yukajet/2026-07-24-kurume-maimu-cast.jpg",
       alt: "赤いダイナー風の舞台セットで、レトロなマイクを囲んでポーズを取る#ゆかJETの女性キャスト3名"
-    },
-    quotedPost: {
-      author: "来瞳舞夢",
-      handle: "@maimu_htk",
-      body:
-        "7/23〜27『GO,JET!GO!GO! vol.1 Premium』Air Studio 両国。B班マスター役／C班美月役の出演日程と、来場・配信チケット、エールカード・メッセージ動画・応援チケットの案内。",
-      url: "https://x.com/maimu_htk/status/2075599809675964695",
-      urlLabel: "7月10日のチケット案内投稿を見る"
-    },
-    deadline: {
-      at: "2026-07-25T23:59:59+09:00",
-      beforeText: "まもなく締切｜エールカードなど各種応援メニューは7月25日 23:59まで",
-      afterText: "受付終了｜エールカードなど各種応援メニューの申込は終了しました"
     }
   },
   {
