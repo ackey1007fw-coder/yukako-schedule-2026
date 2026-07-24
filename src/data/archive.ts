@@ -97,6 +97,11 @@ export type ArchiveItem = {
   images: ArchiveImage[];
   /** images[1] 以降をリード文の直後に掲載する記事のみ指定 */
   showAdditionalImages?: boolean;
+  /**
+   * 追加画像のレイアウト。未指定または "stacked" は従来の縦一列。
+   * "responsive-grid" はスマホ1列・640px以上で2列のフォトギャラリー。
+   */
+  galleryLayout?: "stacked" | "responsive-grid";
   /** OGP/SNSカードに使う画像（images内のsrcを指定）。省略時は images[0] */
   ogImage?: string;
   /** 専用OG画像を使う場合の具体的な代替テキスト。省略時は同じsrcのimages項目かimages[0]を使う */
@@ -336,6 +341,10 @@ export const archiveItems: ArchiveItem[] = [
       {
         label: "大会の様子を公式YouTubeで見る",
         url: "https://www.youtube.com/live/SaX-uoZU9Ys?si=UmNYVWWNzgXTyAXE"
+      },
+      {
+        label: "MSCベリッシマで過ごした7泊8日の船旅を見る",
+        url: "/archive/2026-06-28-msc-bellissima-cruise"
       }
     ],
     award: {
@@ -858,6 +867,175 @@ export const archiveItems: ArchiveItem[] = [
       "#ゆかJETの共演者@eri_1408_さんのInstagramストーリーをアーカイブ。『早紀』役3人の稽古場3ショットとB班日程、応援コンテンツを紹介します。",
     datePublished: "2026-07-21",
     dateModified: "2026-07-21"
+  },
+  {
+    slug: "2026-06-28-msc-bellissima-cruise",
+    title: "母へ贈った、海の上の8日間――MSCベリッシマで巡る鹿児島・済州島",
+    shortTitle: "MSCベリッシマで過ごした7泊8日の船旅",
+    attributionLabel: "PR投稿",
+    subtitle:
+      "母の日旅行として乗船した豪華客船。船内、鹿児島、済州島、そして仲間との時間を、Instagramに投稿された20枚の写真でたどります。",
+    journeyMark: "🛳️ 旅の記録：2026.06.19｜7泊8日",
+    date: "2026.06.28",
+    year: "2026",
+    platform: "Instagram",
+    category: "オフショット",
+    tags: [
+      "MSCベリッシマ",
+      "MSCクルーズ",
+      "クルーズ旅行",
+      "女子旅クルーズ",
+      "母の日旅行",
+      "鹿児島",
+      "済州島",
+      "ミスグランドジャパン",
+      "オフショット",
+      "PR",
+      "吉井優花子"
+    ],
+    summary:
+      "吉井優花子さんが、お母様への母の日旅行として豪華客船「MSCベリッシマ」に乗船。鹿児島と済州島への寄港、船内アクティビティや食事、ミス・グランド・ジャパン同期との時間を、Instagram投稿の全20枚で振り返るフォトストーリーです。",
+    lead: [
+      "2026年6月、吉井優花子さんは、お母様への「母の日旅行」として豪華客船MSCベリッシマの7泊8日クルーズへ出発しました。",
+      "船内の充実した施設やアクティビティ、鹿児島と済州島で過ごした時間、そして偶然同じ日程となったミス・グランド・ジャパン同期との再会。あっという間に過ぎた8日間が、20枚の写真に残されています。",
+      "この記事では、本人がInstagramへ投稿した写真をすべて掲載し、海の上で生まれた思い出を一つのフォトストーリーとして記録します。"
+    ],
+    sections: [
+      {
+        heading: "母の日旅行として贈った時間",
+        body: [
+          "吉井優花子さんが今回の船旅へ招待したのは、お母様でした。日頃の感謝を込めた「母の日旅行」として選んだ7泊8日のクルーズ。投稿では、お母様が喜んでくれたことへの安堵と感謝が綴られています。"
+        ]
+      },
+      {
+        heading: "予想を超えた船内体験",
+        body: [
+          "MSCベリッシマの船内には、レストランやショー、プール、ウォータースライダー、スポーツ施設など、多彩な過ごし方が用意されています。吉井さん自身も「船内の充実度が予想を遥かに超えていた」と振り返りました。"
+        ]
+      },
+      {
+        heading: "鹿児島と済州島へ",
+        body: [
+          "船の中だけではなく、寄港地である鹿児島と済州島にも思い出が生まれました。青い海や空、夕景、現地の風景や食事まで、クルーズならではの時間が写真に収められています。"
+        ]
+      },
+      {
+        heading: "仲間と楽しんだ8日間",
+        body: [
+          "偶然にも、ミス・グランド・ジャパン同期のえりかさん、みおさんも同じ日程で乗船。家族との旅行に加え、仲間との再会と交流も重なった、特別な8日間となりました。"
+        ]
+      }
+    ],
+    quotes: [
+      {
+        text: "船内の充実度が予想を遥かに超えていました",
+        afterSectionIndex: 1
+      }
+    ],
+    images: [
+      {
+        src: "/images/archive/msc-bellissima-2026/01-captain-hat-deck.jpg",
+        alt: "船長帽をかぶりデッキの手すりにもたれ、MSCの白いジャケットを肩にかけた吉井優花子さん"
+      },
+      {
+        src: "/images/archive/msc-bellissima-2026/02-crystal-stairs-dress.jpg",
+        alt: "船内階段で柄ドレス姿を見せ、振り返るように立つ吉井優花子さん"
+      },
+      {
+        src: "/images/archive/msc-bellissima-2026/03-atrium-overview.jpg",
+        alt: "MSCベリッシマの華やかな吹き抜けとクリスタルの階段を見下ろす船内アトリウム"
+      },
+      {
+        src: "/images/archive/msc-bellissima-2026/04-ice-cream-dessert.jpg",
+        alt: "船内で提供されたブラックベリーとミントが乗ったアイスクリームデザート"
+      },
+      {
+        src: "/images/archive/msc-bellissima-2026/05-lobster-dinner.jpg",
+        alt: "船内レストランでロブスター料理の皿を差し出す吉井優花子さん"
+      },
+      {
+        src: "/images/archive/msc-bellissima-2026/06-whale-ceiling-galleria.jpg",
+        alt: "MSCベリッシマ船内のクジラを描いた天井装飾が輝くガレリア"
+      },
+      {
+        src: "/images/archive/msc-bellissima-2026/07-with-mother-stairs.jpg",
+        alt: "船内のクリスタル階段でお母様と寄り添い、感謝のメッセージが添えられた写真"
+      },
+      {
+        src: "/images/archive/msc-bellissima-2026/08-stage-singing.jpg",
+        alt: "船内ステージでマイクを持ち歌唱パフォーマンスを楽しむ様子"
+      },
+      {
+        src: "/images/archive/msc-bellissima-2026/09-mgj-friends-hearts.jpg",
+        alt: "船内ディナーでミス・グランド・ジャパン同期メンバーと手でハートを作る集合写真"
+      },
+      {
+        src: "/images/archive/msc-bellissima-2026/10-breakfast-spread.jpg",
+        alt: "MSCベリッシマ船内で並ぶパンケーキやサーモンなどの朝食料理"
+      },
+      {
+        src: "/images/archive/msc-bellissima-2026/11-jeju-yellow-drink.jpg",
+        alt: "済州島で黄色いキャラクター像の横でドリンクを楽しむ吉井優花子さん"
+      },
+      {
+        src: "/images/archive/msc-bellissima-2026/12-dinner-toast.jpg",
+        alt: "船内レストランでグラスを合わせ乾杯する旅行参加者"
+      },
+      {
+        src: "/images/archive/msc-bellissima-2026/13-character-parade.jpg",
+        alt: "船内アーケードを進むキャラクターパレードの様子"
+      },
+      {
+        src: "/images/archive/msc-bellissima-2026/14-pool-deck-sculpture.jpg",
+        alt: "青空と海を背景にした船上プールデッキのオブジェ"
+      },
+      {
+        src: "/images/archive/msc-bellissima-2026/15-basketball-court.jpg",
+        alt: "船内コートでバスケットボールを持つ吉井優花子さん"
+      },
+      {
+        src: "/images/archive/msc-bellissima-2026/16-red-risotto.jpg",
+        alt: "船内レストランで提供された赤いリゾット"
+      },
+      {
+        src: "/images/archive/msc-bellissima-2026/17-water-slide-float.jpg",
+        alt: "ウォータースライダーと青い浮き輪の横に立つ吉井優花子さん"
+      },
+      {
+        src: "/images/archive/msc-bellissima-2026/18-night-pool-party.jpg",
+        alt: "夜のプールデッキで開催された船内イベント"
+      },
+      {
+        src: "/images/archive/msc-bellissima-2026/19-gym-bike.jpg",
+        alt: "MSCベリッシマ船内のジムでフィットネスバイクを楽しむ吉井優花子さん"
+      },
+      {
+        src: "/images/archive/msc-bellissima-2026/20-sunset-airplane.jpg",
+        alt: "船上から見た海に沈む夕日と上空を飛ぶ飛行機"
+      }
+    ],
+    showAdditionalImages: true,
+    galleryLayout: "responsive-grid",
+    ogImage: "/images/archive/msc-bellissima-2026/01-captain-hat-deck.jpg",
+    ogImageAlt:
+      "船長帽をかぶりデッキに立つ吉井優花子さん。MSCベリッシマ7泊8日の船旅アーカイブのメイン写真",
+    sourceUrl: {
+      label: "Instagramで元の投稿を見る",
+      url: "https://www.instagram.com/p/DZxVzBgmSFx/"
+    },
+    sourceNote:
+      "この記事は、吉井優花子さん本人がInstagramへ投稿した写真と文章をもとに、ファンが活動記録として編集したものです。元投稿には「#PR」の表記があります。旅行商品やサービスの最新情報・条件については、MSCクルーズの公式情報をご確認ください。",
+    relatedUrls: [
+      {
+        label: "MISS GRAND JAPANでの歩みを見る",
+        url: "/archive/miss-grand-japan-2025-miss-peace"
+      }
+    ],
+    seoTitle: "母へ贈った海の上の8日間｜吉井優花子 MSCベリッシマ船旅",
+    seoDescription:
+      "吉井優花子さんが母の日旅行として乗船したMSCベリッシマ7泊8日の船旅。鹿児島・済州島、船内体験、仲間との時間をInstagram投稿の全20枚で紹介します。",
+    datePublished: "2026-06-28",
+    dateModified: "2026-07-24"
   }
 ];
 
