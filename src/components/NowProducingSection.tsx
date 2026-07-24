@@ -75,7 +75,9 @@ function LinkedBodyText({ text }: { text: string }) {
             href={part}
             target="_blank"
             rel="noopener noreferrer"
-            className="font-semibold text-champagne underline underline-offset-4 transition hover:text-white"
+            // 長いURLは折り返せないとカード幅（＝グリッド列幅）を押し広げ、
+            // モバイルで一覧全体が横にはみ出して見切れる。どこでも折り返せるようにする。
+            className="break-all font-semibold text-champagne underline underline-offset-4 transition hover:text-white"
           >
             {part}
           </a>
