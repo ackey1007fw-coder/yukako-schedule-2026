@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { ArrowLeft, ExternalLink, Share2, Trophy } from "lucide-react";
 import { SiteHeader } from "../components/SiteHeader";
 import { Footer } from "../components/Footer";
+import { ArchiveInstagramEmbedBlock } from "../components/ArchiveInstagramEmbedBlock";
 import { ArchivePhotoFrame } from "../components/ArchivePhotoFrame";
 import { ArchiveVideoBlock } from "../components/ArchiveVideoBlock";
 import { ScrollToTop } from "../components/ScrollToTop";
@@ -238,6 +239,8 @@ export function ArchiveDetailPage({ slug }: ArchiveDetailPageProps) {
             {item.video && item.videoAfterSectionIndex === undefined && (
               <ArchiveVideoBlock video={item.video} />
             )}
+
+            {item.relatedEmbed && <ArchiveInstagramEmbedBlock embed={item.relatedEmbed} />}
 
             <div className="mt-12 border-t border-rosefog/20 pt-8">
               <p className="text-xs font-bold uppercase tracking-[0.14em] text-ink/45">

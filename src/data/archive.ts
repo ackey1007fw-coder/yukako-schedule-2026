@@ -41,6 +41,19 @@ export type ArchiveSection = {
   body: string[];
 };
 
+export type ArchiveInstagramEmbed = {
+  url: string;
+  heading: string;
+  /** 表示用の日付（例: 2026.06.28） */
+  dateLabel: string;
+  /** JSON-LD等で使うISO日付 */
+  datePublished: string;
+  attribution: string;
+  caption: string;
+  /** blockquote内フォールバックリンクの文言 */
+  label: string;
+};
+
 export type ArchiveQuote = {
   text: string;
   /** このインデックス（0始まり）の sections の直後に表示。省略時はリード文の直後 */
@@ -91,6 +104,8 @@ export type ArchiveItem = {
   video?: ArchiveVideo;
   /** このインデックス（0始まり）の sections の直後に動画を表示。省略時は本文の末尾 */
   videoAfterSectionIndex?: number;
+  /** 本編の後・元投稿リンクの前に添える関連Instagram投稿の公式embed（任意） */
+  relatedEmbed?: ArchiveInstagramEmbed;
   sourceUrl: ArchiveLink;
   /** 元投稿ボタン直前の案内文（任意） */
   sourceNote?: string;
@@ -304,6 +319,15 @@ export const archiveItems: ArchiveItem[] = [
       fallbackUrl: "https://www.instagram.com/p/DOd2DpckhV0/?igsh=eGowMDQwMTE5eDU0"
     },
     videoAfterSectionIndex: 4,
+    relatedEmbed: {
+      url: "https://www.instagram.com/reel/DaIVlx2BmA5/",
+      heading: "MSCベリッシマ 女子旅クルーズ（PR）",
+      dateLabel: "2026.06.28",
+      datePublished: "2026-06-28",
+      attribution: "吉井優花子さん本人アカウントより",
+      caption: "MSCベリッシマでのクルーズの様子。",
+      label: "吉井優花子さん Instagramリール投稿"
+    },
     sourceUrl: {
       label: "Instagramで本人の投稿を読む",
       url: "https://www.instagram.com/p/DOd2DpckhV0/?igsh=eGowMDQwMTE5eDU0"
@@ -325,7 +349,7 @@ export const archiveItems: ArchiveItem[] = [
     seoDescription:
       "吉井優花子さんがMISS GRAND JAPAN 2025で受賞したMISS PEACE賞。仲間への思いやりと「誰もが安心して輝ける社会」への信念が認められた挑戦を、写真と動画で振り返ります。",
     datePublished: "2025-09-11",
-    dateModified: "2026-07-19"
+    dateModified: "2026-07-24"
   },
   {
     slug: "2022-10-01-akita-to-tokyo",
