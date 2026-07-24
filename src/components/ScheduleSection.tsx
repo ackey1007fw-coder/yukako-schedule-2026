@@ -153,7 +153,7 @@ export function ScheduleSection({
   );
 
   return (
-    <section id="schedule" className="scroll-mt-24 bg-white py-16 sm:py-24">
+    <section id="schedule" className="scroll-mt-32 bg-white py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <ActHeader
           act={2}
@@ -180,7 +180,7 @@ export function ScheduleSection({
             </div>
             <div className="grid gap-5">
               {featuredEvents.map((event) => (
-                <div key={event.id} id={`event-${event.id}`} className="scroll-mt-24">
+                <div key={event.id} id={`event-${event.id}`} className="scroll-mt-32">
                   <EventCard event={event} isNext={event.id === nextId} />
                 </div>
               ))}
@@ -281,7 +281,7 @@ export function ScheduleSection({
                   <div
                     key={event.id}
                     id={featuredEventIds.has(event.id) ? undefined : `event-${event.id}`}
-                    className="scroll-mt-24"
+                    className="scroll-mt-32"
                   >
                     <EventCard
                       event={event}

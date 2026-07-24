@@ -15,7 +15,7 @@ const featuredPhoto = {
 
 export function RyomaKunSection() {
   return (
-    <section id="ryoma-kun" className="scroll-mt-24 bg-white py-16 sm:py-24">
+    <section id="ryoma-kun" className="scroll-mt-32 bg-white py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-8 lg:grid-cols-[0.88fr_1.12fr] lg:items-start">
           <div>

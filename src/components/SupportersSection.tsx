@@ -10,7 +10,7 @@ export function SupportersSection() {
   const hashtagUrl = "https://x.com/hashtag/%E3%82%86%E3%81%8BJET";
 
   return (
-    <section id="support" className="scroll-mt-24 bg-white py-16 sm:py-24">
+    <section id="support" className="scroll-mt-32 bg-white py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeader
           kicker="Support Menu"

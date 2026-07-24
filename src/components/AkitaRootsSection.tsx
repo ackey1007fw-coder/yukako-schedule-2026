@@ -27,7 +27,7 @@ export function AkitaRootsSection() {
   return (
     <section
       id="akita-roots"
-      className="scroll-mt-24 border-t border-champagne/20 bg-white py-14 sm:py-20"
+      className="scroll-mt-32 border-t border-champagne/20 bg-white py-14 sm:py-20"
     >
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <div className="mb-8 flex items-center gap-3">

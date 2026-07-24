@@ -191,7 +191,7 @@ function VenueAccess({
         <MapPin className="h-4 w-4 shrink-0" aria-hidden="true" />
         会場アクセス
       </p>
-      <p className="mt-2 text-sm font-black leading-6 text-white">
+      <p className="mt-2 break-words text-sm font-black leading-6 text-white [overflow-wrap:anywhere]">
         {venue.name}
         {venue.floorNote && (
           <span className="ml-2 inline-flex items-center border border-champagne/40 bg-champagne/10 px-2 py-0.5 align-middle text-[11px] font-black text-champagne">
@@ -425,7 +425,7 @@ export function NowProducingSection({ event, now }: NowProducingSectionProps) {
 
   if (!event) {
     return (
-      <section id="next" className="scroll-mt-24 bg-ink py-16 sm:py-24">
+      <section id="next" className="scroll-mt-32 bg-ink py-16 sm:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <ActHeader
             act={1}
@@ -444,7 +444,7 @@ export function NowProducingSection({ event, now }: NowProducingSectionProps) {
   const infoLinks = event.links.filter((link) => link.kind === "info");
 
   return (
-    <section id="next" className="scroll-mt-24 bg-ink py-8 sm:py-24">
+    <section id="next" className="scroll-mt-32 bg-ink py-8 sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <ActHeader
           act={1}
@@ -457,7 +457,7 @@ export function NowProducingSection({ event, now }: NowProducingSectionProps) {
         <article className="yukako-billboard border border-champagne/30">
           <span className="yukako-billboard-spotlight" aria-hidden="true" />
           <div className="relative z-10 grid gap-6 p-4 sm:gap-8 sm:p-10 lg:grid-cols-[0.86fr_1.14fr] lg:p-14">
-            <div className="relative overflow-hidden border border-champagne/40 bg-black/20">
+            <div className="relative min-w-0 overflow-hidden border border-champagne/40 bg-black/20">
               {event.image ? (
                 <img
                   {...getResponsiveImageProps(
@@ -478,9 +478,9 @@ export function NowProducingSection({ event, now }: NowProducingSectionProps) {
               )}
             </div>
 
-            <div className="flex flex-col justify-between text-white">
+            <div className="flex min-w-0 flex-col justify-between text-white">
               <div>
-                <h3 className="font-display text-3xl leading-tight sm:text-4xl">
+                <h3 className="break-words font-display text-3xl leading-tight [overflow-wrap:anywhere] sm:text-4xl">
                   {event.title}
                 </h3>
                 <p className="mt-4 flex items-center gap-2 text-sm font-bold text-champagne">
@@ -509,7 +509,7 @@ export function NowProducingSection({ event, now }: NowProducingSectionProps) {
                 {gojetOriginUpdate && (
                   <aside
                     id="gojet-produce-announce-2026-06-11"
-                    className="mt-5 scroll-mt-28 border border-champagne/45 bg-champagne/10 p-3 shadow-paper sm:mt-6 sm:p-4"
+                    className="mt-5 scroll-mt-32 border border-champagne/45 bg-champagne/10 p-3 shadow-paper sm:mt-6 sm:p-4"
                     aria-labelledby="gojet-origin-title"
                   >
                     <div className="grid grid-cols-[72px_minmax(0,1fr)] gap-3 sm:grid-cols-[88px_minmax(0,1fr)] sm:gap-4">
@@ -558,12 +558,12 @@ export function NowProducingSection({ event, now }: NowProducingSectionProps) {
                     <div
                       id={update.anchorId}
                       key={update.postUrl}
-                      className="min-w-0 scroll-mt-28 border border-champagne/35 bg-white/[0.07] p-3 shadow-paper sm:p-4"
+                      className="min-w-0 scroll-mt-32 border border-champagne/35 bg-white/[0.07] p-3 shadow-paper sm:p-4"
                     >
-                      <p className="text-xs font-black uppercase tracking-[0.16em] text-champagne">
+                      <p className="break-words text-xs font-black uppercase tracking-[0.16em] text-champagne [overflow-wrap:anywhere]">
                         {index === 0 ? "New" : "Update"} ・ {update.date} ・ {update.label}
                       </p>
-                      <h4 className="mt-2 text-xl font-black leading-tight text-white">
+                      <h4 className="mt-2 break-words text-xl font-black leading-tight text-white [overflow-wrap:anywhere]">
                         {update.title}
                       </h4>
                       {update.supportColors && update.supportColors.length > 0 && (
@@ -604,7 +604,8 @@ export function NowProducingSection({ event, now }: NowProducingSectionProps) {
                           ))}
                         </div>
                       )}
-                      <p className="mt-3 whitespace-pre-line break-words text-sm leading-6 text-white/72 sm:leading-7">
+                      <p className="mt-3 whitespace-pre-line break-words text-sm leading-6 text-white/72 [overflow-wrap:anywhere] sm:leading-7">
+
                         <LinkedBodyText text={update.body} />
                       </p>
                       {update.videoGuide && (

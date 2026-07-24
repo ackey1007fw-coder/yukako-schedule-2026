@@ -7,7 +7,7 @@ const work = babySharkLive;
 
 export function BabySharkLiveSection() {
   return (
-    <section id="baby-shark-live" className="scroll-mt-24 bg-[#f3f8fb] py-16 sm:py-24">
+    <section id="baby-shark-live" className="scroll-mt-32 bg-[#f3f8fb] py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <ActHeader
           act={4}

@@ -14,7 +14,7 @@ export function LatestUpdatesSection() {
   const rest = siteUpdates.slice(FEATURED_COUNT);
 
   return (
-    <section id="updates" className="scroll-mt-24 bg-white py-12 sm:py-20">
+    <section id="updates" className="scroll-mt-32 bg-white py-12 sm:py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeader
           kicker="Latest Updates"
