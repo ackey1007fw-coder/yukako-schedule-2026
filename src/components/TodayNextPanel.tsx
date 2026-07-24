@@ -125,7 +125,7 @@ export function TodayNextPanel({ todayEvents, nextEvent, now = new Date() }: Tod
     );
 
     return (
-      <section id="today" className="bg-porcelain px-4 py-6 sm:px-6 lg:px-8">
+      <section id="today" className="scroll-mt-32 bg-porcelain px-4 py-6 sm:px-6 lg:px-8">
         <div className="mx-auto grid max-w-7xl gap-3 sm:grid-cols-2">
           <GojetAppearancePanel
             eyebrow="今日の出演"
@@ -145,7 +145,7 @@ export function TodayNextPanel({ todayEvents, nextEvent, now = new Date() }: Tod
   }
 
   return (
-    <section id="today" className="bg-porcelain px-4 py-6 sm:px-6 lg:px-8">
+    <section id="today" className="scroll-mt-32 bg-porcelain px-4 py-6 sm:px-6 lg:px-8">
       <div className="mx-auto grid max-w-7xl gap-3 sm:grid-cols-2">
         <Panel
           eyebrow={todayEvents.length > 1 ? `今日の予定 ${todayEvents.length}件` : "今日の予定"}

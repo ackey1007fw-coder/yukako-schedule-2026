@@ -44,7 +44,7 @@ const guideCards = [
 
 export function PortalIntroSection() {
   return (
-    <section id="about" className="scroll-mt-24 bg-porcelain py-16 sm:py-24">
+    <section id="about" className="scroll-mt-32 bg-porcelain py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
           <div className="yukako-card border-champagne/40 bg-white p-6 shadow-paper sm:p-8">
@@ -93,7 +93,7 @@ export function PortalIntroSection() {
           </div>
         </div>
 
-        <div id="first-guide" className="mt-12 scroll-mt-24">
+        <div id="first-guide" className="mt-12 scroll-mt-32">
           <SectionHeader
             kicker="First guide"
             title="はじめての方へ"

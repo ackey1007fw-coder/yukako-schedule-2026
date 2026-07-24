@@ -21,7 +21,7 @@ export function GojetHairUpdateSection() {
     <section
       id="gojet-hair-update"
       aria-labelledby="gojet-hair-update-title"
-      className="scroll-mt-24 bg-gradient-to-br from-[#fff7f4] via-porcelain to-[#fdf1e6] py-16 sm:py-24"
+      className="scroll-mt-32 bg-gradient-to-br from-[#fff7f4] via-porcelain to-[#fdf1e6] py-16 sm:py-24"
     >
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <article className="yukako-card overflow-hidden border-rosefog/25 bg-white shadow-paper">

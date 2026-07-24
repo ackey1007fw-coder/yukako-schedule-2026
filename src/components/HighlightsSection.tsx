@@ -24,7 +24,7 @@ export function HighlightsSection() {
   const remainingYears = Math.max(years.length - 1, 0);
 
   return (
-    <section id="highlights" className="scroll-mt-24 bg-porcelain py-16 sm:py-24">
+    <section id="highlights" className="scroll-mt-32 bg-porcelain py-16 sm:py-24">
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <ActHeader
           act={3}

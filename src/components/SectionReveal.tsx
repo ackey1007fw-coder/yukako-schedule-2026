@@ -26,7 +26,12 @@ export function SectionReveal({ children, className = "" }: SectionRevealProps) 
           observer.unobserve(el);
         }
       },
-      { threshold: 0.08, rootMargin: "0px 0px -40px 0px" },
+      // #ゆかJET のような更新カードが多いセクションは高さが数万pxに達し、
+      // threshold(対象要素の可視割合)が0より大きいと、共有リンクなどで
+      // セクション途中へ直接ジャンプした際に可視割合が閾値へ届かず、
+      // 永久にopacity:0のまま（revealされない）になる。0にして
+      // 「viewportと少しでも重なれば表示」に統一する。
+      { threshold: 0, rootMargin: "0px 0px -40px 0px" },
     );
 
     observer.observe(el);

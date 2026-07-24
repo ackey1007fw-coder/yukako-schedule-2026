@@ -76,11 +76,11 @@ export function GojetTeamsSection() {
           className="mt-3 border border-champagne/35 bg-white/[0.07] p-6 shadow-paper sm:p-8 lg:p-10"
         >
           <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-            <div>
+            <div className="min-w-0">
               <p className="text-xs font-black uppercase tracking-[0.16em] text-champagne">
                 {activeUpdate.date} ・ {activeUpdate.label}
               </p>
-              <h3 className="mt-2 font-display text-3xl leading-tight text-white sm:text-4xl">
+              <h3 className="mt-2 break-words font-display text-3xl leading-tight text-white [overflow-wrap:anywhere] sm:text-4xl">
                 {activeUpdate.title}
               </h3>
             </div>

@@ -3,7 +3,10 @@ type ScrollToSectionOptions = {
   gap?: number;
 };
 
-const DEFAULT_GAP = 12;
+// SectionReveal未表示のセクションへ着地する場合、クリック時点ではまだ
+// translateY(24px)が残っており、reveal後にコンテンツが24px分上へ動く。
+// その分を吸収できるよう、通常の余白(12px)より大きめに確保する。
+const DEFAULT_GAP = 36;
 
 function getStickyBottom(selector: string) {
   const element = document.querySelector<HTMLElement>(selector);
@@ -28,17 +31,11 @@ function getStickyBottom(selector: string) {
 }
 
 function getDocumentTop(element: HTMLElement) {
-  let top = 0;
-  let current: HTMLElement | null = element;
-
-  // offsetTop は CSS transform を含まないため、SectionReveal の初期
-  // translateY(24px) が解除された後も着地点がずれない。
-  while (current) {
-    top += current.offsetTop;
-    current = current.offsetParent as HTMLElement | null;
-  }
-
-  return top;
+  // offsetTop/offsetParent の手動チェーンは、will-change/transform を持つ
+  // SectionReveal ラッパーが途中で新たな offsetParent 境界になった場合に
+  // 数千px規模でずれることがある（未reveal区間が多いページ下部で顕著）。
+  // getBoundingClientRect は常に実際の描画位置を返すため、こちらを正とする。
+  return element.getBoundingClientRect().top + window.scrollY;
 }
 
 export function getStickyNavigationBottom() {

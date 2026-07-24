@@ -59,7 +59,7 @@ export function ShowroomSection() {
   );
 
   return (
-    <section id="showroom" className="bg-white py-16 sm:py-24">
+    <section id="showroom" className="scroll-mt-32 bg-white py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <ActHeader
           act={6}
