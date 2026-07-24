@@ -294,6 +294,7 @@ export const imageManifest = {
   "/images/yukajet/2026-07-23-shiina-akane-01.jpg": {"width":960,"height":1280,"widths":[360,480,720,960]},
   "/images/yukajet/2026-07-23-shiina-akane-02.jpg": {"width":960,"height":1280,"widths":[360,480,720,960]},
   "/images/yukajet/2026-07-23-visitor-guide.jpg": {"width":1169,"height":1753,"widths":[360,480,720,960,1169]},
+  "/images/yukajet/2026-07-24-aoki-anna-yukako-heart.jpg": {"width":2048,"height":1536,"widths":[360,480,720,960,1280,1600,2048]},
   "/images/yukajet/2026-07-24-kae-yukajet-01.jpg": {"width":1538,"height":2048,"widths":[360,480,720,960,1280,1538]},
   "/images/yukajet/2026-07-24-kae-yukajet-02.jpg": {"width":1538,"height":2048,"widths":[360,480,720,960,1280,1538]},
   "/images/yukajet/2026-07-24-kae-yukajet-03.jpg": {"width":1538,"height":2048,"widths":[360,480,720,960,1280,1538]},
