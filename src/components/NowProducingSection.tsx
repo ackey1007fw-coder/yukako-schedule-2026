@@ -700,7 +700,18 @@ export function NowProducingSection({ event, now }: NowProducingSectionProps) {
                         </aside>
                       )}
                       {update.photo && (
-                        <div className="mt-4 overflow-hidden border border-white/12 bg-black/20">
+                        <button
+                          type="button"
+                          onClick={() =>
+                            setLightbox({
+                              photos: [update.photo as PromoImage],
+                              index: 0,
+                              label: `${update.title} 画像`
+                            })
+                          }
+                          className="mt-4 block w-full overflow-hidden border border-white/12 bg-black/20"
+                          aria-label={`${update.photo.alt}を拡大表示`}
+                        >
                           <img
                             {...getResponsiveImageProps(
                               update.photo.src,
@@ -709,9 +720,9 @@ export function NowProducingSection({ event, now }: NowProducingSectionProps) {
                             alt={update.photo.alt}
                             loading="lazy"
                             decoding="async"
-                            className="mx-auto block h-auto max-h-[520px] w-auto max-w-full object-contain"
+                            className="mx-auto block h-auto max-h-[520px] w-auto max-w-full object-contain object-top"
                           />
-                        </div>
+                        </button>
                       )}
                       {update.photos && update.photos.length > 0 && (
                         <div className="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-2">

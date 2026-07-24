@@ -48,6 +48,8 @@ const AOKI_ANNA_DAY2_HEART_20260724_POST_URL =
   "https://x.com/anna_aoki0906/status/2080630150077825528";
 const KAE_YUKAJET_DAY2_20260724_POST_URL =
   "https://x.com/kaenomusic/status/2080619068445597718";
+const KURUME_MAIMU_DAY2_20260724_POST_URL =
+  "https://x.com/maimu_htk/status/2080595354442137931";
 const COUNTDOWN_3DAYS_20260720_POST_URL =
   "https://x.com/mokoopy/status/2079223875905491204";
 const PREMIUM_PROMO_VIDEO_POST_URL =
@@ -162,6 +164,9 @@ const aokiAnnaDay2Heart20260724Update = decoratedSourceUpdates.find(
 const kaeYukajetDay220260724Update = decoratedSourceUpdates.find(
   (update) => update.postUrl === KAE_YUKAJET_DAY2_20260724_POST_URL
 );
+const kurumeMaimuDay220260724Update = decoratedSourceUpdates.find(
+  (update) => update.postUrl === KURUME_MAIMU_DAY2_20260724_POST_URL
+);
 const eri1408SakiStoryUpdate = decoratedSourceUpdates.find(
   (update) => update.postUrl === ERI1408_INSTAGRAM_PROFILE_URL
 );
@@ -184,6 +189,7 @@ const remainingSourceUpdates = decoratedSourceUpdates.filter(
   (update) =>
     update.postUrl !== AOKI_ANNA_DAY2_HEART_20260724_POST_URL &&
     update.postUrl !== KAE_YUKAJET_DAY2_20260724_POST_URL &&
+    update.postUrl !== KURUME_MAIMU_DAY2_20260724_POST_URL &&
     update.postUrl !== PENLIGHT_SCHEDULE_20260724_POST_URL &&
     update.postUrl !== YUKAKO_JET_OPENING_GOODS_20260724_POST_URL &&
     update.postUrl !== OFFICIAL_X_NEWS_20260724_POST_URL &&
@@ -294,6 +300,16 @@ const featuredKaeYukajetDay220260724Update:
     }
   : undefined;
 
+const featuredKurumeMaimuDay220260724Update:
+  | DisplayGojetFeatureUpdate
+  | undefined = kurumeMaimuDay220260724Update
+  ? {
+      ...kurumeMaimuDay220260724Update,
+      anchorId: "gojet-kurume-maimu-day2-2026-07-24",
+      primaryCta: "post"
+    }
+  : undefined;
+
 const featuredOfficialVisitorGoods20260723Update:
   | DisplayGojetFeatureUpdate
   | undefined = officialVisitorGoods20260723Update
@@ -383,13 +399,16 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
       }
     : undefined;
 
-// 21:24の青木杏奈さん投稿 → 20:40の曽原加絵さん投稿の順で先頭表示する。
+// 21:24青木杏奈さん → 20:40曽原加絵さん → 19:06来瞳舞夢さんの順で先頭表示する。
 const orderedGojetFeatureUpdates: DisplayGojetFeatureUpdate[] = [
   ...(featuredAokiAnnaDay2Heart20260724Update
     ? [featuredAokiAnnaDay2Heart20260724Update]
     : []),
   ...(featuredKaeYukajetDay220260724Update
     ? [featuredKaeYukajetDay220260724Update]
+    : []),
+  ...(featuredKurumeMaimuDay220260724Update
+    ? [featuredKurumeMaimuDay220260724Update]
     : []),
   ...(featuredPenlightSchedule20260724Update
     ? [featuredPenlightSchedule20260724Update]
