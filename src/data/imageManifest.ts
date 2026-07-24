@@ -319,6 +319,7 @@ export const imageManifest = {
   "/images/yukajet/2026-07-24-kae-yukajet-02.jpg": {"width":1538,"height":2048,"widths":[360,480,720,960,1280,1538]},
   "/images/yukajet/2026-07-24-kae-yukajet-03.jpg": {"width":1538,"height":2048,"widths":[360,480,720,960,1280,1538]},
   "/images/yukajet/2026-07-24-kae-yukajet-04.jpg": {"width":1538,"height":2048,"widths":[360,480,720,960,1280,1538]},
+  "/images/yukajet/2026-07-24-kurume-maimu-cast.jpg": {"width":2048,"height":1152,"widths":[360,480,720,960,1280,1600,2048]},
   "/images/yukajet/2026-07-24-x-news-summary.jpg": {"width":1290,"height":2796,"widths":[360,480,720,960,1280,1290]},
   "/images/yukajet/2026-07-24-x-todays-news-screen.jpg": {"width":1290,"height":2796,"widths":[360,480,720,960,1280,1290]},
   "/images/yukajet/2026-07-24-yukako-jet-opening-cast-selfie.jpg": {"width":2048,"height":1153,"widths":[360,480,720,960,1280,1600,2048]},
