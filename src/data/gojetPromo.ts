@@ -200,7 +200,7 @@ export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
     label: "来瞳舞夢さん（@maimu_htk）・B班マスター役／C班美月役",
     title: "C班初日＆B班2日目ありがとうございました！｜来瞳舞夢さん",
     body:
-      "来瞳舞夢さんが、7月24日に行われたC班初日とB班2日目の終演を報告しました。\n\n来場した皆さんへの感謝とともに、翌日以降の公演への来場も呼びかけています。\n\n来瞳舞夢さんは、B班ではマスター役、C班では美月役を担当しています。吉井優花子さんは、B班ではJET役、C班では早紀役を務めています。\n\n投稿時点では公演公式HPに不具合があったため、来瞳舞夢さんがチケット購入用の直接リンクを案内しました。\n\n各種応援メニューの詳細は元のX投稿からご確認ください。\n\n【来場チケット】\nhttps://torioki.confetti-web.com/form/4827\n\n【元投稿】\nhttps://x.com/maimu_htk/status/2080595354442137931",
+      "7月24日、C班初日とB班2日目が終演。来瞳舞夢さんから、来場した皆さんへの感謝と、翌日以降の公演への呼びかけ。\n\n来瞳舞夢さんはB班でマスター役、C班で美月役。吉井優花子さんはB班でJET役、C班で早紀役です。\n\n投稿時点では公演公式HPに不具合があり、チケット購入用の直接リンクが案内されました。\n\n各種応援メニューの詳細は元のX投稿から。\n\n【来場チケット】\nhttps://torioki.confetti-web.com/form/4827\n\n【元投稿】\nhttps://x.com/maimu_htk/status/2080595354442137931",
     postUrl: "https://x.com/maimu_htk/status/2080595354442137931",
     homepageUrl: "https://torioki.confetti-web.com/form/4827",
     ctaLabel: "Xで元の投稿を見る",
