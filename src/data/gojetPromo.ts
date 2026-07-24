@@ -129,6 +129,33 @@ export type GojetTeamUpdate = {
 
 export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
   {
+    date: "2026.7.24 21:24",
+    label: "青木杏奈さん（@anna_aoki0906）・B班あかね役",
+    title: "B班2日目終了！青木杏奈さんと優花子ちゃんのハートショット",
+    body:
+      "『GO,JET!GO!GO! vol.1 Premium 〜I LOVE YOUが言えなくて〜』公演2日目を終え、B班・あかね役の青木杏奈さんが、JET役の吉井優花子ちゃんとのツーショットを投稿しました。\n\nアメリカンダイナー風の舞台セットを背景に、二人で大きなハートを作った一枚。GOJETの世界を全力で楽しんだ、と青木さん。\n\n次回のB班公演は、2026年7月25日（土）12:00開演。同日はA班15:30、C班19:00も上演。Air studio 両国でお待ちしています。",
+    caption:
+      "#ゆかJET 2日目もありがとうございました✨️B班あかね役青木杏奈です❤️‍🔥\nGOJETの世界を全力で楽しみました！\n皆さんも一緒に楽しんでいただけましたかでしょうか？🥹\n\n明日7/25(土)は\n\n💙B班12:00 ◀︎出演回\n🩷A班15:30\n💛C班19:00  \n\nでお届けします！\nAir studio両国でお待ちしております💫",
+    postUrl: "https://x.com/anna_aoki0906/status/2080630150077825528",
+    homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+    ctaLabel: "Xで元の投稿を見る",
+    homepageLabel: "公演予約・応援案内を見る",
+    roleTags: ["共演者投稿", "B班", "公演2日目", "あかね＆JET"],
+    photo: {
+      src: "/images/yukajet/2026-07-24-aoki-anna-yukako-heart.jpg",
+      alt: "B班あかね役の青木杏奈さんとJET役の吉井優花子が、舞台セットを背景に手でハートを作っているツーショット"
+    },
+    schedule: {
+      heading: "次回公演スケジュール（2026年7月25日）",
+      note: "会場：Air studio 両国。作品名：GO,JET!GO!GO! vol.1 Premium 〜I LOVE YOUが言えなくて〜。#ゆかJET",
+      items: [
+        { time: "12:00〜", label: "B班（あかね役・青木杏奈さん出演回）" },
+        { time: "15:30〜", label: "A班" },
+        { time: "19:00〜", label: "C班" }
+      ]
+    }
+  },
+  {
     date: "2026.7.24 20:40",
     label: "曽原加絵さん（@kaenomusic）・B班美里役",
     title: "「大好きなゆかJET」と仲良しショット！B班2日目終了",

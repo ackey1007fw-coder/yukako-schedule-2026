@@ -44,6 +44,8 @@ const OFFICIAL_X_NEWS_20260724_POST_URL =
   "https://x.com/yukako_produce/status/2080313032174174590";
 const PENLIGHT_SCHEDULE_20260724_POST_URL =
   "https://x.com/mokoopy/status/2080454389677039811";
+const AOKI_ANNA_DAY2_HEART_20260724_POST_URL =
+  "https://x.com/anna_aoki0906/status/2080630150077825528";
 const KAE_YUKAJET_DAY2_20260724_POST_URL =
   "https://x.com/kaenomusic/status/2080619068445597718";
 const COUNTDOWN_3DAYS_20260720_POST_URL =
@@ -154,6 +156,9 @@ const officialXNews20260724Update = decoratedSourceUpdates.find(
 const penlightSchedule20260724Update = decoratedSourceUpdates.find(
   (update) => update.postUrl === PENLIGHT_SCHEDULE_20260724_POST_URL
 );
+const aokiAnnaDay2Heart20260724Update = decoratedSourceUpdates.find(
+  (update) => update.postUrl === AOKI_ANNA_DAY2_HEART_20260724_POST_URL
+);
 const kaeYukajetDay220260724Update = decoratedSourceUpdates.find(
   (update) => update.postUrl === KAE_YUKAJET_DAY2_20260724_POST_URL
 );
@@ -177,6 +182,7 @@ export const gojetOriginUpdate = decoratedSourceUpdates.find(
 );
 const remainingSourceUpdates = decoratedSourceUpdates.filter(
   (update) =>
+    update.postUrl !== AOKI_ANNA_DAY2_HEART_20260724_POST_URL &&
     update.postUrl !== KAE_YUKAJET_DAY2_20260724_POST_URL &&
     update.postUrl !== PENLIGHT_SCHEDULE_20260724_POST_URL &&
     update.postUrl !== YUKAKO_JET_OPENING_GOODS_20260724_POST_URL &&
@@ -264,6 +270,16 @@ const featuredPenlightSchedule20260724Update:
   ? {
       ...penlightSchedule20260724Update,
       anchorId: "gojet-penlight-schedule-2026-07-24",
+      primaryCta: "post"
+    }
+  : undefined;
+
+const featuredAokiAnnaDay2Heart20260724Update:
+  | DisplayGojetFeatureUpdate
+  | undefined = aokiAnnaDay2Heart20260724Update
+  ? {
+      ...aokiAnnaDay2Heart20260724Update,
+      anchorId: "gojet-aoki-anna-day2-heart-2026-07-24",
       primaryCta: "post"
     }
   : undefined;
@@ -367,8 +383,11 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
       }
     : undefined;
 
-// 20:40の曽原加絵さん投稿を、同日午前の案内より上に表示する。
+// 21:24の青木杏奈さん投稿 → 20:40の曽原加絵さん投稿の順で先頭表示する。
 const orderedGojetFeatureUpdates: DisplayGojetFeatureUpdate[] = [
+  ...(featuredAokiAnnaDay2Heart20260724Update
+    ? [featuredAokiAnnaDay2Heart20260724Update]
+    : []),
   ...(featuredKaeYukajetDay220260724Update
     ? [featuredKaeYukajetDay220260724Update]
     : []),
