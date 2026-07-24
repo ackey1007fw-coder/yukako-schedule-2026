@@ -42,6 +42,8 @@ const YUKAKO_JET_OPENING_GOODS_20260724_POST_URL =
   "https://x.com/mokoopy/status/2080320822825439518";
 const OFFICIAL_X_NEWS_20260724_POST_URL =
   "https://x.com/yukako_produce/status/2080313032174174590";
+const PENLIGHT_SCHEDULE_20260724_POST_URL =
+  "https://x.com/mokoopy/status/2080454389677039811";
 const COUNTDOWN_3DAYS_20260720_POST_URL =
   "https://x.com/mokoopy/status/2079223875905491204";
 const PREMIUM_PROMO_VIDEO_POST_URL =
@@ -147,6 +149,9 @@ const yukakoJetOpeningGoods20260724Update = decoratedSourceUpdates.find(
 const officialXNews20260724Update = decoratedSourceUpdates.find(
   (update) => update.postUrl === OFFICIAL_X_NEWS_20260724_POST_URL
 );
+const penlightSchedule20260724Update = decoratedSourceUpdates.find(
+  (update) => update.postUrl === PENLIGHT_SCHEDULE_20260724_POST_URL
+);
 const eri1408SakiStoryUpdate = decoratedSourceUpdates.find(
   (update) => update.postUrl === ERI1408_INSTAGRAM_PROFILE_URL
 );
@@ -167,6 +172,7 @@ export const gojetOriginUpdate = decoratedSourceUpdates.find(
 );
 const remainingSourceUpdates = decoratedSourceUpdates.filter(
   (update) =>
+    update.postUrl !== PENLIGHT_SCHEDULE_20260724_POST_URL &&
     update.postUrl !== YUKAKO_JET_OPENING_GOODS_20260724_POST_URL &&
     update.postUrl !== OFFICIAL_X_NEWS_20260724_POST_URL &&
     update.postUrl !== OPENING_NIGHT_REPORT_20260723_POST_URL &&
@@ -242,6 +248,16 @@ const featuredOfficialXNews20260724Update:
   ? {
       ...officialXNews20260724Update,
       anchorId: "gojet-official-x-news-2026-07-24",
+      primaryCta: "post"
+    }
+  : undefined;
+
+const featuredPenlightSchedule20260724Update:
+  | DisplayGojetFeatureUpdate
+  | undefined = penlightSchedule20260724Update
+  ? {
+      ...penlightSchedule20260724Update,
+      anchorId: "gojet-penlight-schedule-2026-07-24",
       primaryCta: "post"
     }
   : undefined;
@@ -337,6 +353,9 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
 
 // 22:12のペンライト投稿を、22:04の「最後」の投稿より上に表示する。
 const orderedGojetFeatureUpdates: DisplayGojetFeatureUpdate[] = [
+  ...(featuredPenlightSchedule20260724Update
+    ? [featuredPenlightSchedule20260724Update]
+    : []),
   ...(featuredYukakoJetOpeningGoods20260724Update
     ? [featuredYukakoJetOpeningGoods20260724Update]
     : []),
