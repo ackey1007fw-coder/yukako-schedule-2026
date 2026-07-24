@@ -4,6 +4,7 @@ import { SiteHeader } from "../components/SiteHeader";
 import { Footer } from "../components/Footer";
 import { ArchiveInstagramEmbedBlock } from "../components/ArchiveInstagramEmbedBlock";
 import { ArchivePhotoFrame } from "../components/ArchivePhotoFrame";
+import { ArchivePhotoGallery } from "../components/ArchivePhotoGallery";
 import { ArchiveVideoBlock } from "../components/ArchiveVideoBlock";
 import { ScrollToTop } from "../components/ScrollToTop";
 import { getArchiveItemBySlug } from "../data/archive";
@@ -190,23 +191,30 @@ export function ArchiveDetailPage({ slug }: ArchiveDetailPageProps) {
             </div>
 
             {item.showAdditionalImages && item.images.length > 1 && (
-              <div className="mt-10 grid gap-6">
-                {item.images.slice(1).map((image) => (
-                  <div key={image.src} className="mx-auto w-full max-w-lg">
-                    <ArchivePhotoFrame
-                      src={image.src}
-                      alt={image.alt}
-                      sizes="(min-width: 640px) 512px, 100vw"
-                      aspectRatio={image.aspectRatio}
-                    />
-                    {image.caption && (
-                      <p className="mt-2 text-center text-xs leading-6 text-ink/55">
-                        {image.caption}
-                      </p>
-                    )}
-                  </div>
-                ))}
-              </div>
+              item.galleryLayout === "responsive-grid" ? (
+                <ArchivePhotoGallery
+                  images={item.images.slice(1)}
+                  label={`${item.shortTitle}のフォトギャラリー`}
+                />
+              ) : (
+                <div className="mt-10 grid gap-6">
+                  {item.images.slice(1).map((image) => (
+                    <div key={image.src} className="mx-auto w-full max-w-lg">
+                      <ArchivePhotoFrame
+                        src={image.src}
+                        alt={image.alt}
+                        sizes="(min-width: 640px) 512px, 100vw"
+                        aspectRatio={image.aspectRatio}
+                      />
+                      {image.caption && (
+                        <p className="mt-2 text-center text-xs leading-6 text-ink/55">
+                          {image.caption}
+                        </p>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )
             )}
 
             {leadQuotes.map((quote) => (
