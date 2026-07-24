@@ -91,6 +91,11 @@ export function PriorityBanner({ now: nowProp }: PriorityBannerProps = {}) {
       ?? todayTimeFromNextShow(nextShow);
     const gojet = getGojetStatus(now);
     const items: Announcement[] = [];
+
+    // 優先順位：配信中 → 今日の配信予定 → 本日の公演 → その他
+    if (isLive) items.push({ id: "live", label: "配信中", text: "ただいまSHOWROOMで配信中。いますぐ見る", href: profile.showroom.url, tone: "bg-[#e0245e] text-white", Icon: Radio, tracking: "stream_click" });
+    if (todayTime) items.push({ id: "stream", label: "今日の配信", text: `${todayTime}〜 予定${scheduled?.note ? `・${scheduled.note}` : ""}`, href: profile.showroom.url, tone: "bg-[#fbeef0] text-ink", Icon: CalendarClock, tracking: "stream_click" });
+
     if (gojet.phase === "today") {
       // 「上演中」「次の公演」は開演時刻と想定上演時間（durationMinutes）から算出した
       // 目安であり、外部から実際の進行状況を取得しているわけではない。
@@ -112,8 +117,6 @@ export function PriorityBanner({ now: nowProp }: PriorityBannerProps = {}) {
         tracking: "ticket_click"
       });
     }
-    if (isLive) items.push({ id: "live", label: "配信中", text: "ただいまSHOWROOMで配信中。いますぐ見る", href: profile.showroom.url, tone: "bg-[#e0245e] text-white", Icon: Radio, tracking: "stream_click" });
-    if (todayTime) items.push({ id: "stream", label: "今日の配信", text: `${todayTime}〜 予定${scheduled?.note ? `・${scheduled.note}` : ""}`, href: profile.showroom.url, tone: "bg-[#fbeef0] text-ink", Icon: CalendarClock, tracking: "stream_click" });
     if (gojet.phase === "before") items.push({ id: "gojet-countdown", label: "#ゆかJET", text: `公演まであと${gojet.daysLeft}日・チケット／配信を確認`, href: gojetTicketUrl, tone: "bg-gradient-to-r from-[#fbeef0] to-[#faf3e2] text-ink", Icon: Ticket, tracking: "ticket_click" });
     if (gojet.phase === "archive") items.push({ id: "gojet-archive", label: "#ゆかJET 配信", text: "アーカイブ配信は8/6（木）まで・配信チケット 3,700円", href: gojetStreamingTicketUrl, tone: "bg-gradient-to-r from-[#fbeef0] to-[#faf3e2] text-ink", Icon: Radio, tracking: "ticket_click" });
     const latestUpdate = siteUpdates[0];
