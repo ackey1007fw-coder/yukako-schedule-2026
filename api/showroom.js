@@ -12,14 +12,14 @@ function leagueToRank(id) {
 }
 
 async function fromJson() {
-  const r=await fetch(JSON_API,{headers:{'User-Agent':'Mozilla/5.0','Accept':'application/json','Referer':'https://www.showroom-live.com/'}});
+  const r=await fetch(JSON_API,{cache:'no-store',headers:{'User-Agent':'Mozilla/5.0','Accept':'application/json','Referer':'https://www.showroom-live.com/'}});
   if(!r.ok) throw new Error('JSON API HTTP '+r.status);
   const d=await r.json();
   return {followerCount:d.follower_num!=null?String(d.follower_num):null,roomLevel:d.room_level!=null?String(d.room_level):null,showRank:d.league_id!=null?leagueToRank(d.league_id):null,streakDays:d.live_continuous_days!=null?String(d.live_continuous_days):null,coverImage:d.image_l||d.image||d.main_image||null,isLive:(d.is_live===1||d.is_live===true||d.is_onlive===true),source:'json'};
 }
 
 async function fromHtml() {
-  const r=await fetch(ROOM_HTML,{headers:{'User-Agent':'Mozilla/5.0 (compatible; Googlebot/2.1)','Accept-Language':'ja,en'}});
+  const r=await fetch(ROOM_HTML,{cache:'no-store',headers:{'User-Agent':'Mozilla/5.0 (compatible; Googlebot/2.1)','Accept-Language':'ja,en'}});
   if(!r.ok) throw new Error('HTML HTTP '+r.status);
   const html=await r.text();
   const g=(re)=>{const x=html.match(re);return x?x[1]:null;};
@@ -27,23 +27,48 @@ async function fromHtml() {
   return {followerCount:g(/follower_num["\s:>]+(\d+)/i),roomLevel:g(/room_level["\s:>]+(\d+)/i),showRank:g(/league_name["\s:>"']+([ A-Z][-\d]*)/i),streakDays:g(/live_continuous_days["\s:]+(\d+)/i),coverImage:cover?cover.replace(/\\\//g,'/'):null,source:'html'};
 }
 
-// 次回の配信予定（SHOWROOMの next_live エポックを JST 表記に整形）
+function toEpochMs(value) {
+  const n=Number(value);
+  if(!Number.isFinite(n)||n<=0) return null;
+  return n>1e12?n:n*1000;
+}
+
+function findNextLiveEpoch(payload) {
+  const candidates=[
+    payload?.epoch,
+    payload?.next_live_start_at,
+    payload?.next_live_at,
+    payload?.live_start_at,
+    payload?.next_live?.epoch,
+    payload?.next_live?.start_at,
+    payload?.next_live?.started_at,
+    payload?.started_at
+  ];
+  for(const value of candidates){
+    const ms=toEpochMs(value);
+    if(ms) return ms;
+  }
+  return null;
+}
+
+// 次回の配信予定（SHOWROOMの日時をJST表記に整形）
 async function fetchNextLive() {
   try {
-    const r=await fetch(NEXT_LIVE_API,{headers:{'User-Agent':'Mozilla/5.0','Accept':'application/json','Referer':'https://www.showroom-live.com/'}});
+    const r=await fetch(NEXT_LIVE_API,{cache:'no-store',headers:{'User-Agent':'Mozilla/5.0','Accept':'application/json','Referer':'https://www.showroom-live.com/'}});
     if(!r.ok) return null;
     const d=await r.json();
-    const epoch=d&&(d.epoch||d.next_live_start_at||d.started_at);
-    if(!epoch) return null;
-    const dt=new Date(epoch*1000);
+    const epochMs=findNextLiveEpoch(d);
+    if(!epochMs) return null;
+    const dt=new Date(epochMs);
+    if(Number.isNaN(dt.getTime())) return null;
     const p=new Intl.DateTimeFormat('ja-JP',{timeZone:'Asia/Tokyo',month:'numeric',day:'numeric',weekday:'short',hour:'2-digit',minute:'2-digit',hour12:false}).formatToParts(dt).reduce((o,x)=>{o[x.type]=x.value;return o;},{});
-    return `${p.month}/${p.day}(${p.weekday}) ${p.hour}:${p.minute}〜`;
+    return {label:`${p.month}/${p.day}(${p.weekday}) ${p.hour}:${p.minute}〜`,at:dt.toISOString()};
   } catch(_) { return null; }
 }
 
 export default async function handler(req,res){
   res.setHeader('Access-Control-Allow-Origin','*');
-  res.setHeader('Cache-Control','s-maxage=300,stale-while-revalidate=600');
+  res.setHeader('Cache-Control','public, s-maxage=15, stale-while-revalidate=15');
   if(req.method==='OPTIONS') return res.status(200).end();
   try {
     let s;
@@ -51,10 +76,10 @@ export default async function handler(req,res){
     if(!s.followerCount||!s.roomLevel||!s.showRank){
       try{const h2=await fromHtml();s.followerCount=s.followerCount||h2.followerCount;s.roomLevel=s.roomLevel||h2.roomLevel;s.showRank=s.showRank||h2.showRank;s.streakDays=s.streakDays||h2.streakDays;s.coverImage=s.coverImage||h2.coverImage;}catch(_){}
     }
-    let nextShow=null;
-    try{nextShow=await fetchNextLive();}catch(_){}
-    res.status(200).json({ok:true,followerCount:s.followerCount||'—',roomLevel:s.roomLevel||'—',showRank:s.showRank||'—',streakDays:s.streakDays||null,coverImage:s.coverImage||null,isLive:!!s.isLive,nextShow:nextShow||null,source:s.source,updatedAt:new Date().toISOString()});
+    let nextLive=null;
+    try{nextLive=await fetchNextLive();}catch(_){}
+    res.status(200).json({ok:true,followerCount:s.followerCount||'—',roomLevel:s.roomLevel||'—',showRank:s.showRank||'—',streakDays:s.streakDays||null,coverImage:s.coverImage||null,isLive:!!s.isLive,nextShow:nextLive?.label||null,nextShowAt:nextLive?.at||null,source:s.source,updatedAt:new Date().toISOString()});
   } catch(err){
     res.status(500).json({ok:false,error:err.message});
   }
-};
+}
