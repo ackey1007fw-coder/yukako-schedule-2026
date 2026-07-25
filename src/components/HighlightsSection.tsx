@@ -130,7 +130,7 @@ export function HighlightsSection() {
                             {links.length > 0 && (
                               <div className="mt-4 flex flex-wrap gap-2">
                                 {links.map((link) => {
-                                  const isInternal = link.url.startsWith("/");
+                                  const isInternal = link.url.startsWith("/") || link.url.startsWith("#");
                                   return (
                                     <a
                                       key={link.url}
