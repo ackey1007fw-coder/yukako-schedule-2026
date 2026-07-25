@@ -19,11 +19,26 @@ const categoryLabels: Record<WorkCreditEntry["category"], string> = {
   pr: "PR",
   stage: "舞台",
   media: "メディア",
+  report: "レポート",
   other: "その他"
 };
 
 export const workCreditCategoryLabel = (category: WorkCreditEntry["category"]) =>
   categoryLabels[category];
+
+export type WorkCreditSectionKey = "work" | "report";
+
+const sectionByCategory: Record<WorkCreditEntry["category"], WorkCreditSectionKey> = {
+  pr: "work",
+  stage: "work",
+  media: "work",
+  report: "report",
+  other: "report"
+};
+
+/** category から掲載先セクションを判定する（'pr'/'stage'/'media' → お仕事実績、'report'/'other' → 活動レポート）。 */
+export const workCreditSectionFor = (category: WorkCreditEntry["category"]) =>
+  sectionByCategory[category];
 
 const dateFormatter = new Intl.DateTimeFormat("ja-JP", {
   timeZone: "Asia/Tokyo",
