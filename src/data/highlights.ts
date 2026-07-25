@@ -43,6 +43,17 @@ export const highlights: Highlight[] = [
     }
   },
   {
+    id: "miss-grand-japan-management-2026-06",
+    year: "2026",
+    date: "2026年6月7日",
+    category: "運営・マネジメント",
+    title: "ミス・グランド・ジャパン 代表補佐／運営マネジメントに就任",
+    description:
+      "2026年6月7日、ミス・グランド・ジャパン「代表補佐／運営マネジメント」への就任を発表。2026年度より、大会運営全体のマネジメントと体制強化を担い、参加者一人ひとりの挑戦を支える立場として、大会のさらなる発展に取り組みます。",
+    badge: "在任中",
+    link: { label: "詳しく見る", url: "#miss-grand-japan-management" }
+  },
+  {
     id: "ojosama-band-2026-05",
     year: "2026",
     date: "2026年5月",

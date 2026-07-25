@@ -76,6 +76,13 @@ export const searchFaqs: SearchFaq[] = [
     linkLabel: "応援メニューを見る"
   },
   {
+    question: "Miss Grand Japanでの役職は？",
+    answer:
+      "2026年度より、ミス・グランド・ジャパンの「代表補佐／運営マネジメント」を務めています。大会運営全体のマネジメントと体制強化を担う役割です。",
+    href: "#miss-grand-japan-management",
+    linkLabel: "詳しく見る"
+  },
+  {
     question: "#ゆかJET とは何ですか？",
     answer:
       "吉井優花子さんがプロデュースする舞台シリーズ『GO,JET!GO!GO!』の愛称です。第1弾は2026年7月にAir studio 両国で上演されます。",
