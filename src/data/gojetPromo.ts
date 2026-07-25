@@ -156,6 +156,33 @@ export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
     }
   },
   {
+    date: "2026.7.25 11:31",
+    label: "秋乃蒼依さん（@akino_aoinari）・A班出演",
+    title: "「どのチームも盛り上がっていくよ✨」秋乃蒼依さんが7月25日の公演を案内",
+    body:
+      "7月25日はB班12:00・A班15:30・C班19:00の3公演。A班に出演する秋乃蒼依さんから「われら！」の呼びかけ。\n\nプロデューサーとしてC班早紀・B班JETを務める吉井優花子さんへは、「大変な中素敵なお芝居届けてくれる」と労いのひとこと。",
+    caption:
+      "#ゆかJET 今日はB班から！どのチームも盛り上がっていくよ✨\n\n✴︎B班 12:00\n✴︎A班 15:30 ←われら！\n✴︎C班 19:00\n\nプロデューサー＆C班早紀＆B班JETで大変な中素敵なお芝居届けてくれるゆかちゃまと！（いなり私服でごめんご）",
+    postUrl: "https://x.com/akino_aoinari/status/2080843278480818262",
+    homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+    ctaLabel: "Xで元の投稿を見る",
+    homepageLabel: "公演予約・応援案内を見る",
+    roleTags: ["#ゆかJET", "キャスト投稿", "A班", "本日の公演案内"],
+    photo: {
+      src: "/images/yukajet/2026-07-25-akino-aoinari-yukako.jpg",
+      alt: "レトロな舞台セットを背景に、笑顔でポーズを取る吉井優花子さんと秋乃蒼依さん"
+    },
+    schedule: {
+      heading: "本日の公演スケジュール（2026年7月25日）",
+      note: "会場：Air studio 両国。秋乃蒼依さんはA班に出演。優花子さんはB班でJET役、C班で早紀役を務めます。",
+      items: [
+        { time: "12:00〜", label: "B班" },
+        { time: "15:30〜", label: "A班（秋乃蒼依さん出演）" },
+        { time: "19:00〜", label: "C班" }
+      ]
+    }
+  },
+  {
     date: "2026.7.24 21:24",
     label: "青木杏奈さん（@anna_aoki0906）・B班あかね役",
     title: "B班2日目終了！青木杏奈さんと優花子ちゃんのハートショット",
