@@ -33,6 +33,7 @@ import { SiteHeader } from "./components/SiteHeader";
 import { SupportersSection } from "./components/SupportersSection";
 import { StructuredData } from "./components/StructuredData";
 import { TodayNextPanel } from "./components/TodayNextPanel";
+import { WorkCreditsSection } from "./components/WorkCreditsSection";
 import {
   getMonthKeysFromEvents,
   isEventPast,
@@ -196,6 +197,9 @@ function App() {
         </SectionReveal>
         <SectionReveal>
           <LatestInstagramSection />
+        </SectionReveal>
+        <SectionReveal>
+          <WorkCreditsSection />
         </SectionReveal>
 
         {/* 4. アーカイブ：これまでの歩みと代表出演作品 */}
