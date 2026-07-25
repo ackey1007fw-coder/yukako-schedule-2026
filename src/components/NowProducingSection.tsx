@@ -703,6 +703,24 @@ export function NowProducingSection({ event, now }: NowProducingSectionProps) {
                           )}
                         </aside>
                       )}
+                      {update.yukakoReply && (
+                        <aside
+                          className="mt-3 border-l-4 border-champagne/70 bg-black/20 p-3 sm:p-4"
+                          aria-label="優花子さんからの返信"
+                        >
+                          <p className="text-xs font-black uppercase tracking-[0.14em] text-champagne">
+                            優花子さんからの返信
+                          </p>
+                          <p className="mt-2 whitespace-pre-line text-sm leading-6 text-white/72 sm:leading-7">
+                            {update.yukakoReply.body}
+                          </p>
+                          {update.yukakoReply.note && (
+                            <p className="mt-2 text-xs leading-5 text-white/55">
+                              {update.yukakoReply.note}
+                            </p>
+                          )}
+                        </aside>
+                      )}
                       {update.photo && (
                         <div className="mt-4 overflow-hidden border border-white/12 bg-black/20">
                           <img
