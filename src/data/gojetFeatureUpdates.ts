@@ -11,6 +11,8 @@ export type DisplayGojetFeatureUpdate = GojetFeatureUpdate & {
   primaryCta?: "post" | "homepage";
 };
 
+const YUKAKO_DAY3_WRAP_20260726_POST_URL =
+  "https://x.com/mokoopy/status/2081033107919229302";
 const MIMURA_SUMIKA_C_DAY2_20260725_POST_URL =
   "https://x.com/smk_mmr/status/2081012385842860371";
 const AKINO_AOINARI_20260725_POST_URL =
@@ -126,6 +128,9 @@ const decoratedSourceUpdates: DisplayGojetFeatureUpdate[] = sourceUpdates
     };
   });
 
+const yukakoDay3Wrap20260726Update = decoratedSourceUpdates.find(
+  (update) => update.postUrl === YUKAKO_DAY3_WRAP_20260726_POST_URL
+);
 const akinoAoinari20260725Update = decoratedSourceUpdates.find(
   (update) => update.postUrl === AKINO_AOINARI_20260725_POST_URL
 );
@@ -197,6 +202,7 @@ export const gojetOriginUpdate = decoratedSourceUpdates.find(
 );
 const remainingSourceUpdates = decoratedSourceUpdates.filter(
   (update) =>
+    update.postUrl !== YUKAKO_DAY3_WRAP_20260726_POST_URL &&
     update.postUrl !== MIMURA_SUMIKA_C_DAY2_20260725_POST_URL &&
     update.postUrl !== AKINO_AOINARI_20260725_POST_URL &&
     update.postUrl !== AOKI_ANNA_DAY2_HEART_20260724_POST_URL &&
@@ -221,6 +227,16 @@ const remainingSourceUpdates = decoratedSourceUpdates.filter(
     update.postUrl !== PENLIGHT_POST_URL &&
     update.postUrl !== PRODUCE_ANNOUNCE_POST_URL
 );
+
+const featuredYukakoDay3Wrap20260726Update:
+  | DisplayGojetFeatureUpdate
+  | undefined = yukakoDay3Wrap20260726Update
+  ? {
+      ...yukakoDay3Wrap20260726Update,
+      anchorId: "gojet-yukako-day3-wrap-2026-07-26",
+      primaryCta: "post"
+    }
+  : undefined;
 
 const featuredMimuraSumikaCDay220260725Update:
   | DisplayGojetFeatureUpdate
@@ -431,8 +447,11 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
       }
     : undefined;
 
-// 7/25 22:43三村すみかさん → 7/25 11:31秋乃蒼依さん → 21:24青木杏奈さん → 20:40曽原加絵さん → 19:06来瞳舞夢さんの順で先頭表示する。
+// 7/26 0:05優花子さん本人（3日目終演レポート）→ 7/25 22:43三村すみかさん → 7/25 11:31秋乃蒼依さん → 21:24青木杏奈さん → 20:40曽原加絵さん → 19:06来瞳舞夢さんの順で先頭表示する。
 const orderedGojetFeatureUpdates: DisplayGojetFeatureUpdate[] = [
+  ...(featuredYukakoDay3Wrap20260726Update
+    ? [featuredYukakoDay3Wrap20260726Update]
+    : []),
   ...(featuredMimuraSumikaCDay220260725Update
     ? [featuredMimuraSumikaCDay220260725Update]
     : []),
