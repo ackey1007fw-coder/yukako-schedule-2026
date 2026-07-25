@@ -129,6 +129,33 @@ export type GojetTeamUpdate = {
 
 export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
   {
+    date: "2026.7.25 22:43",
+    label: "三村すみかさん（@smk_mmr）・C班美里役",
+    title:
+      "C班2日目ありがとうございました！美里役・三村すみかさんと優花子さんの2ショット",
+    body:
+      "『GO,JET!GO!GO! vol.1 Premium 〜I LOVE YOUが言えなくて〜』C班2日目を終え、美里役の三村すみかさんが、来場への感謝と残り2公演へ向けた意気込みを投稿しました。\n\n写真は、プロデューサー兼C班・早紀役の吉井優花子さんとのツーショット。「本当にすごい方です！！」という言葉から、共演者としての敬意と、一緒に撮影できた喜びが伝わる一枚です。\n\n※出演者の公開投稿をもとにした、非公式の応援まとめです。",
+    caption:
+      "#ゆかJET\nC班2日目！\nありがとうございました！\n\n美里ちゃんお届けできたかな？💓\n\nあと2回！\n全力で頑張ります！\n\n↓プロデューサー&C班では早紀役のゆかこさんと撮っていただきました！\n嬉し過ぎて絶妙な顔しちゃってますが！本当にすごい方です！！",
+    postUrl: "https://x.com/smk_mmr/status/2081012385842860371",
+    homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+    ctaLabel: "三村すみかさんのX投稿を見る",
+    homepageLabel: "公演情報を見る",
+    roleTags: [
+      "#ゆかJET",
+      "公演レポート",
+      "キャスト投稿",
+      "C班",
+      "美里役",
+      "早紀役",
+      "プロデューサー"
+    ],
+    photo: {
+      src: "/images/yukajet/2026-07-25-mimura-sumika-yukako.jpg",
+      alt: "#ゆかJETの舞台セットを背景に、ピンクの衣装と白いブラウス姿の出演者2人がポーズを取る縦長のツーショット"
+    }
+  },
+  {
     date: "2026.7.24 21:24",
     label: "青木杏奈さん（@anna_aoki0906）・B班あかね役",
     title: "B班2日目終了！青木杏奈さんと優花子ちゃんのハートショット",
