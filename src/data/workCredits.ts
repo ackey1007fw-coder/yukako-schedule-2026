@@ -72,7 +72,7 @@ export const workCredits: WorkCreditEntry[] = [
     title: "「シューイチ 全国うまいもの博」へ",
     date: "2026-06-02",
     summary:
-      "西武秋田店で開催された「シューイチ 全国うまいもの博」へ足を運ばれた際の投稿。小さい頃から親しんできた西武に各県のグルメが並ぶ様子を、ご姉妹と一緒に楽しまれています。",
+      "西武秋田店「シューイチ 全国うまいもの博」へ。ご姉妹と一緒に、小さい頃から親しんできた西武に並ぶ各県のグルメを見て回っています。",
     sourceUrl: "https://www.instagram.com/p/DZFhVz-mZtt/",
     embedType: "instagram",
     links: [
