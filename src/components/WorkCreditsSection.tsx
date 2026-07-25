@@ -93,11 +93,12 @@ function WorkCreditCard({ entry }: { entry: WorkCreditEntry }) {
             href={entry.sourceUrl}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label={entry.alt ?? entry.title}
             className="mt-4 block overflow-hidden border border-champagne/25 bg-porcelain"
           >
             <img
               {...getResponsiveImageProps(entry.thumbnail, "(min-width: 1024px) 33vw, 100vw")}
-              alt={entry.alt ?? ""}
+              alt={entry.alt ?? entry.title}
               loading="lazy"
               decoding="async"
               className="block h-auto w-full object-contain"
