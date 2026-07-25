@@ -1,8 +1,14 @@
 import { useEffect, useRef, useState } from "react";
+import type { ReactNode } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { workCredits } from "../data/workCredits";
 import type { WorkCreditEntry } from "../data/workCredits";
-import { deriveWorkCreditStatus, formatWorkCreditDate, workCreditCategoryLabel } from "../lib/workCredits";
+import {
+  deriveWorkCreditStatus,
+  formatWorkCreditDate,
+  workCreditCategoryLabel,
+  workCreditSectionFor
+} from "../lib/workCredits";
 import { getResponsiveImageProps } from "../lib/responsiveImage";
 import { InstagramReelEmbed } from "./InstagramReelEmbed";
 import { ActHeader } from "./ActHeader";
@@ -127,22 +133,24 @@ function WorkCreditCard({ entry }: { entry: WorkCreditEntry }) {
   );
 }
 
-export function WorkCreditsSection() {
-  const entries = [...workCredits]
-    .filter((entry) => entry.published)
-    .sort((a, b) => b.date.localeCompare(a.date));
+type WorkCreditGroupProps = {
+  id: string;
+  act: number;
+  eyebrow: string;
+  title: string;
+  copy: string;
+  entries: WorkCreditEntry[];
+};
 
+// お仕事実績・活動レポートは、同じデータ構造とカードを使い回し、
+// category による振り分け先（work / report）だけが異なるセクション。
+function WorkCreditGroup({ id, act, eyebrow, title, copy, entries }: WorkCreditGroupProps): ReactNode {
   if (entries.length === 0) return null;
 
   return (
-    <section id="work-credits" className="scroll-mt-32 bg-porcelain py-16 sm:py-24">
+    <section id={id} className="scroll-mt-32 bg-porcelain py-16 sm:py-24">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <ActHeader
-          act={9}
-          eyebrow="Work Credits"
-          title="お仕事実績"
-          copy="PR案件・出演・メディア掲載などのお仕事を、新しい順にまとめています。"
-        />
+        <ActHeader act={act} eyebrow={eyebrow} title={title} copy={copy} />
 
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {entries.map((entry) => (
@@ -151,5 +159,41 @@ export function WorkCreditsSection() {
         </div>
       </div>
     </section>
+  );
+}
+
+export function WorkCreditsSection() {
+  const publishedEntries = [...workCredits]
+    .filter((entry) => entry.published)
+    .sort((a, b) => b.date.localeCompare(a.date));
+
+  const workEntries = publishedEntries.filter(
+    (entry) => workCreditSectionFor(entry.category) === "work",
+  );
+  const reportEntries = publishedEntries.filter(
+    (entry) => workCreditSectionFor(entry.category) === "report",
+  );
+
+  if (workEntries.length === 0 && reportEntries.length === 0) return null;
+
+  return (
+    <>
+      <WorkCreditGroup
+        id="work-credits"
+        act={9}
+        eyebrow="Work Credits"
+        title="お仕事実績"
+        copy="PR案件・出演・メディア掲載などのお仕事を、新しい順にまとめています。"
+        entries={workEntries}
+      />
+      <WorkCreditGroup
+        id="activity-reports"
+        act={10}
+        eyebrow="Activity Reports"
+        title="活動レポート"
+        copy="日々の活動から、Instagramなどで公開されている投稿をまとめています。"
+        entries={reportEntries}
+      />
+    </>
   );
 }

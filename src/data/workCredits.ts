@@ -1,8 +1,10 @@
-// お仕事実績｜PR案件・出演・メディア掲載などを時系列で記録するデータソース。
+// お仕事実績・活動レポート｜PR案件・出演・メディア掲載・日々の活動レポートを時系列で記録するデータソース。
 // 新しいエントリは配列に追記するだけでよい（表示順は日付の新しい順に自動で並び替わる）。
+// category が 'pr'/'stage'/'media' なら「お仕事実績」、'report'/'other' なら「活動レポート」に振り分けられる
+// （振り分けロジックは src/lib/workCredits.ts の workCreditSectionFor）。
 // published: false のエントリは掲載コントロール用（サイトには一切レンダリングされない）。
 
-export type WorkCreditCategory = "pr" | "stage" | "media" | "other";
+export type WorkCreditCategory = "pr" | "stage" | "media" | "report" | "other";
 export type WorkCreditEmbedType = "instagram" | "thumbnail" | "none";
 export type WorkCreditStatus = "ongoing" | "ended" | "none";
 
@@ -61,6 +63,28 @@ export const workCredits: WorkCreditEntry[] = [
     eventPeriod: {
       end: "2026-06-07",
       label: "西武秋田店 地階催事場「シューイチ 全国うまいもの博」"
+    },
+    published: false
+  },
+  {
+    id: "seibu-akita-umaimono-2026-06",
+    category: "report",
+    title: "「シューイチ 全国うまいもの博」へ",
+    date: "2026-06-02",
+    summary:
+      "西武秋田店「シューイチ 全国うまいもの博」へ。ご姉妹と一緒に、小さい頃から親しんできた西武に並ぶ各県のグルメを見て回っています。",
+    sourceUrl: "https://www.instagram.com/p/DZFhVz-mZtt/",
+    embedType: "instagram",
+    links: [
+      { label: "本人の投稿", url: "https://www.instagram.com/p/DZFhVz-mZtt/" },
+      { label: "@supermamaeriko", url: "https://www.instagram.com/supermamaeriko" },
+      { label: "西武秋田店 公式サイト", url: "https://www.sogo-seibu.jp/akita" },
+      { label: "@seibuakita_official", url: "https://www.instagram.com/seibuakita_official" }
+    ],
+    isPr: false,
+    eventPeriod: {
+      end: "2026-06-07",
+      label: "西武秋田店 地下1階 催事場「シューイチ 全国うまいもの博」"
     },
     published: false
   }
