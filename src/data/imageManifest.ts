@@ -207,6 +207,8 @@ export const imageManifest = {
   "/images/gallery/g63.jpg": {"width":1206,"height":2622,"widths":[360,480,720,960,1206]},
   "/images/gallery/g64.jpg": {"width":1206,"height":2622,"widths":[360,480,720,960,1206]},
   "/images/gallery/g65.jpg": {"width":960,"height":1280,"widths":[360,480,720,960]},
+  "/images/miss-grand-japan/yukako-miss-grand-japan-management-2026-01.jpg": {"width":3240,"height":4317,"widths":[360,480,720,960,1280,1600,3240]},
+  "/images/miss-grand-japan/yukako-miss-grand-japan-management-2026-02.jpg": {"width":3240,"height":4317,"widths":[360,480,720,960,1280,1600,3240]},
   "/images/og/yukako-akita-to-tokyo-2022-1200x630.jpg": {"width":1200,"height":630,"widths":[360,480,720,960,1200]},
   "/images/og/yukako-baby-shark-live-1200x630.jpg": {"width":1200,"height":630,"widths":[360,480,720,960,1200]},
   "/images/og/yukako-mgj-2025-miss-peace-1200x630.jpg": {"width":1200,"height":630,"widths":[360,480,720,960,1200]},

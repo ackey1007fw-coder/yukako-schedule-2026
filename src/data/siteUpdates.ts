@@ -40,6 +40,21 @@ const sourcePlatform = (url: string) => {
 // 専用セクションを持つ単発トピック。本文は各セクションが持つため、ここは見出しと導線のみ。
 const standaloneUpdates: SiteUpdate[] = [
   {
+    id: "miss-grand-japan-management-2026-06-07",
+    date: "2026.6.7",
+    category: "Miss Grand Japan",
+    title: "ミス・グランド・ジャパン「代表補佐／運営マネジメント」に就任",
+    summary:
+      "2026年度より、大会運営全体のマネジメントと体制強化を担当。参加者一人ひとりの挑戦に寄り添いながら、大会のさらなるレベルアップを支えます。",
+    image: {
+      src: "/images/miss-grand-japan/yukako-miss-grand-japan-management-2026-01.jpg",
+      alt: "白い衣装を着た吉井優花子さんの宣材写真。ミス・グランド・ジャパン代表補佐／運営マネジメント就任発表"
+    },
+    imageLayout: "portrait-preview",
+    sourceUrl: "https://www.instagram.com/p/DZSK68wgVm4/?igsh=ZDY4YTQ3a2M5bHcz",
+    anchor: "#miss-grand-japan-management"
+  },
+  {
     id: "gojet-shiina-message-2026-07-19",
     date: "2026.7.19",
     category: "#ゆかJET",

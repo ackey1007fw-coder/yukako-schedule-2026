@@ -14,6 +14,7 @@ import { HighlightsSection } from "./components/HighlightsSection";
 import { LatestInstagramSection } from "./components/LatestInstagramSection";
 import { LatestUpdatesSection } from "./components/LatestUpdatesSection";
 import { LinksSection } from "./components/LinksSection";
+import { MissGrandJapanManagementSection } from "./components/MissGrandJapanManagementSection";
 import { NowProducingSection } from "./components/NowProducingSection";
 import { PhotoGallerySection } from "./components/PhotoGallerySection";
 import { BabySharkLiveSection } from "./components/BabySharkLiveSection";
@@ -220,6 +221,9 @@ function App() {
         </SectionReveal>
         <SectionReveal>
           <PhotoGallerySection />
+        </SectionReveal>
+        <SectionReveal>
+          <MissGrandJapanManagementSection />
         </SectionReveal>
         <SearchSeoSection />
         <SectionReveal>
