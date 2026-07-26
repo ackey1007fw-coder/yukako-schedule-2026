@@ -125,9 +125,10 @@ try {
     /data-ticket-tone="secondary"[^>]*>[\s\S]*?配信チケット[\s\S]*?<\/a>/
   );
 
+  // 最終日のLIVEは開演20:15（当初20:00から15分繰り下げ）。
   const afterFinalStartHtml = renderToStaticMarkup(
     createElement(GojetPerformancePanel, {
-      now: new Date("2026-07-27T20:00:01+09:00")
+      now: new Date("2026-07-27T20:15:01+09:00")
     })
   );
   assert.match(afterFinalStartHtml, /残り0公演/);

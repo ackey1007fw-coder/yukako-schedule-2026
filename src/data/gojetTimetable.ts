@@ -131,15 +131,19 @@ export const gojetTimetable: GojetTimetableDay[] = [
         time: "18:00",
         team: "C班",
         yukakoRole: "早紀役",
-        durationMinutes: DEFAULT_PERFORMANCE_DURATION_MINUTES,
+        // 18:00〜19:45予定（案内画像の記載どおり）
+        durationMinutes: 105,
         isFinale: true
       },
       {
-        time: "20:00",
+        // 当初20:00開演から15分繰り下げ（2026/7/26 案内）
+        time: "20:15",
         team: "全班合同LIVE",
         yukakoRole: "LIVE出演",
-        durationMinutes: DEFAULT_PERFORMANCE_DURATION_MINUTES
+        // 20:15〜21:35予定
+        durationMinutes: 80
       }
-    ]
+    ],
+    note: "LIVEは開場20:00・開演20:15（当初の20:00開演から15分繰り下げ）。C班公演後の面会＆チェキタイムは19:45〜19:55、退場も19:55。物販の購入はLIVE後のみです。"
   }
 ];
