@@ -47,6 +47,12 @@ export type GojetFeatureUpdate = {
     // リンクのラベル（未指定時は「引用元の投稿を見る」）
     urlLabel?: string;
   };
+  // 優花子さん本人からのリプライが確認できた場合に、控えめな引用欄として表示する
+  yukakoReply?: {
+    body: string;
+    // 返信についての短い補足文
+    note?: string;
+  };
   // 稽古動画などを手元にホストできた場合はカード内で直接再生する
   video?: {
     src: string;
@@ -128,6 +134,34 @@ export type GojetTeamUpdate = {
 };
 
 export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
+  {
+    date: "2026.7.26 1:30",
+    label: "矢口秀さん（@syu_martin68Y）・共演者投稿",
+    title: "3日目、楽しさと寂しさが深まる #ゆかJET",
+    body:
+      "『GO,JET!GO!GO! vol.1 Premium』公演3日目を終えた、矢口秀さんから。「3日目どんどん楽しくなってるし終わっちゃうのが淋しくなってます」というほど、公演に没頭している様子がつづられています。色々な方からの嬉しい言葉を糧に、さらに自分を上げていきたいとのこと。\n\n写真は、優花子さんとのハートポーズの2ショットと、キャスト全員の笑顔の集合セルフィー。あと2日、「皆さんとイイ笑顔で終われますように」。",
+    caption:
+      "#ゆかJET\n3日目どんどん楽しくなってるし終わっちゃうのが淋しくなってます！\nそのくらい没頭してます\n色々な方に嬉しい言葉をいただけてさらに自分を上げようと思ってます😁\n\nあと2日、皆さんとイイ笑顔で終われますように",
+    postUrl: "https://x.com/syu_martin68y/status/2081054397170372677",
+    homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+    ctaLabel: "矢口秀さんの投稿を見る",
+    homepageLabel: "公演予約・応援案内を見る",
+    roleTags: ["#ゆかJET", "共演者投稿", "公演3日目", "キャスト交流"],
+    photos: [
+      {
+        src: "/images/yukajet/2026-07-25-yaguchi-shu-yukako-heart.jpg",
+        alt: "アメリカンダイナー風の舞台セットでハートポーズを作る吉井優花子さんと矢口秀さん"
+      },
+      {
+        src: "/images/yukajet/2026-07-25-day3-cast-02.jpg",
+        alt: "アメリカンダイナー風の舞台セットで笑顔を見せるゆかJET出演者の集合写真"
+      }
+    ],
+    yukakoReply: {
+      body: "そう思ってもらえててとても嬉しい\n明日！！C班のときJET３人で撮ろう😏📸✨",
+      note: "出演者同士の信頼関係と、公演を楽しむ雰囲気が感じられるやり取りです。"
+    }
+  },
   {
     date: "2026.7.26 0:05",
     label: "吉井優花子さん本人（@mokoopy）",
