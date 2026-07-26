@@ -11,6 +11,8 @@ export type DisplayGojetFeatureUpdate = GojetFeatureUpdate & {
   primaryCta?: "post" | "homepage";
 };
 
+const YUKAKO_YELL_CARDS_20260727_POST_URL =
+  "https://x.com/mokoopy/status/2081421564504097269";
 const YUKAKO_DAY4_WRAP_20260727_POST_URL =
   "https://x.com/mokoopy/status/2081417317918155013";
 const YUKAKO_SCHEDULE_CHANGE_20260726_POST_URL =
@@ -140,6 +142,9 @@ const decoratedSourceUpdates: DisplayGojetFeatureUpdate[] = sourceUpdates
     };
   });
 
+const yukakoYellCards20260727Update = decoratedSourceUpdates.find(
+  (update) => update.postUrl === YUKAKO_YELL_CARDS_20260727_POST_URL
+);
 const yukakoDay4Wrap20260727Update = decoratedSourceUpdates.find(
   (update) => update.postUrl === YUKAKO_DAY4_WRAP_20260727_POST_URL
 );
@@ -232,6 +237,7 @@ export const gojetOriginUpdate = decoratedSourceUpdates.find(
 );
 const remainingSourceUpdates = decoratedSourceUpdates.filter(
   (update) =>
+    update.postUrl !== YUKAKO_YELL_CARDS_20260727_POST_URL &&
     update.postUrl !== YUKAKO_DAY4_WRAP_20260727_POST_URL &&
     update.postUrl !== YUKAKO_SCHEDULE_CHANGE_20260726_POST_URL &&
     update.postUrl !== KURUME_MAIMU_BBAN_FINALE_20260726_POST_URL &&
@@ -263,6 +269,16 @@ const remainingSourceUpdates = decoratedSourceUpdates.filter(
     update.postUrl !== PENLIGHT_POST_URL &&
     update.postUrl !== PRODUCE_ANNOUNCE_POST_URL
 );
+
+const featuredYukakoYellCards20260727Update:
+  | DisplayGojetFeatureUpdate
+  | undefined = yukakoYellCards20260727Update
+  ? {
+      ...yukakoYellCards20260727Update,
+      anchorId: "gojet-yukako-yell-cards-2026-07-27",
+      primaryCta: "post"
+    }
+  : undefined;
 
 const featuredYukakoDay4Wrap20260727Update:
   | DisplayGojetFeatureUpdate
@@ -550,6 +566,9 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
 // 7/25 23:49優花子さん本人（残り公演の呼びかけ）→ 7/25 22:43三村すみかさん →
 // 7/25 11:31秋乃蒼依さん → 21:24青木杏奈さん → 20:40曽原加絵さん → 19:06来瞳舞夢さんの順で先頭表示する。
 const orderedGojetFeatureUpdates: DisplayGojetFeatureUpdate[] = [
+  ...(featuredYukakoYellCards20260727Update
+    ? [featuredYukakoYellCards20260727Update]
+    : []),
   ...(featuredYukakoDay4Wrap20260727Update
     ? [featuredYukakoDay4Wrap20260727Update]
     : []),
