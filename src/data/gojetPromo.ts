@@ -135,6 +135,40 @@ export type GojetTeamUpdate = {
 
 export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
   {
+    date: "2026.7.26 22:34",
+    label: "来瞳舞夢さん（@maimu_htk）・B班マスター役／C班美月役",
+    title: "B班千秋楽、無事に駆け抜けられました｜来瞳舞夢さん",
+    body:
+      "B班マスター役の来瞳舞夢さんから、B班千秋楽の完走報告。「無事に駆け抜けられました！！」\n\n詳しい感想は、翌27日のC班千秋楽とライブ公演を終えてから。来瞳さんはB班でマスター役、C班で美月役。優花子さんはB班でJET役、C班で早紀役です。\n\n写真は「ご観劇 ゆかJET ありがとうございました♡」のボードを囲んだ、千秋楽直後の集合ショット。",
+    caption:
+      "ハロー💋➰💕\n\n取り急ぎ、B班千秋楽🍻\n無事に駆け抜けられました！！\nご来場ありがとうございました‼️\n\n詳しい感想などは明日に控えている\nC班千秋楽とライブ公演を終えてから⭕️\n\n#ゆかJET",
+    postUrl: "https://x.com/maimu_htk/status/2081372480959307913",
+    homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+    ctaLabel: "来瞳舞夢さんの投稿を見る",
+    homepageLabel: "最終日の予約・応援案内を見る",
+    roleTags: [
+      "#ゆかJET",
+      "公演レポート",
+      "キャスト投稿",
+      "B班：マスター",
+      "C班：美月",
+      "B班千秋楽",
+      "最終日案内"
+    ],
+    photo: {
+      src: "/images/yukajet/2026-07-26-kurume-maimu-bban-finale.jpg",
+      alt: "「ご観劇 ゆかJET ありがとうございました♡」と書かれたボードを中央で掲げ、レトロなアメリカンダイナー風のセットに集まったB班千秋楽の出演者集合写真"
+    },
+    schedule: {
+      heading: "最終日公演スケジュール（2026年7月27日）",
+      note: "会場：Air studio 両国。優花子さんはC班で早紀役、20:00のLIVEにも出演します。来瞳さんはC班で美月役。",
+      items: [
+        { time: "18:00〜", label: "C班・イエロー（千秋楽）" },
+        { time: "20:00〜", label: "全班合同LIVE" }
+      ]
+    }
+  },
+  {
     date: "2026.7.26 10:32",
     label: "吉井優花子さん本人（@mokoopy）",
     title: "歌で全員が輝く舞台へ──脚色・楽曲制作への想い",

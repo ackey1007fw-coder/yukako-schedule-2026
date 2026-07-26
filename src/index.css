@@ -178,10 +178,17 @@ img {
   );
 }
 
+/* 縦の inset を % にすると billboard の高さ基準で解決されるため、#ゆかJET の
+   更新カードが増えるほどこの装飾だけが巨大化する（実測: 高さ10,000px超）。
+   iOS Safari では巨大な要素を無限アニメーションさせると合成レイヤーが上限を超え、
+   カード上部が欠ける・広い余白ができる・スクロールが詰まる、という描画崩れが起きる。
+   光が届くのは上端付近だけなので、カードの高さから切り離した固定サイズで覆う。 */
 .yukako-billboard-spotlight {
   pointer-events: none;
   position: absolute;
-  inset: -20%;
+  inset: -260px -20% auto;
+  height: 1100px;
+  max-height: 140%;
   z-index: 0;
   background: radial-gradient(circle at 50% 0%, rgba(255, 253, 247, 0.16), transparent 45%);
   animation: yukako-spotlight-sweep 9s ease-in-out infinite;
@@ -644,13 +651,15 @@ img {
 }
 
 /* セクション表示アニメーション（スクロールでふわっと浮かび上がる） */
+/* will-change は指定しない。#ゆかJET のように数千px規模になるセクションでは、
+   恒常的な合成レイヤーが iOS Safari の上限を超えて描画崩れの原因になる。
+   表示が終わったセクションは SectionReveal 側でクラス自体を外す。 */
 .section-reveal {
   opacity: 0;
   transform: translateY(24px);
   transition:
     opacity 640ms cubic-bezier(0.2, 0.75, 0.25, 1),
     transform 640ms cubic-bezier(0.2, 0.75, 0.25, 1);
-  will-change: opacity, transform;
 }
 
 .section-revealed {

@@ -11,6 +11,8 @@ export type DisplayGojetFeatureUpdate = GojetFeatureUpdate & {
   primaryCta?: "post" | "homepage";
 };
 
+const KURUME_MAIMU_BBAN_FINALE_20260726_POST_URL =
+  "https://x.com/maimu_htk/status/2081372480959307913";
 const YUKAKO_SONGS_STAGING_20260726_POST_URL =
   "https://x.com/mokoopy/status/2081190994415083734";
 const YAGUCHI_SHU_DAY3_20260726_POST_URL =
@@ -134,6 +136,9 @@ const decoratedSourceUpdates: DisplayGojetFeatureUpdate[] = sourceUpdates
     };
   });
 
+const kurumeMaimuBbanFinale20260726Update = decoratedSourceUpdates.find(
+  (update) => update.postUrl === KURUME_MAIMU_BBAN_FINALE_20260726_POST_URL
+);
 const yukakoSongsStaging20260726Update = decoratedSourceUpdates.find(
   (update) => update.postUrl === YUKAKO_SONGS_STAGING_20260726_POST_URL
 );
@@ -217,6 +222,7 @@ export const gojetOriginUpdate = decoratedSourceUpdates.find(
 );
 const remainingSourceUpdates = decoratedSourceUpdates.filter(
   (update) =>
+    update.postUrl !== KURUME_MAIMU_BBAN_FINALE_20260726_POST_URL &&
     update.postUrl !== YUKAKO_SONGS_STAGING_20260726_POST_URL &&
     update.postUrl !== YAGUCHI_SHU_DAY3_20260726_POST_URL &&
     update.postUrl !== YUKAKO_DAY3_WRAP_20260726_POST_URL &&
@@ -245,6 +251,16 @@ const remainingSourceUpdates = decoratedSourceUpdates.filter(
     update.postUrl !== PENLIGHT_POST_URL &&
     update.postUrl !== PRODUCE_ANNOUNCE_POST_URL
 );
+
+const featuredKurumeMaimuBbanFinale20260726Update:
+  | DisplayGojetFeatureUpdate
+  | undefined = kurumeMaimuBbanFinale20260726Update
+  ? {
+      ...kurumeMaimuBbanFinale20260726Update,
+      anchorId: "gojet-kurume-maimu-bban-finale-2026-07-26",
+      primaryCta: "post"
+    }
+  : undefined;
 
 const featuredYukakoSongsStaging20260726Update:
   | DisplayGojetFeatureUpdate
@@ -495,11 +511,14 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
       }
     : undefined;
 
-// 7/26 10:32優花子さん本人（脚色・楽曲制作への想い）→ 7/26 1:30矢口秀さん（3日目共演者投稿）→
-// 7/26 0:05優花子さん本人（3日目終演レポート）→
+// 7/26 22:34来瞳舞夢さん（B班千秋楽の完走報告）→ 7/26 10:32優花子さん本人（脚色・楽曲制作への想い）→
+// 7/26 1:30矢口秀さん（3日目共演者投稿）→ 7/26 0:05優花子さん本人（3日目終演レポート）→
 // 7/25 23:49優花子さん本人（残り公演の呼びかけ）→ 7/25 22:43三村すみかさん →
 // 7/25 11:31秋乃蒼依さん → 21:24青木杏奈さん → 20:40曽原加絵さん → 19:06来瞳舞夢さんの順で先頭表示する。
 const orderedGojetFeatureUpdates: DisplayGojetFeatureUpdate[] = [
+  ...(featuredKurumeMaimuBbanFinale20260726Update
+    ? [featuredKurumeMaimuBbanFinale20260726Update]
+    : []),
   ...(featuredYukakoSongsStaging20260726Update
     ? [featuredYukakoSongsStaging20260726Update]
     : []),
