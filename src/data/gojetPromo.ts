@@ -135,6 +135,39 @@ export type GojetTeamUpdate = {
 
 export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
   {
+    date: "2026.7.27 1:49",
+    label: "吉井優花子さん本人（@mokoopy）",
+    title: "喉と向き合いながら、私らしい早紀をやり切る",
+    body:
+      "「喉が本当に本当に、ねえ、、、」——この2日、B班のJETもC班の早紀も深い声。声の良さがウリなのに、と本人。\n\nアゲアゲ200%ができない悔しさはありつつ、「私らしく優しく愛のあるかっこいいおもっしろい早紀をやり切ります‼️」。最終日・C班大千秋楽へ向けて。\n\n写真は、壁一面のエールカードを背にしたポーズ。「エールカード ありがとう」の文字入りです。",
+    caption:
+      "#ゆかJET \n\n喉が本当に本当に、ねえ、、、\nこの2日来てくださった方はわかると思うけど\n深い声出してますBJET&C早紀💭\n声の良さがウリなのに、、😭\n\nアゲアゲ200%ができない悔しさはありますが、\n私らしく優しく愛のあるかっこいいおもっしろい早紀をやり切ります‼️\n\n⬇️応援ありがとう🥹とても嬉しい🩷",
+    postUrl: "https://x.com/mokoopy/status/2081421564504097269",
+    homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+    ctaLabel: "Xで元の投稿を見る",
+    homepageLabel: "最終日の予約・応援案内を見る",
+    roleTags: [
+      "#ゆかJET",
+      "吉井優花子さん本人",
+      "B班：JET役",
+      "C班：早紀役",
+      "大千秋楽",
+      "最終日案内"
+    ],
+    photo: {
+      src: "/images/yukajet/2026-07-27-yukako-yell-cards.jpg",
+      alt: "壁一面に貼られた応援メッセージのエールカードを背に、ピンクのシャツと黒地にピンクの水玉模様のスカート姿で両手を広げる吉井優花子さん"
+    },
+    quotedPost: {
+      author: "吉井優花子",
+      handle: "@mokoopy",
+      body:
+        "4日目、A班とB班の千秋楽。最終日は27日18:00〜C班の大千秋楽、20:15〜全キャストのLIVE（20:00開場）。飛び入り来場も歓迎。",
+      url: "https://x.com/mokoopy/status/2081417317918155013",
+      urlLabel: "引用元（4日目のレポート）を見る"
+    }
+  },
+  {
     date: "2026.7.27 1:32",
     label: "吉井優花子さん本人（@mokoopy）",
     title: "A班・B班千秋楽を見送って。4日目終演、そして最終日へ",
