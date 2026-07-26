@@ -333,6 +333,7 @@ export const imageManifest = {
   "/images/yukajet/2026-07-25-mimura-sumika-yukako.jpg": {"width":1536,"height":2048,"widths":[360,480,720,960,1280,1536]},
   "/images/yukajet/2026-07-25-yaguchi-shu-yukako-heart.jpg": {"width":1477,"height":1108,"widths":[360,480,720,960,1280,1477]},
   "/images/yukajet/2026-07-25-yukako-remaining-shows.jpg": {"width":1536,"height":2048,"widths":[360,480,720,960,1280,1536]},
+  "/images/yukajet/2026-07-26-kurume-maimu-bban-finale.jpg": {"width":1108,"height":1477,"widths":[360,480,720,960,1108]},
   "/images/yukako-babyshark-character.jpg": {"width":1600,"height":2048,"widths":[360,480,720,960,1280,1600]},
   "/images/yukako-babyshark-lobster.jpg": {"width":941,"height":1176,"widths":[360,480,720,941]},
   "/images/yukako-babyshark-lobster2.jpg": {"width":1170,"height":1560,"widths":[360,480,720,960,1170]},
