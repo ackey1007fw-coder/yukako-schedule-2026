@@ -19,7 +19,13 @@ export function XPostEmbed({ url, label }: XPostEmbedProps) {
 
   useEffect(() => {
     let cancelled = false;
+    // タイムアウト後にフォールバックカードへ切り替えたら、それより遅れて届く
+    // widgets.load()の結果は無視する。そうしないと、既にアンマウントされた
+    // blockquoteをXが処理した結果が届いた際に、未処理のblockquoteを再マウント
+    // してしまい、埋め込みにもフォールバックにもならない状態になる。
+    let timedOut = false;
     const timeoutId = window.setTimeout(() => {
+      timedOut = true;
       if (!cancelled) setStatus((current) => (current === "loading" ? "failed" : current));
     }, EMBED_TIMEOUT_MS);
 
@@ -29,12 +35,12 @@ export function XPostEmbed({ url, label }: XPostEmbedProps) {
         return window.twttr.widgets.load(containerRef.current ?? undefined);
       })
       .then((elements) => {
-        if (cancelled) return;
+        if (cancelled || timedOut) return;
         window.clearTimeout(timeoutId);
         setStatus(elements.length > 0 ? "loaded" : "failed");
       })
       .catch(() => {
-        if (!cancelled) setStatus("failed");
+        if (!cancelled && !timedOut) setStatus("failed");
       });
 
     return () => {
