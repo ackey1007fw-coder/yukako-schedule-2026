@@ -6,9 +6,16 @@ type SectionRevealProps = {
   className?: string;
 };
 
+// .section-reveal のトランジション時間（index.css）と揃える。
+const REVEAL_TRANSITION_MS = 640;
+
 export function SectionReveal({ children, className = "" }: SectionRevealProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [revealed, setRevealed] = useState(false);
+  // 表示アニメーションが終わったセクションは、transform / transition を持たない
+  // ただのdivへ戻す。iOS Safariでは、残ったtransformが大きなセクションを
+  // 合成レイヤーにしてしまい、カード上部の欠けやスクロールの詰まりを起こす。
+  const [settled, setSettled] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
@@ -16,6 +23,7 @@ export function SectionReveal({ children, className = "" }: SectionRevealProps) 
 
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       setRevealed(true);
+      setSettled(true);
       return;
     }
 
@@ -38,14 +46,25 @@ export function SectionReveal({ children, className = "" }: SectionRevealProps) 
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    if (!revealed || settled) return undefined;
+
+    const timer = window.setTimeout(() => setSettled(true), REVEAL_TRANSITION_MS);
+    return () => window.clearTimeout(timer);
+  }, [revealed, settled]);
+
+  if (settled) {
+    return (
+      <div ref={ref} className={className}>
+        {children}
+      </div>
+    );
+  }
+
   return (
     <div
       ref={ref}
       className={`section-reveal ${revealed ? "section-revealed" : ""} ${className}`}
-      // iOS Safariでは、表示後もtransform / will-changeを残すと、
-      // overflow-hiddenとアニメーションを含む大きなカードの上部が欠けることがある。
-      // none / autoへ戻して恒常的な合成レイヤーを解除する。
-      style={revealed ? { transform: "none", willChange: "auto" } : undefined}
     >
       {children}
     </div>
