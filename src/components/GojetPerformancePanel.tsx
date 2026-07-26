@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { ArrowUpRight, Clock3, Radio, Ticket } from "lucide-react";
 import {
+  gojetClosingDate,
   gojetInPersonTicketUrl,
   gojetStreamingTicketUrl
 } from "../data/gojetTimetable";
@@ -12,6 +13,7 @@ import {
   type GojetPerformanceLiveStatus
 } from "../lib/gojetStatus";
 import { trackPortalEvent } from "../lib/analytics";
+import { FinaleBadge } from "./FinaleBadge";
 
 type GojetPerformancePanelProps = {
   now?: Date;
@@ -175,9 +177,10 @@ export function GojetPerformancePanel({ now }: GojetPerformancePanelProps) {
             </div>
             <h2
               id="gojet-today-title"
-              className="mt-2 font-display text-3xl font-black leading-tight text-ink sm:text-4xl"
+              className="mt-2 flex flex-wrap items-center gap-2 font-display text-3xl font-black leading-tight text-ink sm:text-4xl"
             >
               本日の公演
+              {status.day.date === gojetClosingDate && <FinaleBadge />}
             </h2>
             {daySummary.live ? (
               <p className="mt-2 inline-flex w-fit items-center gap-2 rounded-full border border-rosefog/50 bg-rosefog/10 px-3 py-1.5 text-sm font-black text-rosefog">
@@ -214,6 +217,9 @@ export function GojetPerformancePanel({ now }: GojetPerformancePanelProps) {
                       performance.durationMinutes
                     )}
                   />
+                  {performance.isFinale && status.day.date !== gojetClosingDate && (
+                    <FinaleBadge className="w-fit" />
+                  )}
                 </div>
               ))}
             </div>

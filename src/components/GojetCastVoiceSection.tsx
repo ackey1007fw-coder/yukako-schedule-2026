@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { Award, Clock3, Instagram, MapPin, Ticket } from "lucide-react";
+import { Clock3, Instagram, MapPin, Ticket } from "lucide-react";
 import { gojetStreamingTicketUrl } from "../data/gojetTimetable";
 import { getGojetCastVoiceSchedule } from "../lib/gojetCastVoiceSchedule";
 import { gojetPerformanceLiveStatusLabel } from "../lib/gojetStatus";
 import { trackPortalEvent } from "../lib/analytics";
+import { FinaleBadge } from "./FinaleBadge";
 import { XPostEmbed } from "./XPostEmbed";
 
 const CLOCK_UPDATE_MS = 60000;
@@ -189,10 +190,7 @@ export function GojetCastVoiceSection({ now }: GojetCastVoiceSectionProps) {
                                     </span>
                                   )}
                                   {performance.isFinale && (
-                                    <span className="mt-1.5 inline-flex items-center gap-1 border border-champagne/50 bg-champagne/10 px-2 py-0.5 text-[11px] font-black text-champagneInk">
-                                      <Award className="h-3 w-3 shrink-0" aria-hidden="true" />
-                                      千穐楽
-                                    </span>
+                                    <FinaleBadge className="mt-1.5" />
                                   )}
                                 </span>
                                 <span
