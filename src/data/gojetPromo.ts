@@ -209,6 +209,42 @@ export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
     }
   },
   {
+    date: "2026.7.25 23:49",
+    label: "吉井優花子さん本人（@mokoopy）",
+    title: "お客様目標まであと3名！残り公演への呼びかけ",
+    body:
+      "「私のお客様目標まであと3名…🥹」——優花子さん本人から、残り公演への呼びかけです。\n\nB班ではJET役、C班では早紀役、そして千秋楽のLIVEまで。「BもCもLIVEも必ず楽しませます」——A班の回も、優花子さん扱いでの観劇でOKとのことです。\n\n「最後の特別なGO,JET!、観に来てね」——ラストスパートへ向けた、まっすぐな呼びかけです。",
+    caption:
+      "は！！！！！！ #ゆかJET \n\n私のお客様目標まであと３名…🥹\n\nぜひどなたか、、リピートでも、、、\n観に来てくださいませんか⁉️😭\nBもCもLIVEも必ず楽しませます✨\nAも私扱いで観劇🉑です！\n最後の特別なGO,JET!、観に来てね✨\n\n【残りの公演】\n26日(日)12:00〜B班(JET役)\n26日(日)19:00〜C班(早紀役)\n27日(月)18:00〜C班(早紀役)\n27日(月)20:00〜LIVE(全キャストで🪩)",
+    postUrl: "https://x.com/mokoopy/status/2081165030729654285",
+    homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+    ctaLabel: "Xで元の投稿を見る",
+    homepageLabel: "公演予約・応援案内を見る",
+    roleTags: [
+      "#ゆかJET",
+      "吉井優花子さん本人",
+      "公演告知",
+      "残り公演案内",
+      "B班：JET役",
+      "C班：早紀役",
+      "観劇呼びかけ"
+    ],
+    photo: {
+      src: "/images/yukajet/2026-07-25-yukako-remaining-shows.jpg",
+      alt: "GO,JET!の舞台セット前で笑顔を見せる吉井優花子さん"
+    },
+    schedule: {
+      heading: "残りの公演スケジュール",
+      note: "会場：Air studio 両国。優花子さんはB班でJET役、C班で早紀役を務めます。27日20:00はキャスト全員によるLIVEです。",
+      items: [
+        { time: "26日(日) 12:00〜", label: "B班（JET役）" },
+        { time: "26日(日) 19:00〜", label: "C班（早紀役）" },
+        { time: "27日(月) 18:00〜", label: "C班（早紀役）" },
+        { time: "27日(月) 20:00〜", label: "LIVE（全キャストで🪩）" }
+      ]
+    }
+  },
+  {
     date: "2026.7.25 22:43",
     label: "三村すみかさん（@smk_mmr）・C班美里役",
     title:
