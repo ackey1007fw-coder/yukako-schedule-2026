@@ -76,28 +76,28 @@ export const profile = {
   },
   avatars: [
     {
-      name: "にこにこ柴犬風アバター",
+      name: "あきたいぬちゃん",
       image: "/images/showroom-avatars/yukako-showroom-avatar-01.jpg",
       featured: true
     },
     {
-      name: "うさぎ衣装アバター",
+      name: "ゆかうさ",
       image: "/images/showroom-avatars/yukako-showroom-avatar-02.jpg"
     },
     {
-      name: "おひるね柴犬風アバター",
+      name: "あきたい夢",
       image: "/images/showroom-avatars/yukako-showroom-avatar-03.jpg"
     },
     {
-      name: "花束ドレスアバター",
+      name: "ゆかボンヌ",
       image: "/images/showroom-avatars/yukako-showroom-avatar-04.jpg"
     },
     {
-      name: "秋田なまはげ風アバター",
+      name: "あきたいぬくん",
       image: "/images/showroom-avatars/yukako-showroom-avatar-05.jpg"
     },
     {
-      name: "浴衣アバター",
+      name: "ちびゆか",
       image: "/images/showroom-avatars/yukako-showroom-avatar-06.jpg"
     }
   ] as { name: string; image: string; featured?: boolean }[]
