@@ -11,6 +11,8 @@ export type DisplayGojetFeatureUpdate = GojetFeatureUpdate & {
   primaryCta?: "post" | "homepage";
 };
 
+const YUKAKO_DAY4_WRAP_20260727_POST_URL =
+  "https://x.com/mokoopy/status/2081417317918155013";
 const YUKAKO_SCHEDULE_CHANGE_20260726_POST_URL =
   "https://x.com/mokoopy/status/2081386441725071564";
 const KURUME_MAIMU_BBAN_FINALE_20260726_POST_URL =
@@ -138,6 +140,9 @@ const decoratedSourceUpdates: DisplayGojetFeatureUpdate[] = sourceUpdates
     };
   });
 
+const yukakoDay4Wrap20260727Update = decoratedSourceUpdates.find(
+  (update) => update.postUrl === YUKAKO_DAY4_WRAP_20260727_POST_URL
+);
 const yukakoScheduleChange20260726Update = decoratedSourceUpdates.find(
   (update) => update.postUrl === YUKAKO_SCHEDULE_CHANGE_20260726_POST_URL
 );
@@ -227,6 +232,7 @@ export const gojetOriginUpdate = decoratedSourceUpdates.find(
 );
 const remainingSourceUpdates = decoratedSourceUpdates.filter(
   (update) =>
+    update.postUrl !== YUKAKO_DAY4_WRAP_20260727_POST_URL &&
     update.postUrl !== YUKAKO_SCHEDULE_CHANGE_20260726_POST_URL &&
     update.postUrl !== KURUME_MAIMU_BBAN_FINALE_20260726_POST_URL &&
     update.postUrl !== YUKAKO_SONGS_STAGING_20260726_POST_URL &&
@@ -257,6 +263,16 @@ const remainingSourceUpdates = decoratedSourceUpdates.filter(
     update.postUrl !== PENLIGHT_POST_URL &&
     update.postUrl !== PRODUCE_ANNOUNCE_POST_URL
 );
+
+const featuredYukakoDay4Wrap20260727Update:
+  | DisplayGojetFeatureUpdate
+  | undefined = yukakoDay4Wrap20260727Update
+  ? {
+      ...yukakoDay4Wrap20260727Update,
+      anchorId: "gojet-yukako-day4-wrap-2026-07-27",
+      primaryCta: "post"
+    }
+  : undefined;
 
 const featuredYukakoScheduleChange20260726Update:
   | DisplayGojetFeatureUpdate
@@ -527,12 +543,16 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
       }
     : undefined;
 
+// 7/27 1:32優花子さん本人（4日目終演・A班B班千秋楽の振り返りと最終日案内）→
 // 7/26 23:29優花子さん本人（最終日LIVEの15分繰り下げ案内）→
 // 7/26 22:34来瞳舞夢さん（B班千秋楽の完走報告）→ 7/26 10:32優花子さん本人（脚色・楽曲制作への想い）→
 // 7/26 1:30矢口秀さん（3日目共演者投稿）→ 7/26 0:05優花子さん本人（3日目終演レポート）→
 // 7/25 23:49優花子さん本人（残り公演の呼びかけ）→ 7/25 22:43三村すみかさん →
 // 7/25 11:31秋乃蒼依さん → 21:24青木杏奈さん → 20:40曽原加絵さん → 19:06来瞳舞夢さんの順で先頭表示する。
 const orderedGojetFeatureUpdates: DisplayGojetFeatureUpdate[] = [
+  ...(featuredYukakoDay4Wrap20260727Update
+    ? [featuredYukakoDay4Wrap20260727Update]
+    : []),
   ...(featuredYukakoScheduleChange20260726Update
     ? [featuredYukakoScheduleChange20260726Update]
     : []),
