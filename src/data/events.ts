@@ -7,7 +7,7 @@ export const events: ScheduleEvent[] = [
     shortTitle: "#ゆかJET",
     category: "stage",
     startAt: "2026-07-23T18:30:00+09:00",
-    endAt: "2026-07-27T21:00:00+09:00",
+    endAt: "2026-07-27T21:35:00+09:00",
     dates: [
       "2026-07-23",
       "2026-07-24",
