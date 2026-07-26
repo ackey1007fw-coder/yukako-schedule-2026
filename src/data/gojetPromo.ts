@@ -135,6 +135,18 @@ export type GojetTeamUpdate = {
 
 export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
   {
+    date: "2026.7.26 10:32",
+    label: "吉井優花子さん本人（@mokoopy）",
+    title: "歌で全員が輝く舞台へ──脚色・楽曲制作への想い",
+    body:
+      "『GO,JET!GO!GO! vol.1 Premium』で優花子さんが担うのは出演だけではない。脚色・楽曲制作にも携わり、「みんなに輝いてほしくて」全キャストが歌える構成へと組み直した。\n\n本番を重ねる中で、自身が見て感じた手応えと、観客から届いた好評な反応。その両方から「歌を増やして本当に良かった」という実感。演出の多賀さんからも、歌が加わったことで『GO,JET!GO!GO! vol.1』に新しい演出が生まれたとの声。\n\n観劇したファンからは「歌盛りだくさんで面白かった」「世界観が好き」「千秋楽LIVEも楽しみ」の声も。役者としてだけでなく、作品づくりにも力を注ぐ優花子さんの一面。",
+    postUrl: "https://x.com/mokoopy/status/2081190994415083734",
+    homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+    ctaLabel: "Xで元の投稿を見る",
+    homepageLabel: "公演情報を見る",
+    roleTags: ["#ゆかJET", "吉井優花子さん本人", "脚色・楽曲制作", "演出家コメント"]
+  },
+  {
     date: "2026.7.26 1:30",
     label: "矢口秀さん（@syu_martin68Y）・共演者投稿",
     title: "3日目、楽しさと寂しさが深まる #ゆかJET",

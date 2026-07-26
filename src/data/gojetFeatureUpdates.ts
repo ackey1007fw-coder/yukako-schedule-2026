@@ -11,6 +11,8 @@ export type DisplayGojetFeatureUpdate = GojetFeatureUpdate & {
   primaryCta?: "post" | "homepage";
 };
 
+const YUKAKO_SONGS_STAGING_20260726_POST_URL =
+  "https://x.com/mokoopy/status/2081190994415083734";
 const YAGUCHI_SHU_DAY3_20260726_POST_URL =
   "https://x.com/syu_martin68y/status/2081054397170372677";
 const YUKAKO_DAY3_WRAP_20260726_POST_URL =
@@ -132,6 +134,9 @@ const decoratedSourceUpdates: DisplayGojetFeatureUpdate[] = sourceUpdates
     };
   });
 
+const yukakoSongsStaging20260726Update = decoratedSourceUpdates.find(
+  (update) => update.postUrl === YUKAKO_SONGS_STAGING_20260726_POST_URL
+);
 const yaguchiShuDay320260726Update = decoratedSourceUpdates.find(
   (update) => update.postUrl === YAGUCHI_SHU_DAY3_20260726_POST_URL
 );
@@ -212,6 +217,7 @@ export const gojetOriginUpdate = decoratedSourceUpdates.find(
 );
 const remainingSourceUpdates = decoratedSourceUpdates.filter(
   (update) =>
+    update.postUrl !== YUKAKO_SONGS_STAGING_20260726_POST_URL &&
     update.postUrl !== YAGUCHI_SHU_DAY3_20260726_POST_URL &&
     update.postUrl !== YUKAKO_DAY3_WRAP_20260726_POST_URL &&
     update.postUrl !== YUKAKO_REMAINING_SHOWS_20260725_POST_URL &&
@@ -239,6 +245,16 @@ const remainingSourceUpdates = decoratedSourceUpdates.filter(
     update.postUrl !== PENLIGHT_POST_URL &&
     update.postUrl !== PRODUCE_ANNOUNCE_POST_URL
 );
+
+const featuredYukakoSongsStaging20260726Update:
+  | DisplayGojetFeatureUpdate
+  | undefined = yukakoSongsStaging20260726Update
+  ? {
+      ...yukakoSongsStaging20260726Update,
+      anchorId: "gojet-yukako-songs-staging-2026-07-26",
+      primaryCta: "post"
+    }
+  : undefined;
 
 const featuredYaguchiShuDay320260726Update:
   | DisplayGojetFeatureUpdate
@@ -479,10 +495,14 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
       }
     : undefined;
 
-// 7/26 1:30矢口秀さん（3日目共演者投稿）→ 7/26 0:05優花子さん本人（3日目終演レポート）→
+// 7/26 10:32優花子さん本人（脚色・楽曲制作への想い）→ 7/26 1:30矢口秀さん（3日目共演者投稿）→
+// 7/26 0:05優花子さん本人（3日目終演レポート）→
 // 7/25 23:49優花子さん本人（残り公演の呼びかけ）→ 7/25 22:43三村すみかさん →
 // 7/25 11:31秋乃蒼依さん → 21:24青木杏奈さん → 20:40曽原加絵さん → 19:06来瞳舞夢さんの順で先頭表示する。
 const orderedGojetFeatureUpdates: DisplayGojetFeatureUpdate[] = [
+  ...(featuredYukakoSongsStaging20260726Update
+    ? [featuredYukakoSongsStaging20260726Update]
+    : []),
   ...(featuredYaguchiShuDay320260726Update
     ? [featuredYaguchiShuDay320260726Update]
     : []),
