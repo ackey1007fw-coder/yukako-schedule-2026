@@ -5,7 +5,7 @@ export type GojetPerformance = {
   yukakoRole?: string;
   /** 上演時間（分）。カーテンコール等を含めた目安。ステータス判定に使用する */
   durationMinutes: number;
-  /** その班にとっての千穐楽（最終公演）の場合のみ true */
+  /** その班にとっての千秋楽（最終公演）の場合のみ true */
   isFinale?: boolean;
 };
 

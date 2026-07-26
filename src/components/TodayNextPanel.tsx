@@ -1,9 +1,11 @@
 import { CalendarClock, CalendarDays, MapPin } from "lucide-react";
 import {
+  gojetClosingDate,
   gojetTimetable,
   type GojetTimetableDay
 } from "../data/gojetTimetable";
 import type { ScheduleEvent } from "../types";
+import { FinaleBadge } from "./FinaleBadge";
 
 type TodayNextPanelProps = {
   todayEvents: ScheduleEvent[];
@@ -92,7 +94,10 @@ const GojetAppearancePanel = ({
         </strong>
         {day && (
           <>
-            <span className="mt-2 block text-sm font-bold text-ink/72">{day.label}</span>
+            <span className="mt-2 flex flex-wrap items-center gap-2">
+              <span className="text-sm font-bold text-ink/72">{day.label}</span>
+              {day.date === gojetClosingDate && <FinaleBadge />}
+            </span>
             <span className="mt-3 grid gap-2">
               {appearances.map((appearance) => (
                 <span
@@ -102,6 +107,7 @@ const GojetAppearancePanel = ({
                   <strong className="font-display text-lg text-rosefog">{appearance.time}</strong>
                   <span className="text-sm font-black text-ink">{appearance.team}</span>
                   <span className="text-sm font-bold text-ink/65">{appearance.yukakoRole}</span>
+                  {appearance.isFinale && day.date !== gojetClosingDate && <FinaleBadge />}
                 </span>
               ))}
             </span>
