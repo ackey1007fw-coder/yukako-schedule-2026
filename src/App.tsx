@@ -5,6 +5,7 @@ import { AkitaRootsSection } from "./components/AkitaRootsSection";
 import { AudienceReportSection } from "./components/AudienceReportSection";
 import { Footer } from "./components/Footer";
 import { GojetCastMessageSection } from "./components/GojetCastMessageSection";
+import { GojetCastVoiceSection } from "./components/GojetCastVoiceSection";
 import { GojetHairUpdateSection } from "./components/GojetHairUpdateSection";
 import { GojetPerformancePanel } from "./components/GojetPerformancePanel";
 import { GojetTeamsSection } from "./components/GojetTeamsSection";
@@ -162,6 +163,9 @@ function App() {
         </SectionReveal>
         <SectionReveal>
           <GojetCastMessageSection />
+        </SectionReveal>
+        <SectionReveal>
+          <GojetCastVoiceSection />
         </SectionReveal>
         <SectionReveal>
           <GojetHairUpdateSection />

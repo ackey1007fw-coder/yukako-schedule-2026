@@ -5,6 +5,8 @@ export type GojetPerformance = {
   yukakoRole?: string;
   /** 上演時間（分）。カーテンコール等を含めた目安。ステータス判定に使用する */
   durationMinutes: number;
+  /** その班にとっての千穐楽（最終公演）の場合のみ true */
+  isFinale?: boolean;
 };
 
 // 上演時間の目安（分）。公式から「1時間20分」→「1時間40分」（カーテンコール込み）へ
@@ -109,13 +111,15 @@ export const gojetTimetable: GojetTimetableDay[] = [
       {
         time: "15:30",
         team: "A班",
-        durationMinutes: DEFAULT_PERFORMANCE_DURATION_MINUTES
+        durationMinutes: DEFAULT_PERFORMANCE_DURATION_MINUTES,
+        isFinale: true
       },
       {
         time: "19:00",
         team: "B班",
         yukakoRole: "JET役",
-        durationMinutes: DEFAULT_PERFORMANCE_DURATION_MINUTES
+        durationMinutes: DEFAULT_PERFORMANCE_DURATION_MINUTES,
+        isFinale: true
       }
     ]
   },
@@ -127,7 +131,8 @@ export const gojetTimetable: GojetTimetableDay[] = [
         time: "18:00",
         team: "C班",
         yukakoRole: "早紀役",
-        durationMinutes: DEFAULT_PERFORMANCE_DURATION_MINUTES
+        durationMinutes: DEFAULT_PERFORMANCE_DURATION_MINUTES,
+        isFinale: true
       },
       {
         time: "20:00",
