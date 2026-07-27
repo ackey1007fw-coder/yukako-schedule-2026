@@ -11,7 +11,7 @@ export function AudienceReportSection() {
     <section
       id="audience-reports"
       aria-labelledby="audience-reports-title"
-      className="scroll-mt-24 bg-gradient-to-br from-porcelain via-white to-blush/20 py-16 sm:py-24"
+      className="scroll-mt-24 py-10 sm:py-14"
     >
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <p className="flex flex-wrap items-center gap-2 text-xs font-black uppercase tracking-[0.16em] text-champagneInk">
