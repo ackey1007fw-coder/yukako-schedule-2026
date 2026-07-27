@@ -23,6 +23,47 @@ export const ojosamaBandSchedule = [
   "2026年5月24日(日) 12:00"
 ];
 
+export const ojosamaBandVenue = "シアターグリーン Big Tree Theater（南池袋）";
+
+export type OjosamaBandAnnouncementImage = {
+  src: string;
+  alt: string;
+  caption: string;
+};
+
+export const ojosamaBandAnnouncement = {
+  date: "2026年5月19日",
+  source: "Instagram @yoppy_777",
+  url: "https://www.instagram.com/p/DYhcKlZmU6e/",
+  headline: "いよいよ明日から——開幕前日の告知",
+  quotes: [
+    "とっても重要な役で歌も多くて、ワクワクです",
+    "雲雀(ひばり)として楽しみながら、心を込めてしっかりと表現を届けます！",
+    "歌も感情芝居もコミカル芝居もお楽しみに"
+  ],
+  notes: [
+    "A班4公演、会場はシアターグリーン Big Tree Theater（南池袋）。チケットは特典付き優先入場 ¥8,000 / 一般 ¥5,500。",
+    "劇場ロビーにはブロマイドとチェキ。「推し花」は劇場に飾られる電光掲示板型の応援メッセージで、3,000円・5,000円・10,000円の3種類。"
+  ],
+  images: [
+    {
+      src: "/images/ojosama-band-2026/yukako-ojosama-band-2026-05-19-flyer.jpg",
+      alt: "コメディミュージカル「お嬢様はバンドがやりたい」A班のフライヤー。黒白院雲雀（こくびゃくいん ひばり）役の吉井優花子さんと、5月20日から24日までの公演日程、会場のBig Tree Theater、チケット料金が記載されている",
+      caption: "A班フライヤー"
+    },
+    {
+      src: "/images/ojosama-band-2026/yukako-ojosama-band-2026-05-19-costume.jpg",
+      alt: "黒白院雲雀の衣装で立つ吉井優花子さん。生成り色のケープ付きロングドレスに緑のリボンタイ",
+      caption: "雲雀の衣装"
+    },
+    {
+      src: "/images/ojosama-band-2026/yukako-ojosama-band-2026-05-19-oshibana.jpg",
+      alt: "「お嬢様はバンドがやりたい」推し花受付開始の告知画像。電光掲示板型メッセージ3種類の見本と価格、ご注文特典の案内、黒白院雲雀役の吉井優花子さんの写真",
+      caption: "推し花の受付案内"
+    }
+  ] satisfies OjosamaBandAnnouncementImage[]
+};
+
 export const ojosamaBandMoments = [
   {
     label: "役柄",
