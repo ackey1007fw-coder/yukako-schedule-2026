@@ -51,6 +51,50 @@ export const events: ScheduleEvent[] = [
     isImportant: true
   },
   {
+    id: "babyshark-live-2026-06-07",
+    title: "BABY SHARK LIVE! -The Hidden Treasure- 埼玉・大宮公演",
+    shortTitle: "Baby Shark 大宮",
+    category: "stage",
+    startAt: "2026-06-07T11:00:00+09:00",
+    endAt: "2026-06-07T13:30:00+09:00",
+    dates: ["2026-06-07"],
+    displayDate: "2026年6月7日（日）",
+    venue: "大宮ソニックシティ 大ホール（埼玉県さいたま市）",
+    image: "/images/baby-shark/baby-shark-hetty.jpg",
+    summary:
+      "全国公演のファミリーミュージカル。①11:00／②13:30の2回公演で、2回目は終演後にお見送りあり。",
+    badges: ["舞台", "全国公演", "2回公演"],
+    links: [
+      {
+        label: "出演回のお知らせ（吉井優花子 Instagram）",
+        url: "https://www.instagram.com/p/DY4au0dmbOg/",
+        kind: "sns"
+      }
+    ]
+  },
+  {
+    id: "babyshark-live-2026-05-30",
+    title: "BABY SHARK LIVE! -The Hidden Treasure- 神奈川・海老名公演",
+    shortTitle: "Baby Shark 海老名",
+    category: "stage",
+    startAt: "2026-05-30T12:30:00+09:00",
+    endAt: "2026-05-30T14:50:00+09:00",
+    dates: ["2026-05-30"],
+    displayDate: "2026年5月30日（土）",
+    venue: "海老名市文化会館 大ホール（神奈川県海老名市）",
+    image: "/images/baby-shark/baby-shark-hetty.jpg",
+    summary:
+      "全国公演のファミリーミュージカル。①12:30／②14:50の2回公演で、2回目は終演後にお見送りあり。",
+    badges: ["舞台", "全国公演", "2回公演"],
+    links: [
+      {
+        label: "出演回のお知らせ（吉井優花子 Instagram）",
+        url: "https://www.instagram.com/p/DY4au0dmbOg/",
+        kind: "sns"
+      }
+    ]
+  },
+  {
     id: "babyshark-live-2026-08-22",
     title: "BABY SHARK LIVE! -The Hidden Treasure- 岐阜・大垣公演",
     shortTitle: "Baby Shark 大垣",
@@ -62,7 +106,7 @@ export const events: ScheduleEvent[] = [
     venue: "大垣市スイトピアセンター 文化ホール（岐阜県大垣市）",
     image: "/images/baby-shark/baby-shark-hetty.jpg",
     summary:
-      "ヤドカリのヘッティー、海賊のパールで出演してきた全国公演のファミリーミュージカル。①12:30／②14:30の2回公演で、2回目は終演後のお見送りあり。上演時間は約65分。",
+      "ヤドカリのヘッティー、海賊のパールで出演してきた全国公演のファミリーミュージカル。①12:30／②14:30の2回公演で、2回目は終演後にお見送りあり。上演時間は約65分。",
     badges: ["舞台", "全国公演", "2回公演", "お見送り有"],
     links: [
       {
