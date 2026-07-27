@@ -8,6 +8,7 @@ import {
   ryomaKunProducerAnswer,
   ryomaKunProducerDuties,
   ryomaKunProducerPrinciples,
+  ryomaKunRehearsalStills,
   ryomaKunRoles,
   ryomaKunSchedule
 } from "../data/ryomaKun";
@@ -216,6 +217,32 @@ export function RyomaKunSection() {
         </div>
 
         <RyomaKunPromoVideos />
+
+        <div id="ryoma-kun-rehearsal" className="mt-8">
+          <div className="mb-4 flex flex-col gap-2 border-y border-champagne/30 py-4 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <p className="text-xs font-black uppercase tracking-[0.18em] text-champagneInk">
+                Rehearsal Stills
+              </p>
+              <p className="mt-1 text-sm font-bold text-ink/70">
+                稽古場ムービーからのスチール・{ryomaKunRehearsalStills.length}枚
+              </p>
+            </div>
+            <a
+              href="#ryoma-kun-promo"
+              className="inline-flex min-h-11 items-center justify-center gap-2 border border-rosefog/35 bg-porcelain px-4 py-2 text-sm font-bold text-ink transition hover:border-champagne hover:bg-white"
+            >
+              動画で見る
+              <ArrowUpRight className="h-4 w-4 text-champagne" aria-hidden="true" />
+            </a>
+          </div>
+
+          <RyomaKunLookbackGallery
+            photos={ryomaKunRehearsalStills}
+            id="ryoma-kun-rehearsal-grid"
+            label="『かわええのう、龍馬くん』稽古場スチール"
+          />
+        </div>
 
         <div id="ryoma-kun-lookback" className="mt-8">
           <div className="mb-4 flex flex-col gap-2 border-y border-champagne/30 py-4 sm:flex-row sm:items-center sm:justify-between">
