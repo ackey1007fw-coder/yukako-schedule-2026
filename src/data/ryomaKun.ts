@@ -32,7 +32,7 @@ export const ryomaKunMoments = [
   },
   {
     label: "記録",
-    text: "A-root赤坂での上演記録写真49枚と、本人による振り返り投稿の20枚をこのページに収蔵。"
+    text: "A-root赤坂での上演記録写真49枚、本人による振り返り投稿の20枚、そしてSNS宣伝用の稽古場ムービー2本をこのページに収蔵。"
   }
 ];
 
@@ -97,6 +97,55 @@ export const ryomaKunProducerDuties = [
   "方言・殺陣・踊り指導管轄",
   "フライヤー・ブロマイド作成"
 ];
+
+/** プロデュースの手応えとして綴られた一文（2026年5月16日の投稿の原文どおり）。 */
+export const ryomaKunProducerAnswer =
+  "お客様にもキャストにも楽しんでもらえた舞台になったことが、今回の答えだと思っています。";
+
+export type RyomaKunPromoVideo = {
+  group: string;
+  role: string;
+  src: string;
+  poster: string;
+  /** スクリーンリーダー用の事実描写。見出し・キャプションに流用しない。 */
+  label: string;
+  duration: string;
+  body: string;
+};
+
+/**
+ * SNS宣伝担当として本人が編集した、班ごとの稽古場ムービー2本。
+ * 2026年5月16日の投稿（Instagram @yoppy_777）で改めて公開されたもの。
+ */
+export const ryomaKunPromoVideos: RyomaKunPromoVideo[] = [
+  {
+    group: "B班",
+    role: "坂本龍馬役",
+    src: "/videos/ryoma-kun-promo-bban-2026-05-16.mp4",
+    poster: "/images/ryoma-kun-2026/yukako-ryoma-kun-2026-promo-bban-poster.jpg",
+    label:
+      "『かわええのう、龍馬くん』B班の稽古場ムービー。紅い着物に刀を差した坂本龍馬役の吉井優花子さんと、全員女性のキャストによる稽古風景（約29秒・音声あり）",
+    duration: "約29秒",
+    body: "紅い着物に刀、腕を組んでカメラを見る龍馬から。殺陣も踊りも、全員女性のB班が稽古場でつくっていく過程がそのまま入っています。"
+  },
+  {
+    group: "C班",
+    role: "おりょう役",
+    src: "/videos/ryoma-kun-promo-cban-2026-05-16.mp4",
+    poster: "/images/ryoma-kun-2026/yukako-ryoma-kun-2026-promo-cban-poster.jpg",
+    label:
+      "『かわええのう、龍馬くん』C班の稽古場ムービー。淡い桜色の着物のおりょう役・吉井優花子さんと、キャストによる稽古風景（約28秒・音声あり）",
+    duration: "約28秒",
+    body: "大千穐楽を飾ったC班から。淡い桜色の着物のおりょうが龍馬と手を取り合う場面は、稽古場の段階でもう涙。"
+  }
+];
+
+export const ryomaKunPromoSource = {
+  label: "2026年5月16日の投稿",
+  url: "https://www.instagram.com/p/DYZwPx1mQ2e/",
+  /** 投稿本文の表現（原文どおり）。 */
+  note: "SNS宣伝投稿の際に作った動画"
+};
 
 type LookbackEntry = {
   alt: string;

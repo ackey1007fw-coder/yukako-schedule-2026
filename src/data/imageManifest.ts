@@ -310,6 +310,8 @@ export const imageManifest = {
   "/images/ryoma-kun-2026/yukako-ryoma-kun-2026-lookback-19.jpg": {"width":1500,"height":1875,"widths":[360,480,720,960,1280,1500]},
   "/images/ryoma-kun-2026/yukako-ryoma-kun-2026-lookback-20.jpg": {"width":1500,"height":1875,"widths":[360,480,720,960,1280,1500]},
   "/images/ryoma-kun-2026/yukako-ryoma-kun-2026-main-visual.jpg": {"width":853,"height":1280,"widths":[360,480,720,853]},
+  "/images/ryoma-kun-2026/yukako-ryoma-kun-2026-promo-bban-poster.jpg": {"width":720,"height":960,"widths":[360,480,720]},
+  "/images/ryoma-kun-2026/yukako-ryoma-kun-2026-promo-cban-poster.jpg": {"width":720,"height":960,"widths":[360,480,720]},
   "/images/showroom-avatars/yukako-showroom-avatar-01.jpg": {"width":512,"height":512,"widths":[360,480,512]},
   "/images/showroom-avatars/yukako-showroom-avatar-02.jpg": {"width":512,"height":512,"widths":[360,480,512]},
   "/images/showroom-avatars/yukako-showroom-avatar-03.jpg": {"width":512,"height":512,"widths":[360,480,512]},

@@ -5,6 +5,7 @@ import {
   ryomaKunLookbackSource,
   ryomaKunMoments,
   ryomaKunPhotos,
+  ryomaKunProducerAnswer,
   ryomaKunProducerDuties,
   ryomaKunProducerPrinciples,
   ryomaKunRoles,
@@ -14,6 +15,7 @@ import { getResponsiveImageProps } from "../lib/responsiveImage";
 import { ActHeader } from "./ActHeader";
 import { CollapsiblePhotoArchive } from "./CollapsiblePhotoArchive";
 import { RyomaKunLookbackGallery } from "./RyomaKunLookbackGallery";
+import { RyomaKunPromoVideos } from "./RyomaKunPromoVideos";
 
 const featuredPhoto = {
   src: "/images/ryoma-kun-2026/yukako-ryoma-kun-2026-main-visual.jpg",
@@ -66,13 +68,22 @@ export function RyomaKunSection() {
                   班によって異なる役に挑み、アソシエイトプロデューサーとしても支えた一作です。
                 </p>
               </div>
-              <a
-                href="#ryoma-kun-photos"
-                className="inline-flex min-h-12 items-center justify-center gap-2 border border-rosefog/40 bg-porcelain px-4 py-3 text-sm font-bold text-ink transition hover:border-champagne hover:bg-white"
-              >
-                写真を見る
-                <ArrowUpRight className="h-4 w-4 text-champagne" aria-hidden="true" />
-              </a>
+              <div className="flex flex-wrap gap-2">
+                <a
+                  href="#ryoma-kun-promo"
+                  className="inline-flex min-h-12 items-center justify-center gap-2 border border-rosefog/40 bg-porcelain px-4 py-3 text-sm font-bold text-ink transition hover:border-champagne hover:bg-white"
+                >
+                  動画を見る
+                  <ArrowUpRight className="h-4 w-4 text-champagne" aria-hidden="true" />
+                </a>
+                <a
+                  href="#ryoma-kun-photos"
+                  className="inline-flex min-h-12 items-center justify-center gap-2 border border-rosefog/40 bg-porcelain px-4 py-3 text-sm font-bold text-ink transition hover:border-champagne hover:bg-white"
+                >
+                  写真を見る
+                  <ArrowUpRight className="h-4 w-4 text-champagne" aria-hidden="true" />
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -198,7 +209,13 @@ export function RyomaKunSection() {
               </li>
             ))}
           </ol>
+
+          <p className="mt-6 border-l-2 border-champagne bg-white px-4 py-3 font-display text-lg leading-8 text-rosefog">
+            「{ryomaKunProducerAnswer}」
+          </p>
         </div>
+
+        <RyomaKunPromoVideos />
 
         <div id="ryoma-kun-lookback" className="mt-8">
           <div className="mb-4 flex flex-col gap-2 border-y border-champagne/30 py-4 sm:flex-row sm:items-center sm:justify-between">
