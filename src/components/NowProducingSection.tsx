@@ -374,7 +374,7 @@ type FeatureUpdateCardProps = {
   update: DisplayGojetFeatureUpdate;
   index: number;
   expanded: boolean;
-  onExpand: () => void;
+  onToggle: () => void;
   currentTime: Date;
   onOpenLightbox: (state: { photos: PromoImage[]; index: number; label: string }) => void;
 };
@@ -385,11 +385,13 @@ function FeatureUpdateCard({
   update,
   index,
   expanded,
-  onExpand,
+  onToggle,
   currentTime,
   onOpenLightbox
 }: FeatureUpdateCardProps) {
   const bodyId = `${update.anchorId ?? update.postUrl}-body`;
+  // 最新の1件は常に開いたまま。畳めるのは自分で開いたカードだけ。
+  const collapsible = index > 0;
 
   return (
     // min-w-0 がないと本文中の長いURLがグリッド列を押し広げ、カードが画面幅を超える。
@@ -404,23 +406,27 @@ function FeatureUpdateCard({
         {update.title}
       </h4>
       {!expanded && (
-        <>
-          <p className="mt-2 break-words text-sm leading-6 text-white/60 [overflow-wrap:anywhere]">
-            {buildExcerpt(update.body)}
-          </p>
-          <button
-            type="button"
-            onClick={onExpand}
-            aria-expanded={false}
-            aria-controls={bodyId}
-            className="yukako-button yukako-button-ghost mt-3 min-h-11 px-4 py-2.5 text-sm"
-          >
-            <ChevronDown className="h-4 w-4 text-champagne" aria-hidden="true" />
-            全文を読む
-          </button>
-        </>
+        <p className="mt-2 break-words text-sm leading-6 text-white/60 [overflow-wrap:anywhere]">
+          {buildExcerpt(update.body)}
+        </p>
       )}
-      <div id={bodyId} hidden={!expanded}>
+      {collapsible && (
+        <button
+          type="button"
+          onClick={onToggle}
+          aria-expanded={expanded}
+          aria-controls={bodyId}
+          className="yukako-button yukako-button-ghost mt-3 min-h-11 px-4 py-2.5 text-sm"
+        >
+          {expanded ? (
+            <ChevronUp className="h-4 w-4 text-champagne" aria-hidden="true" />
+          ) : (
+            <ChevronDown className="h-4 w-4 text-champagne" aria-hidden="true" />
+          )}
+          {expanded ? "この記録を閉じる" : "全文を読む"}
+        </button>
+      )}
+      <div id={bodyId} className="mt-1" hidden={!expanded}>
         {update.supportColors && update.supportColors.length > 0 && (
         <dl
           aria-label="ペンライト応援カラー"
@@ -780,11 +786,13 @@ export function NowProducingSection({ event, now }: NowProducingSectionProps) {
 
   const isUpdateExpanded = (update: DisplayGojetFeatureUpdate) =>
     !update.anchorId || expandedUpdateIds.includes(update.anchorId);
-  const expandUpdate = (update: DisplayGojetFeatureUpdate) => {
+  const toggleUpdate = (update: DisplayGojetFeatureUpdate) => {
     const anchorId = update.anchorId;
     if (!anchorId) return;
     setExpandedUpdateIds((current) =>
-      current.includes(anchorId) ? current : [...current, anchorId],
+      current.includes(anchorId)
+        ? current.filter((id) => id !== anchorId)
+        : [...current, anchorId],
     );
   };
 
@@ -932,7 +940,7 @@ export function NowProducingSection({ event, now }: NowProducingSectionProps) {
                       update={update}
                       index={index}
                       expanded={isUpdateExpanded(update)}
-                      onExpand={() => expandUpdate(update)}
+                      onToggle={() => toggleUpdate(update)}
                       currentTime={currentTime}
                       onOpenLightbox={setLightbox}
                     />
