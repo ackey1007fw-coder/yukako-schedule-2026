@@ -1,8 +1,18 @@
-import { ArrowUpRight, CalendarDays, Heart, Music2, Sparkles } from "lucide-react";
 import {
+  ArrowUpRight,
+  CalendarDays,
+  Heart,
+  Instagram,
+  MapPin,
+  Music2,
+  Sparkles
+} from "lucide-react";
+import {
+  ojosamaBandAnnouncement,
   ojosamaBandMoments,
   ojosamaBandPhotos,
-  ojosamaBandSchedule
+  ojosamaBandSchedule,
+  ojosamaBandVenue
 } from "../data/ojosamaBand";
 import { getResponsiveImageProps } from "../lib/responsiveImage";
 import { ActHeader } from "./ActHeader";
@@ -84,6 +94,10 @@ export function OjosamaBandSection() {
                 </div>
               ))}
             </div>
+            <p className="mt-3 flex items-start gap-2 text-sm leading-6 text-ink/70">
+              <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-champagne" aria-hidden="true" />
+              <span>{ojosamaBandVenue}</span>
+            </p>
           </div>
 
           <div className="border border-rosefog/15 bg-[#fff8f2] p-5 shadow-paper sm:p-6">
@@ -98,6 +112,72 @@ export function OjosamaBandSection() {
               公演後に公開された記録写真から。衣装姿も舞台の空気も、ここでいつでも見返せます。
             </p>
           </div>
+        </div>
+
+        <div className="mt-8 border border-rosefog/15 bg-porcelain p-5 shadow-paper sm:p-6">
+          <div className="flex flex-wrap items-center gap-2 text-xs font-black uppercase tracking-[0.18em] text-champagneInk">
+            <span className="inline-flex items-center gap-2 border border-champagne/45 bg-white px-2.5 py-1">
+              <Instagram className="h-3.5 w-3.5 text-rosefog" aria-hidden="true" />
+              {ojosamaBandAnnouncement.source}
+            </span>
+            <span className="text-ink/55">{ojosamaBandAnnouncement.date}</span>
+          </div>
+
+          <h3 className="mt-3 font-display text-3xl leading-tight text-ink">
+            {ojosamaBandAnnouncement.headline}
+          </h3>
+
+          <ul className="mt-4 grid gap-2">
+            {ojosamaBandAnnouncement.quotes.map((quote) => (
+              <li
+                key={quote}
+                className="border-l-2 border-rosefog/40 bg-white px-4 py-2 text-sm leading-7 text-ink/80"
+              >
+                「{quote}」
+              </li>
+            ))}
+          </ul>
+
+          <div className="mt-4 grid gap-2">
+            {ojosamaBandAnnouncement.notes.map((note) => (
+              <p key={note} className="text-sm leading-7 text-ink/72">
+                {note}
+              </p>
+            ))}
+          </div>
+
+          <div className="mt-5 grid gap-4 sm:grid-cols-3">
+            {ojosamaBandAnnouncement.images.map((image) => (
+              <figure
+                key={image.src}
+                className="yukako-card min-w-0 overflow-hidden border-rosefog/15 bg-white"
+              >
+                <img
+                  {...getResponsiveImageProps(
+                    image.src,
+                    "(min-width: 640px) 31vw, 100vw"
+                  )}
+                  alt={image.alt}
+                  loading="lazy"
+                  decoding="async"
+                  className="block h-auto w-full object-contain"
+                />
+                <figcaption className="border-t border-champagne/30 px-3 py-2 text-xs font-bold text-ink/65">
+                  {image.caption}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+
+          <a
+            href={ojosamaBandAnnouncement.url}
+            target="_blank"
+            rel="noreferrer"
+            className="mt-5 inline-flex min-h-12 items-center justify-center gap-2 border border-rosefog/40 bg-white px-4 py-3 text-sm font-bold text-ink transition hover:border-champagne hover:bg-porcelain"
+          >
+            Instagramの投稿を見る
+            <ArrowUpRight className="h-4 w-4 text-champagne" aria-hidden="true" />
+          </a>
         </div>
 
         <div id="ojosama-band-photos" className="mt-8">
