@@ -52,7 +52,8 @@ export function PhotoLightbox({
 
   return createPortal(
     <div
-      className="fixed inset-0 z-[999] flex h-[100dvh] flex-col overscroll-contain bg-ink/97 px-3 py-4 text-white sm:px-6"
+      // bg-ink/97 はTailwindが生成しない刻み（不透明度は5刻みのみ）で、背景が透明のままになっていた。
+      className="fixed inset-0 z-[999] flex h-[100dvh] flex-col overscroll-contain bg-ink/95 px-3 py-4 text-white sm:px-6"
       role="dialog"
       aria-modal="true"
       aria-label={label}

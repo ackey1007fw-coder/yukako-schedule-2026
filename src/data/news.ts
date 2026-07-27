@@ -101,5 +101,11 @@ export const news: NewsItem[] = [
     label: "X",
     text: "#ゆかJET 舞台情報が解禁されました（7/23〜27 Air studio 両国）",
     url: "https://x.com/yukako_produce/status/2070122985265197380"
+  },
+  {
+    date: "2026.5.18",
+    label: "Instagram",
+    text: "『かわええのう、龍馬くん』の振り返り。大量の龍馬のセリフから好きな3選、B班の龍馬とC班のおりょう、そして初のアソシエイト・プロデューサーで大切にしたこと。",
+    url: "https://www.instagram.com/p/DYeSf_aGe1T/"
   }
 ];
