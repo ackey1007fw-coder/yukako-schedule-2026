@@ -1,17 +1,51 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { ArrowDownRight, ChevronDown, ChevronUp, ExternalLink } from "lucide-react";
-import { siteUpdates, sourceLinkLabel } from "../data/siteUpdates";
+import { siteUpdates, sourceLinkLabel, type SiteUpdate } from "../data/siteUpdates";
 import { getResponsiveImageProps } from "../lib/responsiveImage";
 import { SectionHeader } from "./SectionHeader";
 
 const FEATURED_COUNT = 3;
+const ALL_CATEGORIES = "すべて";
+
+// カードは1カテゴリ1枚まで。公演期間中は #ゆかJET が上位を占め、3枚とも同じ話題に
+// なっていた。すぐ下に #ゆかJET の特集があるので、ここは横断で見せる。
+function pickFeatured(updates: SiteUpdate[], count: number) {
+  const picked: SiteUpdate[] = [];
+  const usedCategories = new Set<string>();
+
+  for (const update of updates) {
+    if (picked.length >= count) break;
+    if (usedCategories.has(update.category)) continue;
+    picked.push(update);
+    usedCategories.add(update.category);
+  }
+  // カテゴリ数が枠に足りないときは、新しい順で埋める。
+  for (const update of updates) {
+    if (picked.length >= count) break;
+    if (!picked.includes(update)) picked.push(update);
+  }
+  return picked;
+}
 
 // トップページ上部の「最新情報」。散らばった更新を新しい順に集約して見せる。
 // 先頭3件をカードで、それ以降は「すべて見る」トグルの一覧で表示する（ルーターがないためページは増やさない）。
 export function LatestUpdatesSection() {
   const [showAll, setShowAll] = useState(false);
-  const featured = siteUpdates.slice(0, FEATURED_COUNT);
-  const rest = siteUpdates.slice(FEATURED_COUNT);
+  const [category, setCategory] = useState(ALL_CATEGORIES);
+
+  const featured = useMemo(() => pickFeatured(siteUpdates, FEATURED_COUNT), []);
+  const rest = useMemo(() => {
+    const featuredIds = new Set(featured.map((update) => update.id));
+    return siteUpdates.filter((update) => !featuredIds.has(update.id));
+  }, [featured]);
+  const categories = useMemo(
+    () => [ALL_CATEGORIES, ...new Set(rest.map((update) => update.category))],
+    [rest],
+  );
+  const filteredRest =
+    category === ALL_CATEGORIES
+      ? rest
+      : rest.filter((update) => update.category === category);
 
   return (
     <section id="updates" className="scroll-mt-32 bg-white py-12 sm:py-20">
@@ -19,7 +53,7 @@ export function LatestUpdatesSection() {
         <SectionHeader
           kicker="Latest Updates"
           title="最新情報"
-          copy="優花子さんのSNS投稿や#ゆかJETの稽古場だよりを、新しい順にまとめています。"
+          copy="SNS投稿・写真・お知らせを新しい順に。#ゆかJET の詳しい記録は、すぐ下の特集にまとめています。"
         />
 
         <div className="grid gap-4 sm:grid-cols-3">
@@ -121,11 +155,45 @@ export function LatestUpdatesSection() {
               </button>
             </div>
             {showAll && (
-              <ol
-                id="all-updates-list"
-                className="mt-6 divide-y divide-rosefog/12 border border-rosefog/15 bg-porcelain"
-              >
-                {rest.map((update) => (
+              <>
+                {/* #ゆかJET だけで50件を超えるため、絞り込みがないと他の更新が埋もれる */}
+                <div
+                  role="group"
+                  aria-label="カテゴリで絞り込む"
+                  className="mt-6 flex flex-wrap gap-2"
+                >
+                  {categories.map((item) => {
+                    const isActive = item === category;
+                    const count =
+                      item === ALL_CATEGORIES
+                        ? rest.length
+                        : rest.filter((update) => update.category === item).length;
+
+                    return (
+                      <button
+                        key={item}
+                        type="button"
+                        onClick={() => setCategory(item)}
+                        aria-pressed={isActive}
+                        className={`inline-flex min-h-11 items-center gap-1.5 border px-3.5 py-2 text-sm font-bold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-champagne ${
+                          isActive
+                            ? "border-champagne bg-champagne text-ink"
+                            : "border-champagne/40 bg-white text-champagneInk hover:border-champagne hover:bg-porcelain"
+                        }`}
+                      >
+                        {item}
+                        <span className={isActive ? "text-ink/60" : "text-ink/45"}>
+                          {count}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+                <ol
+                  id="all-updates-list"
+                  className="mt-4 divide-y divide-rosefog/12 border border-rosefog/15 bg-porcelain"
+                >
+                  {filteredRest.map((update) => (
                   <li key={update.id} className="p-4 sm:px-5">
                     <p className="flex flex-wrap items-center gap-2 text-[11px] font-black uppercase tracking-[0.12em] text-champagneInk">
                       <span className="border border-champagne/45 bg-white px-2 py-0.5">
@@ -159,8 +227,9 @@ export function LatestUpdatesSection() {
                       )}
                     </p>
                   </li>
-                ))}
-              </ol>
+                  ))}
+                </ol>
+              </>
             )}
           </>
         )}
