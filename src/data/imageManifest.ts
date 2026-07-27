@@ -24,6 +24,7 @@ export const imageManifest = {
   "/images/baby-shark/baby-shark-hetty-with-william.jpg": {"width":1600,"height":2048,"widths":[360,480,720,960,1280,1600]},
   "/images/baby-shark/baby-shark-hetty.jpg": {"width":941,"height":1176,"widths":[360,480,720,941]},
   "/images/baby-shark/baby-shark-pearl.jpg": {"width":1011,"height":1264,"widths":[360,480,720,960,1011]},
+  "/images/baby-shark/baby-shark-schedule-2026.jpg": {"width":1600,"height":2039,"widths":[360,480,720,960,1280,1600]},
   "/images/drive-yukako-2026/yukako-drive-2026-07-05-001.jpg": {"width":2048,"height":1536,"widths":[360,480,720,960,1280,1600,2048]},
   "/images/drive-yukako-2026/yukako-drive-2026-07-05-002.jpg": {"width":1524,"height":2048,"widths":[360,480,720,960,1280,1524]},
   "/images/drive-yukako-2026/yukako-drive-2026-07-05-003.jpg": {"width":1536,"height":2048,"widths":[360,480,720,960,1280,1536]},

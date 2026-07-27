@@ -54,6 +54,34 @@ export type BabySharkAppearance = {
   sourceUrl?: string;
 };
 
+export type BabySharkStage = {
+  /** ①②などの回名 */
+  label: string;
+  /** 開演時刻（HH:mm） */
+  time: string;
+  /** 「お見送り有」などの補足 */
+  note?: string;
+};
+
+/** 優花子さんの出演が本人告知で確認できた公演日 */
+export type BabySharkTourDate = {
+  id: string;
+  region: string;
+  /** 公演日（YYYY-MM-DD, JST） */
+  date: string;
+  dateLabel: string;
+  venue: string;
+  /** 会場の住所（会場公式サイト等で確認したもの） */
+  address: string;
+  /** 最寄り駅からのアクセス */
+  access: string;
+  /** Google マップ検索URL（住所で開く） */
+  mapUrl: string;
+  /** 会場の公式サイト */
+  venueUrl: string;
+  stages: BabySharkStage[];
+};
+
 export const babySharkLive = {
   id: "baby-shark-live-hidden-treasure",
   slug: "baby-shark-live",
@@ -66,7 +94,8 @@ export const babySharkLive = {
   /** 作品自体の継続状況（優花子さん個人の出演状況ではない） */
   workStatus: "作品は全国公演継続中",
   /** 優花子さん個人の出演予定についての注記 */
-  appearanceNote: "優花子さんの出演日は、本人からの告知確認後に更新します",
+  appearanceNote:
+    "本人告知で確認できた2026年の出演公演を掲載中。追加の告知があれば更新します",
   firstPerformanceDate: "2024-02-25",
   firstPerformanceLabel: "2024年2月25日",
   postDate: "2024-03-01",
@@ -162,6 +191,70 @@ export const babySharkLive = {
       kind: "gallery"
     }
   ] satisfies BabySharkImage[],
+  /**
+   * 2026年の出演公演。優花子さん本人のInstagram告知で確認できた日程だけを載せる。
+   * 追加公演が告知されたら dates へ追記する（表示は日付順、終演済みは自動でグレーになる）。
+   */
+  tour2026: {
+    sourceUrl: "https://www.instagram.com/p/DY4au0dmbOg/",
+    sourceLabel: "本人のInstagram告知を見る",
+    sourceDate: "2026-05-28",
+    sourceDateLabel: "2026年5月28日",
+    officialUrl: "https://babyshark-live-japan.com/ticket/",
+    image: {
+      src: "/images/baby-shark/baby-shark-schedule-2026.jpg",
+      alt: "ベイビーシャークライブ2026年の公演日程。神奈川・海老名公演は5月30日（土）海老名市文化会館 大ホール ①12:30 ②14:50（お見送り有）、埼玉・大宮公演は6月7日（日）大宮ソニックシティ 大ホール ①11:00 ②13:30（お見送り有）、岐阜・大垣公演は8月22日（土）大垣市スイトピアセンター 文化ホール ①12:30 ②14:30（お見送り有）",
+      caption: "本人告知より（2026年の出演回）",
+      available: true
+    },
+    dates: [
+      {
+        id: "ebina-2026-05-30",
+        region: "神奈川・海老名",
+        date: "2026-05-30",
+        dateLabel: "2026年5月30日（土）",
+        venue: "海老名市文化会館 大ホール",
+        address: "神奈川県海老名市めぐみ町6番1号",
+        access: "小田急小田原線・相鉄線 海老名駅 西口から徒歩5分／JR相模線 海老名駅 東口から徒歩5分",
+        mapUrl: "https://www.google.com/maps/search/?api=1&query=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E6%B5%B7%E8%80%81%E5%90%8D%E5%B8%82%E3%82%81%E3%81%90%E3%81%BF%E7%94%BA6%E7%95%AA1%E5%8F%B7%20%E6%B5%B7%E8%80%81%E5%90%8D%E5%B8%82%E6%96%87%E5%8C%96%E4%BC%9A%E9%A4%A8",
+        venueUrl: "https://www.ebina-bunka.jp/",
+        stages: [
+          { label: "①", time: "12:30" },
+          { label: "②", time: "14:50", note: "お見送り有" }
+        ]
+      },
+      {
+        id: "omiya-2026-06-07",
+        region: "埼玉・大宮",
+        date: "2026-06-07",
+        dateLabel: "2026年6月7日（日）",
+        venue: "大宮ソニックシティ 大ホール",
+        address: "埼玉県さいたま市大宮区桜木町1-7-5",
+        access: "JR・東武野田線 大宮駅 西口から徒歩3分",
+        mapUrl: "https://www.google.com/maps/search/?api=1&query=%E5%9F%BC%E7%8E%89%E7%9C%8C%E3%81%95%E3%81%84%E3%81%9F%E3%81%BE%E5%B8%82%E5%A4%A7%E5%AE%AE%E5%8C%BA%E6%A1%9C%E6%9C%A8%E7%94%BA1-7-5%20%E5%A4%A7%E5%AE%AE%E3%82%BD%E3%83%8B%E3%83%83%E3%82%AF%E3%82%B7%E3%83%86%E3%82%A3",
+        venueUrl: "https://www.sonic-city.or.jp/",
+        stages: [
+          { label: "①", time: "11:00" },
+          { label: "②", time: "13:30", note: "お見送り有" }
+        ]
+      },
+      {
+        id: "ogaki-2026-08-22",
+        region: "岐阜・大垣",
+        date: "2026-08-22",
+        dateLabel: "2026年8月22日（土）",
+        venue: "大垣市スイトピアセンター 文化ホール",
+        address: "岐阜県大垣市室本町5-51",
+        access: "JR大垣駅から徒歩15分／養老鉄道 室駅から徒歩5分",
+        mapUrl: "https://www.google.com/maps/search/?api=1&query=%E5%B2%90%E9%98%9C%E7%9C%8C%E5%A4%A7%E5%9E%A3%E5%B8%82%E5%AE%A4%E6%9C%AC%E7%94%BA5-51%20%E5%A4%A7%E5%9E%A3%E5%B8%82%E3%82%B9%E3%82%A4%E3%83%88%E3%83%94%E3%82%A2%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC",
+        venueUrl: "https://www.og-bunka.or.jp/",
+        stages: [
+          { label: "①", time: "12:30" },
+          { label: "②", time: "14:30", note: "お見送り有" }
+        ]
+      }
+    ] satisfies BabySharkTourDate[]
+  },
   /** 2024年当時の作品公演スケジュール（優花子さん個人の出演確定日ではない） */
   archiveScheduleNote:
     "こちらは2024年当時の公演情報です。現在の公演情報は公式サイトをご確認ください。",
@@ -218,6 +311,19 @@ export const babySharkLive = {
         "https://www.instagram.com/p/C3-IholvnW4/?img_index=4&igsh=aGhuc2Z0NGZlbWc3",
       sourceLabel: "Instagramの元投稿を見る",
       kind: "comment"
+    },
+    {
+      id: "instagram-2026-05-28",
+      date: "2026-05-28",
+      dateLabel: "2026年5月28日",
+      title: "2026年の出演回のお知らせ",
+      body: [
+        "神奈川・海老名（5/30）、埼玉・大宮（6/7）、岐阜・大垣（8/22）の3公演。いずれも2回公演で、2回目は終演後にお見送りあり。",
+        "「みんなと会えることを楽しみにしています☺️♪」——ヘッティー🐚&パール🏴‍☠️"
+      ],
+      sourceUrl: "https://www.instagram.com/p/DY4au0dmbOg/",
+      sourceLabel: "Instagramの元投稿を見る",
+      kind: "announcement"
     }
   ] satisfies BabySharkUpdate[],
   /** 今後の出演日・告知を足す用（確定情報のみ追記）。空のときは一覧を出さない。 */
@@ -232,4 +338,32 @@ export const babySharkGalleryImages = babySharkLive.images.filter(
 /** 活動記録を date の新しい順で返す（配列末尾追加でも表示は新しい順） */
 export function getBabySharkUpdatesNewestFirst(): BabySharkUpdate[] {
   return [...babySharkLive.updates].sort((a, b) => b.date.localeCompare(a.date));
+}
+
+const toTokyoDateKey = (now: Date) =>
+  new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Tokyo" }).format(now);
+
+export type BabySharkTourDateWithStatus = BabySharkTourDate & {
+  /** upcoming = これから / today = 当日 / past = 終演 */
+  status: "upcoming" | "today" | "past";
+};
+
+/** 2026年の出演公演を日付順（古い順）で返す。当日・終演の判定つき。 */
+export function getBabySharkTourDates2026(
+  now: Date = new Date()
+): BabySharkTourDateWithStatus[] {
+  const today = toTokyoDateKey(now);
+  return [...babySharkLive.tour2026.dates]
+    .sort((a, b) => a.date.localeCompare(b.date))
+    .map((item) => ({
+      ...item,
+      status: item.date === today ? "today" : item.date > today ? "upcoming" : "past"
+    }));
+}
+
+/** 次に控えている出演公演（当日を含む）。すべて終演していれば null。 */
+export function getBabySharkNextTourDate(
+  now: Date = new Date()
+): BabySharkTourDateWithStatus | null {
+  return getBabySharkTourDates2026(now).find((item) => item.status !== "past") ?? null;
 }

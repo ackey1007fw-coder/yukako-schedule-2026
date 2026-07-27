@@ -23,6 +23,7 @@ export function EventCard({ event, isNext = false, compact = false }: EventCardP
   const uniqueLinks = event.links.filter((link, index, links) => links.findIndex((candidate) => candidate.url === link.url) === index);
   const primaryLink = uniqueLinks.find((link) => link.kind === "ticket") ?? uniqueLinks.find((link) => link.kind === "stream");
   const infoLink = uniqueLinks.find((link) => link.kind === "info" && link.url !== primaryLink?.url);
+  const mapLink = uniqueLinks.find((link) => link.kind === "map");
   const shareText = upcoming ? `${event.title}を応援しています！` : `${event.title}の活動記録を見ました`;
   const shareContent = event.id === "yukajet-gojet-2026-07" ? "yukajet_share" : "event_share";
 
@@ -48,9 +49,10 @@ export function EventCard({ event, isNext = false, compact = false }: EventCardP
           </div>
         </div>
         <p className={`${compact ? "mt-4 line-clamp-4" : "mt-5"} leading-8 text-ink/72`}>{event.summary}</p>
-        {(primaryLink || infoLink) && <div className="mt-6 grid gap-3 sm:grid-cols-2">
+        {(primaryLink || infoLink || mapLink) && <div className="mt-6 grid gap-3 sm:grid-cols-2">
           {primaryLink && <ExternalButton href={primaryLink.url} variant="gold" onClick={() => trackPortalEvent(primaryLink.kind === "stream" ? "stream_click" : "ticket_click", { event_id: event.id, placement: "event_card" })}>{primaryLink.kind === "stream" ? "配信を見る" : "チケット予約"}</ExternalButton>}
           {infoLink && <ExternalButton href={infoLink.url} variant="light">詳細を見る</ExternalButton>}
+          {mapLink && <ExternalButton href={mapLink.url} variant="light">地図を開く</ExternalButton>}
         </div>}
         {upcoming && <details className="group mt-5 border-t border-rosefog/15 pt-4">
           <summary className="flex min-h-10 cursor-pointer list-none items-center gap-2 text-xs font-bold text-ink/60 marker:hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-champagne">その他の操作<ChevronDown className="h-4 w-4 transition group-open:rotate-180 motion-reduce:transition-none" aria-hidden="true" /></summary>

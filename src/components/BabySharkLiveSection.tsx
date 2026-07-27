@@ -1,11 +1,13 @@
-import { ArrowRight, Waves } from "lucide-react";
-import { babySharkLive } from "../data/babySharkLive";
+import { ArrowRight, CalendarDays, Waves } from "lucide-react";
+import { babySharkLive, getBabySharkNextTourDate } from "../data/babySharkLive";
 import { getResponsiveImageProps } from "../lib/responsiveImage";
 import { ActHeader } from "./ActHeader";
 
 const work = babySharkLive;
 
 export function BabySharkLiveSection() {
+  const nextTourDate = getBabySharkNextTourDate();
+
   return (
     <section id="baby-shark-live" className="scroll-mt-32 bg-[#f3f8fb] py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -41,6 +43,11 @@ export function BabySharkLiveSection() {
                 <span className="border border-champagne/40 bg-porcelain px-2.5 py-1 text-[11px] font-bold text-champagneInk">
                   {work.workStatus}
                 </span>
+                {nextTourDate && (
+                  <span className="border border-rosefog/40 bg-white px-2.5 py-1 text-[11px] font-bold text-rosefog">
+                    {nextTourDate.status === "today" ? "本日出演" : "出演予定あり"}
+                  </span>
+                )}
               </div>
 
               <h3 className="mt-4 font-display text-3xl leading-tight text-ink sm:text-4xl">
@@ -53,6 +60,29 @@ export function BabySharkLiveSection() {
                 役：ヤドカリのヘッティー／海賊のパール
               </p>
               <p className="mt-3 text-sm leading-7 text-ink/70">{work.cardSummary}</p>
+
+              {nextTourDate && (
+                <div className="mt-4 border border-champagne/45 bg-[#fff8e8] px-3 py-3">
+                  <p className="flex items-center gap-1.5 text-[11px] font-black uppercase tracking-[0.14em] text-champagneInk">
+                    <CalendarDays className="h-3.5 w-3.5 text-champagne" aria-hidden="true" />
+                    {nextTourDate.status === "today" ? "本日" : "次の出演"}
+                  </p>
+                  <p className="mt-2 text-sm font-bold text-ink">
+                    <time dateTime={nextTourDate.date}>{nextTourDate.dateLabel}</time>
+                    <span className="ml-2 font-normal text-ink/70">{nextTourDate.region}</span>
+                  </p>
+                  <p className="mt-1 text-sm text-ink/70">{nextTourDate.venue}</p>
+                  <p className="mt-1 text-sm text-ink/70">
+                    {nextTourDate.stages
+                      .map(
+                        (stage) =>
+                          `${stage.label}${stage.time}${stage.note ? `（${stage.note}）` : ""}`
+                      )
+                      .join("　")}
+                  </p>
+                </div>
+              )}
+
               <p className="mt-3 text-xs leading-6 text-ink/55">{work.appearanceNote}</p>
             </div>
 
