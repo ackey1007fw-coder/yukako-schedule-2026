@@ -36,7 +36,7 @@ export function SupportersSection() {
                 <span className="font-display text-xl text-ink">
                   {item.title}
                 </span>
-                <span className="text-sm leading-6 text-ink/66">
+                <span className="text-sm leading-6 text-ink/65">
                   {item.description}
                 </span>
               </a>
@@ -44,7 +44,7 @@ export function SupportersSection() {
           })}
         </div>
 
-        <p className="mt-6 flex items-start gap-2 text-sm leading-6 text-ink/62">
+        <p className="mt-6 flex items-start gap-2 text-sm leading-6 text-ink/60">
           <Radio className="mt-0.5 h-4 w-4 shrink-0 text-champagne" aria-hidden="true" />
           遠方の方も、配信チケット（3,700円・アーカイブは2026年8月6日まで視聴可）で公演をご覧いただけます。
         </p>

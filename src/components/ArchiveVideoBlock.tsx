@@ -21,12 +21,12 @@ export function ArchiveVideoBlock({ video }: ArchiveVideoBlockProps) {
 
       <div className="mx-auto mt-6 max-w-[360px]">
         {hasError ? (
-          <div className="flex aspect-[3/4] flex-col items-center justify-center gap-2 border border-white/12 bg-black/40 p-6 text-center">
+          <div className="flex aspect-[3/4] flex-col items-center justify-center gap-2 border border-white/10 bg-black/40 p-6 text-center">
             <p className="text-sm font-bold text-white/80">動画を再生できませんでした</p>
             <p className="text-xs text-white/55">下のリンクから元の投稿をご覧ください。</p>
           </div>
         ) : (
-          <div className="aspect-[3/4] overflow-hidden border border-white/12 bg-black">
+          <div className="aspect-[3/4] overflow-hidden border border-white/10 bg-black">
             {/* videoのsrcは<source>子要素ではなく本体属性で指定する。<source>だと読み込み失敗の
                 errorイベントがsource側で発火し、onErrorフォールバックが動かない */}
             {video.type === "drive" ? (

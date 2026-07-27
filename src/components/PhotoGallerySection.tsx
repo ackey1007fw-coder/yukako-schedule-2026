@@ -220,7 +220,7 @@ export function PhotoGallerySection() {
               <p className="mt-3 text-2xl font-black leading-tight text-ink sm:text-3xl">
                 開くたびに、違う並びで。
               </p>
-              <p className="mt-3 text-sm leading-7 text-ink/68">
+              <p className="mt-3 text-sm leading-7 text-ink/70">
                 大きな写真は自動で切り替わります。気になる1枚はタップで拡大。
               </p>
               <div className="mt-5 overflow-hidden border-y border-rosefog/10 py-3">

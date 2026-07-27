@@ -52,7 +52,8 @@ export function PhotoLightbox({
 
   return createPortal(
     <div
-      className="fixed inset-0 z-[999] flex h-[100dvh] flex-col overscroll-contain bg-ink/97 px-3 py-4 text-white sm:px-6"
+      // 背景の不透明度は5刻みでしか生成されない。5の倍数以外を書くとCSSが出ず背景が透明になる。
+      className="fixed inset-0 z-[999] flex h-[100dvh] flex-col overscroll-contain bg-ink/95 px-3 py-4 text-white sm:px-6"
       role="dialog"
       aria-modal="true"
       aria-label={label}

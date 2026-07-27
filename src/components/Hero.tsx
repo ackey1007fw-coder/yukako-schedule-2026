@@ -41,22 +41,22 @@ export function Hero({ nextEvent, socialLinks }: HeroProps) {
             </h1>
             <p className="mt-5 font-display text-2xl text-champagne sm:text-3xl">
               {profile.name}
-              <span className="ml-3 align-middle text-base text-white/56">
+              <span className="ml-3 align-middle text-base text-white/55">
                 {profile.romaji}
               </span>
             </p>
-            <p className="mt-6 max-w-xl text-base leading-8 text-white/78 sm:mt-7 sm:text-lg sm:leading-9">
+            <p className="mt-6 max-w-xl text-base leading-8 text-white/80 sm:mt-7 sm:text-lg sm:leading-9">
               {profile.intro}
             </p>
-            <div className="mt-5 flex flex-wrap gap-2 text-xs font-bold text-white/68">
-              <span className="inline-flex items-center gap-1.5 border border-white/18 bg-white/8 px-3 py-1.5">
+            <div className="mt-5 flex flex-wrap gap-2 text-xs font-bold text-white/70">
+              <span className="inline-flex items-center gap-1.5 border border-white/20 bg-white/10 px-3 py-1.5">
                 <MapPin className="h-3.5 w-3.5 text-champagne" aria-hidden="true" />
                 秋田出身
               </span>
-              <span className="border border-white/18 bg-white/8 px-3 py-1.5">
+              <span className="border border-white/20 bg-white/10 px-3 py-1.5">
                 秋田の公務員から俳優へ
               </span>
-              <span className="border border-white/18 bg-white/8 px-3 py-1.5">
+              <span className="border border-white/20 bg-white/10 px-3 py-1.5">
                 #ゆかJET
               </span>
             </div>
@@ -99,12 +99,12 @@ export function Hero({ nextEvent, socialLinks }: HeroProps) {
                     rel="noopener noreferrer"
                     title={`${link.label} ${link.handle}`}
                     aria-label={`${link.label}を開く（${link.handle}）`}
-                    className="inline-flex min-h-11 items-center gap-2 border border-white/18 bg-white/10 px-3 text-xs font-bold text-white shadow-sm transition hover:border-champagne hover:bg-white/16"
+                    className="inline-flex min-h-11 items-center gap-2 border border-white/20 bg-white/10 px-3 text-xs font-bold text-white shadow-sm transition hover:border-champagne hover:bg-white/15"
                   >
                     <span className="font-black text-champagne" aria-hidden="true">
                       {socialShortLabels[link.kind]}
                     </span>
-                    <span className="text-white/78" aria-hidden="true">
+                    <span className="text-white/80" aria-hidden="true">
                       {link.kind === "showroom" ? "SHOWROOM" : link.handle}
                     </span>
                   </a>
@@ -116,7 +116,7 @@ export function Hero({ nextEvent, socialLinks }: HeroProps) {
 
         {profile.heroImage && (
           <div className="relative order-2 overflow-hidden bg-ink px-4 pb-8 sm:px-6 lg:flex lg:h-full lg:min-h-0 lg:flex-col lg:px-8 lg:py-8">
-            <div className="yukako-photo-stage relative overflow-hidden border border-champagne/45 bg-white/8 p-2 shadow-paper lg:min-h-0 lg:flex-1">
+            <div className="yukako-photo-stage relative overflow-hidden border border-champagne/45 bg-white/10 p-2 shadow-paper lg:min-h-0 lg:flex-1">
             <img
               {...getResponsiveImageProps(
                 profile.heroImage,
@@ -127,7 +127,7 @@ export function Hero({ nextEvent, socialLinks }: HeroProps) {
               {...{ fetchpriority: "high" }}
               className="block w-full object-cover object-[50%_18%] lg:absolute lg:inset-2 lg:h-[calc(100%-1rem)] lg:w-[calc(100%-1rem)]"
             />
-            <p className="absolute bottom-5 left-5 z-10 border border-white/45 bg-ink/52 px-3 py-2 text-[11px] font-black uppercase tracking-[0.18em] text-white backdrop-blur">
+            <p className="absolute bottom-5 left-5 z-10 border border-white/45 bg-ink/50 px-3 py-2 text-[11px] font-black uppercase tracking-[0.18em] text-white backdrop-blur">
               Voice / Actor / Produce
             </p>
             </div>

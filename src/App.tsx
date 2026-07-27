@@ -145,7 +145,7 @@ function App() {
                 className="yukako-card yukako-card-interactive flex min-h-32 min-w-0 flex-col border-rosefog/25 bg-white p-5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-champagne"
               >
                 <span className="font-display text-xl text-ink">{item.title}</span>
-                <span className="mt-2 text-sm leading-6 text-ink/68">{item.copy}</span>
+                <span className="mt-2 text-sm leading-6 text-ink/70">{item.copy}</span>
                 <span className="mt-auto inline-flex items-center gap-1 pt-3 text-sm font-bold text-champagneInk">
                   {item.cta}
                   <ArrowDownRight className="h-4 w-4" aria-hidden="true" />

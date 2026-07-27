@@ -56,7 +56,7 @@ export function GojetHairUpdateSection() {
               </figcaption>
             </figure>
 
-            <div className="mt-6 max-w-2xl space-y-4 text-sm leading-7 text-ink/72 sm:text-base sm:leading-8">
+            <div className="mt-6 max-w-2xl space-y-4 text-sm leading-7 text-ink/70 sm:text-base sm:leading-8">
               <p>
                 2026年7月15日、吉井優花子さんが、#ゆかJETのために髪をピンクブラウンへ染めたことをXで報告しました。
               </p>

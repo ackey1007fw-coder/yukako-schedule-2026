@@ -35,7 +35,7 @@ export function GojetYellCardSection() {
               エールカードで優花子さんに応援を届けよう💌
             </h2>
 
-            <p className="mt-5 max-w-2xl text-sm leading-7 text-ink/72 sm:text-base sm:leading-8">
+            <p className="mt-5 max-w-2xl text-sm leading-7 text-ink/70 sm:text-base sm:leading-8">
               優花子さんから、エールカードについて率直な呼びかけがありました。今回の『#ゆかJET』は、自身がプロデュースを手がけながら「早紀」と「JET」の2役に挑戦する特別な公演です。劇場を応援のメッセージでいっぱいにして、優花子さんへエールを届けませんか？
             </p>
 
@@ -65,7 +65,7 @@ export function GojetYellCardSection() {
               {cardFacts.map((fact) => (
                 <div key={fact.label} className="grid grid-cols-[5.5rem_1fr] gap-3 text-sm sm:grid-cols-[6.5rem_1fr]">
                   <dt className="font-black text-champagneInk">{fact.label}</dt>
-                  <dd className="text-ink/78">{fact.value}</dd>
+                  <dd className="text-ink/80">{fact.value}</dd>
                 </div>
               ))}
             </dl>

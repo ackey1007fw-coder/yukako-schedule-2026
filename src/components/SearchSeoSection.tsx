@@ -136,7 +136,7 @@ export function SearchSeoSection() {
                     />
                   </summary>
                   <div className="pb-5 pr-6">
-                    <p className="text-sm leading-8 text-ink/68">{faq.answer}</p>
+                    <p className="text-sm leading-8 text-ink/70">{faq.answer}</p>
                     <a
                       href={faq.href}
                       {...(faq.href.startsWith("http")

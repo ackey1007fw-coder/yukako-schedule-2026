@@ -41,7 +41,7 @@ export function GojetCastMessageSection() {
               最後まで一緒に、楽しく誠実に——仲間と育てる #ゆかJET
             </h2>
 
-            <p className="mt-5 max-w-2xl text-sm leading-7 text-ink/72 sm:text-base sm:leading-8">
+            <p className="mt-5 max-w-2xl text-sm leading-7 text-ink/70 sm:text-base sm:leading-8">
               C班・あかね役のしいなさんから、優花子さんへ。出会って約2年という二人の、尊敬と感謝の言葉です。
             </p>
 
@@ -61,7 +61,7 @@ export function GojetCastMessageSection() {
               </figcaption>
             </figure>
 
-            <div className="mt-6 max-w-2xl space-y-4 text-sm leading-7 text-ink/72 sm:text-base sm:leading-8">
+            <div className="mt-6 max-w-2xl space-y-4 text-sm leading-7 text-ink/70 sm:text-base sm:leading-8">
               <p>
                 共演回数は多くないとしながらも、優花子さんの人柄や成長、その裏にある努力を見てきたというしいなさん。尊敬と感謝を、まっすぐな言葉で届けています。
               </p>
@@ -102,7 +102,7 @@ export function GojetCastMessageSection() {
               </figcaption>
             </figure>
 
-            <div className="mt-6 max-w-2xl space-y-4 text-sm leading-7 text-ink/72 sm:text-base sm:leading-8">
+            <div className="mt-6 max-w-2xl space-y-4 text-sm leading-7 text-ink/70 sm:text-base sm:leading-8">
               <p>
                 本人が「最後」と伝えた『GO,JET!』出演。その締めくくりを、自身のプロデュース公演でカンパニーのみなさんと迎えます。最後まで楽しく、誠実に——劇場や配信で見届けたい舞台です。
               </p>

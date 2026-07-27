@@ -50,7 +50,7 @@ export function AkitaRootsSection() {
               <h4 className="mt-3 font-display text-xl leading-tight text-ink">
                 {item.title}
               </h4>
-              <p className="mt-2 text-sm leading-6 text-ink/68">{item.copy}</p>
+              <p className="mt-2 text-sm leading-6 text-ink/70">{item.copy}</p>
             </div>
           ))}
         </div>

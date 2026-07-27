@@ -136,7 +136,7 @@ export function ArchiveDetailPage({ slug }: ArchiveDetailPageProps) {
             </h1>
 
             {item.subtitle && (
-              <p className="mt-4 text-base leading-8 text-ink/72 sm:text-lg sm:leading-9">
+              <p className="mt-4 text-base leading-8 text-ink/70 sm:text-lg sm:leading-9">
                 {item.subtitle}
               </p>
             )}
@@ -255,7 +255,7 @@ export function ArchiveDetailPage({ slug }: ArchiveDetailPageProps) {
                 元投稿・関連リンク
               </p>
               {item.sourceNote && (
-                <p className="mt-4 text-sm leading-7 text-ink/72">{item.sourceNote}</p>
+                <p className="mt-4 text-sm leading-7 text-ink/70">{item.sourceNote}</p>
               )}
               <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                 <a

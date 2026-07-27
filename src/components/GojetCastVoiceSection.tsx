@@ -93,7 +93,7 @@ export function GojetCastVoiceSection({ now }: GojetCastVoiceSectionProps) {
               A班あかね役・葉山椎菜さんからの投稿
             </h2>
 
-            <p className="mt-5 max-w-2xl text-sm leading-7 text-ink/72 sm:text-base sm:leading-8">
+            <p className="mt-5 max-w-2xl text-sm leading-7 text-ink/70 sm:text-base sm:leading-8">
               7/25公演でA班あかね役を務めた葉山椎菜さん（{castHandle}）の投稿を、Xの埋め込みでそのままご紹介します。
             </p>
 

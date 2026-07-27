@@ -42,7 +42,7 @@ export function GojetCountdownBanner() {
               ))}
             </span>
             {todayShow.note && (
-              <span className="w-full text-xs font-semibold leading-5 text-ink/62 sm:w-auto">
+              <span className="w-full text-xs font-semibold leading-5 text-ink/60 sm:w-auto">
                 {todayShow.note}
               </span>
             )}

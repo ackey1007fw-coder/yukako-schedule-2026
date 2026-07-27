@@ -24,7 +24,7 @@ export function AudienceReportSection() {
         >
           ご来場、ありがとうございます
         </h2>
-        <p className="mt-5 max-w-2xl text-sm leading-7 text-ink/72 sm:text-base sm:leading-8">
+        <p className="mt-5 max-w-2xl text-sm leading-7 text-ink/70 sm:text-base sm:leading-8">
           観劇に来てくれたお客さんの投稿に、優花子さんがInstagramストーリーズで返したコメントです。
         </p>
 

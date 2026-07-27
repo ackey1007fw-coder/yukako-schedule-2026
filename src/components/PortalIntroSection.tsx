@@ -54,7 +54,7 @@ export function PortalIntroSection() {
             <h2 className="font-display text-3xl leading-tight text-ink sm:text-4xl">
               30秒でわかる吉井優花子
             </h2>
-            <p className="mt-5 text-base leading-8 text-ink/74 sm:text-lg sm:leading-9">
+            <p className="mt-5 text-base leading-8 text-ink/75 sm:text-lg sm:leading-9">
               秋田出身。公務員として働いた経験を礎に上京し、舞台・ミュージカル・映像・モデル・MC・リポーターとして活動する俳優。やわらかな声、丁寧な言葉、人をよく見る力を武器に、観る人の心に届く表現を目指しています。2026年は出演だけでなく、プロデュース公演にも挑戦中。
             </p>
             <div className="mt-6 grid gap-3 sm:grid-cols-3">
@@ -86,7 +86,7 @@ export function PortalIntroSection() {
                   <h3 className="mt-4 font-display text-2xl leading-tight text-ink">
                     {title}
                   </h3>
-                  <p className="mt-3 text-sm leading-7 text-ink/68">{copy}</p>
+                  <p className="mt-3 text-sm leading-7 text-ink/70">{copy}</p>
                 </article>
               ))}
             </div>
@@ -109,7 +109,7 @@ export function PortalIntroSection() {
                 <span className="grid h-10 w-10 shrink-0 place-items-center border border-champagne/45 bg-porcelain text-champagne">
                   <Icon className="h-4 w-4" aria-hidden="true" />
                 </span>
-                <span className="pt-1 text-sm font-bold leading-6 text-ink/78">
+                <span className="pt-1 text-sm font-bold leading-6 text-ink/80">
                   {label}
                 </span>
               </a>
