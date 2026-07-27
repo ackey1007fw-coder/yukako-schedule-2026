@@ -71,6 +71,14 @@ export type BabySharkTourDate = {
   date: string;
   dateLabel: string;
   venue: string;
+  /** 会場の住所（会場公式サイト等で確認したもの） */
+  address: string;
+  /** 最寄り駅からのアクセス */
+  access: string;
+  /** Google マップ検索URL（住所で開く） */
+  mapUrl: string;
+  /** 会場の公式サイト */
+  venueUrl: string;
   stages: BabySharkStage[];
 };
 
@@ -190,6 +198,8 @@ export const babySharkLive = {
   tour2026: {
     sourceUrl: "https://www.instagram.com/p/DY4au0dmbOg/",
     sourceLabel: "本人のInstagram告知を見る",
+    sourceDate: "2026-05-28",
+    sourceDateLabel: "2026年5月28日",
     officialUrl: "https://babyshark-live-japan.com/ticket/",
     image: {
       src: "/images/baby-shark/baby-shark-schedule-2026.jpg",
@@ -204,6 +214,10 @@ export const babySharkLive = {
         date: "2026-05-30",
         dateLabel: "2026年5月30日（土）",
         venue: "海老名市文化会館 大ホール",
+        address: "神奈川県海老名市めぐみ町6番1号",
+        access: "小田急小田原線・相鉄線 海老名駅 西口から徒歩5分／JR相模線 海老名駅 東口から徒歩5分",
+        mapUrl: "https://www.google.com/maps/search/?api=1&query=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E6%B5%B7%E8%80%81%E5%90%8D%E5%B8%82%E3%82%81%E3%81%90%E3%81%BF%E7%94%BA6%E7%95%AA1%E5%8F%B7%20%E6%B5%B7%E8%80%81%E5%90%8D%E5%B8%82%E6%96%87%E5%8C%96%E4%BC%9A%E9%A4%A8",
+        venueUrl: "https://www.ebina-bunka.jp/",
         stages: [
           { label: "①", time: "12:30" },
           { label: "②", time: "14:50", note: "お見送り有" }
@@ -215,6 +229,10 @@ export const babySharkLive = {
         date: "2026-06-07",
         dateLabel: "2026年6月7日（日）",
         venue: "大宮ソニックシティ 大ホール",
+        address: "埼玉県さいたま市大宮区桜木町1-7-5",
+        access: "JR・東武野田線 大宮駅 西口から徒歩3分",
+        mapUrl: "https://www.google.com/maps/search/?api=1&query=%E5%9F%BC%E7%8E%89%E7%9C%8C%E3%81%95%E3%81%84%E3%81%9F%E3%81%BE%E5%B8%82%E5%A4%A7%E5%AE%AE%E5%8C%BA%E6%A1%9C%E6%9C%A8%E7%94%BA1-7-5%20%E5%A4%A7%E5%AE%AE%E3%82%BD%E3%83%8B%E3%83%83%E3%82%AF%E3%82%B7%E3%83%86%E3%82%A3",
+        venueUrl: "https://www.sonic-city.or.jp/",
         stages: [
           { label: "①", time: "11:00" },
           { label: "②", time: "13:30", note: "お見送り有" }
@@ -226,6 +244,10 @@ export const babySharkLive = {
         date: "2026-08-22",
         dateLabel: "2026年8月22日（土）",
         venue: "大垣市スイトピアセンター 文化ホール",
+        address: "岐阜県大垣市室本町5-51",
+        access: "JR大垣駅から徒歩15分／養老鉄道 室駅から徒歩5分",
+        mapUrl: "https://www.google.com/maps/search/?api=1&query=%E5%B2%90%E9%98%9C%E7%9C%8C%E5%A4%A7%E5%9E%A3%E5%B8%82%E5%AE%A4%E6%9C%AC%E7%94%BA5-51%20%E5%A4%A7%E5%9E%A3%E5%B8%82%E3%82%B9%E3%82%A4%E3%83%88%E3%83%94%E3%82%A2%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC",
+        venueUrl: "https://www.og-bunka.or.jp/",
         stages: [
           { label: "①", time: "12:30" },
           { label: "②", time: "14:30", note: "お見送り有" }
@@ -289,6 +311,19 @@ export const babySharkLive = {
         "https://www.instagram.com/p/C3-IholvnW4/?img_index=4&igsh=aGhuc2Z0NGZlbWc3",
       sourceLabel: "Instagramの元投稿を見る",
       kind: "comment"
+    },
+    {
+      id: "instagram-2026-05-28",
+      date: "2026-05-28",
+      dateLabel: "2026年5月28日",
+      title: "2026年の出演回のお知らせ",
+      body: [
+        "神奈川・海老名（5/30）、埼玉・大宮（6/7）、岐阜・大垣（8/22）の3公演。いずれも2回公演で、2回目は終演後にお見送りあり。",
+        "「みんなと会えることを楽しみにしています☺️♪」——ヘッティー🐚&パール🏴‍☠️"
+      ],
+      sourceUrl: "https://www.instagram.com/p/DY4au0dmbOg/",
+      sourceLabel: "Instagramの元投稿を見る",
+      kind: "announcement"
     }
   ] satisfies BabySharkUpdate[],
   /** 今後の出演日・告知を足す用（確定情報のみ追記）。空のときは一覧を出さない。 */

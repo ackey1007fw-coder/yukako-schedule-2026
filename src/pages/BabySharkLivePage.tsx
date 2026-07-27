@@ -3,6 +3,7 @@ import {
   ArrowLeft,
   CalendarDays,
   ExternalLink,
+  MapPin,
   Sparkles,
   Waves
 } from "lucide-react";
@@ -104,6 +105,16 @@ export function BabySharkLivePage() {
                 </a>
               ) : null}
               <p className="mt-3 max-w-xl text-sm leading-7 text-white/70">{work.appearanceNote}</p>
+
+              <a
+                href={work.officialUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 inline-flex min-h-11 items-center gap-2 border border-white/25 bg-white/5 px-3 py-2 text-sm font-bold text-white/85 transition hover:border-champagne hover:text-white"
+              >
+                公式サイト babyshark-live-japan.com
+                <ExternalLink className="h-4 w-4 text-champagne" aria-hidden="true" />
+              </a>
             </div>
 
             <figure className="mx-auto w-full max-w-md overflow-hidden border border-white/15 bg-[#124a66] shadow-paper lg:max-w-none">
@@ -166,7 +177,7 @@ export function BabySharkLivePage() {
               2026年の出演公演
             </h2>
             <p className="mt-4 text-sm leading-7 text-ink/70">
-              優花子さん本人のInstagram告知に載っていた3公演。チケットと最新情報は公式サイトへ。
+              {`優花子さん本人のInstagram告知（${work.tour2026.sourceDateLabel}）に載っていた3公演。チケットと最新情報は公式サイトへ。`}
             </p>
 
             <ul className="mt-6 grid gap-3">
@@ -216,6 +227,36 @@ export function BabySharkLivePage() {
                           )
                           .join("　")}
                       </p>
+
+                      <dl className="mt-3 grid gap-1 text-xs leading-6 text-ink/60 sm:grid-cols-[3.5rem_1fr]">
+                        <dt className="font-bold text-ink/50">住所</dt>
+                        <dd>{item.address}</dd>
+                        <dt className="font-bold text-ink/50">アクセス</dt>
+                        <dd>{item.access}</dd>
+                      </dl>
+
+                      <div className="mt-3 flex flex-wrap gap-2">
+                        <a
+                          href={item.mapUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex min-h-11 items-center gap-1.5 border border-[#7aa8c4]/45 bg-white px-3 py-2 text-xs font-bold text-[#2f5f78] transition hover:border-champagne hover:text-ink"
+                        >
+                          <MapPin className="h-3.5 w-3.5" aria-hidden="true" />
+                          地図を開く
+                          <span className="sr-only">（{item.venue}）</span>
+                        </a>
+                        <a
+                          href={item.venueUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex min-h-11 items-center gap-1.5 border border-[#7aa8c4]/45 bg-white px-3 py-2 text-xs font-bold text-[#2f5f78] transition hover:border-champagne hover:text-ink"
+                        >
+                          会場サイト
+                          <span className="sr-only">（{item.venue}）</span>
+                          <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
+                        </a>
+                      </div>
                     </div>
                   </li>
                 );

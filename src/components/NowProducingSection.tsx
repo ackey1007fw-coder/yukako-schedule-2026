@@ -822,7 +822,9 @@ export function NowProducingSection({ event, now }: NowProducingSectionProps) {
 
   const ticketLink =
     event.links.find((link) => link.kind === "ticket") ?? event.links[0];
-  const infoLinks = event.links.filter((link) => link.kind === "info");
+  const infoLinks = event.links.filter(
+    (link) => link.kind === "info" || link.kind === "map",
+  );
 
   return (
     <section id="next" className="scroll-mt-32 bg-ink py-8 sm:py-24">

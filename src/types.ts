@@ -9,7 +9,8 @@ export type EventCategory =
 export type EventLink = {
   label: string;
   url: string;
-  kind?: "ticket" | "stream" | "info" | "sns";
+  /** map = 会場の地図。カード内に専用の「地図を開く」ボタンとして出す */
+  kind?: "ticket" | "stream" | "info" | "sns" | "map";
 };
 
 export type ScheduleEvent = {

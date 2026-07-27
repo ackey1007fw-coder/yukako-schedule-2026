@@ -35,7 +35,7 @@ export const events: ScheduleEvent[] = [
       {
         label: "会場の地図を開く",
         url: "https://www.google.com/maps/search/?api=1&query=Air%20studio%20%E4%B8%A1%E5%9B%BD%20%E6%9D%B1%E4%BA%AC%E9%83%BD%E5%A2%A8%E7%94%B0%E5%8C%BA%E4%B8%A1%E5%9B%BD2-18-7",
-        kind: "info"
+        kind: "map"
       },
       {
         label: "ご予約開始のお知らせ（吉井優花子 X）",
@@ -59,7 +59,7 @@ export const events: ScheduleEvent[] = [
     endAt: "2026-06-07T13:30:00+09:00",
     dates: ["2026-06-07"],
     displayDate: "2026年6月7日（日）",
-    venue: "大宮ソニックシティ 大ホール（埼玉県さいたま市）",
+    venue: "大宮ソニックシティ 大ホール（埼玉県さいたま市大宮区桜木町1-7-5）",
     image: "/images/baby-shark/baby-shark-hetty.jpg",
     summary:
       "全国公演のファミリーミュージカル。①11:00／②13:30の2回公演で、2回目は終演後にお見送りあり。",
@@ -69,6 +69,16 @@ export const events: ScheduleEvent[] = [
         label: "出演回のお知らせ（吉井優花子 Instagram）",
         url: "https://www.instagram.com/p/DY4au0dmbOg/",
         kind: "sns"
+      },
+      {
+        label: "会場の地図を開く（大宮ソニックシティ）",
+        url: "https://www.google.com/maps/search/?api=1&query=%E5%9F%BC%E7%8E%89%E7%9C%8C%E3%81%95%E3%81%84%E3%81%9F%E3%81%BE%E5%B8%82%E5%A4%A7%E5%AE%AE%E5%8C%BA%E6%A1%9C%E6%9C%A8%E7%94%BA1-7-5%20%E5%A4%A7%E5%AE%AE%E3%82%BD%E3%83%8B%E3%83%83%E3%82%AF%E3%82%B7%E3%83%86%E3%82%A3",
+        kind: "map"
+      },
+      {
+        label: "公式サイト（BABY SHARK LIVE！）",
+        url: "https://babyshark-live-japan.com/",
+        kind: "info"
       }
     ]
   },
@@ -81,7 +91,7 @@ export const events: ScheduleEvent[] = [
     endAt: "2026-05-30T14:50:00+09:00",
     dates: ["2026-05-30"],
     displayDate: "2026年5月30日（土）",
-    venue: "海老名市文化会館 大ホール（神奈川県海老名市）",
+    venue: "海老名市文化会館 大ホール（神奈川県海老名市めぐみ町6番1号）",
     image: "/images/baby-shark/baby-shark-hetty.jpg",
     summary:
       "全国公演のファミリーミュージカル。①12:30／②14:50の2回公演で、2回目は終演後にお見送りあり。",
@@ -91,6 +101,16 @@ export const events: ScheduleEvent[] = [
         label: "出演回のお知らせ（吉井優花子 Instagram）",
         url: "https://www.instagram.com/p/DY4au0dmbOg/",
         kind: "sns"
+      },
+      {
+        label: "会場の地図を開く（海老名市文化会館）",
+        url: "https://www.google.com/maps/search/?api=1&query=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E6%B5%B7%E8%80%81%E5%90%8D%E5%B8%82%E3%82%81%E3%81%90%E3%81%BF%E7%94%BA6%E7%95%AA1%E5%8F%B7%20%E6%B5%B7%E8%80%81%E5%90%8D%E5%B8%82%E6%96%87%E5%8C%96%E4%BC%9A%E9%A4%A8",
+        kind: "map"
+      },
+      {
+        label: "公式サイト（BABY SHARK LIVE！）",
+        url: "https://babyshark-live-japan.com/",
+        kind: "info"
       }
     ]
   },
@@ -103,7 +123,7 @@ export const events: ScheduleEvent[] = [
     endAt: "2026-08-22T15:35:00+09:00",
     dates: ["2026-08-22"],
     displayDate: "2026年8月22日（土）",
-    venue: "大垣市スイトピアセンター 文化ホール（岐阜県大垣市）",
+    venue: "大垣市スイトピアセンター 文化ホール（岐阜県大垣市室本町5-51）",
     image: "/images/baby-shark/baby-shark-hetty.jpg",
     summary:
       "ヤドカリのヘッティー、海賊のパールで出演してきた全国公演のファミリーミュージカル。①12:30／②14:30の2回公演で、2回目は終演後にお見送りあり。上演時間は約65分。",
@@ -118,6 +138,16 @@ export const events: ScheduleEvent[] = [
         label: "出演回のお知らせ（吉井優花子 Instagram）",
         url: "https://www.instagram.com/p/DY4au0dmbOg/",
         kind: "sns"
+      },
+      {
+        label: "会場の地図を開く（大垣市スイトピアセンター）",
+        url: "https://www.google.com/maps/search/?api=1&query=%E5%B2%90%E9%98%9C%E7%9C%8C%E5%A4%A7%E5%9E%A3%E5%B8%82%E5%AE%A4%E6%9C%AC%E7%94%BA5-51%20%E5%A4%A7%E5%9E%A3%E5%B8%82%E3%82%B9%E3%82%A4%E3%83%88%E3%83%94%E3%82%A2%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC",
+        kind: "map"
+      },
+      {
+        label: "公式サイト（BABY SHARK LIVE！）",
+        url: "https://babyshark-live-japan.com/",
+        kind: "info"
       },
       {
         label: "会場ページ（大垣市スイトピアセンター）",
