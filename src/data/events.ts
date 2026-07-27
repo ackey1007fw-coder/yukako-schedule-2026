@@ -51,6 +51,38 @@ export const events: ScheduleEvent[] = [
     isImportant: true
   },
   {
+    id: "babyshark-live-2026-08-22",
+    title: "BABY SHARK LIVE! -The Hidden Treasure- 岐阜・大垣公演",
+    shortTitle: "Baby Shark 大垣",
+    category: "stage",
+    startAt: "2026-08-22T12:30:00+09:00",
+    endAt: "2026-08-22T15:35:00+09:00",
+    dates: ["2026-08-22"],
+    displayDate: "2026年8月22日（土）",
+    venue: "大垣市スイトピアセンター 文化ホール（岐阜県大垣市）",
+    image: "/images/baby-shark/baby-shark-hetty.jpg",
+    summary:
+      "ヤドカリのヘッティー、海賊のパールで出演してきた全国公演のファミリーミュージカル。①12:30／②14:30の2回公演で、2回目は終演後のお見送りあり。上演時間は約65分。",
+    badges: ["舞台", "全国公演", "2回公演", "お見送り有"],
+    links: [
+      {
+        label: "🎫 チケット・公演情報（公式）",
+        url: "https://babyshark-live-japan.com/ticket/",
+        kind: "ticket"
+      },
+      {
+        label: "出演回のお知らせ（吉井優花子 Instagram）",
+        url: "https://www.instagram.com/p/DY4au0dmbOg/",
+        kind: "sns"
+      },
+      {
+        label: "会場ページ（大垣市スイトピアセンター）",
+        url: "https://www.og-bunka.or.jp/event/20260126141210.html",
+        kind: "info"
+      }
+    ]
+  },
+  {
     id: "ryoma-kun-2026-04",
     title: "かわええのう、龍馬くん",
     shortTitle: "龍馬くん",

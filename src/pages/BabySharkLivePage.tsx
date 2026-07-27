@@ -14,6 +14,8 @@ import { ExternalButton } from "../components/ExternalButton";
 import {
   babySharkGalleryImages,
   babySharkLive,
+  getBabySharkNextTourDate,
+  getBabySharkTourDates2026,
   getBabySharkUpdatesNewestFirst
 } from "../data/babySharkLive";
 import { getResponsiveImageProps } from "../lib/responsiveImage";
@@ -25,6 +27,8 @@ export function BabySharkLivePage() {
   const { schedule } = useSchedule();
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const updates = getBabySharkUpdatesNewestFirst();
+  const tourDates2026 = getBabySharkTourDates2026();
+  const nextTourDate = getBabySharkNextTourDate();
 
   useEffect(() => {
     document.title = work.seoTitle;
@@ -86,6 +90,19 @@ export function BabySharkLivePage() {
               <p className="mt-5 text-sm font-bold text-white/85">
                 役：ヤドカリのヘッティー／海賊のパール
               </p>
+              {nextTourDate ? (
+                <a
+                  href="#baby-shark-2026"
+                  className="mt-5 inline-flex max-w-xl flex-wrap items-center gap-x-2 gap-y-1 border border-champagne/50 bg-white/10 px-3 py-2.5 text-sm font-bold text-white transition hover:border-champagne hover:bg-white/15"
+                >
+                  <CalendarDays className="h-4 w-4 text-champagne" aria-hidden="true" />
+                  <span className="text-champagne">
+                    {nextTourDate.status === "today" ? "本日" : "次の出演"}
+                  </span>
+                  <span>{nextTourDate.dateLabel}</span>
+                  <span className="text-white/75">{nextTourDate.venue}</span>
+                </a>
+              ) : null}
               <p className="mt-3 max-w-xl text-sm leading-7 text-white/70">{work.appearanceNote}</p>
             </div>
 
@@ -134,6 +151,103 @@ export function BabySharkLivePage() {
                 <dd className="mt-2 text-sm font-bold text-ink">{work.firstPerformanceLabel}</dd>
               </div>
             </dl>
+          </section>
+
+          {/* 2.5 2026年の出演公演 */}
+          <section id="baby-shark-2026" aria-labelledby="baby-shark-2026-heading" className="mt-16 scroll-mt-28">
+            <p className="flex items-center gap-2 text-xs font-black uppercase tracking-[0.18em] text-champagneInk">
+              <CalendarDays className="h-4 w-4 text-champagne" aria-hidden="true" />
+              2026 Schedule
+            </p>
+            <h2
+              id="baby-shark-2026-heading"
+              className="mt-3 font-display text-3xl text-ink sm:text-4xl"
+            >
+              2026年の出演公演
+            </h2>
+            <p className="mt-4 text-sm leading-7 text-ink/70">
+              優花子さん本人のInstagram告知に載っていた3公演。チケットと最新情報は公式サイトへ。
+            </p>
+
+            <ul className="mt-6 grid gap-3">
+              {tourDates2026.map((item) => {
+                const isPast = item.status === "past";
+                return (
+                  <li
+                    key={item.id}
+                    className={`grid gap-2 border px-4 py-4 sm:grid-cols-[9rem_1fr] sm:gap-4 ${
+                      isPast
+                        ? "border-ink/10 bg-white/60"
+                        : "border-champagne/55 bg-[#fff8e8]"
+                    }`}
+                  >
+                    <div className="flex flex-wrap items-start gap-2">
+                      <span
+                        className={`text-xs font-black uppercase tracking-[0.12em] ${
+                          isPast ? "text-ink/45" : "text-[#2f5f78]"
+                        }`}
+                      >
+                        {item.region}
+                      </span>
+                      <span
+                        className={`px-2 py-0.5 text-[11px] font-bold ${
+                          isPast
+                            ? "border border-ink/15 bg-white text-ink/50"
+                            : "border border-champagne/60 bg-white text-champagneInk"
+                        }`}
+                      >
+                        {item.status === "past"
+                          ? "終演"
+                          : item.status === "today"
+                            ? "本日"
+                            : "これから"}
+                      </span>
+                    </div>
+                    <div className={isPast ? "text-ink/60" : "text-ink"}>
+                      <p className="text-sm font-bold">
+                        <time dateTime={item.date}>{item.dateLabel}</time>
+                      </p>
+                      <p className="mt-1 text-sm">{item.venue}</p>
+                      <p className={`mt-1 text-sm ${isPast ? "text-ink/50" : "text-ink/70"}`}>
+                        {item.stages
+                          .map(
+                            (stage) =>
+                              `${stage.label}${stage.time}${stage.note ? `（${stage.note}）` : ""}`
+                          )
+                          .join("　")}
+                      </p>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+
+            {work.tour2026.image.available ? (
+              <figure className="mt-6 overflow-hidden border border-[#7aa8c4]/30 bg-white p-3">
+                <img
+                  {...getResponsiveImageProps(
+                    work.tour2026.image.src,
+                    "(min-width: 1024px) 60vw, 100vw"
+                  )}
+                  alt={work.tour2026.image.alt}
+                  loading="lazy"
+                  decoding="async"
+                  className="mx-auto block h-auto w-full max-w-xl object-contain"
+                />
+                <figcaption className="mt-2 text-center text-xs text-ink/55">
+                  {work.tour2026.image.caption}
+                </figcaption>
+              </figure>
+            ) : null}
+
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <ExternalButton href={work.tour2026.officialUrl} variant="gold">
+                チケット・公演情報（公式）
+              </ExternalButton>
+              <ExternalButton href={work.tour2026.sourceUrl} variant="light">
+                {work.tour2026.sourceLabel}
+              </ExternalButton>
+            </div>
           </section>
 
           {/* 3. 役紹介（並列・上下なし） */}

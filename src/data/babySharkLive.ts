@@ -54,6 +54,26 @@ export type BabySharkAppearance = {
   sourceUrl?: string;
 };
 
+export type BabySharkStage = {
+  /** ①②などの回名 */
+  label: string;
+  /** 開演時刻（HH:mm） */
+  time: string;
+  /** 「お見送り有」などの補足 */
+  note?: string;
+};
+
+/** 優花子さんの出演が本人告知で確認できた公演日 */
+export type BabySharkTourDate = {
+  id: string;
+  region: string;
+  /** 公演日（YYYY-MM-DD, JST） */
+  date: string;
+  dateLabel: string;
+  venue: string;
+  stages: BabySharkStage[];
+};
+
 export const babySharkLive = {
   id: "baby-shark-live-hidden-treasure",
   slug: "baby-shark-live",
@@ -66,7 +86,8 @@ export const babySharkLive = {
   /** 作品自体の継続状況（優花子さん個人の出演状況ではない） */
   workStatus: "作品は全国公演継続中",
   /** 優花子さん個人の出演予定についての注記 */
-  appearanceNote: "優花子さんの出演日は、本人からの告知確認後に更新します",
+  appearanceNote:
+    "本人告知で確認できた2026年の出演公演を掲載中。追加の告知があれば更新します",
   firstPerformanceDate: "2024-02-25",
   firstPerformanceLabel: "2024年2月25日",
   postDate: "2024-03-01",
@@ -162,6 +183,56 @@ export const babySharkLive = {
       kind: "gallery"
     }
   ] satisfies BabySharkImage[],
+  /**
+   * 2026年の出演公演。優花子さん本人のInstagram告知で確認できた日程だけを載せる。
+   * 追加公演が告知されたら dates へ追記する（表示は日付順、終演済みは自動でグレーになる）。
+   */
+  tour2026: {
+    sourceUrl: "https://www.instagram.com/p/DY4au0dmbOg/",
+    sourceLabel: "本人のInstagram告知を見る",
+    officialUrl: "https://babyshark-live-japan.com/ticket/",
+    image: {
+      src: "/images/baby-shark/baby-shark-schedule-2026.jpg",
+      alt: "ベイビーシャークライブ2026年の公演日程。神奈川・海老名公演は5月30日（土）海老名市文化会館 大ホール ①12:30 ②14:50（お見送り有）、埼玉・大宮公演は6月7日（日）大宮ソニックシティ 大ホール ①11:00 ②13:30（お見送り有）、岐阜・大垣公演は8月22日（土）大垣市スイトピアセンター 文化ホール ①12:30 ②14:30（お見送り有）",
+      caption: "本人告知より（2026年の出演回）",
+      available: true
+    },
+    dates: [
+      {
+        id: "ebina-2026-05-30",
+        region: "神奈川・海老名",
+        date: "2026-05-30",
+        dateLabel: "2026年5月30日（土）",
+        venue: "海老名市文化会館 大ホール",
+        stages: [
+          { label: "①", time: "12:30" },
+          { label: "②", time: "14:50", note: "お見送り有" }
+        ]
+      },
+      {
+        id: "omiya-2026-06-07",
+        region: "埼玉・大宮",
+        date: "2026-06-07",
+        dateLabel: "2026年6月7日（日）",
+        venue: "大宮ソニックシティ 大ホール",
+        stages: [
+          { label: "①", time: "11:00" },
+          { label: "②", time: "13:30", note: "お見送り有" }
+        ]
+      },
+      {
+        id: "ogaki-2026-08-22",
+        region: "岐阜・大垣",
+        date: "2026-08-22",
+        dateLabel: "2026年8月22日（土）",
+        venue: "大垣市スイトピアセンター 文化ホール",
+        stages: [
+          { label: "①", time: "12:30" },
+          { label: "②", time: "14:30", note: "お見送り有" }
+        ]
+      }
+    ] satisfies BabySharkTourDate[]
+  },
   /** 2024年当時の作品公演スケジュール（優花子さん個人の出演確定日ではない） */
   archiveScheduleNote:
     "こちらは2024年当時の公演情報です。現在の公演情報は公式サイトをご確認ください。",
@@ -232,4 +303,32 @@ export const babySharkGalleryImages = babySharkLive.images.filter(
 /** 活動記録を date の新しい順で返す（配列末尾追加でも表示は新しい順） */
 export function getBabySharkUpdatesNewestFirst(): BabySharkUpdate[] {
   return [...babySharkLive.updates].sort((a, b) => b.date.localeCompare(a.date));
+}
+
+const toTokyoDateKey = (now: Date) =>
+  new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Tokyo" }).format(now);
+
+export type BabySharkTourDateWithStatus = BabySharkTourDate & {
+  /** upcoming = これから / today = 当日 / past = 終演 */
+  status: "upcoming" | "today" | "past";
+};
+
+/** 2026年の出演公演を日付順（古い順）で返す。当日・終演の判定つき。 */
+export function getBabySharkTourDates2026(
+  now: Date = new Date()
+): BabySharkTourDateWithStatus[] {
+  const today = toTokyoDateKey(now);
+  return [...babySharkLive.tour2026.dates]
+    .sort((a, b) => a.date.localeCompare(b.date))
+    .map((item) => ({
+      ...item,
+      status: item.date === today ? "today" : item.date > today ? "upcoming" : "past"
+    }));
+}
+
+/** 次に控えている出演公演（当日を含む）。すべて終演していれば null。 */
+export function getBabySharkNextTourDate(
+  now: Date = new Date()
+): BabySharkTourDateWithStatus | null {
+  return getBabySharkTourDates2026(now).find((item) => item.status !== "past") ?? null;
 }
