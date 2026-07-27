@@ -362,6 +362,8 @@ export const imageManifest = {
   "/images/yukajet/2026-07-26-day4-cban-cast.jpg": {"width":973,"height":1250,"widths":[360,480,720,960,973]},
   "/images/yukajet/2026-07-26-kurume-maimu-bban-finale.jpg": {"width":1108,"height":1477,"widths":[360,480,720,960,1108]},
   "/images/yukajet/2026-07-26-schedule-change-notice.jpg": {"width":1169,"height":1553,"widths":[360,480,720,960,1169]},
+  "/images/yukajet/2026-07-27-yukako-final-bouquet-story.jpg": {"width":3510,"height":6240,"widths":[360,480,720,960,1280,1600,3510]},
+  "/images/yukajet/2026-07-27-yukako-final-bouquet.jpg": {"width":1102,"height":1598,"widths":[360,480,720,960,1102]},
   "/images/yukajet/2026-07-27-yukako-yell-cards.jpg": {"width":1520,"height":2026,"widths":[360,480,720,960,1280,1520]},
   "/images/yukako-babyshark-character.jpg": {"width":1600,"height":2048,"widths":[360,480,720,960,1280,1600]},
   "/images/yukako-babyshark-lobster.jpg": {"width":941,"height":1176,"widths":[360,480,720,941]},
