@@ -36,7 +36,7 @@ export function Hero({ nextEvent, socialLinks }: HeroProps) {
             <p className="yukako-kicker mb-5 inline-flex self-start px-3 py-2 text-xs font-bold uppercase">
               ファン制作応援ポータル / Akita to Actor
             </p>
-            <h1 className="font-display text-4xl leading-tight text-white sm:text-5xl lg:text-6xl">
+            <h1 className="font-display text-4xl leading-tight text-white [text-wrap:balance] sm:text-5xl lg:text-6xl">
               {profile.catchCopy}
             </h1>
             <p className="mt-5 font-display text-2xl text-champagne sm:text-3xl">
@@ -88,8 +88,9 @@ export function Hero({ nextEvent, socialLinks }: HeroProps) {
               </div>
             </div>
 
+            {/* Xは個人とプロデュースの2つあり、頭文字だけだと同じ四角が並んで見分けられない */}
             {mainSocials.length > 0 && (
-              <div className="mt-7 flex items-center gap-2">
+              <div className="mt-7 flex flex-wrap items-center gap-2">
                 {mainSocials.map((link) => (
                   <a
                     key={link.url}
@@ -98,9 +99,14 @@ export function Hero({ nextEvent, socialLinks }: HeroProps) {
                     rel="noopener noreferrer"
                     title={`${link.label} ${link.handle}`}
                     aria-label={`${link.label}を開く（${link.handle}）`}
-                    className="grid h-11 w-11 place-items-center border border-white/18 bg-white/10 text-xs font-black text-white shadow-sm transition hover:border-champagne hover:bg-white/16"
+                    className="inline-flex min-h-11 items-center gap-2 border border-white/18 bg-white/10 px-3 text-xs font-bold text-white shadow-sm transition hover:border-champagne hover:bg-white/16"
                   >
-                    <span aria-hidden="true">{socialShortLabels[link.kind]}</span>
+                    <span className="font-black text-champagne" aria-hidden="true">
+                      {socialShortLabels[link.kind]}
+                    </span>
+                    <span className="text-white/78" aria-hidden="true">
+                      {link.kind === "showroom" ? "SHOWROOM" : link.handle}
+                    </span>
                   </a>
                 ))}
               </div>

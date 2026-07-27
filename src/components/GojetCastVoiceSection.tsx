@@ -74,7 +74,7 @@ export function GojetCastVoiceSection({ now }: GojetCastVoiceSectionProps) {
     <section
       id="gojet-cast-voice"
       aria-labelledby="gojet-cast-voice-title"
-      className="scroll-mt-32 bg-gradient-to-br from-porcelain via-white to-blush/20 py-16 sm:py-24"
+      className="scroll-mt-32 py-10 sm:py-14"
     >
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <article className="yukako-card overflow-hidden border-rosefog/25 bg-white shadow-paper">

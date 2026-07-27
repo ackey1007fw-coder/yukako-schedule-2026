@@ -40,10 +40,19 @@ type NowProducingSectionProps = {
   now?: Date;
 };
 
-// 同じ日の夜に投稿が続くことがあるため、初期表示は3件にして
-// 直近の公演レポートが「一覧を見る」を押さずに読めるようにする。
-const INITIAL_VISIBLE_UPDATES = 3;
+// 1件ずつが長いので、初期表示は最新カードだけ全文にして、
+// 残りは見出し＋抜粋だけ並べる。件数を増やしても縦に伸びない。
+const INITIAL_VISIBLE_UPDATES = 6;
 const CLOCK_UPDATE_MS = 60000;
+
+// 折りたたみ時の抜粋。URLは読み上げても意味がないので落とす。
+function buildExcerpt(text: string, max = 92) {
+  const flat = text
+    .replace(/https?:\/\/[^\s]+/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+  return flat.length > max ? `${flat.slice(0, max)}…` : flat;
+}
 
 const roles = [
   { label: "プロデュース", Icon: Sparkles },
@@ -244,13 +253,16 @@ function VenueAccess({
   );
 }
 
+// カードごとに同じ顔ぶれが並びやすいので、既定は畳んでおく。
 function RelatedGojetLinks({ current }: { current: DisplayGojetFeatureUpdate }) {
   const related = getRelatedGojetUpdates(current, gojetFeatureUpdates);
   if (related.length === 0) return null;
 
   return (
-    <aside className="mt-5 border-t border-white/12 pt-4" aria-label="関連する #ゆかJET の記録">
-      <h5 className="text-sm font-black text-white">関連する #ゆかJET の記録</h5>
+    <details className="mt-5 border-t border-white/12 pt-4">
+      <summary className="cursor-pointer text-sm font-black text-champagne">
+        関連する #ゆかJET の記録（{related.length}件）
+      </summary>
       <ul className="mt-3 grid gap-2 sm:grid-cols-3">
         {related.map(({ candidate, sharedTags }) => (
           <li key={candidate.anchorId} className="min-w-0">
@@ -271,7 +283,7 @@ function RelatedGojetLinks({ current }: { current: DisplayGojetFeatureUpdate }) 
           </li>
         ))}
       </ul>
-    </aside>
+    </details>
   );
 }
 
@@ -358,6 +370,354 @@ function PromoLightbox({
   );
 }
 
+type FeatureUpdateCardProps = {
+  update: DisplayGojetFeatureUpdate;
+  index: number;
+  expanded: boolean;
+  onToggle: () => void;
+  currentTime: Date;
+  onOpenLightbox: (state: { photos: PromoImage[]; index: number; label: string }) => void;
+};
+
+// 活動記録の1件。最新以外は見出しと抜粋だけにして、押したときに全文・写真・
+// 予定表を出す。1枚が数千px あるので、畳んでおかないと一覧として読めない。
+function FeatureUpdateCard({
+  update,
+  index,
+  expanded,
+  onToggle,
+  currentTime,
+  onOpenLightbox
+}: FeatureUpdateCardProps) {
+  const bodyId = `${update.anchorId ?? update.postUrl}-body`;
+  // 最新の1件は常に開いたまま。畳めるのは自分で開いたカードだけ。
+  const collapsible = index > 0;
+
+  return (
+    // min-w-0 がないと本文中の長いURLがグリッド列を押し広げ、カードが画面幅を超える。
+    <div
+      id={update.anchorId}
+      className="min-w-0 scroll-mt-32 border border-champagne/35 bg-white/[0.07] p-3 shadow-paper sm:p-4"
+    >
+      <p className="break-words text-xs font-black uppercase tracking-[0.16em] text-champagne [overflow-wrap:anywhere]">
+        {index === 0 ? "New" : "Update"} ・ {update.date} ・ {update.label}
+      </p>
+      <h4 className="mt-2 break-words text-xl font-black leading-tight text-white [overflow-wrap:anywhere]">
+        {update.title}
+      </h4>
+      {!expanded && (
+        <p className="mt-2 break-words text-sm leading-6 text-white/60 [overflow-wrap:anywhere]">
+          {buildExcerpt(update.body)}
+        </p>
+      )}
+      {collapsible && (
+        <button
+          type="button"
+          onClick={onToggle}
+          aria-expanded={expanded}
+          aria-controls={bodyId}
+          className="yukako-button yukako-button-ghost mt-3 min-h-11 px-4 py-2.5 text-sm"
+        >
+          {expanded ? (
+            <ChevronUp className="h-4 w-4 text-champagne" aria-hidden="true" />
+          ) : (
+            <ChevronDown className="h-4 w-4 text-champagne" aria-hidden="true" />
+          )}
+          {expanded ? "この記録を閉じる" : "全文を読む"}
+        </button>
+      )}
+      <div id={bodyId} className="mt-1" hidden={!expanded}>
+        {update.supportColors && update.supportColors.length > 0 && (
+        <dl
+          aria-label="ペンライト応援カラー"
+          className="mt-3 grid grid-cols-2 gap-2"
+        >
+          {update.supportColors.map((item) => (
+            <div
+              key={`${item.team}-${item.role}`}
+              className={`min-w-0 border px-3 py-2.5 ${
+                item.tone === "pink"
+                  ? "border-rosefog/60 bg-rosefog/15"
+                  : "border-red-400/60 bg-red-950/25"
+              }`}
+            >
+              <dt className="text-[11px] font-bold text-white/65">
+                {item.team}・{item.role}
+              </dt>
+              <dd className="mt-0.5 text-sm font-black text-white">
+                <span aria-hidden="true">{item.emoji}</span>{" "}
+                {item.color}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      )}
+      {update.roleTags && update.roleTags.length > 0 && (
+        <div className="mt-2 flex flex-wrap gap-2">
+          {update.roleTags.map((tag) => (
+            <span
+              key={tag}
+              className="inline-flex items-center gap-1.5 border border-champagne/40 bg-champagne/10 px-2.5 py-1 text-[11px] font-black text-champagne"
+            >
+              <Users className="h-3 w-3 shrink-0" aria-hidden="true" />
+              {tag}
+            </span>
+          ))}
+        </div>
+      )}
+      <p className="mt-3 whitespace-pre-line break-words text-sm leading-6 text-white/72 [overflow-wrap:anywhere] sm:leading-7">
+        <LinkedBodyText text={update.body} />
+      </p>
+      {update.videoGuide && (
+        <div className="mt-4">
+          <a
+            href={update.videoGuide.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${update.videoGuide.alt}（Xで開く）`}
+            className="flex items-center gap-3 border border-champagne/60 bg-champagne/10 p-4 transition hover:border-champagne hover:bg-champagne/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-champagne sm:gap-4"
+          >
+            <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-champagne/60 bg-black/25">
+              <PlayCircle
+                className="h-7 w-7 text-champagne"
+                aria-hidden="true"
+              />
+            </span>
+            <span className="min-w-0">
+              <span className="block text-sm font-black text-white sm:text-base">
+                劇場までの行き方動画
+              </span>
+              {update.videoGuide.note && (
+                <span className="mt-0.5 block text-xs font-bold text-white/70">
+                  {update.videoGuide.note}
+                </span>
+              )}
+              <span className="mt-1.5 inline-flex items-center gap-1.5 text-xs font-black text-champagne sm:text-sm">
+                <ExternalLink
+                  className="h-4 w-4 shrink-0"
+                  aria-hidden="true"
+                />
+                {update.videoGuide.buttonLabel}
+              </span>
+            </span>
+          </a>
+          {update.videoGuide.venue ? (
+            <VenueAccess
+              venue={update.videoGuide.venue}
+              steps={update.videoGuide.steps}
+            />
+          ) : (
+            update.videoGuide.steps &&
+            update.videoGuide.steps.length > 0 && (
+              <details className="mt-2 border border-white/12 bg-black/15 p-3">
+                <summary className="cursor-pointer text-sm font-bold text-champagne">
+                  道順を詳しく見る
+                </summary>
+                <ol className="mt-3 list-decimal space-y-1.5 pl-5 text-sm leading-6 text-white/72 sm:leading-7">
+                  {update.videoGuide.steps.map((step) => (
+                    <li key={step}>{step}</li>
+                  ))}
+                </ol>
+              </details>
+            )
+          )}
+        </div>
+      )}
+      {update.caption && (
+        <details className="mt-3 border border-white/12 bg-black/15 p-3">
+          <summary className="cursor-pointer text-sm font-bold text-champagne">
+            投稿本文を読む
+          </summary>
+          <p className="mt-3 whitespace-pre-line break-words text-sm leading-6 text-white/72 sm:leading-7">
+            <LinkedBodyText text={update.caption} />
+          </p>
+        </details>
+      )}
+      {update.quotedPost && (
+        <aside
+          className="mt-3 border-l-4 border-champagne/70 bg-black/20 p-3 sm:p-4"
+          aria-label="引用元投稿"
+        >
+          <p className="text-xs font-black uppercase tracking-[0.14em] text-champagne">
+            引用元投稿
+          </p>
+          <p className="mt-1 text-sm font-black text-white">
+            {update.quotedPost.author}（{update.quotedPost.handle}）
+          </p>
+          <p className="mt-2 whitespace-pre-line text-sm leading-6 text-white/72 sm:leading-7">
+            {update.quotedPost.body}
+          </p>
+          {update.quotedPost.url && (
+            <a
+              href={update.quotedPost.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-2 inline-flex items-center gap-1.5 text-xs font-black text-champagne underline underline-offset-4 transition hover:text-white"
+            >
+              <ExternalLink
+                className="h-3.5 w-3.5 shrink-0"
+                aria-hidden="true"
+              />
+              {update.quotedPost.urlLabel ?? "引用元の投稿を見る"}
+            </a>
+          )}
+        </aside>
+      )}
+      {update.yukakoReply && (
+        <aside
+          className="mt-3 border-l-4 border-champagne/70 bg-black/20 p-3 sm:p-4"
+          aria-label="優花子さんからの返信"
+        >
+          <p className="text-xs font-black uppercase tracking-[0.14em] text-champagne">
+            優花子さんからの返信
+          </p>
+          <p className="mt-2 whitespace-pre-line text-sm leading-6 text-white/72 sm:leading-7">
+            {update.yukakoReply.body}
+          </p>
+          {update.yukakoReply.note && (
+            <p className="mt-2 text-xs leading-5 text-white/55">
+              {update.yukakoReply.note}
+            </p>
+          )}
+        </aside>
+      )}
+      {update.photo && (
+        <div className="mt-4 overflow-hidden border border-white/12 bg-black/20">
+          <img
+            {...getResponsiveImageProps(
+              update.photo.src,
+              "(min-width: 1024px) 40vw, 100vw",
+            )}
+            alt={update.photo.alt}
+            loading="lazy"
+            decoding="async"
+            className="mx-auto block h-auto max-h-[520px] w-auto max-w-full object-contain"
+          />
+        </div>
+      )}
+      {update.photos && update.photos.length > 0 && (
+        <div className="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-2">
+          {update.photos.map((photo, photoIndex) => (
+            <button
+              key={photo.src}
+              type="button"
+              onClick={() =>
+                onOpenLightbox({
+                  photos: update.photos ?? [],
+                  index: photoIndex,
+                  label: `${update.title} 画像ギャラリー`
+                })
+              }
+              className="overflow-hidden border border-white/12 bg-black/20"
+              aria-label={`${photo.alt}を拡大表示`}
+            >
+              <img
+                {...getResponsiveImageProps(
+                  photo.src,
+                  "(min-width: 1024px) 20vw, 50vw",
+                )}
+                alt={photo.alt}
+                loading="lazy"
+                decoding="async"
+                className="block h-auto w-full object-contain"
+              />
+            </button>
+          ))}
+        </div>
+      )}
+      {update.schedule &&
+        update.schedule.items.length > 0 && (
+          <div
+            className="mt-4 border border-champagne/30 bg-black/20 p-4"
+            aria-label={update.schedule.heading}
+          >
+            <p className="text-xs font-black uppercase tracking-[0.14em] text-champagne">
+              {update.schedule.heading}
+            </p>
+            <ul className="mt-3 grid gap-2">
+              {update.schedule.items.map((item) => (
+                <li
+                  key={`${item.time}-${item.label}`}
+                  className="flex items-baseline gap-3 border-b border-white/10 pb-2 last:border-0 last:pb-0"
+                >
+                  <span className="shrink-0 text-sm font-black text-champagne">
+                    {item.time}
+                  </span>
+                  <span className="min-w-0 text-sm font-bold text-white">
+                    {item.label}
+                  </span>
+                </li>
+              ))}
+            </ul>
+            {update.schedule.note && (
+              <p className="mt-3 text-xs font-bold text-white/60">
+                {update.schedule.note}
+              </p>
+            )}
+          </div>
+        )}
+      {update.goods && update.goods.items.length > 0 && (
+        <div
+          className="mt-4 border border-champagne/30 bg-black/20 p-4"
+          aria-label={update.goods.heading}
+        >
+          <p className="text-xs font-black uppercase tracking-[0.14em] text-champagne">
+            {update.goods.heading}
+          </p>
+          <ul className="mt-3 grid gap-2">
+            {update.goods.items.map((item) => (
+              <li
+                key={item.name}
+                className="flex flex-col gap-0.5 border-b border-white/10 pb-2 last:border-0 last:pb-0 sm:flex-row sm:items-baseline sm:justify-between sm:gap-3"
+              >
+                <span className="min-w-0 text-sm font-bold text-white">
+                  {item.name}
+                  {item.detail && (
+                    <span className="mt-0.5 block text-xs font-bold text-white/60">
+                      {item.detail}
+                    </span>
+                  )}
+                </span>
+                <span className="shrink-0 text-sm font-black text-champagne">
+                  {item.price}
+                </span>
+              </li>
+            ))}
+          </ul>
+          {update.goods.note && (
+            <p className="mt-3 text-xs font-bold text-white/60">
+              {update.goods.note}
+            </p>
+          )}
+        </div>
+      )}
+      {update.video && (
+        <video
+          controls
+          playsInline
+          preload="none"
+          poster={update.video.poster}
+          aria-label={update.video.label}
+          className="mt-4 block max-h-[420px] w-full border border-white/12 bg-black object-contain"
+        >
+          <source src={update.video.src} type="video/mp4" />
+        </video>
+      )}
+      {update.deadline && (
+        <p className="mt-4 inline-flex w-fit items-center gap-2 border border-champagne/50 bg-champagne/10 px-3 py-2 text-xs font-black text-champagne">
+          <Clock3 className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+          {isPastDeadline(update.deadline.at, currentTime)
+            ? update.deadline.afterText
+            : update.deadline.beforeText}
+        </p>
+      )}
+        <UpdateLinkButtons update={update} />
+        <RelatedGojetLinks current={update} />
+      </div>
+    </div>
+  );
+}
+
 // ヒーロー直下の #ゆかJET 特設ブロック（Now Producing billboard）。
 // ポスター + カウントダウン + 役割リスト + 予約CTA + 特集ギャラリーを、舞台看板風の1枚にまとめる。
 export function NowProducingSection({ event, now }: NowProducingSectionProps) {
@@ -367,6 +727,11 @@ export function NowProducingSection({ event, now }: NowProducingSectionProps) {
     label: string;
   } | null>(null);
   const [showAllUpdates, setShowAllUpdates] = useState(false);
+  // 全文表示中のカード。既定は最新1件だけ。
+  const [expandedUpdateIds, setExpandedUpdateIds] = useState<string[]>(() => {
+    const newest = gojetFeatureUpdates[0]?.anchorId;
+    return newest ? [newest] : [];
+  });
   const [hashTarget, setHashTarget] = useState<string | null>(null);
   const [currentTime, setCurrentTime] = useState(() => now ?? new Date());
 
@@ -393,6 +758,10 @@ export function NowProducingSection({ event, now }: NowProducingSectionProps) {
       if (targetIndex >= INITIAL_VISIBLE_UPDATES) {
         setShowAllUpdates(true);
       }
+      // 共有リンクで飛んできた記録は、畳んだままだと中身が読めない。
+      setExpandedUpdateIds((current) =>
+        current.includes(anchorId) ? current : [...current, anchorId],
+      );
       setHashTarget(anchorId);
     };
 
@@ -414,6 +783,18 @@ export function NowProducingSection({ event, now }: NowProducingSectionProps) {
     });
     return () => window.cancelAnimationFrame(frame);
   }, [hashTarget, showAllUpdates]);
+
+  const isUpdateExpanded = (update: DisplayGojetFeatureUpdate) =>
+    !update.anchorId || expandedUpdateIds.includes(update.anchorId);
+  const toggleUpdate = (update: DisplayGojetFeatureUpdate) => {
+    const anchorId = update.anchorId;
+    if (!anchorId) return;
+    setExpandedUpdateIds((current) =>
+      current.includes(anchorId)
+        ? current.filter((id) => id !== anchorId)
+        : [...current, anchorId],
+    );
+  };
 
   const visibleUpdates = showAllUpdates
     ? gojetFeatureUpdates
@@ -554,306 +935,15 @@ export function NowProducingSection({ event, now }: NowProducingSectionProps) {
                 </p>
                 <div id="gojet-feature-updates" className="mt-3 grid gap-3">
                   {visibleUpdates.map((update, index) => (
-                    // min-w-0 がないと本文中の長いURLがグリッド列を押し広げ、カードが画面幅を超える。
-                    <div
-                      id={update.anchorId}
+                    <FeatureUpdateCard
                       key={update.postUrl}
-                      className="min-w-0 scroll-mt-32 border border-champagne/35 bg-white/[0.07] p-3 shadow-paper sm:p-4"
-                    >
-                      <p className="break-words text-xs font-black uppercase tracking-[0.16em] text-champagne [overflow-wrap:anywhere]">
-                        {index === 0 ? "New" : "Update"} ・ {update.date} ・ {update.label}
-                      </p>
-                      <h4 className="mt-2 break-words text-xl font-black leading-tight text-white [overflow-wrap:anywhere]">
-                        {update.title}
-                      </h4>
-                      {update.supportColors && update.supportColors.length > 0 && (
-                        <dl
-                          aria-label="ペンライト応援カラー"
-                          className="mt-3 grid grid-cols-2 gap-2"
-                        >
-                          {update.supportColors.map((item) => (
-                            <div
-                              key={`${item.team}-${item.role}`}
-                              className={`min-w-0 border px-3 py-2.5 ${
-                                item.tone === "pink"
-                                  ? "border-rosefog/60 bg-rosefog/15"
-                                  : "border-red-400/60 bg-red-950/25"
-                              }`}
-                            >
-                              <dt className="text-[11px] font-bold text-white/65">
-                                {item.team}・{item.role}
-                              </dt>
-                              <dd className="mt-0.5 text-sm font-black text-white">
-                                <span aria-hidden="true">{item.emoji}</span>{" "}
-                                {item.color}
-                              </dd>
-                            </div>
-                          ))}
-                        </dl>
-                      )}
-                      {update.roleTags && update.roleTags.length > 0 && (
-                        <div className="mt-2 flex flex-wrap gap-2">
-                          {update.roleTags.map((tag) => (
-                            <span
-                              key={tag}
-                              className="inline-flex items-center gap-1.5 border border-champagne/40 bg-champagne/10 px-2.5 py-1 text-[11px] font-black text-champagne"
-                            >
-                              <Users className="h-3 w-3 shrink-0" aria-hidden="true" />
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-                      )}
-                      <p className="mt-3 whitespace-pre-line break-words text-sm leading-6 text-white/72 [overflow-wrap:anywhere] sm:leading-7">
-
-                        <LinkedBodyText text={update.body} />
-                      </p>
-                      {update.videoGuide && (
-                        <div className="mt-4">
-                          <a
-                            href={update.videoGuide.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label={`${update.videoGuide.alt}（Xで開く）`}
-                            className="flex items-center gap-3 border border-champagne/60 bg-champagne/10 p-4 transition hover:border-champagne hover:bg-champagne/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-champagne sm:gap-4"
-                          >
-                            <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-champagne/60 bg-black/25">
-                              <PlayCircle
-                                className="h-7 w-7 text-champagne"
-                                aria-hidden="true"
-                              />
-                            </span>
-                            <span className="min-w-0">
-                              <span className="block text-sm font-black text-white sm:text-base">
-                                劇場までの行き方動画
-                              </span>
-                              {update.videoGuide.note && (
-                                <span className="mt-0.5 block text-xs font-bold text-white/70">
-                                  {update.videoGuide.note}
-                                </span>
-                              )}
-                              <span className="mt-1.5 inline-flex items-center gap-1.5 text-xs font-black text-champagne sm:text-sm">
-                                <ExternalLink
-                                  className="h-4 w-4 shrink-0"
-                                  aria-hidden="true"
-                                />
-                                {update.videoGuide.buttonLabel}
-                              </span>
-                            </span>
-                          </a>
-                          {update.videoGuide.venue ? (
-                            <VenueAccess
-                              venue={update.videoGuide.venue}
-                              steps={update.videoGuide.steps}
-                            />
-                          ) : (
-                            update.videoGuide.steps &&
-                            update.videoGuide.steps.length > 0 && (
-                              <details className="mt-2 border border-white/12 bg-black/15 p-3">
-                                <summary className="cursor-pointer text-sm font-bold text-champagne">
-                                  道順を詳しく見る
-                                </summary>
-                                <ol className="mt-3 list-decimal space-y-1.5 pl-5 text-sm leading-6 text-white/72 sm:leading-7">
-                                  {update.videoGuide.steps.map((step) => (
-                                    <li key={step}>{step}</li>
-                                  ))}
-                                </ol>
-                              </details>
-                            )
-                          )}
-                        </div>
-                      )}
-                      {update.caption && (
-                        <details className="mt-3 border border-white/12 bg-black/15 p-3">
-                          <summary className="cursor-pointer text-sm font-bold text-champagne">
-                            投稿本文を読む
-                          </summary>
-                          <p className="mt-3 whitespace-pre-line break-words text-sm leading-6 text-white/72 sm:leading-7">
-                            <LinkedBodyText text={update.caption} />
-                          </p>
-                        </details>
-                      )}
-                      {update.quotedPost && (
-                        <aside
-                          className="mt-3 border-l-4 border-champagne/70 bg-black/20 p-3 sm:p-4"
-                          aria-label="引用元投稿"
-                        >
-                          <p className="text-xs font-black uppercase tracking-[0.14em] text-champagne">
-                            引用元投稿
-                          </p>
-                          <p className="mt-1 text-sm font-black text-white">
-                            {update.quotedPost.author}（{update.quotedPost.handle}）
-                          </p>
-                          <p className="mt-2 whitespace-pre-line text-sm leading-6 text-white/72 sm:leading-7">
-                            {update.quotedPost.body}
-                          </p>
-                          {update.quotedPost.url && (
-                            <a
-                              href={update.quotedPost.url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="mt-2 inline-flex items-center gap-1.5 text-xs font-black text-champagne underline underline-offset-4 transition hover:text-white"
-                            >
-                              <ExternalLink
-                                className="h-3.5 w-3.5 shrink-0"
-                                aria-hidden="true"
-                              />
-                              {update.quotedPost.urlLabel ?? "引用元の投稿を見る"}
-                            </a>
-                          )}
-                        </aside>
-                      )}
-                      {update.yukakoReply && (
-                        <aside
-                          className="mt-3 border-l-4 border-champagne/70 bg-black/20 p-3 sm:p-4"
-                          aria-label="優花子さんからの返信"
-                        >
-                          <p className="text-xs font-black uppercase tracking-[0.14em] text-champagne">
-                            優花子さんからの返信
-                          </p>
-                          <p className="mt-2 whitespace-pre-line text-sm leading-6 text-white/72 sm:leading-7">
-                            {update.yukakoReply.body}
-                          </p>
-                          {update.yukakoReply.note && (
-                            <p className="mt-2 text-xs leading-5 text-white/55">
-                              {update.yukakoReply.note}
-                            </p>
-                          )}
-                        </aside>
-                      )}
-                      {update.photo && (
-                        <div className="mt-4 overflow-hidden border border-white/12 bg-black/20">
-                          <img
-                            {...getResponsiveImageProps(
-                              update.photo.src,
-                              "(min-width: 1024px) 40vw, 100vw",
-                            )}
-                            alt={update.photo.alt}
-                            loading="lazy"
-                            decoding="async"
-                            className="mx-auto block h-auto max-h-[520px] w-auto max-w-full object-contain"
-                          />
-                        </div>
-                      )}
-                      {update.photos && update.photos.length > 0 && (
-                        <div className="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-2">
-                          {update.photos.map((photo, photoIndex) => (
-                            <button
-                              key={photo.src}
-                              type="button"
-                              onClick={() =>
-                                setLightbox({
-                                  photos: update.photos ?? [],
-                                  index: photoIndex,
-                                  label: `${update.title} 画像ギャラリー`
-                                })
-                              }
-                              className="overflow-hidden border border-white/12 bg-black/20"
-                              aria-label={`${photo.alt}を拡大表示`}
-                            >
-                              <img
-                                {...getResponsiveImageProps(
-                                  photo.src,
-                                  "(min-width: 1024px) 20vw, 50vw",
-                                )}
-                                alt={photo.alt}
-                                loading="lazy"
-                                decoding="async"
-                                className="block h-auto w-full object-contain"
-                              />
-                            </button>
-                          ))}
-                        </div>
-                      )}
-                      {update.schedule &&
-                        update.schedule.items.length > 0 && (
-                          <div
-                            className="mt-4 border border-champagne/30 bg-black/20 p-4"
-                            aria-label={update.schedule.heading}
-                          >
-                            <p className="text-xs font-black uppercase tracking-[0.14em] text-champagne">
-                              {update.schedule.heading}
-                            </p>
-                            <ul className="mt-3 grid gap-2">
-                              {update.schedule.items.map((item) => (
-                                <li
-                                  key={`${item.time}-${item.label}`}
-                                  className="flex items-baseline gap-3 border-b border-white/10 pb-2 last:border-0 last:pb-0"
-                                >
-                                  <span className="shrink-0 text-sm font-black text-champagne">
-                                    {item.time}
-                                  </span>
-                                  <span className="min-w-0 text-sm font-bold text-white">
-                                    {item.label}
-                                  </span>
-                                </li>
-                              ))}
-                            </ul>
-                            {update.schedule.note && (
-                              <p className="mt-3 text-xs font-bold text-white/60">
-                                {update.schedule.note}
-                              </p>
-                            )}
-                          </div>
-                        )}
-                      {update.goods && update.goods.items.length > 0 && (
-                        <div
-                          className="mt-4 border border-champagne/30 bg-black/20 p-4"
-                          aria-label={update.goods.heading}
-                        >
-                          <p className="text-xs font-black uppercase tracking-[0.14em] text-champagne">
-                            {update.goods.heading}
-                          </p>
-                          <ul className="mt-3 grid gap-2">
-                            {update.goods.items.map((item) => (
-                              <li
-                                key={item.name}
-                                className="flex flex-col gap-0.5 border-b border-white/10 pb-2 last:border-0 last:pb-0 sm:flex-row sm:items-baseline sm:justify-between sm:gap-3"
-                              >
-                                <span className="min-w-0 text-sm font-bold text-white">
-                                  {item.name}
-                                  {item.detail && (
-                                    <span className="mt-0.5 block text-xs font-bold text-white/60">
-                                      {item.detail}
-                                    </span>
-                                  )}
-                                </span>
-                                <span className="shrink-0 text-sm font-black text-champagne">
-                                  {item.price}
-                                </span>
-                              </li>
-                            ))}
-                          </ul>
-                          {update.goods.note && (
-                            <p className="mt-3 text-xs font-bold text-white/60">
-                              {update.goods.note}
-                            </p>
-                          )}
-                        </div>
-                      )}
-                      {update.video && (
-                        <video
-                          controls
-                          playsInline
-                          preload="none"
-                          poster={update.video.poster}
-                          aria-label={update.video.label}
-                          className="mt-4 block max-h-[420px] w-full border border-white/12 bg-black object-contain"
-                        >
-                          <source src={update.video.src} type="video/mp4" />
-                        </video>
-                      )}
-                      {update.deadline && (
-                        <p className="mt-4 inline-flex w-fit items-center gap-2 border border-champagne/50 bg-champagne/10 px-3 py-2 text-xs font-black text-champagne">
-                          <Clock3 className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
-                          {isPastDeadline(update.deadline.at, currentTime)
-                            ? update.deadline.afterText
-                            : update.deadline.beforeText}
-                        </p>
-                      )}
-                      <UpdateLinkButtons update={update} />
-                      <RelatedGojetLinks current={update} />
-                    </div>
+                      update={update}
+                      index={index}
+                      expanded={isUpdateExpanded(update)}
+                      onToggle={() => toggleUpdate(update)}
+                      currentTime={currentTime}
+                      onOpenLightbox={setLightbox}
+                    />
                   ))}
                 </div>
                 {remainingUpdates > 0 && (

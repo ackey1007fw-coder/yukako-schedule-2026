@@ -9,6 +9,7 @@ import { GojetCastVoiceSection } from "./components/GojetCastVoiceSection";
 import { GojetHairUpdateSection } from "./components/GojetHairUpdateSection";
 import { GojetPerformancePanel } from "./components/GojetPerformancePanel";
 import { GojetTeamsSection } from "./components/GojetTeamsSection";
+import { GojetTopicsBand } from "./components/GojetTopicsBand";
 import { GojetYellCardSection } from "./components/GojetYellCardSection";
 import { Hero } from "./components/Hero";
 import { HighlightsSection } from "./components/HighlightsSection";
@@ -122,17 +123,20 @@ function App() {
               {
                 href: "#profile",
                 title: "初めての方へ",
-                copy: "吉井優花子さんのプロフィール、これまでの歩み、活動の魅力をご紹介します。"
+                copy: "プロフィールと、これまでの歩み。",
+                cta: "プロフィールへ"
               },
               {
                 href: "#updates",
-                title: "最新情報を見る",
-                copy: "出演、配信、公演、SNSなど、現在進行中の活動をチェックできます。"
+                title: "最新情報",
+                copy: "SNS投稿と稽古場だより。新しい順。",
+                cta: "最新情報へ"
               },
               {
                 href: "#next",
                 title: "公演・チケット",
-                copy: "最新の出演日程、配信、予約、応援方法をご案内します。"
+                copy: "出演日程、配信、予約、応援メニュー。",
+                cta: "#ゆかJET 公演情報へ"
               }
             ].map((item) => (
               <a
@@ -143,7 +147,7 @@ function App() {
                 <span className="font-display text-xl text-ink">{item.title}</span>
                 <span className="mt-2 text-sm leading-6 text-ink/68">{item.copy}</span>
                 <span className="mt-auto inline-flex items-center gap-1 pt-3 text-sm font-bold text-champagneInk">
-                  {item.title}へ移動
+                  {item.cta}
                   <ArrowDownRight className="h-4 w-4" aria-hidden="true" />
                 </span>
               </a>
@@ -161,21 +165,23 @@ function App() {
         <SectionReveal>
           <GojetTeamsSection />
         </SectionReveal>
-        <SectionReveal>
-          <GojetCastMessageSection />
-        </SectionReveal>
-        <SectionReveal>
-          <GojetCastVoiceSection />
-        </SectionReveal>
-        <SectionReveal>
-          <GojetHairUpdateSection />
-        </SectionReveal>
-        <SectionReveal>
-          <GojetYellCardSection />
-        </SectionReveal>
-        <SectionReveal>
-          <AudienceReportSection />
-        </SectionReveal>
+        <GojetTopicsBand>
+          <SectionReveal>
+            <GojetCastMessageSection />
+          </SectionReveal>
+          <SectionReveal>
+            <GojetCastVoiceSection />
+          </SectionReveal>
+          <SectionReveal>
+            <GojetHairUpdateSection />
+          </SectionReveal>
+          <SectionReveal>
+            <GojetYellCardSection />
+          </SectionReveal>
+          <SectionReveal>
+            <AudienceReportSection />
+          </SectionReveal>
+        </GojetTopicsBand>
 
         {/* 3. 行動導線：予定を確認してから、応援・SNSへ進む */}
         <SectionReveal>
