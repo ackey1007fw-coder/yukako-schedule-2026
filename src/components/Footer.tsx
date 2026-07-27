@@ -45,7 +45,7 @@ export function Footer({ socialLinks, source, updatedAt }: FooterProps) {
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="border border-white/18 px-3 py-2 text-xs font-bold text-white/75 transition hover:border-champagne hover:text-white"
+                  className="border border-white/20 px-3 py-2 text-xs font-bold text-white/75 transition hover:border-champagne hover:text-white"
                 >
                   {link.label}
                 </a>
@@ -54,7 +54,7 @@ export function Footer({ socialLinks, source, updatedAt }: FooterProps) {
                 href={profile.wikipediaUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 border border-white/18 px-3 py-2 text-xs font-bold text-white/75 transition hover:border-champagne hover:text-white"
+                className="inline-flex items-center gap-1.5 border border-white/20 px-3 py-2 text-xs font-bold text-white/75 transition hover:border-champagne hover:text-white"
               >
                 <BookOpenText className="h-3.5 w-3.5" aria-hidden="true" />
                 Wikipedia

@@ -49,7 +49,7 @@ export function CalendarView({ events, monthKeys }: CalendarViewProps) {
   return (
     <div>
       <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <div className="flex items-center gap-2 text-sm font-bold text-ink/62">
+        <div className="flex items-center gap-2 text-sm font-bold text-ink/60">
           <History className="h-4 w-4 text-champagne" aria-hidden="true" />
           <span>
             {availableMonthKeys.length}か月分

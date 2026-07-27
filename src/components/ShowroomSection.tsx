@@ -89,7 +89,7 @@ export function ShowroomSection() {
               <div><p className="text-xs font-bold uppercase">Room</p><h3 className="font-display text-3xl text-ink">{profile.showroom.roomName}</h3></div>
             </div>
             <p className="text-sm font-bold text-ink/55">{profile.showroom.tagline}</p>
-            <p className="mt-4 text-lg leading-9 text-ink/72">{profile.showroom.message}</p>
+            <p className="mt-4 text-lg leading-9 text-ink/70">{profile.showroom.message}</p>
             <div className="mt-7 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
               {stats.map((stat) => <div key={stat.label} className="yukako-card border-white bg-white p-4"><p className="font-display text-2xl text-ink sm:text-3xl">{stat.value}</p><p className="mt-2 text-xs font-bold text-ink/55">{stat.label}</p></div>)}
             </div>

@@ -46,7 +46,7 @@ export function LinksSection({ socialLinks, mediaLinks }: LinksSectionProps) {
                   <span className="mt-1 block text-sm font-bold text-champagneInk">
                     {link.handle}
                   </span>
-                  <span className="mt-3 block text-sm leading-6 text-ink/62">
+                  <span className="mt-3 block text-sm leading-6 text-ink/60">
                     {link.description}
                   </span>
                 </span>
@@ -72,7 +72,7 @@ export function LinksSection({ socialLinks, mediaLinks }: LinksSectionProps) {
                   <span className="mt-1 block text-sm text-champagneInk">
                     {link.handle}
                   </span>
-                  <span className="mt-2 block text-sm leading-6 text-ink/62">
+                  <span className="mt-2 block text-sm leading-6 text-ink/60">
                     {link.description}
                   </span>
                 </a>

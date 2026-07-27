@@ -173,7 +173,7 @@ export function ScheduleSection({
                   直近の重要予定
                 </h3>
               </div>
-              <span className="inline-flex items-center gap-2 border border-champagne/40 bg-porcelain px-3 py-2 text-xs font-bold text-ink/62">
+              <span className="inline-flex items-center gap-2 border border-champagne/40 bg-porcelain px-3 py-2 text-xs font-bold text-ink/60">
                 <Star className="h-4 w-4 text-champagne" aria-hidden="true" />
                 応援優先
               </span>
@@ -198,7 +198,7 @@ export function ScheduleSection({
                 className={`inline-flex min-h-11 items-center gap-2 border px-4 py-2 text-sm font-bold transition ${
                   activeTab === tab.id
                     ? "border-ink bg-ink text-white"
-                    : "border-rosefog/30 bg-porcelain text-ink/72 hover:border-champagne hover:bg-white"
+                    : "border-rosefog/30 bg-porcelain text-ink/70 hover:border-champagne hover:bg-white"
                 }`}
               >
                 {tab.label}
@@ -227,7 +227,7 @@ export function ScheduleSection({
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
                 placeholder="公演名・会場・キーワードで検索"
-                className="min-h-12 w-full border border-rosefog/25 bg-white px-11 py-3 text-sm font-semibold text-ink outline-none transition placeholder:text-ink/38 focus:border-champagne"
+                className="min-h-12 w-full border border-rosefog/25 bg-white px-11 py-3 text-sm font-semibold text-ink outline-none transition placeholder:text-ink/40 focus:border-champagne"
               />
             </label>
             <div className="flex min-w-0 flex-wrap items-center gap-2">
@@ -243,11 +243,11 @@ export function ScheduleSection({
                   className={`inline-flex min-h-10 items-center gap-2 border px-3 py-2 text-xs font-bold transition ${
                     categoryFilter === option.id
                       ? "border-champagne bg-champagne text-white"
-                      : "border-rosefog/25 bg-white text-ink/68 hover:border-champagne hover:text-ink"
+                      : "border-rosefog/25 bg-white text-ink/70 hover:border-champagne hover:text-ink"
                   }`}
                 >
                   {option.label}
-                  <span className={categoryFilter === option.id ? "text-white/72" : "text-champagneInk"}>
+                  <span className={categoryFilter === option.id ? "text-white/70" : "text-champagneInk"}>
                     {option.count}
                   </span>
                 </button>
@@ -294,7 +294,7 @@ export function ScheduleSection({
             ) : (
               <div className="border border-dashed border-rosefog/30 bg-white px-5 py-8 text-center">
                 <p className="font-display text-2xl text-ink">該当する予定はありません</p>
-                <p className="mt-3 text-sm leading-7 text-ink/62">
+                <p className="mt-3 text-sm leading-7 text-ink/60">
                   検索条件を変えるか、SHOWROOMやSNSで近況をチェックできます。
                 </p>
                 <div className="mt-5 flex justify-center">
@@ -316,7 +316,7 @@ export function ScheduleSection({
                 直近以外も含めて、予定をまとめて確認できます。
               </p>
             </div>
-            <span className="flex shrink-0 items-center gap-2 border border-rosefog/30 bg-porcelain px-3 py-2 text-xs font-bold text-ink/62">
+            <span className="flex shrink-0 items-center gap-2 border border-rosefog/30 bg-porcelain px-3 py-2 text-xs font-bold text-ink/60">
               {upcomingEvents.length}件
               <ChevronDown className="h-4 w-4 text-champagne transition group-open:rotate-180" aria-hidden="true" />
             </span>

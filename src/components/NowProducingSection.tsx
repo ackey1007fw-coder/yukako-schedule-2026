@@ -208,9 +208,9 @@ function VenueAccess({
           </span>
         )}
       </p>
-      <p className="mt-1 text-sm leading-6 text-white/72">{venue.address}</p>
+      <p className="mt-1 text-sm leading-6 text-white/70">{venue.address}</p>
       {venue.nearestStation && (
-        <p className="mt-1 text-sm leading-6 text-white/72">
+        <p className="mt-1 text-sm leading-6 text-white/70">
           最寄り：
           <span className="font-bold text-white/85">{venue.nearestStation}</span>
         </p>
@@ -238,11 +238,11 @@ function VenueAccess({
         </a>
       </div>
       {steps && steps.length > 0 && (
-        <details className="mt-3 border border-white/12 bg-black/15 p-3">
+        <details className="mt-3 border border-white/10 bg-black/15 p-3">
           <summary className="cursor-pointer text-sm font-bold text-champagne">
             道順の目印を見る（初めての方向け）
           </summary>
-          <ol className="mt-3 list-decimal space-y-1.5 pl-5 text-sm leading-6 text-white/72 sm:leading-7">
+          <ol className="mt-3 list-decimal space-y-1.5 pl-5 text-sm leading-6 text-white/70 sm:leading-7">
             {steps.map((step) => (
               <li key={step}>{step}</li>
             ))}
@@ -259,7 +259,7 @@ function RelatedGojetLinks({ current }: { current: DisplayGojetFeatureUpdate }) 
   if (related.length === 0) return null;
 
   return (
-    <details className="mt-5 border-t border-white/12 pt-4">
+    <details className="mt-5 border-t border-white/10 pt-4">
       <summary className="cursor-pointer text-sm font-black text-champagne">
         関連する #ゆかJET の記録（{related.length}件）
       </summary>
@@ -268,7 +268,7 @@ function RelatedGojetLinks({ current }: { current: DisplayGojetFeatureUpdate }) 
           <li key={candidate.anchorId} className="min-w-0">
             <a
               href={`#${candidate.anchorId}`}
-              className="flex min-h-24 flex-col border border-white/12 bg-black/15 p-3 text-left transition hover:border-champagne/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-champagne"
+              className="flex min-h-24 flex-col border border-white/10 bg-black/15 p-3 text-left transition hover:border-champagne/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-champagne"
             >
               <span className="text-[11px] font-bold text-champagne">
                 {candidate.date} ・ {sharedTags[0]}
@@ -465,7 +465,7 @@ function FeatureUpdateCard({
           ))}
         </div>
       )}
-      <p className="mt-3 whitespace-pre-line break-words text-sm leading-6 text-white/72 [overflow-wrap:anywhere] sm:leading-7">
+      <p className="mt-3 whitespace-pre-line break-words text-sm leading-6 text-white/70 [overflow-wrap:anywhere] sm:leading-7">
         <LinkedBodyText text={update.body} />
       </p>
       {update.videoGuide && (
@@ -509,11 +509,11 @@ function FeatureUpdateCard({
           ) : (
             update.videoGuide.steps &&
             update.videoGuide.steps.length > 0 && (
-              <details className="mt-2 border border-white/12 bg-black/15 p-3">
+              <details className="mt-2 border border-white/10 bg-black/15 p-3">
                 <summary className="cursor-pointer text-sm font-bold text-champagne">
                   道順を詳しく見る
                 </summary>
-                <ol className="mt-3 list-decimal space-y-1.5 pl-5 text-sm leading-6 text-white/72 sm:leading-7">
+                <ol className="mt-3 list-decimal space-y-1.5 pl-5 text-sm leading-6 text-white/70 sm:leading-7">
                   {update.videoGuide.steps.map((step) => (
                     <li key={step}>{step}</li>
                   ))}
@@ -524,11 +524,11 @@ function FeatureUpdateCard({
         </div>
       )}
       {update.caption && (
-        <details className="mt-3 border border-white/12 bg-black/15 p-3">
+        <details className="mt-3 border border-white/10 bg-black/15 p-3">
           <summary className="cursor-pointer text-sm font-bold text-champagne">
             投稿本文を読む
           </summary>
-          <p className="mt-3 whitespace-pre-line break-words text-sm leading-6 text-white/72 sm:leading-7">
+          <p className="mt-3 whitespace-pre-line break-words text-sm leading-6 text-white/70 sm:leading-7">
             <LinkedBodyText text={update.caption} />
           </p>
         </details>
@@ -544,7 +544,7 @@ function FeatureUpdateCard({
           <p className="mt-1 text-sm font-black text-white">
             {update.quotedPost.author}（{update.quotedPost.handle}）
           </p>
-          <p className="mt-2 whitespace-pre-line text-sm leading-6 text-white/72 sm:leading-7">
+          <p className="mt-2 whitespace-pre-line text-sm leading-6 text-white/70 sm:leading-7">
             {update.quotedPost.body}
           </p>
           {update.quotedPost.url && (
@@ -571,7 +571,7 @@ function FeatureUpdateCard({
           <p className="text-xs font-black uppercase tracking-[0.14em] text-champagne">
             優花子さんからの返信
           </p>
-          <p className="mt-2 whitespace-pre-line text-sm leading-6 text-white/72 sm:leading-7">
+          <p className="mt-2 whitespace-pre-line text-sm leading-6 text-white/70 sm:leading-7">
             {update.yukakoReply.body}
           </p>
           {update.yukakoReply.note && (
@@ -582,7 +582,7 @@ function FeatureUpdateCard({
         </aside>
       )}
       {update.photo && (
-        <div className="mt-4 overflow-hidden border border-white/12 bg-black/20">
+        <div className="mt-4 overflow-hidden border border-white/10 bg-black/20">
           <img
             {...getResponsiveImageProps(
               update.photo.src,
@@ -608,7 +608,7 @@ function FeatureUpdateCard({
                   label: `${update.title} 画像ギャラリー`
                 })
               }
-              className="overflow-hidden border border-white/12 bg-black/20"
+              className="overflow-hidden border border-white/10 bg-black/20"
               aria-label={`${photo.alt}を拡大表示`}
             >
               <img
@@ -698,7 +698,7 @@ function FeatureUpdateCard({
           preload="none"
           poster={update.video.poster}
           aria-label={update.video.label}
-          className="mt-4 block max-h-[420px] w-full border border-white/12 bg-black object-contain"
+          className="mt-4 block max-h-[420px] w-full border border-white/10 bg-black object-contain"
         >
           <source src={update.video.src} type="video/mp4" />
         </video>
@@ -871,7 +871,7 @@ export function NowProducingSection({ event, now }: NowProducingSectionProps) {
                   {event.displayDate}
                 </p>
                 {event.venue && (
-                  <p className="mt-2 flex items-center gap-2 text-sm font-semibold text-white/72">
+                  <p className="mt-2 flex items-center gap-2 text-sm font-semibold text-white/70">
                     <MapPin className="h-4 w-4 shrink-0 text-champagne" aria-hidden="true" />
                     {event.venue}
                   </p>
@@ -881,7 +881,7 @@ export function NowProducingSection({ event, now }: NowProducingSectionProps) {
                   {roles.map((role) => (
                     <li
                       key={role.label}
-                      className="flex items-center gap-2.5 border border-white/12 bg-white/5 px-3 py-2.5 text-sm font-semibold text-white/85"
+                      className="flex items-center gap-2.5 border border-white/10 bg-white/5 px-3 py-2.5 text-sm font-semibold text-white/85"
                     >
                       <role.Icon className="h-4 w-4 shrink-0 text-champagne" aria-hidden="true" />
                       {role.label}
@@ -918,7 +918,7 @@ export function NowProducingSection({ event, now }: NowProducingSectionProps) {
                         >
                           『GO,JET!GO!GO!』プロデュース発表
                         </h4>
-                        <p className="mt-2 text-xs leading-5 text-white/72 sm:text-sm sm:leading-6">
+                        <p className="mt-2 text-xs leading-5 text-white/70 sm:text-sm sm:leading-6">
                           出演者として挑んだ思い出の舞台を、今度はプロデューサーとして立ち上げた始まりの記録。
                         </p>
                       </div>
@@ -969,7 +969,7 @@ export function NowProducingSection({ event, now }: NowProducingSectionProps) {
                   </div>
                 )}
 
-                <p className="mt-6 text-base leading-8 text-white/72">{event.summary}</p>
+                <p className="mt-6 text-base leading-8 text-white/70">{event.summary}</p>
               </div>
 
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
@@ -1036,7 +1036,7 @@ export function NowProducingSection({ event, now }: NowProducingSectionProps) {
                         label: "#ゆかJET 特集ギャラリー"
                       })
                     }
-                    className="group relative aspect-[3/4] overflow-hidden border border-white/12 bg-black/20 transition hover:border-champagne/60"
+                    className="group relative aspect-[3/4] overflow-hidden border border-white/10 bg-black/20 transition hover:border-champagne/60"
                     aria-label={`${photo.alt}を拡大表示`}
                   >
                     <img

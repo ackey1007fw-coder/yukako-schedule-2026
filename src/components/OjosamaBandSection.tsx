@@ -30,7 +30,7 @@ export function OjosamaBandSection() {
                     <Sparkles className="h-4 w-4 text-champagne" aria-hidden="true" />
                     {moment.label}
                   </p>
-                  <p className="text-sm leading-7 text-ink/72">{moment.text}</p>
+                  <p className="text-sm leading-7 text-ink/70">{moment.text}</p>
                 </div>
               ))}
             </div>
@@ -78,7 +78,7 @@ export function OjosamaBandSection() {
             </h3>
             <div className="mt-5 grid gap-2">
               {ojosamaBandSchedule.map((item) => (
-                <div key={item} className="flex items-center gap-3 border border-champagne/25 bg-white px-3 py-2 text-sm font-bold text-ink/76">
+                <div key={item} className="flex items-center gap-3 border border-champagne/25 bg-white px-3 py-2 text-sm font-bold text-ink/75">
                   <CalendarDays className="h-4 w-4 shrink-0 text-champagne" aria-hidden="true" />
                   <span>{item}</span>
                 </div>
@@ -94,7 +94,7 @@ export function OjosamaBandSection() {
             <h3 className="mt-3 font-display text-3xl leading-tight text-ink">
               写真で残す、黒白院雲雀の記録
             </h3>
-            <p className="mt-4 text-sm leading-7 text-ink/72">
+            <p className="mt-4 text-sm leading-7 text-ink/70">
               公演後に公開された記録写真から。衣装姿も舞台の空気も、ここでいつでも見返せます。
             </p>
           </div>

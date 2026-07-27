@@ -51,7 +51,7 @@ const Panel = ({
       </strong>
       {event && (
         <>
-          <span className="mt-2 block text-sm font-bold text-ink/72">{event.displayDate}</span>
+          <span className="mt-2 block text-sm font-bold text-ink/70">{event.displayDate}</span>
           {event.venue && (
             <span className="mt-1 flex min-w-0 items-start gap-1.5 text-xs text-ink/55">
               <MapPin className="mt-0.5 h-3.5 w-3.5 shrink-0" aria-hidden="true" />
@@ -95,7 +95,7 @@ const GojetAppearancePanel = ({
         {day && (
           <>
             <span className="mt-2 flex flex-wrap items-center gap-2">
-              <span className="text-sm font-bold text-ink/72">{day.label}</span>
+              <span className="text-sm font-bold text-ink/70">{day.label}</span>
               {day.date === gojetClosingDate && <FinaleBadge />}
             </span>
             <span className="mt-3 grid gap-2">

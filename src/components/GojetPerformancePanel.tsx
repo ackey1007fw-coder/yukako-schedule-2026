@@ -52,7 +52,7 @@ function PerformanceStatusBadge({
   }
 
   return (
-    <span className="inline-flex w-fit items-center gap-1.5 rounded-full border border-ink/12 bg-white px-2.5 py-1 text-xs font-bold text-ink/55">
+    <span className="inline-flex w-fit items-center gap-1.5 rounded-full border border-ink/10 bg-white px-2.5 py-1 text-xs font-bold text-ink/55">
       <span className="h-2 w-2 shrink-0 rounded-full bg-ink/25" aria-hidden="true" />
       {label}
     </span>

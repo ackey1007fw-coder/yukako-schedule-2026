@@ -103,7 +103,7 @@ export function LatestUpdatesSection() {
                   {update.title}
                 </h3>
                 {update.summary && (
-                  <p className="mt-2 line-clamp-3 text-sm leading-6 text-ink/68">
+                  <p className="mt-2 line-clamp-3 text-sm leading-6 text-ink/70">
                     {update.summary}
                   </p>
                 )}
@@ -191,7 +191,7 @@ export function LatestUpdatesSection() {
                 </div>
                 <ol
                   id="all-updates-list"
-                  className="mt-4 divide-y divide-rosefog/12 border border-rosefog/15 bg-porcelain"
+                  className="mt-4 divide-y divide-rosefog/10 border border-rosefog/15 bg-porcelain"
                 >
                   {filteredRest.map((update) => (
                   <li key={update.id} className="p-4 sm:px-5">

@@ -102,7 +102,7 @@ export function GojetTeamsSection() {
             className={`mt-6 grid gap-4 ${activeUpdate.photo ? "sm:grid-cols-2" : ""}`}
           >
             {activeUpdate.photo && (
-              <div className="overflow-hidden border border-white/12 bg-black shadow-paper">
+              <div className="overflow-hidden border border-white/10 bg-black shadow-paper">
                 <img
                   {...getResponsiveImageProps(
                     activeUpdate.photo.src,
@@ -115,7 +115,7 @@ export function GojetTeamsSection() {
                 />
               </div>
             )}
-            <div className="overflow-hidden border border-white/12 bg-black shadow-paper">
+            <div className="overflow-hidden border border-white/10 bg-black shadow-paper">
               <video
                 controls
                 playsInline

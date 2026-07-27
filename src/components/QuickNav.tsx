@@ -174,7 +174,7 @@ export function QuickNav({ now }: QuickNavProps) {
             key={href}
             href={href}
             onClick={(event) => handleSectionLinkClick(event, href)}
-            className="flex min-h-11 min-w-0 flex-col items-center justify-center gap-0.5 text-center text-[10px] font-bold leading-tight text-ink/72 focus-visible:outline focus-visible:outline-2 focus-visible:outline-champagne min-[420px]:text-xs"
+            className="flex min-h-11 min-w-0 flex-col items-center justify-center gap-0.5 text-center text-[10px] font-bold leading-tight text-ink/70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-champagne min-[420px]:text-xs"
           >
             <Icon className="h-4 w-4 text-champagne" aria-hidden="true" />
             {label}
@@ -187,7 +187,7 @@ export function QuickNav({ now }: QuickNavProps) {
           aria-controls={menuPanelId}
           aria-label={isMoreOpen ? "追加メニューを閉じる" : "追加メニューを開く"}
           onClick={handleMoreToggle}
-          className="flex min-h-11 min-w-0 flex-col items-center justify-center gap-0.5 text-[10px] font-bold text-ink/72 focus-visible:outline focus-visible:outline-2 focus-visible:outline-champagne min-[380px]:text-xs"
+          className="flex min-h-11 min-w-0 flex-col items-center justify-center gap-0.5 text-[10px] font-bold text-ink/70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-champagne min-[380px]:text-xs"
         >
           <ChevronDown
             className={`h-4 w-4 text-champagne transition motion-reduce:transition-none ${
@@ -235,7 +235,7 @@ export function QuickNav({ now }: QuickNavProps) {
                         onClick={(event) =>
                           handleSectionLinkClick(event, item.href, { closeMenu: true })
                         }
-                        className="flex min-h-11 items-center px-3 py-2 text-sm font-bold leading-snug text-ink/78 hover:bg-porcelain focus-visible:outline focus-visible:outline-2 focus-visible:outline-champagne"
+                        className="flex min-h-11 items-center px-3 py-2 text-sm font-bold leading-snug text-ink/80 hover:bg-porcelain focus-visible:outline focus-visible:outline-2 focus-visible:outline-champagne"
                       >
                         {item.label}
                       </a>

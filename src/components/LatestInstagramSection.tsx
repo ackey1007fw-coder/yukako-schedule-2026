@@ -43,10 +43,10 @@ export function LatestInstagramSection() {
               「明日は何をしよう？」が尽きない毎日
             </h3>
 
-            <p className="mt-6 text-base leading-8 text-ink/72">
+            <p className="mt-6 text-base leading-8 text-ink/70">
               ずっと気になっていたクルーズ旅行へ。美味しい料理、毎日変わるショーやイベント、スポーツ、プール、ショッピング、寄港地の観光まで、船の上とは思えないほど充実した6泊7日です。
             </p>
-            <p className="mt-4 text-base leading-8 text-ink/72">
+            <p className="mt-4 text-base leading-8 text-ink/70">
               今回は母の日のプレゼントとしてお母さまと乗船。ミス・グランド・ジャパン同期のお二人とも偶然同じ日程になり、たくさんの笑顔と思い出が詰まった旅になりました。
             </p>
 

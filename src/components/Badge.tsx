@@ -8,10 +8,10 @@ type BadgeProps = {
 
 export function Badge({ children, category, strong = false }: BadgeProps) {
   const tone = category
-    ? "border-champagne/60 bg-porcelain text-ink/72"
+    ? "border-champagne/60 bg-porcelain text-ink/70"
     : strong
       ? "border-champagne bg-ink text-champagne"
-      : "border-champagne/45 bg-white text-ink/68";
+      : "border-champagne/45 bg-white text-ink/70";
 
   return (
     <span

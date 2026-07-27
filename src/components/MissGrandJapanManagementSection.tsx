@@ -69,7 +69,7 @@ export function MissGrandJapanManagementSection() {
               {data.subtitle}
             </h3>
 
-            <div className="mt-5 space-y-4 text-sm leading-7 text-ink/72 sm:text-base sm:leading-8">
+            <div className="mt-5 space-y-4 text-sm leading-7 text-ink/70 sm:text-base sm:leading-8">
               {data.body.map((paragraph, index) => (
                 <p key={index}>{paragraph}</p>
               ))}

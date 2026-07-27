@@ -53,7 +53,7 @@ export function AvatarGallery() {
             </p>
           )}
         </div>
-        <span className="border border-rosefog/30 bg-white px-3 py-2 text-xs font-bold text-ink/62">
+        <span className="border border-rosefog/30 bg-white px-3 py-2 text-xs font-bold text-ink/60">
           {items.length}枚
         </span>
       </div>

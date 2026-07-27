@@ -27,7 +27,7 @@ export function ActionStrip({ nextEvent, upcomingEvents, socialLinks }: ActionSt
   return (
     <section id="support-actions" className="bg-porcelain px-4 pb-10 pt-4 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
-        <div className="mb-4 flex flex-wrap items-center gap-2 text-xs font-bold text-ink/62" aria-label="予定件数">
+        <div className="mb-4 flex flex-wrap items-center gap-2 text-xs font-bold text-ink/60" aria-label="予定件数">
           <span className="border border-rosefog/25 bg-white px-3 py-1.5">今日 {counts.today}件</span>
           <span className="border border-rosefog/25 bg-white px-3 py-1.5">今週 {counts.week}件</span>
           <span className="border border-rosefog/25 bg-white px-3 py-1.5">今月 {counts.month}件</span>

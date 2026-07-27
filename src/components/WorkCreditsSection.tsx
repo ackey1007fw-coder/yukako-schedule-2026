@@ -70,7 +70,7 @@ function WorkCreditCard({ entry }: { entry: WorkCreditEntry }) {
           </span>
         )}
         {status === "ended" && (
-          <span className="border border-ink/25 bg-ink/8 px-2.5 py-1 text-[11px] font-bold text-ink/55">
+          <span className="border border-ink/25 bg-ink/10 px-2.5 py-1 text-[11px] font-bold text-ink/55">
             終了しました
           </span>
         )}
@@ -86,7 +86,7 @@ function WorkCreditCard({ entry }: { entry: WorkCreditEntry }) {
           <p className="mt-2 text-xs font-bold text-ink/55">{entry.eventPeriod.label}</p>
         )}
 
-        <p className="mt-3 text-sm leading-7 text-ink/72">{entry.summary}</p>
+        <p className="mt-3 text-sm leading-7 text-ink/70">{entry.summary}</p>
 
         {entry.embedType === "instagram" && (
           <div className="mt-4">
