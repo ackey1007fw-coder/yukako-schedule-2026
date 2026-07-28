@@ -11,6 +11,10 @@ export type DisplayGojetFeatureUpdate = GojetFeatureUpdate & {
   primaryCta?: "post" | "homepage";
 };
 
+const CAST_VOICES_FINALE_20260727_POST_URL =
+  "https://x.com/hashtag/%E3%82%86%E3%81%8BJET?f=live";
+const YUKAKO_FINALE_20260728_POST_URL =
+  "https://x.com/mokoopy/status/2081797457068130391";
 const YUKAKO_YELL_CARDS_20260727_POST_URL =
   "https://x.com/mokoopy/status/2081421564504097269";
 const YUKAKO_DAY4_WRAP_20260727_POST_URL =
@@ -142,6 +146,12 @@ const decoratedSourceUpdates: DisplayGojetFeatureUpdate[] = sourceUpdates
     };
   });
 
+const castVoicesFinale20260727Update = decoratedSourceUpdates.find(
+  (update) => update.postUrl === CAST_VOICES_FINALE_20260727_POST_URL
+);
+const yukakoFinale20260728Update = decoratedSourceUpdates.find(
+  (update) => update.postUrl === YUKAKO_FINALE_20260728_POST_URL
+);
 const yukakoYellCards20260727Update = decoratedSourceUpdates.find(
   (update) => update.postUrl === YUKAKO_YELL_CARDS_20260727_POST_URL
 );
@@ -237,6 +247,8 @@ export const gojetOriginUpdate = decoratedSourceUpdates.find(
 );
 const remainingSourceUpdates = decoratedSourceUpdates.filter(
   (update) =>
+    update.postUrl !== CAST_VOICES_FINALE_20260727_POST_URL &&
+    update.postUrl !== YUKAKO_FINALE_20260728_POST_URL &&
     update.postUrl !== YUKAKO_YELL_CARDS_20260727_POST_URL &&
     update.postUrl !== YUKAKO_DAY4_WRAP_20260727_POST_URL &&
     update.postUrl !== YUKAKO_SCHEDULE_CHANGE_20260726_POST_URL &&
@@ -269,6 +281,26 @@ const remainingSourceUpdates = decoratedSourceUpdates.filter(
     update.postUrl !== PENLIGHT_POST_URL &&
     update.postUrl !== PRODUCE_ANNOUNCE_POST_URL
 );
+
+const featuredCastVoicesFinale20260727Update:
+  | DisplayGojetFeatureUpdate
+  | undefined = castVoicesFinale20260727Update
+  ? {
+      ...castVoicesFinale20260727Update,
+      anchorId: "gojet-cast-voices-finale-2026-07-27",
+      primaryCta: "post"
+    }
+  : undefined;
+
+const featuredYukakoFinale20260728Update:
+  | DisplayGojetFeatureUpdate
+  | undefined = yukakoFinale20260728Update
+  ? {
+      ...yukakoFinale20260728Update,
+      anchorId: "gojet-yukako-finale-2026-07-28",
+      primaryCta: "post"
+    }
+  : undefined;
 
 const featuredYukakoYellCards20260727Update:
   | DisplayGojetFeatureUpdate
@@ -559,6 +591,8 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
       }
     : undefined;
 
+// 7/28 2:42優花子さん本人（全公演終了）→ 7/27〜28キャストの千秋楽投稿まとめ →
+// 7/27 1:49優花子さん本人（喉と向き合いながらの最終日）→
 // 7/27 1:32優花子さん本人（4日目終演・A班B班千秋楽の振り返りと最終日案内）→
 // 7/26 23:29優花子さん本人（最終日LIVEの15分繰り下げ案内）→
 // 7/26 22:34来瞳舞夢さん（B班千秋楽の完走報告）→ 7/26 10:32優花子さん本人（脚色・楽曲制作への想い）→
@@ -566,6 +600,12 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
 // 7/25 23:49優花子さん本人（残り公演の呼びかけ）→ 7/25 22:43三村すみかさん →
 // 7/25 11:31秋乃蒼依さん → 21:24青木杏奈さん → 20:40曽原加絵さん → 19:06来瞳舞夢さんの順で先頭表示する。
 const orderedGojetFeatureUpdates: DisplayGojetFeatureUpdate[] = [
+  ...(featuredYukakoFinale20260728Update
+    ? [featuredYukakoFinale20260728Update]
+    : []),
+  ...(featuredCastVoicesFinale20260727Update
+    ? [featuredCastVoicesFinale20260727Update]
+    : []),
   ...(featuredYukakoYellCards20260727Update
     ? [featuredYukakoYellCards20260727Update]
     : []),

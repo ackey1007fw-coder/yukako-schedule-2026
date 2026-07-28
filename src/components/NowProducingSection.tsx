@@ -581,6 +581,62 @@ function FeatureUpdateCard({
           )}
         </aside>
       )}
+      {update.castVoices && update.castVoices.items.length > 0 && (
+        <div
+          className="mt-4 border border-champagne/30 bg-black/20 p-4"
+          aria-label={update.castVoices.heading}
+        >
+          <p className="text-xs font-black uppercase tracking-[0.14em] text-champagne">
+            {update.castVoices.heading}
+          </p>
+          <ul className="mt-3 grid gap-3">
+            {update.castVoices.items.map((voice) => (
+              <li
+                key={voice.handle}
+                className="border-b border-white/10 pb-3 last:border-0 last:pb-0"
+              >
+                <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+                  <a
+                    href={`https://x.com/${voice.handle.replace(/^@/, "")}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-baseline gap-1.5 text-sm font-black text-white underline decoration-champagne/60 underline-offset-4 transition hover:text-champagne focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-champagne"
+                  >
+                    {voice.name}
+                    <span className="text-xs font-bold text-champagne">
+                      {voice.handle}
+                    </span>
+                  </a>
+                  {voice.role && (
+                    <span className="text-xs font-bold text-white/60">
+                      {voice.role}
+                    </span>
+                  )}
+                </div>
+                <p className="mt-1.5 whitespace-pre-line break-words text-sm leading-6 text-white/70 [overflow-wrap:anywhere] sm:leading-7">
+                  {voice.quote}
+                </p>
+                {voice.postUrl && (
+                  <a
+                    href={voice.postUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-1.5 inline-flex items-center gap-1.5 text-xs font-black text-champagne transition hover:text-champagne/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-champagne"
+                  >
+                    <ExternalLink className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+                    {voice.name}さんの投稿を見る
+                  </a>
+                )}
+              </li>
+            ))}
+          </ul>
+          {update.castVoices.note && (
+            <p className="mt-3 text-xs font-bold text-white/60">
+              {update.castVoices.note}
+            </p>
+          )}
+        </div>
+      )}
       {update.photo && (
         <div className="mt-4 overflow-hidden border border-white/10 bg-black/20">
           <img

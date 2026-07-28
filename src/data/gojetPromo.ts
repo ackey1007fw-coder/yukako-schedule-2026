@@ -112,6 +112,23 @@ export type GojetFeatureUpdate = {
   };
   // 役柄タグ(例: "B班：JET")。見出し下に小さなバッジとして並べる
   roleTags?: string[];
+  // 複数の演者さんの投稿を1枚のカードにまとめるときに使う。
+  // 個別カードを立てるほどではないが、名前・役・言葉・動線は残したい場合向け。
+  castVoices?: {
+    heading: string;
+    note?: string;
+    items: {
+      name: string;
+      // Xのハンドル（"@" 込み）。プロフィールへの動線をここから組み立てる。
+      handle: string;
+      // 役どころ（例: "C班：JET役"）
+      role?: string;
+      // 投稿からの引用。原文どおりのときだけ載せる。
+      quote: string;
+      // 元投稿のURL。確認できたものだけ設定する（未確認ならプロフィールのみ表示）。
+      postUrl?: string;
+    }[];
+  };
 };
 
 export type GojetTeamUpdate = {
@@ -134,6 +151,119 @@ export type GojetTeamUpdate = {
 };
 
 export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
+  {
+    date: "2026.7.27〜28",
+    label: "#ゆかJET キャストの千秋楽投稿",
+    title: "初舞台も、初主演も。キャスト9人の千秋楽投稿",
+    body:
+      "7月23日から27日までのAir studio 両国。26日にA班とB班が千秋楽、27日はC班の大千秋楽と全キャストLIVEで、全日程が終わりました。\n\n初舞台の人、初ミュージカルの人、久しぶりの舞台で初主演だった人、最終日はLIVEだけの出演だった人。立ち位置はばらばらでも、終演後のXにはそれぞれの5日間が残っています。\n\n下のリストから、9人それぞれの元投稿とXプロフィールへ。プロデューサー兼B班JET・C班早紀の優花子さんの投稿は、すぐ上のカードに。\n\n配信チケットはまだ購入できる、という案内も複数出ています。",
+    postUrl: "https://x.com/hashtag/%E3%82%86%E3%81%8BJET?f=live",
+    homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
+    ctaLabel: "Xで #ゆかJET の投稿を見る",
+    homepageLabel: "公演ホームページを見る",
+    roleTags: [
+      "#ゆかJET",
+      "キャスト投稿まとめ",
+      "大千秋楽",
+      "全キャストLIVE",
+      "A班",
+      "B班",
+      "C班"
+    ],
+    castVoices: {
+      heading: "キャストの千秋楽投稿（敬称略・投稿順ではありません）",
+      note: "名前をタップするとXのプロフィールへ、その下のリンクが元投稿です。",
+      items: [
+        {
+          name: "宇佐美翔",
+          handle: "@sho_usami0419",
+          role: "C班：JET役",
+          quote:
+            "取り急ぎ！！！ #ゆかJET 全公演無事終了することが出来ました‼️‼️ ご来場下さった方々、本当にありがとうございました！",
+          postUrl: "https://x.com/sho_usami0419/status/2081759935168463318"
+        },
+        {
+          name: "三村すみか",
+          handle: "@smk_mmr",
+          role: "C班：美里役",
+          quote:
+            "初めてのミュージカルでしたが、観てくれた皆様…1回しかない初ミュージカルを見届けてくれてありがとうございました✨",
+          postUrl: "https://x.com/smk_mmr/status/2081758125921845506"
+        },
+        {
+          name: "沼尾麻由佳",
+          handle: "@mayuka_pinkcha",
+          role: "C班：メグ役",
+          quote: "ゆかJETが初舞台で幸せでした！！！",
+          postUrl: "https://x.com/mayuka_pinkcha/status/2081770991752270183"
+        },
+        {
+          name: "中原楓歌",
+          handle: "@fuchan_O315",
+          role: "夏代（ナッツ）役",
+          quote:
+            "思いやりがあって、のんびりしていて、アホなナッツ。私なりの夏代が届けられたら嬉しいな。",
+          postUrl: "https://x.com/fuchan_O315/status/2081755873412886679"
+        },
+        {
+          name: "来瞳舞夢",
+          handle: "@maimu_htk",
+          role: "B班：マスター役／C班：美月役",
+          quote: "C班千秋楽とLIVE公演 ありがとうございました！",
+          postUrl: "https://x.com/maimu_htk/status/2081856438880907679"
+        },
+        {
+          name: "矢口秀",
+          handle: "@syu_martin68Y",
+          role: "初主演・2役",
+          quote:
+            "久しぶりの舞台、初主演、2役！ たくさんの挑戦をたくさんの方の支えで無事千秋楽を迎えることが出来ました!!",
+          postUrl: "https://x.com/syu_martin68Y/status/2081848008820601301"
+        },
+        {
+          name: "荒井映里乃",
+          handle: "@eri_no_a",
+          role: "最終日はLIVEのみ出演",
+          quote:
+            "最終日はライブのみの出演でした！ 大盛り上がりのライブ！楽しんでいただけていたら嬉しいです☺️",
+          postUrl: "https://x.com/eri_no_a/status/2081863795107115314"
+        },
+        {
+          name: "Caroline",
+          handle: "@Hanatarebeen",
+          role: "初舞台",
+          quote:
+            "私にとっての初舞台で一生忘れる事のない思い出になりました🕯 もう終わったのが本当に信じられん。",
+          postUrl: "https://x.com/Hanatarebeen/status/2081763298723471659"
+        },
+        {
+          name: "青木杏奈",
+          handle: "@anna_aoki0906",
+          role: "B班：あかね役",
+          quote: "本日千秋楽を迎えることができました！ありがとうございます✨️",
+          postUrl: "https://x.com/anna_aoki0906/status/2081578266067116169"
+        }
+      ]
+    },
+    photos: [
+      {
+        src: "/images/yukajet/2026-07-27-final-company-bouquet.jpg",
+        alt: "アメリカンダイナー風の舞台セットの前に3列で並んだ#ゆかJET全キャストの集合写真。前列中央でピンクの制服と黒地にピンクの水玉スカート姿の吉井優花子さんが花束を持ち、周囲の出演者が手でハートやピースを作っている"
+      },
+      {
+        src: "/images/yukajet/2026-07-27-final-cban-yukajet-sign.jpg",
+        alt: "「ゆかJET」のネオン風ロゴパネルを背に、全員が両手で三角形をつくるポーズを取るC班9人の集合写真。前列中央がピンクの制服に赤いリボン姿の吉井優花子さん"
+      },
+      {
+        src: "/images/yukajet/2026-07-27-final-cast-selfie.jpg",
+        alt: "終演後の舞台セットで顔を寄せ合うC班キャストの自撮り。手前中央でピンクの衣装に赤いリボンを付けた吉井優花子さんが笑顔でカメラを向けている"
+      },
+      {
+        src: "/images/yukajet/2026-07-27-final-curtain-call.jpg",
+        alt: "客席側から撮影したカーテンコール。赤い壁のダイナーセットの舞台上で9人の出演者が一列に並んで深くお辞儀をし、客席の観客が拍手を送っている"
+      }
+    ]
+  },
   {
     date: "2026.7.28 2:42",
     label: "吉井優花子さん本人（@mokoopy）",
