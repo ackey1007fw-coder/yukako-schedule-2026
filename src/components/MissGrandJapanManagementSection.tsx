@@ -1,4 +1,4 @@
-import { ArrowUpRight, Clapperboard, ShieldCheck } from "lucide-react";
+import { ArrowUpRight, Clapperboard, Music, ShieldCheck } from "lucide-react";
 import {
   missGrandJapanManagement,
   missGrandJapanSeries
@@ -43,17 +43,27 @@ function MissGrandJapanSeriesBlock() {
             <div className="flex flex-1 flex-col p-4 sm:p-5">
               <h4 className="font-display text-xl leading-tight text-ink">{reel.title}</h4>
 
-              {reel.repostFrom && (
+              {reel.postedBy && (
                 <p className="mt-2 text-xs font-bold text-ink/55">
-                  リポスト元{" "}
+                  投稿{" "}
                   <a
-                    href={reel.repostFrom.url}
+                    href={reel.postedBy.url}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-champagneInk underline underline-offset-2 hover:text-rosefog"
                   >
-                    {reel.repostFrom.handle}
+                    {reel.postedBy.handle}
                   </a>
+                  {reel.postedBy.note && <span className="ml-1">（{reel.postedBy.note}）</span>}
+                </p>
+              )}
+
+              {reel.note && <p className="mt-3 text-sm leading-7 text-ink/70">{reel.note}</p>}
+
+              {reel.bgm && (
+                <p className="mt-2 inline-flex items-center gap-1.5 self-start text-xs font-bold text-ink/55">
+                  <Music className="h-3.5 w-3.5 text-champagne" aria-hidden="true" />
+                  {reel.bgm}
                 </p>
               )}
 

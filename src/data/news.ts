@@ -105,7 +105,7 @@ export const news: NewsItem[] = [
   {
     date: "2026.5.18",
     label: "Instagram",
-    text: "ミス・グランド・ジャパンのシリーズ企画リールをリポスト。#floatmyboat のチャレンジは #misstake #チャレンジ失敗😂",
+    text: "ミス・グランド・ジャパンのシリーズ企画リール。テラスでの #floatmyboat チャレンジは #misstake #チャレンジ失敗😂",
     url: "https://www.instagram.com/reel/DYe2xLHhrwp/"
   },
   {
