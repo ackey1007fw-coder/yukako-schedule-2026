@@ -105,6 +105,12 @@ export const news: NewsItem[] = [
   {
     date: "2026.5.18",
     label: "Instagram",
+    text: "ミス・グランド・ジャパンのシリーズ企画リール。テラスでの #floatmyboat チャレンジは #misstake #チャレンジ失敗😂",
+    url: "https://www.instagram.com/reel/DYe2xLHhrwp/"
+  },
+  {
+    date: "2026.5.18",
+    label: "Instagram",
     text: "『かわええのう、龍馬くん』の振り返り。大量の龍馬のセリフから好きな3選、B班の龍馬とC班のおりょう、そして初のアソシエイト・プロデューサーで大切にしたこと。",
     url: "https://www.instagram.com/p/DYeSf_aGe1T/"
   }
