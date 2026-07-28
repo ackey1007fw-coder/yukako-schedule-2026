@@ -1,8 +1,94 @@
-import { ArrowUpRight, ShieldCheck } from "lucide-react";
-import { missGrandJapanManagement } from "../data/missGrandJapanManagement";
+import { ArrowUpRight, Clapperboard, ShieldCheck } from "lucide-react";
+import {
+  missGrandJapanManagement,
+  missGrandJapanSeries
+} from "../data/missGrandJapanManagement";
 import { getResponsiveImageProps } from "../lib/responsiveImage";
 import { trackPortalEvent } from "../lib/analytics";
 import { ActHeader } from "./ActHeader";
+import { LazyInstagramEmbed } from "./LazyInstagramEmbed";
+
+function MissGrandJapanSeriesBlock() {
+  const series = missGrandJapanSeries;
+  if (series.reels.length === 0) return null;
+
+  return (
+    <div id="miss-grand-japan-series" className="mt-14 scroll-mt-32 sm:mt-20">
+      <div className="flex flex-wrap items-baseline gap-x-4 gap-y-2 border-t border-champagne/30 pt-10">
+        <p className="text-xs font-black uppercase tracking-[0.16em] text-champagneInk">
+          {series.eyebrow}
+        </p>
+        <h3 className="font-display text-2xl leading-tight text-ink sm:text-3xl">
+          {series.title}
+        </h3>
+      </div>
+      <p className="mt-3 max-w-2xl text-sm leading-7 text-ink/70 sm:text-base sm:leading-8">
+        {series.copy}
+      </p>
+
+      <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {series.reels.map((reel) => (
+          <article
+            key={reel.id}
+            className="yukako-card flex min-w-0 flex-col overflow-hidden border-champagne/35 bg-white shadow-paper"
+          >
+            <div className="flex flex-wrap items-center gap-2 border-b border-champagne/20 bg-porcelain px-4 py-3">
+              <span className="inline-flex items-center gap-1 border border-champagne/45 bg-white px-2.5 py-1 text-[11px] font-bold text-champagneInk">
+                <Clapperboard className="h-3.5 w-3.5" aria-hidden="true" />
+                リール
+              </span>
+              <span className="ml-auto text-[11px] font-bold text-ink/45">{reel.dateLabel}</span>
+            </div>
+
+            <div className="flex flex-1 flex-col p-4 sm:p-5">
+              <h4 className="font-display text-xl leading-tight text-ink">{reel.title}</h4>
+
+              {reel.repostFrom && (
+                <p className="mt-2 text-xs font-bold text-ink/55">
+                  リポスト元{" "}
+                  <a
+                    href={reel.repostFrom.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-champagneInk underline underline-offset-2 hover:text-rosefog"
+                  >
+                    {reel.repostFrom.handle}
+                  </a>
+                </p>
+              )}
+
+              <div className="mt-4">
+                <LazyInstagramEmbed url={reel.url} label={reel.title} />
+              </div>
+
+              <p className="mt-4 flex flex-wrap gap-x-2 gap-y-1 text-xs font-bold text-champagneInk">
+                {reel.hashtags.map((tag) => (
+                  <span key={tag}>{tag}</span>
+                ))}
+              </p>
+
+              <a
+                href={reel.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() =>
+                  trackPortalEvent("sns_click", {
+                    placement: "miss_grand_japan_series",
+                    item: reel.id
+                  })
+                }
+                className="mt-4 inline-flex items-center gap-1 self-start border border-rosefog/35 bg-porcelain px-3 py-1.5 text-xs font-bold text-ink transition hover:border-champagne hover:bg-white"
+              >
+                Instagramでリールを見る
+                <ArrowUpRight className="h-3.5 w-3.5 text-champagne" aria-hidden="true" />
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export function MissGrandJapanManagementSection() {
   const data = missGrandJapanManagement;
@@ -109,6 +195,8 @@ export function MissGrandJapanManagementSection() {
             </div>
           </div>
         </div>
+
+        <MissGrandJapanSeriesBlock />
       </div>
     </section>
   );

@@ -7,6 +7,12 @@ export type NewsItem = {
 
 export const news: NewsItem[] = [
   {
+    date: "2026.7",
+    label: "Instagram",
+    text: "ミス・グランド・ジャパンのシリーズ企画リール。#floatmyboat のチャレンジは #misstake #チャレンジ失敗😂",
+    url: "https://www.instagram.com/reel/DYe2xLHhrwp/"
+  },
+  {
     date: "2026.7.13",
     label: "X",
     text: "「ワイワイC班😆 最後の早紀、楽しんで演じます✨」——CM枠は7/16（木）23:59まで。",
