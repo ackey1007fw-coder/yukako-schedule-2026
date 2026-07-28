@@ -7,12 +7,6 @@ export type NewsItem = {
 
 export const news: NewsItem[] = [
   {
-    date: "2026.7",
-    label: "Instagram",
-    text: "ミス・グランド・ジャパンのシリーズ企画リール。#floatmyboat のチャレンジは #misstake #チャレンジ失敗😂",
-    url: "https://www.instagram.com/reel/DYe2xLHhrwp/"
-  },
-  {
     date: "2026.7.13",
     label: "X",
     text: "「ワイワイC班😆 最後の早紀、楽しんで演じます✨」——CM枠は7/16（木）23:59まで。",
@@ -107,6 +101,12 @@ export const news: NewsItem[] = [
     label: "X",
     text: "#ゆかJET 舞台情報が解禁されました（7/23〜27 Air studio 両国）",
     url: "https://x.com/yukako_produce/status/2070122985265197380"
+  },
+  {
+    date: "2026.5.18",
+    label: "Instagram",
+    text: "ミス・グランド・ジャパンのシリーズ企画リールをリポスト。#floatmyboat のチャレンジは #misstake #チャレンジ失敗😂",
+    url: "https://www.instagram.com/reel/DYe2xLHhrwp/"
   },
   {
     date: "2026.5.18",

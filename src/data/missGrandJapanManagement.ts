@@ -12,7 +12,7 @@ export type MissGrandJapanManagementImage = {
 // 新しいリールは reels 配列の先頭に追記する。
 export type MissGrandJapanSeriesReel = {
   id: string;
-  /** サイトに掲載した月（投稿日が確認できない場合は年月まで） */
+  /** 元投稿の公開日 */
   dateLabel: string;
   title: string;
   /** リポスト元アカウント（#Repost 表記があるときだけ） */
@@ -25,11 +25,11 @@ export type MissGrandJapanSeriesReel = {
 export const missGrandJapanSeries = {
   eyebrow: "MISS GRAND JAPAN / SERIES",
   title: "シリーズ企画のリール",
-  copy: "ミス・グランド・ジャパンのシリーズ企画から、Instagramのリール動画。再生はInstagramの埋め込みプレーヤーで。",
+  copy: "ミス・グランド・ジャパンのシリーズ企画から、吉井優花子さんがリポストしたリール。再生はInstagramの埋め込みプレーヤーで。",
   reels: [
     {
-      id: "float-my-boat-challenge-2026-07",
-      dateLabel: "2026.7",
+      id: "float-my-boat-challenge-2026-05",
+      dateLabel: "2026.5.18",
       title: "#floatmyboat チャレンジ",
       repostFrom: { handle: "@suke_japan", url: "https://www.instagram.com/suke_japan" },
       hashtags: ["#floatmyboat", "#challenge", "#misstake", "#チャレンジ失敗😂"],
