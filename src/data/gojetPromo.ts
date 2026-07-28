@@ -154,9 +154,9 @@ export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
   {
     date: "2026.7.27〜28",
     label: "#ゆかJET キャストの千秋楽投稿",
-    title: "初舞台も、初主演も。キャスト9人の千秋楽投稿",
+    title: "初舞台も、初主演も。キャスト14人の千秋楽投稿",
     body:
-      "7月23日から27日までのAir studio 両国。26日にA班とB班が千秋楽、27日はC班の大千秋楽と全キャストLIVEで、全日程が終わりました。\n\n初舞台の人、初ミュージカルの人、久しぶりの舞台で初主演だった人、最終日はLIVEだけの出演だった人。立ち位置はばらばらでも、終演後のXにはそれぞれの5日間が残っています。\n\n下のリストから、9人それぞれの元投稿とXプロフィールへ。プロデューサー兼B班JET・C班早紀の優花子さんの投稿は、すぐ上のカードに。\n\n配信チケットはまだ購入できる、という案内も複数出ています。",
+      "7月23日から27日までのAir studio 両国。26日にA班とB班が千秋楽、27日はC班の大千秋楽と全キャストLIVEで、全日程が終わりました。\n\n初舞台の人、初ミュージカルの人、久しぶりの舞台で初主演だった人、最終日はLIVEだけの出演だった人。立ち位置はばらばらでも、終演後のXにはそれぞれの5日間が残っています。\n\n終演直後の速報から一日おいて、7月28日には役や座組についてじっくり書いた振り返りが続きました。下のリストから、14人それぞれの元投稿とXプロフィールへ。プロデューサー兼B班JET・C班早紀の優花子さんの投稿は、すぐ上のカードに。\n\n配信チケットはまだ購入できる、という案内も複数出ています。",
     postUrl: "https://x.com/hashtag/%E3%82%86%E3%81%8BJET?f=live",
     homepageUrl: "https://premiumgoyukajet.hp.peraichi.com/",
     ctaLabel: "Xで #ゆかJET の投稿を見る",
@@ -240,8 +240,49 @@ export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
           name: "青木杏奈",
           handle: "@anna_aoki0906",
           role: "B班：あかね役",
-          quote: "本日千秋楽を迎えることができました！ありがとうございます✨️",
-          postUrl: "https://x.com/anna_aoki0906/status/2081578266067116169"
+          quote:
+            "座組の皆さんと出会えて、B班でお芝居ができて、相手役がゆかちゃんでよかったです！ 悩み、もがいた期間でしたが、やっぱりお芝居が好きだなと心から思いました",
+          postUrl: "https://x.com/anna_aoki0906/status/2081924916753191210"
+        },
+        {
+          name: "秋乃蒼依",
+          handle: "@akino_aoinari",
+          role: "A班出演",
+          quote:
+            "#ゆかJET Liveまで終了しました！ ここまで駆け抜けられてよかった〜！ 関わる方々が素敵な方ばかりで、とにかく楽しい公演期間でした✨ そしてゆかちゃま卒業おめでとう💐",
+          postUrl: "https://x.com/akino_aoinari/status/2081978279121277142"
+        },
+        {
+          name: "葉山椎菜",
+          handle: "@shiina_style222",
+          role: "全班＆LIVE公演",
+          quote:
+            "吉井優花子プロデュース公演　#ゆかJET 全班&LIVE公演、無事終演しました💐✨ ご観劇、配信ご視聴の皆さま ゆかJETメンバー、関係者さま 演出:多賀さん、P:優花ちゃん 本当にありがとうございました✨",
+          postUrl: "https://x.com/shiina_style222/status/2081977928896966859"
+        },
+        {
+          name: "清水桃香",
+          handle: "@momo0227butai",
+          role: "B班：大地役",
+          quote:
+            "舞台を始めたばかりの頃の自分にはGO,JETに出演できるなんて想像もつかなかったなと…本当に貴重な時間でした！",
+          postUrl: "https://x.com/momo0227butai/status/2081958768024383736"
+        },
+        {
+          name: "浅井つぐみ",
+          handle: "@Tsugumi_Asai",
+          role: "A班：あかね役",
+          quote:
+            "#ゆかJET 全公演無事に終演しました！ 応援してくださった皆さん、キャストの皆さん、スタッフの皆さん…ありがとうございました🌸 あかねをこのタイミングで挑戦できてよかったなと思います😌",
+          postUrl: "https://x.com/Tsugumi_Asai/status/2081911009837732327"
+        },
+        {
+          name: "曽原加絵",
+          handle: "@kaenomusic",
+          role: "B班：美里役",
+          quote:
+            "B班だけでなく、A班もC班も素敵な方ばかりで、本当に楽しい座組でした☺️ また改めて、美里についても書こうと思います🌼",
+          postUrl: "https://x.com/kaenomusic/status/2082007291096920162"
         }
       ]
     },
@@ -261,6 +302,26 @@ export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
       {
         src: "/images/yukajet/2026-07-27-final-curtain-call.jpg",
         alt: "客席側から撮影したカーテンコール。赤い壁のダイナーセットの舞台上で9人の出演者が一列に並んで深くお辞儀をし、客席の観客が拍手を送っている"
+      },
+      {
+        src: "/images/yukajet/2026-07-28-cast-afterglow-girls-trio.jpg",
+        alt: "黄色・ピンク・水色の水玉衣装を着たGO,JET! Girlsの3人が、ダイナーセットの前で並んでピースサインを向けている自撮り"
+      },
+      {
+        src: "/images/yukajet/2026-07-28-cast-afterglow-mic-trio.jpg",
+        alt: "ヴィンテージマイクを囲むように顔を寄せた出演者3人の自撮り。黄色いリボン、赤いリボン、水色のリボンをそれぞれ髪につけている"
+      },
+      {
+        src: "/images/yukajet/2026-07-28-cast-afterglow-yellow-hug.jpg",
+        alt: "「GO,JET!go!go!」のロゴパネルの前で、黄色い水玉衣装のGO,JET! Girls2人が抱き合って笑顔を見せている"
+      },
+      {
+        src: "/images/yukajet/2026-07-28-cast-afterglow-yellow-mic.jpg",
+        alt: "黄色い水玉衣装のGO,JET! Girlsの一人が、レトロなポスターが並ぶ壁の前でヴィンテージマイクのスタンドを両手で持ち微笑んでいる"
+      },
+      {
+        src: "/images/yukajet/2026-07-28-cast-afterglow-heart.jpg",
+        alt: "ピンクの壁にコカ・コーラの看板やダイヤル式電話が並ぶセットの前で、白いカチューシャとチェック柄の衣装をつけた出演者が両手で小さなハートを作っている"
       }
     ]
   },
