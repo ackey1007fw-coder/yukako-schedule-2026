@@ -375,6 +375,7 @@ export const imageManifest = {
   "/images/yukajet/2026-07-28-cast-afterglow-yellow-hug.jpg": {"width":1086,"height":1448,"widths":[360,480,720,960,1086]},
   "/images/yukajet/2026-07-28-cast-afterglow-yellow-mic.jpg": {"width":1536,"height":2048,"widths":[360,480,720,960,1280,1536]},
   "/images/yukajet/2026-07-29-produce-final-group.jpg": {"width":1024,"height":692,"widths":[360,480,720,960,1024]},
+  "/images/yukajet/2026-07-29-yukako-bouquet-with-cast.jpg": {"width":1477,"height":1108,"widths":[360,480,720,960,1280,1477]},
   "/images/yukajet/2026-07-29-yukako-streaming-ticket-cast.jpg": {"width":1538,"height":2048,"widths":[360,480,720,960,1280,1538]},
   "/images/yukako-babyshark-character.jpg": {"width":1600,"height":2048,"widths":[360,480,720,960,1280,1600]},
   "/images/yukako-babyshark-lobster.jpg": {"width":941,"height":1176,"widths":[360,480,720,941]},
