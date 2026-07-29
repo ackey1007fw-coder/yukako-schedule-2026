@@ -11,6 +11,8 @@ export type DisplayGojetFeatureUpdate = GojetFeatureUpdate & {
   primaryCta?: "post" | "homepage";
 };
 
+const PRODUCE_FINALE_20260729_POST_URL =
+  "https://x.com/yukako_produce/status/2082402006891888959";
 const CAST_VOICES_FINALE_20260727_POST_URL =
   "https://x.com/hashtag/%E3%82%86%E3%81%8BJET?f=live";
 const YUKAKO_FINALE_20260728_POST_URL =
@@ -146,6 +148,9 @@ const decoratedSourceUpdates: DisplayGojetFeatureUpdate[] = sourceUpdates
     };
   });
 
+const produceFinale20260729Update = decoratedSourceUpdates.find(
+  (update) => update.postUrl === PRODUCE_FINALE_20260729_POST_URL
+);
 const castVoicesFinale20260727Update = decoratedSourceUpdates.find(
   (update) => update.postUrl === CAST_VOICES_FINALE_20260727_POST_URL
 );
@@ -247,6 +252,7 @@ export const gojetOriginUpdate = decoratedSourceUpdates.find(
 );
 const remainingSourceUpdates = decoratedSourceUpdates.filter(
   (update) =>
+    update.postUrl !== PRODUCE_FINALE_20260729_POST_URL &&
     update.postUrl !== CAST_VOICES_FINALE_20260727_POST_URL &&
     update.postUrl !== YUKAKO_FINALE_20260728_POST_URL &&
     update.postUrl !== YUKAKO_YELL_CARDS_20260727_POST_URL &&
@@ -281,6 +287,16 @@ const remainingSourceUpdates = decoratedSourceUpdates.filter(
     update.postUrl !== PENLIGHT_POST_URL &&
     update.postUrl !== PRODUCE_ANNOUNCE_POST_URL
 );
+
+const featuredProduceFinale20260729Update:
+  | DisplayGojetFeatureUpdate
+  | undefined = produceFinale20260729Update
+  ? {
+      ...produceFinale20260729Update,
+      anchorId: "gojet-produce-finale-2026-07-29",
+      primaryCta: "post"
+    }
+  : undefined;
 
 const featuredCastVoicesFinale20260727Update:
   | DisplayGojetFeatureUpdate
@@ -591,6 +607,7 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
       }
     : undefined;
 
+// 7/29 18:45公演アカウント（終演報告・配信チケット案内）→
 // 7/28 2:42優花子さん本人（全公演終了）→ 7/27〜28キャストの千秋楽投稿まとめ →
 // 7/27 1:49優花子さん本人（喉と向き合いながらの最終日）→
 // 7/27 1:32優花子さん本人（4日目終演・A班B班千秋楽の振り返りと最終日案内）→
@@ -600,6 +617,9 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
 // 7/25 23:49優花子さん本人（残り公演の呼びかけ）→ 7/25 22:43三村すみかさん →
 // 7/25 11:31秋乃蒼依さん → 21:24青木杏奈さん → 20:40曽原加絵さん → 19:06来瞳舞夢さんの順で先頭表示する。
 const orderedGojetFeatureUpdates: DisplayGojetFeatureUpdate[] = [
+  ...(featuredProduceFinale20260729Update
+    ? [featuredProduceFinale20260729Update]
+    : []),
   ...(featuredYukakoFinale20260728Update
     ? [featuredYukakoFinale20260728Update]
     : []),

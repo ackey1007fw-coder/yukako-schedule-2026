@@ -118,8 +118,8 @@ export const countRemainingGojetPerformances = (
 // #ゆかJET『GO,JET!GO!GO! vol.1 Premium』の公演フェーズを判定する。
 // ・公演前：あと何日か（before）
 // ・公演期間中（7/23〜27）：本日の回（today）
-// ・終演翌日〜8/6：アーカイブ配信（archive）
-// ・8/7以降：終了（ended）
+// ・終演翌日〜8/10：アーカイブ配信（archive）
+// ・8/11以降：終了（ended）
 export const getGojetStatus = (
   now: Date = new Date(),
   timetable: GojetTimetableDay[] = gojetTimetable

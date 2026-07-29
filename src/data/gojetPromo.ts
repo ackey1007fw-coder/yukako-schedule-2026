@@ -152,6 +152,43 @@ export type GojetTeamUpdate = {
 
 export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
   {
+    date: "2026.7.29 18:45",
+    label: "吉井優花子プロデュース公演公式（@yukako_produce）",
+    title: "#ゆかJET【終演💐】｜C班大千秋楽と全キャストLIVEで幕",
+    body:
+      "7月23日からのAir studio 両国。最終日はC班の大千秋楽と全キャストLIVEで、『GO,JET!GO!GO! vol.1 Premium』の全日程が終わりました。\n\n「たくさんの温かい拍手に包まれて幕を閉じることができました✨」——ご来場いただいた皆様へ、公演アカウントからの御礼。\n\n配信チケットはA班・B班・C班の本編と全キャストLIVEが対象。申し込みは8月3日〆切、視聴は8月10日まで。「まだまだお楽しみください！」\n\n添えられているのは、ダイナーのセットに全キャスト・スタッフが勢ぞろいした一枚。前列中央で花束を抱えているのが優花子さん。",
+    caption:
+      "#ゆかJET 【終演💐】\n\nC班大千穐楽／全キャストLIVEも\nたくさんの温かい拍手に包まれて幕を閉じることができました✨\n\nご来場いただいた皆様、\n本当にありがとうございました🙇‍♀️✨\n\n🎥配信チケット🎟️(A.B.C班、LIVE)\n※8月3日〆切〜10日まで視聴可\nまだまだお楽しみください！",
+    postUrl: "https://x.com/yukako_produce/status/2082402006891888959",
+    homepageUrl:
+      "https://docs.google.com/forms/d/e/1FAIpQLScsEmjjECWOVKzYuJ_93BRlS1rI8cbzcPFBb0f4mVqWNlLnuQ/viewform",
+    ctaLabel: "Xで元の投稿を見る",
+    homepageLabel: "配信チケットを申し込む（8/3〆切）",
+    roleTags: [
+      "#ゆかJET",
+      "公演アカウント",
+      "終演",
+      "大千秋楽",
+      "全キャストLIVE",
+      "配信チケット"
+    ],
+    deadline: {
+      at: "2026-08-03T23:59:59+09:00",
+      beforeText: "配信チケットの申し込みは8月3日（月）まで・視聴は8月10日（月）まで",
+      afterText: "配信チケットの申し込みは終了。視聴は8月10日（月）まで"
+    },
+    photo: {
+      src: "/images/yukajet/2026-07-29-produce-final-group.jpg",
+      alt: "赤い壁とチェック柄の床のアメリカンダイナー風セットの前に3列で並んだ#ゆかJET全キャスト・スタッフの集合写真。前列中央でピンクの制服と黒地にピンクの水玉スカート姿の吉井優花子さんが花束を抱え、周囲の出演者が水玉のスカートでピースや手のポーズを取っている。左下に「Yuka JET」のロゴ"
+    },
+    quotedPost: {
+      author: "吉井優花子プロデュース公演",
+      handle: "@yukako_produce",
+      body:
+        "26日のC班／A班千秋楽／B班千秋楽への御礼と、27日最終日のスケジュール（18:00〜C班大千秋楽、20:15〜全キャストLIVE）の案内。"
+    }
+  },
+  {
     date: "2026.7.27〜28",
     label: "#ゆかJET キャストの千秋楽投稿",
     title: "初舞台も、初主演も。キャスト15人の千秋楽投稿",

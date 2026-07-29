@@ -118,7 +118,7 @@ export function PriorityBanner({ now: nowProp }: PriorityBannerProps = {}) {
       });
     }
     if (gojet.phase === "before") items.push({ id: "gojet-countdown", label: "#ゆかJET", text: `公演まであと${gojet.daysLeft}日・チケット／配信を確認`, href: gojetTicketUrl, tone: "bg-gradient-to-r from-[#fbeef0] to-[#faf3e2] text-ink", Icon: Ticket, tracking: "ticket_click" });
-    if (gojet.phase === "archive") items.push({ id: "gojet-archive", label: "#ゆかJET 配信", text: "アーカイブ配信は8/6（木）まで・配信チケット 3,700円", href: gojetStreamingTicketUrl, tone: "bg-gradient-to-r from-[#fbeef0] to-[#faf3e2] text-ink", Icon: Radio, tracking: "ticket_click" });
+    if (gojet.phase === "archive") items.push({ id: "gojet-archive", label: "#ゆかJET 配信", text: "配信チケットの申し込みは8/3（月）まで・視聴は8/10（月）まで 3,700円", href: gojetStreamingTicketUrl, tone: "bg-gradient-to-r from-[#fbeef0] to-[#faf3e2] text-ink", Icon: Radio, tracking: "ticket_click" });
     const latestUpdate = siteUpdates[0];
     const latestHref = latestUpdate?.anchor || latestUpdate?.sourceUrl;
     if (latestUpdate && latestHref) {

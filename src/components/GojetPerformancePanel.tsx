@@ -135,17 +135,17 @@ export function GojetPerformancePanel({ now }: GojetPerformancePanelProps) {
               id="gojet-archive-title"
               className="mt-2 font-display text-2xl font-black leading-tight sm:text-3xl"
             >
-              アーカイブ配信は8/6（木）まで
+              アーカイブ配信は8/10（月）まで
             </h2>
             <p className="mt-2 text-sm leading-6 text-white/75">
-              A班・B班は7/26公演、C班・LIVEは7/27公演。配信チケットは3,700円です。
+              A班・B班は7/26公演、C班・LIVEは7/27公演。配信チケットは3,700円、申し込みは8/3（月）〆切です。
             </p>
           </div>
           <div className="w-full shrink-0 sm:w-72">
             <TicketLink
               href={gojetStreamingTicketUrl}
               label="配信チケット"
-              detail="3,700円・8/6まで視聴可"
+              detail="3,700円・8/10まで視聴可"
               tone="primary"
             />
           </div>
@@ -247,7 +247,7 @@ export function GojetPerformancePanel({ now }: GojetPerformancePanelProps) {
             <TicketLink
               href={gojetStreamingTicketUrl}
               label="配信チケット"
-              detail="3,700円・8/6まで視聴可"
+              detail="3,700円・8/10まで視聴可"
               tone={allPerformancesStarted ? "primary" : "secondary"}
             />
           </div>
