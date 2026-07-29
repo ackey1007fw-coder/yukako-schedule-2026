@@ -152,6 +152,46 @@ export type GojetTeamUpdate = {
 
 export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
   {
+    date: "2026.7.29 22:22",
+    label: "吉井優花子さん本人（@mokoopy）",
+    title: "熱はまだまだ冷めません❤️‍🔥｜配信チケットは8月3日〆切",
+    body:
+      "A班・B班・C班の本編と、全キャストLIVE。『配信チケット』で8月10日まで視聴できます。購入は8月3日〆切。\n\n初プロデュースで、演者としては最後のGO,JET!。こだわりのキャスティングと脚色で歌も多め、新曲も作った——「絶対観てほしい☺️💖」\n\n写真はRoute 66の路線図が並ぶダイナーのセット前で、全員が両手で三角形をつくった一枚。「C班では早紀 B班ではJET！（Bはみんな女性です）」の文字入りです。",
+    caption:
+      "#ゆかJET 熱はまだまだ冷めません❤️‍🔥\n\n大好評のA.B.C班の本編と\n大盛り上がりだった”全キャストLIVE”が\n『配信チケット』で8月10日まで視聴可能です😳✨\n\n初プロデュース＆最後のGO,JET!💐😭\nこだわりのキャスティング・脚色で歌も多めです！新曲も作りました✌️\n絶対観てほしい☺️💖\n\n⬇️8月3日 購入〆切",
+    postUrl: "https://x.com/mokoopy/status/2082456710611128358",
+    homepageUrl:
+      "https://docs.google.com/forms/d/e/1FAIpQLScsEmjjECWOVKzYuJ_93BRlS1rI8cbzcPFBb0f4mVqWNlLnuQ/viewform",
+    ctaLabel: "Xで元の投稿を見る",
+    homepageLabel: "配信チケットを申し込む（8/3〆切）",
+    roleTags: [
+      "#ゆかJET",
+      "吉井優花子さん本人",
+      "配信チケット",
+      "8月3日〆切",
+      "全キャストLIVE",
+      "B班：JET役",
+      "C班：早紀役"
+    ],
+    deadline: {
+      at: "2026-08-03T23:59:59+09:00",
+      beforeText: "配信チケットの申し込みは8月3日（月）まで・視聴は8月10日（月）まで",
+      afterText: "配信チケットの申し込みは終了。視聴は8月10日（月）まで"
+    },
+    photo: {
+      src: "/images/yukajet/2026-07-29-yukako-streaming-ticket-cast.jpg",
+      alt: "アメリカの路線図やRoute 66の看板が描かれたダイナー風の舞台セットの前で、両手で三角形をつくるポーズを取る#ゆかJET出演者9人の集合写真。前列中央がピンクのシャツと黒地にピンクの水玉スカート姿の吉井優花子さん。画像下部に「C班では早紀 B班ではJET！（Bはみんな女性です）」の文字が入っている"
+    },
+    quotedPost: {
+      author: "吉井優花子プロデュース公演",
+      handle: "@yukako_produce",
+      body:
+        "同じ日の18:45に出た終演報告。C班大千秋楽と全キャストLIVEへの御礼と、配信チケット（8月3日〆切・8月10日まで視聴可）の案内。",
+      url: "https://x.com/yukako_produce/status/2082402006891888959",
+      urlLabel: "引用元（公演アカウントの終演報告）を見る"
+    }
+  },
+  {
     date: "2026.7.29 18:45",
     label: "吉井優花子プロデュース公演公式（@yukako_produce）",
     title: "#ゆかJET【終演💐】｜C班大千秋楽と全キャストLIVEで幕",
