@@ -155,7 +155,7 @@ try {
       now: new Date("2026-07-28T00:00:00+09:00")
     })
   );
-  assert.match(archiveHtml, /アーカイブ配信は8\/6（木）まで/);
+  assert.match(archiveHtml, /アーカイブ配信は8\/10（月）まで/);
   assert.match(archiveHtml, /3,700円/);
   assert.match(archiveHtml, /id="gojet-live-panel"/);
   assert.match(archiveHtml, /scroll-mt-32/);
@@ -168,16 +168,16 @@ try {
   assert.doesNotMatch(archiveQuickNavHtml, /href="#gojet-live-panel"/);
 
   const archiveLastMinute = getGojetStatus(
-    new Date("2026-08-06T23:59:59+09:00")
+    new Date("2026-08-10T23:59:59+09:00")
   );
   assert.equal(archiveLastMinute.phase, "archive");
 
-  const ended = getGojetStatus(new Date("2026-08-07T00:00:00+09:00"));
+  const ended = getGojetStatus(new Date("2026-08-11T00:00:00+09:00"));
   assert.deepEqual(ended, { phase: "ended" });
   assert.equal(
     renderToStaticMarkup(
       createElement(GojetPerformancePanel, {
-        now: new Date("2026-08-07T00:00:00+09:00")
+        now: new Date("2026-08-11T00:00:00+09:00")
       })
     ),
     ""

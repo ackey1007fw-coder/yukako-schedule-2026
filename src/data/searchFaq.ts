@@ -50,7 +50,7 @@ export const searchFaqs: SearchFaq[] = [
   {
     question: "配信で観られる？",
     answer:
-      "配信チケットは3,700円で、アーカイブは2026年8月6日まで視聴できます。遠方の方も予約サイトから申し込めます。",
+      "配信チケットは3,700円。申し込みは2026年8月3日まで、アーカイブは8月10日まで視聴できます。A班・B班・C班の本編と全キャストLIVEが対象です。",
     href: "https://premiumgoyukajet.hp.peraichi.com",
     linkLabel: "配信チケットを見る"
   },

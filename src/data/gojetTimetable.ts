@@ -30,7 +30,11 @@ export const gojetStreamingTicketUrl =
 export const gojetOpeningDate = "2026-07-23";
 export const gojetClosingDate = "2026-07-27";
 export const gojetArchiveStartDate = "2026-07-28";
-export const gojetArchiveEndDate = "2026-08-06";
+// 2026/7/29の公演アカウント（@yukako_produce）終演報告で
+// 「8月3日〆切〜10日まで視聴可」と案内されたため、視聴期限を8/10へ更新。
+export const gojetArchiveEndDate = "2026-08-10";
+/** 配信チケットの申し込み〆切（この日を過ぎると新規申し込みはできない） */
+export const gojetStreamingOrderDeadline = "2026-08-03";
 
 // タイムテーブル（yukako-gojet-poster.jpg の記載どおり）
 export const gojetTimetable: GojetTimetableDay[] = [

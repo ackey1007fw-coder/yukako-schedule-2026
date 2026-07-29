@@ -46,7 +46,7 @@ export function SupportersSection() {
 
         <p className="mt-6 flex items-start gap-2 text-sm leading-6 text-ink/60">
           <Radio className="mt-0.5 h-4 w-4 shrink-0 text-champagne" aria-hidden="true" />
-          遠方の方も、配信チケット（3,700円・アーカイブは2026年8月6日まで視聴可）で公演をご覧いただけます。
+          遠方の方も、配信チケット（3,700円・申し込みは2026年8月3日まで／視聴は8月10日まで）で公演をご覧いただけます。
         </p>
         <div className="mt-5">
           <a
