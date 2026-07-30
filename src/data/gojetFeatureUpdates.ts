@@ -11,6 +11,8 @@ export type DisplayGojetFeatureUpdate = GojetFeatureUpdate & {
   primaryCta?: "post" | "homepage";
 };
 
+const SUPPORT_CONTENT_SHIPPING_20260730_POST_URL =
+  "https://x.com/yukako_produce/status/2082689806270947683";
 const YUKAKO_LOOKBACK_1_20260729_POST_URL =
   "https://x.com/mokoopy/status/2082478266989113425";
 const YUKAKO_STREAMING_TICKET_20260729_POST_URL =
@@ -157,6 +159,9 @@ const decoratedSourceUpdates: DisplayGojetFeatureUpdate[] = sourceUpdates
 const yukakoLookback120260729Update = decoratedSourceUpdates.find(
   (update) => update.postUrl === YUKAKO_LOOKBACK_1_20260729_POST_URL
 );
+const supportContentShipping20260730Update = decoratedSourceUpdates.find(
+  (update) => update.postUrl === SUPPORT_CONTENT_SHIPPING_20260730_POST_URL
+);
 const yukakoStreamingTicket20260729Update = decoratedSourceUpdates.find(
   (update) => update.postUrl === YUKAKO_STREAMING_TICKET_20260729_POST_URL
 );
@@ -267,6 +272,7 @@ export const gojetOriginUpdate = decoratedSourceUpdates.find(
 );
 const remainingSourceUpdates = decoratedSourceUpdates.filter(
   (update) =>
+    update.postUrl !== SUPPORT_CONTENT_SHIPPING_20260730_POST_URL &&
     update.postUrl !== YUKAKO_LOOKBACK_1_20260729_POST_URL &&
     update.postUrl !== YUKAKO_STREAMING_TICKET_20260729_POST_URL &&
     update.postUrl !== NUMAO_MAYUKA_MEGS_20260729_POST_URL &&
@@ -305,6 +311,16 @@ const remainingSourceUpdates = decoratedSourceUpdates.filter(
     update.postUrl !== PENLIGHT_POST_URL &&
     update.postUrl !== PRODUCE_ANNOUNCE_POST_URL
 );
+
+const featuredSupportContentShipping20260730Update:
+  | DisplayGojetFeatureUpdate
+  | undefined = supportContentShipping20260730Update
+  ? {
+      ...supportContentShipping20260730Update,
+      anchorId: "gojet-support-content-shipping-2026-07-30",
+      primaryCta: "post"
+    }
+  : undefined;
 
 const featuredYukakoLookback120260729Update:
   | DisplayGojetFeatureUpdate
@@ -655,6 +671,7 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
       }
     : undefined;
 
+// 7/30 13:48公演アカウント（応援コンテンツの発送完了・順次送付）→
 // 7/29 23:48優花子さん本人（振り返りつぶやき①・声と初プロデュースの学び）→
 // 7/29 22:22優花子さん本人（配信チケットの案内・8/3〆切）→
 // 7/29 21:56沼尾麻由佳さん（3つ子メグと千秋楽オフショット）→
@@ -668,6 +685,9 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
 // 7/25 23:49優花子さん本人（残り公演の呼びかけ）→ 7/25 22:43三村すみかさん →
 // 7/25 11:31秋乃蒼依さん → 21:24青木杏奈さん → 20:40曽原加絵さん → 19:06来瞳舞夢さんの順で先頭表示する。
 const orderedGojetFeatureUpdates: DisplayGojetFeatureUpdate[] = [
+  ...(featuredSupportContentShipping20260730Update
+    ? [featuredSupportContentShipping20260730Update]
+    : []),
   ...(featuredYukakoLookback120260729Update
     ? [featuredYukakoLookback120260729Update]
     : []),

@@ -152,6 +152,48 @@ export type GojetTeamUpdate = {
 
 export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
   {
+    date: "2026.7.30 13:48",
+    label: "吉井優花子プロデュース公演公式（@yukako_produce）",
+    title: "応援コンテンツの発送完了と、順次送付のお知らせ",
+    body:
+      "終演後の#ゆかJET公演アカウントから、応援コンテンツの発送状況が案内されました。\n\n発送が完了したのは「キャストCM（DVD）」「エールカード」「応援チケット（チェキ）」の3点。「たくさんの応援を誠にありがとうございました✨」と感謝を伝えています。\n\n「メッセージ動画」と「配信チケット」は順次送付中です。対象の方へ、もうしばらく待ってほしいとの案内です。\n\nこの投稿が引用しているのは、前日のC班大千秋楽・全キャストLIVE終演報告。配信チケットはA班・B班・C班の本編と全キャストLIVEが対象で、申し込みは8月3日〆切、視聴は8月10日までです。",
+    caption:
+      "#ゆかJET 💐\n【応援コンテンツにつきまして】\n\n・キャストCM(DVD)\n・エールカード\n・応援チケット(チェキ)\n上記発送が完了しました。\n\nたくさんの応援を誠にありがとうございました✨\n\n『メッセージ動画』『配信チケット』の送付も順次行っておりますので、もう暫くお待ち下さい🙇‍♀️",
+    postUrl:
+      "https://x.com/yukako_produce/status/2082689806270947683",
+    homepageUrl:
+      "https://docs.google.com/forms/d/e/1FAIpQLScsEmjjECWOVKzYuJ_93BRlS1rI8cbzcPFBb0f4mVqWNlLnuQ/viewform",
+    ctaLabel: "Xで元の投稿を見る",
+    homepageLabel: "配信チケットを申し込む（8/3〆切）",
+    roleTags: [
+      "#ゆかJET",
+      "公演アカウント",
+      "応援コンテンツ",
+      "発送完了",
+      "順次送付中",
+      "配信チケット"
+    ],
+    deadline: {
+      at: "2026-08-03T23:59:59+09:00",
+      beforeText:
+        "配信チケットの申し込みは8月3日（月）まで・視聴は8月10日（月）まで",
+      afterText:
+        "配信チケットの申し込みは終了。視聴は8月10日（月）まで"
+    },
+    photo: {
+      src: "/images/yukajet/2026-07-29-produce-final-group.jpg",
+      alt: "引用元の終演報告に添えられた集合写真。赤い壁とチェック柄の床のアメリカンダイナー風セットの前に#ゆかJET全キャスト・スタッフが並び、前列中央でピンクの制服姿の吉井優花子さんが花束を抱えている"
+    },
+    quotedPost: {
+      author: "吉井優花子プロデュース公演",
+      handle: "@yukako_produce",
+      body:
+        "前日7月29日のC班大千秋楽・全キャストLIVE終演報告。来場者への御礼と、配信チケット（A班・B班・C班・LIVE／8月3日〆切・8月10日まで視聴可）を案内しています。",
+      url: "https://x.com/yukako_produce/status/2082402006891888959",
+      urlLabel: "引用元（終演報告）を見る"
+    }
+  },
+  {
     date: "2026.7.29 23:48",
     label: "吉井優花子さん本人（@mokoopy）",
     title: "振り返りつぶやき📝①｜声と、初プロデュースの学び",
