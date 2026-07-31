@@ -152,6 +152,47 @@ export type GojetTeamUpdate = {
 
 export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
   {
+    date: "2026.7.31 18:45",
+    label: "吉井優花子さん本人（@mokoopy）",
+    title: "三者三様「JET」爆誕💣✨｜緻密・のび太・不器用",
+    body:
+      "A班は矢口秀さん、B班は優花子さん、C班は宇佐美翔さん。班ごとに違うJETを、優花子さん本人が「緻密JET・のび太JET・不器用JET⁉️」と紹介しています。\n\nさらに、矢口さんはC班で大地、優花子さんはC班で早紀。「C班にはJETが３人いました😂笑」\n\n三人のJETが並んだセルフィーはこちら。見比べるなら配信チケットで——8月3日〆切、8月10日まで視聴可、1本¥3,700です。",
+    caption:
+      "#ゆかJET \n三者三様「JET」爆誕💣✨\n緻密JET・のび太JET・不器用JET⁉️\n\nA班は矢口秀くん=C班では大地\nB班は私=C班では早紀\nC班は宇佐美翔くん\n\nC班にはJETが３人いました😂笑\n\n〈配信チケットでぜひご覧ください🎟️〉\n※8月3日〆切〜10日まで視聴可能✨\n※¥3,700/本",
+    postUrl: "https://x.com/mokoopy/status/2083127016010944516",
+    homepageUrl:
+      "https://docs.google.com/forms/d/e/1FAIpQLScsEmjjECWOVKzYuJ_93BRlS1rI8cbzcPFBb0f4mVqWNlLnuQ/viewform",
+    ctaLabel: "Xで元の投稿を見る",
+    homepageLabel: "配信チケットを申し込む（8/3〆切・¥3,700）",
+    roleTags: [
+      "#ゆかJET",
+      "吉井優花子さん本人",
+      "三者三様のJET",
+      "A班：矢口秀さん",
+      "B班：JET役",
+      "C班：宇佐美翔さん",
+      "配信チケット"
+    ],
+    deadline: {
+      at: "2026-08-03T23:59:59+09:00",
+      beforeText:
+        "配信チケットの申し込みは8月3日（月）まで・視聴は8月10日（月）まで（¥3,700/本）",
+      afterText: "配信チケットの申し込みは終了。視聴は8月10日（月）まで"
+    },
+    photo: {
+      src: "/images/yukajet/2026-07-31-three-jets-selfie.jpg",
+      alt: "「GO,JET!go!go!」のロゴが掲げられたアメリカンダイナー風のセットの前で顔を寄せ合う3人のセルフィー。中央にピンクの制服と黒縁メガネ、ピンクのリボンを付けた吉井優花子さんがピースサインを向け、左に赤いシャツの男性、右に白いタオルを頭に巻いた水色の上着の男性が並んでいる"
+    },
+    quotedPost: {
+      author: "吉井優花子",
+      handle: "@mokoopy",
+      body:
+        "7月29日の配信チケットの案内。A班・B班・C班の本編と全キャストLIVEが8月10日まで視聴可、購入は8月3日〆切。",
+      url: "https://x.com/mokoopy/status/2082456710611128358",
+      urlLabel: "引用元（配信チケットの案内）を見る"
+    }
+  },
+  {
     date: "2026.7.31 2:42",
     label: "吉井優花子さん本人（@mokoopy）",
     title: "「#ゆかJET の次は何をしようか💭」｜密度と、作品の質",
