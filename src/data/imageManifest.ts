@@ -378,6 +378,7 @@ export const imageManifest = {
   "/images/yukajet/2026-07-29-yukako-backstage-selfie.jpg": {"width":2048,"height":1578,"widths":[360,480,720,960,1280,1600,2048]},
   "/images/yukajet/2026-07-29-yukako-bouquet-with-cast.jpg": {"width":1477,"height":1108,"widths":[360,480,720,960,1280,1477]},
   "/images/yukajet/2026-07-29-yukako-streaming-ticket-cast.jpg": {"width":1538,"height":2048,"widths":[360,480,720,960,1280,1538]},
+  "/images/yukajet/2026-07-31-abc-teams-collage.jpg": {"width":946,"height":2048,"widths":[360,480,720,946]},
   "/images/yukajet/2026-07-31-three-jets-selfie.jpg": {"width":2048,"height":1539,"widths":[360,480,720,960,1280,1600,2048]},
   "/images/yukako-babyshark-character.jpg": {"width":1600,"height":2048,"widths":[360,480,720,960,1280,1600]},
   "/images/yukako-babyshark-lobster.jpg": {"width":941,"height":1176,"widths":[360,480,720,941]},

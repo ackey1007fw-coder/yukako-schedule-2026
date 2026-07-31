@@ -11,6 +11,8 @@ export type DisplayGojetFeatureUpdate = GojetFeatureUpdate & {
   primaryCta?: "post" | "homepage";
 };
 
+const STREAMING_FINAL_CALL_20260731_POST_URL =
+  "https://x.com/yukako_produce/status/2083165443876081719";
 const THREE_JETS_20260731_POST_URL =
   "https://x.com/mokoopy/status/2083127016010944516";
 const YUKAKO_NEXT_STAGE_20260731_POST_URL =
@@ -160,6 +162,9 @@ const decoratedSourceUpdates: DisplayGojetFeatureUpdate[] = sourceUpdates
     };
   });
 
+const streamingFinalCall20260731Update = decoratedSourceUpdates.find(
+  (update) => update.postUrl === STREAMING_FINAL_CALL_20260731_POST_URL
+);
 const threeJets20260731Update = decoratedSourceUpdates.find(
   (update) => update.postUrl === THREE_JETS_20260731_POST_URL
 );
@@ -282,6 +287,7 @@ export const gojetOriginUpdate = decoratedSourceUpdates.find(
 );
 const remainingSourceUpdates = decoratedSourceUpdates.filter(
   (update) =>
+    update.postUrl !== STREAMING_FINAL_CALL_20260731_POST_URL &&
     update.postUrl !== THREE_JETS_20260731_POST_URL &&
     update.postUrl !== YUKAKO_NEXT_STAGE_20260731_POST_URL &&
     update.postUrl !== SUPPORT_CONTENT_SHIPPING_20260730_POST_URL &&
@@ -323,6 +329,16 @@ const remainingSourceUpdates = decoratedSourceUpdates.filter(
     update.postUrl !== PENLIGHT_POST_URL &&
     update.postUrl !== PRODUCE_ANNOUNCE_POST_URL
 );
+
+const featuredStreamingFinalCall20260731Update:
+  | DisplayGojetFeatureUpdate
+  | undefined = streamingFinalCall20260731Update
+  ? {
+      ...streamingFinalCall20260731Update,
+      anchorId: "gojet-streaming-final-call-2026-07-31",
+      primaryCta: "homepage"
+    }
+  : undefined;
 
 const featuredThreeJets20260731Update:
   | DisplayGojetFeatureUpdate
@@ -703,6 +719,7 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
       }
     : undefined;
 
+// 7/31 21:18公演アカウント（配信チケットの購入は3日まで・A/B/C班見比べ）→
 // 7/31 18:45優花子さん本人（三者三様のJET・配信チケット案内）→
 // 7/31 2:42優花子さん本人（次は何をしようか・作品の質へのこだわり）→
 // 7/30 13:48公演アカウント（応援コンテンツの発送完了・順次送付）→
@@ -719,6 +736,9 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
 // 7/25 23:49優花子さん本人（残り公演の呼びかけ）→ 7/25 22:43三村すみかさん →
 // 7/25 11:31秋乃蒼依さん → 21:24青木杏奈さん → 20:40曽原加絵さん → 19:06来瞳舞夢さんの順で先頭表示する。
 const orderedGojetFeatureUpdates: DisplayGojetFeatureUpdate[] = [
+  ...(featuredStreamingFinalCall20260731Update
+    ? [featuredStreamingFinalCall20260731Update]
+    : []),
   ...(featuredThreeJets20260731Update
     ? [featuredThreeJets20260731Update]
     : []),
