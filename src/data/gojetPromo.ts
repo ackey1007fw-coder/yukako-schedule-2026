@@ -152,6 +152,52 @@ export type GojetTeamUpdate = {
 
 export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
   {
+    date: "2026.7.31 23:11",
+    label: "吉井優花子さん本人（@mokoopy）",
+    title: "「龍馬とJET違いすぎ〜楽しい〜」｜大切な舞台が一つまた一つ",
+    body:
+      "#ゆかJET と並行して頭に浮かんでくるのは #龍馬くん2026。B班では坂本龍馬役、B・C班のキャスティングも担当した4月の舞台です。\n\n「大切な舞台が一つまた一つと増えていく。」「龍馬とJET違いすぎ〜楽しい〜(つづく)」——対になる22:55の投稿では、男女二役の楽しさについて。\n\n引用元はTEAMマルナゲーズの4月の配信案内で、B班のプロモーション映像つき。「引用元の動画見てね🌟」\n\n最後に一言、「🐚B班では龍馬のあのセリフも…？」。ゆかJETの配信チケットは8月3日〆切、8月10日まで視聴できます。",
+    caption:
+      "#ゆかJET と並行して #龍馬くん2026 が頭に浮かんでくる💭\nB.C班のキャスティングをしました\n(引用元の動画見てね🌟)\n\n大切な舞台が一つまた一つと増えていく。\n\nB班では坂本龍馬役でした。\n龍馬とJET違いすぎ〜楽しい〜(つづく)\n\n〈ゆかJET 配信チケット🎟️〉\n※8月3日〆切〜10日まで視聴可能\n🐚B班では龍馬のあのセリフも…？",
+    postUrl: "https://x.com/mokoopy/status/2083193878006620507",
+    homepageUrl:
+      "https://docs.google.com/forms/d/e/1FAIpQLScsEmjjECWOVKzYuJ_93BRlS1rI8cbzcPFBb0f4mVqWNlLnuQ/viewform",
+    ctaLabel: "Xで元の投稿を見る",
+    homepageLabel: "配信チケットを申し込む（8/3〆切・¥3,700）",
+    roleTags: [
+      "#ゆかJET",
+      "吉井優花子さん本人",
+      "#龍馬くん2026",
+      "B班：坂本龍馬役",
+      "キャスティング担当",
+      "配信チケット"
+    ],
+    deadline: {
+      at: "2026-08-03T23:59:59+09:00",
+      beforeText:
+        "配信チケットの申し込みは8月3日（月）まで・視聴は8月10日（月）まで（¥3,700/本）",
+      afterText: "配信チケットの申し込みは終了。視聴は8月10日（月）まで"
+    },
+    photo: {
+      src: "/images/yukajet/2026-07-31-ryoma-gojet-castmates.jpg",
+      alt: "8枚の写真を並べたコラージュ。左側は#ゆかJETのアメリカンダイナー風セットで撮られた共演者とのツーショットや3ショットで、赤い制服に黒縁メガネの出演者が中心。右側は『かわええのう、龍馬くん』の和装・日本髪での自撮り4枚で、赤い着物姿の出演者が共演者と顔を寄せて笑顔を見せている"
+    },
+    videoGuide: {
+      url: "https://x.com/TEAMmarunage/status/2044864575804449102",
+      buttonLabel: "Xで #龍馬くん2026 B班の映像を見る",
+      alt: "舞台『かわええのう、龍馬くん』B班のプロモーション映像",
+      note: "引用元の投稿に付いている約30秒のB班プロモーション映像"
+    },
+    quotedPost: {
+      author: "TEAMマルナゲーズ",
+      handle: "@TEAMmarunage",
+      body:
+        "4月16日の舞台『かわええのう、龍馬くん』配信チケットの案内。B班のプロモーション映像が添えられています。",
+      url: "https://x.com/TEAMmarunage/status/2044864575804449102",
+      urlLabel: "引用元（#龍馬くん2026 の配信案内）を見る"
+    }
+  },
+  {
     date: "2026.7.31 22:55",
     label: "吉井優花子さん本人（@mokoopy）",
     title: "男女二役の振り幅｜龍馬とおりょう、JETと早紀",
