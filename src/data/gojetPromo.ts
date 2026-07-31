@@ -152,6 +152,47 @@ export type GojetTeamUpdate = {
 
 export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
   {
+    date: "2026.7.31 22:55",
+    label: "吉井優花子さん本人（@mokoopy）",
+    title: "男女二役の振り幅｜龍馬とおりょう、JETと早紀",
+    body:
+      "4月の『かわええのう、龍馬くん』ではB班で龍馬、C班で妻のおりょう。#ゆかJET でもB班JET、C班早紀。\n\n「やっぱり男女二役やるって楽しいなと思う 振り幅が活かせる」。そして——自信を持って言えるのは「両班観ていただきたい！😆」\n\n引用元は4月の #龍馬くん2026 配信チケット案内（TEAMマルナゲーズ）。ゆかJETの配信は8月3日〆切、8月10日まで視聴できます。\n\n写真は#ゆかJETのダイナーセットでのオフショットと、和装・舞台メイクのツーショットを並べたコラージュ。",
+    caption:
+      "(つづき) \n#龍馬くん2026 \nB班では龍馬、C班では妻のおりょう役\n\n#ゆかJET でもJET&早紀役\n\nやっぱり男女二役やるって楽しいなと思う\n振り幅が活かせる\n\n自信を持って言えるのは\n「両班観ていただきたい！😆」\n\n⬇️\n〈ゆかJET 配信チケット🎟️〉\n※8月3日〆切〜10日まで視聴可能",
+    postUrl: "https://x.com/mokoopy/status/2083189908970348909",
+    homepageUrl:
+      "https://docs.google.com/forms/d/e/1FAIpQLScsEmjjECWOVKzYuJ_93BRlS1rI8cbzcPFBb0f4mVqWNlLnuQ/viewform",
+    ctaLabel: "Xで元の投稿を見る",
+    homepageLabel: "配信チケットを申し込む（8/3〆切・¥3,700）",
+    roleTags: [
+      "#ゆかJET",
+      "吉井優花子さん本人",
+      "#龍馬くん2026",
+      "男女二役",
+      "B班：JET役",
+      "C班：早紀役",
+      "配信チケット"
+    ],
+    deadline: {
+      at: "2026-08-03T23:59:59+09:00",
+      beforeText:
+        "配信チケットの申し込みは8月3日（月）まで・視聴は8月10日（月）まで（¥3,700/本）",
+      afterText: "配信チケットの申し込みは終了。視聴は8月10日（月）まで"
+    },
+    photo: {
+      src: "/images/yukajet/2026-07-31-ryoma-gojet-dual-roles.jpg",
+      alt: "6枚の写真を並べたコラージュ。左側は#ゆかJETのアメリカンダイナー風セットで撮られた共演者とのツーショットや、3人が手で三角形をつくる集合写真。右側は『かわええのう、龍馬くん』の和装と日本髪、赤いアイラインの舞台メイクで、共演者と顔を寄せてピースサインを向けるツーショット3枚"
+    },
+    quotedPost: {
+      author: "TEAMマルナゲーズ",
+      handle: "@TEAMmarunage",
+      body:
+        "4月16日の舞台『かわええのう、龍馬くん』配信チケットの案内。三班の宣伝動画を添えて、班ごとの違いを楽しんでほしいと呼びかけています。",
+      url: "https://x.com/TEAMmarunage/status/2044864575804449102",
+      urlLabel: "引用元（#龍馬くん2026 の配信案内）を見る"
+    }
+  },
+  {
     date: "2026.7.31 21:18",
     label: "吉井優花子プロデュース公演公式（@yukako_produce）",
     title: "【配信チケットの購入は3日まで‼️】｜A・B・C班を見比べて",
