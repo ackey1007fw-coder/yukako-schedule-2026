@@ -11,6 +11,8 @@ export type DisplayGojetFeatureUpdate = GojetFeatureUpdate & {
   primaryCta?: "post" | "homepage";
 };
 
+const RYOMA_CASTMATES_20260731_POST_URL =
+  "https://x.com/mokoopy/status/2083193878006620507";
 const DUAL_ROLES_RYOMA_20260731_POST_URL =
   "https://x.com/mokoopy/status/2083189908970348909";
 const STREAMING_FINAL_CALL_20260731_POST_URL =
@@ -164,6 +166,9 @@ const decoratedSourceUpdates: DisplayGojetFeatureUpdate[] = sourceUpdates
     };
   });
 
+const ryomaCastmates20260731Update = decoratedSourceUpdates.find(
+  (update) => update.postUrl === RYOMA_CASTMATES_20260731_POST_URL
+);
 const dualRolesRyoma20260731Update = decoratedSourceUpdates.find(
   (update) => update.postUrl === DUAL_ROLES_RYOMA_20260731_POST_URL
 );
@@ -292,6 +297,7 @@ export const gojetOriginUpdate = decoratedSourceUpdates.find(
 );
 const remainingSourceUpdates = decoratedSourceUpdates.filter(
   (update) =>
+    update.postUrl !== RYOMA_CASTMATES_20260731_POST_URL &&
     update.postUrl !== DUAL_ROLES_RYOMA_20260731_POST_URL &&
     update.postUrl !== STREAMING_FINAL_CALL_20260731_POST_URL &&
     update.postUrl !== THREE_JETS_20260731_POST_URL &&
@@ -335,6 +341,16 @@ const remainingSourceUpdates = decoratedSourceUpdates.filter(
     update.postUrl !== PENLIGHT_POST_URL &&
     update.postUrl !== PRODUCE_ANNOUNCE_POST_URL
 );
+
+const featuredRyomaCastmates20260731Update:
+  | DisplayGojetFeatureUpdate
+  | undefined = ryomaCastmates20260731Update
+  ? {
+      ...ryomaCastmates20260731Update,
+      anchorId: "gojet-ryoma-castmates-2026-07-31",
+      primaryCta: "post"
+    }
+  : undefined;
 
 const featuredDualRolesRyoma20260731Update:
   | DisplayGojetFeatureUpdate
@@ -735,6 +751,7 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
       }
     : undefined;
 
+// 7/31 23:11優花子さん本人（龍馬とJET違いすぎ・龍馬くん2026のB班映像）→
 // 7/31 22:55優花子さん本人（男女二役の振り幅・龍馬くん2026との重ね合わせ）→
 // 7/31 21:18公演アカウント（配信チケットの購入は3日まで・A/B/C班見比べ）→
 // 7/31 18:45優花子さん本人（三者三様のJET・配信チケット案内）→
@@ -753,6 +770,9 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
 // 7/25 23:49優花子さん本人（残り公演の呼びかけ）→ 7/25 22:43三村すみかさん →
 // 7/25 11:31秋乃蒼依さん → 21:24青木杏奈さん → 20:40曽原加絵さん → 19:06来瞳舞夢さんの順で先頭表示する。
 const orderedGojetFeatureUpdates: DisplayGojetFeatureUpdate[] = [
+  ...(featuredRyomaCastmates20260731Update
+    ? [featuredRyomaCastmates20260731Update]
+    : []),
   ...(featuredDualRolesRyoma20260731Update
     ? [featuredDualRolesRyoma20260731Update]
     : []),
