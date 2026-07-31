@@ -152,6 +152,48 @@ export type GojetTeamUpdate = {
 
 export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
   {
+    date: "2026.7.31 21:18",
+    label: "吉井優花子プロデュース公演公式（@yukako_produce）",
+    title: "【配信チケットの購入は3日まで‼️】｜A・B・C班を見比べて",
+    body:
+      "本編は歌ダンスたっぷりの約100分。A班・B班・C班を見比べてお楽しみください、と公演アカウントから。\n\n全キャスト参加の「LIVE」は、様々な組み合わせで約20曲。\n\n購入は8月3日まで、視聴は8月10日まで。¥3,700/本です。\n\n画像はA・B・C班それぞれの集合写真を縦に並べた3枚組。",
+    caption:
+      "#ゆかJET \n【配信チケットの購入は3日まで‼️】\n\n歌ダンスたっぷりの約100分😳✨\nA.B.C班を見比べてお楽しみください👀\n\nまた、全キャスト参加の「LIVE」も、\n様々な組み合わせで約20曲をお届け🎶\n\n※8月10日まで視聴可能◎\n※¥3,700/本",
+    postUrl: "https://x.com/yukako_produce/status/2083165443876081719",
+    homepageUrl:
+      "https://docs.google.com/forms/d/e/1FAIpQLScsEmjjECWOVKzYuJ_93BRlS1rI8cbzcPFBb0f4mVqWNlLnuQ/viewform",
+    ctaLabel: "Xで元の投稿を見る",
+    homepageLabel: "配信チケットを申し込む（8/3〆切・¥3,700）",
+    roleTags: [
+      "#ゆかJET",
+      "公演アカウント",
+      "配信チケット",
+      "8月3日〆切",
+      "A班",
+      "B班",
+      "C班",
+      "全キャストLIVE"
+    ],
+    deadline: {
+      at: "2026-08-03T23:59:59+09:00",
+      beforeText:
+        "配信チケットの申し込みは8月3日（月）まで・視聴は8月10日（月）まで（¥3,700/本）",
+      afterText: "配信チケットの申し込みは終了。視聴は8月10日（月）まで"
+    },
+    photo: {
+      src: "/images/yukajet/2026-07-31-abc-teams-collage.jpg",
+      alt: "#ゆかJETのA班・B班・C班それぞれの集合写真を縦に3枚並べたコラージュ。各班ともRoute 66の看板やクラシックカーが描かれたアメリカンダイナー風のセットの前で、出演者が両手を合わせて三角形をつくるポーズを取っている。各写真の左下に「A」「B」「C」のラベルが入っている"
+    },
+    quotedPost: {
+      author: "吉井優花子プロデュース公演",
+      handle: "@yukako_produce",
+      body:
+        "7月29日の終演報告。C班大千秋楽と全キャストLIVEへの御礼と、配信チケット（8月3日〆切・8月10日まで視聴可）の案内。",
+      url: "https://x.com/yukako_produce/status/2082402006891888959",
+      urlLabel: "引用元（終演報告）を見る"
+    }
+  },
+  {
     date: "2026.7.31 18:45",
     label: "吉井優花子さん本人（@mokoopy）",
     title: "三者三様「JET」爆誕💣✨｜緻密・のび太・不器用",
