@@ -13,6 +13,8 @@ export type DisplayGojetFeatureUpdate = GojetFeatureUpdate & {
 
 const SAKI_TRIO_20260801_POST_URL =
   "https://x.com/akino_aoinari/status/2083430725815247136";
+const YUKAKO_FUCHAN_CONNECTION_20260801_POST_URL =
+  "https://x.com/mokoopy/status/2083565988352790714";
 const REHEARSAL_LOOKBACK_20260801_POST_URL =
   "https://x.com/mokoopy/status/2083394253787644060";
 const RYOMA_CASTMATES_20260731_POST_URL =
@@ -173,6 +175,9 @@ const decoratedSourceUpdates: DisplayGojetFeatureUpdate[] = sourceUpdates
 const sakiTrio20260801Update = decoratedSourceUpdates.find(
   (update) => update.postUrl === SAKI_TRIO_20260801_POST_URL
 );
+const yukakoFuchanConnection20260801Update = decoratedSourceUpdates.find(
+  (update) => update.postUrl === YUKAKO_FUCHAN_CONNECTION_20260801_POST_URL
+);
 const rehearsalLookback20260801Update = decoratedSourceUpdates.find(
   (update) => update.postUrl === REHEARSAL_LOOKBACK_20260801_POST_URL
 );
@@ -307,6 +312,7 @@ export const gojetOriginUpdate = decoratedSourceUpdates.find(
 );
 const remainingSourceUpdates = decoratedSourceUpdates.filter(
   (update) =>
+    update.postUrl !== YUKAKO_FUCHAN_CONNECTION_20260801_POST_URL &&
     update.postUrl !== SAKI_TRIO_20260801_POST_URL &&
     update.postUrl !== REHEARSAL_LOOKBACK_20260801_POST_URL &&
     update.postUrl !== RYOMA_CASTMATES_20260731_POST_URL &&
@@ -360,6 +366,16 @@ const featuredSakiTrio20260801Update:
   ? {
       ...sakiTrio20260801Update,
       anchorId: "gojet-saki-trio-2026-08-01",
+      primaryCta: "post"
+    }
+  : undefined;
+
+const featuredYukakoFuchanConnection20260801Update:
+  | DisplayGojetFeatureUpdate
+  | undefined = yukakoFuchanConnection20260801Update
+  ? {
+      ...yukakoFuchanConnection20260801Update,
+      anchorId: "gojet-yukako-fuchan-connection-2026-08-01",
       primaryCta: "post"
     }
   : undefined;
@@ -783,6 +799,7 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
       }
     : undefined;
 
+// 8/1 23:50優花子さん×中原楓歌さん（偶然のご縁・また一緒に良い仕事を）→
 // 8/1 14:52秋乃蒼依さん（早紀3人の集合セルフィー・三者三様の早紀）→
 // 8/1 12:27優花子さん本人（稽古1カ月弱の振り返り・配信は約100分）→
 // 7/31 23:11優花子さん本人（龍馬とJET違いすぎ・龍馬くん2026のB班映像）→
@@ -804,6 +821,9 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
 // 7/25 23:49優花子さん本人（残り公演の呼びかけ）→ 7/25 22:43三村すみかさん →
 // 7/25 11:31秋乃蒼依さん → 21:24青木杏奈さん → 20:40曽原加絵さん → 19:06来瞳舞夢さんの順で先頭表示する。
 const orderedGojetFeatureUpdates: DisplayGojetFeatureUpdate[] = [
+  ...(featuredYukakoFuchanConnection20260801Update
+    ? [featuredYukakoFuchanConnection20260801Update]
+    : []),
   ...(featuredSakiTrio20260801Update ? [featuredSakiTrio20260801Update] : []),
   ...(featuredRehearsalLookback20260801Update
     ? [featuredRehearsalLookback20260801Update]
