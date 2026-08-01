@@ -11,6 +11,8 @@ export type DisplayGojetFeatureUpdate = GojetFeatureUpdate & {
   primaryCta?: "post" | "homepage";
 };
 
+const SAKI_TRIO_20260801_POST_URL =
+  "https://x.com/akino_aoinari/status/2083430725815247136";
 const REHEARSAL_LOOKBACK_20260801_POST_URL =
   "https://x.com/mokoopy/status/2083394253787644060";
 const RYOMA_CASTMATES_20260731_POST_URL =
@@ -168,6 +170,9 @@ const decoratedSourceUpdates: DisplayGojetFeatureUpdate[] = sourceUpdates
     };
   });
 
+const sakiTrio20260801Update = decoratedSourceUpdates.find(
+  (update) => update.postUrl === SAKI_TRIO_20260801_POST_URL
+);
 const rehearsalLookback20260801Update = decoratedSourceUpdates.find(
   (update) => update.postUrl === REHEARSAL_LOOKBACK_20260801_POST_URL
 );
@@ -302,6 +307,7 @@ export const gojetOriginUpdate = decoratedSourceUpdates.find(
 );
 const remainingSourceUpdates = decoratedSourceUpdates.filter(
   (update) =>
+    update.postUrl !== SAKI_TRIO_20260801_POST_URL &&
     update.postUrl !== REHEARSAL_LOOKBACK_20260801_POST_URL &&
     update.postUrl !== RYOMA_CASTMATES_20260731_POST_URL &&
     update.postUrl !== DUAL_ROLES_RYOMA_20260731_POST_URL &&
@@ -347,6 +353,16 @@ const remainingSourceUpdates = decoratedSourceUpdates.filter(
     update.postUrl !== PENLIGHT_POST_URL &&
     update.postUrl !== PRODUCE_ANNOUNCE_POST_URL
 );
+
+const featuredSakiTrio20260801Update:
+  | DisplayGojetFeatureUpdate
+  | undefined = sakiTrio20260801Update
+  ? {
+      ...sakiTrio20260801Update,
+      anchorId: "gojet-saki-trio-2026-08-01",
+      primaryCta: "post"
+    }
+  : undefined;
 
 const featuredRehearsalLookback20260801Update:
   | DisplayGojetFeatureUpdate
@@ -767,6 +783,7 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
       }
     : undefined;
 
+// 8/1 14:52秋乃蒼依さん（早紀3人の集合セルフィー・三者三様の早紀）→
 // 8/1 12:27優花子さん本人（稽古1カ月弱の振り返り・配信は約100分）→
 // 7/31 23:11優花子さん本人（龍馬とJET違いすぎ・龍馬くん2026のB班映像）→
 // 7/31 22:55優花子さん本人（男女二役の振り幅・龍馬くん2026との重ね合わせ）→
@@ -787,6 +804,7 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
 // 7/25 23:49優花子さん本人（残り公演の呼びかけ）→ 7/25 22:43三村すみかさん →
 // 7/25 11:31秋乃蒼依さん → 21:24青木杏奈さん → 20:40曽原加絵さん → 19:06来瞳舞夢さんの順で先頭表示する。
 const orderedGojetFeatureUpdates: DisplayGojetFeatureUpdate[] = [
+  ...(featuredSakiTrio20260801Update ? [featuredSakiTrio20260801Update] : []),
   ...(featuredRehearsalLookback20260801Update
     ? [featuredRehearsalLookback20260801Update]
     : []),
