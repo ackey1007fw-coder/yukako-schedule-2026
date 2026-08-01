@@ -184,6 +184,47 @@ export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
     }
   },
   {
+    date: "2026.8.1 23:26",
+    label: "吉井優花子プロデュース公演（@yukako_produce）・A班",
+    title: "キャラ紹介ナレーションをチラ見せ｜まずはA班から",
+    body:
+      "「キャラ紹介ナレーションをチラ見せ👀」——三班連続の第1弾はA班❤️\n\n約2分52秒の舞台映像で、キャラクター紹介にあわせて歌・ダンス・掛け合いを少しずつ。劇場で観た方にも、配信でもう一度。\n\n配信チケットは8月3日〆切、8月10日まで視聴できます（¥3,700/本）。",
+    caption:
+      "#ゆかJET\n＼キャラ紹介ナレーションをチラ見せ👀／\n\n三班続けて投稿します！✨\nまずはA班から❤️\n\n【配信チケット🎟️】\n大好評です😳‼️\n劇場で観た方も、ぜひご覧ください🎶\n※8月3日〆切〜10日まで視聴可能✨",
+    postUrl: "https://x.com/yukako_produce/status/2083560056470323653",
+    homepageUrl:
+      "https://docs.google.com/forms/d/e/1FAIpQLScsEmjjECWOVKzYuJ_93BRlS1rI8cbzcPFBb0f4mVqWNlLnuQ/viewform",
+    ctaLabel: "Xで元の投稿を見る",
+    homepageLabel: "配信チケットを申し込む（8/3〆切・¥3,700）",
+    roleTags: [
+      "#ゆかJET",
+      "公演アカウント",
+      "A班",
+      "キャラクター紹介",
+      "舞台映像",
+      "配信チケット"
+    ],
+    video: {
+      src: "/videos/yukajet-a-team-character-intro-2026-08-01.mp4",
+      poster: "/images/yukajet/2026-08-01-a-team-character-intro-poster.jpg",
+      label: "『GO,JET!GO!GO! vol.1 Premium』A班のキャラクター紹介ナレーション映像"
+    },
+    deadline: {
+      at: "2026-08-03T23:59:59+09:00",
+      beforeText:
+        "配信チケットの申し込みは8月3日（月）まで・視聴は8月10日（月）まで（¥3,700/本）",
+      afterText: "配信チケットの申し込みは終了。視聴は8月10日（月）まで"
+    },
+    quotedPost: {
+      author: "吉井優花子プロデュース公演",
+      handle: "@yukako_produce",
+      body:
+        "前日の配信チケット案内。本編は歌・ダンスたっぷりの約100分、A・B・C班の見比べと全キャスト参加LIVE約20曲を紹介しています。",
+      url: "https://x.com/yukako_produce/status/2083165443876081719",
+      urlLabel: "引用元（配信チケット案内）を見る"
+    }
+  },
+  {
     date: "2026.8.1 14:52",
     label: "秋乃蒼依さん（@akino_aoinari）・A班早紀役",
     title: "早紀3人で🩷｜三者三様の早紀を見比べて",

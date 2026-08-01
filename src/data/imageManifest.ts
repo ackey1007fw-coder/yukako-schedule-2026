@@ -382,6 +382,7 @@ export const imageManifest = {
   "/images/yukajet/2026-07-31-ryoma-gojet-castmates.jpg": {"width":1638,"height":2048,"widths":[360,480,720,960,1280,1600,1638]},
   "/images/yukajet/2026-07-31-ryoma-gojet-dual-roles.jpg": {"width":1638,"height":2048,"widths":[360,480,720,960,1280,1600,1638]},
   "/images/yukajet/2026-07-31-three-jets-selfie.jpg": {"width":2048,"height":1539,"widths":[360,480,720,960,1280,1600,2048]},
+  "/images/yukajet/2026-08-01-a-team-character-intro-poster.jpg": {"width":1280,"height":720,"widths":[360,480,720,960,1280]},
   "/images/yukajet/2026-08-01-fuchan-nuts-popcorn.jpg": {"width":1536,"height":2048,"widths":[360,480,720,960,1280,1536]},
   "/images/yukajet/2026-08-01-saki-trio-selfie.jpg": {"width":1564,"height":1174,"widths":[360,480,720,960,1280,1564]},
   "/images/yukako-babyshark-character.jpg": {"width":1600,"height":2048,"widths":[360,480,720,960,1280,1600]},
