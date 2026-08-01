@@ -1,21 +1,40 @@
 import { useMemo, useState } from "react";
 import { ArrowDownRight, ChevronDown, ChevronUp, ExternalLink } from "lucide-react";
-import { siteUpdates, sourceLinkLabel, type SiteUpdate } from "../data/siteUpdates";
+import {
+  siteUpdates,
+  sourceLinkLabel,
+  updateTimestamp,
+  type SiteUpdate
+} from "../data/siteUpdates";
 import { getResponsiveImageProps } from "../lib/responsiveImage";
 import { SectionHeader } from "./SectionHeader";
 
 const FEATURED_COUNT = 3;
 const ALL_CATEGORIES = "すべて";
+// 最新の更新から何日前までをカードの候補にするか。
+// これを超えて古いものは、カテゴリが空いていても繰り上げない。
+const FEATURED_MAX_AGE_DAYS = 14;
+const DAY_MS = 24 * 60 * 60 * 1000;
 
 // カードは1カテゴリ1枚まで。公演期間中は #ゆかJET が上位を占め、3枚とも同じ話題に
 // なっていた。すぐ下に #ゆかJET の特集があるので、ここは横断で見せる。
+// ただし他カテゴリの更新が止まっていると、3週間前の投稿がカードに残り続けてしまう。
+// 最新から FEATURED_MAX_AGE_DAYS 以上離れた候補は繰り上げず、新しい順で埋める。
 function pickFeatured(updates: SiteUpdate[], count: number) {
   const picked: SiteUpdate[] = [];
   const usedCategories = new Set<string>();
+  const newest = updates[0] ? updateTimestamp(updates[0].date) : undefined;
+  const isFresh = (update: SiteUpdate) => {
+    if (newest === undefined) return true;
+    const timestamp = updateTimestamp(update.date);
+    if (timestamp === undefined) return true;
+    return newest - timestamp <= FEATURED_MAX_AGE_DAYS * DAY_MS;
+  };
 
   for (const update of updates) {
     if (picked.length >= count) break;
     if (usedCategories.has(update.category)) continue;
+    if (!isFresh(update)) continue;
     picked.push(update);
     usedCategories.add(update.category);
   }
