@@ -152,6 +152,35 @@ export type GojetTeamUpdate = {
 
 export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
   {
+    date: "2026.8.1 12:27",
+    label: "吉井優花子さん本人（@mokoopy）",
+    title: "稽古1カ月弱であのクオリティ｜次はもう少し長めに",
+    body:
+      "5月に出したキャスト募集の告知を引用しての振り返り。「もう懐かしいけど、まだ約1カ月前、、、」\n\n「稽古期間1カ月弱で、あそこまでのクオリティになったのはすごい」——そのうえで「次は稽古期間もう少し長めに取ろう。。💭」。プロデューサーとしての次への一手。\n\n配信は約100分。A・B・C班とLIVEを「予想を超えて楽しめます！」。購入は8月3日まで、視聴は8月10日までです。",
+    caption:
+      "もう懐かしいけど、まだ約1カ月前、、、\n稽古期間1カ月弱で、あそこまでのクオリティになったのはすごい\n\n次は稽古期間もう少し長めに取ろう。。💭\n\n⬇️#ゆかJET なんと約100分😳🎶✨\nA.B.C班&LIVE、予想を超えて楽しめます！\n配信チケットでぜひ観てほしい‼️",
+    postUrl: "https://x.com/mokoopy/status/2083394253787644060",
+    homepageUrl:
+      "https://docs.google.com/forms/d/e/1FAIpQLScsEmjjECWOVKzYuJ_93BRlS1rI8cbzcPFBb0f4mVqWNlLnuQ/viewform",
+    ctaLabel: "Xで元の投稿を見る",
+    homepageLabel: "配信チケットを申し込む（8/3〆切・¥3,700）",
+    roleTags: [
+      "#ゆかJET",
+      "吉井優花子さん本人",
+      "振り返り",
+      "プロデューサー",
+      "稽古期間",
+      "配信チケット",
+      "8月3日〆切"
+    ],
+    deadline: {
+      at: "2026-08-03T23:59:59+09:00",
+      beforeText:
+        "配信チケットの申し込みは8月3日（月）まで・視聴は8月10日（月）まで（¥3,700/本）",
+      afterText: "配信チケットの申し込みは終了。視聴は8月10日（月）まで"
+    }
+  },
+  {
     date: "2026.7.31 23:11",
     label: "吉井優花子さん本人（@mokoopy）",
     title: "「龍馬とJET違いすぎ〜楽しい〜」｜大切な舞台が一つまた一つ",
