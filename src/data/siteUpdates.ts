@@ -28,6 +28,22 @@ const parseDate = (date: string) => {
   return (((year * 100 + month) * 100 + day) * 100 + hour) * 100 + minute;
 };
 
+// 並び替え用の parseDate と違い、日数差を測れる実時刻（ミリ秒）を返す。
+// "2026.6" のように日がない表記はその月の1日として扱い、解釈できないものは undefined。
+export const updateTimestamp = (date: string): number | undefined => {
+  const [datePart = "", timePart = ""] = date.split(" ");
+  const [year, month, day] = datePart.split(".").map(Number);
+  if (!year || !month) return undefined;
+  const timeMatch = timePart.match(/^(\d{1,2}):(\d{2})$/);
+  return Date.UTC(
+    year,
+    month - 1,
+    day || 1,
+    timeMatch ? Number(timeMatch[1]) : 0,
+    timeMatch ? Number(timeMatch[2]) : 0
+  );
+};
+
 const normalizeUrl = (url: string) => url.split("?")[0].replace(/\/$/, "");
 
 const sourcePlatform = (url: string) => {
