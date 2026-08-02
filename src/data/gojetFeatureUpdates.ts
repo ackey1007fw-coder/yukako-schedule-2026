@@ -11,6 +11,8 @@ export type DisplayGojetFeatureUpdate = GojetFeatureUpdate & {
   primaryCta?: "post" | "homepage";
 };
 
+const C_TEAM_CAST_REPOST_20260802_POST_URL =
+  "https://x.com/yukako_produce/status/2083763241877217706";
 const SAKI_TRIO_20260801_POST_URL =
   "https://x.com/akino_aoinari/status/2083430725815247136";
 const YUKAKO_FUCHAN_CONNECTION_20260801_POST_URL =
@@ -181,6 +183,9 @@ const decoratedSourceUpdates: DisplayGojetFeatureUpdate[] = sourceUpdates
 const sakiTrio20260801Update = decoratedSourceUpdates.find(
   (update) => update.postUrl === SAKI_TRIO_20260801_POST_URL
 );
+const cTeamCastRepost20260802Update = decoratedSourceUpdates.find(
+  (update) => update.postUrl === C_TEAM_CAST_REPOST_20260802_POST_URL
+);
 const yukakoFuchanConnection20260801Update = decoratedSourceUpdates.find(
   (update) => update.postUrl === YUKAKO_FUCHAN_CONNECTION_20260801_POST_URL
 );
@@ -327,6 +332,7 @@ export const gojetOriginUpdate = decoratedSourceUpdates.find(
 );
 const remainingSourceUpdates = decoratedSourceUpdates.filter(
   (update) =>
+    update.postUrl !== C_TEAM_CAST_REPOST_20260802_POST_URL &&
     update.postUrl !== YUKAKO_FUCHAN_CONNECTION_20260801_POST_URL &&
     update.postUrl !== A_TEAM_CHARACTER_INTRO_20260801_POST_URL &&
     update.postUrl !== B_TEAM_CHARACTER_INTRO_20260801_POST_URL &&
@@ -377,6 +383,16 @@ const remainingSourceUpdates = decoratedSourceUpdates.filter(
     update.postUrl !== PENLIGHT_POST_URL &&
     update.postUrl !== PRODUCE_ANNOUNCE_POST_URL
 );
+
+const featuredCTeamCastRepost20260802Update:
+  | DisplayGojetFeatureUpdate
+  | undefined = cTeamCastRepost20260802Update
+  ? {
+      ...cTeamCastRepost20260802Update,
+      anchorId: "gojet-c-team-cast-repost-2026-08-02",
+      primaryCta: "homepage"
+    }
+  : undefined;
 
 const featuredSakiTrio20260801Update:
   | DisplayGojetFeatureUpdate
@@ -847,6 +863,7 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
       }
     : undefined;
 
+// 8/2 12:54公演アカウント（消えていたC班キャスト紹介を再投稿）→
 // 8/1 23:50優花子さん×中原楓歌さん（偶然のご縁・また一緒に良い仕事を）→
 // 8/1 23:33公演アカウント（三班連続のラスト・C班キャラクター紹介映像）→
 // 8/1 23:30公演アカウント（女性キャストのみのB班キャラクター紹介映像）→
@@ -872,6 +889,9 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
 // 7/25 23:49優花子さん本人（残り公演の呼びかけ）→ 7/25 22:43三村すみかさん →
 // 7/25 11:31秋乃蒼依さん → 21:24青木杏奈さん → 20:40曽原加絵さん → 19:06来瞳舞夢さんの順で先頭表示する。
 const orderedGojetFeatureUpdates: DisplayGojetFeatureUpdate[] = [
+  ...(featuredCTeamCastRepost20260802Update
+    ? [featuredCTeamCastRepost20260802Update]
+    : []),
   ...(featuredYukakoFuchanConnection20260801Update
     ? [featuredYukakoFuchanConnection20260801Update]
     : []),
