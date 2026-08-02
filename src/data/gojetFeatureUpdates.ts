@@ -39,6 +39,8 @@ const B_TEAM_CHARACTER_INTRO_20260801_POST_URL =
   "https://x.com/yukako_produce/status/2083560994169889115";
 const C_TEAM_CHARACTER_INTRO_20260801_POST_URL =
   "https://x.com/yukako_produce/status/2083561783437279522";
+const YUKAKO_A_TEAM_CHARACTER_INTRO_QUOTE_20260802_POST_URL =
+  "https://x.com/mokoopy/status/2083896120812720278";
 const REHEARSAL_LOOKBACK_20260801_POST_URL =
   "https://x.com/mokoopy/status/2083394253787644060";
 const RYOMA_CASTMATES_20260731_POST_URL =
@@ -479,6 +481,44 @@ const featuredYukakoCTeamCastQuote20260802Update:
       },
       anchorId: "gojet-yukako-c-team-cast-quote-2026-08-02",
       primaryCta: "homepage"
+    }
+  : undefined;
+
+const featuredYukakoATeamCharacterIntroQuote20260802Update:
+  | DisplayGojetFeatureUpdate
+  | undefined = aTeamCharacterIntro20260801Update
+  ? {
+      ...aTeamCharacterIntro20260801Update,
+      date: "2026.8.2 21:42",
+      label: "吉井優花子さん（@mokoopy）・A班",
+      title:
+        "マスターはいじりようなくて💭笑｜Aガールズのキャッキャッがかわいい",
+      body:
+        "「A班のマスターは…いじりようなくて💭笑」「Aガールズのキャッキャッがかわいい🙂‍↕️」——優花子さんのひと言と一緒に見る、A班キャラ紹介ナレーション。\n\n約2分52秒の舞台映像には、A班の明るい歌・ダンス・掛け合いがたっぷり。落ち着いたマスターと、にぎやかなAガールズの空気にも注目です。配信チケットは8月3日〆切、視聴は8月10日まで。",
+      caption:
+        "#ゆかJET キャラ紹介を公開❣️\n\nA班のマスターは…いじりようなくて💭笑\n\nAガールズのキャッキャッがかわいい🙂‍↕️",
+      postUrl: YUKAKO_A_TEAM_CHARACTER_INTRO_QUOTE_20260802_POST_URL,
+      ctaLabel: "優花子さんのX投稿を見る",
+      roleTags: [
+        "#ゆかJET",
+        "吉井優花子さん",
+        "A班",
+        "キャラ紹介ナレーション",
+        "マスター",
+        "Aガールズ",
+        "配信チケット"
+      ],
+      quotedPost: {
+        author: "吉井優花子プロデュース公演",
+        handle: "@yukako_produce",
+        body:
+          "三班連続の第1弾、A班のキャラクター紹介ナレーション映像。約2分52秒の本番映像で、役柄や歌・ダンス・掛け合いを紹介しています。",
+        url: A_TEAM_CHARACTER_INTRO_20260801_POST_URL,
+        urlLabel: "引用元のA班キャラ紹介を見る"
+      },
+      anchorId: "gojet-yukako-a-team-character-intro-quote-2026-08-02",
+      primaryCta: "homepage",
+      hideHomepageAfterDeadline: true
     }
   : undefined;
 
@@ -998,6 +1038,7 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
     : undefined;
 
 // 8/3 0:53優花子さん本人（千秋楽LIVEダイジェストを引用・配信チケット最終案内）→
+// 8/2 21:42優花子さん本人（A班キャラ紹介ナレーションを引用・Aガールズの掛け合い）→
 // 8/2 21:39優花子さん本人（B班キャラ紹介ナレーションを引用・マスターと大地へのツッコミ）→
 // 8/2 21:35優花子さん本人（C班紹介動画を引用・配信チケット最終案内）→
 // 8/2 12:54公演アカウント（消えていたC班キャスト紹介を再投稿）→
@@ -1027,6 +1068,9 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
 // 7/25 11:31秋乃蒼依さん → 21:24青木杏奈さん → 20:40曽原加絵さん → 19:06来瞳舞夢さんの順で先頭表示する。
 const orderedGojetFeatureUpdates: DisplayGojetFeatureUpdate[] = [
   featuredYukakoFinalLiveQuote20260803Update,
+  ...(featuredYukakoATeamCharacterIntroQuote20260802Update
+    ? [featuredYukakoATeamCharacterIntroQuote20260802Update]
+    : []),
   ...(featuredYukakoBTeamCharacterIntroQuote20260802Update
     ? [featuredYukakoBTeamCharacterIntroQuote20260802Update]
     : []),
