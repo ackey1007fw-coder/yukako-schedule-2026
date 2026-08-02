@@ -759,6 +759,23 @@ function FeatureUpdateCard({
           <source src={update.video.src} type="video/mp4" />
         </video>
       )}
+      {update.embeddedVideo && (
+        <div className="mt-4 overflow-hidden border border-white/10 bg-black">
+          <iframe
+            src={update.embeddedVideo.src}
+            title={update.embeddedVideo.label}
+            loading="lazy"
+            allow="autoplay; encrypted-media"
+            allowFullScreen
+            className="aspect-video w-full"
+          />
+          {update.embeddedVideo.note && (
+            <p className="border-t border-white/10 px-3 py-2 text-xs leading-5 text-white/60">
+              {update.embeddedVideo.note}
+            </p>
+          )}
+        </div>
+      )}
       {update.deadline && (
         <p className="mt-4 inline-flex w-fit items-center gap-2 border border-champagne/50 bg-champagne/10 px-3 py-2 text-xs font-black text-champagne">
           <Clock3 className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
