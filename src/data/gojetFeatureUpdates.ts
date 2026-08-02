@@ -9,8 +9,20 @@ export type DisplayGojetFeatureUpdate = GojetFeatureUpdate & {
   anchorId?: string;
   // 記事ごとに、公演情報と元投稿のどちらを主CTAにするか指定する
   primaryCta?: "post" | "homepage";
+  // Google Driveなど、共有元のプレーヤーをカード内に埋め込む場合に使用する。
+  embeddedVideo?: {
+    src: string;
+    label: string;
+    note?: string;
+  };
+  // 申込フォームなど、期限後に案内すべきでないホームページCTAを非表示にする。
+  hideHomepageAfterDeadline?: boolean;
 };
 
+const YUKAKO_FINAL_LIVE_QUOTE_20260803_POST_URL =
+  "https://x.com/mokoopy/status/2083944200119476437";
+const FINAL_LIVE_20260803_POST_URL =
+  "https://x.com/yukako_produce/status/2083938076452434371";
 const C_TEAM_CAST_REPOST_20260802_POST_URL =
   "https://x.com/yukako_produce/status/2083763241877217706";
 const YUKAKO_C_TEAM_CAST_QUOTE_20260802_POST_URL =
@@ -387,6 +399,53 @@ const remainingSourceUpdates = decoratedSourceUpdates.filter(
     update.postUrl !== PENLIGHT_POST_URL &&
     update.postUrl !== PRODUCE_ANNOUNCE_POST_URL
 );
+
+const featuredYukakoFinalLiveQuote20260803Update: DisplayGojetFeatureUpdate = {
+  date: "2026.8.3 0:53",
+  label: "吉井優花子さん（@mokoopy）・千秋楽LIVE",
+  title: "激熱の千秋楽LIVE｜オリジナル楽曲を全キャストで",
+  body:
+    "「#ゆかJET 激熱”LIVE”観てほしい👀❤️‍🔥」——全キャストで届けた千秋楽LIVEのダイジェストが公開されました。\n\nオリジナル楽曲を、さまざまな組み合わせで。ゆかJETだけの美里とメグの曲も。お客様もキャストも一緒に楽しめるよう、優花子さんが企画・構成をものすごく考えたLIVEです。\n\n約2分18秒の映像では、カラフルな衣装と赤×白のダイナーセットで、歌とダンスを次々に。配信チケットは8月3日〆切、視聴は8月10日まで。",
+  caption:
+    "#ゆかJET 激熱”LIVE”観てほしい👀❤️‍🔥\n\n色々なオリジナル楽曲を、様々な組み合わせでお届けしています‼️\n\nお客様もキャストも楽しめるように\n諸々ものすごく考えました💭\nたくさんの方に楽しんでほしいな🥹♪\n\n【配信チケット🎟️】\n※8月3日〆切〜10日まで視聴可能◎",
+  postUrl: YUKAKO_FINAL_LIVE_QUOTE_20260803_POST_URL,
+  homepageUrl:
+    "https://docs.google.com/forms/d/e/1FAIpQLScsEmjjECWOVKzYuJ_93BRlS1rI8cbzcPFBb0f4mVqWNlLnuQ/viewform",
+  ctaLabel: "優花子さんのX投稿を見る",
+  homepageLabel: "配信チケットを申し込む（8/3〆切・¥3,700）",
+  roleTags: [
+    "#ゆかJET",
+    "吉井優花子さん",
+    "千秋楽LIVE",
+    "全キャスト",
+    "オリジナル楽曲",
+    "美里とメグ",
+    "配信チケット"
+  ],
+  embeddedVideo: {
+    src: "https://drive.google.com/file/d/1Gq7dSABc559mD_tpibBMLIwih6pkxg1I/preview",
+    label:
+      "『GO,JET!GO!GO! vol.1 Premium』全キャストによる千秋楽LIVEダイジェスト（約2分18秒・音声あり）",
+    note: "再生できない場合は、本人投稿または引用元投稿からご覧ください。"
+  },
+  deadline: {
+    at: "2026-08-03T23:59:59+09:00",
+    beforeText:
+      "配信チケットの申し込みは8月3日（月）まで・視聴は8月10日（月）まで（¥3,700/本）",
+    afterText: "配信チケットの申し込みは終了。視聴は8月10日（月）まで"
+  },
+  quotedPost: {
+    author: "吉井優花子プロデュース公演",
+    handle: "@yukako_produce",
+    body:
+      "#ゆかJET\n【千秋楽LIVE】🪩✨\n\nオリジナル楽曲が盛りだくさん‼️\nゆかJETだけの美里とメグの曲も…👀✨\n\n映像でもたっぷり楽しめますので\nぜひ”配信チケット”でご覧ください😊🎶",
+    url: FINAL_LIVE_20260803_POST_URL,
+    urlLabel: "引用元の千秋楽LIVE投稿を見る"
+  },
+  anchorId: "gojet-yukako-final-live-quote-2026-08-03",
+  primaryCta: "homepage",
+  hideHomepageAfterDeadline: true
+};
 
 const featuredYukakoCTeamCastQuote20260802Update:
   | DisplayGojetFeatureUpdate
@@ -938,6 +997,7 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
       }
     : undefined;
 
+// 8/3 0:53優花子さん本人（千秋楽LIVEダイジェストを引用・配信チケット最終案内）→
 // 8/2 21:39優花子さん本人（B班キャラ紹介ナレーションを引用・マスターと大地へのツッコミ）→
 // 8/2 21:35優花子さん本人（C班紹介動画を引用・配信チケット最終案内）→
 // 8/2 12:54公演アカウント（消えていたC班キャスト紹介を再投稿）→
@@ -966,6 +1026,7 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
 // 7/25 23:49優花子さん本人（残り公演の呼びかけ）→ 7/25 22:43三村すみかさん →
 // 7/25 11:31秋乃蒼依さん → 21:24青木杏奈さん → 20:40曽原加絵さん → 19:06来瞳舞夢さんの順で先頭表示する。
 const orderedGojetFeatureUpdates: DisplayGojetFeatureUpdate[] = [
+  featuredYukakoFinalLiveQuote20260803Update,
   ...(featuredYukakoBTeamCharacterIntroQuote20260802Update
     ? [featuredYukakoBTeamCharacterIntroQuote20260802Update]
     : []),
