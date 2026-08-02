@@ -517,7 +517,8 @@ const featuredYukakoATeamCharacterIntroQuote20260802Update:
         urlLabel: "引用元のA班キャラ紹介を見る"
       },
       anchorId: "gojet-yukako-a-team-character-intro-quote-2026-08-02",
-      primaryCta: "homepage"
+      primaryCta: "homepage",
+      hideHomepageAfterDeadline: true
     }
   : undefined;
 
