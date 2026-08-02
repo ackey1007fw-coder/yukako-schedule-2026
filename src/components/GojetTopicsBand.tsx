@@ -1,10 +1,12 @@
 import type { ReactNode } from "react";
 import { audienceReports } from "../data/audienceReports";
+import { GojetFinaleReportSection } from "./GojetFinaleReportSection";
 
 // #ゆかJET のトピック（出演者メッセージ・稽古オフショット・応援メニュー・観劇レポート）は
 // もともと背景も余白もばらばらの独立セクションで、同じ特集に見えなかった。
 // 1本の帯にまとめて、先頭に行き先の一覧を置く。
 const topics = [
+  { href: "#gojet-finale-report", label: "公演完走レポート" },
   { href: "#gojet-shiina-message", label: "出演者メッセージ" },
   { href: "#gojet-cast-voice", label: "キャストの声" },
   { href: "#gojet-hair-update", label: "稽古・オフショット" },
@@ -47,6 +49,7 @@ export function GojetTopicsBand({ children }: { children: ReactNode }) {
           </ul>
         </nav>
       </div>
+      <GojetFinaleReportSection />
       {children}
     </div>
   );
