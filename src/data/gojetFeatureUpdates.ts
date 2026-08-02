@@ -13,6 +13,8 @@ export type DisplayGojetFeatureUpdate = GojetFeatureUpdate & {
 
 const C_TEAM_CAST_REPOST_20260802_POST_URL =
   "https://x.com/yukako_produce/status/2083763241877217706";
+const YUKAKO_C_TEAM_CAST_QUOTE_20260802_POST_URL =
+  "https://x.com/mokoopy/status/2083894429962977371";
 const SAKI_TRIO_20260801_POST_URL =
   "https://x.com/akino_aoinari/status/2083430725815247136";
 const YUKAKO_FUCHAN_CONNECTION_20260801_POST_URL =
@@ -383,6 +385,41 @@ const remainingSourceUpdates = decoratedSourceUpdates.filter(
     update.postUrl !== PENLIGHT_POST_URL &&
     update.postUrl !== PRODUCE_ANNOUNCE_POST_URL
 );
+
+const featuredYukakoCTeamCastQuote20260802Update:
+  | DisplayGojetFeatureUpdate
+  | undefined = cTeamCastRepost20260802Update
+  ? {
+      ...cTeamCastRepost20260802Update,
+      date: "2026.8.2 21:35",
+      label: "吉井優花子さん（@mokoopy）・C班",
+      title: "C班紹介動画をもう一度｜配信チケットは8月3日まで",
+      body:
+        "「#ゆかJET C班紹介動画‼️(なぜか消えたよ👻)」——優花子さん本人から、C班の魅力たっぷりなお芝居を配信で、と改めて案内。\n\n約2分54秒の紹介動画で、相関図、キャストの表情、稽古や本番の熱をひと足先に。配信チケットは8月3日〆切、視聴は8月10日まで。",
+      caption:
+        "#ゆかJET\nC班紹介動画‼️(なぜか消えたよ👻)\n\nC班の魅力たっぷりなお芝居は\nぜひ『配信チケット』でご覧ください✨\n\n⬇️\n【配信チケット🎟️】\n※約100分のラブコメ×ミュージカル♪\n※8月3日〆切〜10日まで視聴可能◎",
+      postUrl: YUKAKO_C_TEAM_CAST_QUOTE_20260802_POST_URL,
+      ctaLabel: "優花子さんのX投稿を見る",
+      roleTags: [
+        "#ゆかJET",
+        "吉井優花子さん",
+        "C班",
+        "キャスト紹介",
+        "ラブコメ×ミュージカル",
+        "配信チケット"
+      ],
+      quotedPost: {
+        author: "吉井優花子プロデュース公演",
+        handle: "@yukako_produce",
+        body:
+          "「なぜか消えているC班の動画。。。幽霊ガールズの仕業👻⁉️」——消えていたC班キャスト紹介を再投稿。A班・B班も遡って見られます。",
+        url: C_TEAM_CAST_REPOST_20260802_POST_URL,
+        urlLabel: "引用元のC班キャスト紹介を見る"
+      },
+      anchorId: "gojet-yukako-c-team-cast-quote-2026-08-02",
+      primaryCta: "homepage"
+    }
+  : undefined;
 
 const featuredCTeamCastRepost20260802Update:
   | DisplayGojetFeatureUpdate
@@ -863,6 +900,7 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
       }
     : undefined;
 
+// 8/2 21:35優花子さん本人（C班紹介動画を引用・配信チケット最終案内）→
 // 8/2 12:54公演アカウント（消えていたC班キャスト紹介を再投稿）→
 // 8/1 23:50優花子さん×中原楓歌さん（偶然のご縁・また一緒に良い仕事を）→
 // 8/1 23:33公演アカウント（三班連続のラスト・C班キャラクター紹介映像）→
@@ -889,6 +927,9 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
 // 7/25 23:49優花子さん本人（残り公演の呼びかけ）→ 7/25 22:43三村すみかさん →
 // 7/25 11:31秋乃蒼依さん → 21:24青木杏奈さん → 20:40曽原加絵さん → 19:06来瞳舞夢さんの順で先頭表示する。
 const orderedGojetFeatureUpdates: DisplayGojetFeatureUpdate[] = [
+  ...(featuredYukakoCTeamCastQuote20260802Update
+    ? [featuredYukakoCTeamCastQuote20260802Update]
+    : []),
   ...(featuredCTeamCastRepost20260802Update
     ? [featuredCTeamCastRepost20260802Update]
     : []),
