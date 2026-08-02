@@ -15,6 +15,8 @@ const C_TEAM_CAST_REPOST_20260802_POST_URL =
   "https://x.com/yukako_produce/status/2083763241877217706";
 const YUKAKO_C_TEAM_CAST_QUOTE_20260802_POST_URL =
   "https://x.com/mokoopy/status/2083894429962977371";
+const YUKAKO_B_TEAM_CHARACTER_INTRO_QUOTE_20260802_POST_URL =
+  "https://x.com/mokoopy/status/2083895403389555175";
 const SAKI_TRIO_20260801_POST_URL =
   "https://x.com/akino_aoinari/status/2083430725815247136";
 const YUKAKO_FUCHAN_CONNECTION_20260801_POST_URL =
@@ -417,6 +419,42 @@ const featuredYukakoCTeamCastQuote20260802Update:
         urlLabel: "引用元のC班キャスト紹介を見る"
       },
       anchorId: "gojet-yukako-c-team-cast-quote-2026-08-02",
+      primaryCta: "homepage"
+    }
+  : undefined;
+
+const featuredYukakoBTeamCharacterIntroQuote20260802Update:
+  | DisplayGojetFeatureUpdate
+  | undefined = bTeamCharacterIntro20260801Update
+  ? {
+      ...bTeamCharacterIntro20260801Update,
+      date: "2026.8.2 21:39",
+      label: "吉井優花子さん（@mokoopy）・B班",
+      title: "マスターナレは･･･ちっちゃい😂｜あ、大地も🫶笑",
+      body:
+        "「B班のマスターナレは･･･ちっちゃい😂 あ、大地も🫶笑」——優花子さんのツッコミと一緒に見る、B班キャラ紹介ナレーション。\n\n約3分01秒の舞台映像には、女性キャストだけで作り上げたB班の歌・ダンス・掛け合いがたっぷり。マスターと大地の登場にも注目です。配信チケットは8月3日〆切、視聴は8月10日まで。",
+      caption:
+        "#ゆかJET 紹介ナレーション公開✨\n\nB班のマスターナレは･･･ちっちゃい😂\n\nあ、大地も🫶笑",
+      postUrl: YUKAKO_B_TEAM_CHARACTER_INTRO_QUOTE_20260802_POST_URL,
+      ctaLabel: "優花子さんのX投稿を見る",
+      roleTags: [
+        "#ゆかJET",
+        "吉井優花子さん",
+        "B班",
+        "キャラ紹介ナレーション",
+        "マスター",
+        "大地",
+        "配信チケット"
+      ],
+      quotedPost: {
+        author: "吉井優花子プロデュース公演",
+        handle: "@yukako_produce",
+        body:
+          "三班連続の第2弾、女性キャストのみのB班キャラクター紹介ナレーション映像。約3分01秒の本番映像で、役柄や歌・ダンス・掛け合いを紹介しています。",
+        url: B_TEAM_CHARACTER_INTRO_20260801_POST_URL,
+        urlLabel: "引用元のB班キャラ紹介を見る"
+      },
+      anchorId: "gojet-yukako-b-team-character-intro-quote-2026-08-02",
       primaryCta: "homepage"
     }
   : undefined;
@@ -900,6 +938,7 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
       }
     : undefined;
 
+// 8/2 21:39優花子さん本人（B班キャラ紹介ナレーションを引用・マスターと大地へのツッコミ）→
 // 8/2 21:35優花子さん本人（C班紹介動画を引用・配信チケット最終案内）→
 // 8/2 12:54公演アカウント（消えていたC班キャスト紹介を再投稿）→
 // 8/1 23:50優花子さん×中原楓歌さん（偶然のご縁・また一緒に良い仕事を）→
@@ -927,6 +966,9 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
 // 7/25 23:49優花子さん本人（残り公演の呼びかけ）→ 7/25 22:43三村すみかさん →
 // 7/25 11:31秋乃蒼依さん → 21:24青木杏奈さん → 20:40曽原加絵さん → 19:06来瞳舞夢さんの順で先頭表示する。
 const orderedGojetFeatureUpdates: DisplayGojetFeatureUpdate[] = [
+  ...(featuredYukakoBTeamCharacterIntroQuote20260802Update
+    ? [featuredYukakoBTeamCharacterIntroQuote20260802Update]
+    : []),
   ...(featuredYukakoCTeamCastQuote20260802Update
     ? [featuredYukakoCTeamCastQuote20260802Update]
     : []),
