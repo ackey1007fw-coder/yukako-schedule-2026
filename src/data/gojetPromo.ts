@@ -152,6 +152,48 @@ export type GojetTeamUpdate = {
 
 export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
   {
+    date: "2026.8.2 12:54",
+    label: "吉井優花子プロデュース公演（@yukako_produce）・C班",
+    title: "消えていたC班キャスト紹介を再投稿｜幽霊ガールズの仕業？",
+    body:
+      "「なぜか消えているC班の動画。。。幽霊ガールズの仕業👻⁉️」——C班キャスト紹介が、このタイミングで再登場✨\n\n相関図から一人ずつの紹介、稽古や本番の映像までを約2分54秒に凝縮。A班・B班の紹介も遡って楽しめます。\n\n配信チケットは8月3日〆切、8月10日まで視聴できます（¥3,700/本）。",
+    caption:
+      "【#ゆかJET C班キャスト紹介🎙️】\n\nなぜか消えているC班の動画。。。\n幽霊ガールズの仕業👻⁉️\n\nせっかくなのでこのタイミングで再投稿✨\nA.B班も遡ってみてください♪\n\n＼🎟️『配信チケット』大好評販売中／\n新たなGO,JET!ここにあり❤️‍🔥\n10日まで視聴可能◎\n⬇️",
+    postUrl: "https://x.com/yukako_produce/status/2083763241877217706",
+    homepageUrl:
+      "https://docs.google.com/forms/d/e/1FAIpQLScsEmjjECWOVKzYuJ_93BRlS1rI8cbzcPFBb0f4mVqWNlLnuQ/viewform",
+    ctaLabel: "Xで再投稿を見る",
+    homepageLabel: "配信チケットを申し込む（8/3〆切・¥3,700）",
+    roleTags: [
+      "#ゆかJET",
+      "公演アカウント",
+      "C班",
+      "キャスト紹介",
+      "幽霊ガールズ",
+      "再投稿",
+      "配信チケット"
+    ],
+    video: {
+      src: "/videos/yukajet-cban-cast-2026-07-13.mp4",
+      poster: "/images/yukako-yukajet-cban-cast-video-poster-2026-07-13.jpg",
+      label: "#ゆかJET C班キャスト紹介動画（約2分54秒・音声あり）"
+    },
+    deadline: {
+      at: "2026-08-03T23:59:59+09:00",
+      beforeText:
+        "配信チケットの申し込みは8月3日（月）まで・視聴は8月10日（月）まで（¥3,700/本）",
+      afterText: "配信チケットの申し込みは終了。視聴は8月10日（月）まで"
+    },
+    quotedPost: {
+      author: "吉井優花子プロデュース公演",
+      handle: "@yukako_produce",
+      body:
+        "7月12日に公開されたA班キャスト紹介動画。今回のC班再投稿は、このA班投稿を引用し、A班・B班の紹介もあわせて遡って見るよう呼びかけています。",
+      url: "https://x.com/yukako_produce/status/2076313322421690497",
+      urlLabel: "引用元（A班キャスト紹介）を見る"
+    }
+  },
+  {
     date: "2026.8.1 23:50",
     label: "吉井優花子さん（@mokoopy）× 中原楓歌さん（@fuchan_O315）",
     title: "偶然のご縁から、また一緒に良い仕事を",
