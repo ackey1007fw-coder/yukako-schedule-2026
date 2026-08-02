@@ -98,8 +98,20 @@ function LinkedBodyText({ text }: { text: string }) {
   );
 }
 
-function UpdateLinkButtons({ update }: { update: DisplayGojetFeatureUpdate }) {
-  const homepageIsPrimary = update.primaryCta === "homepage";
+function UpdateLinkButtons({
+  update,
+  currentTime
+}: {
+  update: DisplayGojetFeatureUpdate;
+  currentTime: Date;
+}) {
+  const hideHomepage = Boolean(
+    update.hideHomepageAfterDeadline &&
+      update.deadline &&
+      isPastDeadline(update.deadline.at, currentTime)
+  );
+  const homepageIsPrimary =
+    update.primaryCta === "homepage" && !hideHomepage;
   const postIsInternal = isInternalHref(update.postUrl);
   const homepageIsInternal = isInternalHref(update.homepageUrl);
   const postButton = (
@@ -119,7 +131,7 @@ function UpdateLinkButtons({ update }: { update: DisplayGojetFeatureUpdate }) {
       {update.ctaLabel}
     </a>
   );
-  const homepageButton = (
+  const homepageButton = hideHomepage ? null : (
     <a
       href={update.homepageUrl}
       {...(homepageIsInternal
@@ -784,7 +796,7 @@ function FeatureUpdateCard({
             : update.deadline.beforeText}
         </p>
       )}
-        <UpdateLinkButtons update={update} />
+        <UpdateLinkButtons update={update} currentTime={currentTime} />
         <RelatedGojetLinks current={update} />
       </div>
     </div>
