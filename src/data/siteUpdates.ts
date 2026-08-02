@@ -56,6 +56,21 @@ const sourcePlatform = (url: string) => {
 // 専用セクションを持つ単発トピック。本文は各セクションが持つため、ここは見出しと導線のみ。
 const standaloneUpdates: SiteUpdate[] = [
   {
+    id: "gojet-finale-report-2026-08-02",
+    date: "2026.8.2",
+    category: "#ゆかJET",
+    title: "A・B・C班、そしてLIVEまで——初プロデュース #ゆかJET 完走",
+    summary:
+      "全班と千秋楽LIVEまで無事に完走。3班の集合写真と3本の動画、約20曲を披露したLIVEの熱気、配信情報をまとめました。",
+    image: {
+      src: "https://drive.google.com/thumbnail?id=1kza1J9Z-NjoELY_7niOROg9FoLCHi2SJ&sz=w1600",
+      alt: "舞台セットの前でポーズをとる#ゆかJET C班キャストの集合写真"
+    },
+    sourceUrl:
+      "https://www.instagram.com/p/DbiZ7_MlKIt/?img_index=5&igsh=MW91b25wN2o3dW92Yg==",
+    anchor: "#gojet-finale-report"
+  },
+  {
     id: "miss-grand-japan-management-2026-06-07",
     date: "2026.6.7",
     category: "Miss Grand Japan",
