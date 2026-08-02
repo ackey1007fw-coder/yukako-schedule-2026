@@ -15,6 +15,8 @@ export type DisplayGojetFeatureUpdate = GojetFeatureUpdate & {
     label: string;
     note?: string;
   };
+  // 申込フォームなど、期限後に案内すべきでないホームページCTAを非表示にする。
+  hideHomepageAfterDeadline?: boolean;
 };
 
 const YUKAKO_FINAL_LIVE_QUOTE_20260803_POST_URL =
@@ -441,7 +443,8 @@ const featuredYukakoFinalLiveQuote20260803Update: DisplayGojetFeatureUpdate = {
     urlLabel: "引用元の千秋楽LIVE投稿を見る"
   },
   anchorId: "gojet-yukako-final-live-quote-2026-08-03",
-  primaryCta: "homepage"
+  primaryCta: "homepage",
+  hideHomepageAfterDeadline: true
 };
 
 const featuredYukakoCTeamCastQuote20260802Update:
