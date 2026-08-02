@@ -17,6 +17,8 @@ const YUKAKO_FUCHAN_CONNECTION_20260801_POST_URL =
   "https://x.com/mokoopy/status/2083565988352790714";
 const A_TEAM_CHARACTER_INTRO_20260801_POST_URL =
   "https://x.com/yukako_produce/status/2083560056470323653";
+const B_TEAM_CHARACTER_INTRO_20260801_POST_URL =
+  "https://x.com/yukako_produce/status/2083560994169889115";
 const REHEARSAL_LOOKBACK_20260801_POST_URL =
   "https://x.com/mokoopy/status/2083394253787644060";
 const RYOMA_CASTMATES_20260731_POST_URL =
@@ -183,6 +185,9 @@ const yukakoFuchanConnection20260801Update = decoratedSourceUpdates.find(
 const aTeamCharacterIntro20260801Update = decoratedSourceUpdates.find(
   (update) => update.postUrl === A_TEAM_CHARACTER_INTRO_20260801_POST_URL
 );
+const bTeamCharacterIntro20260801Update = decoratedSourceUpdates.find(
+  (update) => update.postUrl === B_TEAM_CHARACTER_INTRO_20260801_POST_URL
+);
 const rehearsalLookback20260801Update = decoratedSourceUpdates.find(
   (update) => update.postUrl === REHEARSAL_LOOKBACK_20260801_POST_URL
 );
@@ -319,6 +324,7 @@ const remainingSourceUpdates = decoratedSourceUpdates.filter(
   (update) =>
     update.postUrl !== YUKAKO_FUCHAN_CONNECTION_20260801_POST_URL &&
     update.postUrl !== A_TEAM_CHARACTER_INTRO_20260801_POST_URL &&
+    update.postUrl !== B_TEAM_CHARACTER_INTRO_20260801_POST_URL &&
     update.postUrl !== SAKI_TRIO_20260801_POST_URL &&
     update.postUrl !== REHEARSAL_LOOKBACK_20260801_POST_URL &&
     update.postUrl !== RYOMA_CASTMATES_20260731_POST_URL &&
@@ -392,6 +398,16 @@ const featuredATeamCharacterIntro20260801Update:
   ? {
       ...aTeamCharacterIntro20260801Update,
       anchorId: "gojet-a-team-character-intro-2026-08-01",
+      primaryCta: "homepage"
+    }
+  : undefined;
+
+const featuredBTeamCharacterIntro20260801Update:
+  | DisplayGojetFeatureUpdate
+  | undefined = bTeamCharacterIntro20260801Update
+  ? {
+      ...bTeamCharacterIntro20260801Update,
+      anchorId: "gojet-b-team-character-intro-2026-08-01",
       primaryCta: "homepage"
     }
   : undefined;
@@ -816,6 +832,7 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
     : undefined;
 
 // 8/1 23:50優花子さん×中原楓歌さん（偶然のご縁・また一緒に良い仕事を）→
+// 8/1 23:30公演アカウント（女性キャストのみのB班キャラクター紹介映像）→
 // 8/1 23:26公演アカウント（A班キャラクター紹介ナレーション映像）→
 // 8/1 14:52秋乃蒼依さん（早紀3人の集合セルフィー・三者三様の早紀）→
 // 8/1 12:27優花子さん本人（稽古1カ月弱の振り返り・配信は約100分）→
@@ -840,6 +857,9 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
 const orderedGojetFeatureUpdates: DisplayGojetFeatureUpdate[] = [
   ...(featuredYukakoFuchanConnection20260801Update
     ? [featuredYukakoFuchanConnection20260801Update]
+    : []),
+  ...(featuredBTeamCharacterIntro20260801Update
+    ? [featuredBTeamCharacterIntro20260801Update]
     : []),
   ...(featuredATeamCharacterIntro20260801Update
     ? [featuredATeamCharacterIntro20260801Update]
