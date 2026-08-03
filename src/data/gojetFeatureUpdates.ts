@@ -21,6 +21,9 @@ export type DisplayGojetFeatureUpdate = GojetFeatureUpdate & {
   hideHomepageAfterDeadline?: boolean;
 };
 
+const NUMAO_MAYUKA_C_GIRLS_20260803_POST_URL =
+  "https://x.com/mayuka_pinkcha/status/2084243063141179760";
+
 const YUKAKO_FINAL_LIVE_QUOTE_20260803_POST_URL =
   "https://x.com/mokoopy/status/2083944200119476437";
 const FINAL_LIVE_20260803_POST_URL =
@@ -203,6 +206,9 @@ const decoratedSourceUpdates: DisplayGojetFeatureUpdate[] = sourceUpdates
 const sakiTrio20260801Update = decoratedSourceUpdates.find(
   (update) => update.postUrl === SAKI_TRIO_20260801_POST_URL
 );
+const numaoMayukaCGirls20260803Update = decoratedSourceUpdates.find(
+  (update) => update.postUrl === NUMAO_MAYUKA_C_GIRLS_20260803_POST_URL
+);
 const cTeamCastRepost20260802Update = decoratedSourceUpdates.find(
   (update) => update.postUrl === C_TEAM_CAST_REPOST_20260802_POST_URL
 );
@@ -352,6 +358,7 @@ export const gojetOriginUpdate = decoratedSourceUpdates.find(
 );
 const remainingSourceUpdates = decoratedSourceUpdates.filter(
   (update) =>
+    update.postUrl !== NUMAO_MAYUKA_C_GIRLS_20260803_POST_URL &&
     update.postUrl !== C_TEAM_CAST_REPOST_20260802_POST_URL &&
     update.postUrl !== YUKAKO_FUCHAN_CONNECTION_20260801_POST_URL &&
     update.postUrl !== A_TEAM_CHARACTER_INTRO_20260801_POST_URL &&
@@ -449,6 +456,16 @@ const featuredYukakoFinalLiveQuote20260803Update: DisplayGojetFeatureUpdate = {
   anchorId: "gojet-yukako-final-live-quote-2026-08-03",
   primaryCta: "homepage"
 };
+
+const featuredNumaoMayukaCGirls20260803Update:
+  | DisplayGojetFeatureUpdate
+  | undefined = numaoMayukaCGirls20260803Update
+  ? {
+      ...numaoMayukaCGirls20260803Update,
+      anchorId: "gojet-numao-mayuka-c-girls-2026-08-03",
+      primaryCta: "post"
+    }
+  : undefined;
 
 const featuredYukakoCTeamCastQuote20260802Update:
   | DisplayGojetFeatureUpdate
@@ -1019,6 +1036,7 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
       }
     : undefined;
 
+// 8/3 20:40沼尾麻由佳さん（メグから見た早紀とC班ガールズ）→
 // 8/3 0:53優花子さん本人（千秋楽LIVEダイジェストを引用・配信チケット最終案内）→
 // 8/2 21:42優花子さん本人（A班キャラ紹介ナレーションを引用・Aガールズの掛け合い）→
 // 8/2 21:39優花子さん本人（B班キャラ紹介ナレーションを引用・マスターと大地へのツッコミ）→
@@ -1046,6 +1064,9 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
 // 7/25 23:49優花子さん本人（残り公演の呼びかけ）→ 7/25 22:43三村すみかさん →
 // 7/25 11:31秋乃蒼依さん → 21:24青木杏奈さん → 20:40曽原加絵さん → 19:06来瞳舞夢さんの順で先頭表示する。
 const orderedGojetFeatureUpdates: DisplayGojetFeatureUpdate[] = [
+  ...(featuredNumaoMayukaCGirls20260803Update
+    ? [featuredNumaoMayukaCGirls20260803Update]
+    : []),
   featuredYukakoFinalLiveQuote20260803Update,
   ...(featuredYukakoATeamCharacterIntroQuote20260802Update
     ? [featuredYukakoATeamCharacterIntroQuote20260802Update]

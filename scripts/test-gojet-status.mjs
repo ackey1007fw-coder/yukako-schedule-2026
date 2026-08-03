@@ -26,6 +26,21 @@ try {
   const { TodayNextPanel } = await server.ssrLoadModule(
     "/src/components/TodayNextPanel.tsx"
   );
+  const { gojetFeatureUpdates } = await server.ssrLoadModule(
+    "/src/data/gojetFeatureUpdates.ts"
+  );
+
+  const newestCastPost = gojetFeatureUpdates[0];
+  assert.equal(
+    newestCastPost.postUrl,
+    "https://x.com/mayuka_pinkcha/status/2084243063141179760"
+  );
+  assert.equal(
+    newestCastPost.anchorId,
+    "gojet-numao-mayuka-c-girls-2026-08-03"
+  );
+  assert.equal(newestCastPost.photos?.length, 3);
+  assert.match(newestCastPost.title, /メグから見た早紀とC班ガールズ/);
 
   const before = getGojetStatus(new Date("2026-07-22T23:59:59+09:00"));
   assert.deepEqual(before, { phase: "before", daysLeft: 1 });
