@@ -28,6 +28,7 @@ import {
 } from "../data/gojetFeatureUpdates";
 import { gojetPromoImages, type PromoImage } from "../data/gojetPromo";
 import { isPastDeadline } from "../lib/date";
+import { isClosedOrderCta } from "../lib/gojetOrderDeadline";
 import { getRelatedGojetUpdates } from "../lib/engagement";
 import { getResponsiveImageProps } from "../lib/responsiveImage";
 import { googleCalendarUrl, SITE_URL, xShareUrl } from "../lib/share";
@@ -105,10 +106,16 @@ function UpdateLinkButtons({
   update: DisplayGojetFeatureUpdate;
   currentTime: Date;
 }) {
-  const hideHomepage = Boolean(
-    update.hideHomepageAfterDeadline &&
-      update.deadline &&
-      isPastDeadline(update.deadline.at, currentTime)
+  // 締切を持つ申込導線（配信チケットのGoogleフォーム等）は、締切後に自動で閉じる。
+  // 元投稿・引用元投稿・Instagramへのリンクは締切を持たないのでそのまま残る。
+  const hideHomepage = isClosedOrderCta(
+    {
+      url: update.homepageUrl,
+      deadlineAt: update.deadline?.at,
+      label: update.homepageLabel,
+      force: update.hideHomepageAfterDeadline
+    },
+    currentTime
   );
   const homepageIsPrimary =
     update.primaryCta === "homepage" && !hideHomepage;

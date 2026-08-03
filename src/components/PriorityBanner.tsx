@@ -5,6 +5,7 @@ import { siteUpdates } from "../data/siteUpdates";
 import { specialStream, streamSchedule } from "../data/streamSchedule";
 import { gojetStreamingTicketUrl, gojetTicketUrl } from "../data/gojetTimetable";
 import { getGojetStatus, summarizeGojetDayLiveStatus } from "../lib/gojetStatus";
+import { isGojetStreamingOrderClosed } from "../lib/gojetOrderDeadline";
 import { trackPortalEvent } from "../lib/analytics";
 
 type Announcement = {
@@ -118,7 +119,21 @@ export function PriorityBanner({ now: nowProp }: PriorityBannerProps = {}) {
       });
     }
     if (gojet.phase === "before") items.push({ id: "gojet-countdown", label: "#ゆかJET", text: `公演まであと${gojet.daysLeft}日・チケット／配信を確認`, href: gojetTicketUrl, tone: "bg-gradient-to-r from-[#fbeef0] to-[#faf3e2] text-ink", Icon: Ticket, tracking: "ticket_click" });
-    if (gojet.phase === "archive") items.push({ id: "gojet-archive", label: "#ゆかJET 配信", text: "配信チケットの申し込みは8/3（月）まで・視聴は8/10（月）まで 3,700円", href: gojetStreamingTicketUrl, tone: "bg-gradient-to-r from-[#fbeef0] to-[#faf3e2] text-ink", Icon: Radio, tracking: "ticket_click" });
+    // 申込〆切後は、申込フォームではなく完走レポートへ案内する（視聴期限の案内は残す）。
+    if (gojet.phase === "archive") {
+      const orderClosed = isGojetStreamingOrderClosed(now);
+      items.push({
+        id: "gojet-archive",
+        label: "#ゆかJET 配信",
+        text: orderClosed
+          ? "配信チケットの申し込みは終了・視聴は8/10（月）まで"
+          : "配信チケットの申し込みは8/3（月）まで・視聴は8/10（月）まで 3,700円",
+        href: orderClosed ? "#gojet-finale-report" : gojetStreamingTicketUrl,
+        tone: "bg-gradient-to-r from-[#fbeef0] to-[#faf3e2] text-ink",
+        Icon: Radio,
+        tracking: orderClosed ? undefined : "ticket_click"
+      });
+    }
     const latestUpdate = siteUpdates[0];
     const latestHref = latestUpdate?.anchor || latestUpdate?.sourceUrl;
     if (latestUpdate && latestHref) {

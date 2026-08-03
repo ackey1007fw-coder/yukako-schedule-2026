@@ -12,6 +12,7 @@ import {
   summarizeGojetDayLiveStatus,
   type GojetPerformanceLiveStatus
 } from "../lib/gojetStatus";
+import { isGojetStreamingOrderClosed } from "../lib/gojetOrderDeadline";
 import { trackPortalEvent } from "../lib/analytics";
 import { FinaleBadge } from "./FinaleBadge";
 
@@ -119,6 +120,9 @@ export function GojetPerformancePanel({ now }: GojetPerformancePanelProps) {
   if (status.phase === "before" || status.phase === "ended") return null;
 
   if (status.phase === "archive") {
+    // 申込〆切を過ぎたら申し込みボタンは出さず、視聴期限の案内だけ残す。
+    const orderClosed = isGojetStreamingOrderClosed(currentTime);
+
     return (
       <section
         id="gojet-live-panel"
@@ -138,16 +142,21 @@ export function GojetPerformancePanel({ now }: GojetPerformancePanelProps) {
               アーカイブ配信は8/10（月）まで
             </h2>
             <p className="mt-2 text-sm leading-6 text-white/75">
-              A班・B班は7/26公演、C班・LIVEは7/27公演。配信チケットは3,700円、申し込みは8/3（月）〆切です。
+              A班・B班は7/26公演、C班・LIVEは7/27公演。
+              {orderClosed
+                ? "配信チケットの申し込みは終了。視聴は8/10（月）までです。"
+                : "配信チケットは3,700円、申し込みは8/3（月）〆切です。"}
             </p>
           </div>
           <div className="flex w-full shrink-0 flex-col gap-2 sm:w-72">
-            <TicketLink
-              href={gojetStreamingTicketUrl}
-              label="配信チケット"
-              detail="3,700円・8/10まで視聴可"
-              tone="primary"
-            />
+            {!orderClosed && (
+              <TicketLink
+                href={gojetStreamingTicketUrl}
+                label="配信チケット"
+                detail="3,700円・8/10まで視聴可"
+                tone="primary"
+              />
+            )}
             <a
               href="#gojet-finale-report"
               className="yukako-button yukako-button-ghost min-h-12 px-4 py-3 text-sm"

@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   ArrowDownRight,
   ExternalLink,
@@ -8,7 +9,14 @@ import {
   Ticket
 } from "lucide-react";
 import { gojetStreamingTicketUrl } from "../data/gojetTimetable";
+import { isGojetStreamingOrderClosed } from "../lib/gojetOrderDeadline";
 import { trackPortalEvent } from "../lib/analytics";
+
+type GojetFinaleReportSectionProps = {
+  now?: Date;
+};
+
+const CLOCK_UPDATE_MS = 60000;
 
 const instagramPostUrl =
   "https://www.instagram.com/p/DbiZ7_MlKIt/?img_index=5&igsh=MW91b25wN2o3dW92Yg==";
@@ -46,11 +54,11 @@ const videos = [
   }
 ] as const;
 
-const highlights = [
+const buildHighlights = (orderClosed: boolean) => [
   "A・B・C班を完走",
   "約100分のラブコメ×ミュージカル",
   "千秋楽LIVEで約20曲",
-  "配信申込は8/3まで"
+  orderClosed ? "配信は8/10まで視聴可能" : "配信申込は8/3まで"
 ];
 
 const driveViewUrl = (id: string) => `https://drive.google.com/file/d/${id}/view`;
@@ -58,7 +66,23 @@ const drivePreviewUrl = (id: string) => `https://drive.google.com/file/d/${id}/p
 const driveThumbnailUrl = (id: string) =>
   `https://drive.google.com/thumbnail?id=${id}&sz=w1600`;
 
-export function GojetFinaleReportSection() {
+export function GojetFinaleReportSection({ now }: GojetFinaleReportSectionProps) {
+  const [currentTime, setCurrentTime] = useState(() => now ?? new Date());
+
+  useEffect(() => {
+    if (now) {
+      setCurrentTime(now);
+      return undefined;
+    }
+
+    const timer = window.setInterval(() => setCurrentTime(new Date()), CLOCK_UPDATE_MS);
+    return () => window.clearInterval(timer);
+  }, [now]);
+
+  // 申込〆切を過ぎたら申し込みボタンを出さない。写真・動画・Instagram導線はそのまま残す。
+  const orderClosed = isGojetStreamingOrderClosed(currentTime);
+  const highlights = buildHighlights(orderClosed);
+
   return (
     <section
       id="gojet-finale-report"
@@ -189,26 +213,32 @@ export function GojetFinaleReportSection() {
             </blockquote>
 
             <div className="mt-8 border border-champagne/35 bg-porcelain p-5 sm:p-6">
-              <p className="text-sm font-black text-rosefog">配信チケット 3,700円／申込は8月3日まで</p>
+              <p className="text-sm font-black text-rosefog">
+                {orderClosed
+                  ? "配信チケットの申し込みは終了・視聴は8月10日まで"
+                  : "配信チケット 3,700円／申込は8月3日まで"}
+              </p>
               <p className="mt-2 text-sm leading-7 text-ink/70">
                 A班・B班・C班と全キャスト参加の千秋楽LIVEを、8月10日まで視聴できます。
               </p>
               <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-                <a
-                  href={gojetStreamingTicketUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() =>
-                    trackPortalEvent("ticket_click", {
-                      placement: "gojet_finale_report",
-                      item: "配信チケットを申し込む"
-                    })
-                  }
-                  className="yukako-button yukako-button-rose min-h-12 px-5 py-3 text-sm"
-                >
-                  <Ticket className="h-4 w-4" aria-hidden="true" />
-                  配信チケットを申し込む
-                </a>
+                {!orderClosed && (
+                  <a
+                    href={gojetStreamingTicketUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() =>
+                      trackPortalEvent("ticket_click", {
+                        placement: "gojet_finale_report",
+                        item: "配信チケットを申し込む"
+                      })
+                    }
+                    className="yukako-button yukako-button-rose min-h-12 px-5 py-3 text-sm"
+                  >
+                    <Ticket className="h-4 w-4" aria-hidden="true" />
+                    配信チケットを申し込む
+                  </a>
+                )}
                 <a
                   href={instagramPostUrl}
                   target="_blank"
