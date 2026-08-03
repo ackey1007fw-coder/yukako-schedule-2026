@@ -7,6 +7,12 @@ export type NewsItem = {
 
 export const news: NewsItem[] = [
   {
+    date: "2026.8.3 17:23",
+    label: "秋田",
+    text: "「行きたい&参加したい🥹✨」——公務員時代に参加した秋田竿燈まつり。自作の紹介動画と今年のメッセージを「秋田との絆」に追加しました。",
+    url: "#akita-kanto-festival-2026"
+  },
+  {
     date: "2026.7.13",
     label: "X",
     text: "「ワイワイC班😆 最後の早紀、楽しんで演じます✨」——CM枠は7/16（木）23:59まで。",
