@@ -15,7 +15,9 @@ export type DisplayGojetFeatureUpdate = GojetFeatureUpdate & {
     label: string;
     note?: string;
   };
-  // 申込フォームなど、期限後に案内すべきでないホームページCTAを非表示にする。
+  // 締切を持つ申込導線は lib/gojetOrderDeadline.ts が自動で閉じる。
+  // URL（Googleフォーム）とラベル（「申し込む」等）で判定できない申込導線だけ、
+  // ここで明示的に指定する。通常は指定不要。
   hideHomepageAfterDeadline?: boolean;
 };
 
@@ -445,8 +447,7 @@ const featuredYukakoFinalLiveQuote20260803Update: DisplayGojetFeatureUpdate = {
     urlLabel: "引用元の千秋楽LIVE投稿を見る"
   },
   anchorId: "gojet-yukako-final-live-quote-2026-08-03",
-  primaryCta: "homepage",
-  hideHomepageAfterDeadline: true
+  primaryCta: "homepage"
 };
 
 const featuredYukakoCTeamCastQuote20260802Update:
@@ -474,10 +475,12 @@ const featuredYukakoCTeamCastQuote20260802Update:
       quotedPost: {
         author: "吉井優花子プロデュース公演",
         handle: "@yukako_produce",
+        // 引用元（公式再投稿）の本文をそのまま残す。
         body:
-          "「なぜか消えているC班の動画。。。幽霊ガールズの仕業👻⁉️」——消えていたC班キャスト紹介を再投稿。A班・B班も遡って見られます。",
+          cTeamCastRepost20260802Update.caption ??
+          "消えていたC班キャスト紹介を再投稿。A班・B班も遡って見られます。",
         url: C_TEAM_CAST_REPOST_20260802_POST_URL,
-        urlLabel: "引用元のC班キャスト紹介を見る"
+        urlLabel: "引用元のC班キャスト紹介（公式再投稿）を見る"
       },
       anchorId: "gojet-yukako-c-team-cast-quote-2026-08-02",
       primaryCta: "homepage"
@@ -511,14 +514,15 @@ const featuredYukakoATeamCharacterIntroQuote20260802Update:
       quotedPost: {
         author: "吉井優花子プロデュース公演",
         handle: "@yukako_produce",
+        // 引用元（公演アカウント）の本文をそのまま残す。
         body:
-          "三班連続の第1弾、A班のキャラクター紹介ナレーション映像。約2分52秒の本番映像で、役柄や歌・ダンス・掛け合いを紹介しています。",
+          aTeamCharacterIntro20260801Update.caption ??
+          "三班連続の第1弾、A班のキャラクター紹介ナレーション映像。",
         url: A_TEAM_CHARACTER_INTRO_20260801_POST_URL,
-        urlLabel: "引用元のA班キャラ紹介を見る"
+        urlLabel: "引用元のA班キャラ紹介（公演アカウント）を見る"
       },
       anchorId: "gojet-yukako-a-team-character-intro-quote-2026-08-02",
-      primaryCta: "homepage",
-      hideHomepageAfterDeadline: true
+      primaryCta: "homepage"
     }
   : undefined;
 
@@ -548,25 +552,23 @@ const featuredYukakoBTeamCharacterIntroQuote20260802Update:
       quotedPost: {
         author: "吉井優花子プロデュース公演",
         handle: "@yukako_produce",
+        // 引用元（公演アカウント）の本文をそのまま残す。
         body:
-          "三班連続の第2弾、女性キャストのみのB班キャラクター紹介ナレーション映像。約3分01秒の本番映像で、役柄や歌・ダンス・掛け合いを紹介しています。",
+          bTeamCharacterIntro20260801Update.caption ??
+          "三班連続の第2弾、女性キャストのみのB班キャラクター紹介ナレーション映像。",
         url: B_TEAM_CHARACTER_INTRO_20260801_POST_URL,
-        urlLabel: "引用元のB班キャラ紹介を見る"
+        urlLabel: "引用元のB班キャラ紹介（公演アカウント）を見る"
       },
       anchorId: "gojet-yukako-b-team-character-intro-quote-2026-08-02",
       primaryCta: "homepage"
     }
   : undefined;
 
-const featuredCTeamCastRepost20260802Update:
-  | DisplayGojetFeatureUpdate
-  | undefined = cTeamCastRepost20260802Update
-  ? {
-      ...cTeamCastRepost20260802Update,
-      anchorId: "gojet-c-team-cast-repost-2026-08-02",
-      primaryCta: "homepage"
-    }
-  : undefined;
+// A班・B班・C班のキャラ紹介／キャスト紹介は、優花子さん本人の引用投稿カードを代表カードとして
+// 1件だけ並べる（本人の言葉＋引用元の公式投稿＋既存動画を1セットで保持）。
+// 引用元の公式投稿は代表カード内の「引用元投稿」欄からURL付きで辿れるため、
+// 同じ動画・ポスター・配信導線を持つ公式カードは一覧に重ねて出さない。
+// 元データは src/data/gojetPromo.ts にそのまま残している。
 
 const featuredSakiTrio20260801Update:
   | DisplayGojetFeatureUpdate
@@ -585,26 +587,6 @@ const featuredYukakoFuchanConnection20260801Update:
       ...yukakoFuchanConnection20260801Update,
       anchorId: "gojet-yukako-fuchan-connection-2026-08-01",
       primaryCta: "post"
-    }
-  : undefined;
-
-const featuredATeamCharacterIntro20260801Update:
-  | DisplayGojetFeatureUpdate
-  | undefined = aTeamCharacterIntro20260801Update
-  ? {
-      ...aTeamCharacterIntro20260801Update,
-      anchorId: "gojet-a-team-character-intro-2026-08-01",
-      primaryCta: "homepage"
-    }
-  : undefined;
-
-const featuredBTeamCharacterIntro20260801Update:
-  | DisplayGojetFeatureUpdate
-  | undefined = bTeamCharacterIntro20260801Update
-  ? {
-      ...bTeamCharacterIntro20260801Update,
-      anchorId: "gojet-b-team-character-intro-2026-08-01",
-      primaryCta: "homepage"
     }
   : undefined;
 
@@ -1041,11 +1023,8 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
 // 8/2 21:42優花子さん本人（A班キャラ紹介ナレーションを引用・Aガールズの掛け合い）→
 // 8/2 21:39優花子さん本人（B班キャラ紹介ナレーションを引用・マスターと大地へのツッコミ）→
 // 8/2 21:35優花子さん本人（C班紹介動画を引用・配信チケット最終案内）→
-// 8/2 12:54公演アカウント（消えていたC班キャスト紹介を再投稿）→
 // 8/1 23:50優花子さん×中原楓歌さん（偶然のご縁・また一緒に良い仕事を）→
 // 8/1 23:33公演アカウント（三班連続のラスト・C班キャラクター紹介映像）→
-// 8/1 23:30公演アカウント（女性キャストのみのB班キャラクター紹介映像）→
-// 8/1 23:26公演アカウント（A班キャラクター紹介ナレーション映像）→
 // 8/1 14:52秋乃蒼依さん（早紀3人の集合セルフィー・三者三様の早紀）→
 // 8/1 12:27優花子さん本人（稽古1カ月弱の振り返り・配信は約100分）→
 // 7/31 23:11優花子さん本人（龍馬とJET違いすぎ・龍馬くん2026のB班映像）→
@@ -1077,20 +1056,11 @@ const orderedGojetFeatureUpdates: DisplayGojetFeatureUpdate[] = [
   ...(featuredYukakoCTeamCastQuote20260802Update
     ? [featuredYukakoCTeamCastQuote20260802Update]
     : []),
-  ...(featuredCTeamCastRepost20260802Update
-    ? [featuredCTeamCastRepost20260802Update]
-    : []),
   ...(featuredYukakoFuchanConnection20260801Update
     ? [featuredYukakoFuchanConnection20260801Update]
     : []),
   ...(featuredCTeamCharacterIntro20260801Update
     ? [featuredCTeamCharacterIntro20260801Update]
-    : []),
-  ...(featuredBTeamCharacterIntro20260801Update
-    ? [featuredBTeamCharacterIntro20260801Update]
-    : []),
-  ...(featuredATeamCharacterIntro20260801Update
-    ? [featuredATeamCharacterIntro20260801Update]
     : []),
   ...(featuredSakiTrio20260801Update ? [featuredSakiTrio20260801Update] : []),
   ...(featuredRehearsalLookback20260801Update

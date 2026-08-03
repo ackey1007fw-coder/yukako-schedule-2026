@@ -362,6 +362,208 @@ try {
   );
   assert.match(bannerEndedHtml, /本日の #ゆかJET 公演は終了しました/);
 
+  // --- 配信申込の〆切（2026-08-03T23:59:59+09:00）と、A・B・C班カードの重複表示 ---
+  const { NowProducingSection } = await server.ssrLoadModule(
+    "/src/components/NowProducingSection.tsx"
+  );
+  const { GojetFinaleReportSection } = await server.ssrLoadModule(
+    "/src/components/GojetFinaleReportSection.tsx"
+  );
+  const { gojetFeatureUpdates: displayUpdates } = await server.ssrLoadModule(
+    "/src/data/gojetFeatureUpdates.ts"
+  );
+  const { gojetFeatureUpdates: sourceUpdates } = await server.ssrLoadModule(
+    "/src/data/gojetPromo.ts"
+  );
+  const { events } = await server.ssrLoadModule("/src/data/events.ts");
+
+  const gojetEvent = events.find((event) => event.id === "yukajet-gojet-2026-07");
+  assert.ok(gojetEvent, "#ゆかJET のイベントデータが見つからない");
+
+  const beforeDeadline = new Date("2026-08-03T23:59:58+09:00");
+  const afterDeadline = new Date("2026-08-04T00:00:00+09:00");
+  const orderFormHref = 'href="https://docs.google.com/forms/';
+
+  // 1. 〆切1秒前：配信申込CTAが出ている
+  const producingBeforeHtml = renderToStaticMarkup(
+    createElement(NowProducingSection, { event: gojetEvent, now: beforeDeadline })
+  );
+  assert.ok(
+    producingBeforeHtml.includes(orderFormHref),
+    "〆切前は配信申込フォームへのCTAが表示されるべき"
+  );
+  assert.match(producingBeforeHtml, /配信チケットを申し込む/);
+  assert.match(
+    producingBeforeHtml,
+    /配信チケットの申し込みは8月3日（月）まで/
+  );
+
+  // 2. 〆切後：申込CTAだけが消え、投稿・引用元・視聴期限の案内は残る
+  const producingAfterHtml = renderToStaticMarkup(
+    createElement(NowProducingSection, { event: gojetEvent, now: afterDeadline })
+  );
+  assert.ok(
+    !producingAfterHtml.includes(orderFormHref),
+    "〆切後に配信申込フォームへのCTAが残っている"
+  );
+  assert.doesNotMatch(producingAfterHtml, /配信チケットを申し込む/);
+  assert.match(producingAfterHtml, /配信チケットの申し込みは終了。視聴は8月10日（月）まで/);
+  for (const keptUrl of [
+    "https://x.com/mokoopy/status/2083944200119476437",
+    "https://x.com/yukako_produce/status/2083938076452434371",
+    "https://x.com/mokoopy/status/2083896120812720278",
+    "https://x.com/yukako_produce/status/2083560056470323653",
+    "https://x.com/mokoopy/status/2083895403389555175",
+    "https://x.com/yukako_produce/status/2083560994169889115",
+    "https://x.com/mokoopy/status/2083894429962977371",
+    "https://x.com/yukako_produce/status/2083763241877217706"
+  ]) {
+    assert.ok(
+      producingAfterHtml.includes(keptUrl),
+      `〆切後も残すべき投稿リンクが消えている: ${keptUrl}`
+    );
+  }
+  // 既存動画・Drive動画も〆切後に消えない
+  for (const media of [
+    "/videos/yukajet-a-team-character-intro-2026-08-01.mp4",
+    "/videos/yukajet-b-team-character-intro-2026-08-01.mp4",
+    "/videos/yukajet-cban-cast-2026-07-13.mp4",
+    "/videos/yukajet-c-team-character-intro-2026-08-01.mp4",
+    "1Gq7dSABc559mD_tpibBMLIwih6pkxg1I"
+  ]) {
+    assert.ok(
+      producingAfterHtml.includes(media),
+      `〆切後も残すべき動画が消えている: ${media}`
+    );
+  }
+
+  // 3. A・B・C班で同じ動画カードが二重表示されない
+  for (const videoSrc of [
+    "/videos/yukajet-a-team-character-intro-2026-08-01.mp4",
+    "/videos/yukajet-b-team-character-intro-2026-08-01.mp4",
+    "/videos/yukajet-c-team-character-intro-2026-08-01.mp4",
+    "/videos/yukajet-cban-cast-2026-07-13.mp4"
+  ]) {
+    const shown = displayUpdates.filter(
+      (update) => update.video?.src === videoSrc
+    );
+    assert.equal(
+      shown.length,
+      1,
+      `一覧に同じ動画のカードが${shown.length}件ある: ${videoSrc}`
+    );
+  }
+  // 一覧の代表カードは本人（@mokoopy）の引用投稿
+  for (const [videoSrc, expectedPostUrl] of [
+    [
+      "/videos/yukajet-a-team-character-intro-2026-08-01.mp4",
+      "https://x.com/mokoopy/status/2083896120812720278"
+    ],
+    [
+      "/videos/yukajet-b-team-character-intro-2026-08-01.mp4",
+      "https://x.com/mokoopy/status/2083895403389555175"
+    ],
+    [
+      "/videos/yukajet-cban-cast-2026-07-13.mp4",
+      "https://x.com/mokoopy/status/2083894429962977371"
+    ]
+  ]) {
+    const card = displayUpdates.find((update) => update.video?.src === videoSrc);
+    assert.equal(card.postUrl, expectedPostUrl);
+    assert.ok(card.quotedPost?.url, "代表カードに引用元の公式投稿URLが必要");
+  }
+
+  // 4. 保持必須の投稿URLが元データにも残っている
+  const sourceUrls = new Set(
+    sourceUpdates.flatMap((update) =>
+      [update.postUrl, update.quotedPost?.url].filter(Boolean)
+    )
+  );
+  for (const requiredUrl of [
+    "https://x.com/yukako_produce/status/2083763241877217706",
+    "https://x.com/yukako_produce/status/2083560994169889115",
+    "https://x.com/yukako_produce/status/2083560056470323653"
+  ]) {
+    assert.ok(
+      sourceUrls.has(requiredUrl),
+      `元データから投稿が消えている: ${requiredUrl}`
+    );
+  }
+
+  // 5. アンカーIDの重複がない
+  const anchorIds = displayUpdates.map((update) => update.anchorId);
+  assert.equal(
+    new Set(anchorIds).size,
+    anchorIds.length,
+    "#ゆかJET カードのアンカーIDが重複している"
+  );
+
+  // 6. Instagram完走レポート：〆切後は申込ボタンだけ消し、写真・動画・Instagram導線は残す
+  const finaleBeforeHtml = renderToStaticMarkup(
+    createElement(GojetFinaleReportSection, { now: beforeDeadline })
+  );
+  assert.match(finaleBeforeHtml, /配信チケットを申し込む/);
+  assert.match(finaleBeforeHtml, /配信申込は8\/3まで/);
+
+  const finaleAfterHtml = renderToStaticMarkup(
+    createElement(GojetFinaleReportSection, { now: afterDeadline })
+  );
+  assert.doesNotMatch(finaleAfterHtml, /配信チケットを申し込む/);
+  assert.ok(!finaleAfterHtml.includes(orderFormHref));
+  assert.match(finaleAfterHtml, /配信チケットの申し込みは終了・視聴は8月10日まで/);
+  assert.match(finaleAfterHtml, /配信は8\/10まで視聴可能/);
+  assert.match(finaleAfterHtml, /8月10日まで視聴できます/);
+  assert.ok(finaleAfterHtml.includes("https://www.instagram.com/p/DbiZ7_MlKIt/"));
+  for (const driveId of [
+    "14Vo03fCpL6-w5WqLzBZDSQr3teZzYvDw",
+    "186ZwlbiVquo8aWKdz7QjtHPtwPaAAmb0",
+    "1kza1J9Z-NjoELY_7niOROg9FoLCHi2SJ",
+    "13cLw7bsw7lo-95pUNQZoJRVnLe8FnW9i",
+    "1PHLrnk6-7rFCi-WaBjBOuzhK881mYxHM",
+    "1Ca3PkVDA5oBapzUjpxeWcx9UTTBine1E"
+  ]) {
+    assert.ok(
+      finaleAfterHtml.includes(driveId),
+      `完走レポートのDrive IDが消えている: ${driveId}`
+    );
+  }
+
+  // 7. 上部のアーカイブ配信パネル
+  const archiveBeforeDeadlineHtml = renderToStaticMarkup(
+    createElement(GojetPerformancePanel, { now: beforeDeadline })
+  );
+  assert.match(archiveBeforeDeadlineHtml, /配信チケット/);
+  assert.ok(archiveBeforeDeadlineHtml.includes(orderFormHref));
+
+  const archiveAfterDeadlineHtml = renderToStaticMarkup(
+    createElement(GojetPerformancePanel, { now: afterDeadline })
+  );
+  assert.ok(!archiveAfterDeadlineHtml.includes(orderFormHref));
+  assert.match(
+    archiveAfterDeadlineHtml,
+    /配信チケットの申し込みは終了。視聴は8\/10（月）までです。/
+  );
+  assert.match(archiveAfterDeadlineHtml, /アーカイブ配信は8\/10（月）まで/);
+  assert.match(archiveAfterDeadlineHtml, /href="#gojet-finale-report"/);
+
+  // 8. トップのお知らせバー
+  const bannerArchiveBeforeHtml = renderToStaticMarkup(
+    createElement(PriorityBanner, { now: beforeDeadline })
+  );
+  assert.match(
+    bannerArchiveBeforeHtml,
+    /配信チケットの申し込みは8\/3（月）まで/
+  );
+
+  const bannerArchiveAfterHtml = renderToStaticMarkup(
+    createElement(PriorityBanner, { now: afterDeadline })
+  );
+  assert.ok(!bannerArchiveAfterHtml.includes(orderFormHref));
+  assert.match(
+    bannerArchiveAfterHtml,
+    /配信チケットの申し込みは終了・視聴は8\/10（月）まで/
+  );
+
   console.log("gojet-status tests OK");
 } finally {
   await server.close();
