@@ -24,6 +24,10 @@ export type DisplayGojetFeatureUpdate = GojetFeatureUpdate & {
 const NUMAO_MAYUKA_C_GIRLS_20260803_POST_URL =
   "https://x.com/mayuka_pinkcha/status/2084243063141179760";
 
+const YUKAKO_FINAL_CALL_QUOTE_20260803_POST_URL =
+  "https://x.com/mokoopy/status/2084261233344016471";
+const STREAMING_FINAL_DAY_20260803_POST_URL =
+  "https://x.com/yukako_produce/status/2084256242856587746";
 const YUKAKO_FINAL_LIVE_QUOTE_20260803_POST_URL =
   "https://x.com/mokoopy/status/2083944200119476437";
 const FINAL_LIVE_20260803_POST_URL =
@@ -410,6 +414,55 @@ const remainingSourceUpdates = decoratedSourceUpdates.filter(
     update.postUrl !== PENLIGHT_POST_URL &&
     update.postUrl !== PRODUCE_ANNOUNCE_POST_URL
 );
+
+const featuredYukakoFinalCallQuote20260803Update: DisplayGojetFeatureUpdate = {
+  date: "2026.8.3 21:52",
+  label: "吉井優花子さん（@mokoopy）・配信最終案内",
+  // 見出しに「本日まで」のような相対表現を入れると、締切後の案内と食い違う。
+  // 期限の状態は deadline の案内文に任せる。
+  title: "載せていない見所がありすぎる｜笑いどころも、ドラマも",
+  body:
+    "「載せていない見所がありすぎる🙂‍↕️🎙️」——宣伝動画で見せきれなかった笑いどころも、ドラマも。A班・B班・C班それぞれがクオリティの高い作品に。\n\n愛のある脚本、素敵なキャスト、素晴らしい演出。こだわって作ったメグと美里の曲も。約3分50秒の映像で、本編の空気をもう一度。\n\n配信チケットの購入は8月3日まで、視聴は8月10日まで。",
+  caption:
+    "#ゆかJET\n宣伝動画でたくさん見せているけど。。\n載せていない見所がありすぎる🙂‍↕️🎙️\n笑いどころも、、😂笑\nそしてもちろんドラマも✨\n\nA班、B班、C班それぞれでクオリティの高い作品となりました。\n愛のある脚本、素敵なキャスト、素晴らしい演出で、とってもおもしろいです！！！\n\nこだわって作ったメグと美里の曲もお楽しみください😌\n\n【配信チケットの購入は本日まで！🎟️】\n※8月10日まで視聴可能\n⬇️",
+  postUrl: YUKAKO_FINAL_CALL_QUOTE_20260803_POST_URL,
+  homepageUrl:
+    "https://docs.google.com/forms/d/e/1FAIpQLScsEmjjECWOVKzYuJ_93BRlS1rI8cbzcPFBb0f4mVqWNlLnuQ/viewform",
+  ctaLabel: "優花子さんのX投稿を見る",
+  homepageLabel: "配信チケットを申し込む（8/3〆切・¥3,700）",
+  roleTags: [
+    "#ゆかJET",
+    "吉井優花子さん",
+    "配信チケット",
+    "A班",
+    "B班",
+    "C班",
+    "メグと美里の曲",
+    "千秋楽LIVE"
+  ],
+  embeddedVideo: {
+    src: "https://drive.google.com/file/d/1X3-NYAOQ-Lx7GW9W_T8lG0bTG4SVdgOx/preview",
+    label:
+      "『GO,JET!GO!GO! vol.1 Premium』配信チケット案内の宣伝動画（約3分50秒・音声あり）",
+    note: "再生できない場合は、本人投稿または引用元投稿からご覧ください。"
+  },
+  deadline: {
+    at: "2026-08-03T23:59:59+09:00",
+    beforeText:
+      "配信チケットの申し込みは8月3日（月）まで・視聴は8月10日（月）まで（¥3,700/本）",
+    afterText: "配信チケットの申し込みは終了。視聴は8月10日（月）まで"
+  },
+  quotedPost: {
+    author: "吉井優花子プロデュース公演",
+    handle: "@yukako_produce",
+    body:
+      "#ゆかJET\n【📣配信チケットの購入は本日まで‼️】\n\n劇場でも配信でもお楽しみいただいております😭✨\n\nキャストの個性が光るvol.1 Premiumを\nぜひ『配信チケット』でご覧ください☺️✨\n\n🌟A.B.C班の本編\n🌟全キャスト参加の千秋楽LIVE\n\n8月10日まで視聴可能◎\n⬇️",
+    url: STREAMING_FINAL_DAY_20260803_POST_URL,
+    urlLabel: "引用元の配信チケット最終案内を見る"
+  },
+  anchorId: "gojet-yukako-final-call-quote-2026-08-03",
+  primaryCta: "homepage"
+};
 
 const featuredYukakoFinalLiveQuote20260803Update: DisplayGojetFeatureUpdate = {
   date: "2026.8.3 0:53",
@@ -1036,6 +1089,7 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
       }
     : undefined;
 
+// 8/3 21:52優花子さん本人（載せていない見所・配信チケットの購入は本日まで）→
 // 8/3 20:40沼尾麻由佳さん（メグから見た早紀とC班ガールズ）→
 // 8/3 0:53優花子さん本人（千秋楽LIVEダイジェストを引用・配信チケット最終案内）→
 // 8/2 21:42優花子さん本人（A班キャラ紹介ナレーションを引用・Aガールズの掛け合い）→
@@ -1064,6 +1118,7 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
 // 7/25 23:49優花子さん本人（残り公演の呼びかけ）→ 7/25 22:43三村すみかさん →
 // 7/25 11:31秋乃蒼依さん → 21:24青木杏奈さん → 20:40曽原加絵さん → 19:06来瞳舞夢さんの順で先頭表示する。
 const orderedGojetFeatureUpdates: DisplayGojetFeatureUpdate[] = [
+  featuredYukakoFinalCallQuote20260803Update,
   ...(featuredNumaoMayukaCGirls20260803Update
     ? [featuredNumaoMayukaCGirls20260803Update]
     : []),

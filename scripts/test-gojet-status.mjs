@@ -30,7 +30,23 @@ try {
     "/src/data/gojetFeatureUpdates.ts"
   );
 
-  const newestCastPost = gojetFeatureUpdates[0];
+  // 先頭は8/3 21:52の優花子さん本人（配信最終案内）、その次が8/3 20:40の沼尾さん。
+  const newestPost = gojetFeatureUpdates[0];
+  assert.equal(
+    newestPost.postUrl,
+    "https://x.com/mokoopy/status/2084261233344016471"
+  );
+  assert.equal(
+    newestPost.anchorId,
+    "gojet-yukako-final-call-quote-2026-08-03"
+  );
+  assert.equal(
+    newestPost.quotedPost?.url,
+    "https://x.com/yukako_produce/status/2084256242856587746"
+  );
+  assert.match(newestPost.title, /載せていない見所がありすぎる/);
+
+  const newestCastPost = gojetFeatureUpdates[1];
   assert.equal(
     newestCastPost.postUrl,
     "https://x.com/mayuka_pinkcha/status/2084243063141179760"
@@ -424,6 +440,8 @@ try {
   assert.doesNotMatch(producingAfterHtml, /配信チケットを申し込む/);
   assert.match(producingAfterHtml, /配信チケットの申し込みは終了。視聴は8月10日（月）まで/);
   for (const keptUrl of [
+    "https://x.com/mokoopy/status/2084261233344016471",
+    "https://x.com/yukako_produce/status/2084256242856587746",
     "https://x.com/mokoopy/status/2083944200119476437",
     "https://x.com/yukako_produce/status/2083938076452434371",
     "https://x.com/mokoopy/status/2083896120812720278",
@@ -439,16 +457,28 @@ try {
     );
   }
   // 既存動画・Drive動画も〆切後に消えない
+  // （一覧の初期表示は先頭6件なので、動画の保持はデータ側で確認する）
+  const displayMedia = new Set(
+    displayUpdates.flatMap((update) =>
+      [update.video?.src, update.video?.poster, update.embeddedVideo?.src].filter(
+        Boolean
+      )
+    )
+  );
   for (const media of [
     "/videos/yukajet-a-team-character-intro-2026-08-01.mp4",
     "/videos/yukajet-b-team-character-intro-2026-08-01.mp4",
     "/videos/yukajet-cban-cast-2026-07-13.mp4",
     "/videos/yukajet-c-team-character-intro-2026-08-01.mp4",
-    "1Gq7dSABc559mD_tpibBMLIwih6pkxg1I"
+    "/images/yukajet/2026-08-01-a-team-character-intro-poster.jpg",
+    "/images/yukajet/2026-08-01-b-team-character-intro-poster.jpg",
+    "/images/yukako-yukajet-cban-cast-video-poster-2026-07-13.jpg",
+    "https://drive.google.com/file/d/1Gq7dSABc559mD_tpibBMLIwih6pkxg1I/preview",
+    "https://drive.google.com/file/d/1X3-NYAOQ-Lx7GW9W_T8lG0bTG4SVdgOx/preview"
   ]) {
     assert.ok(
-      producingAfterHtml.includes(media),
-      `〆切後も残すべき動画が消えている: ${media}`
+      displayMedia.has(media),
+      `一覧から動画・ポスターが消えている: ${media}`
     );
   }
 
