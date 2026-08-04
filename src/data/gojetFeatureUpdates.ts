@@ -418,7 +418,9 @@ const remainingSourceUpdates = decoratedSourceUpdates.filter(
 const featuredYukakoFinalCallQuote20260803Update: DisplayGojetFeatureUpdate = {
   date: "2026.8.3 21:52",
   label: "吉井優花子さん（@mokoopy）・配信最終案内",
-  title: "載せていない見所がありすぎる｜配信チケットの購入は本日まで",
+  // 見出しに「本日まで」のような相対表現を入れると、締切後の案内と食い違う。
+  // 期限の状態は deadline の案内文に任せる。
+  title: "載せていない見所がありすぎる｜笑いどころも、ドラマも",
   body:
     "「載せていない見所がありすぎる🙂‍↕️🎙️」——宣伝動画で見せきれなかった笑いどころも、ドラマも。A班・B班・C班それぞれがクオリティの高い作品に。\n\n愛のある脚本、素敵なキャスト、素晴らしい演出。こだわって作ったメグと美里の曲も。約3分50秒の映像で、本編の空気をもう一度。\n\n配信チケットの購入は8月3日まで、視聴は8月10日まで。",
   caption:
