@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { existsSync } from "node:fs";
 import { createServer } from "vite";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
@@ -559,19 +560,28 @@ try {
   assert.match(finaleAfterHtml, /配信は8\/10まで視聴可能/);
   assert.match(finaleAfterHtml, /8月10日まで視聴できます/);
   assert.ok(finaleAfterHtml.includes("https://www.instagram.com/p/DbiZ7_MlKIt/"));
-  for (const driveId of [
-    "14Vo03fCpL6-w5WqLzBZDSQr3teZzYvDw",
-    "186ZwlbiVquo8aWKdz7QjtHPtwPaAAmb0",
-    "1kza1J9Z-NjoELY_7niOROg9FoLCHi2SJ",
-    "13cLw7bsw7lo-95pUNQZoJRVnLe8FnW9i",
-    "1PHLrnk6-7rFCi-WaBjBOuzhK881mYxHM",
-    "1Ca3PkVDA5oBapzUjpxeWcx9UTTBine1E"
+  // 写真・動画は自己ホスト。外部（Googleドライブ）へは依存しない。
+  for (const asset of [
+    "/images/yukajet/2026-08-02-finale-a-team.jpg",
+    "/images/yukajet/2026-08-02-finale-b-team.jpg",
+    "/images/yukajet/2026-08-02-finale-c-team.jpg",
+    "/videos/yukajet-finale-a-team-2026-08-02.mp4",
+    "/videos/yukajet-finale-b-team-2026-08-02.mp4",
+    "/videos/yukajet-finale-c-team-2026-08-02.mp4"
   ]) {
     assert.ok(
-      finaleAfterHtml.includes(driveId),
-      `完走レポートのDrive IDが消えている: ${driveId}`
+      finaleAfterHtml.includes(asset),
+      `完走レポートの自己ホスト素材が消えている: ${asset}`
+    );
+    assert.ok(
+      existsSync(new URL(`../public${asset}`, import.meta.url)),
+      `完走レポートの素材ファイルが無い: public${asset}`
     );
   }
+  assert.ok(
+    !finaleAfterHtml.includes("drive.google.com"),
+    "完走レポートにGoogleドライブへの依存が残っている"
+  );
 
   // 7. 上部のアーカイブ配信パネル
   const archiveBeforeDeadlineHtml = renderToStaticMarkup(
