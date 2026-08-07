@@ -619,6 +619,59 @@ try {
     /配信チケットの申し込みは終了・視聴は8\/10（月）まで/
   );
 
+  // 9. Miss Grand Japan FINAL（8/10 16:00 開演）
+  //    開演前はチケット導線あり、開演後はチケット導線だけ消えて告知・投稿リンクは残る。
+  const { MissGrandJapanManagementSection } = await server.ssrLoadModule(
+    "/src/components/MissGrandJapanManagementSection.tsx"
+  );
+  const { missGrandJapanFinal } = await server.ssrLoadModule(
+    "/src/data/missGrandJapanManagement.ts"
+  );
+
+  const beforeFinal = new Date("2026-08-10T15:59:00+09:00");
+  const afterFinal = new Date("2026-08-10T16:00:01+09:00");
+
+  const mgjBeforeHtml = renderToStaticMarkup(
+    createElement(MissGrandJapanManagementSection, { now: beforeFinal })
+  );
+  assert.ok(
+    mgjBeforeHtml.includes(missGrandJapanFinal.ticketUrl),
+    "開演前なのにMGJ FINALのチケット導線が無い"
+  );
+  assert.match(mgjBeforeHtml, /チケット申し込みフォームへ/);
+  assert.ok(mgjBeforeHtml.includes(missGrandJapanFinal.ticketNote));
+
+  const mgjAfterHtml = renderToStaticMarkup(
+    createElement(MissGrandJapanManagementSection, { now: afterFinal })
+  );
+  assert.ok(
+    !mgjAfterHtml.includes(missGrandJapanFinal.ticketUrl),
+    "開演後もMGJ FINALのチケット導線が残っている"
+  );
+  assert.doesNotMatch(mgjAfterHtml, /チケット申し込みフォームへ/);
+  assert.ok(mgjAfterHtml.includes(missGrandJapanFinal.endedNote));
+  // 告知画像・元投稿への導線は開演後も残す
+  for (const image of missGrandJapanFinal.images) {
+    assert.ok(
+      mgjAfterHtml.includes(image.src),
+      `開演後にMGJ FINALの告知画像が消えている: ${image.src}`
+    );
+    assert.ok(
+      existsSync(new URL(`../public${image.src}`, import.meta.url)),
+      `MGJ FINALの画像ファイルが無い: public${image.src}`
+    );
+  }
+  assert.ok(mgjAfterHtml.includes(missGrandJapanFinal.postUrl));
+
+  // events.ts の同じ公演と日時がずれていないか（二重管理の検算）
+  const mgjEvent = events.find((event) => event.id === "miss-grand-japan-2026-final-mc");
+  assert.ok(mgjEvent, "events.ts に miss-grand-japan-2026-final-mc が無い");
+  assert.equal(
+    new Date(mgjEvent.startAt).getTime(),
+    new Date(missGrandJapanFinal.startsAt).getTime(),
+    "MGJ FINAL の開演時刻が events.ts と missGrandJapanFinal でずれている"
+  );
+
   console.log("gojet-status tests OK");
 } finally {
   await server.close();

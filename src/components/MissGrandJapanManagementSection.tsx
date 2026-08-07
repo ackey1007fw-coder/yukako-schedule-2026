@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { ArrowUpRight, Clapperboard, Mic, Music, ShieldCheck, Ticket } from "lucide-react";
 import {
   missGrandJapanFinal,
@@ -5,12 +6,15 @@ import {
   missGrandJapanSeries
 } from "../data/missGrandJapanManagement";
 import { getResponsiveImageProps } from "../lib/responsiveImage";
+import { isPastDeadline } from "../lib/date";
 import { trackPortalEvent } from "../lib/analytics";
 import { ActHeader } from "./ActHeader";
 import { LazyInstagramEmbed } from "./LazyInstagramEmbed";
 
-function MissGrandJapanFinalBlock() {
+function MissGrandJapanFinalBlock({ now }: { now: Date }) {
   const final = missGrandJapanFinal;
+  // 開演を過ぎたら申し込み導線を出さない（#ゆかJETの締切判定と同じ考え方）。
+  const ended = isPastDeadline(final.startsAt, now);
 
   return (
     <div
@@ -80,21 +84,23 @@ function MissGrandJapanFinalBlock() {
           </blockquote>
 
           <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-            <a
-              href={final.ticketUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() =>
-                trackPortalEvent("ticket_click", {
-                  placement: "miss_grand_japan_final",
-                  item: "チケット申し込みフォーム"
-                })
-              }
-              className="yukako-button yukako-button-rose min-h-12 px-5 py-3 text-sm"
-            >
-              <Ticket className="h-4 w-4" aria-hidden="true" />
-              チケット申し込みフォームへ
-            </a>
+            {!ended && (
+              <a
+                href={final.ticketUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() =>
+                  trackPortalEvent("ticket_click", {
+                    placement: "miss_grand_japan_final",
+                    item: "チケット申し込みフォーム"
+                  })
+                }
+                className="yukako-button yukako-button-rose min-h-12 px-5 py-3 text-sm"
+              >
+                <Ticket className="h-4 w-4" aria-hidden="true" />
+                チケット申し込みフォームへ
+              </a>
+            )}
             <a
               href={final.postUrl}
               target="_blank"
@@ -112,7 +118,9 @@ function MissGrandJapanFinalBlock() {
             </a>
           </div>
 
-          <p className="mt-3 text-xs leading-6 text-ink/50">{final.ticketNote}</p>
+          <p className="mt-3 text-xs leading-6 text-ink/50">
+            {ended ? final.endedNote : final.ticketNote}
+          </p>
         </div>
       </div>
     </div>
@@ -211,8 +219,21 @@ function MissGrandJapanSeriesBlock() {
   );
 }
 
-export function MissGrandJapanManagementSection() {
+const CLOCK_UPDATE_MS = 60000;
+
+export function MissGrandJapanManagementSection({ now }: { now?: Date } = {}) {
   const data = missGrandJapanManagement;
+  const [currentTime, setCurrentTime] = useState(() => now ?? new Date());
+
+  useEffect(() => {
+    if (now) {
+      setCurrentTime(now);
+      return undefined;
+    }
+
+    const timer = window.setInterval(() => setCurrentTime(new Date()), CLOCK_UPDATE_MS);
+    return () => window.clearInterval(timer);
+  }, [now]);
 
   return (
     <section
@@ -221,7 +242,7 @@ export function MissGrandJapanManagementSection() {
       className="scroll-mt-32 bg-white py-16 sm:py-24"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <MissGrandJapanFinalBlock />
+        <MissGrandJapanFinalBlock now={currentTime} />
 
         <div className="grid gap-8 lg:grid-cols-[0.88fr_1.12fr] lg:items-start">
           <div>
