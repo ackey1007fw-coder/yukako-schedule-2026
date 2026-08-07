@@ -7,6 +7,12 @@ export type NewsItem = {
 
 export const news: NewsItem[] = [
   {
+    date: "2026.8.10",
+    label: "Instagram",
+    text: "MISS GRAND JAPAN & MR GAY JAPAN 2026 FINAL の日本語MCに吉井優花子さん。英語MCはRICOさん。8/10（月）16:00・ヒューリックホール東京、YouTubeでライブ配信も。",
+    url: "https://www.instagram.com/p/DbuenU5FKVg/?igsh=bjFvdjA2enZ5czA4"
+  },
+  {
     date: "2026.7.13",
     label: "X",
     text: "「ワイワイC班😆 最後の早紀、楽しんで演じます✨」——CM枠は7/16（木）23:59まで。",

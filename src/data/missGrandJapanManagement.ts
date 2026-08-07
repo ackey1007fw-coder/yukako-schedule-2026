@@ -48,6 +48,45 @@ export const missGrandJapanSeries = {
   ] satisfies MissGrandJapanSeriesReel[]
 };
 
+// MISS GRAND JAPAN & MR GAY JAPAN 2026 FINAL の MC 告知。
+// 出典: Miss Grand Japan 公式Instagram（@missgrandjapan）
+// https://www.instagram.com/p/DbuenU5FKVg/?igsh=bjFvdjA2enZ5czA4
+// 開催日程は src/data/events.ts の "miss-grand-japan-2026-final-mc" と揃える。
+export const missGrandJapanFinal = {
+  eyebrow: "MISS GRAND JAPAN / FINAL",
+  badge: "MC",
+  title: "MISS GRAND JAPAN & MR GAY JAPAN 2026 FINAL",
+  subtitle: "日本語MC 吉井優花子／英語MC RICO",
+  facts: [
+    { label: "日時", value: "2026年8月10日（月）16:00（日本時間）" },
+    { label: "会場", value: "ヒューリックホール東京（東京都千代田区有楽町2-5-1 有楽町マリオン11階）" },
+    { label: "配信", value: "@missgrandjapan のYouTubeでライブ配信" }
+  ],
+  body: [
+    "ミス・グランド・ジャパンとミスター・ゲイ・ジャパン、2つの日本代表が決まるファイナル。日本語MCを吉井優花子さん、英語MCをRICOさんが務めます。",
+    "優花子さんは2025年大会でMISS PEACE賞を受賞し、2026年度からは代表補佐／運営マネジメント。今回は進行役として本番のステージに立ちます。"
+  ],
+  // 公式投稿からの引用（原文どおり）
+  quote: "2人とともに、日本代表が誕生する特別な瞬間をお届けします👑✨",
+  images: [
+    {
+      src: "/images/miss-grand-japan/yukako-mgj-2026-final-mc-2026-08-10.jpg",
+      alt: "黒と金の装飾フレームの中で、片方の肩を出した黒いドレス姿の吉井優花子さんが微笑む告知画像。下部に「MC YUKAKO YOSHII」「MISS GRAND JAPAN & MR GAY JAPAN 2026 FINAL COMPETITION」「AUG 10TH 4.00PM (JAPAN TIME)」「HULIC HALL TOKYO | LIVE STREAMING ON @MISSGRANDJAPAN」の文字",
+      caption: "日本語MC 吉井優花子さん"
+    },
+    {
+      src: "/images/miss-grand-japan/yukako-mgj-2026-final-ticket-2026-08-10.jpg",
+      alt: "黒と金の背景に「TICKET」の見出しと大きなQRコードが置かれた告知画像。下部に「MISS GRAND JAPAN & MR GAY JAPAN 2026 FINAL COMPETITION」「AUG 10TH 4.00PM (JAPAN TIME)」「HULIC HALL TOKYO | LIVE STREAMING ON @MISSGRANDJAPAN」の文字",
+      caption: "チケット案内（QRコード）"
+    }
+  ],
+  // 上のTICKET画像のQRコードを読み取った先。スキャンしなくても飛べるように文字でも出す。
+  ticketUrl: "https://forms.gle/zftxsTkwg8G7jT7G6",
+  ticketNote: "リンク先は公式TICKET画像のQRコードと同じ申し込みフォームです。",
+  postUrl: "https://www.instagram.com/p/DbuenU5FKVg/?igsh=bjFvdjA2enZ5czA4",
+  ctaLabel: "MC発表の投稿を見る"
+};
+
 export const missGrandJapanManagement = {
   // 投稿日（=就任日ではなく、就任を発表した日として扱う）
   dateLabel: "2026.6.7",
