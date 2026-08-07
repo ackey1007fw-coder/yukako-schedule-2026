@@ -63,8 +63,8 @@ const standaloneUpdates: SiteUpdate[] = [
     summary:
       "全班と千秋楽LIVEまで無事に完走。3班の集合写真と3本の動画、約20曲を披露したLIVEの熱気、配信情報をまとめました。",
     image: {
-      src: "https://drive.google.com/thumbnail?id=1kza1J9Z-NjoELY_7niOROg9FoLCHi2SJ&sz=w1600",
-      alt: "舞台セットの前でポーズをとる#ゆかJET C班キャストの集合写真"
+      src: "/images/yukajet/2026-08-02-finale-c-team.jpg",
+      alt: "アメリカンダイナー風のセットの前で三角形のポーズを取る#ゆかJET C班の集合写真。下部に「ゆかJET」のロゴと「C班ではガールズの早紀 歌ダンスがたくさん♪」の文字が入っている"
     },
     sourceUrl:
       "https://www.instagram.com/p/DbiZ7_MlKIt/?img_index=5&igsh=MW91b25wN2o3dW92Yg==",

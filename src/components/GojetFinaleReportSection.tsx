@@ -11,6 +11,7 @@ import {
 import { gojetStreamingTicketUrl } from "../data/gojetTimetable";
 import { isGojetStreamingOrderClosed } from "../lib/gojetOrderDeadline";
 import { trackPortalEvent } from "../lib/analytics";
+import { getResponsiveImageProps } from "../lib/responsiveImage";
 
 type GojetFinaleReportSectionProps = {
   now?: Date;
@@ -23,34 +24,40 @@ const instagramPostUrl =
 
 const photos = [
   {
-    id: "14Vo03fCpL6-w5WqLzBZDSQr3teZzYvDw",
-    alt: "舞台セットの前でポーズをとる#ゆかJET A班キャストの集合写真",
+    src: "/images/yukajet/2026-08-02-finale-a-team.jpg",
+    alt: "Route 66の看板やクラシックカーの壁画が並ぶアメリカンダイナー風のセットの前で、両手を顔の横に添えて三角形をつくる#ゆかJET A班の集合写真。前列は黄色・ピンク・水色の水玉スカート姿の3人が床に座り、後列にアロハシャツや水色の制服の出演者が並ぶ。下部に「A班」の文字",
     caption: "A班キャスト"
   },
   {
-    id: "186ZwlbiVquo8aWKdz7QjtHPtwPaAAmb0",
-    alt: "舞台セットの前でポーズをとる#ゆかJET B班キャストの集合写真",
+    src: "/images/yukajet/2026-08-02-finale-b-team.jpg",
+    alt: "同じアメリカンダイナー風のセットの前で三角形のポーズを取る#ゆかJET B班9人の集合写真。上部に「B班では主役のJET! GO,JET!史上初の全員女性キャスト」の文字が入っている",
     caption: "B班キャスト／JET役・吉井優花子さん"
   },
   {
-    id: "1kza1J9Z-NjoELY_7niOROg9FoLCHi2SJ",
-    alt: "舞台セットの前でポーズをとる#ゆかJET C班キャストの集合写真",
+    src: "/images/yukajet/2026-08-02-finale-c-team.jpg",
+    alt: "同じアメリカンダイナー風のセットの前で三角形のポーズを取る#ゆかJET C班の集合写真。下部に「ゆかJET」のロゴと「C班ではガールズの早紀 歌ダンスがたくさん♪」の文字が入っている",
     caption: "C班キャスト／早紀役・吉井優花子さん"
   }
 ] as const;
 
 const videos = [
   {
-    id: "13cLw7bsw7lo-95pUNQZoJRVnLe8FnW9i",
-    label: "#ゆかJET 舞台記録 1"
+    src: "/videos/yukajet-finale-a-team-2026-08-02.mp4",
+    poster: "/images/yukajet/2026-08-02-finale-a-team-video-poster.jpg",
+    team: "A班",
+    label: "『GO,JET!GO!GO! vol.1 Premium』A班の舞台映像（約1分・音声あり）"
   },
   {
-    id: "1PHLrnk6-7rFCi-WaBjBOuzhK881mYxHM",
-    label: "#ゆかJET 舞台記録 2"
+    src: "/videos/yukajet-finale-b-team-2026-08-02.mp4",
+    poster: "/images/yukajet/2026-08-02-finale-b-team-video-poster.jpg",
+    team: "B班",
+    label: "『GO,JET!GO!GO! vol.1 Premium』B班の舞台映像（約1分・音声あり）"
   },
   {
-    id: "1Ca3PkVDA5oBapzUjpxeWcx9UTTBine1E",
-    label: "#ゆかJET 舞台記録 3"
+    src: "/videos/yukajet-finale-c-team-2026-08-02.mp4",
+    poster: "/images/yukajet/2026-08-02-finale-c-team-video-poster.jpg",
+    team: "C班",
+    label: "『GO,JET!GO!GO! vol.1 Premium』C班の舞台映像（約1分・音声あり）"
   }
 ] as const;
 
@@ -60,11 +67,6 @@ const buildHighlights = (orderClosed: boolean) => [
   "千秋楽LIVEで約20曲",
   orderClosed ? "配信は8/10まで視聴可能" : "配信申込は8/3まで"
 ];
-
-const driveViewUrl = (id: string) => `https://drive.google.com/file/d/${id}/view`;
-const drivePreviewUrl = (id: string) => `https://drive.google.com/file/d/${id}/preview`;
-const driveThumbnailUrl = (id: string) =>
-  `https://drive.google.com/thumbnail?id=${id}&sz=w1600`;
 
 export function GojetFinaleReportSection({ now }: GojetFinaleReportSectionProps) {
   const [currentTime, setCurrentTime] = useState(() => now ?? new Date());
@@ -139,25 +141,20 @@ export function GojetFinaleReportSection({ now }: GojetFinaleReportSectionProps)
             <div className="mt-6 grid gap-4 md:grid-cols-3">
               {photos.map((photo) => (
                 <figure
-                  key={photo.id}
+                  key={photo.src}
                   className="m-0 overflow-hidden border border-champagne/30 bg-porcelain"
                 >
-                  <a
-                    href={driveViewUrl(photo.id)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group block bg-ink"
-                    aria-label={`${photo.caption}の写真を大きく見る`}
-                  >
-                    <img
-                      src={driveThumbnailUrl(photo.id)}
-                      alt={photo.alt}
-                      loading="lazy"
-                      decoding="async"
-                      referrerPolicy="no-referrer"
-                      className="block aspect-[4/3] h-auto w-full object-contain transition duration-300 group-hover:opacity-90"
-                    />
-                  </a>
+                  <img
+                    {...getResponsiveImageProps(
+                      photo.src,
+                      "(min-width: 768px) 33vw, 100vw"
+                    )}
+                    alt={photo.alt}
+                    loading="lazy"
+                    decoding="async"
+                    // 3枚とも4:5。切らずに全体を出しても高さが揃う。
+                    className="block h-auto w-full bg-ink"
+                  />
                   <figcaption className="border-t border-champagne/20 bg-white px-3 py-3 text-xs font-bold leading-5 text-ink/70">
                     {photo.caption}
                   </figcaption>
@@ -173,36 +170,27 @@ export function GojetFinaleReportSection({ now }: GojetFinaleReportSectionProps)
               写真だけでは伝わらない、舞台の熱
             </h3>
             <p className="mt-3 max-w-2xl text-sm leading-7 text-ink/70">
-              3本の動画で、公演の空気とキャストの表情を楽しめます。再生できない場合は、各カードの「動画を開く」からGoogleドライブでご覧ください。
+              A班・B班・C班、それぞれの本編から約1分ずつ。歌とダンス、客席の熱気まで音ありでどうぞ。
             </p>
 
             <div className="mt-6 grid gap-5 md:grid-cols-3">
-              {videos.map((video, index) => (
+              {videos.map((video) => (
                 <figure
-                  key={video.id}
+                  key={video.src}
                   className="m-0 overflow-hidden border border-champagne/30 bg-ink shadow-paper"
                 >
-                  <div className="aspect-[9/16] w-full bg-black">
-                    <iframe
-                      src={drivePreviewUrl(video.id)}
-                      title={video.label}
-                      loading="lazy"
-                      allow="autoplay; encrypted-media; picture-in-picture"
-                      allowFullScreen
-                      className="h-full w-full"
-                    />
-                  </div>
-                  <figcaption className="flex items-center justify-between gap-3 border-t border-white/10 px-3 py-3 text-xs font-bold text-white/75">
-                    <span>舞台記録 {index + 1}</span>
-                    <a
-                      href={driveViewUrl(video.id)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex shrink-0 items-center gap-1 underline underline-offset-4 transition hover:text-champagne"
-                    >
-                      動画を開く
-                      <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
-                    </a>
+                  <video
+                    controls
+                    playsInline
+                    preload="none"
+                    poster={video.poster}
+                    aria-label={video.label}
+                    className="block aspect-video w-full bg-black object-contain"
+                  >
+                    <source src={video.src} type="video/mp4" />
+                  </video>
+                  <figcaption className="border-t border-white/10 px-3 py-3 text-xs font-bold text-white/75">
+                    {video.team}／舞台映像（約1分）
                   </figcaption>
                 </figure>
               ))}
