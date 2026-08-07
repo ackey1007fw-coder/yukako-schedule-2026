@@ -50,7 +50,7 @@ function MissGrandJapanFinalBlock({ now }: { now: Date }) {
 
         <div className="p-6 sm:p-8">
           <p className="flex flex-wrap items-center gap-2 text-xs font-black uppercase tracking-[0.16em] text-champagneInk">
-            <span className="inline-flex items-center gap-1 border border-rosefog/45 bg-[#fff1f4] px-2.5 py-1 text-rosefog">
+            <span className="inline-flex items-center gap-1 border border-rosefog/45 bg-rosefog/10 px-2.5 py-1 text-rosefog">
               <Mic className="h-3.5 w-3.5" aria-hidden="true" />
               {final.badge}
             </span>
@@ -59,9 +59,10 @@ function MissGrandJapanFinalBlock({ now }: { now: Date }) {
             </span>
           </p>
 
-          <h3 className="mt-4 font-display text-2xl leading-tight text-ink sm:text-3xl">
+          {/* セクション内で最初に現れる見出し。ActHeader の h2 より前に出るので h3 にしない */}
+          <h2 className="mt-4 font-display text-2xl leading-tight text-ink sm:text-3xl">
             {final.title}
-          </h3>
+          </h2>
           <p className="mt-2 text-sm font-bold text-champagneInk sm:text-base">{final.subtitle}</p>
 
           <dl className="mt-5 divide-y divide-champagne/20 border-y border-champagne/25">

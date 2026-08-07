@@ -7,6 +7,10 @@ export const events: ScheduleEvent[] = [
     shortTitle: "MGJ 2026 FINAL（MC）",
     category: "event",
     startAt: "2026-08-10T16:00:00+09:00",
+    // 終演時刻は公表されていない。endAt を省くと isEventPast が startAt を見るため、
+    // 16:00の開演と同時に「終了した予定」へ移ってしまう。開催中も直近予定として
+    // 残すために当日いっぱいを終わりとして持つ（表示は displayDate の「16:00開演」）。
+    endAt: "2026-08-10T23:59:59+09:00",
     dates: ["2026-08-10"],
     displayDate: "2026年8月10日（月）16:00開演（日本時間）",
     venue: "ヒューリックホール東京（東京都千代田区有楽町2-5-1 有楽町マリオン11階）",
