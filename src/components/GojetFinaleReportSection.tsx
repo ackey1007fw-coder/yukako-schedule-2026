@@ -144,17 +144,25 @@ export function GojetFinaleReportSection({ now }: GojetFinaleReportSectionProps)
                   key={photo.src}
                   className="m-0 overflow-hidden border border-champagne/30 bg-porcelain"
                 >
-                  <img
-                    {...getResponsiveImageProps(
-                      photo.src,
-                      "(min-width: 768px) 33vw, 100vw"
-                    )}
-                    alt={photo.alt}
-                    loading="lazy"
-                    decoding="async"
-                    // 3枚とも4:5。切らずに全体を出しても高さが揃う。
-                    className="block h-auto w-full bg-ink"
-                  />
+                  <a
+                    href={photo.src}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group block bg-ink"
+                    aria-label={`${photo.caption}の写真を大きく見る`}
+                  >
+                    <img
+                      {...getResponsiveImageProps(
+                        photo.src,
+                        "(min-width: 768px) 33vw, 100vw"
+                      )}
+                      alt={photo.alt}
+                      loading="lazy"
+                      decoding="async"
+                      // 3枚とも4:5。切らずに全体を出しても高さが揃う。
+                      className="block h-auto w-full transition duration-300 group-hover:opacity-90"
+                    />
+                  </a>
                   <figcaption className="border-t border-champagne/20 bg-white px-3 py-3 text-xs font-bold leading-5 text-ink/70">
                     {photo.caption}
                   </figcaption>
