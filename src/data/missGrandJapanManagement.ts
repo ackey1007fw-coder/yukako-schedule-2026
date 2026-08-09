@@ -101,7 +101,7 @@ export const missGrandJapanFinal = {
       alt: "MISS GRAND JAPANとMR GAY JAPANの2025年日本代表、OB・OG会代表と写る吉井優花子さん。画像内に「司会を務めます」「大会は8月10日」の文字"
     },
     body: [
-      "MISS GRAND JAPAN 2025年日本代表のERIKA OPIEさん、OB・OG会代表のSATSUKIさん、MR GAY JAPAN 2025年日本代表のSUKEさんと並んだ3枚。差し入れのドリンクにも一言。"
+      "MISS GRAND JAPAN 2025年日本代表のERIKA OPIEさん、OB・OG会代表のSATSUKIさん、MR GAY JAPAN 2025年日本代表のSUKEさんと並んだ3枚。ドリンクを持つSUKEさんの1枚には「ドリンクありがとう✨」と一言。"
     ],
     // 画像に書き込まれた文字（原文どおり）。写真が見えない環境でも投稿の中身が分かるように。
     handwritten: ["司会を務めます", "今年の日本大会も盛り上げていくぞ🔥", "大会は8月10日👑"],
