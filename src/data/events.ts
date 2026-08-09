@@ -9,8 +9,8 @@ export const events: ScheduleEvent[] = [
     startAt: "2026-08-10T16:00:00+09:00",
     // 終演時刻は公表されていない。endAt を省くと isEventPast が startAt を見るため、
     // 16:00の開演と同時に「終了した予定」へ移ってしまう。開催中も直近予定として
-    // 残すために当日いっぱいを終わりとして持つ（表示は displayDate の「16:00開演」）。
-    endAt: "2026-08-10T23:59:59+09:00",
+    // 残すために日付が変わる時刻を表示上の境界として持つ（公表された終演時刻ではない）。
+    endAt: "2026-08-11T00:00:00+09:00",
     dates: ["2026-08-10"],
     displayDate: "2026年8月10日（月）16:00開演（日本時間）",
     venue: "ヒューリックホール東京（東京都千代田区有楽町2-5-1 有楽町マリオン11階）",
@@ -35,7 +35,7 @@ export const events: ScheduleEvent[] = [
         kind: "sns"
       },
       {
-        label: "🎫 チケット申し込みフォーム（公式TICKET画像のQRコード先）",
+        label: "🎫 チケット申し込みフォーム（TICKET画像のQRコード先）",
         url: "https://forms.gle/zftxsTkwg8G7jT7G6",
         kind: "ticket"
       },

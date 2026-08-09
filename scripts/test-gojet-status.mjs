@@ -640,6 +640,7 @@ try {
   );
   assert.match(mgjBeforeHtml, /チケット申し込みフォームへ/);
   assert.ok(mgjBeforeHtml.includes(missGrandJapanFinal.ticketNote));
+  assert.doesNotMatch(mgjBeforeHtml, /公式TICKET/);
 
   const mgjAfterHtml = renderToStaticMarkup(
     createElement(MissGrandJapanManagementSection, { now: afterFinal })
@@ -672,6 +673,11 @@ try {
     new Date(mgjEvent.startAt).getTime(),
     new Date(missGrandJapanFinal.startsAt).getTime(),
     "MGJ FINAL の開演時刻が events.ts と missGrandJapanFinal でずれている"
+  );
+  assert.ok(mgjEvent.endAt, "MGJ FINAL に表示上の終了境界が無い");
+  assert.ok(
+    new Date(mgjEvent.endAt).getTime() > new Date(mgjEvent.startAt).getTime(),
+    "MGJ FINAL が開演時刻と同時に終了扱いになる"
   );
 
   console.log("gojet-status tests OK");

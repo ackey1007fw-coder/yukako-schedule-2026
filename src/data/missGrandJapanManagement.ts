@@ -90,7 +90,7 @@ export const missGrandJapanFinal = {
   startsAt: "2026-08-10T16:00:00+09:00",
   // 上のTICKET画像のQRコードを読み取った先。スキャンしなくても飛べるように文字でも出す。
   ticketUrl: "https://forms.gle/zftxsTkwg8G7jT7G6",
-  ticketNote: "リンク先は公式TICKET画像のQRコードと同じ申し込みフォームです。",
+  ticketNote: "リンク先はTICKET画像のQRコードと同じ申し込みフォームです。",
   // 開演後に出す案内。申し込みボタンは出さない。
   endedNote: "この日の公演は終了しています。",
   yukakoPostUrl: "https://x.com/mokoopy/status/2086075435927138676",
