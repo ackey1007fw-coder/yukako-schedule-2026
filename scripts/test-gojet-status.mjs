@@ -723,13 +723,16 @@ try {
   const latestUpdatesHtml = renderToStaticMarkup(createElement(LatestUpdatesSection));
   assert.ok(latestUpdatesHtml.includes(mgjUpdate.image.src));
   assert.ok(latestUpdatesHtml.includes("sm:object-contain"));
+  // 最新情報の記事と、MGJ FINALセクション内の投稿ブロックは同じX投稿を指す。
+  // news.ts にも同じURLの項目があるので、siteUpdates 側で1件に畳まれていることを見る。
+  const yukakoPostUrl = missGrandJapanFinal.yukakoPost.postUrl;
+  assert.ok(yukakoPostUrl, "MGJ FINAL に優花子さんの投稿URLが無い");
   assert.equal(
-    siteUpdates.filter(
-      (update) => update.sourceUrl?.split("?")[0] === missGrandJapanFinal.yukakoPostUrl
-    ).length,
+    siteUpdates.filter((update) => update.sourceUrl?.split("?")[0] === yukakoPostUrl).length,
     1,
     "同じX投稿が最新情報に重複している"
   );
+  assert.equal(mgjUpdate.sourceUrl, yukakoPostUrl, "最新情報の記事が別の投稿を指している");
 
   console.log("gojet-status tests OK");
 } finally {
