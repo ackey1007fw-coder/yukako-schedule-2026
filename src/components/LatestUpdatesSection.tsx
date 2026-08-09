@@ -101,6 +101,8 @@ export function LatestUpdatesSection() {
                     className={
                       update.imageLayout === "portrait-preview"
                         ? "block aspect-[4/3] w-full object-cover object-top"
+                        : update.imageLayout === "contain"
+                          ? "block h-auto w-full sm:aspect-[4/3] sm:bg-ink sm:object-contain"
                         : "block h-auto w-full sm:aspect-[4/3] sm:object-cover sm:object-top"
                     }
                   />

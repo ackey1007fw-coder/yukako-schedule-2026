@@ -680,6 +680,32 @@ try {
     "MGJ FINAL が開演時刻と同時に終了扱いになる"
   );
 
+  // 10. トップの「最新情報」記事にも、本人投稿の写真と記事内導線を出す。
+  const { LatestUpdatesSection } = await server.ssrLoadModule(
+    "/src/components/LatestUpdatesSection.tsx"
+  );
+  const { siteUpdates } = await server.ssrLoadModule("/src/data/siteUpdates.ts");
+  const mgjUpdate = siteUpdates.find(
+    (update) => update.id === "miss-grand-japan-final-mc-2026-08-08"
+  );
+  assert.ok(mgjUpdate, "最新情報にMGJ FINALの記事が無い");
+  assert.equal(
+    mgjUpdate.image?.src,
+    "/images/miss-grand-japan/yukako-mgj-2026-final-members-2026-08-08.jpg"
+  );
+  assert.equal(mgjUpdate.imageLayout, "contain");
+  assert.equal(mgjUpdate.anchor, "#miss-grand-japan-final");
+  const latestUpdatesHtml = renderToStaticMarkup(createElement(LatestUpdatesSection));
+  assert.ok(latestUpdatesHtml.includes(mgjUpdate.image.src));
+  assert.ok(latestUpdatesHtml.includes("sm:object-contain"));
+  assert.equal(
+    siteUpdates.filter(
+      (update) => update.sourceUrl?.split("?")[0] === missGrandJapanFinal.yukakoPostUrl
+    ).length,
+    1,
+    "同じX投稿が最新情報に重複している"
+  );
+
   console.log("gojet-status tests OK");
 } finally {
   await server.close();
