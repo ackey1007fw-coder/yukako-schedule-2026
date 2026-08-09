@@ -22,7 +22,7 @@ function MissGrandJapanFinalBlock({ now }: { now: Date }) {
       className="yukako-card mb-12 scroll-mt-32 overflow-hidden border-champagne/35 bg-white shadow-paper sm:mb-16"
     >
       <div className="grid gap-0 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
-        <div className="grid grid-cols-2 gap-px bg-champagne/25">
+        <div className="grid grid-cols-1 gap-px bg-champagne/25 sm:grid-cols-3 lg:grid-cols-3">
           {final.images.map((image) => (
             <figure key={image.src} className="m-0 bg-ink">
               <a
@@ -103,19 +103,49 @@ function MissGrandJapanFinalBlock({ now }: { now: Date }) {
               </a>
             )}
             <a
-              href={final.postUrl}
+              href={final.yukakoPostUrl}
               target="_blank"
               rel="noopener noreferrer"
               onClick={() =>
                 trackPortalEvent("sns_click", {
                   placement: "miss_grand_japan_final",
-                  item: final.ctaLabel
+                  item: final.yukakoPostCtaLabel
+                })
+              }
+              className="yukako-button yukako-button-rose min-h-12 px-5 py-3 text-sm"
+            >
+              <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+              {final.yukakoPostCtaLabel}
+            </a>
+            <a
+              href={final.yukakoProfileUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() =>
+                trackPortalEvent("sns_click", {
+                  placement: "miss_grand_japan_final",
+                  item: final.yukakoProfileCtaLabel
                 })
               }
               className="yukako-button yukako-button-soft min-h-12 px-5 py-3 text-sm"
             >
               <ArrowUpRight className="h-4 w-4 text-champagneInk" aria-hidden="true" />
-              {final.ctaLabel}
+              {final.yukakoProfileCtaLabel}
+            </a>
+            <a
+              href={final.officialPostUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() =>
+                trackPortalEvent("sns_click", {
+                  placement: "miss_grand_japan_final",
+                  item: final.officialPostCtaLabel
+                })
+              }
+              className="yukako-button yukako-button-soft min-h-12 px-5 py-3 text-sm"
+            >
+              <ArrowUpRight className="h-4 w-4 text-champagneInk" aria-hidden="true" />
+              {final.officialPostCtaLabel}
             </a>
           </div>
 

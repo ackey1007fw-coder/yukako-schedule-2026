@@ -9,10 +9,10 @@ export const news: NewsItem[] = [
   {
     // 掲載日。Footer の「掲載情報更新」も news[0].date を使うため、
     // 公演日（8/10）ではなくサイトに載せた日を入れる。
-    date: "2026.8.7",
-    label: "Instagram",
-    text: "MISS GRAND JAPAN & MR GAY JAPAN 2026 FINAL の日本語MCに吉井優花子さん。英語MCはRICOさん。8/10（月）16:00・ヒューリックホール東京、YouTubeでライブ配信も。",
-    url: "https://www.instagram.com/p/DbuenU5FKVg/?igsh=bjFvdjA2enZ5czA4"
+    date: "2026.8.8",
+    label: "X",
+    text: "8/10（月）16:00、MISS GRAND JAPAN / MR GAY JAPAN 2026 FINAL。吉井優花子さんがMCとしてヒューリックホール東京のステージへ。チケットはまもなく締め切り。",
+    url: "https://x.com/mokoopy/status/2086075435927138676"
   },
   {
     date: "2026.7.13",

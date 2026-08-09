@@ -661,7 +661,9 @@ try {
       `MGJ FINALの画像ファイルが無い: public${image.src}`
     );
   }
-  assert.ok(mgjAfterHtml.includes(missGrandJapanFinal.postUrl));
+  assert.ok(mgjAfterHtml.includes(missGrandJapanFinal.yukakoPostUrl));
+  assert.ok(mgjAfterHtml.includes(missGrandJapanFinal.yukakoProfileUrl));
+  assert.ok(mgjAfterHtml.includes(missGrandJapanFinal.officialPostUrl));
 
   // events.ts の同じ公演と日時がずれていないか（二重管理の検算）
   const mgjEvent = events.find((event) => event.id === "miss-grand-japan-2026-final-mc");

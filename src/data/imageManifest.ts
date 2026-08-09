@@ -209,6 +209,7 @@ export const imageManifest = {
   "/images/gallery/g64.jpg": {"width":1206,"height":2622,"widths":[360,480,720,960,1206]},
   "/images/gallery/g65.jpg": {"width":960,"height":1280,"widths":[360,480,720,960]},
   "/images/miss-grand-japan/yukako-mgj-2026-final-mc-2026-08-10.jpg": {"width":3432,"height":4290,"widths":[360,480,720,960,1280,1600,3432]},
+  "/images/miss-grand-japan/yukako-mgj-2026-final-members-2026-08-08.jpg": {"width":733,"height":1280,"widths":[360,480,720,733]},
   "/images/miss-grand-japan/yukako-mgj-2026-final-ticket-2026-08-10.jpg": {"width":3432,"height":4290,"widths":[360,480,720,960,1280,1600,3432]},
   "/images/miss-grand-japan/yukako-miss-grand-japan-management-2026-01.jpg": {"width":3240,"height":4317,"widths":[360,480,720,960,1280,1600,3240]},
   "/images/miss-grand-japan/yukako-miss-grand-japan-management-2026-02.jpg": {"width":3240,"height":4317,"widths":[360,480,720,960,1280,1600,3240]},

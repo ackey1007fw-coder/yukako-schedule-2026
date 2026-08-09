@@ -20,6 +20,16 @@ export const events: ScheduleEvent[] = [
     badges: ["MC", "Miss Grand Japan", "配信あり", "8/10"],
     links: [
       {
+        label: "優花子さんの出演告知・チケット案内（X）",
+        url: "https://x.com/mokoopy/status/2086075435927138676",
+        kind: "sns"
+      },
+      {
+        label: "優花子さんのXプロフィール",
+        url: "https://x.com/mokoopy",
+        kind: "sns"
+      },
+      {
         label: "MC発表の投稿（Miss Grand Japan Instagram）",
         url: "https://www.instagram.com/p/DbuenU5FKVg/?igsh=bjFvdjA2enZ5czA4",
         kind: "sns"
