@@ -64,28 +64,24 @@ export const missGrandJapanFinal = {
     { label: "配信", value: "@missgrandjapan のYouTubeでライブ配信" }
   ],
   body: [
-    "ミス・グランド・ジャパンとミスター・ゲイ・ジャパン、2つの日本代表が決まるファイナル。日本語MCを吉井優花子さん、英語MCをRICOさんが務めます。",
+    "ミス・グランド・ジャパンとミスター・ゲイ・ジャパン、2つの日本代表が決まるファイナル。",
     "優花子さんは2025年大会でMISS PEACE賞を受賞し、2026年度からは代表補佐／運営マネジメント。今回は進行役として本番のステージに立ちます。"
   ],
-  // 公式投稿からの引用（原文どおり）
+  // MC発表の投稿からの引用（原文どおり）。誰の言葉かが分かるように出典も出す。
   quote: "2人とともに、日本代表が誕生する特別な瞬間をお届けします👑✨",
-  images: [
-    {
-      src: "/images/miss-grand-japan/yukako-mgj-2026-final-members-2026-08-08.jpg",
-      alt: "MISS GRAND JAPANとMR GAY JAPANの2025年日本代表、OB・OG会代表と写る吉井優花子さん。画像内に「司会を務めます」「大会は8月10日」の文字",
-      caption: "優花子さんの8月8日投稿"
-    },
-    {
-      src: "/images/miss-grand-japan/yukako-mgj-2026-final-mc-2026-08-10.jpg",
-      alt: "黒と金の装飾フレームの中で、片方の肩を出した黒いドレス姿の吉井優花子さんが微笑む告知画像。下部に「MC YUKAKO YOSHII」「MISS GRAND JAPAN & MR GAY JAPAN 2026 FINAL COMPETITION」「AUG 10TH 4.00PM (JAPAN TIME)」「HULIC HALL TOKYO | LIVE STREAMING ON @MISSGRANDJAPAN」の文字",
-      caption: "日本語MC 吉井優花子さん"
-    },
-    {
-      src: "/images/miss-grand-japan/yukako-mgj-2026-final-ticket-2026-08-10.jpg",
-      alt: "黒と金の背景に「TICKET」の見出しと大きなQRコードが置かれた告知画像。下部に「MISS GRAND JAPAN & MR GAY JAPAN 2026 FINAL COMPETITION」「AUG 10TH 4.00PM (JAPAN TIME)」「HULIC HALL TOKYO | LIVE STREAMING ON @MISSGRANDJAPAN」の文字",
-      caption: "チケット案内（QRコード）"
-    }
-  ],
+  quoteSource: "MC発表の投稿より（@missgrandjapan）",
+  // メインの告知画像（MC発表）。
+  heroImage: {
+    src: "/images/miss-grand-japan/yukako-mgj-2026-final-mc-2026-08-10.jpg",
+    alt: "黒と金の装飾フレームの中で、片方の肩を出した黒いドレス姿の吉井優花子さんが微笑む告知画像。下部に「MC YUKAKO YOSHII」「MISS GRAND JAPAN & MR GAY JAPAN 2026 FINAL COMPETITION」「AUG 10TH 4.00PM (JAPAN TIME)」「HULIC HALL TOKYO | LIVE STREAMING ON @MISSGRANDJAPAN」の文字",
+    caption: "MC発表の告知画像"
+  },
+  // チケット案内。QRコードが読める大きさで別途開けるよう、申し込み導線の隣に小さく置く。
+  ticketImage: {
+    src: "/images/miss-grand-japan/yukako-mgj-2026-final-ticket-2026-08-10.jpg",
+    alt: "黒と金の背景に「TICKET」の見出しと大きなQRコードが置かれた告知画像。下部に「MISS GRAND JAPAN & MR GAY JAPAN 2026 FINAL COMPETITION」「AUG 10TH 4.00PM (JAPAN TIME)」「HULIC HALL TOKYO | LIVE STREAMING ON @MISSGRANDJAPAN」の文字",
+    caption: "チケット案内（QRコード）"
+  },
   // 開演時刻（ISO8601・JST）。これを過ぎたらチケット導線を閉じる。
   startsAt: "2026-08-10T16:00:00+09:00",
   // 上のTICKET画像のQRコードを読み取った先。スキャンしなくても飛べるように文字でも出す。
@@ -93,12 +89,27 @@ export const missGrandJapanFinal = {
   ticketNote: "リンク先はTICKET画像のQRコードと同じ申し込みフォームです。",
   // 開演後に出す案内。申し込みボタンは出さない。
   endedNote: "この日の公演は終了しています。",
-  yukakoPostUrl: "https://x.com/mokoopy/status/2086075435927138676",
-  yukakoPostCtaLabel: "優花子さんの出演告知を見る",
-  yukakoProfileUrl: "https://x.com/mokoopy",
-  yukakoProfileCtaLabel: "優花子さんをXで応援",
   officialPostUrl: "https://www.instagram.com/p/DbuenU5FKVg/?igsh=bjFvdjA2enZ5czA4",
-  officialPostCtaLabel: "MC発表を見る"
+  officialPostCtaLabel: "MC発表を見る",
+  // 優花子さん本人のX投稿。写真と本文をサイト側にも置き、本人への導線をここにまとめる。
+  // 出典: https://x.com/mokoopy/status/2086075435927138676
+  yukakoPost: {
+    eyebrow: "YUKAKO / X",
+    title: "大切な2025メンバー",
+    image: {
+      src: "/images/miss-grand-japan/yukako-mgj-2026-final-members-2026-08-08.jpg",
+      alt: "MISS GRAND JAPANとMR GAY JAPANの2025年日本代表、OB・OG会代表と写る吉井優花子さん。画像内に「司会を務めます」「大会は8月10日」の文字"
+    },
+    body: [
+      "MISS GRAND JAPAN 2025年日本代表のERIKA OPIEさん、OB・OG会代表のSATSUKIさん、MR GAY JAPAN 2025年日本代表のSUKEさんと並んだ3枚。差し入れのドリンクにも一言。"
+    ],
+    // 画像に書き込まれた文字（原文どおり）。写真が見えない環境でも投稿の中身が分かるように。
+    handwritten: ["司会を務めます", "今年の日本大会も盛り上げていくぞ🔥", "大会は8月10日👑"],
+    postUrl: "https://x.com/mokoopy/status/2086075435927138676",
+    postCtaLabel: "優花子さんの投稿を見る",
+    profileUrl: "https://x.com/mokoopy",
+    profileCtaLabel: "優花子さんをXで応援"
+  }
 };
 
 export const missGrandJapanManagement = {

@@ -9,9 +9,9 @@ export const news: NewsItem[] = [
   {
     // 掲載日。Footer の「掲載情報更新」も news[0].date を使うため、
     // 公演日（8/10）ではなくサイトに載せた日を入れる。
-    date: "2026.8.8",
+    date: "2026.8.9",
     label: "X",
-    text: "8/10（月）16:00、MISS GRAND JAPAN / MR GAY JAPAN 2026 FINAL。吉井優花子さんがMCとしてヒューリックホール東京のステージへ。チケットはまもなく締め切り。",
+    text: "「今年の日本大会も盛り上げていくぞ🔥」——8/10（月）16:00、MISS GRAND JAPAN & MR GAY JAPAN 2026 FINAL。吉井優花子さんが日本語MCとしてヒューリックホール東京のステージへ。",
     url: "https://x.com/mokoopy/status/2086075435927138676"
   },
   {
