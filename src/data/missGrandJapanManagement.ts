@@ -95,7 +95,8 @@ export const missGrandJapanFinal = {
   // 出典: https://x.com/mokoopy/status/2086075435927138676
   yukakoPost: {
     eyebrow: "YUKAKO / X",
-    title: "大切な2025メンバー",
+    // 画像の書き込みをそのまま見出しにする。カギ括弧で囲んで出すので絵文字も省かない。
+    title: "大切な2025メンバー✨",
     image: {
       src: "/images/miss-grand-japan/yukako-mgj-2026-final-members-2026-08-08.jpg",
       alt: "MISS GRAND JAPANとMR GAY JAPANの2025年日本代表、OB・OG会代表と写る吉井優花子さん。画像内に「司会を務めます」「大会は8月10日」の文字"
