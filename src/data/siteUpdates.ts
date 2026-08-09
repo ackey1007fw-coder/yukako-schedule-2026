@@ -12,7 +12,7 @@ export type SiteUpdate = {
   title: string;
   summary?: string;
   image?: { src: string; alt: string };
-  imageLayout?: "portrait-preview";
+  imageLayout?: "portrait-preview" | "contain";
   // 元投稿（X / Instagram など）への外部リンク
   sourceUrl?: string;
   // サイト内で詳しく読めるセクションへのアンカー
@@ -55,6 +55,21 @@ const sourcePlatform = (url: string) => {
 
 // 専用セクションを持つ単発トピック。本文は各セクションが持つため、ここは見出しと導線のみ。
 const standaloneUpdates: SiteUpdate[] = [
+  {
+    id: "miss-grand-japan-final-mc-2026-08-08",
+    date: "2026.8.8",
+    category: "Miss Grand Japan",
+    title: "8/10、日本代表が決まるステージへ——吉井優花子さんがMC",
+    summary:
+      "MISS GRAND JAPAN / MR GAY JAPAN 2026 FINAL。8月10日（月）16:00、ヒューリックホール東京で司会を務めます。",
+    image: {
+      src: "/images/miss-grand-japan/yukako-mgj-2026-final-members-2026-08-08.jpg",
+      alt: "MISS GRAND JAPANとMR GAY JAPANの2025年日本代表、OB・OG会代表と写る吉井優花子さん。画像内に「司会を務めます」「大会は8月10日」の文字"
+    },
+    imageLayout: "contain",
+    sourceUrl: "https://x.com/mokoopy/status/2086075435927138676",
+    anchor: "#miss-grand-japan-final"
+  },
   {
     id: "gojet-finale-report-2026-08-02",
     date: "2026.8.2",
