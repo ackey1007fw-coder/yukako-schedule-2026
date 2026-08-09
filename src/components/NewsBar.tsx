@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ArrowUpRight, Megaphone } from "lucide-react";
+import { ArrowDownRight, ArrowUpRight, Megaphone } from "lucide-react";
 import { news } from "../data/news";
 
 // 最新のお知らせを1件、トップのスリムなバーで表示する。
@@ -18,6 +18,7 @@ export function NewsBar() {
   }, [latest]);
 
   if (!latest) return null;
+  const isInternal = latest.url.startsWith("#") || latest.url.startsWith("/");
 
   return (
     <div
@@ -27,8 +28,8 @@ export function NewsBar() {
     >
       <a
         href={latest.url}
-        target="_blank"
-        rel="noopener noreferrer"
+        target={isInternal ? undefined : "_blank"}
+        rel={isInternal ? undefined : "noopener noreferrer"}
         tabIndex={collapsed ? -1 : undefined}
         aria-hidden={collapsed}
         className="group block border-b border-rosefog/20 bg-white"
@@ -44,8 +45,12 @@ export function NewsBar() {
             {latest.text}
           </span>
           <span className="hidden shrink-0 items-center gap-1 text-xs font-bold text-champagneInk group-hover:underline sm:inline-flex">
-            {latest.label}で見る
-            <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
+            {isInternal ? "詳しく見る" : `${latest.label}で見る`}
+            {isInternal ? (
+              <ArrowDownRight className="h-3.5 w-3.5" aria-hidden="true" />
+            ) : (
+              <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
+            )}
           </span>
         </div>
       </a>
