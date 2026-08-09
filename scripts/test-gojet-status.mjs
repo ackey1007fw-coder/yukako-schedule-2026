@@ -651,20 +651,45 @@ try {
   );
   assert.doesNotMatch(mgjAfterHtml, /チケット申し込みフォームへ/);
   assert.ok(mgjAfterHtml.includes(missGrandJapanFinal.endedNote));
-  // 告知画像・元投稿への導線は開演後も残す
-  for (const image of missGrandJapanFinal.images) {
+  // 告知画像・投稿写真・元投稿への導線は開演後も残す
+  const mgjImages = [
+    missGrandJapanFinal.heroImage,
+    missGrandJapanFinal.ticketImage,
+    missGrandJapanFinal.yukakoPost.image
+  ];
+  for (const image of mgjImages) {
     assert.ok(
       mgjAfterHtml.includes(image.src),
-      `開演後にMGJ FINALの告知画像が消えている: ${image.src}`
+      `開演後にMGJ FINALの画像が消えている: ${image.src}`
     );
     assert.ok(
       existsSync(new URL(`../public${image.src}`, import.meta.url)),
       `MGJ FINALの画像ファイルが無い: public${image.src}`
     );
   }
-  assert.ok(mgjAfterHtml.includes(missGrandJapanFinal.yukakoPostUrl));
-  assert.ok(mgjAfterHtml.includes(missGrandJapanFinal.yukakoProfileUrl));
   assert.ok(mgjAfterHtml.includes(missGrandJapanFinal.officialPostUrl));
+
+  // 優花子さん本人の投稿ブロック（写真・中身・本人への導線）は開演前後とも出す
+  for (const [label, html] of [
+    ["開演前", mgjBeforeHtml],
+    ["開演後", mgjAfterHtml]
+  ]) {
+    const post = missGrandJapanFinal.yukakoPost;
+    assert.ok(html.includes(post.postUrl), `${label}に優花子さんの投稿への導線が無い`);
+    assert.ok(html.includes(post.profileUrl), `${label}に優花子さんのXへの導線が無い`);
+    assert.ok(html.includes(post.image.src), `${label}に優花子さんの投稿写真が無い`);
+    assert.ok(html.includes(post.title), `${label}に投稿の見出しが無い`);
+    for (const line of post.handwritten) {
+      assert.ok(html.includes(line), `${label}に画像の書き込み「${line}」が無い`);
+    }
+  }
+
+  // 引用は出典とセットで出す（誰の言葉か分からない「」を作らない）
+  assert.ok(
+    mgjBeforeHtml.includes(missGrandJapanFinal.quote) &&
+      mgjBeforeHtml.includes(missGrandJapanFinal.quoteSource),
+    "MGJ FINAL の引用に出典が付いていない"
+  );
 
   // events.ts の同じ公演と日時がずれていないか（二重管理の検算）
   const mgjEvent = events.find((event) => event.id === "miss-grand-japan-2026-final-mc");
@@ -698,13 +723,16 @@ try {
   const latestUpdatesHtml = renderToStaticMarkup(createElement(LatestUpdatesSection));
   assert.ok(latestUpdatesHtml.includes(mgjUpdate.image.src));
   assert.ok(latestUpdatesHtml.includes("sm:object-contain"));
+  // 最新情報の記事と、MGJ FINALセクション内の投稿ブロックは同じX投稿を指す。
+  // news.ts にも同じURLの項目があるので、siteUpdates 側で1件に畳まれていることを見る。
+  const yukakoPostUrl = missGrandJapanFinal.yukakoPost.postUrl;
+  assert.ok(yukakoPostUrl, "MGJ FINAL に優花子さんの投稿URLが無い");
   assert.equal(
-    siteUpdates.filter(
-      (update) => update.sourceUrl?.split("?")[0] === missGrandJapanFinal.yukakoPostUrl
-    ).length,
+    siteUpdates.filter((update) => update.sourceUrl?.split("?")[0] === yukakoPostUrl).length,
     1,
     "同じX投稿が最新情報に重複している"
   );
+  assert.equal(mgjUpdate.sourceUrl, yukakoPostUrl, "最新情報の記事が別の投稿を指している");
 
   console.log("gojet-status tests OK");
 } finally {

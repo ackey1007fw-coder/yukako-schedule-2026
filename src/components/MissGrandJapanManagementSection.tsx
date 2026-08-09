@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ArrowUpRight, Clapperboard, Mic, Music, ShieldCheck, Ticket } from "lucide-react";
+import { ArrowUpRight, Clapperboard, Mic, Music, Quote, ShieldCheck, Ticket } from "lucide-react";
 import {
   missGrandJapanFinal,
   missGrandJapanManagement,
@@ -13,6 +13,7 @@ import { LazyInstagramEmbed } from "./LazyInstagramEmbed";
 
 function MissGrandJapanFinalBlock({ now }: { now: Date }) {
   const final = missGrandJapanFinal;
+  const post = final.yukakoPost;
   // 開演を過ぎたら申し込み導線を出さない（#ゆかJETの締切判定と同じ考え方）。
   const ended = isPastDeadline(final.startsAt, now);
 
@@ -21,34 +22,30 @@ function MissGrandJapanFinalBlock({ now }: { now: Date }) {
       id="miss-grand-japan-final"
       className="yukako-card mb-12 scroll-mt-32 overflow-hidden border-champagne/35 bg-white shadow-paper sm:mb-16"
     >
-      <div className="grid gap-0 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
-        <div className="grid grid-cols-1 gap-px bg-champagne/25 sm:grid-cols-3 lg:grid-cols-3">
-          {final.images.map((image) => (
-            <figure key={image.src} className="m-0 bg-ink">
-              <a
-                href={image.src}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group block"
-                aria-label={`${image.caption}の画像を大きく見る`}
-              >
-                <img
-                  {...getResponsiveImageProps(image.src, "(min-width: 1024px) 26vw, 50vw")}
-                  alt={image.alt}
-                  loading="lazy"
-                  decoding="async"
-                  // 文字とQRコードが入った告知画像。切ると読めなくなるので全体表示。
-                  className="block h-auto w-full transition duration-300 group-hover:opacity-90"
-                />
-              </a>
-              <figcaption className="bg-white px-3 py-2.5 text-[11px] font-bold leading-5 text-ink/60">
-                {image.caption}
-              </figcaption>
-            </figure>
-          ))}
-        </div>
+      <div className="grid gap-0 lg:grid-cols-[0.92fr_1.08fr] lg:items-start">
+        <figure className="m-0 min-w-0 bg-ink">
+          <a
+            href={final.heroImage.src}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group block"
+            aria-label={`${final.heroImage.caption}を大きく見る`}
+          >
+            <img
+              {...getResponsiveImageProps(final.heroImage.src, "(min-width: 1024px) 46vw, 100vw")}
+              alt={final.heroImage.alt}
+              loading="lazy"
+              decoding="async"
+              // 文字が入った告知画像。切ると読めなくなるので全体表示。
+              className="block h-auto w-full object-contain transition duration-300 group-hover:opacity-90"
+            />
+          </a>
+          <figcaption className="bg-white px-4 py-2.5 text-[11px] font-bold leading-5 text-ink/60">
+            {final.heroImage.caption}
+          </figcaption>
+        </figure>
 
-        <div className="p-6 sm:p-8">
+        <div className="min-w-0 p-6 sm:p-8">
           <p className="flex flex-wrap items-center gap-2 text-xs font-black uppercase tracking-[0.16em] text-champagneInk">
             <span className="inline-flex items-center gap-1 border border-rosefog/45 bg-rosefog/10 px-2.5 py-1 text-rosefog">
               <Mic className="h-3.5 w-3.5" aria-hidden="true" />
@@ -82,6 +79,7 @@ function MissGrandJapanFinalBlock({ now }: { now: Date }) {
 
           <blockquote className="mt-5 border-l-2 border-champagne/70 bg-porcelain px-5 py-4 text-sm font-semibold leading-7 text-ink/85">
             「{final.quote}」
+            <footer className="mt-2 text-[11px] font-bold text-ink/50">{final.quoteSource}</footer>
           </blockquote>
 
           <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
@@ -103,36 +101,6 @@ function MissGrandJapanFinalBlock({ now }: { now: Date }) {
               </a>
             )}
             <a
-              href={final.yukakoPostUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() =>
-                trackPortalEvent("sns_click", {
-                  placement: "miss_grand_japan_final",
-                  item: final.yukakoPostCtaLabel
-                })
-              }
-              className="yukako-button yukako-button-rose min-h-12 px-5 py-3 text-sm"
-            >
-              <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-              {final.yukakoPostCtaLabel}
-            </a>
-            <a
-              href={final.yukakoProfileUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() =>
-                trackPortalEvent("sns_click", {
-                  placement: "miss_grand_japan_final",
-                  item: final.yukakoProfileCtaLabel
-                })
-              }
-              className="yukako-button yukako-button-soft min-h-12 px-5 py-3 text-sm"
-            >
-              <ArrowUpRight className="h-4 w-4 text-champagneInk" aria-hidden="true" />
-              {final.yukakoProfileCtaLabel}
-            </a>
-            <a
               href={final.officialPostUrl}
               target="_blank"
               rel="noopener noreferrer"
@@ -149,9 +117,111 @@ function MissGrandJapanFinalBlock({ now }: { now: Date }) {
             </a>
           </div>
 
-          <p className="mt-3 text-xs leading-6 text-ink/50">
-            {ended ? final.endedNote : final.ticketNote}
-          </p>
+          <div className="mt-5 flex items-start gap-3 border-t border-champagne/20 pt-4">
+            <a
+              href={final.ticketImage.src}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block w-16 shrink-0 border border-champagne/30 bg-ink transition hover:border-champagne"
+              aria-label={`${final.ticketImage.caption}の告知画像を大きく見る`}
+            >
+              <img
+                {...getResponsiveImageProps(final.ticketImage.src, "64px")}
+                alt={final.ticketImage.alt}
+                loading="lazy"
+                decoding="async"
+                // QRコードが入った告知画像。サムネイルでも切らない。
+                className="block h-auto w-full object-contain"
+              />
+            </a>
+            <p className="min-w-0 text-xs leading-6 text-ink/55">
+              {ended ? final.endedNote : final.ticketNote}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div className="border-t border-champagne/25 bg-porcelain p-6 sm:p-8">
+        <div className="grid gap-6 sm:grid-cols-[minmax(0,13rem)_1fr] sm:items-start sm:gap-8">
+          <a
+            href={post.image.src}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group block min-w-0 border border-champagne/30 bg-ink"
+            aria-label="優花子さんの投稿の写真を大きく見る"
+          >
+            <img
+              {...getResponsiveImageProps(post.image.src, "(min-width: 640px) 13rem, 100vw")}
+              alt={post.image.alt}
+              loading="lazy"
+              decoding="async"
+              // 本人の投稿写真。トリミングせず全体表示。
+              className="block h-auto w-full transition duration-300 group-hover:opacity-90"
+            />
+          </a>
+
+          <div className="min-w-0">
+            <p className="flex flex-wrap items-center gap-2 text-xs font-black uppercase tracking-[0.16em] text-champagneInk">
+              <span className="inline-flex items-center gap-1 border border-champagne/40 bg-white px-2.5 py-1">
+                <Quote className="h-3.5 w-3.5" aria-hidden="true" />
+                {post.eyebrow}
+              </span>
+            </p>
+
+            <h3 className="mt-4 font-display text-xl leading-tight text-ink sm:text-2xl">
+              「{post.title}」
+            </h3>
+
+            <div className="mt-3 max-w-2xl space-y-3 text-sm leading-7 text-ink/70">
+              {post.body.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+            </div>
+
+            <ul className="mt-4 flex flex-wrap gap-2">
+              {post.handwritten.map((line) => (
+                <li
+                  key={line}
+                  className="border border-champagne/45 bg-white px-2.5 py-1 text-xs font-bold text-champagneInk"
+                >
+                  「{line}」
+                </li>
+              ))}
+            </ul>
+
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <a
+                href={post.postUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() =>
+                  trackPortalEvent("sns_click", {
+                    placement: "miss_grand_japan_final",
+                    item: post.postCtaLabel
+                  })
+                }
+                className="yukako-button yukako-button-rose min-h-12 px-5 py-3 text-sm"
+              >
+                <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                {post.postCtaLabel}
+              </a>
+              <a
+                href={post.profileUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() =>
+                  trackPortalEvent("sns_click", {
+                    placement: "miss_grand_japan_final",
+                    item: post.profileCtaLabel
+                  })
+                }
+                className="yukako-button yukako-button-soft min-h-12 px-5 py-3 text-sm"
+              >
+                <ArrowUpRight className="h-4 w-4 text-champagneInk" aria-hidden="true" />
+                {post.profileCtaLabel}
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
