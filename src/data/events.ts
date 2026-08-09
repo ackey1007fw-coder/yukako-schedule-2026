@@ -2,6 +2,57 @@ import type { ScheduleEvent } from "../types";
 
 export const events: ScheduleEvent[] = [
   {
+    id: "miss-grand-japan-2026-final-mc",
+    title: "MISS GRAND JAPAN & MR GAY JAPAN 2026 FINAL COMPETITION",
+    shortTitle: "MGJ 2026 FINAL（MC）",
+    category: "event",
+    startAt: "2026-08-10T16:00:00+09:00",
+    // 終演時刻は公表されていない。endAt を省くと isEventPast が startAt を見るため、
+    // 16:00の開演と同時に「終了した予定」へ移ってしまう。開催中も直近予定として
+    // 残すために日付が変わる時刻を表示上の境界として持つ（公表された終演時刻ではない）。
+    endAt: "2026-08-11T00:00:00+09:00",
+    dates: ["2026-08-10"],
+    displayDate: "2026年8月10日（月）16:00開演（日本時間）",
+    venue: "ヒューリックホール東京（東京都千代田区有楽町2-5-1 有楽町マリオン11階）",
+    image: "/images/miss-grand-japan/yukako-mgj-2026-final-mc-2026-08-10.jpg",
+    summary:
+      "ミス・グランド・ジャパンとミスター・ゲイ・ジャパン、2つの日本代表が決まるファイナル。吉井優花子が日本語MC、RICOが英語MCを務めます。会場のほか、@missgrandjapan のYouTubeでライブ配信。",
+    badges: ["MC", "Miss Grand Japan", "配信あり", "8/10"],
+    links: [
+      {
+        label: "優花子さんの出演告知・チケット案内（X）",
+        url: "https://x.com/mokoopy/status/2086075435927138676",
+        kind: "sns"
+      },
+      {
+        label: "優花子さんのXプロフィール",
+        url: "https://x.com/mokoopy",
+        kind: "sns"
+      },
+      {
+        label: "MC発表の投稿（Miss Grand Japan Instagram）",
+        url: "https://www.instagram.com/p/DbuenU5FKVg/?igsh=bjFvdjA2enZ5czA4",
+        kind: "sns"
+      },
+      {
+        label: "🎫 チケット申し込みフォーム（TICKET画像のQRコード先）",
+        url: "https://forms.gle/zftxsTkwg8G7jT7G6",
+        kind: "ticket"
+      },
+      {
+        label: "会場の地図を開く（ヒューリックホール東京）",
+        url: "https://www.google.com/maps/search/?api=1&query=%E3%83%92%E3%83%A5%E3%83%BC%E3%83%AA%E3%83%83%E3%82%AF%E3%83%9B%E3%83%BC%E3%83%AB%E6%9D%B1%E4%BA%AC%20%E6%9D%B1%E4%BA%AC%E9%83%BD%E5%8D%83%E4%BB%A3%E7%94%B0%E5%8C%BA%E6%9C%89%E6%A5%BD%E7%94%BA2-5-1",
+        kind: "map"
+      },
+      {
+        label: "会場公式サイト（ヒューリックホール東京）",
+        url: "https://hulic-theater.com/access/",
+        kind: "info"
+      }
+    ],
+    isImportant: true
+  },
+  {
     id: "yukajet-gojet-2026-07",
     title: "GO,JET!GO!GO! vol.1 Premium 〜 I LOVE YOU が言えなくて 〜",
     shortTitle: "#ゆかJET",
