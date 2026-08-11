@@ -50,9 +50,9 @@ export const searchFaqs: SearchFaq[] = [
   {
     question: "配信で観られる？",
     answer:
-      "配信チケットは3,700円。申し込みは2026年8月3日まで、アーカイブは8月10日まで視聴できます。A班・B班・C班の本編と全キャストLIVEが対象です。",
-    href: "https://premiumgoyukajet.hp.peraichi.com",
-    linkLabel: "配信チケットを見る"
+      "A班・B班・C班の本編と全キャストLIVEのアーカイブ配信は、2026年8月10日をもって終了しました。配信終了までの記録は#ゆかJET特集に残しています。",
+    href: "#gojet-streaming-viewing-ended-2026-08-09",
+    linkLabel: "配信終了の活動記録を見る"
   },
   {
     question: "会場はどこ？",

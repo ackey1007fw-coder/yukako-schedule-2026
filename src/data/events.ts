@@ -70,13 +70,13 @@ export const events: ScheduleEvent[] = [
     venue: "Air studio 両国（東京都墨田区両国2-18-7 地下1階）",
     image: "/images/yukako-gojet-poster.jpg",
     summary:
-      "吉井優花子プロデュース公演 #ゆかJET 第1弾。BAR SAMASAMA を舞台に、歌って踊る幽霊 GO,JET! GIRLS が繰り広げる歌ダンス満載のコメディ。A/B/C 3班＋7/27は全班合同LIVE。吉井優花子は B班JET・C班早紀を演じ、プロデュース・脚色・楽曲・デザインも担当。全公演終了（ご来場 一般4,700円／特典付き前方席6,000円）。配信チケット3,700円は8月3日〆切、アーカイブは8月10日まで視聴可。",
-    badges: ["舞台", "プロデュース公演", "全公演終了", "配信あり", "7/23〜27"],
+      "吉井優花子プロデュース公演 #ゆかJET 第1弾。BAR SAMASAMA を舞台に、歌って踊る幽霊 GO,JET! GIRLS が繰り広げる歌ダンス満載のコメディ。A/B/C 3班＋7/27は全班合同LIVE。吉井優花子は B班JET・C班早紀を演じ、プロデュース・脚色・楽曲・デザインも担当。全公演終了。アーカイブ配信は2026年8月10日をもって終了しました。",
+    badges: ["舞台", "プロデュース公演", "全公演終了", "配信終了", "7/23〜27"],
     links: [
       {
-        label: "🎫 チケット予約・応援（予約サイト）",
+        label: "公演特設ページ（受付終了）",
         url: "https://premiumgoyukajet.hp.peraichi.com",
-        kind: "ticket"
+        kind: "info"
       },
       {
         label: "「もっと届いてほしい」呼びかけ（吉井優花子 X）",

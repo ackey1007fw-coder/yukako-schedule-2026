@@ -26,6 +26,6 @@ export const supportContent: SupportContentItem[] = [
   {
     title: "配信チケット",
     description:
-      "遠方からも観劇できる配信チケット。申し込みは2026年8月3日まで、視聴は8月10日まで。"
+      "遠方からも観劇できた配信チケット。申し込みは2026年8月3日、視聴は8月10日をもって終了しました。"
   }
 ];

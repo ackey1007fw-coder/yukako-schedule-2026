@@ -51,7 +51,7 @@ export const mediaLinks: SocialLink[] = [
     handle: "peraichi",
     url: "https://premiumgoyukajet.hp.peraichi.com",
     description:
-      "本人が制作に関わった『GO,JET!GO!GO! vol.1 Premium』の公演ページ。チケット予約・応援メニューはこちらから",
+      "本人が制作に関わった『GO,JET!GO!GO! vol.1 Premium』の公演ページ。全公演・配信・各種受付は終了しています",
     kind: "web"
   },
   {

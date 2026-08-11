@@ -1,5 +1,5 @@
 import { HeartHandshake, MonitorPlay, Radio, Ticket, Video } from "lucide-react";
-import { supportContent, supportUrl } from "../data/supportContent";
+import { supportContent } from "../data/supportContent";
 import { SectionHeader } from "./SectionHeader";
 
 const icons = [HeartHandshake, Video, MonitorPlay, Ticket];
@@ -14,8 +14,8 @@ export function SupportersSection() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeader
           kicker="Support Menu"
-          title="#ゆかJET を応援する"
-          copy="『GO,JET!GO!GO! vol.1 Premium』には、会場でもオンラインでも参加できる応援メニューがあります。詳細・お申し込みは特設ページへ。"
+          title="#ゆかJET 応援メニューの記録"
+          copy="『GO,JET!GO!GO! vol.1 Premium』で案内された応援メニューの記録です。各種受付と配信視聴は終了しています。"
         />
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -23,12 +23,9 @@ export function SupportersSection() {
             const Icon = icons[index % icons.length];
 
             return (
-              <a
+              <article
                 key={item.title}
-                href={supportUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="yukako-card yukako-card-interactive yukako-lift flex min-h-44 flex-col gap-3 border-rosefog/25 bg-porcelain p-5 hover:border-champagne hover:bg-white"
+                className="yukako-card flex min-h-44 flex-col gap-3 border-rosefog/25 bg-porcelain p-5"
               >
                 <span className="grid h-11 w-11 shrink-0 place-items-center border border-champagne/50 bg-white text-champagne">
                   <Icon className="h-5 w-5" aria-hidden="true" />
@@ -39,14 +36,17 @@ export function SupportersSection() {
                 <span className="text-sm leading-6 text-ink/65">
                   {item.description}
                 </span>
-              </a>
+                <span className="mt-auto w-fit border border-rosefog/30 bg-white px-2 py-1 text-xs font-black text-rosefog">
+                  受付終了
+                </span>
+              </article>
             );
           })}
         </div>
 
         <p className="mt-6 flex items-start gap-2 text-sm leading-6 text-ink/60">
           <Radio className="mt-0.5 h-4 w-4 shrink-0 text-champagne" aria-hidden="true" />
-          遠方の方も、配信チケット（3,700円・申し込みは2026年8月3日まで／視聴は8月10日まで）で公演をご覧いただけます。
+          配信視聴は2026年8月10日をもって終了しました。劇場と配信で届けられた公演の記録は、#ゆかJET特集で振り返れます。
         </p>
         <div className="mt-5">
           <a

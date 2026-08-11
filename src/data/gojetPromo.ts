@@ -188,6 +188,38 @@ export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
     ]
   },
   {
+    date: "2026.8.9",
+    label: "吉井優花子さん本人（@mokoopy）",
+    title: "#ゆかJET 配信視聴は8/10まで｜最後まで何度でも。そして感想を",
+    body:
+      "『GO,JET!GO!GO! vol.1 Premium』の配信を、最後まで何度でも楽しんでほしいという本人からのメッセージ。劇場に加え、配信でも多くの方に作品を楽しんでもらえたことへの喜びと、感想の投稿が励みになるという呼びかけが届けられました。\n\n配信視聴は2026年8月10日をもって終了しました。公演終了後も続いた#ゆかJET Premiumのアーカイブ配信を振り返る活動記録です。",
+    postUrl: "https://x.com/mokoopy/status/2086455342796603727?s=12",
+    homepageUrl: "#gojet-finale-report",
+    ctaLabel: "Xで元の投稿を見る",
+    homepageLabel: "公演完走レポートを見る",
+    roleTags: [
+      "#ゆかJET",
+      "吉井優花子さん本人",
+      "配信チケット",
+      "アーカイブ配信",
+      "感想投稿",
+      "Premium",
+      "プロデュース公演",
+      "配信終了",
+      "終演後"
+    ],
+    photos: [
+      {
+        src: "/images/yukajet/2026-08-09-yukako-streaming-message-four-cast.jpg",
+        alt: "アメリカンダイナー風のセットで笑顔を見せる出演者4名の集合写真"
+      },
+      {
+        src: "/images/yukajet/2026-08-09-yukako-streaming-message-six-cast.jpg",
+        alt: "アメリカンダイナー風のセットで撮影された出演者6名の集合写真"
+      }
+    ]
+  },
+  {
     date: "2026.8.3 20:40",
     label: "沼尾麻由佳さん（@mayuka_pinkcha）・C班メグ役",
     title: "何をしても良いリアクション｜メグから見た早紀とC班ガールズ",

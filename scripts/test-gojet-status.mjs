@@ -59,8 +59,33 @@ try {
     "#gojet-streaming-viewing-final-day-2026-08-10"
   );
 
+  // 2件目は8/9の優花子さん本人（8/10までの配信・感想投稿の呼びかけ）。
+  const streamingMessagePost = gojetFeatureUpdates[1];
+  assert.equal(
+    streamingMessagePost.postUrl,
+    "https://x.com/mokoopy/status/2086455342796603727?s=12"
+  );
+  assert.equal(
+    streamingMessagePost.anchorId,
+    "gojet-streaming-viewing-ended-2026-08-09"
+  );
+  assert.equal(streamingMessagePost.photos?.length, 2);
+  assert.equal(streamingMessagePost.ctaLabel, "Xで元の投稿を見る");
+  assert.match(streamingMessagePost.body, /2026年8月10日をもって終了しました/);
+  streamingMessagePost.photos?.forEach((image) => {
+    assert.ok(
+      existsSync(new URL(`../public${image.src}`, import.meta.url)),
+      `8/9配信案内の画像ファイルが無い: public${image.src}`
+    );
+  });
+  assert.equal(latestSiteUpdates[1]?.sourceUrl, streamingMessagePost.postUrl);
+  assert.equal(
+    latestSiteUpdates[1]?.anchor,
+    "#gojet-streaming-viewing-ended-2026-08-09"
+  );
+
   // 続いて8/3 21:52の優花子さん本人（配信最終案内）、8/3 20:40の沼尾さん。
-  const previousNewestPost = gojetFeatureUpdates[1];
+  const previousNewestPost = gojetFeatureUpdates[2];
   assert.equal(
     previousNewestPost.postUrl,
     "https://x.com/mokoopy/status/2084261233344016471"
@@ -75,7 +100,7 @@ try {
   );
   assert.match(previousNewestPost.title, /載せていない見所がありすぎる/);
 
-  const newestCastPost = gojetFeatureUpdates[2];
+  const newestCastPost = gojetFeatureUpdates[3];
   assert.equal(
     newestCastPost.postUrl,
     "https://x.com/mayuka_pinkcha/status/2084243063141179760"
@@ -442,6 +467,7 @@ try {
 
   const beforeDeadline = new Date("2026-08-03T23:59:58+09:00");
   const afterDeadline = new Date("2026-08-04T00:00:00+09:00");
+  const afterViewingDeadline = new Date("2026-08-11T00:00:00+09:00");
   const orderFormHref = 'href="https://docs.google.com/forms/';
 
   // 1. 〆切1秒前：配信申込CTAが出ている
@@ -485,6 +511,36 @@ try {
       `〆切後も残すべき投稿リンクが消えている: ${keptUrl}`
     );
   }
+
+  // 2b. 8/11以降：配信終了を明示し、期限切れの購入CTAを表示しない。
+  const producingClosedHtml = renderToStaticMarkup(
+    createElement(NowProducingSection, {
+      event: gojetEvent,
+      now: afterViewingDeadline
+    })
+  );
+  assert.doesNotMatch(producingClosedHtml, /チケット予約/);
+  assert.doesNotMatch(producingClosedHtml, /配信チケットを申し込む/);
+  assert.match(producingClosedHtml, /#ゆかJET 活動の軌跡/);
+  assert.match(
+    producingClosedHtml,
+    /配信視聴は2026年8月10日をもって終了しました/
+  );
+  assert.ok(
+    producingClosedHtml.includes(
+      "https://x.com/mokoopy/status/2086455342796603727?s=12"
+    )
+  );
+  assert.ok(
+    producingClosedHtml.includes(
+      "/images/yukajet/2026-08-09-yukako-streaming-message-four-cast.jpg"
+    )
+  );
+  assert.ok(
+    producingClosedHtml.includes(
+      "/images/yukajet/2026-08-09-yukako-streaming-message-six-cast.jpg"
+    )
+  );
   // 既存動画・Drive動画も〆切後に消えない
   // （一覧の初期表示は先頭6件なので、動画の保持はデータ側で確認する）
   const displayMedia = new Set(
@@ -588,6 +644,17 @@ try {
   assert.match(finaleAfterHtml, /配信は8\/10まで視聴可能/);
   assert.match(finaleAfterHtml, /8月10日まで視聴できます/);
   assert.ok(finaleAfterHtml.includes("https://www.instagram.com/p/DbiZ7_MlKIt/"));
+
+  const finaleClosedHtml = renderToStaticMarkup(
+    createElement(GojetFinaleReportSection, { now: afterViewingDeadline })
+  );
+  assert.doesNotMatch(finaleClosedHtml, /配信チケットを申し込む/);
+  assert.match(finaleClosedHtml, /配信は8\/10をもって終了/);
+  assert.match(
+    finaleClosedHtml,
+    /配信終了・視聴期間は2026年8月10日をもって終了/
+  );
+  assert.match(finaleClosedHtml, /現在、視聴期間は終了しています/);
   // 写真・動画は自己ホスト。外部（Googleドライブ）へは依存しない。
   for (const asset of [
     "/images/yukajet/2026-08-02-finale-a-team.jpg",
