@@ -399,6 +399,8 @@ export const imageManifest = {
   "/images/yukajet/2026-08-03-numao-mayuka-c-girls-kae-nuts.jpg": {"width":1536,"height":2048,"widths":[360,480,720,960,1280,1536]},
   "/images/yukajet/2026-08-03-numao-mayuka-c-girls-maimu-mitts.jpg": {"width":2048,"height":1536,"widths":[360,480,720,960,1280,1600,2048]},
   "/images/yukajet/2026-08-03-numao-mayuka-c-girls-yukako-saki.jpg": {"width":1536,"height":2048,"widths":[360,480,720,960,1280,1536]},
+  "/images/yukajet/2026-08-08-yukako-meg-cast-intro-01.jpg": {"width":1280,"height":961,"widths":[360,480,720,960,1280]},
+  "/images/yukajet/2026-08-08-yukako-meg-cast-intro-02.jpg": {"width":772,"height":1029,"widths":[360,480,720,772]},
   "/images/yukajet/2026-08-09-yukako-streaming-message-four-cast.jpg": {"width":1250,"height":936,"widths":[360,480,720,960,1250]},
   "/images/yukajet/2026-08-09-yukako-streaming-message-six-cast.jpg": {"width":1280,"height":960,"widths":[360,480,720,960,1280]},
   "/images/yukajet/2026-08-10-yukako-streaming-final-day-a-team.jpg": {"width":1280,"height":961,"widths":[360,480,720,960,1280]},

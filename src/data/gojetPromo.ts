@@ -220,6 +220,37 @@ export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
     ]
   },
   {
+    date: "2026.8.8 9:25",
+    label: "吉井優花子さん本人（@mokoopy）",
+    title: "JETの妹・メグ💜 A班の感情の乗った歌声にも注目",
+    body:
+      "〈JETの妹メグ💜〉としてA・B・C班それぞれのメグ役を紹介。A班・みのちゃんメグは、感情の乗った歌声と「JET」ポーズのシュールさにも注目です🎙️ 感想は #ゆかJET へ🕊️",
+    postUrl: "https://x.com/mokoopy/status/2085885102899507709?s=12",
+    homepageUrl: "#gojet-finale-report",
+    ctaLabel: "優花子さんのX投稿を見る",
+    homepageLabel: "公演完走レポートを見る",
+    roleTags: [
+      "#ゆかJET",
+      "吉井優花子さん本人",
+      "JETの妹・メグ",
+      "A班",
+      "B班",
+      "C班",
+      "キャラクター紹介",
+      "終演後"
+    ],
+    photos: [
+      {
+        src: "/images/yukajet/2026-08-08-yukako-meg-cast-intro-01.jpg",
+        alt: "#ゆかJETの舞台セットで、花束を持つピンクの衣装の吉井優花子さんと水色の衣装の出演者3名が並ぶ集合写真"
+      },
+      {
+        src: "/images/yukajet/2026-08-08-yukako-meg-cast-intro-02.jpg",
+        alt: "#ゆかJETの舞台セットで、青い衣装のメグ役と赤い衣装・丸眼鏡のJET役を演じる吉井優花子さんが振り返ってポーズを取る写真"
+      }
+    ]
+  },
+  {
     date: "2026.8.3 20:40",
     label: "沼尾麻由佳さん（@mayuka_pinkcha）・C班メグ役",
     title: "何をしても良いリアクション｜メグから見た早紀とC班ガールズ",
