@@ -49,7 +49,7 @@ type NowProducingSectionProps = {
 // 残りは見出し＋抜粋だけ並べる。件数を増やしても縦に伸びない。
 // 最新のキャスト投稿を足しても、締切後の保存対象（LIVE・A/B/C班映像）が
 // 初期表示から押し出されない件数にする。
-const INITIAL_VISIBLE_UPDATES = 8;
+const INITIAL_VISIBLE_UPDATES = 9;
 const CLOCK_UPDATE_MS = 60000;
 
 // 折りたたみ時の抜粋。URLは読み上げても意味がないので落とす。

@@ -84,8 +84,34 @@ try {
     "#gojet-streaming-viewing-ended-2026-08-09"
   );
 
+  // 3件目は8/8 9:25の優花子さん本人（JETの妹・メグ役紹介）。
+  const megCastIntroPost = gojetFeatureUpdates[2];
+  assert.equal(
+    megCastIntroPost.postUrl,
+    "https://x.com/mokoopy/status/2085885102899507709?s=12"
+  );
+  assert.equal(
+    megCastIntroPost.anchorId,
+    "gojet-yukako-meg-cast-intro-2026-08-08"
+  );
+  assert.equal(megCastIntroPost.date, "2026.8.8 9:25");
+  assert.equal(megCastIntroPost.photos?.length, 2);
+  assert.match(megCastIntroPost.title, /JETの妹・メグ/);
+  assert.match(megCastIntroPost.body, /感情の乗った歌声/);
+  megCastIntroPost.photos?.forEach((image) => {
+    assert.ok(
+      existsSync(new URL(`../public${image.src}`, import.meta.url)),
+      `8/8メグ役紹介の画像ファイルが無い: public${image.src}`
+    );
+  });
+  assert.equal(latestSiteUpdates[2]?.sourceUrl, megCastIntroPost.postUrl);
+  assert.equal(
+    latestSiteUpdates[2]?.anchor,
+    "#gojet-yukako-meg-cast-intro-2026-08-08"
+  );
+
   // 続いて8/3 21:52の優花子さん本人（配信最終案内）、8/3 20:40の沼尾さん。
-  const previousNewestPost = gojetFeatureUpdates[2];
+  const previousNewestPost = gojetFeatureUpdates[3];
   assert.equal(
     previousNewestPost.postUrl,
     "https://x.com/mokoopy/status/2084261233344016471"
@@ -100,7 +126,7 @@ try {
   );
   assert.match(previousNewestPost.title, /載せていない見所がありすぎる/);
 
-  const newestCastPost = gojetFeatureUpdates[3];
+  const newestCastPost = gojetFeatureUpdates[4];
   assert.equal(
     newestCastPost.postUrl,
     "https://x.com/mayuka_pinkcha/status/2084243063141179760"
