@@ -9,7 +9,10 @@ import {
   Ticket
 } from "lucide-react";
 import { gojetStreamingTicketUrl } from "../data/gojetTimetable";
-import { isGojetStreamingOrderClosed } from "../lib/gojetOrderDeadline";
+import {
+  isGojetStreamingOrderClosed,
+  isGojetStreamingViewingClosed
+} from "../lib/gojetOrderDeadline";
 import { trackPortalEvent } from "../lib/analytics";
 import { getResponsiveImageProps } from "../lib/responsiveImage";
 
@@ -61,11 +64,15 @@ const videos = [
   }
 ] as const;
 
-const buildHighlights = (orderClosed: boolean) => [
+const buildHighlights = (orderClosed: boolean, viewingClosed: boolean) => [
   "A・B・C班を完走",
   "約100分のラブコメ×ミュージカル",
   "千秋楽LIVEで約20曲",
-  orderClosed ? "配信は8/10まで視聴可能" : "配信申込は8/3まで"
+  viewingClosed
+    ? "配信は8/10をもって終了"
+    : orderClosed
+      ? "配信は8/10まで視聴可能"
+      : "配信申込は8/3まで"
 ];
 
 export function GojetFinaleReportSection({ now }: GojetFinaleReportSectionProps) {
@@ -83,7 +90,8 @@ export function GojetFinaleReportSection({ now }: GojetFinaleReportSectionProps)
 
   // 申込〆切を過ぎたら申し込みボタンを出さない。写真・動画・Instagram導線はそのまま残す。
   const orderClosed = isGojetStreamingOrderClosed(currentTime);
-  const highlights = buildHighlights(orderClosed);
+  const viewingClosed = isGojetStreamingViewingClosed(currentTime);
+  const highlights = buildHighlights(orderClosed, viewingClosed);
 
   return (
     <section
@@ -210,12 +218,16 @@ export function GojetFinaleReportSection({ now }: GojetFinaleReportSectionProps)
 
             <div className="mt-8 border border-champagne/35 bg-porcelain p-5 sm:p-6">
               <p className="text-sm font-black text-rosefog">
-                {orderClosed
-                  ? "配信チケットの申し込みは終了・視聴は8月10日まで"
-                  : "配信チケット 3,700円／申込は8月3日まで"}
+                {viewingClosed
+                  ? "配信終了・視聴期間は2026年8月10日をもって終了"
+                  : orderClosed
+                    ? "配信チケットの申し込みは終了・視聴は8月10日まで"
+                    : "配信チケット 3,700円／申込は8月3日まで"}
               </p>
               <p className="mt-2 text-sm leading-7 text-ink/70">
-                A班・B班・C班と全キャスト参加の千秋楽LIVEを、8月10日まで視聴できます。
+                {viewingClosed
+                  ? "A班・B班・C班と全キャスト参加の千秋楽LIVEは、8月10日まで配信されました。現在、視聴期間は終了しています。"
+                  : "A班・B班・C班と全キャスト参加の千秋楽LIVEを、8月10日まで視聴できます。"}
               </p>
               <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                 {!orderClosed && (

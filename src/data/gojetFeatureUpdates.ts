@@ -27,6 +27,9 @@ const NUMAO_MAYUKA_C_GIRLS_20260803_POST_URL =
 const YUKAKO_STREAMING_VIEWING_FINAL_DAY_20260810_POST_URL =
   "https://x.com/mokoopy/status/2086627781023285249";
 
+const YUKAKO_STREAMING_MESSAGE_20260809_POST_URL =
+  "https://x.com/mokoopy/status/2086455342796603727?s=12";
+
 const YUKAKO_FINAL_CALL_QUOTE_20260803_POST_URL =
   "https://x.com/mokoopy/status/2084261233344016471";
 const STREAMING_FINAL_DAY_20260803_POST_URL =
@@ -217,6 +220,9 @@ const yukakoStreamingViewingFinalDay20260810Update = decoratedSourceUpdates.find
   (update) =>
     update.postUrl === YUKAKO_STREAMING_VIEWING_FINAL_DAY_20260810_POST_URL
 );
+const yukakoStreamingMessage20260809Update = decoratedSourceUpdates.find(
+  (update) => update.postUrl === YUKAKO_STREAMING_MESSAGE_20260809_POST_URL
+);
 const numaoMayukaCGirls20260803Update = decoratedSourceUpdates.find(
   (update) => update.postUrl === NUMAO_MAYUKA_C_GIRLS_20260803_POST_URL
 );
@@ -370,6 +376,7 @@ export const gojetOriginUpdate = decoratedSourceUpdates.find(
 const remainingSourceUpdates = decoratedSourceUpdates.filter(
   (update) =>
     update.postUrl !== YUKAKO_STREAMING_VIEWING_FINAL_DAY_20260810_POST_URL &&
+    update.postUrl !== YUKAKO_STREAMING_MESSAGE_20260809_POST_URL &&
     update.postUrl !== NUMAO_MAYUKA_C_GIRLS_20260803_POST_URL &&
     update.postUrl !== C_TEAM_CAST_REPOST_20260802_POST_URL &&
     update.postUrl !== YUKAKO_FUCHAN_CONNECTION_20260801_POST_URL &&
@@ -428,6 +435,15 @@ const featuredYukakoStreamingViewingFinalDay20260810Update =
     ? {
         ...yukakoStreamingViewingFinalDay20260810Update,
         anchorId: "gojet-streaming-viewing-final-day-2026-08-10",
+        primaryCta: "post" as const
+      }
+    : undefined;
+
+const featuredYukakoStreamingMessage20260809Update =
+  yukakoStreamingMessage20260809Update
+    ? {
+        ...yukakoStreamingMessage20260809Update,
+        anchorId: "gojet-streaming-viewing-ended-2026-08-09",
         primaryCta: "post" as const
       }
     : undefined;
@@ -1106,6 +1122,8 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
       }
     : undefined;
 
+// 8/10 10:36優花子さん本人（配信視聴最終日・A/B/C班集合写真）→
+// 8/9優花子さん本人（8/10までの配信・感想投稿の呼びかけ）→
 // 8/3 21:52優花子さん本人（載せていない見所・配信チケットの購入は本日まで）→
 // 8/3 20:40沼尾麻由佳さん（メグから見た早紀とC班ガールズ）→
 // 8/3 0:53優花子さん本人（千秋楽LIVEダイジェストを引用・配信チケット最終案内）→
@@ -1137,6 +1155,9 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
 const orderedGojetFeatureUpdates: DisplayGojetFeatureUpdate[] = [
   ...(featuredYukakoStreamingViewingFinalDay20260810Update
     ? [featuredYukakoStreamingViewingFinalDay20260810Update]
+    : []),
+  ...(featuredYukakoStreamingMessage20260809Update
+    ? [featuredYukakoStreamingMessage20260809Update]
     : []),
   featuredYukakoFinalCallQuote20260803Update,
   ...(featuredNumaoMayukaCGirls20260803Update

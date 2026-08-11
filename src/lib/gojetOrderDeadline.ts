@@ -12,9 +12,20 @@ export const gojetStreamingOrderDeadlineAt = "2026-08-03T23:59:59+09:00";
 export const gojetStreamingClosedNotice =
   "配信チケットの申し込みは終了。視聴は8月10日（月）まで";
 
+/** アーカイブ視聴期間が終了する時刻（8/10の終了直後） */
+export const gojetStreamingViewingDeadlineAt = "2026-08-11T00:00:00+09:00";
+
+/** 8/11以降に表示する現在状態 */
+export const gojetStreamingViewingClosedNotice =
+  "配信視聴は2026年8月10日をもって終了しました";
+
 /** 配信チケットの申し込みが締め切られたか */
 export const isGojetStreamingOrderClosed = (now: Date) =>
   isPastDeadline(gojetStreamingOrderDeadlineAt, now);
+
+/** アーカイブ視聴期間が終了したか */
+export const isGojetStreamingViewingClosed = (now: Date) =>
+  isPastDeadline(gojetStreamingViewingDeadlineAt, now);
 
 /** 申込フォームへの導線か（Googleフォーム or 配信チケットURL） */
 export const isGojetOrderFormUrl = (url: string) =>

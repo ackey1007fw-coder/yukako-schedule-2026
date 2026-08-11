@@ -28,7 +28,11 @@ import {
 } from "../data/gojetFeatureUpdates";
 import { gojetPromoImages, type PromoImage } from "../data/gojetPromo";
 import { isPastDeadline } from "../lib/date";
-import { isClosedOrderCta } from "../lib/gojetOrderDeadline";
+import {
+  gojetStreamingViewingClosedNotice,
+  isClosedOrderCta,
+  isGojetStreamingViewingClosed
+} from "../lib/gojetOrderDeadline";
 import { getRelatedGojetUpdates } from "../lib/engagement";
 import { getResponsiveImageProps } from "../lib/responsiveImage";
 import { googleCalendarUrl, SITE_URL, xShareUrl } from "../lib/share";
@@ -800,9 +804,14 @@ function FeatureUpdateCard({
       {update.deadline && (
         <p className="mt-4 inline-flex w-fit items-center gap-2 border border-champagne/50 bg-champagne/10 px-3 py-2 text-xs font-black text-champagne">
           <Clock3 className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
-          {isPastDeadline(update.deadline.at, currentTime)
-            ? update.deadline.afterText
-            : update.deadline.beforeText}
+          {isGojetStreamingViewingClosed(currentTime) &&
+          /配信|視聴/.test(
+            `${update.deadline.beforeText}${update.deadline.afterText}`,
+          )
+            ? gojetStreamingViewingClosedNotice
+            : isPastDeadline(update.deadline.at, currentTime)
+              ? update.deadline.afterText
+              : update.deadline.beforeText}
         </p>
       )}
         <UpdateLinkButtons update={update} currentTime={currentTime} />
@@ -914,8 +923,10 @@ export function NowProducingSection({ event, now }: NowProducingSectionProps) {
     );
   }
 
-  const ticketLink =
-    event.links.find((link) => link.kind === "ticket") ?? event.links[0];
+  const viewingClosed = isGojetStreamingViewingClosed(currentTime);
+  const ticketLink = viewingClosed
+    ? undefined
+    : event.links.find((link) => link.kind === "ticket") ?? event.links[0];
   const infoLinks = event.links.filter(
     (link) => link.kind === "info" || link.kind === "map",
   );
@@ -925,10 +936,14 @@ export function NowProducingSection({ event, now }: NowProducingSectionProps) {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <ActHeader
           act={1}
-          eyebrow="Now Producing"
-          title="#ゆかJET 公演情報"
+          eyebrow={viewingClosed ? "Activity Archive" : "Now Producing"}
+          title={viewingClosed ? "#ゆかJET 活動の軌跡" : "#ゆかJET 公演情報"}
           tone="dark"
-          copy="吉井優花子が企画・脚色から出演まで手がけるプロデュース公演。次の舞台をここでチェック。"
+          copy={
+            viewingClosed
+              ? "全公演の完走後、8月10日まで行われたアーカイブ配信も終了。公演から配信終了までの記録を時系列でたどれます。"
+              : "吉井優花子が企画・脚色から出演まで手がけるプロデュース公演。次の舞台をここでチェック。"
+          }
         />
 
         <article className="yukako-billboard border border-champagne/30">
@@ -964,6 +979,11 @@ export function NowProducingSection({ event, now }: NowProducingSectionProps) {
                   <Clock3 className="h-4 w-4 shrink-0" aria-hidden="true" />
                   {event.displayDate}
                 </p>
+                {viewingClosed && (
+                  <p className="mt-3 inline-flex border border-champagne/45 bg-champagne/10 px-3 py-2 text-sm font-black text-champagne">
+                    {gojetStreamingViewingClosedNotice}
+                  </p>
+                )}
                 {event.venue && (
                   <p className="mt-2 flex items-center gap-2 text-sm font-semibold text-white/70">
                     <MapPin className="h-4 w-4 shrink-0 text-champagne" aria-hidden="true" />
