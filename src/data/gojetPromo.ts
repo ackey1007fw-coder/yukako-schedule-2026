@@ -152,6 +152,42 @@ export type GojetTeamUpdate = {
 
 export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
   {
+    date: "2026.8.10 10:36",
+    label: "吉井優花子さん本人（@mokoopy）",
+    title: "A・B・C班、3枚の集合写真｜#ゆかJET 配信視聴最終日",
+    body:
+      "配信で#ゆかJETを観られる最終日。A班・B班・C班の集合写真と、「一部も全体も、何度も観てたっぷりお楽しみください✨」のメッセージ。\n\n配信の視聴期間は8月10日で終了。3班の思い出を、本人投稿と3枚の写真で振り返れます。",
+    caption:
+      "【📣配信チケットのご視聴🎟️】\n#ゆかJET が観られるのも本日までです🥺\n\n一部も全体も、\n何度も観てたっぷりお楽しみください✨\n\n📸A・B・C班🌟",
+    postUrl: "https://x.com/mokoopy/status/2086627781023285249",
+    homepageUrl: "#gojet-finale-report",
+    ctaLabel: "優花子さんのX投稿を見る",
+    homepageLabel: "公演完走レポートを見る",
+    roleTags: [
+      "#ゆかJET",
+      "吉井優花子さん本人",
+      "配信視聴最終日",
+      "A班",
+      "B班",
+      "C班",
+      "終演後"
+    ],
+    photos: [
+      {
+        src: "/images/yukajet/2026-08-10-yukako-streaming-final-day-a-team.jpg",
+        alt: "#ゆかJET A班の出演者がアメリカンダイナー風の舞台セットで集まり、笑顔やピースサインを向ける集合写真"
+      },
+      {
+        src: "/images/yukajet/2026-08-10-yukako-streaming-final-day-b-team.jpg",
+        alt: "#ゆかJET B班の出演者がアメリカンダイナー風の舞台セットで集まり、笑顔やポーズを向ける集合写真"
+      },
+      {
+        src: "/images/yukajet/2026-08-10-yukako-streaming-final-day-c-team.jpg",
+        alt: "#ゆかJET C班の出演者と関係者がアメリカンダイナー風の舞台セットで並び、両手でCのポーズを作る集合写真"
+      }
+    ]
+  },
+  {
     date: "2026.8.3 20:40",
     label: "沼尾麻由佳さん（@mayuka_pinkcha）・C班メグ役",
     title: "何をしても良いリアクション｜メグから見た早紀とC班ガールズ",

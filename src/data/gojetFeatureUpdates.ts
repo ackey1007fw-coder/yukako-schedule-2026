@@ -24,6 +24,9 @@ export type DisplayGojetFeatureUpdate = GojetFeatureUpdate & {
 const NUMAO_MAYUKA_C_GIRLS_20260803_POST_URL =
   "https://x.com/mayuka_pinkcha/status/2084243063141179760";
 
+const YUKAKO_STREAMING_VIEWING_FINAL_DAY_20260810_POST_URL =
+  "https://x.com/mokoopy/status/2086627781023285249";
+
 const YUKAKO_FINAL_CALL_QUOTE_20260803_POST_URL =
   "https://x.com/mokoopy/status/2084261233344016471";
 const STREAMING_FINAL_DAY_20260803_POST_URL =
@@ -210,6 +213,10 @@ const decoratedSourceUpdates: DisplayGojetFeatureUpdate[] = sourceUpdates
 const sakiTrio20260801Update = decoratedSourceUpdates.find(
   (update) => update.postUrl === SAKI_TRIO_20260801_POST_URL
 );
+const yukakoStreamingViewingFinalDay20260810Update = decoratedSourceUpdates.find(
+  (update) =>
+    update.postUrl === YUKAKO_STREAMING_VIEWING_FINAL_DAY_20260810_POST_URL
+);
 const numaoMayukaCGirls20260803Update = decoratedSourceUpdates.find(
   (update) => update.postUrl === NUMAO_MAYUKA_C_GIRLS_20260803_POST_URL
 );
@@ -362,6 +369,7 @@ export const gojetOriginUpdate = decoratedSourceUpdates.find(
 );
 const remainingSourceUpdates = decoratedSourceUpdates.filter(
   (update) =>
+    update.postUrl !== YUKAKO_STREAMING_VIEWING_FINAL_DAY_20260810_POST_URL &&
     update.postUrl !== NUMAO_MAYUKA_C_GIRLS_20260803_POST_URL &&
     update.postUrl !== C_TEAM_CAST_REPOST_20260802_POST_URL &&
     update.postUrl !== YUKAKO_FUCHAN_CONNECTION_20260801_POST_URL &&
@@ -414,6 +422,15 @@ const remainingSourceUpdates = decoratedSourceUpdates.filter(
     update.postUrl !== PENLIGHT_POST_URL &&
     update.postUrl !== PRODUCE_ANNOUNCE_POST_URL
 );
+
+const featuredYukakoStreamingViewingFinalDay20260810Update =
+  yukakoStreamingViewingFinalDay20260810Update
+    ? {
+        ...yukakoStreamingViewingFinalDay20260810Update,
+        anchorId: "gojet-streaming-viewing-final-day-2026-08-10",
+        primaryCta: "post" as const
+      }
+    : undefined;
 
 const featuredYukakoFinalCallQuote20260803Update: DisplayGojetFeatureUpdate = {
   date: "2026.8.3 21:52",
@@ -1118,6 +1135,9 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
 // 7/25 23:49優花子さん本人（残り公演の呼びかけ）→ 7/25 22:43三村すみかさん →
 // 7/25 11:31秋乃蒼依さん → 21:24青木杏奈さん → 20:40曽原加絵さん → 19:06来瞳舞夢さんの順で先頭表示する。
 const orderedGojetFeatureUpdates: DisplayGojetFeatureUpdate[] = [
+  ...(featuredYukakoStreamingViewingFinalDay20260810Update
+    ? [featuredYukakoStreamingViewingFinalDay20260810Update]
+    : []),
   featuredYukakoFinalCallQuote20260803Update,
   ...(featuredNumaoMayukaCGirls20260803Update
     ? [featuredNumaoMayukaCGirls20260803Update]

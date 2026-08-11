@@ -30,24 +30,52 @@ try {
   const { gojetFeatureUpdates } = await server.ssrLoadModule(
     "/src/data/gojetFeatureUpdates.ts"
   );
+  const { siteUpdates: latestSiteUpdates } = await server.ssrLoadModule(
+    "/src/data/siteUpdates.ts"
+  );
 
-  // 先頭は8/3 21:52の優花子さん本人（配信最終案内）、その次が8/3 20:40の沼尾さん。
+  // 先頭は8/10 10:36の優花子さん本人（配信視聴最終日・A/B/C班集合写真）。
   const newestPost = gojetFeatureUpdates[0];
   assert.equal(
     newestPost.postUrl,
-    "https://x.com/mokoopy/status/2084261233344016471"
+    "https://x.com/mokoopy/status/2086627781023285249"
   );
   assert.equal(
     newestPost.anchorId,
+    "gojet-streaming-viewing-final-day-2026-08-10"
+  );
+  assert.equal(newestPost.photos?.length, 3);
+  assert.match(newestPost.title, /A・B・C班、3枚の集合写真/);
+  assert.match(newestPost.caption, /何度も観てたっぷりお楽しみください/);
+  newestPost.photos?.forEach((image) => {
+    assert.ok(
+      existsSync(new URL(`../public${image.src}`, import.meta.url)),
+      `配信視聴最終日の画像ファイルが無い: public${image.src}`
+    );
+  });
+  assert.equal(latestSiteUpdates[0]?.sourceUrl, newestPost.postUrl);
+  assert.equal(
+    latestSiteUpdates[0]?.anchor,
+    "#gojet-streaming-viewing-final-day-2026-08-10"
+  );
+
+  // 続いて8/3 21:52の優花子さん本人（配信最終案内）、8/3 20:40の沼尾さん。
+  const previousNewestPost = gojetFeatureUpdates[1];
+  assert.equal(
+    previousNewestPost.postUrl,
+    "https://x.com/mokoopy/status/2084261233344016471"
+  );
+  assert.equal(
+    previousNewestPost.anchorId,
     "gojet-yukako-final-call-quote-2026-08-03"
   );
   assert.equal(
-    newestPost.quotedPost?.url,
+    previousNewestPost.quotedPost?.url,
     "https://x.com/yukako_produce/status/2084256242856587746"
   );
-  assert.match(newestPost.title, /載せていない見所がありすぎる/);
+  assert.match(previousNewestPost.title, /載せていない見所がありすぎる/);
 
-  const newestCastPost = gojetFeatureUpdates[1];
+  const newestCastPost = gojetFeatureUpdates[2];
   assert.equal(
     newestCastPost.postUrl,
     "https://x.com/mayuka_pinkcha/status/2084243063141179760"
