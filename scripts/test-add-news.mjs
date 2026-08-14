@@ -291,6 +291,36 @@ const differentStatus = prepareNewsAddition({
 });
 assert.equal(differentStatus.ok, true);
 
+const listedAtSource = `export type NewsItem = {
+  date: string;
+  label: string;
+  text: string;
+  url: string;
+  listedAt?: string;
+};
+
+export const news: NewsItem[] = [
+  {
+    date: "2026.8.4",
+    label: "X",
+    text: "過去投稿",
+    url: "https://x.com/mokoopy/status/2084474587052691763",
+    listedAt: "2026.8.14"
+  },
+  {
+    date: "2026.7.13",
+    label: "X",
+    text: "既存の本文です。",
+    url: "https://x.com/example/status/1"
+  }
+];
+`;
+const listedAtItems = extractNewsItems(listedAtSource);
+assert.equal(listedAtItems.length, 2);
+assert.equal(listedAtItems[0].date, "2026.8.4");
+assert.equal(listedAtItems[0].listedAt, "2026.8.14");
+assert.equal(listedAtItems[1].listedAt, undefined);
+
 const functionalQueryKept = prepareNewsAddition({
   source: snsSource,
   filePath: "/tmp/sns-news.ts",

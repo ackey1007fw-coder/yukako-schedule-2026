@@ -1,14 +1,17 @@
 export type NewsItem = {
+  // 投稿日・出来事の日付。最新情報の時系列はこちらを使う。
   date: string;
   label: string;
   text: string;
   url: string;
+  // サイトに載せた日。過去投稿を後から追加するときだけ入れる。
+  // Footer の「掲載情報更新」は listedAt ?? date の新しい方を見る。省略時は date。
+  listedAt?: string;
 };
 
 export const news: NewsItem[] = [
   {
-    // 掲載日。Footer の「掲載情報更新」も news[0].date を使うため、
-    // 公演日（8/10）ではなくサイトに載せた日を入れる。
+    // 掲載日。公演日（8/10）ではなく、サイトに載せた日を入れる。
     date: "2026.8.9",
     label: "X",
     text: "「今年の日本大会も盛り上げていくぞ🔥」——8/10（月）16:00、MISS GRAND JAPAN & MR GAY JAPAN 2026 FINAL。吉井優花子さんが日本語MCとしてヒューリックホール東京のステージへ。",
@@ -18,7 +21,8 @@ export const news: NewsItem[] = [
     date: "2026.8.4",
     label: "X",
     text: "基本は通知オフなのに、なぜかsetlogだけオンのまま。B班メンバーの私生活が視野に入る生活になってる——人生の課題は睡眠。",
-    url: "https://x.com/mokoopy/status/2084474587052691763"
+    url: "https://x.com/mokoopy/status/2084474587052691763",
+    listedAt: "2026.8.14"
   },
   {
     date: "2026.7.13",
@@ -129,3 +133,18 @@ export const news: NewsItem[] = [
     url: "https://www.instagram.com/p/DYeSf_aGe1T/"
   }
 ];
+
+const newsDateKey = (date: string) => {
+  const [year = 0, month = 0, day = 0] = date.split(".").map(Number);
+  return (year * 100 + month) * 100 + day;
+};
+
+export const listingDateOf = (item: NewsItem) => item.listedAt ?? item.date;
+
+export const latestNewsListingDate = (items: readonly NewsItem[] = news) => {
+  if (items.length === 0) return "—";
+  return items.reduce((latest, item) => {
+    const candidate = listingDateOf(item);
+    return newsDateKey(candidate) > newsDateKey(latest) ? candidate : latest;
+  }, listingDateOf(items[0]));
+};

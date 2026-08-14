@@ -194,14 +194,15 @@ export function normalizeTextForCompare(text) {
 export function extractNewsItems(source) {
   const items = [];
   const itemRe =
-    /\{\s*date:\s*"((?:\\.|[^"\\])*)"\s*,\s*label:\s*"((?:\\.|[^"\\])*)"\s*,\s*text:\s*"((?:\\.|[^"\\])*)"\s*,\s*url:\s*"((?:\\.|[^"\\])*)"\s*\}/g;
+    /\{\s*date:\s*"((?:\\.|[^"\\])*)"\s*,\s*label:\s*"((?:\\.|[^"\\])*)"\s*,\s*text:\s*"((?:\\.|[^"\\])*)"\s*,\s*url:\s*"((?:\\.|[^"\\])*)"(?:\s*,\s*listedAt:\s*"((?:\\.|[^"\\])*)")?\s*\}/g;
   let match;
   while ((match = itemRe.exec(source)) !== null) {
     items.push({
       date: unescapeTsString(match[1]),
       label: unescapeTsString(match[2]),
       text: unescapeTsString(match[3]),
-      url: unescapeTsString(match[4])
+      url: unescapeTsString(match[4]),
+      ...(match[5] ? { listedAt: unescapeTsString(match[5]) } : {})
     });
   }
   return items;

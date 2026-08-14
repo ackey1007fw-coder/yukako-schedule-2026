@@ -1,5 +1,5 @@
 import { BookOpenText, Share2 } from "lucide-react";
-import { news } from "../data/news";
+import { latestNewsListingDate } from "../data/news";
 import { profile } from "../data/profile";
 import { SITE_URL, xShareUrl } from "../lib/share";
 import type { SocialLink } from "../types";
@@ -14,7 +14,7 @@ export function Footer({ socialLinks, source, updatedAt }: FooterProps) {
   const year = new Date().getFullYear();
   const displayUpdatedAt = updatedAt
     ? new Date(updatedAt).toLocaleString("ja-JP")
-    : news[0]?.date ?? "—";
+    : latestNewsListingDate();
 
   return (
     <footer className="border-t border-rosefog/20 bg-ink px-4 py-12 text-white sm:px-6 lg:px-8">
