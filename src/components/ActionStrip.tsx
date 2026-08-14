@@ -19,9 +19,9 @@ export function ActionStrip({ nextEvent, upcomingEvents, socialLinks }: ActionSt
     month: upcomingEvents.filter((event) => eventDates(event).some((date) => date.startsWith(month))).length
   };
   const actions = [
-    { label: "次の予定", title: nextEvent?.shortTitle ?? "予定を見る", href: "#schedule", Icon: CalendarDays, external: false },
-    { label: "チケット／配信／詳細", title: primaryLink?.label ?? "公演情報を見る", href: primaryLink?.url ?? "#next", Icon: Ticket, external: Boolean(primaryLink), track: primaryLink?.kind === "stream" ? "stream_click" as const : "ticket_click" as const },
-    { label: "SNSで応援", title: social?.handle ?? "公式SNSを見る", href: social?.url ?? "#links", Icon: MessageCircleHeart, external: Boolean(social), track: "sns_click" as const }
+    { label: "次の出演", title: nextEvent?.shortTitle ?? "これまでの記録を見る", href: nextEvent ? "#schedule" : "#highlights", Icon: CalendarDays, external: false },
+    { label: nextEvent ? "チケット／詳細" : "#ゆかJETの記録", title: primaryLink?.label ?? (nextEvent ? "公演の案内を見る" : "#ゆかJETの記録を見る"), href: primaryLink?.url ?? (nextEvent ? "#schedule" : "#next"), Icon: Ticket, external: Boolean(primaryLink), track: primaryLink?.kind === "stream" ? "stream_click" as const : "ticket_click" as const },
+    { label: "SNSで応援", title: social?.handle ?? "SNSを見る", href: social?.url ?? "#links", Icon: MessageCircleHeart, external: Boolean(social), track: "sns_click" as const }
   ];
 
   return (

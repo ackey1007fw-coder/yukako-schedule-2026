@@ -162,7 +162,7 @@ export function TodayNextPanel({ todayEvents, nextEvent, now = new Date() }: Tod
         <Panel
           eyebrow="次の予定"
           event={nextEvent}
-          empty="次回予定を確認中"
+          empty="次回の出演は未定"
           Icon={CalendarDays}
         />
       </div>

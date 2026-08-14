@@ -1,4 +1,4 @@
-import { CalendarCheck, Clapperboard, MapPin, MessageCircleHeart } from "lucide-react";
+import { CalendarCheck, MapPin, Megaphone, MessageCircleHeart } from "lucide-react";
 import { profile } from "../data/profile";
 import { getResponsiveImageProps } from "../lib/responsiveImage";
 import type { ScheduleEvent, SocialLink } from "../types";
@@ -30,7 +30,7 @@ export function Hero({ nextEvent, socialLinks }: HeroProps) {
       id="top"
       className="yukako-hero relative overflow-hidden border-b border-champagne/25 bg-ink text-white"
     >
-      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-0 lg:h-[calc(100svh-7rem)] lg:min-h-[560px] lg:max-h-[700px] lg:grid-cols-[0.92fr_1.08fr] lg:items-stretch">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-0 lg:h-[calc(100svh-7rem)] lg:min-h-[560px] lg:max-h-[760px] lg:grid-cols-[0.92fr_1.08fr] lg:items-stretch">
         <div className="order-1 flex flex-col justify-center px-4 py-10 sm:px-6 sm:py-14 lg:min-h-0 lg:px-10 lg:py-20">
           <div className="yukako-hero-panel">
             <p className="yukako-kicker mb-5 inline-flex self-start px-3 py-2 text-xs font-bold uppercase">
@@ -54,21 +54,49 @@ export function Hero({ nextEvent, socialLinks }: HeroProps) {
                 秋田出身
               </span>
               <span className="border border-white/20 bg-white/10 px-3 py-1.5">
-                秋田の公務員から俳優へ
+                Miss Grand Japan 代表補佐
               </span>
               <span className="border border-white/20 bg-white/10 px-3 py-1.5">
                 #ゆかJET
               </span>
             </div>
 
+            {nextEvent ? (
+              <a
+                href={`#event-${nextEvent.id}`}
+                className="mt-6 block max-w-xl border border-champagne/40 bg-white/10 px-4 py-3 transition hover:border-champagne hover:bg-white/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-champagne"
+              >
+                <span className="text-[11px] font-black uppercase tracking-[0.16em] text-champagne">
+                  次の出演
+                </span>
+                <span className="mt-1 block font-display text-xl leading-tight text-white">
+                  {nextEvent.shortTitle}
+                </span>
+                <span className="mt-1 block text-sm font-semibold text-white/75">
+                  {nextEvent.displayDate}
+                </span>
+              </a>
+            ) : (
+              <p className="mt-6 max-w-xl text-sm leading-7 text-white/70">
+                次回の出演予定は、発表があり次第ここに載せます。最新の投稿とこれまでの記録から近況をたどれます。
+              </p>
+            )}
+
             <div className="mt-7 flex flex-col gap-3 sm:mt-8">
               <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                 <a
-                  href="#schedule"
+                  href={nextEvent ? "#schedule" : "#highlights"}
                   className="yukako-button yukako-button-primary min-h-12 px-5 py-3 text-sm shadow-paper"
                 >
                   <CalendarCheck className="h-4 w-4" aria-hidden="true" />
-                  今日の予定を見る
+                  {nextEvent ? "出演予定を見る" : "これまでの歩みを見る"}
+                </a>
+                <a
+                  href="#updates"
+                  className="yukako-button yukako-button-ghost min-h-12 px-4 py-3 text-sm shadow-sm"
+                >
+                  <Megaphone className="h-4 w-4 text-champagne" aria-hidden="true" />
+                  最新情報を見る
                 </a>
                 {showroomLink && (
                   <ExternalButton href={showroomLink.url} variant="gold" className="px-5">
@@ -78,13 +106,6 @@ export function Hero({ nextEvent, socialLinks }: HeroProps) {
                     </span>
                   </ExternalButton>
                 )}
-                <a
-                  href="#next"
-                  className="yukako-button yukako-button-ghost min-h-12 px-4 py-3 text-sm shadow-sm"
-                >
-                  <Clapperboard className="h-4 w-4 text-champagne" aria-hidden="true" />
-                  #ゆかJET / 公演情報を見る
-                </a>
               </div>
             </div>
 

@@ -7,7 +7,7 @@ import type { ScheduleEvent } from "../types";
 import { Badge } from "./Badge";
 import { ExternalButton } from "./ExternalButton";
 
-type EventCardProps = { event: ScheduleEvent; isNext?: boolean; compact?: boolean };
+type EventCardProps = { event: ScheduleEvent; isNext?: boolean; compact?: boolean; now?: Date };
 const ticketDateFormatter = new Intl.DateTimeFormat("ja-JP", { timeZone: "Asia/Tokyo", month: "numeric", day: "numeric", weekday: "short" });
 const formatTicketDate = (isoDate: string) => {
   const parts = ticketDateFormatter.formatToParts(new Date(isoDate));
@@ -15,17 +15,22 @@ const formatTicketDate = (isoDate: string) => {
   return { monthDay: `${value("month")}.${value("day")}`, weekday: value("weekday") };
 };
 
-export function EventCard({ event, isNext = false, compact = false }: EventCardProps) {
+export function EventCard({ event, isNext = false, compact = false, now }: EventCardProps) {
   const meta = categoryMeta[event.category];
   const Icon = meta.Icon;
-  const upcoming = !isEventPast(event);
+  const upcoming = !isEventPast(event, now);
   const ticketDate = formatTicketDate(event.startAt);
   const uniqueLinks = event.links.filter((link, index, links) => links.findIndex((candidate) => candidate.url === link.url) === index);
-  const primaryLink = uniqueLinks.find((link) => link.kind === "ticket") ?? uniqueLinks.find((link) => link.kind === "stream");
-  const infoLink = uniqueLinks.find((link) => link.kind === "info" && link.url !== primaryLink?.url);
+  const ticketOrStream = upcoming
+    ? uniqueLinks.find((link) => link.kind === "ticket") ?? uniqueLinks.find((link) => link.kind === "stream")
+    : undefined;
+  const infoLink = uniqueLinks.find((link) => link.kind === "info" && link.url !== ticketOrStream?.url);
   const mapLink = uniqueLinks.find((link) => link.kind === "map");
+  const snsLink = uniqueLinks.find((link) => link.kind === "sns");
+  const recordLink = !upcoming && !infoLink ? snsLink : undefined;
   const shareText = upcoming ? `${event.title}を応援しています！` : `${event.title}の活動記録を見ました`;
   const shareContent = event.id === "yukajet-gojet-2026-07" ? "yukajet_share" : "event_share";
+  const hasActions = Boolean(ticketOrStream || infoLink || mapLink || recordLink);
 
   return (
     <article className={`yukako-ticket-card yukako-card yukako-card-interactive group relative grid overflow-hidden bg-white ${event.isImportant || isNext ? "border-champagne/70" : "border-rosefog/25"} ${compact ? "sm:grid-cols-[112px_1fr]" : "sm:grid-cols-[132px_1fr]"}`}>
@@ -37,8 +42,10 @@ export function EventCard({ event, isNext = false, compact = false }: EventCardP
       </div>
       <div className={`${compact ? "p-5" : "p-6"} flex min-w-0 flex-col`}>
         <div className="mb-4 flex flex-wrap gap-2">
-          {isNext && <Badge strong>NEXT</Badge>}<Badge category={event.category}>{meta.label}</Badge>
-          {event.badges.filter((badge) => badge !== "NEXT" && badge !== meta.label).slice(0, compact ? 3 : 5).map((badge) => <Badge key={badge}>{badge}</Badge>)}
+          {upcoming && isNext && <Badge strong>NEXT</Badge>}
+          {!upcoming && <Badge>終了</Badge>}
+          <Badge category={event.category}>{meta.label}</Badge>
+          {event.badges.filter((badge) => badge !== "NEXT" && badge !== meta.label && badge !== "終了").slice(0, compact ? 3 : 5).map((badge) => <Badge key={badge}>{badge}</Badge>)}
         </div>
         <div className="flex min-w-0 items-start gap-3">
           <span className={`mt-1 grid h-9 w-9 shrink-0 place-items-center border ${meta.tone}`}><Icon className="h-4 w-4" aria-hidden="true" /></span>
@@ -49,9 +56,10 @@ export function EventCard({ event, isNext = false, compact = false }: EventCardP
           </div>
         </div>
         <p className={`${compact ? "mt-4 line-clamp-4" : "mt-5"} leading-8 text-ink/70`}>{event.summary}</p>
-        {(primaryLink || infoLink || mapLink) && <div className="mt-6 grid gap-3 sm:grid-cols-2">
-          {primaryLink && <ExternalButton href={primaryLink.url} variant="gold" onClick={() => trackPortalEvent(primaryLink.kind === "stream" ? "stream_click" : "ticket_click", { event_id: event.id, placement: "event_card" })}>{primaryLink.kind === "stream" ? "配信を見る" : "チケット予約"}</ExternalButton>}
-          {infoLink && <ExternalButton href={infoLink.url} variant="light">詳細を見る</ExternalButton>}
+        {hasActions && <div className="mt-6 grid gap-3 sm:grid-cols-2">
+          {ticketOrStream && <ExternalButton href={ticketOrStream.url} variant="gold" onClick={() => trackPortalEvent(ticketOrStream.kind === "stream" ? "stream_click" : "ticket_click", { event_id: event.id, placement: "event_card" })}>{ticketOrStream.kind === "stream" ? "配信を見る" : "チケット予約"}</ExternalButton>}
+          {infoLink && <ExternalButton href={infoLink.url} variant="light">{upcoming ? "詳細を見る" : "当時の案内を見る"}</ExternalButton>}
+          {recordLink && <ExternalButton href={recordLink.url} variant="light">投稿を見る</ExternalButton>}
           {mapLink && <ExternalButton href={mapLink.url} variant="light">地図を開く</ExternalButton>}
         </div>}
         {upcoming && <details className="group mt-5 border-t border-rosefog/15 pt-4">

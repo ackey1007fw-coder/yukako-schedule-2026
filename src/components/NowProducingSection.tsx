@@ -821,7 +821,7 @@ function FeatureUpdateCard({
   );
 }
 
-// ヒーロー直下の #ゆかJET 特設ブロック（Now Producing billboard）。
+// #ゆかJET 特設ブロック。公演・配信終了後は Activity Archive として記録を残す。
 // ポスター + カウントダウン + 役割リスト + 予約CTA + 特集ギャラリーを、舞台看板風の1枚にまとめる。
 export function NowProducingSection({ event, now }: NowProducingSectionProps) {
   const [lightbox, setLightbox] = useState<{
@@ -913,10 +913,10 @@ export function NowProducingSection({ event, now }: NowProducingSectionProps) {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <ActHeader
             act={1}
-            eyebrow="Now Producing"
-            title="#ゆかJET 公演情報"
+            eyebrow="Activity Archive"
+            title="#ゆかJET 活動の軌跡"
             tone="dark"
-            copy="新しい公演情報が決まり次第、ここに掲載します。"
+            copy="新しい公演情報が決まり次第、スケジュールにも掲載します。第1弾の記録は特集に残しています。"
           />
         </div>
       </section>
@@ -1095,20 +1095,22 @@ export function NowProducingSection({ event, now }: NowProducingSectionProps) {
                     </span>
                   </ExternalButton>
                 )}
-                <a
-                  href={googleCalendarUrl(event)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="yukako-button yukako-button-ghost min-h-12 px-4 py-3 text-sm"
-                >
-                  <CalendarPlus className="h-4 w-4 text-champagne" aria-hidden="true" />
-                  カレンダーに追加
-                </a>
+                {!viewingClosed && (
+                  <a
+                    href={googleCalendarUrl(event)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="yukako-button yukako-button-ghost min-h-12 px-4 py-3 text-sm"
+                  >
+                    <CalendarPlus className="h-4 w-4 text-champagne" aria-hidden="true" />
+                    カレンダーに追加
+                  </a>
+                )}
                 <a
                   href="#support"
                   className="yukako-button yukako-button-ghost min-h-12 px-4 py-3 text-sm"
                 >
-                  応援メニューを見る
+                  {viewingClosed ? "応援メニューの記録を見る" : "応援メニューを見る"}
                 </a>
               </div>
 

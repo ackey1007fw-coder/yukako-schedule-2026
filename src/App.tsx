@@ -129,14 +129,14 @@ function App() {
               {
                 href: "#updates",
                 title: "最新情報",
-                copy: "SNS投稿と稽古場だより。新しい順。",
+                copy: "SNS投稿とお知らせ。新しい順。",
                 cta: "最新情報へ"
               },
               {
-                href: "#next",
-                title: "公演・チケット",
-                copy: "出演日程、配信、予約、応援メニュー。",
-                cta: "#ゆかJET 公演情報へ"
+                href: "#schedule",
+                title: "出演予定",
+                copy: "直近の出演と、終了した公演の記録。",
+                cta: "スケジュールへ"
               }
             ].map((item) => (
               <a
@@ -158,7 +158,27 @@ function App() {
           <LatestUpdatesSection />
         </SectionReveal>
 
-        {/* 2. 現在進行中の最優先企画：概要 → 班紹介 → 新しいトピック順 */}
+        {/* 2. これからの出演：予定を確認してから応援へ */}
+        <SectionReveal>
+          <ScheduleSection
+            upcomingEvents={upcomingEvents}
+            pastEvents={pastEvents}
+            allEvents={events}
+            monthKeys={monthKeys}
+          />
+        </SectionReveal>
+        <ActionStrip
+          nextEvent={nextEvent}
+          upcomingEvents={upcomingEvents}
+          socialLinks={socialLinks}
+        />
+        {source !== "sheets" && (
+          <p className="bg-porcelain px-4 pb-4 text-center text-xs font-semibold text-ink/55" role="status">
+            {source === "cache" ? "保存済みの予定を表示し、最新情報を確認しています。" : "現在は内蔵の予備データを表示しています。最新情報は各詳細リンクでもご確認ください。"}
+          </p>
+        )}
+
+        {/* 3. 代表プロジェクトの記録：#ゆかJET（公演・配信とも終了） */}
         <SectionReveal>
           <NowProducingSection event={gojetEvent ?? nextEvent} />
         </SectionReveal>
@@ -182,26 +202,6 @@ function App() {
             <AudienceReportSection />
           </SectionReveal>
         </GojetTopicsBand>
-
-        {/* 3. 行動導線：予定を確認してから、応援・SNSへ進む */}
-        <SectionReveal>
-          <ScheduleSection
-            upcomingEvents={upcomingEvents}
-            pastEvents={pastEvents}
-            allEvents={events}
-            monthKeys={monthKeys}
-          />
-        </SectionReveal>
-        <ActionStrip
-          nextEvent={nextEvent}
-          upcomingEvents={upcomingEvents}
-          socialLinks={socialLinks}
-        />
-        {source !== "sheets" && (
-          <p className="bg-porcelain px-4 pb-4 text-center text-xs font-semibold text-ink/55" role="status">
-            {source === "cache" ? "保存済みの予定を表示し、最新情報を確認しています。" : "現在は内蔵の予備データを表示しています。最新情報は各詳細リンクでもご確認ください。"}
-          </p>
-        )}
         <SectionReveal>
           <SupportersSection />
         </SectionReveal>

@@ -14,10 +14,10 @@ export type SearchFaq = {
 
 export const searchIntents: SearchIntent[] = [
   {
-    label: "公演情報",
+    label: "出演予定",
     title: "公演スケジュールを確認する",
-    copy: "#ゆかJETの予定や、ベイビーシャークライブの出演記録はこちら。",
-    href: "#next"
+    copy: "これからの出演と、終了した公演の記録はこちら。",
+    href: "#schedule"
   },
   {
     label: "出演歴",
@@ -43,9 +43,9 @@ export const searchFaqs: SearchFaq[] = [
   {
     question: "チケットはどこで買える？",
     answer:
-      "ご来場チケットは一般4,700円、特典付き前方席6,000円。予約サイトから申し込めます。",
-    href: "https://premiumgoyukajet.hp.peraichi.com",
-    linkLabel: "予約サイトを見る"
+      "これからの出演はスケジュールから案内しています。#ゆかJETの来場チケットとアーカイブ配信は、いずれも受付・視聴を終了しました。",
+    href: "#schedule",
+    linkLabel: "出演予定を見る"
   },
   {
     question: "配信で観られる？",
@@ -57,9 +57,9 @@ export const searchFaqs: SearchFaq[] = [
   {
     question: "会場はどこ？",
     answer:
-      "Air studio 両国（東京都墨田区両国2-18-7 地下1階）。両国駅から徒歩2分です。",
-    href: "#next",
-    linkLabel: "公演情報を見る"
+      "これからの会場は各出演予定に記載しています。#ゆかJET 第1弾は Air studio 両国（東京都墨田区両国2-18-7 地下1階）で上演されました。",
+    href: "#schedule",
+    linkLabel: "出演予定を見る"
   },
   {
     question: "SHOWROOMはどこ？",
@@ -71,9 +71,9 @@ export const searchFaqs: SearchFaq[] = [
   {
     question: "初めてでも応援できる？",
     answer:
-      "エールカードやメッセージ動画、応援チケットなど、初めての方でも参加しやすい応援メニューを用意しています。",
-    href: "#support",
-    linkLabel: "応援メニューを見る"
+      "X・Instagram・SHOWROOMのフォローから応援できます。公演ごとの応援案内は、各出演予定と#ゆかJETの記録にまとめています。",
+    href: "#links",
+    linkLabel: "SNS・配信を見る"
   },
   {
     question: "Miss Grand Japanでの役職は？",
@@ -85,8 +85,8 @@ export const searchFaqs: SearchFaq[] = [
   {
     question: "#ゆかJET とは何ですか？",
     answer:
-      "吉井優花子さんがプロデュースする舞台シリーズ『GO,JET!GO!GO!』の愛称です。第1弾は2026年7月にAir studio 両国で上演されます。",
+      "吉井優花子さんがプロデュースする舞台シリーズ『GO,JET!GO!GO!』の愛称です。第1弾は2026年7月23日〜27日にAir studio 両国で上演され、アーカイブ配信も8月10日に終了しました。",
     href: "#next",
-    linkLabel: "公演情報を見る"
+    linkLabel: "#ゆかJETの記録を見る"
   }
 ];
