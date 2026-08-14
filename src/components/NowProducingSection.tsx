@@ -912,7 +912,7 @@ export function NowProducingSection({ event, now }: NowProducingSectionProps) {
       <section id="next" className="scroll-mt-32 bg-ink py-16 sm:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <ActHeader
-            act={1}
+            act={2}
             eyebrow="Activity Archive"
             title="#ゆかJET 活動の軌跡"
             tone="dark"
@@ -935,7 +935,7 @@ export function NowProducingSection({ event, now }: NowProducingSectionProps) {
     <section id="next" className="scroll-mt-32 bg-ink py-8 sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <ActHeader
-          act={1}
+          act={2}
           eyebrow={viewingClosed ? "Activity Archive" : "Now Producing"}
           title={viewingClosed ? "#ゆかJET 活動の軌跡" : "#ゆかJET 公演情報"}
           tone="dark"
