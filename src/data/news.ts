@@ -15,6 +15,12 @@ export const news: NewsItem[] = [
     url: "https://x.com/mokoopy/status/2086075435927138676"
   },
   {
+    date: "2026.8.4",
+    label: "X",
+    text: "基本は通知オフなのに、なぜかsetlogだけオンのまま。B班メンバーの私生活が視野に入る生活になってる——人生の課題は睡眠。",
+    url: "https://x.com/mokoopy/status/2084474587052691763"
+  },
+  {
     date: "2026.7.13",
     label: "X",
     text: "「ワイワイC班😆 最後の早紀、楽しんで演じます✨」——CM枠は7/16（木）23:59まで。",
