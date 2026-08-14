@@ -30,7 +30,7 @@ export function Hero({ nextEvent, socialLinks }: HeroProps) {
       id="top"
       className="yukako-hero relative overflow-hidden border-b border-champagne/25 bg-ink text-white"
     >
-      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-0 lg:h-[calc(100svh-7rem)] lg:min-h-[560px] lg:max-h-[760px] lg:grid-cols-[0.92fr_1.08fr] lg:items-stretch">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-0 lg:min-h-[560px] lg:grid-cols-[0.92fr_1.08fr] lg:items-stretch">
         <div className="order-1 flex flex-col justify-center px-4 py-10 sm:px-6 sm:py-14 lg:min-h-0 lg:px-10 lg:py-20">
           <div className="yukako-hero-panel">
             <p className="yukako-kicker mb-5 inline-flex self-start px-3 py-2 text-xs font-bold uppercase">
