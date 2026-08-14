@@ -1,5 +1,5 @@
 import { BookOpenText, Share2 } from "lucide-react";
-import { latestNewsListingDate } from "../data/news";
+import { latestNewsListingDate, listingDateToUtcMs } from "../data/news";
 import { profile } from "../data/profile";
 import { SITE_URL, xShareUrl } from "../lib/share";
 import type { SocialLink } from "../types";
@@ -12,9 +12,14 @@ type FooterProps = {
 
 export function Footer({ socialLinks, source, updatedAt }: FooterProps) {
   const year = new Date().getFullYear();
-  const displayUpdatedAt = updatedAt
-    ? new Date(updatedAt).toLocaleString("ja-JP")
-    : latestNewsListingDate();
+  const newsListing = latestNewsListingDate();
+  const apiMs = updatedAt ? Date.parse(updatedAt) : Number.NaN;
+  const newsMs = listingDateToUtcMs(newsListing);
+  const useApiDate =
+    Number.isFinite(apiMs) && (newsMs === undefined || apiMs >= newsMs);
+  const displayUpdatedAt = useApiDate
+    ? new Date(updatedAt as string).toLocaleString("ja-JP")
+    : newsListing;
 
   return (
     <footer className="border-t border-rosefog/20 bg-ink px-4 py-12 text-white sm:px-6 lg:px-8">

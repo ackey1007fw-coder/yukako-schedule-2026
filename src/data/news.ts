@@ -141,6 +141,12 @@ const newsDateKey = (date: string) => {
 
 export const listingDateOf = (item: NewsItem) => item.listedAt ?? item.date;
 
+export const listingDateToUtcMs = (date: string) => {
+  const [year, month, day] = date.split(".").map(Number);
+  if (!year || !month) return undefined;
+  return Date.UTC(year, month - 1, day || 1);
+};
+
 export const latestNewsListingDate = (items: readonly NewsItem[] = news) => {
   if (items.length === 0) return "—";
   return items.reduce((latest, item) => {
