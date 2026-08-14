@@ -156,7 +156,7 @@ export function ScheduleSection({
     <section id="schedule" className="scroll-mt-32 bg-white py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <ActHeader
-          act={2}
+          act={1}
           eyebrow="Schedule"
           title="今日、どこを応援する？"
           copy="直近の大事な予定から、今日・今週・今月・これまでの記録まで。"

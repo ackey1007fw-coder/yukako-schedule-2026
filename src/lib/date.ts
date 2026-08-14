@@ -10,6 +10,11 @@ export const eventEndDate = (event: ScheduleEvent) =>
 export const isEventPast = (event: ScheduleEvent, now = new Date()) =>
   eventEndDate(event).getTime() < now.getTime();
 
+export const eventSchemaStatus = (event: ScheduleEvent, now = new Date()) =>
+  isEventPast(event, now)
+    ? "https://schema.org/EventCompleted"
+    : "https://schema.org/EventScheduled";
+
 export const sortEventsAsc = (events: ScheduleEvent[]) =>
   [...events].sort(
     (a, b) => eventStartDate(a).getTime() - eventStartDate(b).getTime(),

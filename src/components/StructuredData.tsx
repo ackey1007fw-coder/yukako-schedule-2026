@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { eventSchemaStatus } from "../lib/date";
 import { searchFaqs } from "../data/searchFaq";
 import type { ScheduleEvent } from "../types";
 
@@ -20,7 +21,7 @@ export function StructuredData({ events }: { events: ScheduleEvent[] }) {
         name: event.title,
         startDate: event.startAt,
         endDate: event.endAt ?? event.startAt,
-        eventStatus: "https://schema.org/EventScheduled",
+        eventStatus: eventSchemaStatus(event),
         eventAttendanceMode: event.venue
           ? "https://schema.org/OfflineEventAttendanceMode"
           : "https://schema.org/OnlineEventAttendanceMode",

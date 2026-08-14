@@ -128,7 +128,7 @@ export function GojetHairUpdateSection() {
                 className="yukako-button yukako-button-soft min-h-12 px-5 py-3 text-sm"
               >
                 <ArrowUpRight className="h-4 w-4 text-champagneInk" aria-hidden="true" />
-                サイト内の#ゆかJET公演情報を見る
+                サイト内の#ゆかJETの記録を見る
               </a>
             </div>
           </div>

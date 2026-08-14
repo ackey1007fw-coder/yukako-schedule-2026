@@ -547,7 +547,9 @@ try {
   );
   assert.doesNotMatch(producingClosedHtml, /チケット予約/);
   assert.doesNotMatch(producingClosedHtml, /配信チケットを申し込む/);
+  assert.doesNotMatch(producingClosedHtml, /カレンダーに追加/);
   assert.match(producingClosedHtml, /#ゆかJET 活動の軌跡/);
+  assert.match(producingClosedHtml, /応援メニューの記録を見る/);
   assert.match(
     producingClosedHtml,
     /配信視聴は2026年8月10日をもって終了しました/
@@ -854,6 +856,97 @@ try {
     "同じX投稿が最新情報に重複している"
   );
   assert.equal(mgjUpdate.sourceUrl, yukakoPostUrl, "最新情報の記事が別の投稿を指している");
+
+  // 11. 初回訪問向け：ヒーローは次の出演を出し、終了済み公演を現行公演のように見せない。
+  const { Hero } = await server.ssrLoadModule("/src/components/Hero.tsx");
+  const { EventCard } = await server.ssrLoadModule("/src/components/EventCard.tsx");
+  const { eventSchemaStatus } = await server.ssrLoadModule("/src/lib/date.ts");
+  const { searchFaqs, searchIntents } = await server.ssrLoadModule(
+    "/src/data/searchFaq.ts"
+  );
+  const babySharkOgaki = events.find((event) => event.id === "babyshark-live-2026-08-22");
+  const mgjFinalEvent = events.find((event) => event.id === "miss-grand-japan-2026-final-mc");
+  assert.ok(babySharkOgaki, "大垣公演が events.ts に無い");
+  assert.ok(mgjFinalEvent, "MGJ FINAL が events.ts に無い");
+
+  const heroWithNextHtml = renderToStaticMarkup(
+    createElement(Hero, {
+      nextEvent: babySharkOgaki,
+      socialLinks: [
+        {
+          label: "SHOWROOM",
+          handle: "秋田の優花子",
+          url: "https://www.showroom-live.com/room/profile?room_id=347571",
+          kind: "showroom",
+          description: "SHOWROOM"
+        }
+      ]
+    })
+  );
+  assert.match(heroWithNextHtml, /次の出演/);
+  assert.match(heroWithNextHtml, /Baby Shark 大垣/);
+  assert.match(heroWithNextHtml, /出演予定を見る/);
+  assert.match(heroWithNextHtml, /最新情報を見る/);
+  assert.match(heroWithNextHtml, /href="#schedule"/);
+  assert.match(heroWithNextHtml, /href="#updates"/);
+  assert.doesNotMatch(heroWithNextHtml, /#ゆかJET \/ 公演情報を見る/);
+  assert.doesNotMatch(heroWithNextHtml, /今日の予定を見る/);
+
+  const heroWithoutNextHtml = renderToStaticMarkup(
+    createElement(Hero, { socialLinks: [] })
+  );
+  assert.match(heroWithoutNextHtml, /発表があり次第ここに載せます/);
+  assert.match(heroWithoutNextHtml, /これまでの歩みを見る/);
+  assert.doesNotMatch(heroWithoutNextHtml, /次の出演/);
+
+  const afterQuickNavHtml = renderToStaticMarkup(
+    createElement(QuickNav, {
+      now: new Date("2026-08-14T12:00:00+09:00")
+    })
+  );
+  assert.match(afterQuickNavHtml, /href="#schedule"/);
+  assert.match(afterQuickNavHtml, /ゆかJET/);
+  assert.ok(
+    afterQuickNavHtml.indexOf('href="#schedule"') <
+      afterQuickNavHtml.indexOf('href="#next"'),
+    "終了後のモバイルナビで、出演予定より先に#ゆかJETへ誘導している"
+  );
+
+  const snapshotNow = new Date("2026-08-14T12:00:00+09:00");
+  const pastEventHtml = renderToStaticMarkup(
+    createElement(EventCard, { event: mgjFinalEvent, now: snapshotNow })
+  );
+  assert.match(pastEventHtml, />終了</);
+  assert.doesNotMatch(pastEventHtml, /チケット予約/);
+  assert.doesNotMatch(pastEventHtml, />NEXT</);
+
+  const upcomingEventHtml = renderToStaticMarkup(
+    createElement(EventCard, {
+      event: babySharkOgaki,
+      isNext: true,
+      now: snapshotNow
+    })
+  );
+  assert.match(upcomingEventHtml, />NEXT</);
+  assert.match(upcomingEventHtml, /チケット予約/);
+  assert.doesNotMatch(upcomingEventHtml, />終了</);
+
+  assert.equal(
+    eventSchemaStatus(mgjFinalEvent, snapshotNow),
+    "https://schema.org/EventCompleted"
+  );
+  assert.equal(
+    eventSchemaStatus(babySharkOgaki, snapshotNow),
+    "https://schema.org/EventScheduled"
+  );
+
+  const ticketFaq = searchFaqs.find((faq) => faq.question === "チケットはどこで買える？");
+  const yukajetFaq = searchFaqs.find((faq) => faq.question === "#ゆかJET とは何ですか？");
+  assert.equal(ticketFaq?.href, "#schedule");
+  assert.match(ticketFaq?.answer ?? "", /受付・視聴を終了しました/);
+  assert.match(yukajetFaq?.answer ?? "", /上演され/);
+  assert.doesNotMatch(yukajetFaq?.answer ?? "", /上演されます/);
+  assert.equal(searchIntents[0]?.href, "#schedule");
 
   console.log("gojet-status tests OK");
 } finally {

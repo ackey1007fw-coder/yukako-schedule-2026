@@ -4,6 +4,7 @@ import {
   CalendarDays,
   CalendarHeart,
   ChevronDown,
+  Clapperboard,
   HeartHandshake,
   Megaphone,
   MessageCircle,
@@ -21,8 +22,8 @@ const CLOCK_UPDATE_MS = 60000;
 
 const mainItems = [
   { label: "今日", href: "#today", Icon: CalendarDays },
-  { label: "公演", href: "#next", Icon: CalendarHeart },
-  { label: "予定", href: "#schedule", Icon: CalendarDays },
+  { label: "予定", href: "#schedule", Icon: CalendarHeart },
+  { label: "ゆかJET", href: "#next", Icon: Clapperboard },
   { label: "応援", href: "#support", Icon: HeartHandshake },
   { label: "SNS", href: "#links", Icon: MessageCircle }
 ];
@@ -38,6 +39,7 @@ const updatesItem = { label: "更新", href: "#updates", Icon: Megaphone };
 
 const moreItems = [
   { label: "最新情報", href: "#updates" },
+  { label: "#ゆかJET", href: "#next" },
   { label: "これまでの歩み", href: "#highlights" },
   { label: "ベイビーシャーク", href: "#baby-shark-live" },
   { label: "お嬢様はバンド", href: "#ojosama-band" },

@@ -12,8 +12,8 @@ import { searchFaqs, searchIntents } from "../data/searchFaq";
 const searchTopics = [
   {
     icon: CalendarDays,
-    title: "公演情報",
-    body: "#ゆかJET の公演日程や、ベイビーシャークライブの出演記録へ。"
+    title: "出演予定",
+    body: "これからの出演と、#ゆかJET・ベイビーシャークライブの記録へ。"
   },
   {
     icon: Radio,

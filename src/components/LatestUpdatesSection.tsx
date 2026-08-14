@@ -72,7 +72,7 @@ export function LatestUpdatesSection() {
         <SectionHeader
           kicker="Latest Updates"
           title="最新情報"
-          copy="SNS投稿・写真・お知らせを新しい順に。#ゆかJET の詳しい記録は、すぐ下の特集にまとめています。"
+          copy="SNS投稿・写真・お知らせを新しい順に。これからの出演はすぐ下のスケジュールへ。#ゆかJET の記録は特集にまとめています。"
         />
 
         <div className="grid gap-4 sm:grid-cols-3">

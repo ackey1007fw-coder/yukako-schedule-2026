@@ -10,8 +10,8 @@ import type { SocialLink } from "../types";
 // ホーム上ではパスが同じなのでリロードせずスクロールだけが起きる）。
 const navItems = [
   { label: "最新情報", href: "/#updates", id: "updates" },
-  { label: "公演情報", href: "/#next", id: "next" },
   { label: "スケジュール", href: "/#schedule", id: "schedule" },
+  { label: "#ゆかJET", href: "/#next", id: "next" },
   { label: "これまでの歩み", href: "/#highlights", id: "highlights" },
   { label: "アーカイブ", href: "/archive", id: "archive" },
   { label: "プロフィール", href: "/#profile", id: "profile" },
