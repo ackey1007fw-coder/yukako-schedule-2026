@@ -138,6 +138,13 @@ export const news: NewsItem[] = [
     label: "Instagram",
     text: "『かわええのう、龍馬くん』の振り返り。大量の龍馬のセリフから好きな3選、B班の龍馬とC班のおりょう、そして初のアソシエイト・プロデューサーで大切にしたこと。",
     url: "https://www.instagram.com/p/DYeSf_aGe1T/"
+  },
+  {
+    date: "2026.1.18",
+    label: "X",
+    text: "秋田の映画館には『いぶりがっこ味のポップコーン』があるんです。大きな反響を呼んだ元投稿。",
+    url: "https://x.com/mokoopy/status/2012824363620331966",
+    listedAt: "2026.8.18"
   }
 ];
 

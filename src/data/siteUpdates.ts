@@ -70,6 +70,20 @@ const standaloneUpdates: SiteUpdate[] = [
     sourceUrl: "https://x.com/mokoopy/status/2089283468576608643"
   },
   {
+    id: "iburigakko-popcorn-original-2026-01-18",
+    date: "2026.1.18",
+    category: "X",
+    title: "秋田の映画館には『いぶりがっこ味のポップコーン』があるんです🍿",
+    summary:
+      "メニュー表に並ぶ“いぶりがっこ”。大きな反響を呼んだ話題の出発点で、8/17の再訪につながる元投稿。",
+    image: {
+      src: "/images/yukako-iburigakko-popcorn-menu-2026-01-18.jpg",
+      alt: "109 CINEMASのポップコーンメニュー。フレーバーに塩、キャラメル、ハーフ＆ハーフ、いぶりがっこが並び、価格は300円"
+    },
+    imageLayout: "contain",
+    sourceUrl: "https://x.com/mokoopy/status/2012824363620331966"
+  },
+  {
     id: "miss-grand-japan-final-mc-2026-08-08",
     date: "2026.8.8",
     category: "Miss Grand Japan",

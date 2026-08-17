@@ -74,6 +74,55 @@ try {
     1,
     "同じX投稿が最新情報に重複している"
   );
+  const popcornOrigin = latestSiteUpdates.find(
+    (update) => update.id === "iburigakko-popcorn-original-2026-01-18"
+  );
+  assert.ok(popcornOrigin, "最新情報に1/18いぶりがっこポップコーン元投稿が無い");
+  assert.equal(popcornOrigin.date, "2026.1.18");
+  assert.equal(
+    popcornOrigin.sourceUrl,
+    "https://x.com/mokoopy/status/2012824363620331966"
+  );
+  assert.equal(
+    popcornOrigin.image?.src,
+    "/images/yukako-iburigakko-popcorn-menu-2026-01-18.jpg"
+  );
+  assert.equal(popcornOrigin.imageLayout, "contain");
+  assert.ok(
+    existsSync(new URL(`../public${popcornOrigin.image.src}`, import.meta.url)),
+    `1/18元投稿の画像ファイルが無い: public${popcornOrigin.image.src}`
+  );
+  assert.equal(
+    latestSiteUpdates.filter(
+      (update) => update.sourceUrl === popcornOrigin.sourceUrl
+    ).length,
+    1,
+    "1/18元投稿が最新情報に重複している"
+  );
+  assert.notEqual(
+    popcornUpdate.sourceUrl,
+    popcornOrigin.sourceUrl,
+    "8/17投稿と1/18元投稿のURLが同じになっている"
+  );
+  const { news, latestNewsListingDate } = await server.ssrLoadModule(
+    "/src/data/news.ts"
+  );
+  assert.equal(
+    news[0]?.url,
+    "https://x.com/mokoopy/status/2089283468576608643",
+    "NewsBar先頭が8/17投稿からずれている"
+  );
+  const popcornOriginNews = news.find(
+    (item) => item.url === popcornOrigin.sourceUrl
+  );
+  assert.ok(popcornOriginNews, "news.ts に1/18元投稿が無い");
+  assert.equal(popcornOriginNews.date, "2026.1.18");
+  assert.equal(popcornOriginNews.listedAt, "2026.8.18");
+  assert.equal(
+    latestNewsListingDate(news),
+    "2026.8.18",
+    "Footerの掲載情報更新日が8/18からずれている"
+  );
   const streamingFinalUpdate = latestSiteUpdates.find(
     (update) => update.anchor === "#gojet-streaming-viewing-final-day-2026-08-10"
   );

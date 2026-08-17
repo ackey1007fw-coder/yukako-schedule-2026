@@ -429,6 +429,7 @@ export const imageManifest = {
   "/images/yukako-gojet-produce-announce-microphone-2026-06-11.jpg": {"width":1658,"height":2210,"widths":[360,480,720,960,1280,1600,1658]},
   "/images/yukako-hero-hall.jpg": {"width":1170,"height":1560,"widths":[360,480,720,960,1170]},
   "/images/yukako-iburigakko-popcorn-2026-08-17.jpg": {"width":1462,"height":2048,"widths":[360,480,720,960,1280,1462]},
+  "/images/yukako-iburigakko-popcorn-menu-2026-01-18.jpg": {"width":2048,"height":2037,"widths":[360,480,720,960,1280,1600,2048]},
   "/images/yukako-mgj-award.jpg": {"width":1111,"height":1516,"widths":[360,480,720,960,1111]},
   "/images/yukako-miss-grand-japan-2025-peace-trophy.jpg": {"width":1536,"height":2048,"widths":[360,480,720,960,1280,1536]},
   "/images/yukako-noodles.jpg": {"width":1536,"height":2048,"widths":[360,480,720,960,1280,1536]},
