@@ -11,6 +11,13 @@ export type NewsItem = {
 
 export const news: NewsItem[] = [
   {
+    date: "2026.8.17",
+    label: "X",
+    text: "秋田帰省で、あの『いぶりがっこポップコーン』を再び。取り上げてくれた記事はリプ欄へ。",
+    url: "https://x.com/mokoopy/status/2089283468576608643",
+    listedAt: "2026.8.18"
+  },
+  {
     // 掲載日。公演日（8/10）ではなく、サイトに載せた日を入れる。
     date: "2026.8.9",
     label: "X",

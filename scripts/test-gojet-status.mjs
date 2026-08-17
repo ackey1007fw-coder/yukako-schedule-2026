@@ -53,11 +53,32 @@ try {
       `配信視聴最終日の画像ファイルが無い: public${image.src}`
     );
   });
-  assert.equal(latestSiteUpdates[0]?.sourceUrl, newestPost.postUrl);
-  assert.equal(
-    latestSiteUpdates[0]?.anchor,
-    "#gojet-streaming-viewing-final-day-2026-08-10"
+  const popcornUpdate = latestSiteUpdates.find(
+    (update) => update.id === "iburigakko-popcorn-homecoming-2026-08-17"
   );
+  assert.ok(popcornUpdate, "最新情報に8/17いぶりがっこポップコーンの記事が無い");
+  assert.equal(latestSiteUpdates[0]?.id, popcornUpdate.id);
+  assert.equal(
+    popcornUpdate.sourceUrl,
+    "https://x.com/mokoopy/status/2089283468576608643"
+  );
+  assert.equal(
+    popcornUpdate.image?.src,
+    "/images/yukako-iburigakko-popcorn-2026-08-17.jpg"
+  );
+  assert.equal(popcornUpdate.imageLayout, "contain");
+  assert.equal(
+    latestSiteUpdates.filter(
+      (update) => update.sourceUrl === popcornUpdate.sourceUrl
+    ).length,
+    1,
+    "同じX投稿が最新情報に重複している"
+  );
+  const streamingFinalUpdate = latestSiteUpdates.find(
+    (update) => update.anchor === "#gojet-streaming-viewing-final-day-2026-08-10"
+  );
+  assert.ok(streamingFinalUpdate, "最新情報から配信視聴最終日の記事が消えている");
+  assert.equal(streamingFinalUpdate.sourceUrl, newestPost.postUrl);
 
   // 2件目は8/9の優花子さん本人（8/10までの配信・感想投稿の呼びかけ）。
   const streamingMessagePost = gojetFeatureUpdates[1];
@@ -78,11 +99,11 @@ try {
       `8/9配信案内の画像ファイルが無い: public${image.src}`
     );
   });
-  assert.equal(latestSiteUpdates[1]?.sourceUrl, streamingMessagePost.postUrl);
-  assert.equal(
-    latestSiteUpdates[1]?.anchor,
-    "#gojet-streaming-viewing-ended-2026-08-09"
+  const streamingMessageUpdate = latestSiteUpdates.find(
+    (update) => update.anchor === "#gojet-streaming-viewing-ended-2026-08-09"
   );
+  assert.ok(streamingMessageUpdate, "最新情報から8/9配信案内の記事が消えている");
+  assert.equal(streamingMessageUpdate.sourceUrl, streamingMessagePost.postUrl);
 
   // 3件目は8/8 9:25の優花子さん本人（JETの妹・メグ役紹介）。
   const megCastIntroPost = gojetFeatureUpdates[2];
@@ -104,11 +125,11 @@ try {
       `8/8メグ役紹介の画像ファイルが無い: public${image.src}`
     );
   });
-  assert.equal(latestSiteUpdates[2]?.sourceUrl, megCastIntroPost.postUrl);
-  assert.equal(
-    latestSiteUpdates[2]?.anchor,
-    "#gojet-yukako-meg-cast-intro-2026-08-08"
+  const megCastIntroUpdate = latestSiteUpdates.find(
+    (update) => update.anchor === "#gojet-yukako-meg-cast-intro-2026-08-08"
   );
+  assert.ok(megCastIntroUpdate, "最新情報からメグ役紹介の記事が消えている");
+  assert.equal(megCastIntroUpdate.sourceUrl, megCastIntroPost.postUrl);
 
   // 続いて8/3 21:52の優花子さん本人（配信最終案内）、8/3 20:40の沼尾さん。
   const previousNewestPost = gojetFeatureUpdates[3];
@@ -845,6 +866,7 @@ try {
   assert.equal(mgjUpdate.anchor, "#miss-grand-japan-final");
   const latestUpdatesHtml = renderToStaticMarkup(createElement(LatestUpdatesSection));
   assert.ok(latestUpdatesHtml.includes(mgjUpdate.image.src));
+  assert.ok(latestUpdatesHtml.includes(popcornUpdate.image.src));
   assert.ok(latestUpdatesHtml.includes("sm:object-contain"));
   // 最新情報の記事と、MGJ FINALセクション内の投稿ブロックは同じX投稿を指す。
   // news.ts にも同じURLの項目があるので、siteUpdates 側で1件に畳まれていることを見る。
