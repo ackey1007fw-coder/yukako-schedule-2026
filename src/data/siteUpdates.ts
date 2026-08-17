@@ -56,6 +56,20 @@ const sourcePlatform = (url: string) => {
 // 専用セクションを持つ単発トピック。本文は各セクションが持つため、ここは見出しと導線のみ。
 const standaloneUpdates: SiteUpdate[] = [
   {
+    id: "iburigakko-popcorn-homecoming-2026-08-17",
+    date: "2026.8.17",
+    category: "X",
+    title: "秋田帰省で、あの『いぶりがっこポップコーン』を再び🍿",
+    summary:
+      "以前大きな反響を呼んだあのポップコーンを、帰省中に。取り上げてくれた記事は、本人のリプ欄へ。",
+    image: {
+      src: "/images/yukako-iburigakko-popcorn-2026-08-17.jpg",
+      alt: "AL☆VEシアターのポップコーン紙袋を持って微笑む吉井優花子さん"
+    },
+    imageLayout: "contain",
+    sourceUrl: "https://x.com/mokoopy/status/2089283468576608643"
+  },
+  {
     id: "miss-grand-japan-final-mc-2026-08-08",
     date: "2026.8.8",
     category: "Miss Grand Japan",
