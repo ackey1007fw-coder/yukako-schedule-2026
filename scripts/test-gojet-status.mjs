@@ -104,6 +104,12 @@ try {
     popcornOrigin.sourceUrl,
     "8/17投稿と1/18元投稿のURLが同じになっている"
   );
+  assert.equal(
+    popcornUpdate.relatedId,
+    popcornOrigin.id,
+    "8/17カードから1/18元投稿への導線が無い"
+  );
+  assert.match(popcornOrigin.summary ?? "", /8\/17の『再び食べた』投稿につながる元投稿/);
   const { news, latestNewsListingDate } = await server.ssrLoadModule(
     "/src/data/news.ts"
   );
@@ -917,6 +923,17 @@ try {
   assert.ok(latestUpdatesHtml.includes(mgjUpdate.image.src));
   assert.ok(latestUpdatesHtml.includes(popcornUpdate.image.src));
   assert.ok(latestUpdatesHtml.includes("sm:object-contain"));
+  assert.ok(
+    latestUpdatesHtml.includes(popcornOrigin.sourceUrl),
+    "8/17カードに1/18元投稿のXリンクが無い"
+  );
+  assert.ok(
+    latestUpdatesHtml.includes(popcornOrigin.image.src),
+    "8/17カードに1/18メニュー写真のサムネイルが無い"
+  );
+  assert.ok(latestUpdatesHtml.includes("話題のはじまり"));
+  assert.ok(latestUpdatesHtml.includes("元投稿をXで見る"));
+  assert.ok(latestUpdatesHtml.includes("2026.1.18"));
   // 最新情報の記事と、MGJ FINALセクション内の投稿ブロックは同じX投稿を指す。
   // news.ts にも同じURLの項目があるので、siteUpdates 側で1件に畳まれていることを見る。
   const yukakoPostUrl = missGrandJapanFinal.yukakoPost.postUrl;

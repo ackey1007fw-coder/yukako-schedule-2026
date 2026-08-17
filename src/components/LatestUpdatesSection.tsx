@@ -76,7 +76,12 @@ export function LatestUpdatesSection() {
         />
 
         <div className="grid gap-4 sm:grid-cols-3">
-          {featured.map((update, index) => (
+          {featured.map((update, index) => {
+            const related = update.relatedId
+              ? siteUpdates.find((item) => item.id === update.relatedId)
+              : undefined;
+
+            return (
             <article
               key={update.id}
               className="yukako-card flex flex-col overflow-hidden border-rosefog/15 bg-porcelain"
@@ -128,6 +133,36 @@ export function LatestUpdatesSection() {
                     {update.summary}
                   </p>
                 )}
+                {related?.sourceUrl && (
+                  <a
+                    href={related.sourceUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-3 flex min-w-0 items-center gap-2.5 border border-rosefog/15 bg-white px-2 py-1.5"
+                  >
+                    {related.image && (
+                      <img
+                        {...getResponsiveImageProps(related.image.src, "48px")}
+                        alt=""
+                        loading="lazy"
+                        decoding="async"
+                        className="h-11 w-11 shrink-0 bg-ink/5 object-contain"
+                      />
+                    )}
+                    <span className="min-w-0">
+                      <span className="block text-[10px] font-black tracking-[0.08em] text-champagneInk">
+                        話題のはじまり
+                        <span className="ml-1.5 font-bold tracking-normal text-ink/45">
+                          {related.date}
+                        </span>
+                      </span>
+                      <span className="mt-0.5 inline-flex items-center gap-1 text-xs font-bold text-ink/65 underline underline-offset-4">
+                        <ExternalLink className="h-3 w-3 shrink-0" aria-hidden="true" />
+                        元投稿をXで見る
+                      </span>
+                    </span>
+                  </a>
+                )}
                 <p className="mt-auto flex flex-wrap gap-x-4 gap-y-1 pt-4 text-sm font-bold">
                   {update.anchor && (
                     <a
@@ -152,7 +187,8 @@ export function LatestUpdatesSection() {
                 </p>
               </div>
             </article>
-          ))}
+            );
+          })}
         </div>
 
         {rest.length > 0 && (
