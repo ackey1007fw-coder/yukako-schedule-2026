@@ -17,6 +17,8 @@ export type SiteUpdate = {
   sourceUrl?: string;
   // サイト内で詳しく読めるセクションへのアンカー
   anchor?: string;
+  // 同じ話題の別投稿へ、カード内だけ小さな導線を出すとき使う。featured判定には使わない。
+  relatedId?: string;
 };
 
 const parseDate = (date: string) => {
@@ -67,7 +69,22 @@ const standaloneUpdates: SiteUpdate[] = [
       alt: "AL☆VEシアターのポップコーン紙袋を持って微笑む吉井優花子さん"
     },
     imageLayout: "contain",
-    sourceUrl: "https://x.com/mokoopy/status/2089283468576608643"
+    sourceUrl: "https://x.com/mokoopy/status/2089283468576608643",
+    relatedId: "iburigakko-popcorn-original-2026-01-18"
+  },
+  {
+    id: "iburigakko-popcorn-original-2026-01-18",
+    date: "2026.1.18",
+    category: "X",
+    title: "秋田の映画館には『いぶりがっこ味のポップコーン』があるんです🍿",
+    summary:
+      "メニュー表に並ぶ“いぶりがっこ”。大きな反響を呼んだ話題の出発点で、8/17の『再び食べた』投稿につながる元投稿。",
+    image: {
+      src: "/images/yukako-iburigakko-popcorn-menu-2026-01-18.jpg",
+      alt: "109 CINEMASのポップコーンメニュー。フレーバーに塩、キャラメル、ハーフ＆ハーフ、いぶりがっこが並び、価格は300円"
+    },
+    imageLayout: "contain",
+    sourceUrl: "https://x.com/mokoopy/status/2012824363620331966"
   },
   {
     id: "miss-grand-japan-final-mc-2026-08-08",
