@@ -6,7 +6,11 @@ import { siteUpdates } from "../data/siteUpdates";
 
 const PERSON_ID = "yukako" as const;
 const SITE_URL = "https://yukako-schedule-2026.vercel.app/";
+const SITE_ORIGIN = new URL(SITE_URL).origin;
 const MAX_ITEMS = 20;
+const JST_OFFSET_MS = 9 * 60 * 60 * 1000;
+const OFFSET_ISO_DATETIME =
+  /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/;
 
 export type PortalFeed = {
   version: 1;
@@ -34,7 +38,7 @@ export type PortalFeedItem = {
 
 type SourceDataset = "siteUpdates" | "news" | "events" | "archive";
 
-type Candidate = {
+export type PortalFeedCandidate = {
   dataset: SourceDataset;
   dedupeKeys: string[];
   item: PortalFeedItem;
@@ -59,8 +63,10 @@ const pad = (value: number) => String(value).padStart(2, "0");
 const toJstIso = (value: string | undefined): string | undefined => {
   if (!value) return undefined;
 
-  if (/^\d{4}-\d{2}-\d{2}T/.test(value)) {
-    return Number.isNaN(Date.parse(value)) ? undefined : value;
+  if (value.includes("T")) {
+    return OFFSET_ISO_DATETIME.test(value) && !Number.isNaN(Date.parse(value))
+      ? value
+      : undefined;
   }
 
   const match = value.match(
@@ -93,10 +99,11 @@ const toJstIso = (value: string | undefined): string | undefined => {
 
 const absoluteSiteUrl = (path: string) => new URL(path, SITE_URL).toString();
 
-const absoluteImageUrl = (path: string | undefined) => {
+export const toPortalImageUrl = (path: string | undefined) => {
   if (!path) return undefined;
   try {
-    return new URL(path, SITE_URL).toString();
+    const url = new URL(path, SITE_URL);
+    return url.origin === SITE_ORIGIN ? url.toString() : undefined;
   } catch {
     return undefined;
   }
@@ -135,7 +142,7 @@ const topicKey = (stableValue: string) =>
     .replace(/^-+|-+$/g, "")
     .replace(/-+/g, "-");
 
-const publishedNewestFirst = (a: Candidate, b: Candidate) =>
+const publishedNewestFirst = (a: PortalFeedCandidate, b: PortalFeedCandidate) =>
   Date.parse(b.item.publishedAt) - Date.parse(a.item.publishedAt) ||
   a.item.id.localeCompare(b.item.id);
 
@@ -152,7 +159,7 @@ const isSyntheticNewsUpdate = (update: (typeof siteUpdates)[number]) =>
       normalizedUrl(item.url) === normalizedUrl(update.sourceUrl)
   );
 
-const newsCandidates: Candidate[] = news.flatMap((item) => {
+const newsCandidates: PortalFeedCandidate[] = news.flatMap((item) => {
   const publishedAt = toJstIso(item.listedAt ?? item.date);
   if (!publishedAt) return [];
 
@@ -177,7 +184,7 @@ const newsCandidates: Candidate[] = news.flatMap((item) => {
   ];
 });
 
-const siteUpdateCandidates: Candidate[] = siteUpdates.flatMap((update) => {
+const siteUpdateCandidates: PortalFeedCandidate[] = siteUpdates.flatMap((update) => {
   if (isSyntheticNewsUpdate(update)) return [];
 
   const matchingNews = news.find(
@@ -211,13 +218,13 @@ const siteUpdateCandidates: Candidate[] = siteUpdates.flatMap((update) => {
         url: absoluteSiteUrl(anchor),
         sourceUrl: update.sourceUrl,
         publishedAt,
-        image: absoluteImageUrl(update.image?.src)
+        image: toPortalImageUrl(update.image?.src)
       }
     }
   ];
 });
 
-const archiveCandidates: Candidate[] = archiveItems.flatMap((archive) => {
+const archiveCandidates: PortalFeedCandidate[] = archiveItems.flatMap((archive) => {
   if (!archive.featured) return [];
 
   // archive.ts では dateModified が「サイトに記事を掲載した日」を表す。
@@ -241,7 +248,7 @@ const archiveCandidates: Candidate[] = archiveItems.flatMap((archive) => {
         url: absoluteSiteUrl(`/archive/${archive.slug}`),
         sourceUrl: archive.sourceUrl.url,
         publishedAt,
-        image: absoluteImageUrl(archive.ogImage ?? archive.images[0]?.src)
+        image: toPortalImageUrl(archive.ogImage ?? archive.images[0]?.src)
       }
     }
   ];
@@ -253,7 +260,7 @@ for (const event of events) {
   eventTopicCounts.set(key, (eventTopicCounts.get(key) ?? 0) + 1);
 }
 
-const eventCandidates: Candidate[] = events.flatMap((event) => {
+const eventCandidates: PortalFeedCandidate[] = events.flatMap((event) => {
   const publishedAt = toJstIso(event.listedAt);
   const startsAt = toJstIso(event.startAt);
   if (!publishedAt || !startsAt) return [];
@@ -284,32 +291,43 @@ const eventCandidates: Candidate[] = events.flatMap((event) => {
         startsAt,
         // events.endAt には表示境界や最終回の開始時刻も含まれるため、
         // 確認済みの終了時刻を表す専用フィールドができるまでは公開しない。
-        image: absoluteImageUrl(event.image)
+        image: toPortalImageUrl(event.image)
       }
     }
   ];
 });
 
-const candidatesBySource: Record<SourceDataset, Candidate[]> = {
-  siteUpdates: siteUpdateCandidates,
-  news: newsCandidates,
-  events: eventCandidates,
-  archive: archiveCandidates
+const allCandidates: PortalFeedCandidate[] = [
+  ...siteUpdateCandidates,
+  ...newsCandidates,
+  ...eventCandidates,
+  ...archiveCandidates
+];
+
+const jstDateOf = (value: string) => {
+  const timestamp = Date.parse(value);
+  if (Number.isNaN(timestamp)) return undefined;
+  return new Date(timestamp + JST_OFFSET_MS).toISOString().slice(0, 10);
 };
 
-const selectedCandidates = (Object.keys(candidatesBySource) as SourceDataset[]).flatMap(
-  (dataset) =>
-    [...candidatesBySource[dataset]]
-      .sort(publishedNewestFirst)
-      .slice(0, sourceLimits[dataset])
-);
+const isTodayOrFutureEvent = (candidate: PortalFeedCandidate, referenceJstDate: string) => {
+  if (candidate.dataset !== "events" || !candidate.item.startsAt) return false;
+  const startsJstDate = jstDateOf(candidate.item.startsAt);
+  return Boolean(startsJstDate && startsJstDate >= referenceJstDate);
+};
 
-const dedupeCandidates = (candidates: Candidate[]) => {
+const dedupeCandidates = (
+  candidates: readonly PortalFeedCandidate[],
+  protectedIds = new Set<string>()
+) => {
   const seen = new Set<string>();
-  const kept: Candidate[] = [];
+  const kept: PortalFeedCandidate[] = [];
 
   const prioritized = [...candidates].sort(
-    (a, b) => sourcePriority[a.dataset] - sourcePriority[b.dataset] || publishedNewestFirst(a, b)
+    (a, b) =>
+      Number(protectedIds.has(b.item.id)) - Number(protectedIds.has(a.item.id)) ||
+      sourcePriority[a.dataset] - sourcePriority[b.dataset] ||
+      publishedNewestFirst(a, b)
   );
 
   for (const candidate of prioritized) {
@@ -322,16 +340,62 @@ const dedupeCandidates = (candidates: Candidate[]) => {
   return kept;
 };
 
+export const selectFeedCandidates = (
+  candidates: readonly PortalFeedCandidate[],
+  generatedAt: string,
+  maxItems = MAX_ITEMS
+) => {
+  const referenceJstDate = jstDateOf(generatedAt);
+  if (!referenceJstDate) throw new Error(`Invalid selection reference: ${generatedAt}`);
+  if (maxItems <= 0) return [];
+
+  const protectedEvents = candidates.filter((candidate) =>
+    isTodayOrFutureEvent(candidate, referenceJstDate)
+  );
+  const protectedIds = new Set(protectedEvents.map(({ item }) => item.id));
+
+  // sourceLimits.events は過去予定の補充上限。今日・未来予定は上限を迂回して全て候補へ入れる。
+  const fallbackCandidates = (Object.keys(sourceLimits) as SourceDataset[]).flatMap(
+    (dataset) =>
+      candidates
+        .filter(
+          (candidate) =>
+            candidate.dataset === dataset &&
+            (dataset !== "events" || !protectedIds.has(candidate.item.id))
+        )
+        .sort(publishedNewestFirst)
+        .slice(0, sourceLimits[dataset])
+  );
+
+  const deduped = dedupeCandidates([...protectedEvents, ...fallbackCandidates], protectedIds);
+  const dedupedProtectedEvents = deduped
+    .filter(({ item }) => protectedIds.has(item.id))
+    .sort(
+      (a, b) =>
+        Date.parse(a.item.startsAt as string) - Date.parse(b.item.startsAt as string) ||
+        publishedNewestFirst(a, b)
+    )
+    .slice(0, maxItems);
+  const remainingSlots = maxItems - dedupedProtectedEvents.length;
+  const fillers = deduped
+    .filter(({ item }) => !protectedIds.has(item.id))
+    .sort(publishedNewestFirst)
+    .slice(0, remainingSlots);
+
+  // 選択時は今日・未来予定を保護するが、公開配列はcontractどおりpublishedAt降順に戻す。
+  return [...dedupedProtectedEvents, ...fillers].sort(publishedNewestFirst);
+};
+
 export const createPortalFeed = (generatedAt = new Date().toISOString()): PortalFeed => {
   const normalizedGeneratedAt = new Date(generatedAt);
   if (Number.isNaN(normalizedGeneratedAt.getTime())) {
     throw new Error(`Invalid generatedAt: ${generatedAt}`);
   }
 
-  const items = dedupeCandidates(selectedCandidates)
-    .sort(publishedNewestFirst)
-    .slice(0, MAX_ITEMS)
-    .map(({ item }) => item);
+  const items = selectFeedCandidates(
+    allCandidates,
+    normalizedGeneratedAt.toISOString()
+  ).map(({ item }) => item);
 
   return {
     version: 1,
