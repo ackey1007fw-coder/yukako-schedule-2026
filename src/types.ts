@@ -18,6 +18,8 @@ export type ScheduleEvent = {
   title: string;
   shortTitle: string;
   category: EventCategory;
+  /** この予定をサイトへ掲載した日。出来事の開始日時とは分けて扱う。 */
+  listedAt?: string;
   startAt: string;
   endAt?: string;
   /** 公演日が飛び飛びの場合の実施日リスト（"YYYY-MM-DD"）。カレンダー表示に使用 */
