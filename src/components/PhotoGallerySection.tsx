@@ -77,8 +77,10 @@ export function PhotoGallerySection() {
         ? Images
         : MessageCircle;
   const updateLinkIsInternal = galleryUpdate.url.startsWith("#");
+  // アイコンは出どころ（platform）、ラベルはリンク先に合わせる。
+  // サイト内アンカーなのに「Xで見る」と出ないようにする。
   const updateLinkLabel =
-    galleryUpdate.platform === "Archive"
+    updateLinkIsInternal || galleryUpdate.platform === "Archive"
       ? "写真を見る"
       : `${galleryUpdate.platform}で見る`;
 

@@ -19,6 +19,11 @@ export type SiteUpdate = {
   anchor?: string;
   // 同じ話題の別投稿へ、カード内だけ小さな導線を出すとき使う。featured判定には使わない。
   relatedId?: string;
+  // relatedId のブロックに出す見出しとリンク文言。引用投稿など関係が違うときだけ変える。
+  relatedLabel?: string;
+  relatedLinkLabel?: string;
+  // 他カードの relatedId から参照されたとき、誰の投稿かを示す。カード本体では使わない。
+  author?: string;
 };
 
 const parseDate = (date: string) => {
@@ -58,6 +63,44 @@ const sourcePlatform = (url: string) => {
 // 専用セクションを持つ単発トピック。本文は各セクションが持つため、ここは見出しと導線のみ。
 const standaloneUpdates: SiteUpdate[] = [
   {
+    id: "seaside-quote-2026-08-19",
+    date: "2026.8.19 22:13",
+    category: "X",
+    // 本文はXから取得できなかったため、見出しと紹介文は写真と引用関係だけに留める。
+    // 本文が確認できたら差し替える（推測で書き足さない）。
+    title: "海辺からの一枚。前日の大森山動物園投稿を引用",
+    summary:
+      "海辺での一枚と一緒に、8/18の大森山動物園の投稿を引用。本文は元投稿からどうぞ。",
+    image: {
+      src: "/images/yukako-seaside-2026-08-19.jpg",
+      alt: "海辺で自撮りする吉井優花子さん。白いTシャツにイエローのキャミソールワンピース"
+    },
+    author: "吉井 優花子（@mokoopy）",
+    sourceUrl: "https://x.com/mokoopy/status/2090064677728661996",
+    // 引用ブロックは1階層だけ。8/18がさらに引用している8/17までは展開しない。
+    relatedId: "omoriyama-zoo-2026-08-18",
+    relatedLabel: "引用元投稿",
+    relatedLinkLabel: "引用元の投稿をXで見る"
+  },
+  {
+    id: "omoriyama-zoo-2026-08-18",
+    date: "2026.8.18 20:31",
+    category: "X",
+    title: "秋田と言ったらここも〜🦘 大森山動物園から",
+    summary:
+      "推しに挙がったのはカワウソ、プレーリードッグ、ペンギン、カンガルー、トラ。「あ、キリがないな」で締めた、アカカンガルー舎の前からの一枚。",
+    image: {
+      src: "/images/yukako-omoriyama-zoo-kangaroo-2026-08-18.jpg",
+      alt: "大森山動物園のアカカンガルー舎で、ガラス越しのカンガルーを指さす吉井優花子さん"
+    },
+    author: "吉井 優花子（@mokoopy）",
+    sourceUrl: "https://x.com/mokoopy/status/2089676553542312218",
+    // この投稿自体が8/17のいぶりがっこポップコーン投稿を引用している。
+    relatedId: "iburigakko-popcorn-homecoming-2026-08-17",
+    relatedLabel: "引用元投稿",
+    relatedLinkLabel: "引用元の投稿をXで見る"
+  },
+  {
     id: "iburigakko-popcorn-homecoming-2026-08-17",
     date: "2026.8.17",
     category: "X",
@@ -69,6 +112,7 @@ const standaloneUpdates: SiteUpdate[] = [
       alt: "AL☆VEシアターのポップコーン紙袋を持って微笑む吉井優花子さん"
     },
     imageLayout: "contain",
+    author: "吉井 優花子（@mokoopy）",
     sourceUrl: "https://x.com/mokoopy/status/2089283468576608643",
     relatedId: "iburigakko-popcorn-original-2026-01-18"
   },

@@ -14,6 +14,8 @@ const driveYukakoPhotos: GalleryPhoto[] = Array.from({ length: 118 }, (_, index)
 
 export const galleryPhotos: GalleryPhoto[] = [
   ...driveYukakoPhotos,
+  { src: "/images/yukako-seaside-2026-08-19.jpg", alt: "白いTシャツにイエローのキャミソールワンピースで、海辺で自撮りする吉井優花子さん（2026.8.19 Xより）" },
+  { src: "/images/yukako-omoriyama-zoo-kangaroo-2026-08-18.jpg", alt: "大森山動物園でガラス越しのアカカンガルーを指さす吉井優花子さん（2026.8.18 Xより）" },
   { src: "/images/yukako-selfie-2026-07-01.jpg", alt: "白Tシャツにピンクのベストで微笑む吉井優花子さん（2026.7.1 Xより）" },
   { src: "/images/yukako-stage-back.jpg", alt: "舞台上から客席を見つめる吉井優花子さん" },
   { src: "/images/yukako-stage-front.jpg", alt: "舞台衣装で演技中の吉井優花子さん" },
@@ -35,8 +37,10 @@ export const galleryUpdate: {
   note: string;
   url: string;
 } = {
-  date: "2026.7.5",
-  platform: "Archive",
-  note: "2026年2月〜7月のDrive写真を118枚追加",
+  date: "2026.8.19",
+  platform: "X",
+  note: "8/19の海辺と、引用元8/18の大森山動物園。X投稿の写真2枚を追加",
+  // 元投稿へのリンクは最新情報の8/19カードが持つ。ここを同じX投稿に向けると
+  // カードとポータルフィードの両方で同じ投稿が二重になるため、写真そのものへ送る。
   url: "#photo-selection"
 };
