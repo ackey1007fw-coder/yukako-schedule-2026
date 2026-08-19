@@ -74,7 +74,12 @@ try {
     (update) => update.anchor === "#gojet-original-songs-misato-2026-08-19"
   );
   assert.ok(originalSongsUpdate, "最新情報にオリジナル楽曲①の記事が無い");
-  assert.equal(latestSiteUpdates[0]?.id, originalSongsUpdate.id);
+  // 先頭は同じ8/19でより遅い22:13の本人投稿。#ゆかJET枠ではこの記事が最新であること。
+  assert.equal(
+    latestSiteUpdates.find((update) => update.category === "#ゆかJET")?.id,
+    originalSongsUpdate.id,
+    "#ゆかJETの最新記事がオリジナル楽曲①になっていない"
+  );
   assert.equal(originalSongsUpdate.sourceUrl, originalSongsPost.postUrl);
   assert.equal(
     originalSongsUpdate.imageLayout,
@@ -112,6 +117,10 @@ try {
       `配信視聴最終日の画像ファイルが無い: public${image.src}`
     );
   });
+  const SEASIDE_POST_URL = "https://x.com/mokoopy/status/2090064677728661996";
+  const OMORIYAMA_ZOO_POST_URL =
+    "https://x.com/mokoopy/status/2089676553542312218";
+
   const popcornUpdate = latestSiteUpdates.find(
     (update) => update.id === "iburigakko-popcorn-homecoming-2026-08-17"
   );
@@ -171,10 +180,22 @@ try {
   const { news, latestNewsListingDate } = await server.ssrLoadModule(
     "/src/data/news.ts"
   );
+  // NewsBarは1件だけ。同じ8/19でも、より新しい22:13の本人投稿を先頭に置く。
   assert.equal(
     news[0]?.url,
-    "https://x.com/yukako_produce/status/2090048586331676998",
-    "NewsBar先頭が8/19オリジナル楽曲①の投稿からずれている"
+    SEASIDE_POST_URL,
+    "NewsBar先頭が8/19の海辺投稿からずれている"
+  );
+  assert.ok(
+    news.some((item) => item.url === OMORIYAMA_ZOO_POST_URL),
+    "news.ts に8/18大森山動物園の投稿が無い"
+  );
+  assert.ok(
+    news.some(
+      (item) =>
+        item.url === "https://x.com/yukako_produce/status/2090048586331676998"
+    ),
+    "news.ts から8/19オリジナル楽曲①が消えている"
   );
   assert.equal(
     news.filter(
@@ -995,40 +1016,90 @@ try {
   const latestUpdatesHtml = renderToStaticMarkup(createElement(LatestUpdatesSection));
   assert.ok(latestUpdatesHtml.includes("sm:object-contain"));
 
-  // カードは1カテゴリ1枚。X枠は最新の本人投稿が取り、その投稿が引用している元投稿は
-  // 独立カードではなく、同じカード内の引用ブロックとして出る（主役が入れ替わらない）。
+  // カードは1カテゴリ1枚。X枠は8/19の海辺投稿（主投稿）が取り、それが引用している
+  // 8/18大森山動物園の投稿は独立カードではなく、同じカード内の引用ブロックに出る。
+  // 引用の引用（8/18が引いている8/17）はカード内に展開しない＝1階層だけ。
   const latestXUpdate = siteUpdates.find((update) => update.category === "X");
   assert.ok(latestXUpdate, "最新情報にX投稿の記事が無い");
-  assert.ok(
-    latestUpdatesHtml.includes(latestXUpdate.image?.src ?? "\u0000"),
-    "X枠のカードに本人投稿の写真が無い"
+  assert.equal(
+    latestXUpdate.sourceUrl,
+    SEASIDE_POST_URL,
+    "X枠の主投稿が8/19の海辺投稿になっていない"
   );
+  assert.equal(latestXUpdate.id, "seaside-quote-2026-08-19");
+  assert.equal(
+    latestXUpdate.relatedId,
+    "omoriyama-zoo-2026-08-18",
+    "8/19カードの引用元が8/18大森山動物園を指していない"
+  );
+  assert.equal(latestXUpdate.relatedLabel, "引用元投稿");
+  assert.equal(latestXUpdate.relatedLinkLabel, "引用元の投稿をXで見る");
+  assert.equal(
+    latestXUpdate.image?.src,
+    "/images/yukako-seaside-2026-08-19.jpg"
+  );
+  assert.ok(
+    existsSync(new URL(`../public${latestXUpdate.image.src}`, import.meta.url)),
+    `8/19海辺投稿の画像ファイルが無い: public${latestXUpdate.image.src}`
+  );
+
   const quotedUpdate = siteUpdates.find(
     (update) => update.id === latestXUpdate.relatedId
   );
-  assert.ok(quotedUpdate, "最新のX投稿カードに引用元投稿が紐付いていない");
-  assert.ok(
-    latestUpdatesHtml.includes(quotedUpdate.sourceUrl),
-    "X枠のカードに引用元投稿のXリンクが無い"
+  assert.ok(quotedUpdate, "8/18大森山動物園の記事が最新情報から消えている");
+  assert.equal(
+    quotedUpdate.sourceUrl,
+    OMORIYAMA_ZOO_POST_URL,
+    "引用元カードが8/18大森山動物園の投稿を指していない"
+  );
+  assert.equal(
+    quotedUpdate.image?.src,
+    "/images/yukako-omoriyama-zoo-kangaroo-2026-08-18.jpg"
   );
   assert.ok(
-    latestUpdatesHtml.includes(quotedUpdate.image?.src ?? "\u0000"),
-    "X枠のカードに引用元投稿のサムネイルが無い"
+    existsSync(new URL(`../public${quotedUpdate.image.src}`, import.meta.url)),
+    `8/18大森山動物園の画像ファイルが無い: public${quotedUpdate.image.src}`
+  );
+  // 8/18側は8/17いぶりがっこを引用したままデータとして保持する。
+  assert.equal(quotedUpdate.relatedId, "iburigakko-popcorn-homecoming-2026-08-17");
+
+  const countIn = (needle) => latestUpdatesHtml.split(needle).length - 1;
+
+  assert.ok(
+    latestUpdatesHtml.includes(SEASIDE_POST_URL),
+    "主カードに8/19海辺投稿へのXリンクが無い"
+  );
+  assert.equal(
+    countIn(latestXUpdate.image.src),
+    1,
+    "主カードの8/19海辺画像が表示されていない、または重複している"
+  );
+  assert.equal(
+    countIn(quotedUpdate.image.src),
+    1,
+    "引用ブロックの8/18大森山画像が無い、または8/18が独立カードとしても出ている"
+  );
+  assert.equal(
+    countIn(OMORIYAMA_ZOO_POST_URL),
+    1,
+    "8/18大森山動物園が独立したXカードとして重複表示されている"
   );
   assert.ok(
     latestUpdatesHtml.includes(quotedUpdate.date),
-    "引用ブロックに元投稿の投稿日が無い"
+    "引用ブロックに8/18の投稿日が無い"
   );
-  assert.ok(
-    latestUpdatesHtml.includes(latestXUpdate.relatedLabel ?? "話題のはじまり")
-  );
-  assert.ok(
-    latestUpdatesHtml.includes(latestXUpdate.relatedLinkLabel ?? "元投稿をXで見る")
+  assert.ok(latestUpdatesHtml.includes("引用元投稿"));
+  assert.ok(latestUpdatesHtml.includes("引用元の投稿をXで見る"));
+  // 引用の引用（8/17）はカード内に展開しない。
+  assert.equal(
+    countIn(popcornUpdate.image.src),
+    0,
+    "8/19カードに引用の引用（8/17いぶりがっこ）まで展開されている"
   );
   assert.equal(
-    latestUpdatesHtml.split(quotedUpdate.sourceUrl).length - 1,
-    1,
-    "引用元投稿が独立カードとしても重複表示されている"
+    countIn(popcornOrigin.sourceUrl),
+    0,
+    "8/19カードに1/18元投稿まで展開されている"
   );
   // 最新情報の記事と、MGJ FINALセクション内の投稿ブロックは同じX投稿を指す。
   // news.ts にも同じURLの項目があるので、siteUpdates 側で1件に畳まれていることを見る。

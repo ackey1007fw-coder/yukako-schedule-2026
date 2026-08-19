@@ -44,9 +44,11 @@ export type PortalFeedCandidate = {
   item: PortalFeedItem;
 };
 
+// 上限は重複排除より前に効くため、news の枠が「専用カードと同じ元投稿」だけで
+// 埋まると、news 単独の項目がフィードから消える。少し余裕を持たせておく。
 const sourceLimits: Record<SourceDataset, number> = {
   siteUpdates: 8,
-  news: 5,
+  news: 6,
   events: 4,
   archive: 3
 };

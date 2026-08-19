@@ -63,6 +63,26 @@ const sourcePlatform = (url: string) => {
 // 専用セクションを持つ単発トピック。本文は各セクションが持つため、ここは見出しと導線のみ。
 const standaloneUpdates: SiteUpdate[] = [
   {
+    id: "seaside-quote-2026-08-19",
+    date: "2026.8.19 22:13",
+    category: "X",
+    // 本文はXから取得できなかったため、見出しと紹介文は写真と引用関係だけに留める。
+    // 本文が確認できたら差し替える（推測で書き足さない）。
+    title: "最新のX投稿は海辺から。引用は前日の大森山動物園",
+    summary:
+      "海辺での一枚と一緒に、8/18の大森山動物園の投稿を引用した最新のX投稿。本文は元投稿でご覧いただけます。",
+    image: {
+      src: "/images/yukako-seaside-2026-08-19.jpg",
+      alt: "海辺で自撮りする吉井優花子さん。白いTシャツにイエローのキャミソールワンピース"
+    },
+    author: "吉井 優花子（@mokoopy）",
+    sourceUrl: "https://x.com/mokoopy/status/2090064677728661996",
+    // 引用ブロックは1階層だけ。8/18がさらに引用している8/17までは展開しない。
+    relatedId: "omoriyama-zoo-2026-08-18",
+    relatedLabel: "引用元投稿",
+    relatedLinkLabel: "引用元の投稿をXで見る"
+  },
+  {
     id: "omoriyama-zoo-2026-08-18",
     date: "2026.8.18 20:31",
     category: "X",
