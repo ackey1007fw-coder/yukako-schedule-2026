@@ -406,6 +406,8 @@ export const imageManifest = {
   "/images/yukajet/2026-08-10-yukako-streaming-final-day-a-team.jpg": {"width":1280,"height":961,"widths":[360,480,720,960,1280]},
   "/images/yukajet/2026-08-10-yukako-streaming-final-day-b-team.jpg": {"width":1280,"height":996,"widths":[360,480,720,960,1280]},
   "/images/yukajet/2026-08-10-yukako-streaming-final-day-c-team.jpg": {"width":960,"height":1280,"widths":[360,480,720,960]},
+  "/images/yukajet/2026-08-19-future-gray-lyrics.jpg": {"width":1168,"height":1742,"widths":[360,480,720,960,1168]},
+  "/images/yukajet/2026-08-19-future-rose-lyrics.jpg": {"width":1169,"height":1740,"widths":[360,480,720,960,1169]},
   "/images/yukako-babyshark-character.jpg": {"width":1600,"height":2048,"widths":[360,480,720,960,1280,1600]},
   "/images/yukako-babyshark-lobster.jpg": {"width":941,"height":1176,"widths":[360,480,720,941]},
   "/images/yukako-babyshark-lobster2.jpg": {"width":1170,"height":1560,"widths":[360,480,720,960,1170]},
