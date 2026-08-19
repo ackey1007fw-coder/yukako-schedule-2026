@@ -18,6 +18,13 @@ export const news: NewsItem[] = [
     url: "https://x.com/yukako_produce/status/2090048586331676998"
   },
   {
+    date: "2026.8.18",
+    label: "X",
+    text: "「秋田と言ったらここも〜」。大森山動物園から、推しの動物を挙げた投稿。8/17のいぶりがっこポップコーン投稿を引用。",
+    url: "https://x.com/mokoopy/status/2089676553542312218",
+    listedAt: "2026.8.19"
+  },
+  {
     date: "2026.8.17",
     label: "X",
     text: "秋田帰省で、あの『いぶりがっこポップコーン』を再び。取り上げてくれた記事はリプ欄へ。",

@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { ArrowDownRight, ChevronDown, ChevronUp, ExternalLink } from "lucide-react";
+import { ArrowDownRight, ChevronDown, ChevronUp, ExternalLink, Quote } from "lucide-react";
 import {
   siteUpdates,
   sourceLinkLabel,
@@ -133,33 +133,46 @@ export function LatestUpdatesSection() {
                     {update.summary}
                   </p>
                 )}
+                {/* 引用投稿など、同じ話題の元投稿を主投稿と同じカード内に小さく添える。
+                    別カードに割らないことで、どちらが主役かが一目で分かる。 */}
                 {related?.sourceUrl && (
                   <a
                     href={related.sourceUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-3 flex min-w-0 items-center gap-2.5 border border-rosefog/15 bg-white px-2 py-1.5"
+                    className="mt-3 block min-w-0 border border-rosefog/15 bg-white px-2.5 py-2"
                   >
-                    {related.image && (
-                      <img
-                        {...getResponsiveImageProps(related.image.src, "48px")}
-                        alt=""
-                        loading="lazy"
-                        decoding="async"
-                        className="h-11 w-11 shrink-0 bg-ink/5 object-contain"
-                      />
-                    )}
-                    <span className="min-w-0">
-                      <span className="block text-[10px] font-black tracking-[0.08em] text-champagneInk">
-                        話題のはじまり
-                        <span className="ml-1.5 font-bold tracking-normal text-ink/45">
-                          {related.date}
+                    <span className="flex flex-wrap items-center gap-x-1.5 text-[10px] font-black tracking-[0.08em] text-champagneInk">
+                      <Quote className="h-3 w-3 shrink-0" aria-hidden="true" />
+                      {update.relatedLabel ?? "話題のはじまり"}
+                      <span className="font-bold tracking-normal text-ink/45">
+                        {related.date}
+                      </span>
+                    </span>
+                    <span className="mt-1.5 flex min-w-0 items-start gap-2.5">
+                      {related.image && (
+                        <img
+                          {...getResponsiveImageProps(related.image.src, "56px")}
+                          alt=""
+                          loading="lazy"
+                          decoding="async"
+                          className="h-14 w-14 shrink-0 bg-ink/5 object-contain"
+                        />
+                      )}
+                      <span className="min-w-0">
+                        {related.author && (
+                          <span className="block truncate text-[11px] font-bold text-ink/50">
+                            {related.author}
+                          </span>
+                        )}
+                        <span className="mt-0.5 block line-clamp-2 text-xs leading-5 text-ink/70">
+                          {related.title}
                         </span>
                       </span>
-                      <span className="mt-0.5 inline-flex items-center gap-1 text-xs font-bold text-ink/65 underline underline-offset-4">
-                        <ExternalLink className="h-3 w-3 shrink-0" aria-hidden="true" />
-                        元投稿をXで見る
-                      </span>
+                    </span>
+                    <span className="mt-1.5 inline-flex items-center gap-1 text-xs font-bold text-ink/65 underline underline-offset-4">
+                      <ExternalLink className="h-3 w-3 shrink-0" aria-hidden="true" />
+                      {update.relatedLinkLabel ?? "元投稿をXで見る"}
                     </span>
                   </a>
                 )}

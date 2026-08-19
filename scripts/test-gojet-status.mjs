@@ -986,21 +986,50 @@ try {
   );
   assert.equal(mgjUpdate.imageLayout, "contain");
   assert.equal(mgjUpdate.anchor, "#miss-grand-japan-final");
+  // MGJ FINALは8/10で終了済み。新しい更新が入るとカード3枠からは外れるが、
+  // 記事と #miss-grand-japan-final への導線は最新情報の一覧に残り続ける。
+  assert.ok(
+    siteUpdates.some((update) => update.id === mgjUpdate.id),
+    "MGJ FINALの記事が最新情報の一覧から消えている"
+  );
   const latestUpdatesHtml = renderToStaticMarkup(createElement(LatestUpdatesSection));
-  assert.ok(latestUpdatesHtml.includes(mgjUpdate.image.src));
-  assert.ok(latestUpdatesHtml.includes(popcornUpdate.image.src));
   assert.ok(latestUpdatesHtml.includes("sm:object-contain"));
+
+  // カードは1カテゴリ1枚。X枠は最新の本人投稿が取り、その投稿が引用している元投稿は
+  // 独立カードではなく、同じカード内の引用ブロックとして出る（主役が入れ替わらない）。
+  const latestXUpdate = siteUpdates.find((update) => update.category === "X");
+  assert.ok(latestXUpdate, "最新情報にX投稿の記事が無い");
   assert.ok(
-    latestUpdatesHtml.includes(popcornOrigin.sourceUrl),
-    "8/17カードに1/18元投稿のXリンクが無い"
+    latestUpdatesHtml.includes(latestXUpdate.image?.src ?? "\u0000"),
+    "X枠のカードに本人投稿の写真が無い"
+  );
+  const quotedUpdate = siteUpdates.find(
+    (update) => update.id === latestXUpdate.relatedId
+  );
+  assert.ok(quotedUpdate, "最新のX投稿カードに引用元投稿が紐付いていない");
+  assert.ok(
+    latestUpdatesHtml.includes(quotedUpdate.sourceUrl),
+    "X枠のカードに引用元投稿のXリンクが無い"
   );
   assert.ok(
-    latestUpdatesHtml.includes(popcornOrigin.image.src),
-    "8/17カードに1/18メニュー写真のサムネイルが無い"
+    latestUpdatesHtml.includes(quotedUpdate.image?.src ?? "\u0000"),
+    "X枠のカードに引用元投稿のサムネイルが無い"
   );
-  assert.ok(latestUpdatesHtml.includes("話題のはじまり"));
-  assert.ok(latestUpdatesHtml.includes("元投稿をXで見る"));
-  assert.ok(latestUpdatesHtml.includes("2026.1.18"));
+  assert.ok(
+    latestUpdatesHtml.includes(quotedUpdate.date),
+    "引用ブロックに元投稿の投稿日が無い"
+  );
+  assert.ok(
+    latestUpdatesHtml.includes(latestXUpdate.relatedLabel ?? "話題のはじまり")
+  );
+  assert.ok(
+    latestUpdatesHtml.includes(latestXUpdate.relatedLinkLabel ?? "元投稿をXで見る")
+  );
+  assert.equal(
+    latestUpdatesHtml.split(quotedUpdate.sourceUrl).length - 1,
+    1,
+    "引用元投稿が独立カードとしても重複表示されている"
+  );
   // 最新情報の記事と、MGJ FINALセクション内の投稿ブロックは同じX投稿を指す。
   // news.ts にも同じURLの項目があるので、siteUpdates 側で1件に畳まれていることを見る。
   const yukakoPostUrl = missGrandJapanFinal.yukakoPost.postUrl;
