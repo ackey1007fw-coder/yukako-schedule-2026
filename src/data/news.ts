@@ -11,6 +11,13 @@ export type NewsItem = {
 
 export const news: NewsItem[] = [
   {
+    date: "2026.8.19",
+    label: "X",
+    text:
+      "#ゆかJET オリジナル楽曲①。美里の『未来は薔薇色』と、対になる『未来は灰色』の歌詞カードを公開。新演出と須田JETから受け継いだ演出も。",
+    url: "https://x.com/yukako_produce/status/2090048586331676998"
+  },
+  {
     date: "2026.8.17",
     label: "X",
     text: "秋田帰省で、あの『いぶりがっこポップコーン』を再び。取り上げてくれた記事はリプ欄へ。",

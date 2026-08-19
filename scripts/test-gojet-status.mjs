@@ -34,8 +34,67 @@ try {
     "/src/data/siteUpdates.ts"
   );
 
-  // 先頭は8/10 10:36の優花子さん本人（配信視聴最終日・A/B/C班集合写真）。
-  const newestPost = gojetFeatureUpdates[0];
+  // 先頭は8/19 21:09のプロデュース公演アカウント（美里のオリジナル楽曲2曲・歌詞カード2枚）。
+  const originalSongsPost = gojetFeatureUpdates[0];
+  assert.equal(
+    originalSongsPost.postUrl,
+    "https://x.com/yukako_produce/status/2090048586331676998"
+  );
+  assert.equal(
+    originalSongsPost.anchorId,
+    "gojet-original-songs-misato-2026-08-19"
+  );
+  assert.equal(originalSongsPost.date, "2026.8.19 21:09");
+  assert.equal(originalSongsPost.imageLayout, "contain");
+  assert.equal(originalSongsPost.photos?.length, 2);
+  assert.equal(
+    originalSongsPost.photos?.[0]?.src,
+    "/images/yukajet/2026-08-19-future-rose-lyrics.jpg",
+    "歌詞カードの並びが『薔薇色 → 灰色』からずれている"
+  );
+  assert.equal(
+    originalSongsPost.photos?.[1]?.src,
+    "/images/yukajet/2026-08-19-future-gray-lyrics.jpg"
+  );
+  assert.match(originalSongsPost.title, /『未来は薔薇色』⇄『未来は灰色』/);
+  assert.match(originalSongsPost.caption, /オリジナル楽曲①/);
+  assert.equal(originalSongsPost.quotedPost?.handle, "@yukako_produce");
+  assert.equal(
+    originalSongsPost.quotedPost?.url,
+    undefined,
+    "引用元投稿のURLは未確認のため設定しない"
+  );
+  originalSongsPost.photos?.forEach((image) => {
+    assert.ok(
+      existsSync(new URL(`../public${image.src}`, import.meta.url)),
+      `オリジナル楽曲①の歌詞カード画像が無い: public${image.src}`
+    );
+  });
+  const originalSongsUpdate = latestSiteUpdates.find(
+    (update) => update.anchor === "#gojet-original-songs-misato-2026-08-19"
+  );
+  assert.ok(originalSongsUpdate, "最新情報にオリジナル楽曲①の記事が無い");
+  assert.equal(latestSiteUpdates[0]?.id, originalSongsUpdate.id);
+  assert.equal(originalSongsUpdate.sourceUrl, originalSongsPost.postUrl);
+  assert.equal(
+    originalSongsUpdate.imageLayout,
+    "contain",
+    "縦長の歌詞カードが最新情報サムネイルで切り抜かれてしまう"
+  );
+  assert.equal(
+    originalSongsUpdate.image?.src,
+    "/images/yukajet/2026-08-19-future-rose-lyrics.jpg"
+  );
+  assert.equal(
+    latestSiteUpdates.filter(
+      (update) => update.sourceUrl === originalSongsPost.postUrl
+    ).length,
+    1,
+    "オリジナル楽曲①の投稿が最新情報に重複している"
+  );
+
+  // 2件目は8/10 10:36の優花子さん本人（配信視聴最終日・A/B/C班集合写真）。
+  const newestPost = gojetFeatureUpdates[1];
   assert.equal(
     newestPost.postUrl,
     "https://x.com/mokoopy/status/2086627781023285249"
@@ -57,7 +116,6 @@ try {
     (update) => update.id === "iburigakko-popcorn-homecoming-2026-08-17"
   );
   assert.ok(popcornUpdate, "最新情報に8/17いぶりがっこポップコーンの記事が無い");
-  assert.equal(latestSiteUpdates[0]?.id, popcornUpdate.id);
   assert.equal(
     popcornUpdate.sourceUrl,
     "https://x.com/mokoopy/status/2089283468576608643"
@@ -115,8 +173,16 @@ try {
   );
   assert.equal(
     news[0]?.url,
-    "https://x.com/mokoopy/status/2089283468576608643",
-    "NewsBar先頭が8/17投稿からずれている"
+    "https://x.com/yukako_produce/status/2090048586331676998",
+    "NewsBar先頭が8/19オリジナル楽曲①の投稿からずれている"
+  );
+  assert.equal(
+    news.filter(
+      (item) =>
+        item.url === "https://x.com/yukako_produce/status/2090048586331676998"
+    ).length,
+    1,
+    "news.ts にオリジナル楽曲①が重複登録されている"
   );
   const popcornOriginNews = news.find(
     (item) => item.url === popcornOrigin.sourceUrl
@@ -126,8 +192,8 @@ try {
   assert.equal(popcornOriginNews.listedAt, "2026.8.18");
   assert.equal(
     latestNewsListingDate(news),
-    "2026.8.18",
-    "Footerの掲載情報更新日が8/18からずれている"
+    "2026.8.19",
+    "Footerの掲載情報更新日が8/19からずれている"
   );
   const streamingFinalUpdate = latestSiteUpdates.find(
     (update) => update.anchor === "#gojet-streaming-viewing-final-day-2026-08-10"
@@ -135,8 +201,8 @@ try {
   assert.ok(streamingFinalUpdate, "最新情報から配信視聴最終日の記事が消えている");
   assert.equal(streamingFinalUpdate.sourceUrl, newestPost.postUrl);
 
-  // 2件目は8/9の優花子さん本人（8/10までの配信・感想投稿の呼びかけ）。
-  const streamingMessagePost = gojetFeatureUpdates[1];
+  // 3件目は8/9の優花子さん本人（8/10までの配信・感想投稿の呼びかけ）。
+  const streamingMessagePost = gojetFeatureUpdates[2];
   assert.equal(
     streamingMessagePost.postUrl,
     "https://x.com/mokoopy/status/2086455342796603727?s=12"
@@ -160,8 +226,8 @@ try {
   assert.ok(streamingMessageUpdate, "最新情報から8/9配信案内の記事が消えている");
   assert.equal(streamingMessageUpdate.sourceUrl, streamingMessagePost.postUrl);
 
-  // 3件目は8/8 9:25の優花子さん本人（JETの妹・メグ役紹介）。
-  const megCastIntroPost = gojetFeatureUpdates[2];
+  // 4件目は8/8 9:25の優花子さん本人（JETの妹・メグ役紹介）。
+  const megCastIntroPost = gojetFeatureUpdates[3];
   assert.equal(
     megCastIntroPost.postUrl,
     "https://x.com/mokoopy/status/2085885102899507709?s=12"
@@ -187,7 +253,7 @@ try {
   assert.equal(megCastIntroUpdate.sourceUrl, megCastIntroPost.postUrl);
 
   // 続いて8/3 21:52の優花子さん本人（配信最終案内）、8/3 20:40の沼尾さん。
-  const previousNewestPost = gojetFeatureUpdates[3];
+  const previousNewestPost = gojetFeatureUpdates[4];
   assert.equal(
     previousNewestPost.postUrl,
     "https://x.com/mokoopy/status/2084261233344016471"
@@ -202,7 +268,7 @@ try {
   );
   assert.match(previousNewestPost.title, /載せていない見所がありすぎる/);
 
-  const newestCastPost = gojetFeatureUpdates[4];
+  const newestCastPost = gojetFeatureUpdates[5];
   assert.equal(
     newestCastPost.postUrl,
     "https://x.com/mayuka_pinkcha/status/2084243063141179760"
@@ -596,7 +662,10 @@ try {
   );
   assert.doesNotMatch(producingAfterHtml, /配信チケットを申し込む/);
   assert.match(producingAfterHtml, /配信チケットの申し込みは終了。視聴は8月10日（月）まで/);
+  // 初期表示は先頭9件。8/19のオリジナル楽曲①が加わり、8/2のC班キャスト引用
+  // （2083894429962977371 / 2083763241877217706）は「もっと見る」の中へ移動した。
   for (const keptUrl of [
+    "https://x.com/yukako_produce/status/2090048586331676998",
     "https://x.com/mokoopy/status/2084261233344016471",
     "https://x.com/yukako_produce/status/2084256242856587746",
     "https://x.com/mokoopy/status/2083944200119476437",
@@ -604,9 +673,7 @@ try {
     "https://x.com/mokoopy/status/2083896120812720278",
     "https://x.com/yukako_produce/status/2083560056470323653",
     "https://x.com/mokoopy/status/2083895403389555175",
-    "https://x.com/yukako_produce/status/2083560994169889115",
-    "https://x.com/mokoopy/status/2083894429962977371",
-    "https://x.com/yukako_produce/status/2083763241877217706"
+    "https://x.com/yukako_produce/status/2083560994169889115"
   ]) {
     assert.ok(
       producingAfterHtml.includes(keptUrl),

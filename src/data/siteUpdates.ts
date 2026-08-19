@@ -201,6 +201,8 @@ const gojetUpdates: SiteUpdate[] = gojetFeatureUpdates.map((update, index) => ({
     (update.video
       ? { src: update.video.poster, alt: update.video.label }
       : undefined),
+  // 歌詞カードなど、切り抜くと読めない画像だけ元データ側で contain を指定する。
+  imageLayout: update.imageLayout,
   sourceUrl: update.postUrl,
   // NowProducingSection側でハッシュ対象を自動展開するため、固有アンカーを維持する。
   anchor: update.anchorId ? `#${update.anchorId}` : "#next"

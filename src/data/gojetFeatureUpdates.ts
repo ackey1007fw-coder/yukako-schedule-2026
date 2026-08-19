@@ -15,6 +15,9 @@ export type DisplayGojetFeatureUpdate = GojetFeatureUpdate & {
     label: string;
     note?: string;
   };
+  // トップの「最新情報」サムネイルでの見せ方。歌詞カードのように
+  // 切り抜くと読めなくなる縦長画像は "contain" を指定する。
+  imageLayout?: "portrait-preview" | "contain";
   // 締切を持つ申込導線は lib/gojetOrderDeadline.ts が自動で閉じる。
   // URL（Googleフォーム）とラベル（「申し込む」等）で判定できない申込導線だけ、
   // ここで明示的に指定する。通常は指定不要。
@@ -23,6 +26,9 @@ export type DisplayGojetFeatureUpdate = GojetFeatureUpdate & {
 
 const NUMAO_MAYUKA_C_GIRLS_20260803_POST_URL =
   "https://x.com/mayuka_pinkcha/status/2084243063141179760";
+
+const ORIGINAL_SONGS_MISATO_20260819_POST_URL =
+  "https://x.com/yukako_produce/status/2090048586331676998";
 
 const YUKAKO_STREAMING_VIEWING_FINAL_DAY_20260810_POST_URL =
   "https://x.com/mokoopy/status/2086627781023285249";
@@ -219,6 +225,9 @@ const decoratedSourceUpdates: DisplayGojetFeatureUpdate[] = sourceUpdates
 const sakiTrio20260801Update = decoratedSourceUpdates.find(
   (update) => update.postUrl === SAKI_TRIO_20260801_POST_URL
 );
+const originalSongsMisato20260819Update = decoratedSourceUpdates.find(
+  (update) => update.postUrl === ORIGINAL_SONGS_MISATO_20260819_POST_URL
+);
 const yukakoStreamingViewingFinalDay20260810Update = decoratedSourceUpdates.find(
   (update) =>
     update.postUrl === YUKAKO_STREAMING_VIEWING_FINAL_DAY_20260810_POST_URL
@@ -381,6 +390,7 @@ export const gojetOriginUpdate = decoratedSourceUpdates.find(
 );
 const remainingSourceUpdates = decoratedSourceUpdates.filter(
   (update) =>
+    update.postUrl !== ORIGINAL_SONGS_MISATO_20260819_POST_URL &&
     update.postUrl !== YUKAKO_STREAMING_VIEWING_FINAL_DAY_20260810_POST_URL &&
     update.postUrl !== YUKAKO_STREAMING_MESSAGE_20260809_POST_URL &&
     update.postUrl !== YUKAKO_MEG_CAST_INTRO_20260808_POST_URL &&
@@ -436,6 +446,17 @@ const remainingSourceUpdates = decoratedSourceUpdates.filter(
     update.postUrl !== PENLIGHT_POST_URL &&
     update.postUrl !== PRODUCE_ANNOUNCE_POST_URL
 );
+
+// 歌詞カードは縦長。最新情報のサムネイルでも全文が読めるよう contain で見せる。
+const featuredOriginalSongsMisato20260819Update =
+  originalSongsMisato20260819Update
+    ? {
+        ...originalSongsMisato20260819Update,
+        anchorId: "gojet-original-songs-misato-2026-08-19",
+        primaryCta: "post" as const,
+        imageLayout: "contain" as const
+      }
+    : undefined;
 
 const featuredYukakoStreamingViewingFinalDay20260810Update =
   yukakoStreamingViewingFinalDay20260810Update
@@ -1170,6 +1191,9 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
 // 7/25 23:49優花子さん本人（残り公演の呼びかけ）→ 7/25 22:43三村すみかさん →
 // 7/25 11:31秋乃蒼依さん → 21:24青木杏奈さん → 20:40曽原加絵さん → 19:06来瞳舞夢さんの順で先頭表示する。
 const orderedGojetFeatureUpdates: DisplayGojetFeatureUpdate[] = [
+  ...(featuredOriginalSongsMisato20260819Update
+    ? [featuredOriginalSongsMisato20260819Update]
+    : []),
   ...(featuredYukakoStreamingViewingFinalDay20260810Update
     ? [featuredYukakoStreamingViewingFinalDay20260810Update]
     : []),
