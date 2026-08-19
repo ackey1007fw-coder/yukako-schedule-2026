@@ -13,7 +13,7 @@ export const news: NewsItem[] = [
   {
     date: "2026.8.19",
     label: "X",
-    text: "最新投稿は海辺から。8/18の大森山動物園の投稿を引用しています。",
+    text: "海辺からの一枚。8/18の大森山動物園の投稿を引用しています。",
     url: "https://x.com/mokoopy/status/2090064677728661996"
   },
   {
