@@ -6,7 +6,8 @@ import { generatePortalFeed, loadPortalFeedModule } from "./generate-portal-feed
 const fixedGeneratedAt = "2026-08-18T00:00:00.000Z";
 const first = await generatePortalFeed(fixedGeneratedAt);
 const second = await generatePortalFeed(fixedGeneratedAt);
-const { selectFeedCandidates, toPortalImageUrl } = await loadPortalFeedModule();
+const { createNewsCandidate, selectFeedCandidates, toPortalImageUrl } =
+  await loadPortalFeedModule();
 const offsetIsoDatetime =
   /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/;
 const siteOrigin = new URL(first.siteUrl).origin;
@@ -61,6 +62,21 @@ const babySharkOgaki = first.items.find(
   (item) => item.id === "yukako:event:babyshark-live-2026-08-22"
 );
 assert.equal(babySharkOgaki?.startsAt, "2026-08-22T12:30:00+09:00");
+assert.equal(
+  first.items.find((item) => item.id === "yukako:event:babyshark-live-2026-09-19")
+    ?.startsAt,
+  "2026-09-19T11:30:00+09:00"
+);
+assert.equal(
+  first.items.find((item) => item.id === "yukako:event:babyshark-live-2026-09-20")
+    ?.startsAt,
+  "2026-09-20T11:30:00+09:00"
+);
+const babySharkStory = first.items.find(
+  (item) => item.type === "news" && item.title.includes("大垣・福山・久留米")
+);
+assert.equal(babySharkStory?.sourceUrl, "https://www.instagram.com/yoppy_777");
+assert.equal(babySharkStory?.publishedAt, "2026-08-21T00:00:00+09:00");
 
 const lateListedNews = first.items.find(
   (item) => item.sourceUrl === "https://x.com/mokoopy/status/2012824363620331966"
@@ -72,6 +88,31 @@ assert.equal(
   "https://yukako-schedule-2026.vercel.app/images/example.jpg"
 );
 assert.equal(toPortalImageUrl("https://example.com/hotlink.jpg"), undefined);
+
+const reusableProfileNews = [
+  createNewsCandidate({
+    date: "2026.8.21",
+    label: "Instagram",
+    text: "Story A",
+    url: "https://www.instagram.com/yoppy_777"
+  }),
+  createNewsCandidate({
+    date: "2026.8.22",
+    label: "Instagram",
+    text: "Story B",
+    url: "https://www.instagram.com/yoppy_777"
+  })
+].filter(Boolean);
+assert.equal(reusableProfileNews.length, 2);
+assert.notEqual(reusableProfileNews[0].item.id, reusableProfileNews[1].item.id);
+assert.equal(
+  selectFeedCandidates(
+    reusableProfileNews,
+    "2026-08-23T00:00:00.000Z"
+  ).length,
+  2,
+  "InstagramプロフィールURLを再利用した別Storyがdedupeで消えている"
+);
 
 const fixtureCandidate = ({ dataset, id, publishedAt, startsAt }) => ({
   dataset,

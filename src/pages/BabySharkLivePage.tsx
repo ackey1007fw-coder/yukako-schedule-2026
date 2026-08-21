@@ -177,7 +177,7 @@ export function BabySharkLivePage() {
               2026年の出演公演
             </h2>
             <p className="mt-4 text-sm leading-7 text-ink/70">
-              {`優花子さん本人のInstagram告知（${work.tour2026.sourceDateLabel}）に載っていた3公演。チケットと最新情報は公式サイトへ。`}
+              優花子さん本人のInstagramで出演が確認できた2026年の公演。チケットと最新情報は公式サイトへ。
             </p>
 
             <ul className="mt-6 grid gap-3">
@@ -285,9 +285,11 @@ export function BabySharkLivePage() {
               <ExternalButton href={work.tour2026.officialUrl} variant="gold">
                 チケット・公演情報（公式）
               </ExternalButton>
-              <ExternalButton href={work.tour2026.sourceUrl} variant="light">
-                {work.tour2026.sourceLabel}
-              </ExternalButton>
+              {work.tour2026.sources.map((source) => (
+                <ExternalButton key={source.id} href={source.url} variant="light">
+                  {source.label}
+                </ExternalButton>
+              ))}
             </div>
           </section>
 
@@ -350,11 +352,34 @@ export function BabySharkLivePage() {
                     </p>
                     <div className="mt-4 space-y-3">
                       {update.body.map((paragraph) => (
-                        <p key={paragraph} className="leading-8 text-ink/75">
+                        <p key={paragraph} className="whitespace-pre-line leading-8 text-ink/75">
                           {paragraph}
                         </p>
                       ))}
                     </div>
+                    {update.videos && update.videos.length > 0 && (
+                      <div className="mt-6 grid min-w-0 gap-5 sm:grid-cols-2">
+                        {update.videos.map((video) => (
+                          <figure key={video.src} className="mx-auto w-full max-w-[280px] min-w-0">
+                            <video
+                              src={video.src}
+                              poster={video.poster}
+                              controls
+                              playsInline
+                              preload="metadata"
+                              aria-label={video.label}
+                              className="aspect-[9/16] w-full bg-ink object-contain"
+                            />
+                            <figcaption className="mt-2 text-sm font-bold leading-6 text-ink/65">
+                              {video.label}
+                            </figcaption>
+                            {video.caption && (
+                              <p className="mt-1 text-xs leading-5 text-ink/50">{video.caption}</p>
+                            )}
+                          </figure>
+                        ))}
+                      </div>
+                    )}
                     {update.sourceUrl && (
                       <a
                         href={update.sourceUrl}

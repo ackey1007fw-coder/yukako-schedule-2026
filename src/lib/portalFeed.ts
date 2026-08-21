@@ -1,8 +1,9 @@
 import { archiveItems } from "../data/archive";
 import { events } from "../data/events";
-import { news } from "../data/news";
+import { news, type NewsItem } from "../data/news";
 import { profile } from "../data/profile";
 import { siteUpdates } from "../data/siteUpdates";
+import { isReusableInstagramProfileUrl } from "./sourceUrl";
 
 const PERSON_ID = "yukako" as const;
 const SITE_URL = "https://yukako-schedule-2026.vercel.app/";
@@ -147,6 +148,7 @@ const publishedNewestFirst = (a: PortalFeedCandidate, b: PortalFeedCandidate) =>
   a.item.id.localeCompare(b.item.id);
 
 const sourceKey = (value: string | undefined) => {
+  if (isReusableInstagramProfileUrl(value)) return undefined;
   const normalized = normalizedUrl(value);
   return normalized ? `source:${normalized}` : undefined;
 };
@@ -159,37 +161,43 @@ const isSyntheticNewsUpdate = (update: (typeof siteUpdates)[number]) =>
       normalizedUrl(item.url) === normalizedUrl(update.sourceUrl)
   );
 
-const newsCandidates: PortalFeedCandidate[] = news.flatMap((item) => {
+export const createNewsCandidate = (item: NewsItem): PortalFeedCandidate | undefined => {
   const publishedAt = toJstIso(item.listedAt ?? item.date);
-  if (!publishedAt) return [];
+  if (!publishedAt) return undefined;
 
   const sourceUrl = item.url.startsWith("#") ? undefined : item.url;
-  const stableMaterial = normalizedUrl(sourceUrl) ?? `${item.url}|${item.date}|${item.text}`;
   const dedupeKey = sourceKey(sourceUrl);
+  const normalizedSource = normalizedUrl(sourceUrl);
+  const stableMaterial = dedupeKey
+    ? normalizedSource ?? `${item.url}|${item.date}|${item.text}`
+    : `${normalizedSource ?? item.url}|${item.date}|${item.text}`;
 
-  return [
-    {
-      dataset: "news",
-      dedupeKeys: dedupeKey ? [dedupeKey] : [`news:${stableHash(stableMaterial)}`],
-      item: {
-        id: `yukako:news:${stableHash(stableMaterial)}`,
-        personId: PERSON_ID,
-        type: "news",
-        title: item.text,
-        url: absoluteSiteUrl(item.url.startsWith("#") ? item.url : "#updates"),
-        sourceUrl,
-        publishedAt
-      }
+  return {
+    dataset: "news",
+    dedupeKeys: dedupeKey ? [dedupeKey] : [`news:${stableHash(stableMaterial)}`],
+    item: {
+      id: `yukako:news:${stableHash(stableMaterial)}`,
+      personId: PERSON_ID,
+      type: "news",
+      title: item.text,
+      url: absoluteSiteUrl(item.url.startsWith("#") ? item.url : "#updates"),
+      sourceUrl,
+      publishedAt
     }
-  ];
+  };
+};
+
+const newsCandidates: PortalFeedCandidate[] = news.flatMap((item) => {
+  const candidate = createNewsCandidate(item);
+  return candidate ? [candidate] : [];
 });
 
 const siteUpdateCandidates: PortalFeedCandidate[] = siteUpdates.flatMap((update) => {
   if (isSyntheticNewsUpdate(update)) return [];
 
-  const matchingNews = news.find(
-    (item) => normalizedUrl(item.url) === normalizedUrl(update.sourceUrl)
-  );
+  const matchingNews = isReusableInstagramProfileUrl(update.sourceUrl)
+    ? undefined
+    : news.find((item) => normalizedUrl(item.url) === normalizedUrl(update.sourceUrl));
   // 専用カードとnewsが同じ元投稿を指す場合も、news側の掲載日を失わない。
   const publishedAt = toJstIso(matchingNews?.listedAt ?? matchingNews?.date ?? update.date);
   if (!publishedAt) return [];

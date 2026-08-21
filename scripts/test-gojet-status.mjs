@@ -74,7 +74,11 @@ try {
     (update) => update.anchor === "#gojet-original-songs-misato-2026-08-19"
   );
   assert.ok(originalSongsUpdate, "最新情報にオリジナル楽曲①の記事が無い");
-  assert.equal(latestSiteUpdates[0]?.id, originalSongsUpdate.id);
+  assert.equal(
+    latestSiteUpdates[0]?.sourceUrl,
+    "https://www.instagram.com/yoppy_777",
+    "8/21 BABY SHARK LIVE! Storyが最新情報の先頭に出ていない"
+  );
   assert.equal(originalSongsUpdate.sourceUrl, originalSongsPost.postUrl);
   assert.equal(
     originalSongsUpdate.imageLayout,
@@ -173,8 +177,8 @@ try {
   );
   assert.equal(
     news[0]?.url,
-    "https://x.com/yukako_produce/status/2090048586331676998",
-    "NewsBar先頭が8/19オリジナル楽曲①の投稿からずれている"
+    "https://www.instagram.com/yoppy_777",
+    "NewsBar先頭が8/21 BABY SHARK LIVE! Storyからずれている"
   );
   assert.equal(
     news.filter(
@@ -192,8 +196,8 @@ try {
   assert.equal(popcornOriginNews.listedAt, "2026.8.18");
   assert.equal(
     latestNewsListingDate(news),
-    "2026.8.19",
-    "Footerの掲載情報更新日が8/19からずれている"
+    "2026.8.21",
+    "Footerの掲載情報更新日が8/21からずれている"
   );
   const streamingFinalUpdate = latestSiteUpdates.find(
     (update) => update.anchor === "#gojet-streaming-viewing-final-day-2026-08-10"
@@ -987,7 +991,8 @@ try {
   assert.equal(mgjUpdate.imageLayout, "contain");
   assert.equal(mgjUpdate.anchor, "#miss-grand-japan-final");
   const latestUpdatesHtml = renderToStaticMarkup(createElement(LatestUpdatesSection));
-  assert.ok(latestUpdatesHtml.includes(mgjUpdate.image.src));
+  assert.ok(latestUpdatesHtml.includes("大垣・福山・久留米"));
+  assert.ok(latestUpdatesHtml.includes("https://www.instagram.com/yoppy_777"));
   assert.ok(latestUpdatesHtml.includes(popcornUpdate.image.src));
   assert.ok(latestUpdatesHtml.includes("sm:object-contain"));
   assert.ok(

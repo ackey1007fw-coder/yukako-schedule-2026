@@ -28,6 +28,7 @@ export type BabySharkUpdate = {
   dateLabel: string;
   title: string;
   body: string[];
+  videos?: BabySharkVideo[];
   sourceUrl?: string;
   sourceLabel?: string;
   kind:
@@ -37,6 +38,21 @@ export type BabySharkUpdate = {
     | "photo"
     | "comment"
     | "report";
+};
+
+export type BabySharkVideo = {
+  src: string;
+  poster?: string;
+  label: string;
+  caption?: string;
+};
+
+export type BabySharkTourSource = {
+  id: string;
+  date: string;
+  dateLabel: string;
+  url: string;
+  label: string;
 };
 
 export type BabySharkArchiveDate = {
@@ -196,15 +212,27 @@ export const babySharkLive = {
    * 追加公演が告知されたら dates へ追記する（表示は日付順、終演済みは自動でグレーになる）。
    */
   tour2026: {
-    sourceUrl: "https://www.instagram.com/p/DY4au0dmbOg/",
-    sourceLabel: "本人のInstagram告知を見る",
-    sourceDate: "2026-05-28",
-    sourceDateLabel: "2026年5月28日",
+    sources: [
+      {
+        id: "instagram-2026-05-28",
+        date: "2026-05-28",
+        dateLabel: "2026年5月28日",
+        url: "https://www.instagram.com/p/DY4au0dmbOg/",
+        label: "5/28のInstagram投稿を見る"
+      },
+      {
+        id: "instagram-story-2026-08-21",
+        date: "2026-08-21",
+        dateLabel: "2026年8月21日",
+        url: "https://www.instagram.com/yoppy_777",
+        label: "Instagram（@yoppy_777）へ"
+      }
+    ] satisfies BabySharkTourSource[],
     officialUrl: "https://babyshark-live-japan.com/ticket/",
     image: {
       src: "/images/baby-shark/baby-shark-schedule-2026.jpg",
       alt: "ベイビーシャークライブ2026年の公演日程。神奈川・海老名公演は5月30日（土）海老名市文化会館 大ホール ①12:30 ②14:50（お見送り有）、埼玉・大宮公演は6月7日（日）大宮ソニックシティ 大ホール ①11:00 ②13:30（お見送り有）、岐阜・大垣公演は8月22日（土）大垣市スイトピアセンター 文化ホール ①12:30 ②14:30（お見送り有）",
-      caption: "本人告知より（2026年の出演回）",
+      caption: "本人の5/28 Instagram告知より（海老名・大宮・大垣）",
       available: true
     },
     dates: [
@@ -251,6 +279,36 @@ export const babySharkLive = {
         stages: [
           { label: "①", time: "12:30" },
           { label: "②", time: "14:30", note: "お見送り有" }
+        ]
+      },
+      {
+        id: "fukuyama-2026-09-19",
+        region: "広島・福山",
+        date: "2026-09-19",
+        dateLabel: "2026年9月19日（土）",
+        venue: "ふくやま芸術文化ホール リーデンローズ",
+        address: "広島県福山市松浜町二丁目1番10号",
+        access: "JR福山駅南口からタクシー約10分、徒歩約25分／南口・北口から路線バスあり",
+        mapUrl: "https://www.google.com/maps/search/?api=1&query=%E5%BA%83%E5%B3%B6%E7%9C%8C%E7%A6%8F%E5%B1%B1%E5%B8%82%E6%9D%BE%E6%B5%9C%E7%94%BA%E4%BA%8C%E4%B8%81%E7%9B%AE1%E7%95%AA10%E5%8F%B7%20%E3%81%B5%E3%81%8F%E3%82%84%E3%81%BE%E8%8A%B8%E8%A1%93%E6%96%87%E5%8C%96%E3%83%9B%E3%83%BC%E3%83%AB%20%E3%83%AA%E3%83%BC%E3%83%87%E3%83%B3%E3%83%AD%E3%83%BC%E3%82%BA",
+        venueUrl: "https://www.fukuyamabunkahall.jp/r-rose/",
+        stages: [
+          { label: "①", time: "11:30" },
+          { label: "②", time: "14:00", note: "お見送り有" }
+        ]
+      },
+      {
+        id: "kurume-2026-09-20",
+        region: "福岡・久留米",
+        date: "2026-09-20",
+        dateLabel: "2026年9月20日（日）",
+        venue: "久留米シティプラザ ザ・グランドホール",
+        address: "福岡県久留米市六ツ門町8-1",
+        access: "西鉄久留米駅からタクシー約4分、路線バス約5分、徒歩約10分／JR久留米駅からタクシー約7分、路線バス約10分、徒歩約20分",
+        mapUrl: "https://www.google.com/maps/search/?api=1&query=%E7%A6%8F%E5%B2%A1%E7%9C%8C%E4%B9%85%E7%95%99%E7%B1%B3%E5%B8%82%E5%85%AD%E3%83%84%E9%96%80%E7%94%BA8-1%20%E4%B9%85%E7%95%99%E7%B1%B3%E3%82%B7%E3%83%86%E3%82%A3%E3%83%97%E3%83%A9%E3%82%B6",
+        venueUrl: "https://kurumecityplaza.jp/",
+        stages: [
+          { label: "①", time: "11:30" },
+          { label: "②", time: "14:00", note: "お見送り有" }
         ]
       }
     ] satisfies BabySharkTourDate[]
@@ -323,6 +381,29 @@ export const babySharkLive = {
       ],
       sourceUrl: "https://www.instagram.com/p/DY4au0dmbOg/",
       sourceLabel: "Instagramの元投稿を見る",
+      kind: "announcement"
+    },
+    {
+      id: "baby-shark-instagram-story-2026-08-21",
+      date: "2026-08-21",
+      dateLabel: "2026年8月21日",
+      title: "大垣へ。そして来月は福山・久留米へ",
+      body: [
+        "「明日は岐阜❤️\n来月は広島と福岡✨」——8月22日の大垣公演を前に、BABY SHARK LIVE! の出演予定をInstagramストーリーズでお知らせ。",
+        "「メインシンガーを務めている\nミュージカルです♪\nぜひ来てね🥺✨」——2026年のツアースケジュールとともに、大垣・福山・久留米へ。"
+      ],
+      videos: [
+        {
+          src: "/videos/baby-shark/baby-shark-instagram-story-2026-08-21-01.mp4",
+          label: "8/21 Instagram Story｜「明日は岐阜、来月は広島と福岡」"
+        },
+        {
+          src: "/videos/baby-shark/baby-shark-instagram-story-2026-08-21-02.mp4",
+          label: "8/21 Instagram Story｜BABY SHARK LIVE! 公演案内"
+        }
+      ],
+      sourceUrl: "https://www.instagram.com/yoppy_777",
+      sourceLabel: "優花子さんのInstagramを見る",
       kind: "announcement"
     }
   ] satisfies BabySharkUpdate[],
