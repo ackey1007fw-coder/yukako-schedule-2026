@@ -11,6 +11,13 @@ export type NewsItem = {
 
 export const news: NewsItem[] = [
   {
+    date: "2026.8.21",
+    label: "Instagram",
+    text:
+      "「明日は岐阜❤️ 来月は広島と福岡✨」——BABY SHARK LIVE! の大垣・福山・久留米出演をストーリーズでお知らせ。",
+    url: "https://www.instagram.com/yoppy_777"
+  },
+  {
     date: "2026.8.19",
     label: "X",
     text:

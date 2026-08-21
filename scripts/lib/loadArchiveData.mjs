@@ -47,6 +47,17 @@ export async function loadArchiveItems() {
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
 const HTTPS_RE = /^https:\/\//i;
 
+const isReusableInstagramProfileUrl = (value) => {
+  try {
+    const url = new URL(value);
+    const hostname = url.hostname.toLowerCase().replace(/^www\./, "");
+    const pathParts = url.pathname.split("/").filter(Boolean);
+    return hostname === "instagram.com" && pathParts.length === 1;
+  } catch {
+    return false;
+  }
+};
+
 /**
  * BABY SHARK LIVE の updates 配列を検証する。
  * - 同じ id / 同じ sourceUrl（設定時のみ）は不可
@@ -92,12 +103,14 @@ export function validateBabySharkUpdates(updates = []) {
           `babySharkLive data: sourceUrl must be an https:// URL (id "${update.id}")`
         );
       }
-      if (seenSourceUrls.has(update.sourceUrl)) {
+      if (seenSourceUrls.has(update.sourceUrl) && !isReusableInstagramProfileUrl(update.sourceUrl)) {
         throw new Error(
           `babySharkLive data: duplicate update sourceUrl "${update.sourceUrl}"`
         );
       }
-      seenSourceUrls.add(update.sourceUrl);
+      if (!isReusableInstagramProfileUrl(update.sourceUrl)) {
+        seenSourceUrls.add(update.sourceUrl);
+      }
     }
   }
 }

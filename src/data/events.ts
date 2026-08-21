@@ -213,6 +213,82 @@ export const events: ScheduleEvent[] = [
     ]
   },
   {
+    id: "babyshark-live-2026-09-19",
+    title: "BABY SHARK LIVE! -The Hidden Treasure- 広島・福山公演",
+    shortTitle: "Baby Shark 福山",
+    category: "stage",
+    listedAt: "2026-08-21",
+    startAt: "2026-09-19T11:30:00+09:00",
+    endAt: "2026-09-19T15:05:00+09:00",
+    dates: ["2026-09-19"],
+    displayDate: "2026年9月19日（土）",
+    venue: "ふくやま芸術文化ホール リーデンローズ（広島県福山市松浜町二丁目1番10号）",
+    image: "/images/baby-shark/baby-shark-hetty.jpg",
+    summary:
+      "本人のInstagramストーリーズで出演が確認できた福山公演。①11:30／②14:00の2回公演で、2回目は終演後にお見送りあり。上演時間は約65分。",
+    badges: ["舞台", "全国公演", "2回公演", "お見送り有"],
+    links: [
+      {
+        label: "🎫 チケット・公演情報（公式）",
+        url: "https://babyshark-live-japan.com/ticket/",
+        kind: "ticket"
+      },
+      {
+        label: "優花子さんのInstagramを見る",
+        url: "https://www.instagram.com/yoppy_777",
+        kind: "sns"
+      },
+      {
+        label: "会場の地図を開く（リーデンローズ）",
+        url: "https://www.google.com/maps/search/?api=1&query=%E5%BA%83%E5%B3%B6%E7%9C%8C%E7%A6%8F%E5%B1%B1%E5%B8%82%E6%9D%BE%E6%B5%9C%E7%94%BA%E4%BA%8C%E4%B8%81%E7%9B%AE1%E7%95%AA10%E5%8F%B7%20%E3%81%B5%E3%81%8F%E3%82%84%E3%81%BE%E8%8A%B8%E8%A1%93%E6%96%87%E5%8C%96%E3%83%9B%E3%83%BC%E3%83%AB%20%E3%83%AA%E3%83%BC%E3%83%87%E3%83%B3%E3%83%AD%E3%83%BC%E3%82%BA",
+        kind: "map"
+      },
+      {
+        label: "会場公式サイト（リーデンローズ）",
+        url: "https://www.fukuyamabunkahall.jp/r-rose/",
+        kind: "info"
+      }
+    ]
+  },
+  {
+    id: "babyshark-live-2026-09-20",
+    title: "BABY SHARK LIVE! -The Hidden Treasure- 福岡・久留米公演",
+    shortTitle: "Baby Shark 久留米",
+    category: "stage",
+    listedAt: "2026-08-21",
+    startAt: "2026-09-20T11:30:00+09:00",
+    endAt: "2026-09-20T15:05:00+09:00",
+    dates: ["2026-09-20"],
+    displayDate: "2026年9月20日（日）",
+    venue: "久留米シティプラザ ザ・グランドホール（福岡県久留米市六ツ門町8-1）",
+    image: "/images/baby-shark/baby-shark-hetty.jpg",
+    summary:
+      "本人のInstagramストーリーズで出演が確認できた久留米公演。①11:30／②14:00の2回公演で、2回目は終演後にお見送りあり。上演時間は約65分。",
+    badges: ["舞台", "全国公演", "2回公演", "お見送り有"],
+    links: [
+      {
+        label: "🎫 チケット・公演情報（公式）",
+        url: "https://babyshark-live-japan.com/ticket/",
+        kind: "ticket"
+      },
+      {
+        label: "優花子さんのInstagramを見る",
+        url: "https://www.instagram.com/yoppy_777",
+        kind: "sns"
+      },
+      {
+        label: "会場の地図を開く（久留米シティプラザ）",
+        url: "https://www.google.com/maps/search/?api=1&query=%E7%A6%8F%E5%B2%A1%E7%9C%8C%E4%B9%85%E7%95%99%E7%B1%B3%E5%B8%82%E5%85%AD%E3%83%84%E9%96%80%E7%94%BA8-1%20%E4%B9%85%E7%95%99%E7%B1%B3%E3%82%B7%E3%83%86%E3%82%A3%E3%83%97%E3%83%A9%E3%82%B6",
+        kind: "map"
+      },
+      {
+        label: "会場公式サイト（久留米シティプラザ）",
+        url: "https://kurumecityplaza.jp/",
+        kind: "info"
+      }
+    ]
+  },
+  {
     id: "ryoma-kun-2026-04",
     title: "かわええのう、龍馬くん",
     shortTitle: "龍馬くん",

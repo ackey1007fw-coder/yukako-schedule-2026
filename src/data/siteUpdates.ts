@@ -2,6 +2,7 @@ import { gojetFeatureUpdates } from "./gojetFeatureUpdates";
 import { news } from "./news";
 import { galleryUpdate } from "./photos";
 import siteContent from "./siteContent.json";
+import { isReusableInstagramProfileUrl } from "../lib/sourceUrl";
 
 // トップの「最新情報」セクション用に、各所へ散らばった更新情報を1本の時系列リストへ集約する。
 // 元データ（news / gojetFeatureUpdates など）は書き換えず、ここで読み取って変換するだけ。
@@ -21,28 +22,39 @@ export type SiteUpdate = {
   relatedId?: string;
 };
 
+const datePrefixParts = (date: string) => {
+  const match = date.match(
+    /^(\d{4})\.(\d{1,2})(?:\.(\d{1,2}))?(?:\s+(\d{1,2}):(\d{2}))?/
+  );
+  if (!match) return undefined;
+  return {
+    year: Number(match[1]),
+    month: Number(match[2]),
+    day: Number(match[3] ?? 1),
+    hour: Number(match[4] ?? 0),
+    minute: Number(match[5] ?? 0)
+  };
+};
+
 const parseDate = (date: string) => {
-  const [datePart = "", timePart = ""] = date.split(" ");
-  const [year = 0, month = 0, day = 0] = datePart.split(".").map(Number);
-  const timeMatch = timePart.match(/^(\d{1,2}):(\d{2})$/);
-  const hour = timeMatch ? Number(timeMatch[1]) : 0;
-  const minute = timeMatch ? Number(timeMatch[2]) : 0;
+  const parts = datePrefixParts(date);
+  if (!parts) return 0;
+  const { year, month, day, hour, minute } = parts;
   return (((year * 100 + month) * 100 + day) * 100 + hour) * 100 + minute;
 };
 
 // 並び替え用の parseDate と違い、日数差を測れる実時刻（ミリ秒）を返す。
 // "2026.6" のように日がない表記はその月の1日として扱い、解釈できないものは undefined。
 export const updateTimestamp = (date: string): number | undefined => {
-  const [datePart = "", timePart = ""] = date.split(" ");
-  const [year, month, day] = datePart.split(".").map(Number);
-  if (!year || !month) return undefined;
-  const timeMatch = timePart.match(/^(\d{1,2}):(\d{2})$/);
+  const parts = datePrefixParts(date);
+  if (!parts) return undefined;
+  const { year, month, day, hour, minute } = parts;
   return Date.UTC(
     year,
     month - 1,
-    day || 1,
-    timeMatch ? Number(timeMatch[1]) : 0,
-    timeMatch ? Number(timeMatch[2]) : 0
+    day,
+    hour,
+    minute
   );
 };
 
@@ -212,7 +224,9 @@ const gojetUpdates: SiteUpdate[] = gojetFeatureUpdates.map((update, index) => ({
 const knownUrls = new Set(
   [...standaloneUpdates, ...gojetUpdates]
     .map((update) => update.sourceUrl)
-    .filter((url): url is string => Boolean(url))
+    .filter(
+      (url): url is string => Boolean(url) && !isReusableInstagramProfileUrl(url)
+    )
     .map(normalizeUrl)
 );
 
