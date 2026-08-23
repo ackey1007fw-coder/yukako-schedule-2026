@@ -137,7 +137,7 @@ export const missGrandJapanFinal = {
     archiveUrl: "https://www.youtube.com/live/Qa00N_YSqpg?si=ioMqEp0rBtV_lM-g",
     archiveCtaLabel: "大会アーカイブをYouTubeで見る",
     youtubeVideoId: "Qa00N_YSqpg",
-    archiveEmbedTitle: "MISS GRAND JAPAN & MR GAY JAPAN 2026 FINAL 公式アーカイブ"
+    archiveEmbedTitle: "MISS GRAND JAPAN / MR GAY JAPAN 2026 FINAL 公式アーカイブ"
   }
 };
 
