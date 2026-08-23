@@ -16,6 +16,8 @@ const ALL_CATEGORIES = "すべて";
 const FEATURED_MAX_AGE_DAYS = 14;
 const DAY_MS = 24 * 60 * 60 * 1000;
 
+const detailAnchorOf = (update: SiteUpdate) => update.detailAnchor ?? update.anchor;
+
 // カードは1カテゴリ1枚まで。公演期間中は #ゆかJET が上位を占め、3枚とも同じ話題に
 // なっていた。すぐ下に #ゆかJET の特集があるので、ここは横断で見せる。
 // ただし他カテゴリの更新が止まっていると、3週間前の投稿がカードに残り続けてしまう。
@@ -80,6 +82,7 @@ export function LatestUpdatesSection() {
             const related = update.relatedId
               ? siteUpdates.find((item) => item.id === update.relatedId)
               : undefined;
+            const detailAnchor = detailAnchorOf(update);
 
             return (
             <article
@@ -88,9 +91,9 @@ export function LatestUpdatesSection() {
             >
               {update.image && (
                 <a
-                  href={update.anchor ?? update.sourceUrl}
-                  target={update.anchor ? undefined : "_blank"}
-                  rel={update.anchor ? undefined : "noopener noreferrer"}
+                  href={detailAnchor ?? update.sourceUrl}
+                  target={detailAnchor ? undefined : "_blank"}
+                  rel={detailAnchor ? undefined : "noopener noreferrer"}
                   tabIndex={-1}
                   aria-hidden="true"
                   className="block overflow-hidden border-b border-rosefog/15 bg-white"
@@ -164,9 +167,9 @@ export function LatestUpdatesSection() {
                   </a>
                 )}
                 <p className="mt-auto flex flex-wrap gap-x-4 gap-y-1 pt-4 text-sm font-bold">
-                  {update.anchor && (
+                  {detailAnchor && (
                     <a
-                      href={update.anchor}
+                      href={detailAnchor}
                       className="inline-flex items-center gap-1 text-champagneInk underline underline-offset-4 transition hover:text-rosefog"
                     >
                       <ArrowDownRight className="h-3.5 w-3.5" aria-hidden="true" />
@@ -250,7 +253,9 @@ export function LatestUpdatesSection() {
                   id="all-updates-list"
                   className="mt-4 divide-y divide-rosefog/10 border border-rosefog/15 bg-porcelain"
                 >
-                  {filteredRest.map((update) => (
+                  {filteredRest.map((update) => {
+                    const detailAnchor = detailAnchorOf(update);
+                    return (
                   <li key={update.id} className="p-4 sm:px-5">
                     <p className="flex flex-wrap items-center gap-2 text-[11px] font-black uppercase tracking-[0.12em] text-champagneInk">
                       <span className="border border-champagne/45 bg-white px-2 py-0.5">
@@ -262,9 +267,9 @@ export function LatestUpdatesSection() {
                       {update.title}
                     </p>
                     <p className="mt-1.5 flex flex-wrap gap-x-4 gap-y-1 text-xs font-bold">
-                      {update.anchor && (
+                      {detailAnchor && (
                         <a
-                          href={update.anchor}
+                          href={detailAnchor}
                           className="inline-flex items-center gap-1 text-champagneInk underline underline-offset-4 transition hover:text-rosefog"
                         >
                           <ArrowDownRight className="h-3.5 w-3.5" aria-hidden="true" />
@@ -284,7 +289,8 @@ export function LatestUpdatesSection() {
                       )}
                     </p>
                   </li>
-                  ))}
+                    );
+                  })}
                 </ol>
               </>
             )}
