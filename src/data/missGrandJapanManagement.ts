@@ -48,9 +48,11 @@ export const missGrandJapanSeries = {
   ] satisfies MissGrandJapanSeriesReel[]
 };
 
-// MISS GRAND JAPAN & MR GAY JAPAN 2026 FINAL の MC 告知。
+// MISS GRAND JAPAN & MR GAY JAPAN 2026 FINAL。
+// 大会前のMC告知と、開催後の報告までを同じブロックで持つ。
 // 出典: 吉井優花子さん本人のX投稿、Miss Grand Japan公式Instagram（@missgrandjapan）
-// https://x.com/mokoopy/status/2086075435927138676
+// https://x.com/mokoopy/status/2086075435927138676 （MC告知）
+// https://x.com/mokoopy/status/2091511016077377631 （開催後報告）
 // https://www.instagram.com/p/DbuenU5FKVg/?igsh=bjFvdjA2enZ5czA4
 // 開催日程は src/data/events.ts の "miss-grand-japan-2026-final-mc" と揃える。
 export const missGrandJapanFinal = {
@@ -61,11 +63,11 @@ export const missGrandJapanFinal = {
   facts: [
     { label: "日時", value: "2026年8月10日（月）16:00（日本時間）" },
     { label: "会場", value: "ヒューリックホール東京（東京都千代田区有楽町2-5-1 有楽町マリオン11階）" },
-    { label: "配信", value: "@missgrandjapan のYouTubeでライブ配信" }
+    { label: "配信", value: "@missgrandjapan のYouTubeでライブ配信。アーカイブ公開中" }
   ],
   body: [
     "ミス・グランド・ジャパンとミスター・ゲイ・ジャパン、2つの日本代表が決まるファイナル。",
-    "優花子さんは2025年大会でMISS PEACE賞を受賞し、2026年度からは代表補佐／運営マネジメント。今回は進行役として本番のステージに立ちます。"
+    "優花子さんは2025年大会でMISS PEACE賞を受賞し、2026年度からは代表補佐／運営マネジメント。今回は進行役として本番のステージに立ちました。"
   ],
   // MC発表の投稿からの引用（原文どおり）。誰の言葉かが分かるように出典も出す。
   quote: "2人とともに、日本代表が誕生する特別な瞬間をお届けします👑✨",
@@ -88,12 +90,14 @@ export const missGrandJapanFinal = {
   ticketUrl: "https://forms.gle/zftxsTkwg8G7jT7G6",
   ticketNote: "リンク先はTICKET画像のQRコードと同じ申し込みフォームです。",
   // 開演後に出す案内。申し込みボタンは出さない。
-  endedNote: "この日の公演は終了しています。",
+  endedNote: "この日の公演は終了しています。大会の模様は公式YouTubeのアーカイブで。",
   officialPostUrl: "https://www.instagram.com/p/DbuenU5FKVg/?igsh=bjFvdjA2enZ5czA4",
   officialPostCtaLabel: "MC発表を見る",
   // 優花子さん本人のX投稿。写真と本文をサイト側にも置き、本人への導線をここにまとめる。
   // 出典: https://x.com/mokoopy/status/2086075435927138676
   yukakoPost: {
+    dateLabel: "2026.8.8",
+    contextLabel: "大会前の告知",
     eyebrow: "YUKAKO / X",
     // 画像の書き込みをそのまま見出しにする。カギ括弧で囲んで出すので絵文字も省かない。
     title: "大切な2025メンバー✨",
@@ -110,6 +114,30 @@ export const missGrandJapanFinal = {
     postCtaLabel: "優花子さんの投稿を見る",
     profileUrl: "https://x.com/mokoopy",
     profileCtaLabel: "優花子さんをXで応援"
+  },
+  // 開催後報告。出典: https://x.com/mokoopy/status/2091511016077377631 （2026.8.23）
+  report: {
+    dateLabel: "2026.8.23",
+    eventDate: "2026.8.10",
+    eyebrow: "YUKAKO / X",
+    badge: "FINAL REPORT",
+    title: "MCとして届けた、2026年のFINAL",
+    image: {
+      src: "/images/miss-grand-japan/yukako-mgj-2026-final-mc-stage-2026-08-10.jpg",
+      alt: "MISS GRAND JAPAN & MR GAY JAPAN 2026 FINALのステージで、ゴールド系のロングドレス姿でマイクを持つ吉井優花子さん"
+    },
+    photoCredit: "H.Shima",
+    body: [
+      "MISS GRAND JAPAN 2026、MR GAY JAPAN 2026 FINALが無事に開催。2026年は吉井優花子さんがMCも務め、8月23日の投稿で大会を支えた皆さんへの感謝を伝えました。",
+      "大会の模様は、MISS GRAND JAPAN公式YouTubeでアーカイブ公開中です。",
+      "2025年大会でMISS PEACE賞を受賞し、2026年度から代表補佐／運営マネジメントを担う優花子さん。今回はMCとしてステージに立ちました。"
+    ],
+    postUrl: "https://x.com/mokoopy/status/2091511016077377631",
+    postCtaLabel: "優花子さんのX投稿を見る",
+    archiveUrl: "https://www.youtube.com/live/Qa00N_YSqpg?si=ioMqEp0rBtV_lM-g",
+    archiveCtaLabel: "大会アーカイブをYouTubeで見る",
+    youtubeVideoId: "Qa00N_YSqpg",
+    archiveEmbedTitle: "MISS GRAND JAPAN & MR GAY JAPAN 2026 FINAL 公式アーカイブ"
   }
 };
 
