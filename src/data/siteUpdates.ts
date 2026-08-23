@@ -18,6 +18,8 @@ export type SiteUpdate = {
   sourceUrl?: string;
   // サイト内で詳しく読めるセクションへのアンカー
   anchor?: string;
+  // 最新情報カードから、そのセクション内のより具体的な位置へ直接飛ばす場合だけ指定する。
+  detailAnchor?: string;
   // 同じ話題の別投稿へ、カード内だけ小さな導線を出すとき使う。featured判定には使わない。
   relatedId?: string;
 };
@@ -82,7 +84,8 @@ const standaloneUpdates: SiteUpdate[] = [
     },
     imageLayout: "contain",
     sourceUrl: "https://x.com/mokoopy/status/2091511016077377631",
-    anchor: "#miss-grand-japan-final"
+    anchor: "#miss-grand-japan-final",
+    detailAnchor: "#miss-grand-japan-final-report"
   },
   {
     id: "iburigakko-popcorn-homecoming-2026-08-17",
