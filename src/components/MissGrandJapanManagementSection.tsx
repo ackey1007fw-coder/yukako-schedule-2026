@@ -240,7 +240,10 @@ function MissGrandJapanFinalReport({
   report: (typeof missGrandJapanFinal)["report"];
 }) {
   return (
-    <div className="border-t border-champagne/25 bg-white">
+    <div
+      id="miss-grand-japan-final-report"
+      className="scroll-mt-32 border-t border-champagne/25 bg-white"
+    >
       <div className="p-6 pb-0 sm:p-8 sm:pb-0">
         <p className="flex flex-wrap items-center gap-2 text-xs font-black uppercase tracking-[0.16em] text-champagneInk">
           <span className="border border-rosefog/45 bg-rosefog/10 px-2.5 py-1 text-rosefog">
