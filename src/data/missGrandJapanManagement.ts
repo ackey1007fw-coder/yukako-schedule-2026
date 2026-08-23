@@ -129,8 +129,7 @@ export const missGrandJapanFinal = {
     photoCredit: "H.Shima",
     body: [
       "MISS GRAND JAPAN 2026、MR GAY JAPAN 2026 FINALが無事に開催。2026年は吉井優花子さんがMCも務め、8月23日の投稿で大会を支えた皆さんへの感謝を伝えました。",
-      "大会の模様は、MISS GRAND JAPAN公式YouTubeでアーカイブ公開中です。",
-      "2025年大会でMISS PEACE賞を受賞し、2026年度から代表補佐／運営マネジメントを担う優花子さん。今回はMCとしてステージに立ちました。"
+      "大会の模様は、MISS GRAND JAPAN公式YouTubeでアーカイブ公開中です。"
     ],
     postUrl: "https://x.com/mokoopy/status/2091511016077377631",
     postCtaLabel: "優花子さんのX投稿を見る",
