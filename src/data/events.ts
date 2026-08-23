@@ -27,7 +27,8 @@ export const events: ScheduleEvent[] = [
       },
       {
         label: "大会アーカイブ（MISS GRAND JAPAN 公式YouTube）",
-        url: "https://www.youtube.com/live/Qa00N_YSqpg?si=ioMqEp0rBtV_lM-g"
+        url: "https://www.youtube.com/live/Qa00N_YSqpg?si=ioMqEp0rBtV_lM-g",
+        kind: "archive"
       },
       {
         label: "MC出演のお知らせ（吉井優花子 X）",
