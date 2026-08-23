@@ -17,9 +17,19 @@ export const events: ScheduleEvent[] = [
     venue: "ヒューリックホール東京（東京都千代田区有楽町2-5-1 有楽町マリオン11階）",
     image: "/images/miss-grand-japan/yukako-mgj-2026-final-mc-2026-08-10.jpg",
     summary:
-      "ミス・グランド・ジャパンとミスター・ゲイ・ジャパン、2つの日本代表が決まるファイナル。吉井優花子が日本語MC、RICOが英語MCを務めます。会場のほか、@missgrandjapan のYouTubeでライブ配信。",
+      "ミス・グランド・ジャパンとミスター・ゲイ・ジャパン、2つの日本代表が決まるファイナル。吉井優花子が日本語MC、RICOが英語MCを務めました。大会の模様は @missgrandjapan のYouTubeでアーカイブ公開中。",
     badges: ["MC", "Miss Grand Japan", "配信あり", "8/10"],
     links: [
+      {
+        label: "開催後報告（吉井優花子 X）",
+        url: "https://x.com/mokoopy/status/2091511016077377631",
+        kind: "sns"
+      },
+      {
+        label: "大会アーカイブ（MISS GRAND JAPAN 公式YouTube）",
+        url: "https://www.youtube.com/live/Qa00N_YSqpg?si=ioMqEp0rBtV_lM-g",
+        kind: "archive"
+      },
       {
         label: "MC出演のお知らせ（吉井優花子 X）",
         url: "https://x.com/mokoopy/status/2086075435927138676",

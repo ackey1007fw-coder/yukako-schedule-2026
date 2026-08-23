@@ -76,8 +76,8 @@ try {
   assert.ok(originalSongsUpdate, "最新情報にオリジナル楽曲①の記事が無い");
   assert.equal(
     latestSiteUpdates[0]?.sourceUrl,
-    "https://www.instagram.com/yoppy_777",
-    "8/21 BABY SHARK LIVE! Storyが最新情報の先頭に出ていない"
+    "https://x.com/mokoopy/status/2091511016077377631",
+    "8/23 MGJ FINAL開催後報告が最新情報の先頭に出ていない"
   );
   assert.equal(originalSongsUpdate.sourceUrl, originalSongsPost.postUrl);
   assert.equal(
@@ -177,8 +177,8 @@ try {
   );
   assert.equal(
     news[0]?.url,
-    "https://www.instagram.com/yoppy_777",
-    "NewsBar先頭が8/21 BABY SHARK LIVE! Storyからずれている"
+    "https://x.com/mokoopy/status/2091511016077377631",
+    "NewsBar先頭が8/23 MGJ FINAL開催後報告からずれている"
   );
   assert.equal(
     news.filter(
@@ -196,8 +196,8 @@ try {
   assert.equal(popcornOriginNews.listedAt, "2026.8.18");
   assert.equal(
     latestNewsListingDate(news),
-    "2026.8.21",
-    "Footerの掲載情報更新日が8/21からずれている"
+    "2026.8.23",
+    "Footerの掲載情報更新日が8/23からずれている"
   );
   const streamingFinalUpdate = latestSiteUpdates.find(
     (update) => update.anchor === "#gojet-streaming-viewing-final-day-2026-08-10"
@@ -925,7 +925,8 @@ try {
   const mgjImages = [
     missGrandJapanFinal.heroImage,
     missGrandJapanFinal.ticketImage,
-    missGrandJapanFinal.yukakoPost.image
+    missGrandJapanFinal.yukakoPost.image,
+    missGrandJapanFinal.report.image
   ];
   for (const image of mgjImages) {
     assert.ok(
@@ -938,6 +939,29 @@ try {
     );
   }
   assert.ok(mgjAfterHtml.includes(missGrandJapanFinal.officialPostUrl));
+  assert.doesNotMatch(mgjAfterHtml, /立ちます。/);
+  assert.match(mgjAfterHtml, /立ちました。/);
+  assert.ok(mgjAfterHtml.includes(missGrandJapanFinal.yukakoPost.contextLabel));
+  assert.ok(mgjAfterHtml.includes(missGrandJapanFinal.yukakoPost.dateLabel));
+  const report = missGrandJapanFinal.report;
+  assert.ok(mgjAfterHtml.includes(report.postUrl), "開催後報告のX投稿への導線が無い");
+  assert.ok(mgjAfterHtml.includes(report.archiveUrl), "開催後報告のYouTubeアーカイブ導線が無い");
+  assert.ok(
+    mgjAfterHtml.includes(`youtube-nocookie.com/embed/${report.youtubeVideoId}`),
+    "開催後報告のYouTube埋め込みが無い"
+  );
+  assert.ok(mgjAfterHtml.includes(report.archiveEmbedTitle), "YouTube埋め込みにtitleが無い");
+  assert.doesNotMatch(mgjAfterHtml, /autoplay/);
+  assert.ok(mgjAfterHtml.includes(`Photo: ${report.photoCredit}`));
+  assert.ok(mgjAfterHtml.includes(report.title));
+  assert.ok(mgjAfterHtml.includes(report.badge));
+  assert.ok(mgjAfterHtml.includes(report.postCtaLabel));
+  assert.ok(mgjAfterHtml.includes(report.archiveCtaLabel));
+  assert.doesNotMatch(
+    mgjAfterHtml,
+    /いいね|リポスト|ブックマーク|表示数/,
+    "変動する反応数を掲載している"
+  );
 
   // 優花子さん本人の投稿ブロック（写真・中身・本人への導線）は開演前後とも出す
   for (const [label, html] of [
@@ -990,22 +1014,29 @@ try {
   );
   assert.equal(mgjUpdate.imageLayout, "contain");
   assert.equal(mgjUpdate.anchor, "#miss-grand-japan-final");
+  const mgjReportUpdate = siteUpdates.find(
+    (update) => update.id === "miss-grand-japan-final-report-2026-08-23"
+  );
+  assert.ok(mgjReportUpdate, "最新情報にMGJ FINAL開催後報告の記事が無い");
+  assert.equal(mgjReportUpdate.date, "2026.8.23 22:00");
+  assert.equal(mgjReportUpdate.image?.src, missGrandJapanFinal.report.image.src);
+  assert.equal(mgjReportUpdate.imageLayout, "contain");
+  assert.equal(mgjReportUpdate.anchor, "#miss-grand-japan-final");
+  assert.equal(mgjReportUpdate.sourceUrl, missGrandJapanFinal.report.postUrl);
+  assert.equal(
+    siteUpdates.filter(
+      (update) => update.sourceUrl?.split("?")[0] === missGrandJapanFinal.report.postUrl
+    ).length,
+    1,
+    "8/23のX投稿が最新情報に重複している"
+  );
   const latestUpdatesHtml = renderToStaticMarkup(createElement(LatestUpdatesSection));
   assert.ok(latestUpdatesHtml.includes("大垣・福山・久留米"));
   assert.ok(latestUpdatesHtml.includes("https://www.instagram.com/yoppy_777"));
-  assert.ok(latestUpdatesHtml.includes(popcornUpdate.image.src));
+  assert.ok(latestUpdatesHtml.includes(missGrandJapanFinal.report.image.src));
+  assert.ok(latestUpdatesHtml.includes(missGrandJapanFinal.report.postUrl));
+  assert.ok(latestUpdatesHtml.includes("MCとして届けたFINAL"));
   assert.ok(latestUpdatesHtml.includes("sm:object-contain"));
-  assert.ok(
-    latestUpdatesHtml.includes(popcornOrigin.sourceUrl),
-    "8/17カードに1/18元投稿のXリンクが無い"
-  );
-  assert.ok(
-    latestUpdatesHtml.includes(popcornOrigin.image.src),
-    "8/17カードに1/18メニュー写真のサムネイルが無い"
-  );
-  assert.ok(latestUpdatesHtml.includes("話題のはじまり"));
-  assert.ok(latestUpdatesHtml.includes("元投稿をXで見る"));
-  assert.ok(latestUpdatesHtml.includes("2026.1.18"));
   // 最新情報の記事と、MGJ FINALセクション内の投稿ブロックは同じX投稿を指す。
   // news.ts にも同じURLの項目があるので、siteUpdates 側で1件に畳まれていることを見る。
   const yukakoPostUrl = missGrandJapanFinal.yukakoPost.postUrl;

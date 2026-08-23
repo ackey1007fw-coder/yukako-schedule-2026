@@ -18,6 +18,8 @@ export type SiteUpdate = {
   sourceUrl?: string;
   // サイト内で詳しく読めるセクションへのアンカー
   anchor?: string;
+  // 最新情報カードから、そのセクション内のより具体的な位置へ直接飛ばす場合だけ指定する。
+  detailAnchor?: string;
   // 同じ話題の別投稿へ、カード内だけ小さな導線を出すとき使う。featured判定には使わない。
   relatedId?: string;
 };
@@ -69,6 +71,22 @@ const sourcePlatform = (url: string) => {
 
 // 専用セクションを持つ単発トピック。本文は各セクションが持つため、ここは見出しと導線のみ。
 const standaloneUpdates: SiteUpdate[] = [
+  {
+    id: "miss-grand-japan-final-report-2026-08-23",
+    date: "2026.8.23 22:00",
+    category: "Miss Grand Japan",
+    title: "MCとして届けたFINAL——MISS GRAND JAPAN 2026を終えて",
+    summary:
+      "MISS GRAND JAPAN 2026 / MR GAY JAPAN 2026 FINALが無事終了。MCを務めた優花子さんがサポートへの感謝を伝え、公式YouTubeの大会アーカイブを案内しました。",
+    image: {
+      src: "/images/miss-grand-japan/yukako-mgj-2026-final-mc-stage-2026-08-10.jpg",
+      alt: "MISS GRAND JAPAN & MR GAY JAPAN 2026 FINALのステージで、ゴールド系のロングドレス姿でマイクを持つ吉井優花子さん"
+    },
+    imageLayout: "contain",
+    sourceUrl: "https://x.com/mokoopy/status/2091511016077377631",
+    anchor: "#miss-grand-japan-final",
+    detailAnchor: "#miss-grand-japan-final-report"
+  },
   {
     id: "iburigakko-popcorn-homecoming-2026-08-17",
     date: "2026.8.17",

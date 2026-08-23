@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ArrowUpRight, Clapperboard, Mic, Music, Quote, ShieldCheck, Ticket } from "lucide-react";
+import { ArrowUpRight, Clapperboard, Mic, Music, Quote, ShieldCheck, Ticket, Youtube } from "lucide-react";
 import {
   missGrandJapanFinal,
   missGrandJapanManagement,
@@ -162,10 +162,14 @@ function MissGrandJapanFinalBlock({ now }: { now: Date }) {
 
           <div className="min-w-0">
             <p className="flex flex-wrap items-center gap-2 text-xs font-black uppercase tracking-[0.16em] text-champagneInk">
+              <span className="border border-champagne/40 bg-white px-2.5 py-1 text-ink/55">
+                {post.contextLabel}
+              </span>
               <span className="inline-flex items-center gap-1 border border-champagne/40 bg-white px-2.5 py-1">
                 <Quote className="h-3.5 w-3.5" aria-hidden="true" />
                 {post.eyebrow}
               </span>
+              <span className="text-ink/45">{post.dateLabel}</span>
             </p>
 
             <h3 className="mt-4 font-display text-xl leading-tight text-ink sm:text-2xl">
@@ -222,6 +226,114 @@ function MissGrandJapanFinalBlock({ now }: { now: Date }) {
               </a>
             </div>
           </div>
+        </div>
+      </div>
+
+      <MissGrandJapanFinalReport report={final.report} />
+    </div>
+  );
+}
+
+function MissGrandJapanFinalReport({
+  report
+}: {
+  report: (typeof missGrandJapanFinal)["report"];
+}) {
+  return (
+    <div
+      id="miss-grand-japan-final-report"
+      className="scroll-mt-32 border-t border-champagne/25 bg-white"
+    >
+      <div className="p-6 pb-0 sm:p-8 sm:pb-0">
+        <p className="flex flex-wrap items-center gap-2 text-xs font-black uppercase tracking-[0.16em] text-champagneInk">
+          <span className="border border-rosefog/45 bg-rosefog/10 px-2.5 py-1 text-rosefog">
+            NEW
+          </span>
+          <span className="inline-flex items-center gap-1 border border-champagne/40 bg-porcelain px-2.5 py-1">
+            <Mic className="h-3.5 w-3.5" aria-hidden="true" />
+            {report.badge}
+          </span>
+          <span className="border border-champagne/40 bg-white px-2.5 py-1">{report.eyebrow}</span>
+          <span className="text-ink/45">{report.dateLabel}</span>
+        </p>
+
+        <h3 className="mt-4 font-display text-xl leading-tight text-ink sm:text-2xl">
+          {report.title}
+        </h3>
+        <p className="mt-2 text-xs font-bold text-champagneInk">大会本番 {report.eventDate}</p>
+      </div>
+
+      <figure className="m-0 mt-5 min-w-0 bg-ink sm:mt-6">
+        <a
+          href={report.image.src}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex justify-center"
+          aria-label="開催後レポートのステージ写真を大きく見る"
+        >
+          <img
+            {...getResponsiveImageProps(report.image.src, "(min-width: 768px) 36rem, 100vw")}
+            alt={report.image.alt}
+            loading="lazy"
+            decoding="async"
+            // 縦写真。顔やドレスを切らない。高さだけ抑えてモバイルで極端に長くしない。
+            className="block h-auto max-h-[min(70vh,36rem)] w-auto max-w-full object-contain"
+          />
+        </a>
+        <figcaption className="bg-white px-6 py-2.5 text-[11px] font-bold leading-5 text-ink/60 sm:px-8">
+          Photo: {report.photoCredit}
+        </figcaption>
+      </figure>
+
+      <div className="p-6 pt-4 sm:p-8 sm:pt-5">
+        <div className="max-w-2xl space-y-3 text-sm leading-7 text-ink/70">
+          {report.body.map((paragraph) => (
+            <p key={paragraph}>{paragraph}</p>
+          ))}
+        </div>
+
+        <div className="mt-6 overflow-hidden border border-champagne/30 bg-ink">
+          <iframe
+            src={`https://www.youtube-nocookie.com/embed/${report.youtubeVideoId}`}
+            title={report.archiveEmbedTitle}
+            loading="lazy"
+            allow="encrypted-media; picture-in-picture; fullscreen"
+            allowFullScreen
+            className="aspect-video w-full"
+          />
+        </div>
+
+        <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          <a
+            href={report.postUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() =>
+              trackPortalEvent("sns_click", {
+                placement: "miss_grand_japan_final_report",
+                item: report.postCtaLabel
+              })
+            }
+            className="yukako-button yukako-button-soft min-h-12 px-5 py-3 text-sm"
+          >
+            <ArrowUpRight className="h-4 w-4 text-champagneInk" aria-hidden="true" />
+            {report.postCtaLabel}
+          </a>
+          <a
+            href={report.archiveUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() =>
+              trackPortalEvent("sns_click", {
+                placement: "miss_grand_japan_final_report",
+                item: report.archiveCtaLabel
+              })
+            }
+            className="yukako-button yukako-button-rose min-h-12 px-5 py-3 text-sm"
+          >
+            <Youtube className="h-4 w-4" aria-hidden="true" />
+            {report.archiveCtaLabel}
+          </a>
         </div>
       </div>
     </div>

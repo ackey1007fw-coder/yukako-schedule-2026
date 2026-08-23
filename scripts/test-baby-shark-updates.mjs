@@ -155,10 +155,13 @@ try {
     assert.equal(event.startAt, startAt);
   }
 
-  assert.equal(news[0]?.date, "2026.8.21");
-  assert.equal(news[0]?.url, instagramUrl);
-  assert.match(news[0]?.text ?? "", /大垣・福山・久留米/);
-  assert.equal(latestNewsListingDate(news), "2026.8.21");
+  const babySharkNews = news.find(
+    (item) => item.date === "2026.8.21" && item.url === instagramUrl
+  );
+  assert.ok(babySharkNews, "news.ts に8/21 BABY SHARK LIVE! Storyが無い");
+  assert.match(babySharkNews.text ?? "", /大垣・福山・久留米/);
+  assert.equal(news[0]?.date, "2026.8.23");
+  assert.equal(latestNewsListingDate(news), "2026.8.23");
   assert.equal(
     siteUpdates.filter(
       (update) =>
@@ -169,8 +172,8 @@ try {
   );
   assert.equal(
     siteUpdates[0]?.sourceUrl,
-    instagramUrl,
-    "8/21 StoryがLatest Updatesの先頭に出ていない"
+    "https://x.com/mokoopy/status/2091511016077377631",
+    "8/23 MGJ FINAL開催後報告がLatest Updatesの先頭に出ていない"
   );
 
   const html = renderToStaticMarkup(createElement(BabySharkLivePage));

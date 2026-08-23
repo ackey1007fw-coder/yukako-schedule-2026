@@ -11,6 +11,13 @@ export type NewsItem = {
 
 export const news: NewsItem[] = [
   {
+    date: "2026.8.23",
+    label: "X",
+    text:
+      "「無事に開催することができました☺️」——MISS GRAND JAPAN 2026 / MR GAY JAPAN 2026 FINAL。MCを務めた吉井優花子さんが感謝を伝え、公式YouTubeの大会アーカイブを案内。",
+    url: "https://x.com/mokoopy/status/2091511016077377631"
+  },
+  {
     date: "2026.8.21",
     label: "Instagram",
     text:
