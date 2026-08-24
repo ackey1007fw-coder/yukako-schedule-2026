@@ -11,6 +11,13 @@ export type NewsItem = {
 
 export const news: NewsItem[] = [
   {
+    date: "2026.8.24",
+    label: "X",
+    text:
+      "#ゆかJET オリジナル楽曲②。メグの『認めたくないのに』。歌うこと自体がvol.1史上初。JETへの想いとあかねへの想いが交錯する曲。",
+    url: "https://x.com/yukako_produce/status/2091831946922045674"
+  },
+  {
     date: "2026.8.23",
     label: "X",
     text:
