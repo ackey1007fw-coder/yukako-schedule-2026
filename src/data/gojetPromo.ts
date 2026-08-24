@@ -152,6 +152,41 @@ export type GojetTeamUpdate = {
 
 export const gojetFeatureUpdates: GojetFeatureUpdate[] = [
   {
+    date: "2026.8.24 19:16",
+    label: "吉井優花子プロデュース公演（@yukako_produce）",
+    title: "『認めたくないのに』｜メグのオリジナル楽曲を公開",
+    body:
+      "終演後に公開された #ゆかJET オリジナル楽曲②は、メグが歌う『認めたくないのに』。\n\nメグが歌うことや、ここまで心境を表現すること自体が vol.1史上初。JETを自分のものだけにしたい気持ちと、本当はあかねのことも大切な気持ちを織り交ぜた曲。\n\n最後の去り際に、一度振り返ってJETとあかねを見る演出がより深くなる——歌詞は歌詞カードに。",
+    caption:
+      "＼ #ゆかJET オリジナル楽曲②✨／\n\n💜メグの歌💜\n\n📚『認めたくないのに』\n\n・メグが歌うことやここまで心境を表現すること自体 vol.1史上初\n・JETを自分のものだけにしたい気持ちと、本当はあかねのことも大切な気持ちを表現\n・最後の去り際に、一度振り返ってJETとあかねを見る演出がより深くなる",
+    postUrl: "https://x.com/yukako_produce/status/2091831946922045674",
+    homepageUrl: "#gojet-finale-report",
+    ctaLabel: "Xでオリジナル楽曲の投稿を見る",
+    homepageLabel: "#ゆかJET 完走レポートを見る",
+    roleTags: [
+      "#ゆかJET",
+      "オリジナル楽曲",
+      "メグ",
+      "認めたくないのに",
+      "吉井優花子さん作",
+      "終演後"
+    ],
+    photos: [
+      {
+        src: "/images/yukajet/2026-08-24-mitometakunai-noni-lyrics.jpg",
+        alt: "#ゆかJET オリジナル楽曲②『認めたくないのに』歌詞カード（作：吉井優花子）"
+      }
+    ],
+    quotedPost: {
+      author: "吉井優花子プロデュース公演",
+      handle: "@yukako_produce",
+      body:
+        "オリジナル楽曲①——美里の『未来は薔薇色』と、対になる『未来は灰色』。",
+      url: "https://x.com/yukako_produce/status/2090048586331676998",
+      urlLabel: "オリジナル楽曲①（美里の歌）を見る"
+    }
+  },
+  {
     date: "2026.8.19 21:09",
     label: "吉井優花子プロデュース公演（@yukako_produce）",
     title: "『未来は薔薇色』⇄『未来は灰色』｜美里のオリジナル楽曲2曲を公開",

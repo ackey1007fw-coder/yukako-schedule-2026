@@ -27,6 +27,9 @@ export type DisplayGojetFeatureUpdate = GojetFeatureUpdate & {
 const NUMAO_MAYUKA_C_GIRLS_20260803_POST_URL =
   "https://x.com/mayuka_pinkcha/status/2084243063141179760";
 
+const ORIGINAL_SONGS_MEG_20260824_POST_URL =
+  "https://x.com/yukako_produce/status/2091831946922045674";
+
 const ORIGINAL_SONGS_MISATO_20260819_POST_URL =
   "https://x.com/yukako_produce/status/2090048586331676998";
 
@@ -225,6 +228,9 @@ const decoratedSourceUpdates: DisplayGojetFeatureUpdate[] = sourceUpdates
 const sakiTrio20260801Update = decoratedSourceUpdates.find(
   (update) => update.postUrl === SAKI_TRIO_20260801_POST_URL
 );
+const originalSongsMeg20260824Update = decoratedSourceUpdates.find(
+  (update) => update.postUrl === ORIGINAL_SONGS_MEG_20260824_POST_URL
+);
 const originalSongsMisato20260819Update = decoratedSourceUpdates.find(
   (update) => update.postUrl === ORIGINAL_SONGS_MISATO_20260819_POST_URL
 );
@@ -390,6 +396,7 @@ export const gojetOriginUpdate = decoratedSourceUpdates.find(
 );
 const remainingSourceUpdates = decoratedSourceUpdates.filter(
   (update) =>
+    update.postUrl !== ORIGINAL_SONGS_MEG_20260824_POST_URL &&
     update.postUrl !== ORIGINAL_SONGS_MISATO_20260819_POST_URL &&
     update.postUrl !== YUKAKO_STREAMING_VIEWING_FINAL_DAY_20260810_POST_URL &&
     update.postUrl !== YUKAKO_STREAMING_MESSAGE_20260809_POST_URL &&
@@ -448,6 +455,16 @@ const remainingSourceUpdates = decoratedSourceUpdates.filter(
 );
 
 // 歌詞カードは縦長。最新情報のサムネイルでも全文が読めるよう contain で見せる。
+const featuredOriginalSongsMeg20260824Update =
+  originalSongsMeg20260824Update
+    ? {
+        ...originalSongsMeg20260824Update,
+        anchorId: "gojet-original-songs-meg-2026-08-24",
+        primaryCta: "post" as const,
+        imageLayout: "contain" as const
+      }
+    : undefined;
+
 const featuredOriginalSongsMisato20260819Update =
   originalSongsMisato20260819Update
     ? {
@@ -1159,6 +1176,8 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
       }
     : undefined;
 
+// 8/24 19:16公演アカウント（オリジナル楽曲②・メグ『認めたくないのに』）→
+// 8/19 21:09公演アカウント（オリジナル楽曲①・美里『未来は薔薇色』⇄『未来は灰色』）→
 // 8/10 10:36優花子さん本人（配信視聴最終日・A/B/C班集合写真）→
 // 8/9優花子さん本人（8/10までの配信・感想投稿の呼びかけ）→
 // 8/8 9:25優花子さん本人（JETの妹・メグ役紹介とA班の歌声）→
@@ -1191,6 +1210,9 @@ const featuredCountdown3DaysUpdate: DisplayGojetFeatureUpdate | undefined =
 // 7/25 23:49優花子さん本人（残り公演の呼びかけ）→ 7/25 22:43三村すみかさん →
 // 7/25 11:31秋乃蒼依さん → 21:24青木杏奈さん → 20:40曽原加絵さん → 19:06来瞳舞夢さんの順で先頭表示する。
 const orderedGojetFeatureUpdates: DisplayGojetFeatureUpdate[] = [
+  ...(featuredOriginalSongsMeg20260824Update
+    ? [featuredOriginalSongsMeg20260824Update]
+    : []),
   ...(featuredOriginalSongsMisato20260819Update
     ? [featuredOriginalSongsMisato20260819Update]
     : []),

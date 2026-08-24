@@ -34,8 +34,66 @@ try {
     "/src/data/siteUpdates.ts"
   );
 
-  // 先頭は8/19 21:09のプロデュース公演アカウント（美里のオリジナル楽曲2曲・歌詞カード2枚）。
-  const originalSongsPost = gojetFeatureUpdates[0];
+  // 先頭は8/24 19:16のプロデュース公演アカウント（メグのオリジナル楽曲・歌詞カード）。
+  const originalSongsMegPost = gojetFeatureUpdates[0];
+  assert.equal(
+    originalSongsMegPost.postUrl,
+    "https://x.com/yukako_produce/status/2091831946922045674"
+  );
+  assert.equal(
+    originalSongsMegPost.anchorId,
+    "gojet-original-songs-meg-2026-08-24"
+  );
+  assert.equal(originalSongsMegPost.date, "2026.8.24 19:16");
+  assert.equal(originalSongsMegPost.imageLayout, "contain");
+  assert.equal(originalSongsMegPost.photos?.length, 1);
+  assert.equal(
+    originalSongsMegPost.photos?.[0]?.src,
+    "/images/yukajet/2026-08-24-mitometakunai-noni-lyrics.jpg"
+  );
+  assert.match(originalSongsMegPost.title, /『認めたくないのに』/);
+  assert.match(originalSongsMegPost.caption, /オリジナル楽曲②/);
+  assert.equal(originalSongsMegPost.quotedPost?.handle, "@yukako_produce");
+  assert.equal(
+    originalSongsMegPost.quotedPost?.url,
+    "https://x.com/yukako_produce/status/2090048586331676998",
+    "引用元はオリジナル楽曲①（美里）へのリンクを残す"
+  );
+  originalSongsMegPost.photos?.forEach((image) => {
+    assert.ok(
+      existsSync(new URL(`../public${image.src}`, import.meta.url)),
+      `オリジナル楽曲②の歌詞カード画像が無い: public${image.src}`
+    );
+  });
+  const originalSongsMegUpdate = latestSiteUpdates.find(
+    (update) => update.anchor === "#gojet-original-songs-meg-2026-08-24"
+  );
+  assert.ok(originalSongsMegUpdate, "最新情報にオリジナル楽曲②の記事が無い");
+  assert.equal(
+    latestSiteUpdates[0]?.sourceUrl,
+    "https://x.com/yukako_produce/status/2091831946922045674",
+    "8/24 オリジナル楽曲②が最新情報の先頭に出ていない"
+  );
+  assert.equal(originalSongsMegUpdate.sourceUrl, originalSongsMegPost.postUrl);
+  assert.equal(
+    originalSongsMegUpdate.imageLayout,
+    "contain",
+    "縦長の歌詞カードが最新情報サムネイルで切り抜かれてしまう"
+  );
+  assert.equal(
+    originalSongsMegUpdate.image?.src,
+    "/images/yukajet/2026-08-24-mitometakunai-noni-lyrics.jpg"
+  );
+  assert.equal(
+    latestSiteUpdates.filter(
+      (update) => update.sourceUrl === originalSongsMegPost.postUrl
+    ).length,
+    1,
+    "オリジナル楽曲②の投稿が最新情報に重複している"
+  );
+
+  // 2件目は8/19 21:09のプロデュース公演アカウント（美里のオリジナル楽曲2曲・歌詞カード2枚）。
+  const originalSongsPost = gojetFeatureUpdates[1];
   assert.equal(
     originalSongsPost.postUrl,
     "https://x.com/yukako_produce/status/2090048586331676998"
@@ -74,11 +132,6 @@ try {
     (update) => update.anchor === "#gojet-original-songs-misato-2026-08-19"
   );
   assert.ok(originalSongsUpdate, "最新情報にオリジナル楽曲①の記事が無い");
-  assert.equal(
-    latestSiteUpdates[0]?.sourceUrl,
-    "https://x.com/mokoopy/status/2091511016077377631",
-    "8/23 MGJ FINAL開催後報告が最新情報の先頭に出ていない"
-  );
   assert.equal(originalSongsUpdate.sourceUrl, originalSongsPost.postUrl);
   assert.equal(
     originalSongsUpdate.imageLayout,
@@ -97,8 +150,8 @@ try {
     "オリジナル楽曲①の投稿が最新情報に重複している"
   );
 
-  // 2件目は8/10 10:36の優花子さん本人（配信視聴最終日・A/B/C班集合写真）。
-  const newestPost = gojetFeatureUpdates[1];
+  // 3件目は8/10 10:36の優花子さん本人（配信視聴最終日・A/B/C班集合写真）。
+  const newestPost = gojetFeatureUpdates[2];
   assert.equal(
     newestPost.postUrl,
     "https://x.com/mokoopy/status/2086627781023285249"
@@ -177,8 +230,16 @@ try {
   );
   assert.equal(
     news[0]?.url,
-    "https://x.com/mokoopy/status/2091511016077377631",
-    "NewsBar先頭が8/23 MGJ FINAL開催後報告からずれている"
+    "https://x.com/yukako_produce/status/2091831946922045674",
+    "NewsBar先頭が8/24 オリジナル楽曲②からずれている"
+  );
+  assert.equal(
+    news.filter(
+      (item) =>
+        item.url === "https://x.com/yukako_produce/status/2091831946922045674"
+    ).length,
+    1,
+    "news.ts にオリジナル楽曲②が重複登録されている"
   );
   assert.equal(
     news.filter(
@@ -196,8 +257,8 @@ try {
   assert.equal(popcornOriginNews.listedAt, "2026.8.18");
   assert.equal(
     latestNewsListingDate(news),
-    "2026.8.23",
-    "Footerの掲載情報更新日が8/23からずれている"
+    "2026.8.24",
+    "Footerの掲載情報更新日が8/24からずれている"
   );
   const streamingFinalUpdate = latestSiteUpdates.find(
     (update) => update.anchor === "#gojet-streaming-viewing-final-day-2026-08-10"
@@ -205,8 +266,8 @@ try {
   assert.ok(streamingFinalUpdate, "最新情報から配信視聴最終日の記事が消えている");
   assert.equal(streamingFinalUpdate.sourceUrl, newestPost.postUrl);
 
-  // 3件目は8/9の優花子さん本人（8/10までの配信・感想投稿の呼びかけ）。
-  const streamingMessagePost = gojetFeatureUpdates[2];
+  // 4件目は8/9の優花子さん本人（8/10までの配信・感想投稿の呼びかけ）。
+  const streamingMessagePost = gojetFeatureUpdates[3];
   assert.equal(
     streamingMessagePost.postUrl,
     "https://x.com/mokoopy/status/2086455342796603727?s=12"
@@ -230,8 +291,8 @@ try {
   assert.ok(streamingMessageUpdate, "最新情報から8/9配信案内の記事が消えている");
   assert.equal(streamingMessageUpdate.sourceUrl, streamingMessagePost.postUrl);
 
-  // 4件目は8/8 9:25の優花子さん本人（JETの妹・メグ役紹介）。
-  const megCastIntroPost = gojetFeatureUpdates[3];
+  // 5件目は8/8 9:25の優花子さん本人（JETの妹・メグ役紹介）。
+  const megCastIntroPost = gojetFeatureUpdates[4];
   assert.equal(
     megCastIntroPost.postUrl,
     "https://x.com/mokoopy/status/2085885102899507709?s=12"
@@ -257,7 +318,7 @@ try {
   assert.equal(megCastIntroUpdate.sourceUrl, megCastIntroPost.postUrl);
 
   // 続いて8/3 21:52の優花子さん本人（配信最終案内）、8/3 20:40の沼尾さん。
-  const previousNewestPost = gojetFeatureUpdates[4];
+  const previousNewestPost = gojetFeatureUpdates[5];
   assert.equal(
     previousNewestPost.postUrl,
     "https://x.com/mokoopy/status/2084261233344016471"
@@ -272,7 +333,7 @@ try {
   );
   assert.match(previousNewestPost.title, /載せていない見所がありすぎる/);
 
-  const newestCastPost = gojetFeatureUpdates[5];
+  const newestCastPost = gojetFeatureUpdates[6];
   assert.equal(
     newestCastPost.postUrl,
     "https://x.com/mayuka_pinkcha/status/2084243063141179760"
@@ -666,18 +727,17 @@ try {
   );
   assert.doesNotMatch(producingAfterHtml, /配信チケットを申し込む/);
   assert.match(producingAfterHtml, /配信チケットの申し込みは終了。視聴は8月10日（月）まで/);
-  // 初期表示は先頭9件。8/19のオリジナル楽曲①が加わり、8/2のC班キャスト引用
-  // （2083894429962977371 / 2083763241877217706）は「もっと見る」の中へ移動した。
+  // 初期表示は先頭9件。8/24のオリジナル楽曲②が加わり、8/2のB班キャスト紹介
+  // （2083895403389555175 / 2083560994169889115）は「もっと見る」の中へ移動した。
   for (const keptUrl of [
+    "https://x.com/yukako_produce/status/2091831946922045674",
     "https://x.com/yukako_produce/status/2090048586331676998",
     "https://x.com/mokoopy/status/2084261233344016471",
     "https://x.com/yukako_produce/status/2084256242856587746",
     "https://x.com/mokoopy/status/2083944200119476437",
     "https://x.com/yukako_produce/status/2083938076452434371",
     "https://x.com/mokoopy/status/2083896120812720278",
-    "https://x.com/yukako_produce/status/2083560056470323653",
-    "https://x.com/mokoopy/status/2083895403389555175",
-    "https://x.com/yukako_produce/status/2083560994169889115"
+    "https://x.com/yukako_produce/status/2083560056470323653"
   ]) {
     assert.ok(
       producingAfterHtml.includes(keptUrl),
