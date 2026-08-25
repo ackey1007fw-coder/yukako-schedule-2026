@@ -230,8 +230,15 @@ try {
   );
   assert.equal(
     news[0]?.url,
-    "https://x.com/yukako_produce/status/2091831946922045674",
-    "NewsBar先頭が8/24 オリジナル楽曲②からずれている"
+    "https://www.instagram.com/reel/DccnlfshIly/",
+    "NewsBar先頭があいぱく® AKITA 2026 Reelからずれている"
+  );
+  assert.equal(
+    news.filter(
+      (item) => item.url === "https://www.instagram.com/reel/DccnlfshIly/"
+    ).length,
+    1,
+    "news.ts にあいぱく Reel が重複登録されている"
   );
   assert.equal(
     news.filter(
@@ -257,8 +264,8 @@ try {
   assert.equal(popcornOriginNews.listedAt, "2026.8.18");
   assert.equal(
     latestNewsListingDate(news),
-    "2026.8.24",
-    "Footerの掲載情報更新日が8/24からずれている"
+    "2026.8.25",
+    "Footerの掲載情報更新日が8/25（あいぱく Reel 掲載）からずれている"
   );
   const streamingFinalUpdate = latestSiteUpdates.find(
     (update) => update.anchor === "#gojet-streaming-viewing-final-day-2026-08-10"
@@ -1091,12 +1098,22 @@ try {
     "8/23のX投稿が最新情報に重複している"
   );
   const latestUpdatesHtml = renderToStaticMarkup(createElement(LatestUpdatesSection));
-  assert.ok(latestUpdatesHtml.includes("大垣・福山・久留米"));
-  assert.ok(latestUpdatesHtml.includes("https://www.instagram.com/yoppy_777"));
+  assert.ok(latestUpdatesHtml.includes("あいぱく"));
+  assert.ok(latestUpdatesHtml.includes("https://www.instagram.com/reel/DccnlfshIly/"));
   assert.ok(latestUpdatesHtml.includes(missGrandJapanFinal.report.image.src));
   assert.ok(latestUpdatesHtml.includes(missGrandJapanFinal.report.postUrl));
   assert.ok(latestUpdatesHtml.includes("MCとして届けたFINAL"));
   assert.ok(latestUpdatesHtml.includes("sm:object-contain"));
+  // BABY SHARK Story は Instagram カテゴリ枠をあいぱく Reel に譲り、「すべて見る」側へ。
+  assert.ok(
+    siteUpdates.some(
+      (update) =>
+        update.date === "2026.8.21" &&
+        update.sourceUrl === "https://www.instagram.com/yoppy_777" &&
+        (update.title ?? "").includes("大垣・福山・久留米")
+    ),
+    "8/21 BABY SHARK Story が最新情報データから消えている"
+  );
   // 最新情報の記事と、MGJ FINALセクション内の投稿ブロックは同じX投稿を指す。
   // news.ts にも同じURLの項目があるので、siteUpdates 側で1件に畳まれていることを見る。
   const yukakoPostUrl = missGrandJapanFinal.yukakoPost.postUrl;
