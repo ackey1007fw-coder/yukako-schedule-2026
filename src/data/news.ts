@@ -12,6 +12,14 @@ export type NewsItem = {
 export const news: NewsItem[] = [
   {
     date: "2026.8.24",
+    label: "Instagram",
+    text:
+      "秋田で「あいぱく® AKITA 2026」へ。生黒ごま・蜜芋・メロン・生チョコのソフト4種。西武秋田店で8/26まで。#PR",
+    url: "https://www.instagram.com/reel/DccnlfshIly/",
+    listedAt: "2026.8.25"
+  },
+  {
+    date: "2026.8.24",
     label: "X",
     text:
       "#ゆかJET オリジナル楽曲②。メグの『認めたくないのに』。歌うこと自体がvol.1史上初。JETへの想いとあかねへの想いが交錯する曲。",

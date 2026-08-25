@@ -205,7 +205,7 @@ const standaloneUpdates: SiteUpdate[] = [
     category: "Instagram",
     title: siteContent.latestInstagram.title,
     summary:
-      "母の日のプレゼントとして贈った、特別なクルーズ旅行のリール動画が公開されました。",
+      "秋田のアイスイベント「あいぱく® AKITA 2026」へ。食べた4種類と、西武秋田店での開催情報はリールで。#PR",
     sourceUrl: siteContent.latestInstagram.reelUrl,
     anchor: "#latest-reel"
   },
