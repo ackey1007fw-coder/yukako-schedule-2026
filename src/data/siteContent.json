@@ -1,10 +1,13 @@
 {
   "latestInstagram": {
-    "publishedAt": "2026.7.11",
-    "reelUrl": "https://www.instagram.com/reel/DaoGHTuSj2U/?igsh=NTFvYzVjdXQ2OHJy",
-    "profileUrl": "https://www.instagram.com/yoppy_777?igsh=MXdkNDZvYnVteTRndw==",
-    "drivePreviewUrl": "https://drive.google.com/file/d/1P1coTEnC2cG2XlN9jbdwHVShoSjV-Akf/preview",
-    "title": "豪華客船 MSC Bellissimaで、6泊7日の船旅へ"
+    "publishedAt": "2026.8.24",
+    "reelUrl": "https://www.instagram.com/reel/DccnlfshIly/",
+    "profileUrl": "https://www.instagram.com/yoppy_777",
+    "videoSrc": "/videos/instagram-aipaku-akita-2026-08-24.mp4",
+    "videoPoster": "/images/yukako-aipaku-akita-reel-poster-2026-08-24.jpg",
+    "title": "秋田で「あいぱく® AKITA 2026」へ",
+    "eventLabel": "あいぱく® AKITA 2026",
+    "isPr": true
   },
   "seasonalOgp": {
     "expiresAfter": "2026-07-27",
