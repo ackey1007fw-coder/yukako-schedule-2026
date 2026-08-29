@@ -295,8 +295,8 @@ try {
   assert.equal(popcornOriginNews.listedAt, "2026.8.18");
   assert.equal(
     latestNewsListingDate(news),
-    "2026.8.25",
-    "Footerの掲載情報更新日が8/25（あいぱく Reel 掲載）からずれている"
+    "2026.8.29",
+    "Footerの掲載情報更新日が8/29（大曲の花火）からずれている"
   );
   const streamingFinalUpdate = latestSiteUpdates.find(
     (update) => update.anchor === "#gojet-streaming-viewing-final-day-2026-08-10"
