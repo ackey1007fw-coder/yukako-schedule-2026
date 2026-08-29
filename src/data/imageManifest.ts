@@ -438,6 +438,8 @@ export const imageManifest = {
   "/images/yukako-mgj-award.jpg": {"width":1111,"height":1516,"widths":[360,480,720,960,1111]},
   "/images/yukako-miss-grand-japan-2025-peace-trophy.jpg": {"width":1536,"height":2048,"widths":[360,480,720,960,1280,1536]},
   "/images/yukako-noodles.jpg": {"width":1536,"height":2048,"widths":[360,480,720,960,1280,1536]},
+  "/images/yukako-omagari-hanabi-hiruhanabi-poster-2026-08-29.jpg": {"width":720,"height":1280,"widths":[360,480,720]},
+  "/images/yukako-omagari-hanabi-komachi-megenai-2026-08-29.jpg": {"width":1500,"height":2000,"widths":[360,480,720,960,1280,1500]},
   "/images/yukako-pink-brown-hair-2026-07-15.jpg": {"width":1170,"height":1560,"widths":[360,480,720,960,1170]},
   "/images/yukako-portrait.jpg": {"width":1366,"height":2048,"widths":[360,480,720,960,1280,1366]},
   "/images/yukako-selfie-2026-07-01.jpg": {"width":1426,"height":2048,"widths":[360,480,720,960,1280,1426]},

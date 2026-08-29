@@ -13,6 +13,10 @@ const driveYukakoPhotos: GalleryPhoto[] = Array.from({ length: 118 }, (_, index)
 });
 
 export const galleryPhotos: GalleryPhoto[] = [
+  {
+    src: "/images/yukako-omagari-hanabi-komachi-megenai-2026-08-29.jpg",
+    alt: "ピンクの『こまちめげない』Tシャツの文字を指さして微笑む吉井優花子さん（2026.8.29 Xより）"
+  },
   ...driveYukakoPhotos,
   { src: "/images/yukako-selfie-2026-07-01.jpg", alt: "白Tシャツにピンクのベストで微笑む吉井優花子さん（2026.7.1 Xより）" },
   { src: "/images/yukako-stage-back.jpg", alt: "舞台上から客席を見つめる吉井優花子さん" },
