@@ -71,8 +71,32 @@ try {
   assert.ok(originalSongsMegUpdate, "最新情報にオリジナル楽曲②の記事が無い");
   assert.equal(
     latestSiteUpdates[0]?.sourceUrl,
-    "https://x.com/yukako_produce/status/2091831946922045674",
-    "8/24 オリジナル楽曲②が最新情報の先頭に出ていない"
+    "https://x.com/mokoopy/status/2093618569678574046",
+    "8/29 大曲の花火が最新情報の先頭に出ていない"
+  );
+  assert.equal(latestSiteUpdates[0]?.id, "omagari-hanabi-2026-08-29");
+  assert.equal(
+    latestSiteUpdates[0]?.image?.src,
+    "/images/yukako-omagari-hanabi-komachi-megenai-2026-08-29.jpg"
+  );
+  assert.equal(latestSiteUpdates[0]?.anchor, "#omagari-hanabi");
+  assert.ok(
+    existsSync(
+      new URL(
+        "../public/images/yukako-omagari-hanabi-komachi-megenai-2026-08-29.jpg",
+        import.meta.url
+      )
+    ),
+    "大曲の花火の本人写真が public/images に無い"
+  );
+  assert.ok(
+    existsSync(
+      new URL(
+        "../public/videos/instagram-omagari-hanabi-hiruhanabi-2026-08-29.mp4",
+        import.meta.url
+      )
+    ),
+    "大曲の花火の昼花火動画が public/videos に無い"
   );
   assert.equal(originalSongsMegUpdate.sourceUrl, originalSongsMegPost.postUrl);
   assert.equal(
@@ -230,8 +254,15 @@ try {
   );
   assert.equal(
     news[0]?.url,
-    "https://www.instagram.com/reel/DccnlfshIly/",
-    "NewsBar先頭があいぱく® AKITA 2026 Reelからずれている"
+    "https://x.com/mokoopy/status/2093618569678574046",
+    "NewsBar先頭が大曲の花火のX投稿からずれている"
+  );
+  assert.equal(
+    news.filter(
+      (item) => item.url === "https://x.com/mokoopy/status/2093618569678574046"
+    ).length,
+    1,
+    "news.ts に大曲の花火投稿が重複登録されている"
   );
   assert.equal(
     news.filter(
@@ -264,8 +295,8 @@ try {
   assert.equal(popcornOriginNews.listedAt, "2026.8.18");
   assert.equal(
     latestNewsListingDate(news),
-    "2026.8.25",
-    "Footerの掲載情報更新日が8/25（あいぱく Reel 掲載）からずれている"
+    "2026.8.29",
+    "Footerの掲載情報更新日が8/29（大曲の花火）からずれている"
   );
   const streamingFinalUpdate = latestSiteUpdates.find(
     (update) => update.anchor === "#gojet-streaming-viewing-final-day-2026-08-10"
@@ -1100,10 +1131,19 @@ try {
   const latestUpdatesHtml = renderToStaticMarkup(createElement(LatestUpdatesSection));
   assert.ok(latestUpdatesHtml.includes("あいぱく"));
   assert.ok(latestUpdatesHtml.includes("https://www.instagram.com/reel/DccnlfshIly/"));
-  assert.ok(latestUpdatesHtml.includes(missGrandJapanFinal.report.image.src));
-  assert.ok(latestUpdatesHtml.includes(missGrandJapanFinal.report.postUrl));
-  assert.ok(latestUpdatesHtml.includes("MCとして届けたFINAL"));
+  assert.ok(latestUpdatesHtml.includes("しったげめんけべ"));
+  assert.ok(
+    latestUpdatesHtml.includes("https://x.com/mokoopy/status/2093618569678574046")
+  );
+  assert.ok(
+    latestUpdatesHtml.includes(
+      "/images/yukako-omagari-hanabi-komachi-megenai-2026-08-29.jpg"
+    )
+  );
   assert.ok(latestUpdatesHtml.includes("sm:object-contain"));
+  // MGJ FINAL開催後報告は、8/29 大曲の花火がX枠を取るためカード3枚の外へ。
+  // データ自体は残っている（上の mgjReportUpdate で確認）。
+
   // BABY SHARK Story は Instagram カテゴリ枠をあいぱく Reel に譲り、「すべて見る」側へ。
   assert.ok(
     siteUpdates.some(

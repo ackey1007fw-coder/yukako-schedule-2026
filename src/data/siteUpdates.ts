@@ -72,6 +72,20 @@ const sourcePlatform = (url: string) => {
 // 専用セクションを持つ単発トピック。本文は各セクションが持つため、ここは見出しと導線のみ。
 const standaloneUpdates: SiteUpdate[] = [
   {
+    id: "omagari-hanabi-2026-08-29",
+    date: "2026.8.29 17:35",
+    category: "X",
+    title: "「しったげめんけべ？✨」——#大曲の花火",
+    summary:
+      "こまちめげないTシャツを指さして。秋田・大曲の昼花火も。",
+    image: {
+      src: "/images/yukako-omagari-hanabi-komachi-megenai-2026-08-29.jpg",
+      alt: "ピンクの『こまちめげない』Tシャツの文字を指さして微笑む吉井優花子さん"
+    },
+    sourceUrl: "https://x.com/mokoopy/status/2093618569678574046",
+    anchor: "#omagari-hanabi"
+  },
+  {
     id: "miss-grand-japan-final-report-2026-08-23",
     date: "2026.8.23 22:00",
     category: "Miss Grand Japan",

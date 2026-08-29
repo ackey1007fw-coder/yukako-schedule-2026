@@ -18,6 +18,7 @@ import { LatestUpdatesSection } from "./components/LatestUpdatesSection";
 import { LinksSection } from "./components/LinksSection";
 import { MissGrandJapanManagementSection } from "./components/MissGrandJapanManagementSection";
 import { NowProducingSection } from "./components/NowProducingSection";
+import { OmagariHanabiSection } from "./components/OmagariHanabiSection";
 import { PhotoGallerySection } from "./components/PhotoGallerySection";
 import { BabySharkLiveSection } from "./components/BabySharkLiveSection";
 import { OjosamaBandSection } from "./components/OjosamaBandSection";
@@ -156,6 +157,9 @@ function App() {
         </nav>
         <SectionReveal>
           <LatestUpdatesSection />
+        </SectionReveal>
+        <SectionReveal>
+          <OmagariHanabiSection />
         </SectionReveal>
 
         {/* 2. これからの出演：予定を確認してから応援へ */}

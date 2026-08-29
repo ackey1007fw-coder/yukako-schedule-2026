@@ -11,6 +11,12 @@ export type NewsItem = {
 
 export const news: NewsItem[] = [
   {
+    date: "2026.8.29",
+    label: "X",
+    text: "「しったげめんけべ？✨」——#大曲の花火。こまちめげないTシャツを指さして。",
+    url: "https://x.com/mokoopy/status/2093618569678574046"
+  },
+  {
     date: "2026.8.24",
     label: "Instagram",
     text:
