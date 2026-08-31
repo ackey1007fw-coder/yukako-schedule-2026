@@ -71,15 +71,28 @@ try {
   assert.ok(originalSongsMegUpdate, "最新情報にオリジナル楽曲②の記事が無い");
   assert.equal(
     latestSiteUpdates[0]?.sourceUrl,
-    "https://x.com/mokoopy/status/2093618569678574046",
-    "8/29 大曲の花火が最新情報の先頭に出ていない"
+    "https://x.com/mokoopy/status/2094455042506178857",
+    "9/1 次プロデュース舞台が最新情報の先頭に出ていない"
   );
-  assert.equal(latestSiteUpdates[0]?.id, "omagari-hanabi-2026-08-29");
+  assert.equal(latestSiteUpdates[0]?.id, "news-0");
+  assert.equal(latestSiteUpdates[0]?.category, "X");
+  assert.match(
+    latestSiteUpdates[0]?.title ?? "",
+    /次のプロデュース舞台/
+  );
+  const omagariUpdate = latestSiteUpdates.find(
+    (update) => update.id === "omagari-hanabi-2026-08-29"
+  );
+  assert.ok(omagariUpdate, "大曲の花火の最新情報が消えている");
   assert.equal(
-    latestSiteUpdates[0]?.image?.src,
+    omagariUpdate.sourceUrl,
+    "https://x.com/mokoopy/status/2093618569678574046"
+  );
+  assert.equal(
+    omagariUpdate.image?.src,
     "/images/yukako-omagari-hanabi-komachi-megenai-2026-08-29.jpg"
   );
-  assert.equal(latestSiteUpdates[0]?.anchor, "#omagari-hanabi");
+  assert.equal(omagariUpdate.anchor, "#omagari-hanabi");
   assert.ok(
     existsSync(
       new URL(
@@ -1131,18 +1144,13 @@ try {
   const latestUpdatesHtml = renderToStaticMarkup(createElement(LatestUpdatesSection));
   assert.ok(latestUpdatesHtml.includes("あいぱく"));
   assert.ok(latestUpdatesHtml.includes("https://www.instagram.com/reel/DccnlfshIly/"));
-  assert.ok(latestUpdatesHtml.includes("しったげめんけべ"));
+  assert.ok(latestUpdatesHtml.includes("こりゃ難しいな"));
   assert.ok(
-    latestUpdatesHtml.includes("https://x.com/mokoopy/status/2093618569678574046")
-  );
-  assert.ok(
-    latestUpdatesHtml.includes(
-      "/images/yukako-omagari-hanabi-komachi-megenai-2026-08-29.jpg"
-    )
+    latestUpdatesHtml.includes("https://x.com/mokoopy/status/2094455042506178857")
   );
   assert.ok(latestUpdatesHtml.includes("sm:object-contain"));
-  // MGJ FINAL開催後報告は、8/29 大曲の花火がX枠を取るためカード3枚の外へ。
-  // データ自体は残っている（上の mgjReportUpdate で確認）。
+  // 9/1 投稿が X 枠を取るため、大曲の花火はカード3枚の外へ。データは上の omagariUpdate で確認。
+  // MGJ FINAL開催後報告も同様（上の mgjReportUpdate で確認）。
 
   // BABY SHARK Story は Instagram カテゴリ枠をあいぱく Reel に譲り、「すべて見る」側へ。
   assert.ok(
