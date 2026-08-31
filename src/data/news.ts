@@ -11,6 +11,12 @@ export type NewsItem = {
 
 export const news: NewsItem[] = [
   {
+    date: "2026.9.1",
+    label: "X",
+    text: "「こりゃ難しいなと思ってる(色々な理由で)」——次のプロデュース舞台。タイトル・会場・日程は未発表。",
+    url: "https://x.com/mokoopy/status/2094455042506178857"
+  },
+  {
     date: "2026.8.29",
     label: "X",
     text: "「しったげめんけべ？✨」——#大曲の花火。こまちめげないTシャツを指さして。",

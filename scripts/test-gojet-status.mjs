@@ -254,8 +254,8 @@ try {
   );
   assert.equal(
     news[0]?.url,
-    "https://x.com/mokoopy/status/2093618569678574046",
-    "NewsBar先頭が大曲の花火のX投稿からずれている"
+    "https://x.com/mokoopy/status/2094455042506178857",
+    "NewsBar先頭が9/1の次プロデュース舞台のX投稿からずれている"
   );
   assert.equal(
     news.filter(
@@ -295,8 +295,8 @@ try {
   assert.equal(popcornOriginNews.listedAt, "2026.8.18");
   assert.equal(
     latestNewsListingDate(news),
-    "2026.8.29",
-    "Footerの掲載情報更新日が8/29（大曲の花火）からずれている"
+    "2026.9.1",
+    "Footerの掲載情報更新日が9/1（次プロデュース舞台）からずれている"
   );
   const streamingFinalUpdate = latestSiteUpdates.find(
     (update) => update.anchor === "#gojet-streaming-viewing-final-day-2026-08-10"
