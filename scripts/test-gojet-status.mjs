@@ -270,6 +270,49 @@ try {
     "https://x.com/mokoopy/status/2094455042506178857",
     "NewsBar先頭が9/1の次プロデュース舞台のX投稿からずれている"
   );
+
+  const { NewsBar } = await server.ssrLoadModule(
+    "/src/components/NewsBar.tsx"
+  );
+  const externalNewsBarHtml = renderToStaticMarkup(createElement(NewsBar));
+  assert.match(
+    externalNewsBarHtml,
+    /target="_blank"/,
+    "外部NEWSリンクが別タブで開かない"
+  );
+  assert.match(
+    externalNewsBarHtml,
+    /rel="noopener noreferrer"/,
+    "外部NEWSリンクのrel属性が不足している"
+  );
+
+  const originalNewsUrl = news[0].url;
+  try {
+    for (const internalUrl of ["#newsbar-internal-test", "/archive/test"]) {
+      news[0].url = internalUrl;
+      const internalNewsBarHtml = renderToStaticMarkup(createElement(NewsBar));
+      assert.match(
+        internalNewsBarHtml,
+        new RegExp(`href="${internalUrl}"`),
+        `内部NEWSリンクのhrefが変わっている: ${internalUrl}`
+      );
+      assert.ok(
+        !internalNewsBarHtml.includes('target="_blank"'),
+        `内部NEWSリンクが別タブで開いてしまう: ${internalUrl}`
+      );
+      assert.ok(
+        !internalNewsBarHtml.includes('rel="noopener noreferrer"'),
+        `内部NEWSリンクに外部向けrel属性が残っている: ${internalUrl}`
+      );
+      assert.match(
+        internalNewsBarHtml,
+        /詳しく見る/,
+        `内部NEWSリンクの案内文が外部向けのまま: ${internalUrl}`
+      );
+    }
+  } finally {
+    news[0].url = originalNewsUrl;
+  }
   assert.equal(
     news.filter(
       (item) => item.url === "https://x.com/mokoopy/status/2093618569678574046"
