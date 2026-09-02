@@ -411,6 +411,7 @@ export const imageManifest = {
   "/images/yukajet/2026-08-19-future-rose-lyrics.jpg": {"width":1169,"height":1740,"widths":[360,480,720,960,1169]},
   "/images/yukajet/2026-08-24-mitometakunai-noni-lyrics.jpg": {"width":1169,"height":1732,"widths":[360,480,720,960,1169]},
   "/images/yukako-aipaku-akita-reel-poster-2026-08-24.jpg": {"width":720,"height":1280,"widths":[360,480,720]},
+  "/images/yukako-akita-inu-shinchan-2026-09-02.jpg": {"width":1536,"height":2048,"widths":[360,480,720,960,1280,1536]},
   "/images/yukako-babyshark-character.jpg": {"width":1600,"height":2048,"widths":[360,480,720,960,1280,1600]},
   "/images/yukako-babyshark-lobster.jpg": {"width":941,"height":1176,"widths":[360,480,720,941]},
   "/images/yukako-babyshark-lobster2.jpg": {"width":1170,"height":1560,"widths":[360,480,720,960,1170]},
