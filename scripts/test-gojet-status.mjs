@@ -80,6 +80,38 @@ try {
     latestSiteUpdates[0]?.title ?? "",
     /秋田・大曲で秋田犬になりました/
   );
+  const akitaInuShinchanUpdate = latestSiteUpdates.find(
+    (update) => update.id === "akita-inu-shinchan-2026-09-02"
+  );
+  assert.ok(akitaInuShinchanUpdate, "9/2 あきたいぬ／しんちゃんの最新情報が消えている");
+  assert.equal(
+    akitaInuShinchanUpdate.sourceUrl,
+    "https://x.com/mokoopy/status/2095128310351385016"
+  );
+  assert.equal(akitaInuShinchanUpdate.category, "X");
+  assert.equal(
+    akitaInuShinchanUpdate.image?.src,
+    "/images/yukako-akita-inu-shinchan-2026-09-02.jpg"
+  );
+  assert.equal(akitaInuShinchanUpdate.anchor, undefined);
+  assert.match(akitaInuShinchanUpdate.title ?? "", /あきたいぬ/);
+  assert.ok(
+    existsSync(
+      new URL(
+        "../public/images/yukako-akita-inu-shinchan-2026-09-02.jpg",
+        import.meta.url
+      )
+    ),
+    "9/2 あきたいぬ／しんちゃんの本人写真が public/images に無い"
+  );
+  assert.equal(
+    latestSiteUpdates.filter(
+      (update) =>
+        update.sourceUrl === "https://x.com/mokoopy/status/2095128310351385016"
+    ).length,
+    1,
+    "9/2 あきたいぬ投稿が最新情報に重複している"
+  );
   assert.equal(latestSiteUpdates[0]?.anchor, "#akita-inu");
   assert.equal(
     latestSiteUpdates[0]?.image?.src,
@@ -342,6 +374,13 @@ try {
       .length,
     1,
     "news.ts に9/3角館が消えている、または重複している"
+  );
+  assert.equal(
+    news.filter(
+      (item) => item.url === "https://x.com/mokoopy/status/2095128310351385016"
+    ).length,
+    1,
+    "news.ts に9/2 あきたいぬ／しんちゃん投稿が消えている、または重複している"
   );
   assert.equal(
     news.filter(
@@ -1217,9 +1256,12 @@ try {
   const latestUpdatesHtml = renderToStaticMarkup(createElement(LatestUpdatesSection));
   assert.ok(latestUpdatesHtml.includes("秋田・大曲で秋田犬になりました"));
   assert.ok(latestUpdatesHtml.includes("#akita-inu"));
-  assert.ok(latestUpdatesHtml.includes("こりゃ難しいな"));
+  assert.ok(latestUpdatesHtml.includes("あきたいぬ"));
   assert.ok(
-    latestUpdatesHtml.includes("https://x.com/mokoopy/status/2094455042506178857")
+    latestUpdatesHtml.includes("https://x.com/mokoopy/status/2095128310351385016")
+  );
+  assert.ok(
+    latestUpdatesHtml.includes("/images/yukako-akita-inu-shinchan-2026-09-02.jpg")
   );
   assert.ok(
     latestUpdatesHtml.includes("https://www.instagram.com/p/Dc6OokunNfi/")
@@ -1268,6 +1310,12 @@ try {
     ),
     "ギャラリーから角館の写真が消えている"
   );
+  assert.ok(
+    galleryPhotos.some(
+      (photo) => photo.src === "/images/yukako-akita-inu-shinchan-2026-09-02.jpg"
+    ),
+    "ギャラリーから 9/2 あきたいぬ／しんちゃんの写真が消えている"
+  );
   // 9/5 秋田犬が Instagram 枠を取るため、角館・あいぱく Reel はカード3枚の外へ。データは残す。
   assert.ok(
     latestSiteUpdates.some(
@@ -1275,7 +1323,8 @@ try {
     ),
     "あいぱく Reel が最新情報データから消えている"
   );
-  // 9/1 投稿が X 枠を取るため、大曲の花火はカード3枚の外へ。データは上の omagariUpdate で確認。
+  // 9/2 投稿が X 枠を取るため、9/1 次プロデュース舞台と大曲の花火はカード3枚の外へ。
+  // データは news / 上の omagariUpdate で確認。
   // MGJ FINAL開催後報告も同様（上の mgjReportUpdate で確認）。
 
   // BABY SHARK Story は Instagram カテゴリ枠をあいぱく Reel に譲り、「すべて見る」側へ。
