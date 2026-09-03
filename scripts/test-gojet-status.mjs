@@ -71,15 +71,50 @@ try {
   assert.ok(originalSongsMegUpdate, "最新情報にオリジナル楽曲②の記事が無い");
   assert.equal(
     latestSiteUpdates[0]?.sourceUrl,
-    "https://x.com/mokoopy/status/2094455042506178857",
-    "9/1 次プロデュース舞台が最新情報の先頭に出ていない"
+    "https://www.instagram.com/p/Dc0xhC_lG95/",
+    "9/3 角館が最新情報の先頭に出ていない"
   );
-  assert.equal(latestSiteUpdates[0]?.id, "news-0");
-  assert.equal(latestSiteUpdates[0]?.category, "X");
+  assert.equal(latestSiteUpdates[0]?.id, "kakunodate-bukeyashiki-2026-09-03");
+  assert.equal(latestSiteUpdates[0]?.category, "Instagram");
   assert.match(
     latestSiteUpdates[0]?.title ?? "",
-    /次のプロデュース舞台/
+    /自然が気持ち良い/
   );
+  assert.equal(latestSiteUpdates[0]?.anchor, "#kakunodate");
+  assert.equal(
+    latestSiteUpdates[0]?.image?.src,
+    "/images/yukako-kakunodate-rickshaw-2026-09-03.jpg"
+  );
+  assert.equal(
+    latestSiteUpdates[0]?.imageLayout,
+    "contain",
+    "角館の縦写真が最新情報サムネイルで切り抜かれてしまう"
+  );
+  assert.equal(
+    latestSiteUpdates.filter(
+      (update) =>
+        update.id === "kakunodate-bukeyashiki-2026-09-03" ||
+        (update.date === "2026.9.3" &&
+          update.sourceUrl === "https://www.instagram.com/p/Dc0xhC_lG95/")
+    ).length,
+    1,
+    "9/3 角館の投稿が最新情報に重複している"
+  );
+  assert.ok(
+    existsSync(
+      new URL(
+        "../public/images/yukako-kakunodate-rickshaw-2026-09-03.jpg",
+        import.meta.url
+      )
+    ),
+    "角館の本人写真が public/images に無い"
+  );
+  const nextProduceUpdate = latestSiteUpdates.find(
+    (update) =>
+      update.sourceUrl === "https://x.com/mokoopy/status/2094455042506178857"
+  );
+  assert.ok(nextProduceUpdate, "9/1 次プロデュース舞台の最新情報が消えている");
+  assert.match(nextProduceUpdate.title ?? "", /次のプロデュース舞台/);
   const omagariUpdate = latestSiteUpdates.find(
     (update) => update.id === "omagari-hanabi-2026-08-29"
   );
@@ -267,8 +302,15 @@ try {
   );
   assert.equal(
     news[0]?.url,
-    "https://x.com/mokoopy/status/2094455042506178857",
-    "NewsBar先頭が9/1の次プロデュース舞台のX投稿からずれている"
+    "https://www.instagram.com/p/Dc0xhC_lG95/",
+    "NewsBar先頭が9/3角館のInstagramからずれている"
+  );
+  assert.equal(news[0]?.date, "2026.9.3");
+  assert.match(news[0]?.text ?? "", /角館/);
+  assert.equal(
+    news.filter((item) => item.date === "2026.9.3").length,
+    1,
+    "news.ts に9/3角館が重複登録されている"
   );
   assert.equal(
     news.filter(
@@ -308,8 +350,8 @@ try {
   assert.equal(popcornOriginNews.listedAt, "2026.8.18");
   assert.equal(
     latestNewsListingDate(news),
-    "2026.9.1",
-    "Footerの掲載情報更新日が9/1（次プロデュース舞台）からずれている"
+    "2026.9.3",
+    "Footerの掲載情報更新日が9/3（角館）からずれている"
   );
   const streamingFinalUpdate = latestSiteUpdates.find(
     (update) => update.anchor === "#gojet-streaming-viewing-final-day-2026-08-10"
@@ -1142,13 +1184,42 @@ try {
     "8/23のX投稿が最新情報に重複している"
   );
   const latestUpdatesHtml = renderToStaticMarkup(createElement(LatestUpdatesSection));
-  assert.ok(latestUpdatesHtml.includes("あいぱく"));
-  assert.ok(latestUpdatesHtml.includes("https://www.instagram.com/reel/DccnlfshIly/"));
+  assert.ok(latestUpdatesHtml.includes("自然が気持ち良い"));
+  assert.ok(latestUpdatesHtml.includes("#kakunodate"));
   assert.ok(latestUpdatesHtml.includes("こりゃ難しいな"));
   assert.ok(
     latestUpdatesHtml.includes("https://x.com/mokoopy/status/2094455042506178857")
   );
+  assert.ok(
+    latestUpdatesHtml.includes("https://www.instagram.com/p/Dc0xhC_lG95/")
+  );
   assert.ok(latestUpdatesHtml.includes("sm:object-contain"));
+  const { KakunodateTourSection } = await server.ssrLoadModule(
+    "/src/components/KakunodateTourSection.tsx"
+  );
+  const kakunodateHtml = renderToStaticMarkup(createElement(KakunodateTourSection));
+  assert.ok(kakunodateHtml.includes("https://www.instagram.com/p/Dc0xhC_lG95/"));
+  assert.ok(
+    kakunodateHtml.includes("https://x.com/mokoopy/status/2095487887819395429"),
+    "角館セクションに X 案内投稿へのリンクが無い"
+  );
+  assert.ok(
+    kakunodateHtml.includes("yukako-kakunodate-forest-smile-2026-09-03.jpg"),
+    "角館セクションに緑の中で微笑む写真が無い"
+  );
+  const { galleryPhotos } = await server.ssrLoadModule("/src/data/photos.ts");
+  assert.equal(
+    galleryPhotos[1]?.src,
+    "/images/yukako-kakunodate-forest-smile-2026-09-03.jpg",
+    "ギャラリー先頭付近に緑の中で微笑む写真が無い"
+  );
+  // 9/3 角館が Instagram 枠を取るため、あいぱく Reel はカード3枚の外へ。データは残す。
+  assert.ok(
+    latestSiteUpdates.some(
+      (update) => update.sourceUrl === "https://www.instagram.com/reel/DccnlfshIly/"
+    ),
+    "あいぱく Reel が最新情報データから消えている"
+  );
   // 9/1 投稿が X 枠を取るため、大曲の花火はカード3枚の外へ。データは上の omagariUpdate で確認。
   // MGJ FINAL開催後報告も同様（上の mgjReportUpdate で確認）。
 

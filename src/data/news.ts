@@ -11,6 +11,12 @@ export type NewsItem = {
 
 export const news: NewsItem[] = [
   {
+    date: "2026.9.3",
+    label: "Instagram",
+    text: "「自然が気持ち良い」——#大曲の花火 ツアー初日。角館の武家屋敷を人力車で。",
+    url: "https://www.instagram.com/p/Dc0xhC_lG95/"
+  },
+  {
     date: "2026.9.1",
     label: "X",
     text: "「こりゃ難しいなと思ってる(色々な理由で)」——次のプロデュース舞台。タイトル・会場・日程は未発表。",

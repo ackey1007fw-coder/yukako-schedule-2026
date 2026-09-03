@@ -46,6 +46,7 @@ const moreItems = [
   { label: "龍馬くん", href: "#ryoma-kun" },
   { label: "プロフィール", href: "#profile" },
   { label: "秋田とのつながり", href: "#akita-roots" },
+  { label: "角館", href: "#kakunodate" },
   { label: "写真", href: "#gallery" },
   { label: "SHOWROOM", href: "#showroom" }
 ];

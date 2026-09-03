@@ -13,6 +13,7 @@ import { GojetTopicsBand } from "./components/GojetTopicsBand";
 import { GojetYellCardSection } from "./components/GojetYellCardSection";
 import { Hero } from "./components/Hero";
 import { HighlightsSection } from "./components/HighlightsSection";
+import { KakunodateTourSection } from "./components/KakunodateTourSection";
 import { LatestInstagramSection } from "./components/LatestInstagramSection";
 import { LatestUpdatesSection } from "./components/LatestUpdatesSection";
 import { LinksSection } from "./components/LinksSection";
@@ -157,6 +158,9 @@ function App() {
         </nav>
         <SectionReveal>
           <LatestUpdatesSection />
+        </SectionReveal>
+        <SectionReveal>
+          <KakunodateTourSection />
         </SectionReveal>
         <SectionReveal>
           <OmagariHanabiSection />
