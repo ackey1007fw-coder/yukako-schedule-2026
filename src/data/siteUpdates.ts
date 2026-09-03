@@ -72,6 +72,21 @@ const sourcePlatform = (url: string) => {
 // 専用セクションを持つ単発トピック。本文は各セクションが持つため、ここは見出しと導線のみ。
 const standaloneUpdates: SiteUpdate[] = [
   {
+    id: "kakunodate-bukeyashiki-2026-09-03",
+    date: "2026.9.3",
+    category: "Instagram",
+    title: "「自然が気持ち良い」——#大曲の花火 ツアー初日",
+    summary:
+      "角館の武家屋敷を人力車で。緑の中での撮影と、顔はめパネルも。",
+    image: {
+      src: "/images/yukako-kakunodate-rickshaw-2026-09-03.jpg",
+      alt: "赤いシートの人力車に並んで座る吉井優花子さん"
+    },
+    imageLayout: "contain",
+    sourceUrl: "https://www.instagram.com/yoppy_777",
+    anchor: "#kakunodate"
+  },
+  {
     id: "omagari-hanabi-2026-08-29",
     date: "2026.8.29 17:35",
     category: "X",
@@ -262,8 +277,17 @@ const knownUrls = new Set(
     .map(normalizeUrl)
 );
 
+const standaloneCoversNews = (item: (typeof news)[number]) =>
+  standaloneUpdates.some(
+    (update) =>
+      Boolean(update.sourceUrl) &&
+      normalizeUrl(update.sourceUrl ?? "") === normalizeUrl(item.url) &&
+      update.date.startsWith(item.date)
+  );
+
 const newsUpdates: SiteUpdate[] = news
   .filter((item) => !knownUrls.has(normalizeUrl(item.url)))
+  .filter((item) => !standaloneCoversNews(item))
   .map((item, index) => ({
     id: `news-${index}`,
     date: item.date,

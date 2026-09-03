@@ -14,6 +14,34 @@ const driveYukakoPhotos: GalleryPhoto[] = Array.from({ length: 118 }, (_, index)
 
 export const galleryPhotos: GalleryPhoto[] = [
   {
+    src: "/images/yukako-kakunodate-portrait-2026-09-03.jpg",
+    alt: "緑の庭園の前で、三つ編みの白いTシャツに青いスカートの吉井優花子さん（2026.9.3 Instagramより）"
+  },
+  {
+    src: "/images/yukako-kakunodate-forest-smile-2026-09-03.jpg",
+    alt: "緑の中で頭に手を添え、振り返って微笑む吉井優花子さん（2026.9.3 Instagramより）"
+  },
+  {
+    src: "/images/yukako-kakunodate-forest-look-up-2026-09-03.jpg",
+    alt: "木漏れ日の緑の中で、手を額に当て空を見上げる吉井優花子さん（2026.9.3 Instagramより）"
+  },
+  {
+    src: "/images/yukako-kakunodate-rickshaw-2026-09-03.jpg",
+    alt: "赤いシートの人力車に並んで座る吉井優花子さん（2026.9.3 Instagramより）"
+  },
+  {
+    src: "/images/yukako-kakunodate-aoyagi-house-2026-09-03.jpg",
+    alt: "茅葺屋根の角館・青柳家の前でパンフレットを手にする吉井優花子さん（2026.9.3 Instagramより）"
+  },
+  {
+    src: "/images/yukako-kakunodate-engawa-2026-09-03.jpg",
+    alt: "武家屋敷の縁側、赤い和傘の下で空を見上げる吉井優花子さん（2026.9.3 Instagramより）"
+  },
+  {
+    src: "/images/yukako-kakunodate-samurai-panel-2026-09-03.jpg",
+    alt: "角館・青柳家の顔はめパネル。赤い甲冑の切り抜きに顔を入れて微笑む吉井優花子さん（2026.9.3 Instagramより）"
+  },
+  {
     src: "/images/yukako-omagari-hanabi-komachi-megenai-2026-08-29.jpg",
     alt: "ピンクの『こまちめげない』Tシャツの文字を指さして微笑む吉井優花子さん（2026.8.29 Xより）"
   },
@@ -39,8 +67,8 @@ export const galleryUpdate: {
   note: string;
   url: string;
 } = {
-  date: "2026.7.5",
-  platform: "Archive",
-  note: "2026年2月〜7月のDrive写真を118枚追加",
-  url: "#photo-selection"
+  date: "2026.9.3",
+  platform: "Instagram",
+  note: "角館・武家屋敷の写真を追加",
+  url: "#kakunodate"
 };
