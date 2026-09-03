@@ -14,7 +14,7 @@ export const news: NewsItem[] = [
     date: "2026.9.3",
     label: "Instagram",
     text: "「自然が気持ち良い」——#大曲の花火 ツアー初日。角館の武家屋敷を人力車で。",
-    url: "https://www.instagram.com/yoppy_777"
+    url: "https://www.instagram.com/p/Dc0xhC_lG95/"
   },
   {
     date: "2026.9.1",

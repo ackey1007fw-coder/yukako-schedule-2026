@@ -83,7 +83,7 @@ const standaloneUpdates: SiteUpdate[] = [
       alt: "赤いシートの人力車に並んで座る吉井優花子さん"
     },
     imageLayout: "contain",
-    sourceUrl: "https://www.instagram.com/yoppy_777",
+    sourceUrl: "https://www.instagram.com/p/Dc0xhC_lG95/",
     anchor: "#kakunodate"
   },
   {

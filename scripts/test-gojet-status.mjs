@@ -71,7 +71,7 @@ try {
   assert.ok(originalSongsMegUpdate, "最新情報にオリジナル楽曲②の記事が無い");
   assert.equal(
     latestSiteUpdates[0]?.sourceUrl,
-    "https://www.instagram.com/yoppy_777",
+    "https://www.instagram.com/p/Dc0xhC_lG95/",
     "9/3 角館が最新情報の先頭に出ていない"
   );
   assert.equal(latestSiteUpdates[0]?.id, "kakunodate-bukeyashiki-2026-09-03");
@@ -95,7 +95,7 @@ try {
       (update) =>
         update.id === "kakunodate-bukeyashiki-2026-09-03" ||
         (update.date === "2026.9.3" &&
-          update.sourceUrl === "https://www.instagram.com/yoppy_777")
+          update.sourceUrl === "https://www.instagram.com/p/Dc0xhC_lG95/")
     ).length,
     1,
     "9/3 角館の投稿が最新情報に重複している"
@@ -302,7 +302,7 @@ try {
   );
   assert.equal(
     news[0]?.url,
-    "https://www.instagram.com/yoppy_777",
+    "https://www.instagram.com/p/Dc0xhC_lG95/",
     "NewsBar先頭が9/3角館のInstagramからずれている"
   );
   assert.equal(news[0]?.date, "2026.9.3");
@@ -1190,7 +1190,29 @@ try {
   assert.ok(
     latestUpdatesHtml.includes("https://x.com/mokoopy/status/2094455042506178857")
   );
+  assert.ok(
+    latestUpdatesHtml.includes("https://www.instagram.com/p/Dc0xhC_lG95/")
+  );
   assert.ok(latestUpdatesHtml.includes("sm:object-contain"));
+  const { KakunodateTourSection } = await server.ssrLoadModule(
+    "/src/components/KakunodateTourSection.tsx"
+  );
+  const kakunodateHtml = renderToStaticMarkup(createElement(KakunodateTourSection));
+  assert.ok(kakunodateHtml.includes("https://www.instagram.com/p/Dc0xhC_lG95/"));
+  assert.ok(
+    kakunodateHtml.includes("https://x.com/mokoopy/status/2095487887819395429"),
+    "角館セクションに X 案内投稿へのリンクが無い"
+  );
+  assert.ok(
+    kakunodateHtml.includes("yukako-kakunodate-forest-smile-2026-09-03.jpg"),
+    "角館セクションに緑の中で微笑む写真が無い"
+  );
+  const { galleryPhotos } = await server.ssrLoadModule("/src/data/photos.ts");
+  assert.equal(
+    galleryPhotos[1]?.src,
+    "/images/yukako-kakunodate-forest-smile-2026-09-03.jpg",
+    "ギャラリー先頭付近に緑の中で微笑む写真が無い"
+  );
   // 9/3 角館が Instagram 枠を取るため、あいぱく Reel はカード3枚の外へ。データは残す。
   assert.ok(
     latestSiteUpdates.some(

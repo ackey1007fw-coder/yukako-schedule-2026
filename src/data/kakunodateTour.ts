@@ -1,6 +1,7 @@
 // 2026.9.3 Instagram @yoppy_777
 // Miss Grand Japan × #名水のDAG米 #大曲の花火 ツアー初日・角館の武家屋敷。
-// 元投稿の個別permalinkは未確認のため、プロフィールURLを出典にする。
+// Instagram permalink: https://www.instagram.com/p/Dc0xhC_lG95/
+// X 案内: https://x.com/mokoopy/status/2095487887819395429
 
 export type KakunodatePhoto = {
   src: string;
@@ -18,6 +19,8 @@ export const kakunodateTour = {
   title: "「自然が気持ち良い」",
   copy: "Miss Grand Japan × #名水のDAG米。#大曲の花火 ツアー初日は、角館の武家屋敷へ。",
   instagramProfileUrl: "https://www.instagram.com/yoppy_777",
+  instagramPostUrl: "https://www.instagram.com/p/Dc0xhC_lG95/",
+  xPostUrl: "https://x.com/mokoopy/status/2095487887819395429",
   missGrandJapanUrl: "https://www.instagram.com/missgrandjapan",
   heroSrc: "/images/yukako-kakunodate-rickshaw-2026-09-03.jpg",
   body: [

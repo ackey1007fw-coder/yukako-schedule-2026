@@ -70,7 +70,7 @@ export function KakunodateTourSection() {
 
             <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <a
-                href={kakunodateTour.instagramProfileUrl}
+                href={kakunodateTour.instagramPostUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() =>
@@ -82,7 +82,21 @@ export function KakunodateTourSection() {
                 className="yukako-button yukako-button-gold inline-flex min-h-12 items-center justify-center gap-1.5 px-5 py-3 text-sm"
               >
                 <ExternalLink className="h-4 w-4" aria-hidden="true" />
-                Instagram @yoppy_777
+                Instagramで見る
+              </a>
+              <a
+                href={kakunodateTour.xPostUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() =>
+                  trackPortalEvent("sns_click", {
+                    kind: "x",
+                    placement: "kakunodate_tour"
+                  })
+                }
+                className="yukako-button inline-flex min-h-12 items-center justify-center border border-champagne bg-white px-5 py-3 text-sm font-bold text-ink transition hover:bg-porcelain"
+              >
+                Xで見る
               </a>
               <a
                 href={kakunodateTour.missGrandJapanUrl}
