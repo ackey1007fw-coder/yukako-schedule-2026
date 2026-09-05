@@ -179,7 +179,9 @@ pnpm test:add-news
 pnpm test:gojet
 pnpm build
 node scripts/check-site-identity.mjs main
-git diff --check
+git diff --check                      # 未ステージの変更
+git diff --cached --check             # ステージ済みの変更
+git diff --check origin/main...HEAD   # コミット済みのPR差分（最新のbaseを取得後）
 ```
 
 - このrepoに一般の `pnpm test` はない。feed等を変更したときは `test:portal-feed` など、対象の実在するテストを追加で実行する。
