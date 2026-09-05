@@ -7,10 +7,18 @@
 > **2026年7月に独立リポジトリになりました**。今は `main` ブランチ＝優花子サイトです。
 > 里季（夏凪里季）サイトは別リポジトリ `ackey1007fw-coder/riri-schedule-2026`。人物・SNS・演目・画像すべて別物なので混同しない。
 
-## ⚠️ 作業前チェック（サイト取り違え防止）
+## 着手時の共通手順
+
+- `git status --short --branch` と `git remote -v` を確認し、他の作業者の未コミット変更を保護する。
+- このガイド → `README.md` → 存在する場合は `docs/AI_HANDOFF.md` → `docs/DECISION_LOG.md` → `docs/AI_PROJECT_MEMORY_SKILL.md` → 対象コード・テストの順に読む。Project Memoryがないrepoへ勝手に導入しない。
+- 最新main、関連merged PR、対象ファイルに触るOpen/Draft PRを確認する。作業を分ける必要があれば別branch / worktreeを使う。
+- 実装の現状はmain / merged PR → 明示的なDecision Log → HANDOFF → 過去チャットの順に確認する。人物事実は出典を確認し、実装にあるだけで裏付け済みとみなさない。
+- 今回の依頼・停止条件を優先する。AGENTSの編集を、その編集PR自身の権限・品質ゲートを緩める根拠にしない。
+
+## 作業前チェック（サイト取り違え防止）
 
 1. `git remote -v` が `yukako-schedule-2026` を指していること。
-2. `grep -m1 name src/data/profile.ts` が **`吉井 優花子`** であること。
+2. `rg -n 'name:' src/data/profile.ts` が **`吉井 優花子`** であること。
    もし **`夏凪 里季`** なら里季サイト＝取り違え。**編集せず報告して止まる**。
 3. CI に Site Identity Guard（`scripts/check-site-identity.mjs`）があり、里季側データの混入を検知する。
 
@@ -36,11 +44,11 @@
 - すべての変更は **`main` から作業ブランチを作成**する。
 - すべての変更は **`main` 宛ての PR** として提出する。
 - **CI がグリーンなら、AIエージェントは自分の判断でマージしてよい**（里季サイト `riri-schedule-2026` と同じ運用）。
-  オーナー「あっきー」の「マージして」を待たない。オーナーは本番を見てから指摘し、必要なら revert PR で戻す。
+  依頼で「Draftのまま」「レビューまで」「マージしない」と指定された場合は、その解除まで進めない。委任された通常変更では、オーナー「あっきー」の「マージして」を待たない。オーナーは本番を見てから指摘し、必要なら revert PR で戻す。
 - マージ前に必ず確認するチェックリスト（1つでも欠けたらマージしない）:
   1. 対象リポジトリが `yukako-schedule-2026`、base が `main`、head が自分の作業ブランチ。
   2. PRがDraftではなく、競合がなく、GitHub上でマージ可能。
-  3. 必須CI・guard・ビルド・型チェックがすべて成功。
+  3. 最新head SHAを確認し、そのheadの必須CI・guard・ビルド・型チェックがすべて成功。旧headの結果を流用しない。
   4. 他エージェント／オーナーからの未解決のレビュー指摘がない。
   5. 掲載した事実（日付・曜日・時刻・会場・引用）の出典を確認済み。
 - マージ後は **Vercel の本番反映（https://yukako-schedule-2026.vercel.app/）まで確認**して報告する。
@@ -87,13 +95,11 @@
 ```bash
 git clone https://github.com/ackey1007fw-coder/yukako-schedule-2026.git
 cd yukako-schedule-2026
-git config user.email "ackey1007fw@gmail.com"
-git config user.name "ackey1007fw-coder"
-pnpm install
+pnpm install --frozen-lockfile
 pnpm dev   # http://127.0.0.1:5173 でローカル確認
 ```
 - パッケージマネージャは **pnpm**（`pnpm-lock.yaml` 基準）。`npm install` で lock を作り直さない。
-- push 認証は**自分の GitHub 認証／トークンを使う**。トークンを会話やファイルに平文で書かない。
+- 認証は接続済みの正規の手段を使う。認証情報を会話・ファイル・ログへ出さず、他人の名前やメールアドレスでgitの作者を設定しない。
 
 ## 技術スタック
 - Vite + React + TypeScript + Tailwind CSS
@@ -107,7 +113,9 @@ pnpm dev   # http://127.0.0.1:5173 でローカル確認
 - `src/data/highlights.ts` … 「これまでの歩み」（受賞・舞台・メディアなど）。**新しい順**に配列。
 - `src/data/archive.ts` … 「YUKAKO STORY ARCHIVE｜活動の軌跡」（`/archive`, `/archive/<slug>`）のファン編集記事。
   追加手順は [docs/ARCHIVE_TEMPLATE.md](./docs/ARCHIVE_TEMPLATE.md) を参照。
-- `src/data/news.ts` … トップのお知らせバー。新しいものを**配列の先頭**に。
+- `src/data/news.ts` … トップのお知らせバー。新しいものを**配列の先頭**に。`date` は元投稿の日付、過去投稿の追加では `listedAt` を掲載日として使う。過去分の表示順は `siteUpdates.ts` も確認する。
+- `src/data/siteUpdates.ts` … 最新情報の集約。元投稿URL・専用カードとの重複を、掲載面ごとに確認する。日付だけで別投稿を一括除外しない。
+- `scripts/add-news.mjs` / `scripts/lib/addNewsCore.mjs` … お知らせ追加の既存CLIと入力・重複検証。引数を確認して使う。
 - `src/data/photos.ts` … フォトギャラリー＋ `galleryUpdate`（更新お知らせ）。**本人のスナップのみ**。
 - `src/data/gojetPromo.ts` … #ゆかJET特集（`NowProducingSection`）の更新カードと告知資料。
   フライヤー・相関図・チケット案内などの**告知画像はこちら**（フォトギャラリーに入れない）。
@@ -119,7 +127,7 @@ pnpm dev   # http://127.0.0.1:5173 でローカル確認
 - `api/showroom.js` … SHOWROOM統計のリアルタイム取得（`room_id=347571`）。
 
 ## 画像を追加する手順
-1. 画像を `public/images/` に保存（命名: `yukako-なにか.jpg`）。動画は `public/videos/`（`tiktok-YYYY-MM-DD.mp4` 等）。
+1. 依頼者提供・掲載承認済みの画像を使い、本人性・出典・利用範囲を確認して `public/images/` に保存（命名: `yukako-なにか.jpg`）。動画は `public/videos/`（`tiktok-YYYY-MM-DD.mp4` 等）。
 2. `pnpm install`（`sharp` が無いと次のスクリプトが落ちる）。
 3. `node scripts/generate-responsive-images.mjs` を実行
  → `public/images/optimized/` に WebP 生成 + `imageManifest.ts` を自動更新。
@@ -146,29 +154,42 @@ pnpm dev   # http://127.0.0.1:5173 でローカル確認
   - `blush` / `lavender` / `lilac`（補助・暖色）、`ink` #312a2e（本文）、`moss`
 - 白・porcelain 背景のテキストは `champagneInk`、`bg-ink` など暗い背景のテキストは `champagne`。逆にすると読めなくなる。
 - ディスプレイフォント: **Playfair Display**。和文は明朝フォールバック。
-- 新規スタイルの直書き hex もこのパレットに合わせる。ピンク/ラベンダー系（里季の色）は使わない。
+- 新規スタイルは既存トークンを優先する。上記の補助色は既存用途に限って維持し、里季サイトの配色へ置き換えない。
 
 ## 絶対ルール
 1. **「公式」「公認」と書かない** →「応援スケジュール」「Fan Schedule」「ファン制作」と表記。
-2. **未確認情報を書かない**（出演歴等は Wikipedia 等で裏取りした事実のみ）。
+2. **未確認情報を書かない**（本人・主催者・媒体等の公開一次情報、またはオーナーが明示確認した事実に限定。二次情報だけで断定しない）。
 3. **優花子さんの顔写真をAI生成しない**（背景・テクスチャのみ可）。
 4. **差分は最小限**。他のエージェント/人の作業を上書きしない。
 5. **画像は切り抜かず全体表示**（上記レスポンシブ方針）。
 6. **里季サイトの内容を持ち込まない**。
 7. **文体ガイドに従う**（上記）。
 
-## 事実メモ（吉井優花子 / よしい ゆかこ / Yoshii Yukako）
-- 1997年4月27日生まれ、秋田県秋田市出身、身長161cm、AB型。
-- 俳優・タレント・モデル・SHOWROOMライバー。元・秋田の公務員。
-- 経歴: 大学卒業後 秋田で公務員 → 2021年 ミス浴衣コンテスト準グランプリ → SHOWROOM開始
-  → 2022年3月退職・上京 → 2022年12月 舞台『悪魔の涙』デビュー → 現在は法律事務所勤務と並行して舞台・プロデュース活動。
-- Baby Shark Live 全国公演シンガー / プロデュース公演 **#ゆかJET**（GO,JET!GO!GO! シリーズ）主宰。
-- 受賞: Miss Grand Japan 2025 MISS PEACE賞 / Miss Cosmo Japan 2024 TOP5。
-- SNS: X個人 `@mokoopy` / Xプロデュース `@yukako_produce` / Instagram `@yoppy_777` /
-  TikTok `@yukakoyoshii` / SHOWROOM「秋田の優花子(ゆかこ)」`room_id=347571`。
-- SNSからの画像自動取得は基本できない（bot遮断・署名URL失効）。画像は手元から `public/images/` に自己ホストする。
+## 人物情報の確認先
 
-## 着手前に
-README と `src/data/*.ts`・`src/components/` を読んで現状を把握してから作業する。
-可能ならローカル（`pnpm dev`）か Vercel のプレビューで見た目を確認してから **PR として提出**する。
-CI がグリーンで上記チェックリストを満たしていれば、オーナーの承認を待たずにマージまで進めてよい。
+プロフィール・経歴・SNS・SHOWROOM設定は `src/data/profile.ts` と各データの出典を確認する。このガイドへ年齢・現在の勤務状況・SNS一覧を複製して固定しない。演目・公演回・会場は `events.ts` の正式表記で照合する。
+
+## 品質ゲートと完了報告
+
+現行 `package.json` / `.github/workflows/ci.yml` に合わせ、次を確認する。
+
+```bash
+pnpm typecheck
+pnpm test:add-news
+pnpm test:gojet
+pnpm build
+node scripts/check-site-identity.mjs main
+git diff --check                      # 未ステージの変更
+git diff --cached --check             # ステージ済みの変更
+git diff --check origin/main...HEAD   # コミット済みのPR差分（最新のbaseを取得後）
+```
+
+- このrepoに一般の `pnpm test` はない。feed等を変更したときは `test:portal-feed` など、対象の実在するテストを追加で実行する。
+- 画像変更時は「画像を追加する手順」、UI変更時は担当指示書の390pxでの確認を通す。文書変更では参照先・コマンド・矛盾・不要差分を確認する。
+- 実行できなかった検証は理由と代替確認を報告する。未実行を成功扱いせず、失敗を隠すためにテストやguardを弱めない。
+- merge後はGitHubの `merged=true`・マージ日時・mainのcommitを確認し、Vercel本番の反映とは分けて報告する。closeだけをmergeと呼ばない。
+- 完了報告には変更目的、PR、検証結果、未確認事項と次の一歩を書く。大きなPhase後は既存HANDOFFを更新し、長期判断は既存Decision Logへ残す。
+
+## 公開リポジトリの境界
+
+私的DM・非公開の人間関係・私的住所・連絡先・家族情報・認証情報を、コード・コメント・PR・文書へ持ち込まない。制作者の職業を特定する公開紹介は避ける。未確認の人物名や撮影場所を写真から補完しない。
