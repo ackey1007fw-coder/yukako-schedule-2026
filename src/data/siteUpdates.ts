@@ -72,6 +72,21 @@ const sourcePlatform = (url: string) => {
 // 専用セクションを持つ単発トピック。本文は各セクションが持つため、ここは見出しと導線のみ。
 const standaloneUpdates: SiteUpdate[] = [
   {
+    id: "akita-inu-omagari-2026-09-05",
+    date: "2026.9.5",
+    category: "Instagram",
+    title: "「秋田・大曲で秋田犬になりました」——#大曲の花火",
+    summary:
+      "秋田犬の被り物で。大仙市は野原ひろしの実家がある設定のまち。しんちゃんともツーショット。",
+    image: {
+      src: "/images/yukako-omagari-shinchan-statue-2026-09-05.jpg",
+      alt: "秋田犬の着ぐるみを着たクレヨンしんちゃんの像の隣で、同じ被り物をして指さす吉井優花子さん"
+    },
+    imageLayout: "contain",
+    sourceUrl: "https://www.instagram.com/p/Dc6OokunNfi/",
+    anchor: "#akita-inu"
+  },
+  {
     id: "kakunodate-bukeyashiki-2026-09-03",
     date: "2026.9.3",
     category: "Instagram",
