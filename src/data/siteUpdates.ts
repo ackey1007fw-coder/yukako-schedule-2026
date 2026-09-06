@@ -206,6 +206,21 @@ const standaloneUpdatesAll: SiteUpdate[] = [
     anchor: "#miss-grand-japan-management"
   },
   {
+    id: "ryoma-kun-promo-2026-05-16",
+    date: "2026.5.16",
+    category: "かわええのう、龍馬くん",
+    title: "SNS宣伝用につくった、B班・C班の稽古場ムービー2本",
+    summary:
+      "初の二役（龍馬・おりょう）と初のプロデュース。宣伝担当として自ら編集した稽古場ムービーが、B班・C班それぞれ1本ずつ。龍馬くんコーナーに動画2本と稽古場スチール13枚。",
+    image: {
+      src: "/images/ryoma-kun-2026/yukako-ryoma-kun-2026-promo-bban-poster.jpg",
+      alt: "紅い着物に刀を差し、腕を組んでカメラを見る坂本龍馬役の吉井優花子さん"
+    },
+    imageLayout: "portrait-preview",
+    sourceUrl: "https://www.instagram.com/p/DYZwPx1mQ2e/",
+    anchor: "#ryoma-kun-promo"
+  },
+  {
     id: "gojet-shiina-message-2026-07-19",
     date: "2026.7.19",
     category: "#ゆかJET",
