@@ -14,6 +14,18 @@ const driveYukakoPhotos: GalleryPhoto[] = Array.from({ length: 118 }, (_, index)
 
 export const galleryPhotos: GalleryPhoto[] = [
   {
+    src: "/images/yukako-omagari-akita-inu-members-2026-09-05.jpg",
+    alt: "秋田犬の被り物をした4人の集合。左から2人目が吉井優花子さん（2026.9.5 Instagramより）"
+  },
+  {
+    src: "/images/yukako-omagari-shinchan-welcome-2026-09-05.jpg",
+    alt: "大仙市のクレヨンしんちゃん歓迎ボードの前、秋田犬の被り物で新幹線モニュメントに座る吉井優花子さん（2026.9.5 Instagramより）"
+  },
+  {
+    src: "/images/yukako-omagari-shinchan-statue-2026-09-05.jpg",
+    alt: "秋田犬の着ぐるみを着たクレヨンしんちゃんの像の隣で、同じ被り物をして指さす吉井優花子さん（2026.9.5 Instagramより）"
+  },
+  {
     src: "/images/yukako-kakunodate-portrait-2026-09-03.jpg",
     alt: "緑の庭園の前で、三つ編みの白いTシャツに青いスカートの吉井優花子さん（2026.9.3 Instagramより）"
   },
@@ -67,8 +79,8 @@ export const galleryUpdate: {
   note: string;
   url: string;
 } = {
-  date: "2026.9.3",
+  date: "2026.9.5",
   platform: "Instagram",
-  note: "角館・武家屋敷の写真を追加",
-  url: "#kakunodate"
+  note: "秋田犬・しんちゃんの写真を追加",
+  url: "#akita-inu"
 };

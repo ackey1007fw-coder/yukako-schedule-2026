@@ -71,35 +71,60 @@ try {
   assert.ok(originalSongsMegUpdate, "最新情報にオリジナル楽曲②の記事が無い");
   assert.equal(
     latestSiteUpdates[0]?.sourceUrl,
-    "https://www.instagram.com/p/Dc0xhC_lG95/",
-    "9/3 角館が最新情報の先頭に出ていない"
+    "https://www.instagram.com/p/Dc6OokunNfi/",
+    "9/5 秋田犬が最新情報の先頭に出ていない"
   );
-  assert.equal(latestSiteUpdates[0]?.id, "kakunodate-bukeyashiki-2026-09-03");
+  assert.equal(latestSiteUpdates[0]?.id, "akita-inu-omagari-2026-09-05");
   assert.equal(latestSiteUpdates[0]?.category, "Instagram");
   assert.match(
     latestSiteUpdates[0]?.title ?? "",
-    /自然が気持ち良い/
+    /秋田・大曲で秋田犬になりました/
   );
-  assert.equal(latestSiteUpdates[0]?.anchor, "#kakunodate");
+  assert.equal(latestSiteUpdates[0]?.anchor, "#akita-inu");
   assert.equal(
     latestSiteUpdates[0]?.image?.src,
-    "/images/yukako-kakunodate-rickshaw-2026-09-03.jpg"
+    "/images/yukako-omagari-shinchan-statue-2026-09-05.jpg"
   );
   assert.equal(
     latestSiteUpdates[0]?.imageLayout,
     "contain",
-    "角館の縦写真が最新情報サムネイルで切り抜かれてしまう"
+    "秋田犬の縦写真が最新情報サムネイルで切り抜かれてしまう"
   );
   assert.equal(
     latestSiteUpdates.filter(
       (update) =>
-        update.id === "kakunodate-bukeyashiki-2026-09-03" ||
-        (update.date === "2026.9.3" &&
-          update.sourceUrl === "https://www.instagram.com/p/Dc0xhC_lG95/")
+        update.id === "akita-inu-omagari-2026-09-05" ||
+        (update.date === "2026.9.5" &&
+          update.sourceUrl === "https://www.instagram.com/p/Dc6OokunNfi/")
     ).length,
     1,
-    "9/3 角館の投稿が最新情報に重複している"
+    "9/5 秋田犬の投稿が最新情報に重複している"
   );
+  assert.equal(
+    latestSiteUpdates.filter(
+      (update) => update.date.startsWith("2026.9.5") && update.anchor === "#akita-inu"
+    ).length,
+    1,
+    "9/5 秋田犬とフォト更新が最新情報で二重になっている"
+  );
+  assert.ok(
+    existsSync(
+      new URL(
+        "../public/images/yukako-omagari-shinchan-statue-2026-09-05.jpg",
+        import.meta.url
+      )
+    ),
+    "秋田犬の本人写真が public/images に無い"
+  );
+  const kakunodateUpdate = latestSiteUpdates.find(
+    (update) => update.id === "kakunodate-bukeyashiki-2026-09-03"
+  );
+  assert.ok(kakunodateUpdate, "9/3 角館の最新情報が消えている");
+  assert.equal(
+    kakunodateUpdate.sourceUrl,
+    "https://www.instagram.com/p/Dc0xhC_lG95/"
+  );
+  assert.equal(kakunodateUpdate.anchor, "#kakunodate");
   assert.ok(
     existsSync(
       new URL(
@@ -302,15 +327,21 @@ try {
   );
   assert.equal(
     news[0]?.url,
-    "https://www.instagram.com/p/Dc0xhC_lG95/",
-    "NewsBar先頭が9/3角館のInstagramからずれている"
+    "https://www.instagram.com/p/Dc6OokunNfi/",
+    "NewsBar先頭が9/5秋田犬のInstagramからずれている"
   );
-  assert.equal(news[0]?.date, "2026.9.3");
-  assert.match(news[0]?.text ?? "", /角館/);
+  assert.equal(news[0]?.date, "2026.9.5");
+  assert.match(news[0]?.text ?? "", /秋田犬/);
   assert.equal(
-    news.filter((item) => item.date === "2026.9.3").length,
+    news.filter((item) => item.date === "2026.9.5").length,
     1,
-    "news.ts に9/3角館が重複登録されている"
+    "news.ts に9/5秋田犬が重複登録されている"
+  );
+  assert.equal(
+    news.filter((item) => item.url === "https://www.instagram.com/p/Dc0xhC_lG95/")
+      .length,
+    1,
+    "news.ts に9/3角館が消えている、または重複している"
   );
   assert.equal(
     news.filter(
@@ -350,8 +381,8 @@ try {
   assert.equal(popcornOriginNews.listedAt, "2026.8.18");
   assert.equal(
     latestNewsListingDate(news),
-    "2026.9.3",
-    "Footerの掲載情報更新日が9/3（角館）からずれている"
+    "2026.9.5",
+    "Footerの掲載情報更新日が9/5（秋田犬）からずれている"
   );
   const streamingFinalUpdate = latestSiteUpdates.find(
     (update) => update.anchor === "#gojet-streaming-viewing-final-day-2026-08-10"
@@ -1184,16 +1215,29 @@ try {
     "8/23のX投稿が最新情報に重複している"
   );
   const latestUpdatesHtml = renderToStaticMarkup(createElement(LatestUpdatesSection));
-  assert.ok(latestUpdatesHtml.includes("自然が気持ち良い"));
-  assert.ok(latestUpdatesHtml.includes("#kakunodate"));
+  assert.ok(latestUpdatesHtml.includes("秋田・大曲で秋田犬になりました"));
+  assert.ok(latestUpdatesHtml.includes("#akita-inu"));
   assert.ok(latestUpdatesHtml.includes("こりゃ難しいな"));
   assert.ok(
     latestUpdatesHtml.includes("https://x.com/mokoopy/status/2094455042506178857")
   );
   assert.ok(
-    latestUpdatesHtml.includes("https://www.instagram.com/p/Dc0xhC_lG95/")
+    latestUpdatesHtml.includes("https://www.instagram.com/p/Dc6OokunNfi/")
   );
   assert.ok(latestUpdatesHtml.includes("sm:object-contain"));
+  const { AkitaInuTourSection } = await server.ssrLoadModule(
+    "/src/components/AkitaInuTourSection.tsx"
+  );
+  const akitaInuHtml = renderToStaticMarkup(createElement(AkitaInuTourSection));
+  assert.ok(akitaInuHtml.includes("https://www.instagram.com/p/Dc6OokunNfi/"));
+  assert.ok(
+    akitaInuHtml.includes("https://x.com/mokoopy/status/2095128310351385016"),
+    "秋田犬セクションに 9/2 X 投稿へのリンクが無い"
+  );
+  assert.ok(
+    akitaInuHtml.includes("yukako-omagari-shinchan-welcome-2026-09-05.jpg"),
+    "秋田犬セクションに大仙市歓迎ボードの写真が無い"
+  );
   const { KakunodateTourSection } = await server.ssrLoadModule(
     "/src/components/KakunodateTourSection.tsx"
   );
@@ -1209,11 +1253,22 @@ try {
   );
   const { galleryPhotos } = await server.ssrLoadModule("/src/data/photos.ts");
   assert.equal(
-    galleryPhotos[1]?.src,
-    "/images/yukako-kakunodate-forest-smile-2026-09-03.jpg",
-    "ギャラリー先頭付近に緑の中で微笑む写真が無い"
+    galleryPhotos[0]?.src,
+    "/images/yukako-omagari-akita-inu-members-2026-09-05.jpg",
+    "ギャラリー先頭に秋田犬ツアーメンバーの写真が無い"
   );
-  // 9/3 角館が Instagram 枠を取るため、あいぱく Reel はカード3枚の外へ。データは残す。
+  assert.equal(
+    galleryPhotos[2]?.src,
+    "/images/yukako-omagari-shinchan-statue-2026-09-05.jpg",
+    "ギャラリー先頭付近にしんちゃん像の写真が無い"
+  );
+  assert.ok(
+    galleryPhotos.some(
+      (photo) => photo.src === "/images/yukako-kakunodate-forest-smile-2026-09-03.jpg"
+    ),
+    "ギャラリーから角館の写真が消えている"
+  );
+  // 9/5 秋田犬が Instagram 枠を取るため、角館・あいぱく Reel はカード3枚の外へ。データは残す。
   assert.ok(
     latestSiteUpdates.some(
       (update) => update.sourceUrl === "https://www.instagram.com/reel/DccnlfshIly/"

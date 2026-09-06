@@ -11,6 +11,12 @@ export type NewsItem = {
 
 export const news: NewsItem[] = [
   {
+    date: "2026.9.5",
+    label: "Instagram",
+    text: "「秋田・大曲で秋田犬になりました」——#大曲の花火 ツアー。しんちゃんともツーショット。",
+    url: "https://www.instagram.com/p/Dc6OokunNfi/"
+  },
+  {
     date: "2026.9.3",
     label: "Instagram",
     text: "「自然が気持ち良い」——#大曲の花火 ツアー初日。角館の武家屋敷を人力車で。",

@@ -70,7 +70,22 @@ const sourcePlatform = (url: string) => {
 };
 
 // 専用セクションを持つ単発トピック。本文は各セクションが持つため、ここは見出しと導線のみ。
-const standaloneUpdates: SiteUpdate[] = [
+const standaloneUpdatesAll: SiteUpdate[] = [
+  {
+    id: "akita-inu-omagari-2026-09-05",
+    date: "2026.9.5",
+    category: "Instagram",
+    title: "「秋田・大曲で秋田犬になりました」——#大曲の花火",
+    summary:
+      "秋田犬の被り物で。大仙市は野原ひろしの実家がある設定のまち。しんちゃんともツーショット。",
+    image: {
+      src: "/images/yukako-omagari-shinchan-statue-2026-09-05.jpg",
+      alt: "秋田犬の着ぐるみを着たクレヨンしんちゃんの像の隣で、同じ被り物をして指さす吉井優花子さん"
+    },
+    imageLayout: "contain",
+    sourceUrl: "https://www.instagram.com/p/Dc6OokunNfi/",
+    anchor: "#akita-inu"
+  },
   {
     id: "kakunodate-bukeyashiki-2026-09-03",
     date: "2026.9.3",
@@ -247,6 +262,19 @@ const standaloneUpdates: SiteUpdate[] = [
     sourceUrl: galleryUpdate.url.startsWith("#") ? undefined : galleryUpdate.url
   }
 ];
+
+// 専用セクションと同じ日付・同じアンカーのフォト更新は、最新情報カードを二重にしない。
+// ギャラリー自体の New 表示は photos.ts の galleryUpdate が担う。
+const standaloneUpdates: SiteUpdate[] = standaloneUpdatesAll.filter((update) => {
+  if (update.id !== "gallery-update") return true;
+  return !standaloneUpdatesAll.some(
+    (other) =>
+      other.id !== "gallery-update" &&
+      Boolean(other.anchor) &&
+      other.anchor === update.anchor &&
+      other.date.startsWith(update.date.split(" ")[0])
+  );
+});
 
 const gojetUpdates: SiteUpdate[] = gojetFeatureUpdates.map((update, index) => ({
   id: update.anchorId ?? `gojet-feature-${index}`,
