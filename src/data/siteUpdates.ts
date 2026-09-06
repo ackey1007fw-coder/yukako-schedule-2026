@@ -70,7 +70,7 @@ const sourcePlatform = (url: string) => {
 };
 
 // 専用セクションを持つ単発トピック。本文は各セクションが持つため、ここは見出しと導線のみ。
-const standaloneUpdates: SiteUpdate[] = [
+const standaloneUpdatesAll: SiteUpdate[] = [
   {
     id: "akita-inu-omagari-2026-09-05",
     date: "2026.9.5",
@@ -262,6 +262,19 @@ const standaloneUpdates: SiteUpdate[] = [
     sourceUrl: galleryUpdate.url.startsWith("#") ? undefined : galleryUpdate.url
   }
 ];
+
+// 専用セクションと同じ日付・同じアンカーのフォト更新は、最新情報カードを二重にしない。
+// ギャラリー自体の New 表示は photos.ts の galleryUpdate が担う。
+const standaloneUpdates: SiteUpdate[] = standaloneUpdatesAll.filter((update) => {
+  if (update.id !== "gallery-update") return true;
+  return !standaloneUpdatesAll.some(
+    (other) =>
+      other.id !== "gallery-update" &&
+      Boolean(other.anchor) &&
+      other.anchor === update.anchor &&
+      other.date.startsWith(update.date.split(" ")[0])
+  );
+});
 
 const gojetUpdates: SiteUpdate[] = gojetFeatureUpdates.map((update, index) => ({
   id: update.anchorId ?? `gojet-feature-${index}`,

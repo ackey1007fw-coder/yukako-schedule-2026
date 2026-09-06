@@ -100,6 +100,13 @@ try {
     1,
     "9/5 秋田犬の投稿が最新情報に重複している"
   );
+  assert.equal(
+    latestSiteUpdates.filter(
+      (update) => update.date.startsWith("2026.9.5") && update.anchor === "#akita-inu"
+    ).length,
+    1,
+    "9/5 秋田犬とフォト更新が最新情報で二重になっている"
+  );
   assert.ok(
     existsSync(
       new URL(
