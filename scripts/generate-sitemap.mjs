@@ -2,18 +2,18 @@ import { writeFile } from "node:fs/promises";
 import { loadArchiveItems, loadBabySharkLive } from "./lib/loadArchiveData.mjs";
 
 const SITE_URL = "https://yukako-schedule-2026.vercel.app";
-const lastmod = new Date().toISOString().slice(0, 10);
+// Build time is not a significant page modification time.
+// Only individual archive records have an explicit dateModified source.
 const archiveItems = await loadArchiveItems();
 const babySharkLive = await loadBabySharkLive();
 
 const urls = [
-  { loc: `${SITE_URL}/`, changefreq: "weekly", priority: "1.0", lastmod },
-  { loc: `${SITE_URL}/archive`, changefreq: "weekly", priority: "0.8", lastmod },
+  { loc: `${SITE_URL}/`, changefreq: "weekly", priority: "1.0" },
+  { loc: `${SITE_URL}/archive`, changefreq: "weekly", priority: "0.8" },
   {
     loc: `${SITE_URL}${babySharkLive.path}`,
     changefreq: "monthly",
-    priority: "0.8",
-    lastmod
+    priority: "0.8"
   },
   ...archiveItems.map((item) => ({
     loc: `${SITE_URL}/archive/${item.slug}`,
@@ -29,8 +29,7 @@ ${urls
   .map(
     (url) => `  <url>
     <loc>${url.loc}</loc>
-    <lastmod>${url.lastmod}</lastmod>
-    <changefreq>${url.changefreq}</changefreq>
+${url.lastmod ? `    <lastmod>${url.lastmod}</lastmod>\n` : ""}    <changefreq>${url.changefreq}</changefreq>
     <priority>${url.priority}</priority>
   </url>`
   )
@@ -39,4 +38,4 @@ ${urls
 `;
 
 await writeFile(new URL("../public/sitemap.xml", import.meta.url), sitemap, "utf8");
-console.log(`sitemap.xml updated: ${lastmod} (${urls.length} urls)`);
+console.log(`sitemap.xml updated (${urls.length} urls)`);
