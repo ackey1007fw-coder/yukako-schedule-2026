@@ -23,6 +23,12 @@ export const news: NewsItem[] = [
     url: "https://www.instagram.com/p/Dc0xhC_lG95/"
   },
   {
+    date: "2026.9.2",
+    label: "X",
+    text: "「あきたいぬ🐕🐾 / しんちゃんと📸」——秋田犬の被り物で、しんちゃん像と。",
+    url: "https://x.com/mokoopy/status/2095128310351385016"
+  },
+  {
     date: "2026.9.1",
     label: "X",
     text: "「こりゃ難しいなと思ってる(色々な理由で)」——次のプロデュース舞台。タイトル・会場・日程は未発表。",

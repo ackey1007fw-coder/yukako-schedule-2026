@@ -102,6 +102,18 @@ const standaloneUpdatesAll: SiteUpdate[] = [
     anchor: "#kakunodate"
   },
   {
+    id: "akita-inu-shinchan-2026-09-02",
+    date: "2026.9.2 21:34",
+    category: "X",
+    title: "「あきたいぬ🐕🐾 / しんちゃんと📸」",
+    summary: "秋田犬の被り物で、しんちゃん像と。",
+    image: {
+      src: "/images/yukako-akita-inu-shinchan-2026-09-02.jpg",
+      alt: "秋田犬の被り物をし、同じ秋田犬の着ぐるみを着たしんちゃん像の横で両手を上げて微笑む吉井優花子さん"
+    },
+    sourceUrl: "https://x.com/mokoopy/status/2095128310351385016"
+  },
+  {
     id: "omagari-hanabi-2026-08-29",
     date: "2026.8.29 17:35",
     category: "X",

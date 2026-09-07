@@ -54,6 +54,10 @@ export const galleryPhotos: GalleryPhoto[] = [
     alt: "角館・青柳家の顔はめパネル。赤い甲冑の切り抜きに顔を入れて微笑む吉井優花子さん（2026.9.3 Instagramより）"
   },
   {
+    src: "/images/yukako-akita-inu-shinchan-2026-09-02.jpg",
+    alt: "秋田犬の被り物をし、同じ秋田犬の着ぐるみを着たしんちゃん像の横で両手を上げて微笑む吉井優花子さん（2026.9.2 Xより）"
+  },
+  {
     src: "/images/yukako-omagari-hanabi-komachi-megenai-2026-08-29.jpg",
     alt: "ピンクの『こまちめげない』Tシャツの文字を指さして微笑む吉井優花子さん（2026.8.29 Xより）"
   },
