@@ -91,6 +91,24 @@ try {
     1,
     "9/11 MISS PEACE振り返りが最新情報に重複している"
   );
+  const novemberStagePlanUpdate = latestSiteUpdates.find(
+    (update) =>
+      update.sourceUrl === "https://x.com/mokoopy/status/2097938152237506926"
+  );
+  assert.ok(novemberStagePlanUpdate, "9/10 11月舞台の案の最新情報が消えている");
+  assert.equal(novemberStagePlanUpdate.date, "2026.9.10");
+  assert.equal(novemberStagePlanUpdate.category, "X");
+  assert.match(novemberStagePlanUpdate.title ?? "", /11月の舞台の案/);
+  assert.match(novemberStagePlanUpdate.title ?? "", /タイトル・会場・開演は未発表/);
+  assert.doesNotMatch(novemberStagePlanUpdate.title ?? "", /11月公演決定/);
+  assert.equal(
+    latestSiteUpdates.filter(
+      (update) =>
+        update.sourceUrl === "https://x.com/mokoopy/status/2097938152237506926"
+    ).length,
+    1,
+    "9/10 11月舞台の案が最新情報に重複している"
+  );
   const akitaInuOmagariUpdate = latestSiteUpdates.find(
     (update) => update.id === "akita-inu-omagari-2026-09-05"
   );
@@ -383,6 +401,22 @@ try {
     news.filter((item) => item.url === "https://x.com/mokoopy/status/2098071506643480765").length,
     1,
     "news.ts に9/11 MISS PEACE振り返りが重複登録されている"
+  );
+  assert.equal(
+    news[1]?.url,
+    "https://x.com/mokoopy/status/2097938152237506926",
+    "NewsBar 2件目が9/10 11月舞台の案からずれている"
+  );
+  assert.equal(news[1]?.date, "2026.9.10");
+  assert.equal(news[1]?.listedAt, "2026.9.11");
+  assert.match(news[1]?.text ?? "", /タイトル・会場・開演は未発表/);
+  assert.doesNotMatch(news[1]?.text ?? "", /11月公演決定/);
+  assert.equal(
+    news.filter(
+      (item) => item.url === "https://x.com/mokoopy/status/2097938152237506926"
+    ).length,
+    1,
+    "news.ts に9/10 11月舞台の案が重複登録されている"
   );
   assert.equal(
     news.filter((item) => item.date === "2026.9.5").length,
@@ -1276,13 +1310,12 @@ try {
   const latestUpdatesHtml = renderToStaticMarkup(createElement(LatestUpdatesSection));
   assert.ok(latestUpdatesHtml.includes("秋田・大曲で秋田犬になりました"));
   assert.ok(latestUpdatesHtml.includes("#akita-inu"));
-  assert.ok(latestUpdatesHtml.includes("あきたいぬ"));
+  assert.ok(latestUpdatesHtml.includes("11月の舞台の案が進んでいる"));
   assert.ok(
-    latestUpdatesHtml.includes("https://x.com/mokoopy/status/2095128310351385016")
+    latestUpdatesHtml.includes("https://x.com/mokoopy/status/2097938152237506926")
   );
-  assert.ok(
-    latestUpdatesHtml.includes("/images/yukako-akita-inu-shinchan-2026-09-02.jpg")
-  );
+  assert.ok(latestUpdatesHtml.includes("タイトル・会場・開演は未発表"));
+  assert.ok(!latestUpdatesHtml.includes("11月公演決定"));
   assert.ok(
     latestUpdatesHtml.includes("https://www.instagram.com/p/Dc6OokunNfi/")
   );
