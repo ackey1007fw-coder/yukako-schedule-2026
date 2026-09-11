@@ -72,6 +72,20 @@ const sourcePlatform = (url: string) => {
 // 専用セクションを持つ単発トピック。本文は各セクションが持つため、ここは見出しと導線のみ。
 const standaloneUpdatesAll: SiteUpdate[] = [
   {
+    id: "miss-grand-japan-miss-peace-reflection-2026-09-11",
+    date: "2026.9.11 00:30",
+    category: "Miss Grand Japan",
+    title: "MISS GRAND JAPANから1年——「MISS PEACE」と今につながる経験",
+    summary:
+      "2025年の日本大会で思いやりの心を評価された「MISS PEACE」。当時の経験や出会った仲間が、今の活力になっていると振り返りました。",
+    image: {
+      src: "/images/yukako-mgj-miss-peace-reflection-2026-09-11.jpg",
+      alt: "赤を基調としたステージ衣装で、片腕を上げてポーズを取る女性"
+    },
+    imageLayout: "contain",
+    sourceUrl: "https://x.com/mokoopy/status/2098071506643480765"
+  },
+  {
     id: "akita-inu-omagari-2026-09-05",
     date: "2026.9.5",
     category: "Instagram",
@@ -275,17 +289,20 @@ const standaloneUpdatesAll: SiteUpdate[] = [
   }
 ];
 
-// 専用セクションと同じ日付・同じアンカーのフォト更新は、最新情報カードを二重にしない。
+// 同じ日付で、同じアンカーまたは同じ元投稿を持つフォト更新は、最新情報カードを二重にしない。
 // ギャラリー自体の New 表示は photos.ts の galleryUpdate が担う。
 const standaloneUpdates: SiteUpdate[] = standaloneUpdatesAll.filter((update) => {
   if (update.id !== "gallery-update") return true;
-  return !standaloneUpdatesAll.some(
-    (other) =>
-      other.id !== "gallery-update" &&
-      Boolean(other.anchor) &&
-      other.anchor === update.anchor &&
-      other.date.startsWith(update.date.split(" ")[0])
-  );
+  return !standaloneUpdatesAll.some((other) => {
+    if (other.id === "gallery-update") return false;
+    if (!other.date.startsWith(update.date.split(" ")[0])) return false;
+    const sameAnchor = Boolean(other.anchor) && other.anchor === update.anchor;
+    const sameSource =
+      Boolean(other.sourceUrl) &&
+      Boolean(update.sourceUrl) &&
+      normalizeUrl(other.sourceUrl ?? "") === normalizeUrl(update.sourceUrl ?? "");
+    return sameAnchor || sameSource;
+  });
 });
 
 const gojetUpdates: SiteUpdate[] = gojetFeatureUpdates.map((update, index) => ({

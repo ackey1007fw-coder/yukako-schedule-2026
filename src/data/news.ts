@@ -11,6 +11,13 @@ export type NewsItem = {
 
 export const news: NewsItem[] = [
   {
+    date: "2026.9.11",
+    label: "X",
+    text:
+      "MISS GRAND JAPAN 2025日本大会から1年。思いやりの心を評価された「MISS PEACE」と、その経験や仲間との出会いが今の活力になっていることを振り返っています。",
+    url: "https://x.com/mokoopy/status/2098071506643480765"
+  },
+  {
     date: "2026.9.5",
     label: "Instagram",
     text: "「秋田・大曲で秋田犬になりました」——#大曲の花火 ツアー。しんちゃんともツーショット。",
