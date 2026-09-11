@@ -71,15 +71,30 @@ try {
   assert.ok(originalSongsMegUpdate, "最新情報にオリジナル楽曲②の記事が無い");
   assert.equal(
     latestSiteUpdates[0]?.sourceUrl,
-    "https://www.instagram.com/p/Dc6OokunNfi/",
-    "9/5 秋田犬が最新情報の先頭に出ていない"
+    "https://x.com/mokoopy/status/2098071506643480765",
+    "9/11 MISS PEACE振り返りが最新情報の先頭に出ていない"
   );
-  assert.equal(latestSiteUpdates[0]?.id, "akita-inu-omagari-2026-09-05");
-  assert.equal(latestSiteUpdates[0]?.category, "Instagram");
-  assert.match(
-    latestSiteUpdates[0]?.title ?? "",
-    /秋田・大曲で秋田犬になりました/
+  assert.equal(latestSiteUpdates[0]?.id, "miss-grand-japan-miss-peace-reflection-2026-09-11");
+  assert.equal(latestSiteUpdates[0]?.category, "Miss Grand Japan");
+  assert.match(latestSiteUpdates[0]?.title ?? "", /MISS PEACE/);
+  assert.equal(
+    latestSiteUpdates[0]?.image?.src,
+    "/images/yukako-mgj-miss-peace-reflection-2026-09-11.jpg"
   );
+  assert.equal(latestSiteUpdates[0]?.imageLayout, "portrait-preview");
+  assert.ok(
+    existsSync(new URL("../public/images/yukako-mgj-miss-peace-reflection-2026-09-11.jpg", import.meta.url)),
+    "9/11 MISS PEACE振り返りの写真が public/images に無い"
+  );
+  assert.equal(
+    latestSiteUpdates.filter((update) => update.sourceUrl === "https://x.com/mokoopy/status/2098071506643480765").length,
+    1,
+    "9/11 MISS PEACE振り返りが最新情報に重複している"
+  );
+  const akitaInuOmagariUpdate = latestSiteUpdates.find(
+    (update) => update.id === "akita-inu-omagari-2026-09-05"
+  );
+  assert.ok(akitaInuOmagariUpdate, "9/5 秋田犬の最新情報が消えている");
   const akitaInuShinchanUpdate = latestSiteUpdates.find(
     (update) => update.id === "akita-inu-shinchan-2026-09-02"
   );
@@ -112,13 +127,13 @@ try {
     1,
     "9/2 あきたいぬ投稿が最新情報に重複している"
   );
-  assert.equal(latestSiteUpdates[0]?.anchor, "#akita-inu");
+  assert.equal(akitaInuOmagariUpdate?.anchor, "#akita-inu");
   assert.equal(
-    latestSiteUpdates[0]?.image?.src,
+    akitaInuOmagariUpdate?.image?.src,
     "/images/yukako-omagari-shinchan-statue-2026-09-05.jpg"
   );
   assert.equal(
-    latestSiteUpdates[0]?.imageLayout,
+    akitaInuOmagariUpdate?.imageLayout,
     "contain",
     "秋田犬の縦写真が最新情報サムネイルで切り抜かれてしまう"
   );
@@ -359,11 +374,16 @@ try {
   );
   assert.equal(
     news[0]?.url,
-    "https://www.instagram.com/p/Dc6OokunNfi/",
-    "NewsBar先頭が9/5秋田犬のInstagramからずれている"
+    "https://x.com/mokoopy/status/2098071506643480765",
+    "NewsBar先頭が9/11 MISS PEACE振り返りからずれている"
   );
-  assert.equal(news[0]?.date, "2026.9.5");
-  assert.match(news[0]?.text ?? "", /秋田犬/);
+  assert.equal(news[0]?.date, "2026.9.11");
+  assert.match(news[0]?.text ?? "", /MISS PEACE/);
+  assert.equal(
+    news.filter((item) => item.url === "https://x.com/mokoopy/status/2098071506643480765").length,
+    1,
+    "news.ts に9/11 MISS PEACE振り返りが重複登録されている"
+  );
   assert.equal(
     news.filter((item) => item.date === "2026.9.5").length,
     1,
@@ -420,8 +440,8 @@ try {
   assert.equal(popcornOriginNews.listedAt, "2026.8.18");
   assert.equal(
     latestNewsListingDate(news),
-    "2026.9.5",
-    "Footerの掲載情報更新日が9/5（秋田犬）からずれている"
+    "2026.9.11",
+    "Footerの掲載情報更新日が9/11（MISS PEACE振り返り）からずれている"
   );
   const streamingFinalUpdate = latestSiteUpdates.find(
     (update) => update.anchor === "#gojet-streaming-viewing-final-day-2026-08-10"
@@ -1296,11 +1316,16 @@ try {
   const { galleryPhotos } = await server.ssrLoadModule("/src/data/photos.ts");
   assert.equal(
     galleryPhotos[0]?.src,
-    "/images/yukako-omagari-akita-inu-members-2026-09-05.jpg",
-    "ギャラリー先頭に秋田犬ツアーメンバーの写真が無い"
+    "/images/yukako-mgj-miss-peace-reflection-2026-09-11.jpg",
+    "ギャラリー先頭に9/11 MISS PEACE振り返りの写真が無い"
   );
   assert.equal(
-    galleryPhotos[2]?.src,
+    galleryPhotos[1]?.src,
+    "/images/yukako-omagari-akita-inu-members-2026-09-05.jpg",
+    "ギャラリー先頭付近から秋田犬ツアーメンバーの写真が消えている"
+  );
+  assert.equal(
+    galleryPhotos[3]?.src,
     "/images/yukako-omagari-shinchan-statue-2026-09-05.jpg",
     "ギャラリー先頭付近にしんちゃん像の写真が無い"
   );
