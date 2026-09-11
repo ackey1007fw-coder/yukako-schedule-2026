@@ -82,7 +82,7 @@ const standaloneUpdatesAll: SiteUpdate[] = [
       src: "/images/yukako-mgj-miss-peace-reflection-2026-09-11.jpg",
       alt: "赤を基調としたステージ衣装で、片腕を上げてポーズを取る女性"
     },
-    imageLayout: "portrait-preview",
+    imageLayout: "contain",
     sourceUrl: "https://x.com/mokoopy/status/2098071506643480765"
   },
   {

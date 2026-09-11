@@ -81,7 +81,7 @@ try {
     latestSiteUpdates[0]?.image?.src,
     "/images/yukako-mgj-miss-peace-reflection-2026-09-11.jpg"
   );
-  assert.equal(latestSiteUpdates[0]?.imageLayout, "portrait-preview");
+  assert.equal(latestSiteUpdates[0]?.imageLayout, "contain");
   assert.ok(
     existsSync(new URL("../public/images/yukako-mgj-miss-peace-reflection-2026-09-11.jpg", import.meta.url)),
     "9/11 MISS PEACE振り返りの写真が public/images に無い"
