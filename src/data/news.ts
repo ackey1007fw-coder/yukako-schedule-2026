@@ -18,6 +18,14 @@ export const news: NewsItem[] = [
     url: "https://x.com/mokoopy/status/2098071506643480765"
   },
   {
+    date: "2026.9.10",
+    label: "X",
+    text:
+      "11月の舞台の案が進んでいる。歌えて真摯に取り組む役者さんを探している。#ゆかJET の投稿もする、と本人が書いている。タイトル・会場・開演は未発表。",
+    url: "https://x.com/mokoopy/status/2097938152237506926",
+    listedAt: "2026.9.11"
+  },
+  {
     date: "2026.9.5",
     label: "Instagram",
     text: "「秋田・大曲で秋田犬になりました」——#大曲の花火 ツアー。しんちゃんともツーショット。",
