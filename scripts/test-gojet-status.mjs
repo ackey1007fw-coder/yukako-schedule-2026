@@ -101,6 +101,8 @@ try {
   assert.match(novemberStagePlanUpdate.title ?? "", /11月の舞台の案/);
   assert.match(novemberStagePlanUpdate.title ?? "", /タイトル・会場・開演は未発表/);
   assert.doesNotMatch(novemberStagePlanUpdate.title ?? "", /11月公演決定/);
+  assert.match(novemberStagePlanUpdate.title ?? "", /#ゆかJET の投稿もこれから。/);
+  assert.doesNotMatch(novemberStagePlanUpdate.title ?? "", /と本人が書いている/);
   assert.equal(
     latestSiteUpdates.filter(
       (update) =>
