@@ -47,7 +47,7 @@ export type PortalFeedCandidate = {
 
 const sourceLimits: Record<SourceDataset, number> = {
   siteUpdates: 8,
-  news: 5,
+  news: 6,
   events: 4,
   archive: 3
 };
@@ -326,10 +326,12 @@ const isTodayOrFutureEvent = (candidate: PortalFeedCandidate, referenceJstDate: 
 
 const dedupeCandidates = (
   candidates: readonly PortalFeedCandidate[],
-  protectedIds = new Set<string>()
+  protectedIds = new Set<string>(),
+  limits?: Readonly<Record<SourceDataset, number>>
 ) => {
   const seen = new Set<string>();
   const kept: PortalFeedCandidate[] = [];
+  const keptByDataset = new Map<SourceDataset, number>();
 
   const prioritized = [...candidates].sort(
     (a, b) =>
@@ -339,10 +341,17 @@ const dedupeCandidates = (
   );
 
   for (const candidate of prioritized) {
+    const isProtected = protectedIds.has(candidate.item.id);
+    const keptCount = keptByDataset.get(candidate.dataset) ?? 0;
+    if (!isProtected && limits && keptCount >= limits[candidate.dataset]) continue;
+
     const duplicate = candidate.dedupeKeys.some((key) => seen.has(key));
     // 重複候補の別キーも記録し、event -> update -> news のような連鎖重複を止める。
     candidate.dedupeKeys.forEach((key) => seen.add(key));
-    if (!duplicate) kept.push(candidate);
+    if (duplicate) continue;
+
+    kept.push(candidate);
+    if (!isProtected) keptByDataset.set(candidate.dataset, keptCount + 1);
   }
 
   return kept;
@@ -363,19 +372,17 @@ export const selectFeedCandidates = (
   const protectedIds = new Set(protectedEvents.map(({ item }) => item.id));
 
   // sourceLimits.events は過去予定の補充上限。今日・未来予定は上限を迂回して全て候補へ入れる。
-  const fallbackCandidates = (Object.keys(sourceLimits) as SourceDataset[]).flatMap(
-    (dataset) =>
-      candidates
-        .filter(
-          (candidate) =>
-            candidate.dataset === dataset &&
-            (dataset !== "events" || !protectedIds.has(candidate.item.id))
-        )
-        .sort(publishedNewestFirst)
-        .slice(0, sourceLimits[dataset])
+  // 重複候補が上限枠を消費しないよう、全候補をdedupeへ渡して採用件数で上限を数える。
+  const fallbackCandidates = candidates.filter(
+    (candidate) =>
+      candidate.dataset !== "events" || !protectedIds.has(candidate.item.id)
   );
 
-  const deduped = dedupeCandidates([...protectedEvents, ...fallbackCandidates], protectedIds);
+  const deduped = dedupeCandidates(
+    [...protectedEvents, ...fallbackCandidates],
+    protectedIds,
+    sourceLimits
+  );
   const dedupedProtectedEvents = deduped
     .filter(({ item }) => protectedIds.has(item.id))
     .sort(
@@ -385,13 +392,29 @@ export const selectFeedCandidates = (
     )
     .slice(0, maxItems);
   const remainingSlots = maxItems - dedupedProtectedEvents.length;
-  const fillers = deduped
+  const nonProtectedFillers = deduped
     .filter(({ item }) => !protectedIds.has(item.id))
-    .sort(publishedNewestFirst)
-    .slice(0, remainingSlots);
+    .sort(publishedNewestFirst);
 
-  // 選択時は今日・未来予定を保護するが、公開配列はcontractどおりpublishedAt降順に戻す。
-  return [...dedupedProtectedEvents, ...fillers].sort(publishedNewestFirst);
+  // feedが十分な枠を持つときは、各データソースを最低1件は残す。
+  // 新しい更新や保護予定が増えても archive/news などの種類ごと丸ごと消えないようにする。
+  const representedDatasets = new Set(dedupedProtectedEvents.map(({ dataset }) => dataset));
+  const requiredFillers = (Object.keys(sourceLimits) as SourceDataset[])
+    .filter((dataset) => !representedDatasets.has(dataset))
+    .flatMap((dataset) => {
+      const candidate = nonProtectedFillers.find((item) => item.dataset === dataset);
+      return candidate ? [candidate] : [];
+    })
+    .slice(0, remainingSlots);
+  const requiredIds = new Set(requiredFillers.map(({ item }) => item.id));
+  const additionalFillers = nonProtectedFillers
+    .filter(({ item }) => !requiredIds.has(item.id))
+    .slice(0, Math.max(0, remainingSlots - requiredFillers.length));
+
+  // 選択時は今日・未来予定とソース多様性を保護するが、公開配列はcontractどおりpublishedAt降順に戻す。
+  return [...dedupedProtectedEvents, ...requiredFillers, ...additionalFillers].sort(
+    publishedNewestFirst
+  );
 };
 
 export const createPortalFeed = (generatedAt = new Date().toISOString()): PortalFeed => {

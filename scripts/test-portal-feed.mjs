@@ -16,7 +16,7 @@ assert.equal(first.version, 1);
 assert.equal(first.personId, "yukako");
 assert.equal(first.siteUrl, "https://yukako-schedule-2026.vercel.app/");
 assert.equal(first.generatedAt, fixedGeneratedAt);
-assert.ok(first.items.length > 0 && first.items.length <= 20);
+assert.equal(first.items.length, 20, "feed must backfill deduped candidates up to 20 items");
 assert.deepEqual(
   first.items.map((item) => item.id),
   second.items.map((item) => item.id),
