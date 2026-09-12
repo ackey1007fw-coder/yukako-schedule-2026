@@ -71,17 +71,21 @@ try {
   assert.ok(originalSongsMegUpdate, "最新情報にオリジナル楽曲②の記事が無い");
   assert.equal(
     latestSiteUpdates[0]?.sourceUrl,
-    "https://x.com/mokoopy/status/2098071506643480765",
-    "9/11 MISS PEACE振り返りが最新情報の先頭に出ていない"
+    "https://www.instagram.com/reel/DIoCRxxTKMS/",
+    "9/12 MGJ NEXT Body & Soulが最新情報の先頭に出ていない"
   );
-  assert.equal(latestSiteUpdates[0]?.id, "miss-grand-japan-miss-peace-reflection-2026-09-11");
-  assert.equal(latestSiteUpdates[0]?.category, "Miss Grand Japan");
-  assert.match(latestSiteUpdates[0]?.title ?? "", /MISS PEACE/);
+  assert.equal(latestSiteUpdates[0]?.id, "mgj-next-body-and-soul-2026-09-12");
+  assert.equal(latestSiteUpdates[0]?.category, "MGJ NEXT");
+  assert.match(latestSiteUpdates[0]?.title ?? "", /Body & Soul/);
   assert.equal(
     latestSiteUpdates[0]?.image?.src,
-    "/images/yukako-mgj-miss-peace-reflection-2026-09-11.jpg"
+    "/images/yukako-mgj-next-body-and-soul-2026-09-12.jpg"
   );
   assert.equal(latestSiteUpdates[0]?.imageLayout, "contain");
+  const missPeaceUpdate = latestSiteUpdates.find(
+    (update) => update.id === "miss-grand-japan-miss-peace-reflection-2026-09-11"
+  );
+  assert.ok(missPeaceUpdate, "9/11 MISS PEACE振り返りが最新情報から消えている");
   assert.ok(
     existsSync(new URL("../public/images/yukako-mgj-miss-peace-reflection-2026-09-11.jpg", import.meta.url)),
     "9/11 MISS PEACE振り返りの写真が public/images に無い"
@@ -1310,17 +1314,15 @@ try {
     "8/23のX投稿が最新情報に重複している"
   );
   const latestUpdatesHtml = renderToStaticMarkup(createElement(LatestUpdatesSection));
-  assert.ok(latestUpdatesHtml.includes("秋田・大曲で秋田犬になりました"));
-  assert.ok(latestUpdatesHtml.includes("#akita-inu"));
+  assert.ok(latestUpdatesHtml.includes("Body &amp; Soul"));
+  assert.ok(latestUpdatesHtml.includes("#latest-reel"));
+  assert.ok(latestUpdatesHtml.includes("https://www.instagram.com/reel/DIoCRxxTKMS/"));
+  assert.ok(latestUpdatesHtml.includes("MISS PEACE"));
+  assert.ok(latestUpdatesHtml.includes("https://x.com/mokoopy/status/2098071506643480765"));
   assert.ok(latestUpdatesHtml.includes("11月の舞台の案が進んでいる"));
-  assert.ok(
-    latestUpdatesHtml.includes("https://x.com/mokoopy/status/2097938152237506926")
-  );
+  assert.ok(latestUpdatesHtml.includes("https://x.com/mokoopy/status/2097938152237506926"));
   assert.ok(latestUpdatesHtml.includes("タイトル・会場・開演は未発表"));
   assert.ok(!latestUpdatesHtml.includes("11月公演決定"));
-  assert.ok(
-    latestUpdatesHtml.includes("https://www.instagram.com/p/Dc6OokunNfi/")
-  );
   assert.ok(latestUpdatesHtml.includes("sm:object-contain"));
   const { AkitaInuTourSection } = await server.ssrLoadModule(
     "/src/components/AkitaInuTourSection.tsx"

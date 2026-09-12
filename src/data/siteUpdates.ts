@@ -270,6 +270,21 @@ const standaloneUpdatesAll: SiteUpdate[] = [
     anchor: "#gojet-yell-card"
   },
   {
+    id: "mgj-next-body-and-soul-2026-09-12",
+    date: "2026.9.12",
+    category: "MGJ NEXT",
+    title: "MGJ NEXTで『Body & Soul』——3人のダンスRepost",
+    summary:
+      "TaTaさん、吉井優花子さん、千葉サラさんの3人でSPEED『Body & Soul』。元投稿は2025年4月19日。",
+    image: {
+      src: "/images/yukako-mgj-next-body-and-soul-2026-09-12.jpg",
+      alt: "スタジオで3人の女性がダンスする縦位置の動画サムネイル"
+    },
+    imageLayout: "contain",
+    sourceUrl: "https://www.instagram.com/reel/DIoCRxxTKMS/",
+    anchor: "#latest-reel"
+  },
+  {
     id: "latest-instagram-reel",
     date: siteContent.latestInstagram.publishedAt,
     category: "Instagram",
@@ -277,7 +292,7 @@ const standaloneUpdatesAll: SiteUpdate[] = [
     summary:
       "秋田のアイスイベント「あいぱく® AKITA 2026」へ。食べた4種類と、西武秋田店での開催情報はリールで。#PR",
     sourceUrl: siteContent.latestInstagram.reelUrl,
-    anchor: "#latest-reel"
+    anchor: "#previous-instagram-reel"
   },
   {
     id: "gallery-update",

@@ -17,7 +17,7 @@ const {
 const mgjNextDance = {
   videoSrc: "/videos/yukako-mgj-next-body-and-soul-2026-09-12.mp4",
   videoPoster: "/images/yukako-mgj-next-body-and-soul-2026-09-12.jpg",
-  sourceProfileUrl: "https://www.instagram.com/tata_diet711_official/",
+  sourcePostUrl: "https://www.instagram.com/reel/DIoCRxxTKMS/",
   yukakoProfileUrl: "https://www.instagram.com/yoppy_777/"
 };
 
@@ -28,7 +28,7 @@ export function LatestInstagramSection() {
         <SectionHeader
           kicker="Instagram / MGJ NEXT"
           title="MGJ NEXTで「Body & Soul」"
-          copy="MGJ NEXTの3人が、SPEED「Body & Soul」をダンス。新しい挑戦を楽しむメッセージと一緒に、サイト内でも動画を見られます。"
+          copy="大会後のキャリアと発信をつなぐMGJ NEXT。活動のひとコマを、確認できる元投稿への導線と一緒に残します。"
         />
 
         <article className="yukako-card overflow-hidden border-rosefog/25 bg-porcelain shadow-paper lg:grid lg:grid-cols-2">
@@ -51,7 +51,7 @@ export function LatestInstagramSection() {
             <div className="flex flex-wrap items-center gap-2 text-xs font-black uppercase tracking-[0.14em] text-champagneInk">
               <span className="border border-champagne/45 bg-white px-3 py-1.5">MGJ NEXT</span>
               <span className="border border-rosefog/35 bg-[#fff1f6] px-3 py-1.5 text-[#8d4260]">Instagram Repost</span>
-              <span className="text-ink/45">2026.9.12 掲載</span>
+              <span className="text-ink/45">元投稿 2025.4.19 / 掲載 2026.9.12</span>
             </div>
 
             <p className="mt-6 text-sm font-bold text-champagneInk">#SPEED_ボディソRemixチャレンジ</p>
@@ -66,13 +66,13 @@ export function LatestInstagramSection() {
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <a
-                href={mgjNextDance.sourceProfileUrl}
+                href={mgjNextDance.sourcePostUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => trackPortalEvent("sns_click", { kind: "instagram", placement: "mgj_next_source" })}
                 className="yukako-button yukako-button-gold min-h-12 px-5 py-3 text-sm"
               >
-                出典 @tata_diet711_official →
+                元投稿を見る →
               </a>
               <a
                 href={mgjNextDance.yukakoProfileUrl}
@@ -86,12 +86,12 @@ export function LatestInstagramSection() {
             </div>
 
             <p className="mt-5 text-xs leading-6 text-ink/50">
-              公開投稿の動画を掲載。元投稿の個別URLは未確認のため、出典アカウントへリンクしています。
+              元投稿は @tata_diet711_official の2025年4月19日投稿。2026年9月12日にRepostとして共有された動画をサイトにもアーカイブしています。
             </p>
           </div>
         </article>
 
-        <div className="mt-14 border-t border-rosefog/25 pt-12">
+        <div id="previous-instagram-reel" className="mt-14 scroll-mt-32 border-t border-rosefog/25 pt-12">
           <p className="text-center text-xs font-black uppercase tracking-[0.18em] text-ink/45">
             Previous Reel
           </p>
