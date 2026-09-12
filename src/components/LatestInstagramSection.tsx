@@ -28,7 +28,7 @@ export function LatestInstagramSection() {
         <SectionHeader
           kicker="Instagram / MGJ NEXT"
           title="MGJ NEXTで「Body & Soul」"
-          copy="大会後のキャリアと発信をつなぐMGJ NEXT。活動のひとコマを、確認できる元投稿への導線と一緒に残します。"
+          copy="大会のその先へ。Miss Grand Japan・Mr Gay JapanのOG・OBがつなぐ、新しい挑戦。"
         />
 
         <article className="yukako-card overflow-hidden border-rosefog/25 bg-porcelain shadow-paper lg:grid lg:grid-cols-2">

@@ -278,7 +278,7 @@ const standaloneUpdatesAll: SiteUpdate[] = [
       "TaTaさん、吉井優花子さん、千葉サラさんの3人でSPEED『Body & Soul』。元投稿は2025年4月19日。",
     image: {
       src: "/images/yukako-mgj-next-body-and-soul-2026-09-12.jpg",
-      alt: "スタジオで3人の女性がダンスする縦位置の動画サムネイル"
+      alt: "スタジオで3人がダンスする縦位置の動画サムネイル"
     },
     imageLayout: "contain",
     sourceUrl: "https://www.instagram.com/reel/DIoCRxxTKMS/",
