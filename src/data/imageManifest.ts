@@ -446,6 +446,7 @@ export const imageManifest = {
   "/images/yukako-kakunodate-samurai-panel-2026-09-03.jpg": {"width":1500,"height":2000,"widths":[360,480,720,960,1280,1500]},
   "/images/yukako-mgj-award.jpg": {"width":1111,"height":1516,"widths":[360,480,720,960,1111]},
   "/images/yukako-mgj-miss-peace-reflection-2026-09-11.jpg": {"width":1399,"height":2048,"widths":[360,480,720,960,1280,1399]},
+  "/images/yukako-mgj-next-body-and-soul-2026-09-12.jpg": {"width":320,"height":568,"widths":[320]},
   "/images/yukako-miss-grand-japan-2025-peace-trophy.jpg": {"width":1536,"height":2048,"widths":[360,480,720,960,1280,1536]},
   "/images/yukako-noodles.jpg": {"width":1536,"height":2048,"widths":[360,480,720,960,1280,1536]},
   "/images/yukako-omagari-akita-inu-members-2026-09-05.jpg": {"width":1500,"height":1991,"widths":[360,480,720,960,1280,1500]},
