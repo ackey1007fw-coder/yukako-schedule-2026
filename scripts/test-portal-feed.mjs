@@ -210,6 +210,32 @@ assert.ok(
   !cappedUpcomingSelection.some(({ item }) => item.id.endsWith("upcoming-20"))
 );
 
+// 残り枠が1件しかないときは、source列挙順ではなく公開日時が新しい候補を残す。
+const scarceSlotSelection = selectFeedCandidates(
+  [
+    ...tooManyUpcomingEvents.slice(0, 19),
+    fixtureCandidate({
+      dataset: "siteUpdates",
+      id: "yukako:update:fixture-old-diversity",
+      publishedAt: "2026-08-01T00:00:00+09:00"
+    }),
+    fixtureCandidate({
+      dataset: "archive",
+      id: "yukako:story:fixture-new-diversity",
+      publishedAt: "2026-08-21T00:00:00+09:00"
+    })
+  ],
+  "2026-08-21T15:00:00.000Z"
+);
+assert.equal(scarceSlotSelection.length, 20);
+assert.ok(
+  scarceSlotSelection.some(({ item }) => item.id === "yukako:story:fixture-new-diversity"),
+  "when diversity slots are scarce, the newest filler must win"
+);
+assert.ok(
+  !scarceSlotSelection.some(({ item }) => item.id === "yukako:update:fixture-old-diversity")
+);
+
 const distPath = path.resolve(import.meta.dirname, "..", "dist", "portal-feed.json");
 try {
   const builtFeed = JSON.parse(await readFile(distPath, "utf8"));

@@ -399,13 +399,16 @@ export const selectFeedCandidates = (
   // feedが十分な枠を持つときは、各データソースを最低1件は残す。
   // 新しい更新や保護予定が増えても archive/news などの種類ごと丸ごと消えないようにする。
   const representedDatasets = new Set(dedupedProtectedEvents.map(({ dataset }) => dataset));
-  const requiredFillers = (Object.keys(sourceLimits) as SourceDataset[])
+  const diversityCandidates = (Object.keys(sourceLimits) as SourceDataset[])
     .filter((dataset) => !representedDatasets.has(dataset))
     .flatMap((dataset) => {
       const candidate = nonProtectedFillers.find((item) => item.dataset === dataset);
       return candidate ? [candidate] : [];
-    })
-    .slice(0, remainingSlots);
+    });
+  // 全sourceを残せるだけの枠がある場合だけ多様性を保証する。
+  // 枠が足りない場合は、種類の列挙順ではなく公開日時の新しい候補を優先する。
+  const requiredFillers =
+    diversityCandidates.length <= remainingSlots ? diversityCandidates : [];
   const requiredIds = new Set(requiredFillers.map(({ item }) => item.id));
   const additionalFillers = nonProtectedFillers
     .filter(({ item }) => !requiredIds.has(item.id))
