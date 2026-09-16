@@ -11,6 +11,11 @@ try {
   const { StreamRecapsSection, StreamRecapCard } = await server.ssrLoadModule("/src/components/StreamRecapsSection.tsx");
   const { profile } = await server.ssrLoadModule("/src/data/profile.ts");
   const render = (component, props) => renderToStaticMarkup(createElement(component, props));
+  const { SiteHeader } = await server.ssrLoadModule("/src/components/SiteHeader.tsx");
+  const subpageHeader = render(SiteHeader, { socialLinks: [] });
+  assert.match(subpageHeader, /data-tablet-site-nav/);
+  assert.match(subpageHeader, /md:block lg:hidden/);
+  assert.doesNotMatch(render(SiteHeader, { socialLinks: [], hasQuickNav: true }), /data-tablet-site-nav/);
   const ids = new Set();
   const timestampSeconds = (value) => {
     assert.match(value, /^\d+:[0-5]\d:[0-5]\d$/);

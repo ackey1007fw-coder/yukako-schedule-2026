@@ -107,7 +107,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-porcelain text-ink">
-      <SiteHeader socialLinks={socialLinks} />
+      <SiteHeader socialLinks={socialLinks} hasQuickNav />
       <PriorityBanner />
       <QuickNav />
       <main>

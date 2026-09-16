@@ -49,9 +49,10 @@ function useActiveSection() {
 
 type SiteHeaderProps = {
   socialLinks: SocialLink[];
+  hasQuickNav?: boolean;
 };
 
-export function SiteHeader({ socialLinks }: SiteHeaderProps) {
+export function SiteHeader({ socialLinks, hasQuickNav = false }: SiteHeaderProps) {
   const showroom = socialLinks.find((link) => link.kind === "showroom");
   const activeSection = useActiveSection();
 
@@ -132,6 +133,18 @@ export function SiteHeader({ socialLinks }: SiteHeaderProps) {
           </a>
         )}
       </div>
+      {!hasQuickNav && (
+        <nav aria-label="サイトメニュー" data-tablet-site-nav className="hidden border-t border-champagne/20 md:block lg:hidden">
+          <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-4 px-4 sm:px-6">
+            {navItems.map((item) => (
+              <a key={item.href} href={item.href} onClick={(event) => handleSectionLinkClick(event, item.href)}
+                className="inline-flex min-h-11 min-w-11 items-center justify-center text-xs font-semibold text-ink/80 hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-champagneInk">
+                {item.label}
+              </a>
+            ))}
+          </div>
+        </nav>
+      )}
     </header>
   );
 }
