@@ -34,6 +34,7 @@ import { ScheduleSection } from "./components/ScheduleSection";
 import { SearchSeoSection } from "./components/SearchSeoSection";
 import { ShareSection } from "./components/ShareSection";
 import { ShowroomSection } from "./components/ShowroomSection";
+import { StreamRecapsSection } from "./components/StreamRecapsSection";
 import { SiteHeader } from "./components/SiteHeader";
 import { SupportersSection } from "./components/SupportersSection";
 import { StructuredData } from "./components/StructuredData";
@@ -106,7 +107,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-porcelain text-ink">
-      <SiteHeader socialLinks={socialLinks} />
+      <SiteHeader socialLinks={socialLinks} hasQuickNav />
       <PriorityBanner />
       <QuickNav />
       <main>
@@ -121,7 +122,7 @@ function App() {
         <Hero nextEvent={nextEvent} socialLinks={socialLinks} />
         <TodayNextPanel todayEvents={todayEvents} nextEvent={nextEvent} />
         <nav aria-label="目的別ナビゲーション" className="bg-porcelain px-4 pb-8 sm:px-6 lg:px-8">
-          <div className="mx-auto grid max-w-7xl gap-3 md:grid-cols-3">
+          <div className="mx-auto grid max-w-7xl gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {[
               {
                 href: "#profile",
@@ -140,6 +141,12 @@ function App() {
                 title: "出演予定",
                 copy: "直近の出演と、終了した公演の記録。",
                 cta: "スケジュールへ"
+              },
+              {
+                href: "#stream-recaps",
+                title: "配信コーナー",
+                copy: "日付ごとに振り返る、配信の記録。",
+                cta: "配信コーナーへ"
               }
             ].map((item) => (
               <a
@@ -159,6 +166,9 @@ function App() {
         </nav>
         <SectionReveal>
           <LatestUpdatesSection />
+        </SectionReveal>
+        <SectionReveal>
+          <StreamRecapsSection />
         </SectionReveal>
         <SectionReveal>
           <AkitaInuTourSection />

@@ -44,6 +44,9 @@ jobs:
       - name: Gojet status tests
         run: pnpm test:gojet
 
+      - name: Stream recap tests
+        run: pnpm test:stream-recaps
+
       - name: Build
         run: pnpm build
 
