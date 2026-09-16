@@ -71,17 +71,38 @@ try {
   assert.ok(originalSongsMegUpdate, "最新情報にオリジナル楽曲②の記事が無い");
   assert.equal(
     latestSiteUpdates[0]?.sourceUrl,
-    "https://www.instagram.com/reel/DIoCRxxTKMS/",
-    "9/12 MGJ NEXT Body & Soulが最新情報の先頭に出ていない"
+    "https://x.com/mokoopy/status/2099829333292675102",
+    "9/15 出演者募集が最新情報の先頭に出ていない"
   );
-  assert.equal(latestSiteUpdates[0]?.id, "mgj-next-body-and-soul-2026-09-12");
-  assert.equal(latestSiteUpdates[0]?.category, "MGJ NEXT");
-  assert.match(latestSiteUpdates[0]?.title ?? "", /Body & Soul/);
+  assert.equal(latestSiteUpdates[0]?.date, "2026.9.15");
+  assert.equal(latestSiteUpdates[0]?.category, "X");
+  assert.match(latestSiteUpdates[0]?.title ?? "", /出演者を募集中/);
+  assert.match(latestSiteUpdates[0]?.title ?? "", /2026\.11\.26〜11\.30（東京）/);
+  assert.doesNotMatch(latestSiteUpdates[0]?.title ?? "", /11月公演決定/);
+  assert.doesNotMatch(latestSiteUpdates[0]?.title ?? "", /公式|公認/);
   assert.equal(
-    latestSiteUpdates[0]?.image?.src,
+    latestSiteUpdates.filter(
+      (update) =>
+        update.sourceUrl === "https://x.com/mokoopy/status/2099829333292675102"
+    ).length,
+    1,
+    "9/15 出演者募集が最新情報に重複している"
+  );
+  const mgjNextUpdate = latestSiteUpdates.find(
+    (update) => update.id === "mgj-next-body-and-soul-2026-09-12"
+  );
+  assert.ok(mgjNextUpdate, "9/12 MGJ NEXT Body & Soulが最新情報から消えている");
+  assert.equal(
+    mgjNextUpdate.sourceUrl,
+    "https://www.instagram.com/reel/DIoCRxxTKMS/"
+  );
+  assert.equal(mgjNextUpdate.category, "MGJ NEXT");
+  assert.match(mgjNextUpdate.title ?? "", /Body & Soul/);
+  assert.equal(
+    mgjNextUpdate.image?.src,
     "/images/yukako-mgj-next-body-and-soul-2026-09-12.jpg"
   );
-  assert.equal(latestSiteUpdates[0]?.imageLayout, "contain");
+  assert.equal(mgjNextUpdate.imageLayout, "contain");
   const missPeaceUpdate = latestSiteUpdates.find(
     (update) => update.id === "miss-grand-japan-miss-peace-reflection-2026-09-11"
   );
@@ -398,25 +419,43 @@ try {
   );
   assert.equal(
     news[0]?.url,
-    "https://x.com/mokoopy/status/2098071506643480765",
-    "NewsBar先頭が9/11 MISS PEACE振り返りからずれている"
+    "https://x.com/mokoopy/status/2099829333292675102",
+    "NewsBar先頭が9/15 出演者募集からずれている"
   );
-  assert.equal(news[0]?.date, "2026.9.11");
-  assert.match(news[0]?.text ?? "", /MISS PEACE/);
+  assert.equal(news[0]?.date, "2026.9.15");
+  assert.equal(news[0]?.listedAt, "2026.9.16");
+  assert.match(news[0]?.text ?? "", /出演者を募集中/);
+  assert.match(news[0]?.text ?? "", /2026\.11\.26〜11\.30（東京）/);
+  assert.match(news[0]?.text ?? "", /女性キャスト／男性キャスト／女性ダンサー/);
+  assert.doesNotMatch(news[0]?.text ?? "", /11月公演決定/);
+  assert.doesNotMatch(news[0]?.text ?? "", /公式|公認/);
+  assert.equal(
+    news.filter((item) => item.url === "https://x.com/mokoopy/status/2099829333292675102")
+      .length,
+    1,
+    "news.ts に9/15 出演者募集が重複登録されている"
+  );
+  assert.equal(
+    news[1]?.url,
+    "https://x.com/mokoopy/status/2098071506643480765",
+    "NewsBar 2件目が9/11 MISS PEACE振り返りからずれている"
+  );
+  assert.equal(news[1]?.date, "2026.9.11");
+  assert.match(news[1]?.text ?? "", /MISS PEACE/);
   assert.equal(
     news.filter((item) => item.url === "https://x.com/mokoopy/status/2098071506643480765").length,
     1,
     "news.ts に9/11 MISS PEACE振り返りが重複登録されている"
   );
   assert.equal(
-    news[1]?.url,
+    news[2]?.url,
     "https://x.com/mokoopy/status/2097938152237506926",
-    "NewsBar 2件目が9/10 11月舞台の案からずれている"
+    "NewsBar 3件目が9/10 11月舞台の案からずれている"
   );
-  assert.equal(news[1]?.date, "2026.9.10");
-  assert.equal(news[1]?.listedAt, "2026.9.11");
-  assert.match(news[1]?.text ?? "", /タイトル・会場・開演は未発表/);
-  assert.doesNotMatch(news[1]?.text ?? "", /11月公演決定/);
+  assert.equal(news[2]?.date, "2026.9.10");
+  assert.equal(news[2]?.listedAt, "2026.9.11");
+  assert.match(news[2]?.text ?? "", /タイトル・会場・開演は未発表/);
+  assert.doesNotMatch(news[2]?.text ?? "", /11月公演決定/);
   assert.equal(
     news.filter(
       (item) => item.url === "https://x.com/mokoopy/status/2097938152237506926"
@@ -480,8 +519,8 @@ try {
   assert.equal(popcornOriginNews.listedAt, "2026.8.18");
   assert.equal(
     latestNewsListingDate(news),
-    "2026.9.11",
-    "Footerの掲載情報更新日が9/11（MISS PEACE振り返り）からずれている"
+    "2026.9.16",
+    "Footerの掲載情報更新日が9/16（出演者募集の掲載日）からずれている"
   );
   const streamingFinalUpdate = latestSiteUpdates.find(
     (update) => update.anchor === "#gojet-streaming-viewing-final-day-2026-08-10"
@@ -1282,6 +1321,41 @@ try {
     "MGJ FINAL が開演時刻と同時に終了扱いになる"
   );
 
+  const novemberCastCall = events.find(
+    (event) => event.id === "yukako-produce-2026-11-cast-call"
+  );
+  assert.ok(novemberCastCall, "events.ts に 11月プロデュース出演者募集が無い");
+  assert.equal(novemberCastCall.venue, "東京");
+  assert.equal(novemberCastCall.image, "");
+  assert.equal(novemberCastCall.displayDate, "2026年11月26日（木）〜30日（月）");
+  assert.deepEqual(novemberCastCall.dates, [
+    "2026-11-26",
+    "2026-11-27",
+    "2026-11-28",
+    "2026-11-29",
+    "2026-11-30"
+  ]);
+  assert.match(novemberCastCall.title, /出演者募集中/);
+  assert.doesNotMatch(novemberCastCall.title, /11月公演決定/);
+  assert.doesNotMatch(novemberCastCall.summary, /公式|公認|#ゆかJET|GO,JET/);
+  assert.equal(novemberCastCall.isImportant, undefined);
+  assert.ok(
+    !novemberCastCall.links.some((link) => link.kind === "ticket" || link.kind === "map"),
+    "11月枠にチケットURLや地図を入れない"
+  );
+  assert.equal(
+    novemberCastCall.links[0]?.url,
+    "https://x.com/mokoopy/status/2099829333292675102"
+  );
+  assert.ok(
+    !gojetFeatureUpdates.some(
+      (update) =>
+        update.postUrl === "https://x.com/mokoopy/status/2099829333292675102" ||
+        update.postUrl === "https://x.com/yukako_produce/status/2099831161489084736"
+    ),
+    "出演者募集を #ゆかJET 第1弾アーカイブへ混ぜない"
+  );
+
   // 10. トップの「最新情報」記事にも、本人投稿の写真と記事内導線を出す。
   const { LatestUpdatesSection } = await server.ssrLoadModule(
     "/src/components/LatestUpdatesSection.tsx"
@@ -1317,11 +1391,10 @@ try {
   assert.ok(latestUpdatesHtml.includes("Body &amp; Soul"));
   assert.ok(latestUpdatesHtml.includes("#latest-reel"));
   assert.ok(latestUpdatesHtml.includes("https://www.instagram.com/reel/DIoCRxxTKMS/"));
+  assert.ok(latestUpdatesHtml.includes("出演者を募集中"));
+  assert.ok(latestUpdatesHtml.includes("https://x.com/mokoopy/status/2099829333292675102"));
   assert.ok(latestUpdatesHtml.includes("MISS PEACE"));
   assert.ok(latestUpdatesHtml.includes("https://x.com/mokoopy/status/2098071506643480765"));
-  assert.ok(latestUpdatesHtml.includes("11月の舞台の案が進んでいる"));
-  assert.ok(latestUpdatesHtml.includes("https://x.com/mokoopy/status/2097938152237506926"));
-  assert.ok(latestUpdatesHtml.includes("タイトル・会場・開演は未発表"));
   assert.ok(!latestUpdatesHtml.includes("11月公演決定"));
   assert.ok(latestUpdatesHtml.includes("sm:object-contain"));
   const { AkitaInuTourSection } = await server.ssrLoadModule(

@@ -11,6 +11,14 @@ export type NewsItem = {
 
 export const news: NewsItem[] = [
   {
+    date: "2026.9.15",
+    label: "X",
+    text:
+      "次回プロデュースの出演者を募集中。本番は 2026.11.26〜11.30（東京）。女性キャスト／男性キャスト／女性ダンサー。",
+    url: "https://x.com/mokoopy/status/2099829333292675102",
+    listedAt: "2026.9.16"
+  },
+  {
     date: "2026.9.11",
     label: "X",
     text:
