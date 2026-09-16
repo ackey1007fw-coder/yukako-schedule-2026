@@ -9,6 +9,7 @@ import type { SocialLink } from "../types";
 // セクションリンクは "#updates" ではなく "/#updates"（どのページからでもホームの該当セクションへ飛べる。
 // ホーム上ではパスが同じなのでリロードせずスクロールだけが起きる）。
 const navItems = [
+  { label: "配信", href: "/#stream-recaps", id: "stream-recaps" },
   { label: "最新情報", href: "/#updates", id: "updates" },
   { label: "スケジュール", href: "/#schedule", id: "schedule" },
   { label: "#ゆかJET", href: "/#next", id: "next" },
@@ -93,7 +94,7 @@ export function SiteHeader({ socialLinks }: SiteHeaderProps) {
           </span>
         </a>
 
-        <nav className="hidden items-center gap-5 text-sm font-semibold text-ink/70 md:flex">
+        <nav className="hidden items-center gap-3 text-xs font-semibold text-ink/70 lg:flex xl:gap-5 xl:text-sm">
           {navItems.map((item) => (
             <a
               key={item.href}

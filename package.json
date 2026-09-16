@@ -12,6 +12,7 @@
     "test:add-news": "node scripts/test-add-news.mjs",
     "test:baby-shark-updates": "node scripts/test-baby-shark-updates.mjs",
     "test:gojet": "node scripts/test-gojet-status.mjs",
+    "test:stream-recaps": "node scripts/test-stream-recaps.mjs",
     "test:msc-bellissima": "node scripts/test-msc-bellissima-archive.mjs",
     "test:portal-feed": "node scripts/test-portal-feed.mjs",
     "test:ouen-archive-link": "node scripts/test-ouen-archive-link.mjs",
