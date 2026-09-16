@@ -2,41 +2,6 @@ import type { ScheduleEvent } from "../types";
 
 export const events: ScheduleEvent[] = [
   {
-    id: "yukako-produce-2026-11-cast-call",
-    title: "次回プロデュース公演（出演者募集中）",
-    shortTitle: "11月プロデュース",
-    category: "stage",
-    listedAt: "2026-09-16",
-    // 開演時刻は未発表。日付幅だけ持ち、isEventPast が最終日まで「これから」を保つようにする。
-    startAt: "2026-11-26T00:00:00+09:00",
-    endAt: "2026-11-30T23:59:59+09:00",
-    dates: [
-      "2026-11-26",
-      "2026-11-27",
-      "2026-11-28",
-      "2026-11-29",
-      "2026-11-30"
-    ],
-    displayDate: "2026年11月26日（木）〜30日（月）",
-    venue: "東京",
-    image: "",
-    summary:
-      "出演者を募集中。本番は2026年11月26日〜30日、東京。女性キャスト／男性キャスト／女性ダンサー。",
-    badges: ["舞台", "出演者募集中", "11/26〜30"],
-    links: [
-      {
-        label: "出演者募集（吉井優花子 X）",
-        url: "https://x.com/mokoopy/status/2099829333292675102",
-        kind: "info"
-      },
-      {
-        label: "キャスト募集のお知らせ（プロデュース公演 X）",
-        url: "https://x.com/yukako_produce/status/2099831161489084736",
-        kind: "sns"
-      }
-    ]
-  },
-  {
     id: "miss-grand-japan-2026-final-mc",
     title: "MISS GRAND JAPAN & MR GAY JAPAN 2026 FINAL COMPETITION",
     shortTitle: "MGJ 2026 FINAL（MC）",

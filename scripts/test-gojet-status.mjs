@@ -1324,28 +1324,21 @@ try {
   const novemberCastCall = events.find(
     (event) => event.id === "yukako-produce-2026-11-cast-call"
   );
-  assert.ok(novemberCastCall, "events.ts に 11月プロデュース出演者募集が無い");
-  assert.equal(novemberCastCall.venue, "東京");
-  assert.equal(novemberCastCall.image, "");
-  assert.equal(novemberCastCall.displayDate, "2026年11月26日（木）〜30日（月）");
-  assert.deepEqual(novemberCastCall.dates, [
-    "2026-11-26",
-    "2026-11-27",
-    "2026-11-28",
-    "2026-11-29",
-    "2026-11-30"
-  ]);
-  assert.match(novemberCastCall.title, /出演者募集中/);
-  assert.doesNotMatch(novemberCastCall.title, /11月公演決定/);
-  assert.doesNotMatch(novemberCastCall.summary, /公式|公認|#ゆかJET|GO,JET/);
-  assert.equal(novemberCastCall.isImportant, undefined);
-  assert.ok(
-    !novemberCastCall.links.some((link) => link.kind === "ticket" || link.kind === "map"),
-    "11月枠にチケットURLや地図を入れない"
-  );
   assert.equal(
-    novemberCastCall.links[0]?.url,
-    "https://x.com/mokoopy/status/2099829333292675102"
+    novemberCastCall,
+    undefined,
+    "出演者募集は本人出演が未確認のため events.ts に入れない"
+  );
+  assert.ok(
+    !events.some(
+      (event) =>
+        event.links.some(
+          (link) =>
+            link.url === "https://x.com/mokoopy/status/2099829333292675102" ||
+            link.url === "https://x.com/yukako_produce/status/2099831161489084736"
+        )
+    ),
+    "出演者募集を予定カードへ入れない"
   );
   assert.ok(
     !gojetFeatureUpdates.some(
