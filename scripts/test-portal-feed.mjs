@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
+import { extractNewsItems } from "./lib/addNewsCore.mjs";
 import { generatePortalFeed, loadPortalFeedModule } from "./generate-portal-feed.mjs";
 
 const fixedGeneratedAt = "2026-08-18T00:00:00.000Z";
@@ -78,10 +79,22 @@ const babySharkStory = first.items.find(
 assert.equal(babySharkStory?.sourceUrl, "https://www.instagram.com/yoppy_777");
 assert.equal(babySharkStory?.publishedAt, "2026-08-21T00:00:00+09:00");
 
-const lateListedNews = first.items.find(
-  (item) => item.sourceUrl === "https://x.com/mokoopy/status/2012824363620331966"
+// 掲載日の変換は実データの候補で検証し、過去記事を最新20件へ永久固定しない。
+const newsSource = await readFile(path.resolve(import.meta.dirname, "..", "src/data/news.ts"), "utf8");
+const newsItems = extractNewsItems(newsSource);
+const lateListedNews = newsItems.find(
+  (item) => item.url === "https://x.com/mokoopy/status/2012824363620331966"
 );
-assert.equal(lateListedNews?.publishedAt, "2026-08-18T00:00:00+09:00");
+assert.ok(lateListedNews, "late-listed source news must remain in the data");
+assert.equal(createNewsCandidate(lateListedNews)?.item.publishedAt, "2026-08-18T00:00:00+09:00");
+const castingNews = newsItems.find(
+  (item) => item.url === "https://x.com/mokoopy/status/2099829333292675102"
+);
+assert.ok(castingNews, "casting announcement must remain in the news data");
+const castingCandidate = createNewsCandidate(castingNews);
+assert.equal(castingCandidate?.item.publishedAt, "2026-09-16T00:00:00+09:00");
+assert.equal(castingCandidate?.item.type, "news");
+assert.equal(castingCandidate?.item.startsAt, undefined);
 
 assert.equal(
   toPortalImageUrl("/images/example.jpg"),
