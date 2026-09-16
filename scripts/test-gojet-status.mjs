@@ -30,7 +30,7 @@ try {
   const { gojetFeatureUpdates } = await server.ssrLoadModule(
     "/src/data/gojetFeatureUpdates.ts"
   );
-  const { siteUpdates: latestSiteUpdates } = await server.ssrLoadModule(
+  const { siteUpdates: latestSiteUpdates, updateTimestamp: auditUpdateTimestamp } = await server.ssrLoadModule(
     "/src/data/siteUpdates.ts"
   );
 
@@ -69,17 +69,27 @@ try {
     (update) => update.anchor === "#gojet-original-songs-meg-2026-08-24"
   );
   assert.ok(originalSongsMegUpdate, "最新情報にオリジナル楽曲②の記事が無い");
-  assert.equal(
-    latestSiteUpdates[0]?.sourceUrl,
-    "https://x.com/mokoopy/status/2099829333292675102",
-    "9/15 出演者募集が最新情報の先頭に出ていない"
+  const castCallUpdate = latestSiteUpdates.find(
+    (update) => update.sourceUrl === "https://x.com/mokoopy/status/2099829333292675102"
   );
-  assert.equal(latestSiteUpdates[0]?.date, "2026.9.15");
-  assert.equal(latestSiteUpdates[0]?.category, "X");
-  assert.match(latestSiteUpdates[0]?.title ?? "", /出演者を募集中/);
-  assert.match(latestSiteUpdates[0]?.title ?? "", /2026\.11\.26〜11\.30（東京）/);
-  assert.doesNotMatch(latestSiteUpdates[0]?.title ?? "", /11月公演決定/);
-  assert.doesNotMatch(latestSiteUpdates[0]?.title ?? "", /公式|公認/);
+  assert.ok(castCallUpdate, "9/15 出演者募集が最新情報から消えている");
+  // 履歴の内容検証と、新しい順の表示契約を分離する。特定記事を永久に先頭へ固定しない。
+  for (let index = 1; index < latestSiteUpdates.length; index += 1) {
+    assert.ok(
+      auditUpdateTimestamp(latestSiteUpdates[index - 1].date) >= auditUpdateTimestamp(latestSiteUpdates[index].date),
+      "最新情報が投稿日降順になっていない"
+    );
+  }
+  assert.equal(castCallUpdate.additionalSource?.url, "https://x.com/yukako_produce/status/2099831161489084736");
+  assert.equal(castCallUpdate.additionalSource?.label, "プロデュースアカウントの告知");
+  assert.match(castCallUpdate.summary ?? "", /9\/15時点/);
+  assert.match(castCallUpdate.summary ?? "", /タイトル・会場・開演は未発表/);
+  assert.equal(castCallUpdate.date, "2026.9.15");
+  assert.equal(castCallUpdate.category, "X");
+  assert.match(castCallUpdate.title ?? "", /出演者募集/);
+  assert.match(castCallUpdate.title ?? "", /2026\.11\.26〜11\.30（東京）/);
+  assert.doesNotMatch(castCallUpdate.title ?? "", /11月公演決定/);
+  assert.doesNotMatch(castCallUpdate.title ?? "", /公式|公認/);
   assert.equal(
     latestSiteUpdates.filter(
       (update) =>
@@ -417,45 +427,37 @@ try {
   const { news, latestNewsListingDate } = await server.ssrLoadModule(
     "/src/data/news.ts"
   );
-  assert.equal(
-    news[0]?.url,
-    "https://x.com/mokoopy/status/2099829333292675102",
-    "NewsBar先頭が9/15 出演者募集からずれている"
-  );
-  assert.equal(news[0]?.date, "2026.9.15");
-  assert.equal(news[0]?.listedAt, "2026.9.16");
-  assert.match(news[0]?.text ?? "", /出演者を募集中/);
-  assert.match(news[0]?.text ?? "", /2026\.11\.26〜11\.30（東京）/);
-  assert.match(news[0]?.text ?? "", /女性キャスト／男性キャスト／女性ダンサー/);
-  assert.doesNotMatch(news[0]?.text ?? "", /11月公演決定/);
-  assert.doesNotMatch(news[0]?.text ?? "", /公式|公認/);
+  const castCallNews = news.find((item) => item.url === castCallUpdate.sourceUrl);
+  assert.ok(castCallNews, "news.ts に9/15 出演者募集が無い");
+  assert.equal(castCallUpdate.title, castCallNews.text, "告知本文は news.ts を正本にする");
+  assert.equal(castCallNews.date, "2026.9.15");
+  assert.equal(castCallNews.listedAt, "2026.9.16");
+  assert.match(castCallNews.text ?? "", /出演者募集/);
+  assert.match(castCallNews.text ?? "", /2026\.11\.26〜11\.30（東京）/);
+  assert.match(castCallNews.text ?? "", /女性キャスト／男性キャスト／女性ダンサー/);
+  assert.doesNotMatch(castCallNews.text ?? "", /11月公演決定/);
+  assert.doesNotMatch(castCallNews.text ?? "", /公式|公認/);
   assert.equal(
     news.filter((item) => item.url === "https://x.com/mokoopy/status/2099829333292675102")
       .length,
     1,
     "news.ts に9/15 出演者募集が重複登録されている"
   );
-  assert.equal(
-    news[1]?.url,
-    "https://x.com/mokoopy/status/2098071506643480765",
-    "NewsBar 2件目が9/11 MISS PEACE振り返りからずれている"
-  );
-  assert.equal(news[1]?.date, "2026.9.11");
-  assert.match(news[1]?.text ?? "", /MISS PEACE/);
+  const missPeaceNews = news.find((item) => item.url === missPeaceUpdate.sourceUrl);
+  assert.ok(missPeaceNews, "news.ts に9/11 MISS PEACE振り返りが無い");
+  assert.equal(missPeaceNews.date, "2026.9.11");
+  assert.match(missPeaceNews.text ?? "", /MISS PEACE/);
   assert.equal(
     news.filter((item) => item.url === "https://x.com/mokoopy/status/2098071506643480765").length,
     1,
     "news.ts に9/11 MISS PEACE振り返りが重複登録されている"
   );
-  assert.equal(
-    news[2]?.url,
-    "https://x.com/mokoopy/status/2097938152237506926",
-    "NewsBar 3件目が9/10 11月舞台の案からずれている"
-  );
-  assert.equal(news[2]?.date, "2026.9.10");
-  assert.equal(news[2]?.listedAt, "2026.9.11");
-  assert.match(news[2]?.text ?? "", /タイトル・会場・開演は未発表/);
-  assert.doesNotMatch(news[2]?.text ?? "", /11月公演決定/);
+  const novemberStagePlanNews = news.find((item) => item.url === novemberStagePlanUpdate.sourceUrl);
+  assert.ok(novemberStagePlanNews, "news.ts に9/10 11月舞台の案が無い");
+  assert.equal(novemberStagePlanNews.date, "2026.9.10");
+  assert.equal(novemberStagePlanNews.listedAt, "2026.9.11");
+  assert.match(novemberStagePlanNews.text ?? "", /タイトル・会場・開演は未発表/);
+  assert.doesNotMatch(novemberStagePlanNews.text ?? "", /11月公演決定/);
   assert.equal(
     news.filter(
       (item) => item.url === "https://x.com/mokoopy/status/2097938152237506926"
@@ -518,9 +520,14 @@ try {
   assert.equal(popcornOriginNews.date, "2026.1.18");
   assert.equal(popcornOriginNews.listedAt, "2026.8.18");
   assert.equal(
-    latestNewsListingDate(news),
+    latestNewsListingDate([novemberStagePlanNews, castCallNews]),
     "2026.9.16",
-    "Footerの掲載情報更新日が9/16（出演者募集の掲載日）からずれている"
+    "投稿日9/15と掲載日9/16を取り違えている"
+  );
+  assert.equal(
+    latestNewsListingDate([castCallNews, { ...castCallNews, date: "2026.9.17", listedAt: "2026.9.18" }]),
+    "2026.9.18",
+    "新しい記事の掲載日を反映できない"
   );
   const streamingFinalUpdate = latestSiteUpdates.find(
     (update) => update.anchor === "#gojet-streaming-viewing-final-day-2026-08-10"
@@ -1380,16 +1387,37 @@ try {
     1,
     "8/23のX投稿が最新情報に重複している"
   );
-  const latestUpdatesHtml = renderToStaticMarkup(createElement(LatestUpdatesSection));
+  // 新着が増えても、過去記事を初期3枚へ強制するテストにはしない。
+  const fixtureUpdates = [castCallUpdate, mgjNextUpdate, missPeaceUpdate];
+  const latestUpdatesHtml = renderToStaticMarkup(createElement(LatestUpdatesSection, { updates: fixtureUpdates }));
   assert.ok(latestUpdatesHtml.includes("Body &amp; Soul"));
   assert.ok(latestUpdatesHtml.includes("#latest-reel"));
   assert.ok(latestUpdatesHtml.includes("https://www.instagram.com/reel/DIoCRxxTKMS/"));
-  assert.ok(latestUpdatesHtml.includes("出演者を募集中"));
+  assert.ok(latestUpdatesHtml.includes("出演者募集"));
   assert.ok(latestUpdatesHtml.includes("https://x.com/mokoopy/status/2099829333292675102"));
   assert.ok(latestUpdatesHtml.includes("MISS PEACE"));
   assert.ok(latestUpdatesHtml.includes("https://x.com/mokoopy/status/2098071506643480765"));
   assert.ok(!latestUpdatesHtml.includes("11月公演決定"));
   assert.ok(latestUpdatesHtml.includes("sm:object-contain"));
+  assert.match(latestUpdatesHtml, /9\/15時点で、タイトル・会場・開演は未発表/);
+  assert.ok(latestUpdatesHtml.includes('href="https://x.com/yukako_produce/status/2099831161489084736" target="_blank" rel="noopener noreferrer"'));
+  assert.equal(latestUpdatesHtml.split('href="https://x.com/mokoopy/status/2099829333292675102"').length - 1, 1);
+  assert.equal(latestUpdatesHtml.split('href="https://x.com/yukako_produce/status/2099831161489084736"').length - 1, 1);
+  const futureFixture = {
+    id: "newer-news-fixture", date: "2026.9.17", category: "X", title: "新しい記事のテスト",
+    sourceUrl: "https://example.com/newer-news-fixture"
+  };
+  const afterNewNewsHtml = renderToStaticMarkup(createElement(LatestUpdatesSection, {
+    updates: [futureFixture, ...fixtureUpdates]
+  }));
+  assert.ok(afterNewNewsHtml.includes(futureFixture.sourceUrl));
+  assert.ok(!afterNewNewsHtml.includes(castCallUpdate.sourceUrl), "同カテゴリの新着追加後も9/15記事を先頭に固定している");
+  assert.match(afterNewNewsHtml, /過去の更新をすべて見る（残り1件）/);
+  // 実際に App が使うのは NewsBar ではなく PriorityBanner。
+  const currentBannerHtml = renderToStaticMarkup(createElement(PriorityBanner, { now: new Date("2026-09-17T09:00:00+09:00") }));
+  const currentHref = latestSiteUpdates[0].anchor || latestSiteUpdates[0].sourceUrl;
+  const escapedHref = renderToStaticMarkup(createElement("a", { href: currentHref })).match(/href="[^"]*"/)?.[0];
+  assert.ok(escapedHref && currentBannerHtml.includes(escapedHref), "PriorityBanner が実データの最新記事を参照していない");
   const { AkitaInuTourSection } = await server.ssrLoadModule(
     "/src/components/AkitaInuTourSection.tsx"
   );

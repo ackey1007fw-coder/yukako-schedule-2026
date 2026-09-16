@@ -16,6 +16,8 @@ export type SiteUpdate = {
   imageLayout?: "portrait-preview" | "contain";
   // 元投稿（X / Instagram など）への外部リンク
   sourceUrl?: string;
+  // 同じ告知を補う別アカウントの出典。独立した更新カードにはしない。
+  additionalSource?: { url: string; label: string };
   // サイト内で詳しく読めるセクションへのアンカー
   anchor?: string;
   // 最新情報カードから、そのセクション内のより具体的な位置へ直接飛ばす場合だけ指定する。
@@ -357,6 +359,17 @@ const standaloneCoversNews = (item: (typeof news)[number]) =>
       update.date.startsWith(item.date)
   );
 
+// 本文・投稿日は news を正本にし、告知を読むための補足だけを元投稿URLで結び付ける。
+const newsContext: Partial<Record<string, Pick<SiteUpdate, "summary" | "additionalSource">>> = {
+  "https://x.com/mokoopy/status/2099829333292675102": {
+    summary: "9/15時点で、タイトル・会場・開演は未発表。応募条件の詳細は本人の元投稿へ。",
+    additionalSource: {
+      url: "https://x.com/yukako_produce/status/2099831161489084736",
+      label: "プロデュースアカウントの告知"
+    }
+  }
+};
+
 const newsUpdates: SiteUpdate[] = news
   .filter((item) => !knownUrls.has(normalizeUrl(item.url)))
   .filter((item) => !standaloneCoversNews(item))
@@ -366,7 +379,8 @@ const newsUpdates: SiteUpdate[] = news
     category: item.label,
     title: item.text,
     sourceUrl: item.url.startsWith("#") ? undefined : item.url,
-    anchor: item.url.startsWith("#") ? item.url : undefined
+    anchor: item.url.startsWith("#") ? item.url : undefined,
+    ...newsContext[item.url]
   }));
 
 // concat順（単発 → gojet → news）を保ったまま日付降順に安定ソート。
