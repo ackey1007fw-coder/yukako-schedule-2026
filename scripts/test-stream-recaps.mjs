@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { existsSync, readFileSync } from "node:fs";
 import { createServer } from "vite";
+import sharp from "sharp";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 
@@ -56,6 +57,10 @@ try {
       for (const image of recap.gallery ?? []) {
         localAsset(image.src);
         assert.ok(image.width > 0 && image.height > 0);
+        const metadata = await sharp(readFileSync(new URL(`../public${image.src}`, import.meta.url))).metadata();
+        assert.equal(metadata.width, image.width);
+        assert.equal(metadata.height, image.height);
+        assert.equal(metadata.exif, undefined);
         assert.match(image.alt, /優花子/);
         assert.ok(image.caption && image.downloadName);
       }
@@ -78,16 +83,26 @@ try {
   const source = [morning, older, current];
   assert.deepEqual(sortStreamRecaps(source).map((item) => item.id), [current.id, morning.id, older.id]);
   assert.deepEqual(source.map((item) => item.id), [morning.id, older.id, current.id], "Sort must not mutate input");
-  const html = render(StreamRecapsSection, {});
+  const html = render(StreamRecapsSection, { recaps: [current] });
   assert.match(html, /id="stream-recaps"/);
   assert.match(html, /配信コーナー/);
   assert.match(html, /dateTime="2026-09-16"/i);
   assert.match(html, /配信の記録 1回/);
-  assert.match(html, /配信メモ 0回/);
-  assert.match(html, /メモ準備中/);
+  assert.match(html, /配信メモ 1回/);
+  assert.equal(current.status, "published");
+  assert.equal(current.gallery.length, 10);
+  assert.equal(new Set(current.gallery.map((image) => image.src)).size, 10);
+  assert.doesNotMatch(html, /メモ準備中/);
   assert.match(html, /録画の記録/);
   assert.ok(html.includes(profile.showroom.url.replaceAll("&", "&amp;")));
-  assert.doesNotMatch(html, /<img|<video|<iframe|この回に歌った曲|この回のスクショ|この回の見どころ/);
+  assert.doesNotMatch(html, /<video|<iframe|この回に歌った曲/);
+  assert.match(html, /この回の見どころ/);
+  assert.match(html, /この回のスクショ/);
+  assert.match(html, /全音声の自動文字起こし/);
+  assert.equal((html.match(/<img /g) ?? []).length, 11);
+  assert.equal(current.highlights.length, 8);
+  assert.equal(current.timeline.at(-1).timestamp, "0:26:44");
+  assert.match(html, /yukako-2026-09-16-night-stills.zip/);
   const fixture = { ...current, id: "2026-09-16-test", status: "published", summary: "テスト用の本文", songs: [{ timestamp: "0:00:05", title: "テスト曲", artist: "テスト歌手", originalUrl: "https://example.com/original" }], highlights: [{ timestamp: "0:00:10", title: "テスト項目", body: "テスト本文" }], gallery: [{ src: "/images/fixture.jpg", width: 640, height: 360, alt: "吉井優花子さんのテスト画像", caption: "テスト写真", downloadName: "fixture.jpg" }], timeline: [{ timestamp: "0:00:10", label: "テスト時刻" }], nextNote: "配信時点の案内テスト" };
   const full = render(StreamRecapCard, { recap: fixture, defaultOpen: true });
   const headings = ["この回に歌った曲", "この回の見どころ", "この回のスクショ", "タイムスタンプ", "配信時点の次回案内", "出典："];
