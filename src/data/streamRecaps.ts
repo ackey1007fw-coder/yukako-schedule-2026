@@ -1,3 +1,5 @@
+import { streamRecap20260916Night } from "./streamRecap20260916Night";
+
 export type StreamRecapImage = {
   src: string;
   width: number;
@@ -29,6 +31,7 @@ type RecapBase = {
 
 export type PublishedStreamRecap = RecapBase & {
   status: "published";
+  verificationNote?: string;
   highlights?: readonly StreamRecapHighlight[];
   songs?: readonly StreamRecapSong[];
   gallery?: readonly StreamRecapImage[];
@@ -41,15 +44,5 @@ export type PublishedStreamRecap = RecapBase & {
 export type StreamRecap = PublishedStreamRecap | (RecapBase & { status: "preparing" });
 
 export const streamRecaps: readonly StreamRecap[] = [
-  {
-    id: "2026-09-16-night",
-    date: "2026-09-16",
-    title: "夜のSHOWROOM",
-    summary: "9月16日の夜配信。詳しい配信メモは準備中です。",
-    platform: "SHOWROOM",
-    status: "preparing",
-    recording: { startedAt: "2026-09-16T20:43:59+09:00", durationSeconds: 1659.96 },
-    sourceLabel: "2026年9月16日夜の配信（録画の日時・長さを確認）",
-    verifiedAt: "2026-09-16",
-  },
+  streamRecap20260916Night,
 ];

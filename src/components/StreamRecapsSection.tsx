@@ -86,12 +86,16 @@ export function StreamRecapCard({ recap, defaultOpen = false }: { recap: StreamR
       <h3 className="mt-4 break-words font-display text-2xl leading-snug text-ink sm:text-3xl">{recap.title}</h3>
       <p className="mt-3 break-words text-sm leading-7 text-ink/80">{recap.summary}</p>
       {recap.recording && <p className="mt-4 flex items-start gap-2 text-xs leading-6 text-ink/70"><Clock3 aria-hidden="true" className="mt-1 h-4 w-4 shrink-0" />{recordingLabel(recap.recording)}</p>}
+      {recap.status === "published" && recap.gallery?.[0] && <figure className="mx-auto mt-5 max-w-2xl overflow-hidden bg-porcelain">
+        <img {...getResponsiveImageProps(recap.gallery[0].src, "(min-width: 1024px) 640px, 100vw")} width={recap.gallery[0].width} height={recap.gallery[0].height} alt={recap.gallery[0].alt} loading="lazy" decoding="async" className="block h-auto w-full object-contain" />
+      </figure>}
       <span className="mt-4 inline-block text-xs font-bold text-champagneInk"><span className="group-open:hidden">この回を開く</span><span className="hidden group-open:inline">閉じる</span></span>
     </summary>
     <div className="border-t border-champagne/20 px-5 pb-5 sm:px-7 sm:pb-7">
       {recap.status === "published" && <RecapContent recap={recap} />}
       <div className="mt-5 border-l-2 border-champagne/50 bg-porcelain p-4 text-xs leading-6 text-ink/75">
         <p>出典：{recap.sourceLabel}</p>
+        {recap.status === "published" && recap.verificationNote && <p className="mt-2">{recap.verificationNote}</p>}
         <p className="mt-1">確認日：<time dateTime={recap.verifiedAt}>{recap.verifiedAt.replace(/-/g, ".")}</time></p>
         {recap.recording && <p className="mt-2">表示の時刻・長さは録画の記録です。配信の開始・終了時刻とは異なる場合があります。</p>}
       </div>
