@@ -1,3 +1,4 @@
+import { streamRecap20260917Night } from "./streamRecap20260917Night";
 import { streamRecap20260916Night } from "./streamRecap20260916Night";
 
 export type StreamRecapImage = {
@@ -44,5 +45,6 @@ export type PublishedStreamRecap = RecapBase & {
 export type StreamRecap = PublishedStreamRecap | (RecapBase & { status: "preparing" });
 
 export const streamRecaps: readonly StreamRecap[] = [
+  streamRecap20260917Night,
   streamRecap20260916Night,
 ];
