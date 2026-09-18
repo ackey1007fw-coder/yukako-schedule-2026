@@ -14,6 +14,10 @@ const driveYukakoPhotos: GalleryPhoto[] = Array.from({ length: 118 }, (_, index)
 
 export const galleryPhotos: GalleryPhoto[] = [
   {
+    src: "/images/baby-shark/baby-shark-hetty-with-babyshark-2026-09-18.jpg",
+    alt: "赤いスパンコールのヤドカリ衣装で、ベイビーシャークの着ぐるみと並んで微笑む吉井優花子さん（2026.9.18 Instagramより）"
+  },
+  {
     src: "/images/yukako-mgj-miss-peace-reflection-2026-09-11.jpg",
     alt: "赤を基調としたステージ衣装で、片腕を上げてポーズを取る女性（2025年のMISS GRAND JAPAN日本大会を振り返る2026.9.11 X投稿より）"
   },
@@ -87,8 +91,8 @@ export const galleryUpdate: {
   note: string;
   url: string;
 } = {
-  date: "2026.9.11",
-  platform: "X",
-  note: "MISS GRAND JAPAN 2025を振り返るステージ写真を追加",
-  url: "https://x.com/mokoopy/status/2098071506643480765"
+  date: "2026.9.18",
+  platform: "Instagram",
+  note: "ベイビーシャークライブ ヘッティー衣装の写真を追加",
+  url: "https://www.instagram.com/p/DdbEOcelBoI/"
 };

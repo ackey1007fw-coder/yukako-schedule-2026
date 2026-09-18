@@ -263,23 +263,25 @@ export function BabySharkLivePage() {
               })}
             </ul>
 
-            {work.tour2026.image.available ? (
-              <figure className="mt-6 overflow-hidden border border-[#7aa8c4]/30 bg-white p-3">
-                <img
-                  {...getResponsiveImageProps(
-                    work.tour2026.image.src,
-                    "(min-width: 1024px) 60vw, 100vw"
-                  )}
-                  alt={work.tour2026.image.alt}
-                  loading="lazy"
-                  decoding="async"
-                  className="mx-auto block h-auto w-full max-w-xl object-contain"
-                />
-                <figcaption className="mt-2 text-center text-xs text-ink/55">
-                  {work.tour2026.image.caption}
-                </figcaption>
-              </figure>
-            ) : null}
+            {work.tour2026.images
+              .filter((image) => image.available)
+              .map((image) => (
+                <figure
+                  key={image.src}
+                  className="mt-6 overflow-hidden border border-[#7aa8c4]/30 bg-white p-3"
+                >
+                  <img
+                    {...getResponsiveImageProps(image.src, "(min-width: 1024px) 60vw, 100vw")}
+                    alt={image.alt}
+                    loading="lazy"
+                    decoding="async"
+                    className="mx-auto block h-auto w-full max-w-xl object-contain"
+                  />
+                  <figcaption className="mt-2 text-center text-xs text-ink/55">
+                    {image.caption}
+                  </figcaption>
+                </figure>
+              ))}
 
             <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <ExternalButton href={work.tour2026.officialUrl} variant="gold">
@@ -376,6 +378,32 @@ export function BabySharkLivePage() {
                             {video.caption && (
                               <p className="mt-1 text-xs leading-5 text-ink/50">{video.caption}</p>
                             )}
+                          </figure>
+                        ))}
+                      </div>
+                    )}
+                    {update.photos && update.photos.length > 0 && (
+                      <div className="mt-6 grid min-w-0 gap-3 sm:grid-cols-2">
+                        {update.photos.map((photo) => (
+                          <figure
+                            key={photo.src}
+                            className="overflow-hidden border border-[#7aa8c4]/25 bg-white"
+                          >
+                            <img
+                              {...getResponsiveImageProps(
+                                photo.src,
+                                "(min-width: 640px) 40vw, 100vw"
+                              )}
+                              alt={photo.alt}
+                              loading="lazy"
+                              decoding="async"
+                              className="mx-auto block h-auto w-full object-contain"
+                            />
+                            {photo.caption ? (
+                              <figcaption className="px-3 py-2 text-center text-xs font-bold text-ink/65">
+                                {photo.caption}
+                              </figcaption>
+                            ) : null}
                           </figure>
                         ))}
                       </div>

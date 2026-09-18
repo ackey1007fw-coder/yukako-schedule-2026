@@ -74,6 +74,21 @@ const sourcePlatform = (url: string) => {
 // 専用セクションを持つ単発トピック。本文は各セクションが持つため、ここは見出しと導線のみ。
 const standaloneUpdatesAll: SiteUpdate[] = [
   {
+    id: "baby-shark-fukuyama-kurume-2026-09-18",
+    date: "2026.9.18",
+    category: "Instagram",
+    title: "「8月は大垣でみんなに会えてとっても嬉しかったよ」——次は福山と久留米",
+    summary:
+      "9月19日（土）ふくやま芸術文化ホール リーデンローズ、9月20日（日）久留米シティプラザ。①11:30／②14:00、2回目はお見送り有。🐚ヘッティー＆パール",
+    image: {
+      src: "/images/baby-shark/baby-shark-hetty-with-babyshark-2026-09-18.jpg",
+      alt: "赤いスパンコールのヤドカリ衣装で、ベイビーシャークの着ぐるみと並んで微笑む吉井優花子さん"
+    },
+    imageLayout: "contain",
+    sourceUrl: "https://www.instagram.com/p/DdbEOcelBoI/",
+    anchor: "#baby-shark-live"
+  },
+  {
     id: "miss-grand-japan-miss-peace-reflection-2026-09-11",
     date: "2026.9.11 00:30",
     category: "Miss Grand Japan",
