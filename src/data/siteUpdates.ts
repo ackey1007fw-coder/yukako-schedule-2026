@@ -86,7 +86,7 @@ const standaloneUpdatesAll: SiteUpdate[] = [
     },
     imageLayout: "contain",
     sourceUrl: "https://www.instagram.com/p/DdbEOcelBoI/",
-    anchor: "#event-babyshark-live-2026-09-19"
+    anchor: "#baby-shark-live"
   },
   {
     id: "miss-grand-japan-miss-peace-reflection-2026-09-11",
