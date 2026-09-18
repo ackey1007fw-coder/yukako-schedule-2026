@@ -14,6 +14,15 @@ const {
   isPr
 } = siteContent.latestInstagram;
 
+const mgjNextDanceNew = {
+  videoSrc: "/videos/yukako-mgj-next-body-and-soul-2026-09-18.mp4",
+  videoPoster: "/images/yukako-mgj-next-body-and-soul-2026-09-18.jpg",
+  sourcePostUrl: "https://www.instagram.com/reel/DdbLANUy4Aj/",
+  tataUrl: "https://www.instagram.com/tata_diet711_official/",
+  yukakoProfileUrl: "https://www.instagram.com/yoppy_777/",
+  meikoUrl: "https://www.instagram.com/meeeik_o/"
+};
+
 const mgjNextDance = {
   videoSrc: "/videos/yukako-mgj-next-body-and-soul-2026-09-12.mp4",
   videoPoster: "/images/yukako-mgj-next-body-and-soul-2026-09-12.jpg",
@@ -31,6 +40,111 @@ export function LatestInstagramSection() {
           copy="大会のその先へ。Miss Grand Japan・Mr Gay JapanのOG・OBがつなぐ、新しい挑戦。"
         />
 
+        <article className="yukako-card overflow-hidden border-rosefog/25 bg-porcelain shadow-paper lg:grid lg:grid-cols-2">
+          <div className="flex min-w-0 items-center justify-center bg-ink p-4 sm:p-6">
+            <div className="aspect-[9/16] w-full max-w-[390px] overflow-hidden rounded-sm border border-white/15 bg-black shadow-2xl">
+              <video
+                controls
+                playsInline
+                preload="metadata"
+                poster={mgjNextDanceNew.videoPoster}
+                aria-label="MGJ NEXT「Body & Soul」ダンス動画 2026.9.18（サイト内再生）"
+                className="h-full w-full bg-black object-contain"
+              >
+                <source src={mgjNextDanceNew.videoSrc} type="video/mp4" />
+              </video>
+            </div>
+          </div>
+
+          <div className="flex min-w-0 flex-col justify-center p-6 sm:p-9 lg:p-12">
+            <div className="flex flex-wrap items-center gap-2 text-xs font-black uppercase tracking-[0.14em] text-champagneInk">
+              <span className="border border-champagne/45 bg-white px-3 py-1.5">MGJ NEXT</span>
+              <span className="border border-rosefog/35 bg-[#fff1f6] px-3 py-1.5 text-[#8d4260]">Instagram Repost</span>
+              <span className="text-ink/45">2026.9.18</span>
+            </div>
+
+            <p className="mt-6 text-sm font-bold text-champagneInk">#SPEED_ボディソRemixチャレンジ</p>
+            <h3 className="mt-2 font-display text-3xl leading-tight text-ink sm:text-4xl">
+              アラサーの本気で「Body & Soul」
+            </h3>
+
+            <p className="mt-6 text-base leading-8 text-ink/70">
+              「ど素人がSPEEDさんのBody&Soulを踊りました」——MGJ NEXT運営代表のTaTaさん、優花子さん、MEIKOさん（MISS GRAND JAPAN 2026 ファイナリスト）の3人。「何歳でも人生楽しもう」
+            </p>
+
+            <ul className="mt-5 space-y-1.5 text-sm leading-7 text-ink/70">
+              <li>
+                TaTa（
+                <a
+                  href={mgjNextDanceNew.tataUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-champagneInk underline underline-offset-4"
+                >
+                  @tata_diet711_official
+                </a>
+                ）MGJ NEXT 運営代表
+              </li>
+              <li>
+                吉井優花子（
+                <a
+                  href={mgjNextDanceNew.yukakoProfileUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-champagneInk underline underline-offset-4"
+                >
+                  @yoppy_777
+                </a>
+                ）MISS GRAND JAPAN 2025 ファイナリスト
+              </li>
+              <li>
+                MEIKO（
+                <a
+                  href={mgjNextDanceNew.meikoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-champagneInk underline underline-offset-4"
+                >
+                  @meeeik_o
+                </a>
+                ）MISS GRAND JAPAN 2026 ファイナリスト
+              </li>
+            </ul>
+
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <a
+                href={mgjNextDanceNew.sourcePostUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => trackPortalEvent("sns_click", { kind: "instagram", placement: "mgj_next_2026_09_18_source" })}
+                className="yukako-button yukako-button-gold min-h-12 px-5 py-3 text-sm"
+              >
+                InstagramでこのReelを見る →
+              </a>
+              <a
+                href={mgjNextDanceNew.yukakoProfileUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => trackPortalEvent("sns_click", { kind: "instagram", placement: "mgj_next_2026_09_18_yukako" })}
+                className="yukako-button min-h-12 border border-champagne bg-white px-5 py-3 text-sm font-bold text-ink transition hover:bg-porcelain"
+              >
+                優花子のInstagramへ →
+              </a>
+            </div>
+
+            <p className="mt-5 text-xs leading-6 text-ink/50">
+              #Repost @tata_diet711_official。動画はサイト内で再生できます。再生できない場合は、Instagramの元投稿からご覧ください。
+            </p>
+          </div>
+        </article>
+
+        <div id="mgj-next-body-and-soul-2026-09-12" className="mt-14 scroll-mt-32 border-t border-rosefog/25 pt-12">
+          <p className="text-center text-xs font-black uppercase tracking-[0.18em] text-ink/45">
+            Previous Dance
+          </p>
+          <h3 className="mt-2 mb-7 text-center font-display text-2xl text-ink sm:text-3xl">
+            3人で踊る「Body & Soul」
+          </h3>
         <article className="yukako-card overflow-hidden border-rosefog/25 bg-porcelain shadow-paper lg:grid lg:grid-cols-2">
           <div className="flex min-w-0 items-center justify-center bg-ink p-4 sm:p-6">
             <div className="aspect-[9/16] w-full max-w-[390px] overflow-hidden rounded-sm border border-white/15 bg-black shadow-2xl">
@@ -90,6 +204,7 @@ export function LatestInstagramSection() {
             </p>
           </div>
         </article>
+        </div>
 
         <div id="previous-instagram-reel" className="mt-14 scroll-mt-32 border-t border-rosefog/25 pt-12">
           <p className="text-center text-xs font-black uppercase tracking-[0.18em] text-ink/45">

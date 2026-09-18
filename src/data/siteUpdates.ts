@@ -74,6 +74,21 @@ const sourcePlatform = (url: string) => {
 // 専用セクションを持つ単発トピック。本文は各セクションが持つため、ここは見出しと導線のみ。
 const standaloneUpdatesAll: SiteUpdate[] = [
   {
+    id: "mgj-next-body-and-soul-2026-09-18",
+    date: "2026.9.18",
+    category: "MGJ NEXT",
+    title: "アラサーの本気で『Body & Soul』——3人のダンス",
+    summary:
+      "「ど素人がSPEEDさんのBody&Soulを踊りました」。TaTaさん、優花子さん、MEIKOさんの3人。「何歳でも人生楽しもう」",
+    image: {
+      src: "/images/yukako-mgj-next-body-and-soul-2026-09-18.jpg",
+      alt: "屋外で3人が両手を上げて踊る縦位置の動画サムネイル。画面中央にBodyの文字"
+    },
+    imageLayout: "contain",
+    sourceUrl: "https://www.instagram.com/reel/DdbLANUy4Aj/",
+    anchor: "#latest-reel"
+  },
+  {
     id: "baby-shark-fukuyama-kurume-2026-09-18",
     date: "2026.9.18",
     category: "Instagram",

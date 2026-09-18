@@ -113,6 +113,37 @@ try {
     "/images/yukako-mgj-next-body-and-soul-2026-09-12.jpg"
   );
   assert.equal(mgjNextUpdate.imageLayout, "contain");
+  const mgjNextNewUpdate = latestSiteUpdates.find(
+    (update) => update.id === "mgj-next-body-and-soul-2026-09-18"
+  );
+  assert.ok(mgjNextNewUpdate, "9/18 MGJ NEXT Body & Soulが最新情報から消えている");
+  assert.equal(
+    mgjNextNewUpdate.sourceUrl,
+    "https://www.instagram.com/reel/DdbLANUy4Aj/"
+  );
+  assert.equal(mgjNextNewUpdate.category, "MGJ NEXT");
+  assert.match(mgjNextNewUpdate.title ?? "", /Body & Soul/);
+  assert.equal(
+    mgjNextNewUpdate.image?.src,
+    "/images/yukako-mgj-next-body-and-soul-2026-09-18.jpg"
+  );
+  assert.equal(mgjNextNewUpdate.imageLayout, "contain");
+  assert.equal(mgjNextNewUpdate.anchor, "#latest-reel");
+  assert.ok(
+    existsSync(new URL("../public/videos/yukako-mgj-next-body-and-soul-2026-09-18.mp4", import.meta.url)),
+    "9/18 Body & Soulの動画が public/videos に無い"
+  );
+  assert.ok(
+    existsSync(new URL("../public/images/yukako-mgj-next-body-and-soul-2026-09-18.jpg", import.meta.url)),
+    "9/18 Body & Soulのポスターが public/images に無い"
+  );
+  assert.equal(
+    latestSiteUpdates.filter(
+      (update) => update.sourceUrl === "https://www.instagram.com/reel/DdbLANUy4Aj/"
+    ).length,
+    1,
+    "9/18 Body & Soulが最新情報に重複している"
+  );
   const missPeaceUpdate = latestSiteUpdates.find(
     (update) => update.id === "miss-grand-japan-miss-peace-reflection-2026-09-11"
   );
