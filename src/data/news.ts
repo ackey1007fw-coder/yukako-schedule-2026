@@ -11,6 +11,13 @@ export type NewsItem = {
 
 export const news: NewsItem[] = [
   {
+    date: "2026.9.18",
+    label: "Instagram",
+    text:
+      "「8月は大垣でみんなに会えてとっても嬉しかったよ」——次は福山9/19、久留米9/20。🐚ヘッティー＆パール",
+    url: "https://www.instagram.com/p/DdbEOcelBoI/"
+  },
+  {
     date: "2026.9.15",
     label: "X",
     text:

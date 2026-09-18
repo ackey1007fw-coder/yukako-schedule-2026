@@ -233,9 +233,9 @@ export const events: ScheduleEvent[] = [
     dates: ["2026-09-19"],
     displayDate: "2026年9月19日（土）",
     venue: "ふくやま芸術文化ホール リーデンローズ（広島県福山市松浜町二丁目1番10号）",
-    image: "/images/baby-shark/baby-shark-hetty.jpg",
+    image: "/images/baby-shark/baby-shark-hetty-with-babyshark-2026-09-18.jpg",
     summary:
-      "本人のInstagramストーリーズで出演が確認できた福山公演。①11:30／②14:00の2回公演で、2回目は終演後にお見送りあり。上演時間は約65分。",
+      "①11:30／②14:00の2回公演。2回目は終演後にお見送りあり。上演時間は約65分。",
     badges: ["舞台", "全国公演", "2回公演", "お見送り有"],
     links: [
       {
@@ -244,8 +244,8 @@ export const events: ScheduleEvent[] = [
         kind: "ticket"
       },
       {
-        label: "優花子さんのInstagramを見る",
-        url: "https://www.instagram.com/yoppy_777",
+        label: "出演回のお知らせ（吉井優花子 Instagram）",
+        url: "https://www.instagram.com/p/DdbEOcelBoI/",
         kind: "sns"
       },
       {
@@ -271,9 +271,9 @@ export const events: ScheduleEvent[] = [
     dates: ["2026-09-20"],
     displayDate: "2026年9月20日（日）",
     venue: "久留米シティプラザ ザ・グランドホール（福岡県久留米市六ツ門町8-1）",
-    image: "/images/baby-shark/baby-shark-hetty.jpg",
+    image: "/images/baby-shark/baby-shark-hetty-with-babyshark-2026-09-18.jpg",
     summary:
-      "本人のInstagramストーリーズで出演が確認できた久留米公演。①11:30／②14:00の2回公演で、2回目は終演後にお見送りあり。上演時間は約65分。",
+      "①11:30／②14:00の2回公演。2回目は終演後にお見送りあり。上演時間は約65分。",
     badges: ["舞台", "全国公演", "2回公演", "お見送り有"],
     links: [
       {
@@ -282,8 +282,8 @@ export const events: ScheduleEvent[] = [
         kind: "ticket"
       },
       {
-        label: "優花子さんのInstagramを見る",
-        url: "https://www.instagram.com/yoppy_777",
+        label: "出演回のお知らせ（吉井優花子 Instagram）",
+        url: "https://www.instagram.com/p/DdbEOcelBoI/",
         kind: "sns"
       },
       {
