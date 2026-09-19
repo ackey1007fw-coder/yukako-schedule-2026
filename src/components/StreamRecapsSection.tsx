@@ -18,6 +18,11 @@ function RecapPart({ id, title, children }: { id: string; title: string; childre
 
 function RecapContent({ recap }: { recap: PublishedStreamRecap }) {
   return <>
+    {recap.image && <div className="mt-5 text-sm leading-7 text-ink/75">
+      <p>{recap.image.caption}</p>
+      <a href={recap.image.src} download={recap.image.downloadName} className={`inline-flex min-h-11 items-center text-sm font-bold text-champagneInk underline underline-offset-4 ${focusStyle}`}>配信画像を保存</a>
+    </div>}
+    {recap.timestampNote && <p className="mt-4 border-l-2 border-champagne/40 pl-3 text-xs leading-6 text-ink/70">{recap.timestampNote}</p>}
     {!!recap.songs?.length && <RecapPart id={`${recap.id}-songs`} title="この回に歌った曲">
       <p className="mt-3 text-xs leading-6 text-ink/70">時刻は録画内の目安。原曲へのリンクは、優花子さんの歌唱映像とは別のものです。</p>
       <ol className="mt-3 space-y-3">{recap.songs.map((song) => <li key={`${song.timestamp}-${song.title}`} className="min-w-0 border border-champagne/25 bg-porcelain p-4">
@@ -62,6 +67,7 @@ function RecapContent({ recap }: { recap: PublishedStreamRecap }) {
 export function StreamRecapCard({ recap, defaultOpen = false }: { recap: StreamRecap; defaultOpen?: boolean }) {
   const [open, setOpen] = useState(defaultOpen);
   const id = recapAnchor(recap.id);
+  const cover = recap.status === "published" ? recap.image ?? recap.gallery?.[0] : undefined;
   useEffect(() => {
     let frame = 0;
     const followLink = () => {
@@ -80,14 +86,15 @@ export function StreamRecapCard({ recap, defaultOpen = false }: { recap: StreamR
       <span className="flex flex-wrap items-center gap-2 text-xs font-bold">
         <time dateTime={recap.date} className="text-champagneInk">{recapDateLabel(recap.date)}</time>
         <span className="border border-rosefog/25 px-2 py-1 text-rosefog">{recap.platform}</span>
+        {recap.status === "published" && recap.mode === "radio" && <span className="border border-champagne/35 px-2 py-1 text-champagneInk">ラジオ配信</span>}
         <span className="bg-porcelain px-2 py-1 text-ink/75">{recap.status === "published" ? "配信メモ" : "メモ準備中"}</span>
         <ChevronDown aria-hidden="true" className="ml-auto h-5 w-5 shrink-0 text-rosefog transition-transform group-open:rotate-180 motion-reduce:transition-none" />
       </span>
       <h3 className="mt-4 break-words font-display text-2xl leading-snug text-ink sm:text-3xl">{recap.title}</h3>
       <p className="mt-3 break-words text-sm leading-7 text-ink/80">{recap.summary}</p>
       {recap.recording && <p className="mt-4 flex items-start gap-2 text-xs leading-6 text-ink/70"><Clock3 aria-hidden="true" className="mt-1 h-4 w-4 shrink-0" />{recordingLabel(recap.recording)}</p>}
-      {recap.status === "published" && recap.gallery?.[0] && <figure className="mx-auto mt-5 max-w-2xl overflow-hidden bg-porcelain">
-        <img {...getResponsiveImageProps(recap.gallery[0].src, "(min-width: 1024px) 640px, 100vw")} width={recap.gallery[0].width} height={recap.gallery[0].height} alt={recap.gallery[0].alt} loading="lazy" decoding="async" className="block h-auto w-full object-contain" />
+      {cover && <figure className="mx-auto mt-5 max-w-2xl overflow-hidden bg-porcelain">
+        <img {...getResponsiveImageProps(cover.src, "(min-width: 1024px) 640px, 100vw")} width={cover.width} height={cover.height} alt={cover.alt} loading="lazy" decoding="async" className="block h-auto w-full object-contain" />
       </figure>}
       <span className="mt-4 inline-block text-xs font-bold text-champagneInk"><span className="group-open:hidden">この回を開く</span><span className="hidden group-open:inline">閉じる</span></span>
     </summary>

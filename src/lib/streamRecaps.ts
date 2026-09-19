@@ -21,5 +21,8 @@ export function recordingLabel(recording: NonNullable<StreamRecap["recording"]>)
   const time = new Intl.DateTimeFormat("ja-JP", {
     timeZone: "Asia/Tokyo", hour: "numeric", minute: "2-digit", hourCycle: "h23",
   }).format(new Date(recording.startedAt));
-  return `記録：${time}頃から・約${Math.round(recording.durationSeconds / 60)}分`;
+  const duration = Math.round(recording.durationSeconds / 60);
+  return recording.segmentCount && recording.segmentCount > 1
+    ? `記録：${time}頃から・${recording.segmentCount}区間の保存分計約${duration}分`
+    : `記録：${time}頃から・約${duration}分`;
 }

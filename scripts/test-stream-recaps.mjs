@@ -44,7 +44,7 @@ try {
       assert.ok(recap.recording.durationSeconds > 0 && Number.isFinite(recap.recording.durationSeconds));
     }
     if (recap.status === "preparing") {
-      for (const key of ["highlights", "songs", "gallery", "galleryZip", "timeline", "nextNote"]) assert.equal(recap[key], undefined, `Unreviewed field: ${key}`);
+      for (const key of ["highlights", "songs", "gallery", "galleryZip", "timeline", "nextNote", "image", "mode", "timestampNote"]) assert.equal(recap[key], undefined, `Unreviewed field: ${key}`);
     } else {
       for (const key of ["highlights", "songs", "timeline"]) {
         let previous = -1;
@@ -54,7 +54,7 @@ try {
           if (recap.recording) assert.ok(seconds < recap.recording.durationSeconds);
         }
       }
-      for (const image of recap.gallery ?? []) {
+      for (const image of [...(recap.gallery ?? []), ...(recap.image ? [recap.image] : [])]) {
         localAsset(image.src);
         assert.ok(image.width > 0 && image.height > 0);
         const metadata = await sharp(readFileSync(new URL(`../public${image.src}`, import.meta.url))).metadata();
@@ -103,6 +103,31 @@ try {
   assert.equal(current.highlights.length, 8);
   assert.equal(current.timeline.at(-1).timestamp, "0:26:44");
   assert.match(html, /yukako-2026-09-16-night-stills.zip/);
+  const radio = streamRecaps.find((recap) => recap.id === "2026-09-18-evening-radio");
+  assert.ok(radio);
+  assert.equal(radio.status, "published");
+  assert.equal(radio.mode, "radio");
+  assert.equal(radio.recording.segmentCount, 2);
+  assert.equal(radio.recording.durationSeconds, 1179.501);
+  assert.equal(recordingLabel(radio.recording), "記録：18:41頃から・2区間の保存分計約20分");
+  assert.equal(radio.gallery, undefined);
+  assert.equal(radio.galleryZip, undefined);
+  assert.equal(radio.songs, undefined);
+  assert.match(radio.timestampNote, /2本/);
+  const radioHtml = render(StreamRecapCard, { recap: radio, defaultOpen: true });
+  assert.equal((radioHtml.match(/<img /g) ?? []).length, 1, "The radio still must be displayed only once");
+  assert.match(radioHtml, /ラジオ配信/);
+  assert.match(radioHtml, /配信画像を保存/);
+  assert.match(radioHtml, /download="yukako-2026-09-18-radio.jpg"/);
+  assert.match(radioHtml, /録画/);
+  assert.doesNotMatch(radioHtml, /スクショをまとめて保存|この回のスクショ|この回に歌った曲/);
+  const orderedIds = sortStreamRecaps(streamRecaps).map((recap) => recap.id);
+  assert.ok(orderedIds.indexOf(radio.id) < orderedIds.indexOf("2026-09-17-night"));
+  assert.equal(streamRecaps.find((recap) => recap.id === "2026-09-17-night").gallery.length, 18);
+  const heldRadio = render(StreamRecapCard, { recap: { ...radio, status: "preparing" } });
+  assert.doesNotMatch(heldRadio, /<img |配信画像を保存|ラジオ配信<\/span>/);
+  assert.ok(!heldRadio.includes(radio.timestampNote));
+
   const fixture = { ...current, id: "2026-09-16-test", status: "published", summary: "テスト用の本文", songs: [{ timestamp: "0:00:05", title: "テスト曲", artist: "テスト歌手", originalUrl: "https://example.com/original" }], highlights: [{ timestamp: "0:00:10", title: "テスト項目", body: "テスト本文" }], gallery: [{ src: "/images/fixture.jpg", width: 640, height: 360, alt: "吉井優花子さんのテスト画像", caption: "テスト写真", downloadName: "fixture.jpg" }], timeline: [{ timestamp: "0:00:10", label: "テスト時刻" }], nextNote: "配信時点の案内テスト" };
   const full = render(StreamRecapCard, { recap: fixture, defaultOpen: true });
   const headings = ["この回に歌った曲", "この回の見どころ", "この回のスクショ", "タイムスタンプ", "配信時点の次回案内", "出典："];
