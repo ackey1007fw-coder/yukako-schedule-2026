@@ -1,3 +1,4 @@
+import { streamRecap20260918Radio } from "./streamRecap20260918Radio";
 import { streamRecap20260917Night } from "./streamRecap20260917Night";
 import { streamRecap20260916Night } from "./streamRecap20260916Night";
 
@@ -25,7 +26,7 @@ type RecapBase = {
   summary: string;
   platform: "SHOWROOM";
   /** Recording metadata, not a claim about the whole broadcast. */
-  recording?: { startedAt: string; durationSeconds: number };
+  recording?: { startedAt: string; durationSeconds: number; segmentCount?: number };
   sourceLabel: string;
   verifiedAt: string;
 };
@@ -33,6 +34,10 @@ type RecapBase = {
 export type PublishedStreamRecap = RecapBase & {
   status: "published";
   verificationNote?: string;
+  timestampNote?: string;
+  mode?: "radio";
+  /** A single nominated broadcast still; not duplicated as a gallery. */
+  image?: StreamRecapImage;
   highlights?: readonly StreamRecapHighlight[];
   songs?: readonly StreamRecapSong[];
   gallery?: readonly StreamRecapImage[];
@@ -45,6 +50,7 @@ export type PublishedStreamRecap = RecapBase & {
 export type StreamRecap = PublishedStreamRecap | (RecapBase & { status: "preparing" });
 
 export const streamRecaps: readonly StreamRecap[] = [
+  streamRecap20260918Radio,
   streamRecap20260917Night,
   streamRecap20260916Night,
 ];
