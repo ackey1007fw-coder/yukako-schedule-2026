@@ -174,7 +174,10 @@ export const createNewsCandidate = (item: NewsItem): PortalFeedCandidate | undef
 
   return {
     dataset: "news",
-    dedupeKeys: dedupeKey ? [dedupeKey] : [`news:${stableHash(stableMaterial)}`],
+    dedupeKeys: [
+      ...(dedupeKey ? [dedupeKey] : [`news:${stableHash(stableMaterial)}`]),
+      ...(item.siteUpdateId ? [`update:${item.siteUpdateId}`] : [])
+    ],
     item: {
       id: `yukako:news:${stableHash(stableMaterial)}`,
       personId: PERSON_ID,
@@ -209,7 +212,7 @@ const siteUpdateCandidates: PortalFeedCandidate[] = siteUpdates.flatMap((update)
         normalizedUrl(update.sourceUrl) ?? `${anchor}|${update.date}|${update.title}`
       )}`
     : update.id;
-  const dedupeKeys = [`topic:${topicKey(stableLocalId)}`];
+  const dedupeKeys = [`topic:${topicKey(stableLocalId)}`, `update:${update.id}`];
   const externalKey = sourceKey(update.sourceUrl);
   if (externalKey) dedupeKeys.push(externalKey);
 

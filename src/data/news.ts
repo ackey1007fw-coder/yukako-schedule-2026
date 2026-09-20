@@ -7,6 +7,8 @@ export type NewsItem = {
   // サイトに載せた日。過去投稿を後から追加するときだけ入れる。
   // Footer の「掲載情報更新」は listedAt ?? date の新しい方を見る。省略時は date。
   listedAt?: string;
+  // 同じ投稿の専用カードがある場合、そのidをportal feedの重複判定に使う。
+  siteUpdateId?: string;
 };
 
 export const news: NewsItem[] = [
@@ -14,8 +16,9 @@ export const news: NewsItem[] = [
     date: "2026.9.21",
     label: "Instagram",
     text:
-      "「次回出演は来年♪みんな来てね」——直近では11月末のプロデュース舞台。「頑張るぞ〜（凄い作品レベルです）」",
-    url: "https://www.instagram.com/yoppy_777"
+      "「次回出演は来年♪みんな来てね😊」——直近では11月末のプロデュース舞台。「頑張るぞ〜✨（凄い作品レベルです）」",
+    url: "https://www.instagram.com/yoppy_777",
+    siteUpdateId: "theater-next-year-story-2026-09-21"
   },
   {
     date: "2026.9.18",
