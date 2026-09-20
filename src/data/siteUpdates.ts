@@ -314,7 +314,7 @@ const standaloneUpdatesAll: SiteUpdate[] = [
     },
     imageLayout: "contain",
     sourceUrl: "https://www.instagram.com/reel/DIoCRxxTKMS/",
-    anchor: "#latest-reel"
+    anchor: "#mgj-next-body-and-soul-2026-09-12"
   },
   {
     id: "latest-instagram-reel",
