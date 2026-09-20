@@ -11,6 +11,13 @@ export type NewsItem = {
 
 export const news: NewsItem[] = [
   {
+    date: "2026.9.21",
+    label: "Instagram",
+    text:
+      "「次回出演は来年♪みんな来てね」——直近では11月末のプロデュース舞台。「頑張るぞ〜（凄い作品レベルです）」",
+    url: "https://www.instagram.com/yoppy_777"
+  },
+  {
     date: "2026.9.18",
     label: "Instagram",
     text:

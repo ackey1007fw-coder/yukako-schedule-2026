@@ -113,6 +113,30 @@ try {
     "/images/yukako-mgj-next-body-and-soul-2026-09-12.jpg"
   );
   assert.equal(mgjNextUpdate.imageLayout, "contain");
+  const theaterStoryUpdate = latestSiteUpdates.find(
+    (update) => update.id === "theater-next-year-story-2026-09-21"
+  );
+  assert.ok(theaterStoryUpdate, "9/21 劇場ストーリーズが最新情報から消えている");
+  assert.equal(theaterStoryUpdate.date, "2026.9.21");
+  assert.equal(theaterStoryUpdate.category, "Instagram");
+  assert.equal(theaterStoryUpdate.sourceUrl, "https://www.instagram.com/yoppy_777");
+  assert.equal(
+    theaterStoryUpdate.image?.src,
+    "/images/yukako-theater-arms-open-story-2026-09-21.jpg"
+  );
+  assert.equal(theaterStoryUpdate.imageLayout, "contain");
+  assert.match(theaterStoryUpdate.title ?? "", /次回出演は来年/);
+  assert.match(theaterStoryUpdate.summary ?? "", /11月末のプロデュース舞台/);
+  assert.doesNotMatch(theaterStoryUpdate.title ?? "", /公式|公認/);
+  assert.ok(
+    existsSync(new URL("../public/images/yukako-theater-arms-open-story-2026-09-21.jpg", import.meta.url)),
+    "9/21 劇場ストーリーズの写真が public/images に無い"
+  );
+  assert.equal(
+    latestSiteUpdates.filter((update) => update.id === "theater-next-year-story-2026-09-21").length,
+    1,
+    "9/21 劇場ストーリーズが最新情報に重複している"
+  );
   const mgjNextNewUpdate = latestSiteUpdates.find(
     (update) => update.id === "mgj-next-body-and-soul-2026-09-18"
   );
@@ -457,6 +481,21 @@ try {
   assert.match(popcornOrigin.summary ?? "", /8\/17の『再び食べた』投稿につながる元投稿/);
   const { news, latestNewsListingDate } = await server.ssrLoadModule(
     "/src/data/news.ts"
+  );
+  const theaterStoryNews = news.find(
+    (item) =>
+      item.date === "2026.9.21" && item.url === "https://www.instagram.com/yoppy_777"
+  );
+  assert.ok(theaterStoryNews, "news.ts に9/21 劇場ストーリーズが無い");
+  assert.match(theaterStoryNews.text ?? "", /次回出演は来年/);
+  assert.match(theaterStoryNews.text ?? "", /11月末のプロデュース舞台/);
+  assert.equal(
+    news.filter(
+      (item) =>
+        item.date === "2026.9.21" && item.url === "https://www.instagram.com/yoppy_777"
+    ).length,
+    1,
+    "news.ts に9/21 劇場ストーリーズが重複登録されている"
   );
   const castCallNews = news.find((item) => item.url === castCallUpdate.sourceUrl);
   assert.ok(castCallNews, "news.ts に9/15 出演者募集が無い");
@@ -1478,21 +1517,21 @@ try {
   const { galleryPhotos } = await server.ssrLoadModule("/src/data/photos.ts");
   assert.equal(
     galleryPhotos[0]?.src,
-    "/images/baby-shark/baby-shark-hetty-with-babyshark-2026-09-18.jpg",
-    "ギャラリー先頭に9/18 ベイビーシャーク ヘッティー写真が無い"
+    "/images/yukako-theater-arms-open-story-2026-09-21.jpg",
+    "ギャラリー先頭に9/21 劇場ストーリーズ写真が無い"
   );
   assert.equal(
     galleryPhotos[1]?.src,
+    "/images/baby-shark/baby-shark-hetty-with-babyshark-2026-09-18.jpg",
+    "ギャラリー先頭付近から9/18 ベイビーシャーク ヘッティー写真が消えている"
+  );
+  assert.equal(
+    galleryPhotos[2]?.src,
     "/images/yukako-mgj-miss-peace-reflection-2026-09-11.jpg",
     "ギャラリー先頭付近から9/11 MISS PEACE振り返りの写真が消えている"
   );
   assert.equal(
-    galleryPhotos[2]?.src,
-    "/images/yukako-omagari-akita-inu-members-2026-09-05.jpg",
-    "ギャラリー先頭付近から秋田犬ツアーメンバーの写真が消えている"
-  );
-  assert.equal(
-    galleryPhotos[4]?.src,
+    galleryPhotos[5]?.src,
     "/images/yukako-omagari-shinchan-statue-2026-09-05.jpg",
     "ギャラリー先頭付近にしんちゃん像の写真が無い"
   );
