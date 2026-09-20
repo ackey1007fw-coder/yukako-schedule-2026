@@ -77,9 +77,9 @@ const standaloneUpdatesAll: SiteUpdate[] = [
     id: "theater-next-year-story-2026-09-21",
     date: "2026.9.21",
     category: "Instagram",
-    title: "「次回出演は来年♪みんな来てね」——11月末はプロデュース舞台",
+    title: "「次回出演は来年♪みんな来てね😊」——11月末はプロデュース舞台",
     summary:
-      "直近では11月末のプロデュース舞台。「頑張るぞ〜（凄い作品レベルです）」",
+      "直近では11月末のプロデュース舞台。「頑張るぞ〜✨（凄い作品レベルです）」",
     image: {
       src: "/images/yukako-theater-arms-open-story-2026-09-21.jpg",
       alt: "赤い客席の劇場ステージ上で、白いキャップに黒い服、両手を大きく広げて立つ吉井優花子さん。画面中央に次回出演は来年、直近では11月末のプロデュース舞台の文字"

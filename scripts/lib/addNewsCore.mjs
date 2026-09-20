@@ -194,7 +194,7 @@ export function normalizeTextForCompare(text) {
 export function extractNewsItems(source) {
   const items = [];
   const itemRe =
-    /\{\s*date:\s*"((?:\\.|[^"\\])*)"\s*,\s*label:\s*"((?:\\.|[^"\\])*)"\s*,\s*text:\s*"((?:\\.|[^"\\])*)"\s*,\s*url:\s*"((?:\\.|[^"\\])*)"(?:\s*,\s*listedAt:\s*"((?:\\.|[^"\\])*)")?\s*\}/g;
+    /\{\s*date:\s*"((?:\\.|[^"\\])*)"\s*,\s*label:\s*"((?:\\.|[^"\\])*)"\s*,\s*text:\s*"((?:\\.|[^"\\])*)"\s*,\s*url:\s*"((?:\\.|[^"\\])*)"(?:\s*,\s*listedAt:\s*"((?:\\.|[^"\\])*)")?(?:\s*,\s*siteUpdateId:\s*"((?:\\.|[^"\\])*)")?\s*\}/g;
   let match;
   while ((match = itemRe.exec(source)) !== null) {
     items.push({
@@ -202,7 +202,8 @@ export function extractNewsItems(source) {
       label: unescapeTsString(match[2]),
       text: unescapeTsString(match[3]),
       url: unescapeTsString(match[4]),
-      ...(match[5] ? { listedAt: unescapeTsString(match[5]) } : {})
+      ...(match[5] ? { listedAt: unescapeTsString(match[5]) } : {}),
+      ...(match[6] ? { siteUpdateId: unescapeTsString(match[6]) } : {})
     });
   }
   return items;

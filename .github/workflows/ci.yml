@@ -50,5 +50,8 @@ jobs:
       - name: Build
         run: pnpm build
 
+      - name: Portal feed regression tests
+        run: pnpm test:portal-feed
+
       - name: Site identity guard
         run: node scripts/check-site-identity.mjs main
