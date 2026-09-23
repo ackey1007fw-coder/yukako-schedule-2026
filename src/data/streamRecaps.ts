@@ -1,4 +1,5 @@
 import { streamRecap20260918Radio } from "./streamRecap20260918Radio";
+import { streamRecap20260922Radio } from "./streamRecap20260922Radio";
 import { streamRecap20260917Night } from "./streamRecap20260917Night";
 import { streamRecap20260916Night } from "./streamRecap20260916Night";
 
@@ -42,6 +43,7 @@ export type PublishedStreamRecap = RecapBase & {
   songs?: readonly StreamRecapSong[];
   gallery?: readonly StreamRecapImage[];
   galleryZip?: { src: string; filename: string };
+  clip?: { src: string; poster: string; caption: string };
   timeline?: readonly { timestamp: string; label: string }[];
   nextNote?: string;
 };
@@ -50,6 +52,7 @@ export type PublishedStreamRecap = RecapBase & {
 export type StreamRecap = PublishedStreamRecap | (RecapBase & { status: "preparing" });
 
 export const streamRecaps: readonly StreamRecap[] = [
+  streamRecap20260922Radio,
   streamRecap20260918Radio,
   streamRecap20260917Night,
   streamRecap20260916Night,

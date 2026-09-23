@@ -351,6 +351,7 @@ export const imageManifest = {
   "/images/stream-recaps/yukako-2026-09-17-night-17.jpg": {"width":640,"height":360,"widths":[360,480,640]},
   "/images/stream-recaps/yukako-2026-09-17-night-18.jpg": {"width":640,"height":360,"widths":[360,480,640]},
   "/images/stream-recaps/yukako-2026-09-18-radio.jpg": {"width":640,"height":360,"widths":[360,480,640]},
+  "/images/stream-recaps/yukako-2026-09-22-radio.jpg": {"width":640,"height":360,"widths":[360,480,640]},
   "/images/yukajet/2026-07-21-eri1408-saki-three-shot-story.jpg": {"width":1179,"height":2096,"widths":[360,480,720,960,1179]},
   "/images/yukajet/2026-07-22-mokoopy-2079594085653070145-01.jpg": {"width":1100,"height":1453,"widths":[360,480,720,960,1100]},
   "/images/yukajet/2026-07-22-opening-eve/yukajet-opening-eve-01.jpg": {"width":1536,"height":2048,"widths":[360,480,720,960,1280,1536]},
