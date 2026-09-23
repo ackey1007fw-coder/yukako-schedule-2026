@@ -70,6 +70,7 @@ try {
         assert.ok(existsSync(new URL(`../public${recap.clip.src}`, import.meta.url)));
         localAsset(recap.clip.poster);
         assert.ok(recap.clip.caption.trim());
+        assert.ok(recap.clip.transcript.trim());
       }
       for (const song of recap.songs ?? []) {
         assert.ok(song.title && song.artist);
@@ -137,6 +138,8 @@ try {
   const latestRadioHtml = render(StreamRecapCard, { recap: latestRadio, defaultOpen: true });
   assert.equal((latestRadioHtml.match(/<img /g) ?? []).length, 1);
   assert.match(latestRadioHtml, /<video[^>]*controls/);
+  assert.match(latestRadioHtml, /width="720" height="1280"/);
+  assert.match(latestRadioHtml, /音声テキスト/);
   assert.match(latestRadioHtml, /yukako-2026-09-22-radio-jelly-vertical\.mp4/);
   const orderedIds = sortStreamRecaps(streamRecaps).map((recap) => recap.id);
   assert.ok(orderedIds.indexOf(latestRadio.id) < orderedIds.indexOf(radio.id));

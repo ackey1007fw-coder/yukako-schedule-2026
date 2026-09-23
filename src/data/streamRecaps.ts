@@ -43,7 +43,7 @@ export type PublishedStreamRecap = RecapBase & {
   songs?: readonly StreamRecapSong[];
   gallery?: readonly StreamRecapImage[];
   galleryZip?: { src: string; filename: string };
-  clip?: { src: string; poster: string; caption: string };
+  clip?: { src: string; poster: string; caption: string; transcript: string };
   timeline?: readonly { timestamp: string; label: string }[];
   nextNote?: string;
 };

@@ -23,13 +23,14 @@ function RecapContent({ recap }: { recap: PublishedStreamRecap }) {
       <a href={recap.image.src} download={recap.image.downloadName} className={`inline-flex min-h-11 items-center text-sm font-bold text-champagneInk underline underline-offset-4 ${focusStyle}`}>配信画像を保存</a>
     </div>}
     {recap.clip && <RecapPart id={`${recap.id}-clip`} title="声で振り返る、この回のひとこま">
-      <figure className="mt-4 max-w-2xl">
-        <video controls playsInline preload="metadata" poster={recap.clip.poster} className="block h-auto w-full bg-ink" aria-label={`${recap.title}の音声付き切り抜き`}>
+      <figure className="mt-4 max-w-sm">
+        <video controls playsInline preload="metadata" width={720} height={1280} poster={recap.clip.poster} className="block aspect-[9/16] w-full bg-ink object-contain" aria-label={`${recap.title}の音声付き切り抜き`}>
           <source src={recap.clip.src} type="video/mp4" />
           お使いのブラウザでは動画を再生できません。
         </video>
         <figcaption className="mt-2 text-sm leading-6 text-ink/75">{recap.clip.caption}</figcaption>
       </figure>
+      <p className="mt-3 max-w-sm text-xs leading-6 text-ink/70">音声テキスト（自動認識を整文。聞き取りにくい箇所は省略）：{recap.clip.transcript}</p>
     </RecapPart>}
     {recap.timestampNote && <p className="mt-4 border-l-2 border-champagne/40 pl-3 text-xs leading-6 text-ink/70">{recap.timestampNote}</p>}
     {!!recap.songs?.length && <RecapPart id={`${recap.id}-songs`} title="この回に歌った曲">
