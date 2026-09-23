@@ -13,6 +13,12 @@ export type NewsItem = {
 
 export const news: NewsItem[] = [
   {
+    date: "2026.9.22",
+    label: "X",
+    text: "「全然思うままにできてない🥹」——#ゆかJET の投稿について、想いは大きいけれど、丁寧に進めるには時間がかかると綴る。",
+    url: "https://x.com/mokoopy/status/2102347563152322664"
+  },
+  {
     date: "2026.9.21",
     label: "Instagram",
     text:
