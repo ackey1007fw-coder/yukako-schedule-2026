@@ -44,7 +44,7 @@ try {
       assert.ok(recap.recording.durationSeconds > 0 && Number.isFinite(recap.recording.durationSeconds));
     }
     if (recap.status === "preparing") {
-      for (const key of ["highlights", "songs", "gallery", "galleryZip", "timeline", "nextNote", "image", "mode", "timestampNote"]) assert.equal(recap[key], undefined, `Unreviewed field: ${key}`);
+      for (const key of ["highlights", "songs", "gallery", "galleryZip", "clip", "timeline", "nextNote", "image", "mode", "timestampNote"]) assert.equal(recap[key], undefined, `Unreviewed field: ${key}`);
     } else {
       for (const key of ["highlights", "songs", "timeline"]) {
         let previous = -1;
@@ -65,6 +65,13 @@ try {
         assert.ok(image.caption && image.downloadName);
       }
       if (recap.galleryZip) { assert.ok(recap.gallery?.length); localAsset(recap.galleryZip.src); }
+      if (recap.clip) {
+        assert.match(recap.clip.src, /^\/videos\/[a-zA-Z0-9_./-]+\.mp4$/);
+        assert.ok(existsSync(new URL(`../public${recap.clip.src}`, import.meta.url)));
+        localAsset(recap.clip.poster);
+        assert.ok(recap.clip.caption.trim());
+        assert.ok(recap.clip.transcript.trim());
+      }
       for (const song of recap.songs ?? []) {
         assert.ok(song.title && song.artist);
         if (song.originalUrl) assert.equal(new URL(song.originalUrl).protocol, "https:");
@@ -121,7 +128,21 @@ try {
   assert.match(radioHtml, /download="yukako-2026-09-18-radio.jpg"/);
   assert.match(radioHtml, /録画/);
   assert.doesNotMatch(radioHtml, /スクショをまとめて保存|この回のスクショ|この回に歌った曲/);
+  const latestRadio = streamRecaps.find((recap) => recap.id === "2026-09-22-night-radio");
+  assert.ok(latestRadio);
+  assert.equal(latestRadio.status, "published");
+  assert.equal(latestRadio.mode, "radio");
+  assert.equal(latestRadio.recording.durationSeconds, 1427.325);
+  assert.equal(latestRadio.gallery, undefined);
+  assert.equal(latestRadio.songs, undefined);
+  const latestRadioHtml = render(StreamRecapCard, { recap: latestRadio, defaultOpen: true });
+  assert.equal((latestRadioHtml.match(/<img /g) ?? []).length, 1);
+  assert.match(latestRadioHtml, /<video[^>]*controls/);
+  assert.match(latestRadioHtml, /width="720" height="1280"/);
+  assert.match(latestRadioHtml, /音声テキスト/);
+  assert.match(latestRadioHtml, /yukako-2026-09-22-radio-jelly-vertical\.mp4/);
   const orderedIds = sortStreamRecaps(streamRecaps).map((recap) => recap.id);
+  assert.ok(orderedIds.indexOf(latestRadio.id) < orderedIds.indexOf(radio.id));
   assert.ok(orderedIds.indexOf(radio.id) < orderedIds.indexOf("2026-09-17-night"));
   assert.equal(streamRecaps.find((recap) => recap.id === "2026-09-17-night").gallery.length, 18);
   const heldRadio = render(StreamRecapCard, { recap: { ...radio, status: "preparing" } });
