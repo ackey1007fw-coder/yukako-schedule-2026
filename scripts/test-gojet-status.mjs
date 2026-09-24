@@ -1461,7 +1461,7 @@ try {
   const fixtureUpdates = [castCallUpdate, mgjNextUpdate, missPeaceUpdate];
   const latestUpdatesHtml = renderToStaticMarkup(createElement(LatestUpdatesSection, { updates: fixtureUpdates }));
   assert.ok(latestUpdatesHtml.includes("Body &amp; Soul"));
-  assert.ok(latestUpdatesHtml.includes("#latest-reel"));
+  assert.ok(latestUpdatesHtml.includes('href="#mgj-next-body-and-soul-2026-09-12"'));
   assert.ok(latestUpdatesHtml.includes("https://www.instagram.com/reel/DIoCRxxTKMS/"));
   assert.ok(latestUpdatesHtml.includes("出演者募集"));
   assert.ok(latestUpdatesHtml.includes("https://x.com/mokoopy/status/2099829333292675102"));
