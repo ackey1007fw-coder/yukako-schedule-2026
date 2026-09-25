@@ -27,7 +27,7 @@ export const streamRecap20260925Late: PublishedStreamRecap = {
   gallery: stills,
   galleryZip: { src: "/downloads/yukako-2026-09-25-late-stills.zip", filename: "yukako-2026-09-25-late-stills.zip" },
   clip: {
-    src: "/videos/yukako-2026-09-25-late-plush.mp4",
+    src: "/videos/yukako-2026-09-25-late-plush-vertical.mp4",
     poster: stills[5].src,
     caption: "白いぬいぐるみがそばに見える、深夜のおしゃべりを原音のまま約12秒。",
     transcript: "キャラクターなどの話題で、ゆったり話すひとこま。",
