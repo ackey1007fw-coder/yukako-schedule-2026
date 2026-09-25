@@ -1,3 +1,4 @@
+import { streamRecap20260925Late } from "./streamRecap20260925Late";
 import { streamRecap20260918Radio } from "./streamRecap20260918Radio";
 import { streamRecap20260922Radio } from "./streamRecap20260922Radio";
 import { streamRecap20260923Night } from "./streamRecap20260923Night";
@@ -53,6 +54,7 @@ export type PublishedStreamRecap = RecapBase & {
 export type StreamRecap = PublishedStreamRecap | (RecapBase & { status: "preparing" });
 
 export const streamRecaps: readonly StreamRecap[] = [
+  streamRecap20260925Late,
   streamRecap20260923Night,
   streamRecap20260922Radio,
   streamRecap20260918Radio,
