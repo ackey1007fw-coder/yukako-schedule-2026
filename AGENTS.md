@@ -160,7 +160,7 @@ pnpm dev   # http://127.0.0.1:5173 でローカル確認
 - `tailwind.config.ts` の colors トークン:
   - `porcelain` #fffdf7（アイボリー背景/カード）
   - `rosefog` #c8385a（クリムゾン＝アクセント/ラベル/境界）
-  - `champagne` #c29a4a（ゴールド＝装飾・暗い背景上のラベル/境界）
+  - `champagne` #c29a4a（ゴールド＝装飾・暗い背景上のラベル）
   - `champagneInk` #8a6d2e（**白背景で読ませるゴールド文字はこちら**。WCAG対応の濃色）
   - `blush` / `lavender` / `lilac`（補助・暖色）、`ink` #312a2e（本文）、`moss`
 - 白・porcelain 背景のテキストは `champagneInk`、`bg-ink` など暗い背景のテキストは `champagne`。逆にすると読めなくなる。
