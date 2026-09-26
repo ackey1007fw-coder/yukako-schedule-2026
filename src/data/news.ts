@@ -13,6 +13,13 @@ export type NewsItem = {
 
 export const news: NewsItem[] = [
   {
+    date: "2026.9.25",
+    label: "X",
+    text: "「今年の夏も楽しかった✨」——#ポートレート #秋田県。海辺で振り返る一枚。",
+    url: "https://x.com/mokoopy/status/2103488688424644773",
+    listedAt: "2026.9.26"
+  },
+  {
     date: "2026.9.22",
     label: "X",
     text: "「全然思うままにできてない🥹」——#ゆかJET の投稿について、想いは大きいけれど、丁寧に進めるには時間がかかると綴る。",

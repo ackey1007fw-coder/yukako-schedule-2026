@@ -515,6 +515,7 @@ export const imageManifest = {
   "/images/yukako-shuichi-event.jpg": {"width":1524,"height":2048,"widths":[360,480,720,960,1280,1524]},
   "/images/yukako-stage-back.jpg": {"width":1536,"height":2048,"widths":[360,480,720,960,1280,1536]},
   "/images/yukako-stage-front.jpg": {"width":1401,"height":1751,"widths":[360,480,720,960,1280,1401]},
+  "/images/yukako-summer-portrait-2026-09-25.jpg": {"width":1365,"height":2048,"widths":[360,480,720,960,1280,1365]},
   "/images/yukako-theater-arms-open-story-2026-09-21.jpg": {"width":1500,"height":2667,"widths":[360,480,720,960,1280,1500]},
   "/images/yukako-tokyo-20221001.jpg": {"width":1080,"height":1328,"widths":[360,480,720,960,1080]},
   "/images/yukako-yukajet-aban-cast-2026-07-13-selfie.jpg": {"width":2048,"height":1537,"widths":[360,480,720,960,1280,1600,2048]},

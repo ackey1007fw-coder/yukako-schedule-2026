@@ -14,6 +14,10 @@ const driveYukakoPhotos: GalleryPhoto[] = Array.from({ length: 118 }, (_, index)
 
 export const galleryPhotos: GalleryPhoto[] = [
   {
+    src: "/images/yukako-summer-portrait-2026-09-25.jpg",
+    alt: "夕暮れの海辺で、白いTシャツと淡い黄色の衣装姿で振り返って微笑む吉井優花子さん（2026.9.25 Xより）"
+  },
+  {
     src: "/images/yukako-theater-arms-open-story-2026-09-21.jpg",
     alt: "赤い客席の劇場ステージ上で、白いキャップに黒い服、両手を大きく広げて立つ吉井優花子さん（2026.9.21 Instagramストーリーズより）"
   },
@@ -95,8 +99,8 @@ export const galleryUpdate: {
   note: string;
   url: string;
 } = {
-  date: "2026.9.21",
-  platform: "Instagram",
-  note: "劇場ステージで両手を広げるストーリーズ写真を追加",
-  url: "https://www.instagram.com/yoppy_777"
+  date: "2026.9.25",
+  platform: "X",
+  note: "海辺のポートレート写真を追加",
+  url: "https://x.com/mokoopy/status/2103488688424644773"
 };
