@@ -6,17 +6,22 @@ import type { RyomaKunPhoto } from "../data/ryomaKun";
 type RyomaKunLookbackGalleryProps = {
   photos: RyomaKunPhoto[];
   initialVisible?: number;
+  /** グリッドとライトボックスのid・ラベルを分ける（同じページに複数並べるため）。 */
+  id?: string;
+  label?: string;
 };
 
 const DEFAULT_INITIAL_VISIBLE = 8;
 
 /**
  * 振り返り投稿の20枚。文章パネルが含まれるので、タップで拡大できるようにライトボックスを付ける
- * （グリッドのままだと本人の書いた文字が読めない）。
+ * （グリッドのままだと本人の書いた文字が読めない）。稽古場スチールでも同じ見せ方を使う。
  */
 export function RyomaKunLookbackGallery({
   photos,
-  initialVisible = DEFAULT_INITIAL_VISIBLE
+  initialVisible = DEFAULT_INITIAL_VISIBLE,
+  id = "ryoma-kun-lookback-grid",
+  label = "『かわええのう、龍馬くん』振り返り"
 }: RyomaKunLookbackGalleryProps) {
   const [showAll, setShowAll] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
@@ -32,7 +37,7 @@ export function RyomaKunLookbackGallery({
   return (
     <>
       <ul
-        id="ryoma-kun-lookback-grid"
+        id={id}
         className="grid min-w-0 grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4"
       >
         {visiblePhotos.map((photo, index) => (
@@ -68,7 +73,7 @@ export function RyomaKunLookbackGallery({
             onClick={() => setShowAll((current) => !current)}
             className="yukako-button min-h-12 border border-rosefog/35 bg-porcelain px-5 py-3 text-sm font-black text-ink transition hover:border-champagne hover:bg-white"
             aria-expanded={showAll}
-            aria-controls="ryoma-kun-lookback-grid"
+            aria-controls={id}
           >
             {showAll ? `最初の${initialVisible}枚だけ表示` : `残り${remainingPhotos}枚を見る`}
           </button>
@@ -80,7 +85,7 @@ export function RyomaKunLookbackGallery({
           photos={lightboxPhotos}
           index={lightboxIndex}
           onClose={() => setLightboxIndex(null)}
-          label="『かわええのう、龍馬くん』振り返り"
+          label={label}
         />
       )}
     </>
