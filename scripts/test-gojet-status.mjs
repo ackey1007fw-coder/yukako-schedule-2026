@@ -1517,21 +1517,26 @@ try {
   const { galleryPhotos } = await server.ssrLoadModule("/src/data/photos.ts");
   assert.equal(
     galleryPhotos[0]?.src,
-    "/images/yukako-theater-arms-open-story-2026-09-21.jpg",
-    "ギャラリー先頭に9/21 劇場ストーリーズ写真が無い"
+    "/images/yukako-summer-portrait-2026-09-25.jpg",
+    "ギャラリー先頭に9/25 海辺ポートレート写真が無い"
   );
   assert.equal(
     galleryPhotos[1]?.src,
+    "/images/yukako-theater-arms-open-story-2026-09-21.jpg",
+    "ギャラリー先頭付近から9/21 劇場ストーリーズ写真が消えている"
+  );
+  assert.equal(
+    galleryPhotos[2]?.src,
     "/images/baby-shark/baby-shark-hetty-with-babyshark-2026-09-18.jpg",
     "ギャラリー先頭付近から9/18 ベイビーシャーク ヘッティー写真が消えている"
   );
   assert.equal(
-    galleryPhotos[2]?.src,
+    galleryPhotos[3]?.src,
     "/images/yukako-mgj-miss-peace-reflection-2026-09-11.jpg",
     "ギャラリー先頭付近から9/11 MISS PEACE振り返りの写真が消えている"
   );
   assert.equal(
-    galleryPhotos[5]?.src,
+    galleryPhotos[6]?.src,
     "/images/yukako-omagari-shinchan-statue-2026-09-05.jpg",
     "ギャラリー先頭付近にしんちゃん像の写真が無い"
   );
