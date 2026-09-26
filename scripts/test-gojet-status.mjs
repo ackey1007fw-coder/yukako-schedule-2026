@@ -98,6 +98,25 @@ try {
     1,
     "9/15 出演者募集が最新情報に重複している"
   );
+  const dancerCallUpdate = latestSiteUpdates.find(
+    (update) => update.sourceUrl === "https://x.com/mokoopy/status/2103827646480355682"
+  );
+  assert.ok(dancerCallUpdate, "9/26 女性ダンサー募集が最新情報から消えている");
+  assert.equal(dancerCallUpdate.date, "2026.9.26");
+  assert.equal(dancerCallUpdate.category, "X");
+  assert.match(dancerCallUpdate.title ?? "", /女性ダンサーを引き続き募集/);
+  assert.match(dancerCallUpdate.summary ?? "", /2026\.11\.26〜11\.30（東京）/);
+  assert.equal(dancerCallUpdate.additionalSource?.url, "https://x.com/mokoopy/status/2099829333292675102");
+  assert.equal(dancerCallUpdate.additionalSource?.label, "出演者募集の元投稿");
+  assert.doesNotMatch(dancerCallUpdate.title ?? "", /公式|公認/);
+  assert.equal(
+    latestSiteUpdates.filter(
+      (update) =>
+        update.sourceUrl === "https://x.com/mokoopy/status/2103827646480355682"
+    ).length,
+    1,
+    "9/26 女性ダンサー募集が最新情報に重複している"
+  );
   const mgjNextUpdate = latestSiteUpdates.find(
     (update) => update.id === "mgj-next-body-and-soul-2026-09-12"
   );
@@ -512,6 +531,18 @@ try {
       .length,
     1,
     "news.ts に9/15 出演者募集が重複登録されている"
+  );
+  const dancerCallNews = news.find((item) => item.url === dancerCallUpdate.sourceUrl);
+  assert.ok(dancerCallNews, "news.ts に9/26 女性ダンサー募集が無い");
+  assert.equal(dancerCallUpdate.title, dancerCallNews.text, "9/26本文は news.ts を正本にする");
+  assert.equal(dancerCallNews.date, "2026.9.26");
+  assert.match(dancerCallNews.text ?? "", /女性ダンサーを引き続き募集/);
+  assert.doesNotMatch(dancerCallNews.text ?? "", /公式|公認/);
+  assert.equal(
+    news.filter((item) => item.url === "https://x.com/mokoopy/status/2103827646480355682")
+      .length,
+    1,
+    "news.ts に9/26 女性ダンサー募集が重複登録されている"
   );
   const missPeaceNews = news.find((item) => item.url === missPeaceUpdate.sourceUrl);
   assert.ok(missPeaceNews, "news.ts に9/11 MISS PEACE振り返りが無い");
@@ -1412,6 +1443,7 @@ try {
         event.links.some(
           (link) =>
             link.url === "https://x.com/mokoopy/status/2099829333292675102" ||
+            link.url === "https://x.com/mokoopy/status/2103827646480355682" ||
             link.url === "https://x.com/yukako_produce/status/2099831161489084736"
         )
     ),
@@ -1421,6 +1453,7 @@ try {
     !gojetFeatureUpdates.some(
       (update) =>
         update.postUrl === "https://x.com/mokoopy/status/2099829333292675102" ||
+        update.postUrl === "https://x.com/mokoopy/status/2103827646480355682" ||
         update.postUrl === "https://x.com/yukako_produce/status/2099831161489084736"
     ),
     "出演者募集を #ゆかJET 第1弾アーカイブへ混ぜない"
