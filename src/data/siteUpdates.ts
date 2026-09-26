@@ -405,6 +405,13 @@ const standaloneCoversNews = (item: (typeof news)[number]) =>
 
 // 本文・投稿日は news を正本にし、告知を読むための補足だけを元投稿URLで結び付ける。
 const newsContext: Partial<Record<string, Pick<SiteUpdate, "summary" | "additionalSource">>> = {
+  "https://x.com/mokoopy/status/2103827646480355682": {
+    summary: "本番は 2026.11.26〜11.30（東京）。気になる方・紹介したい方は本人へDM。",
+    additionalSource: {
+      url: "https://x.com/mokoopy/status/2099829333292675102",
+      label: "出演者募集の元投稿"
+    }
+  },
   "https://x.com/mokoopy/status/2099829333292675102": {
     summary: "9/15時点で、タイトル・会場・開演は未発表。応募条件の詳細は本人の元投稿へ。",
     additionalSource: {

@@ -13,6 +13,12 @@ export type NewsItem = {
 
 export const news: NewsItem[] = [
   {
+    date: "2026.9.26",
+    label: "X",
+    text: "11月末プロデュース公演の女性ダンサーを引き続き募集。詳細は引用元の出演者募集へ。",
+    url: "https://x.com/mokoopy/status/2103827646480355682"
+  },
+  {
     date: "2026.9.25",
     label: "X",
     text: "「今年の夏も楽しかった✨」——#ポートレート #秋田県。海辺で振り返る一枚。",
