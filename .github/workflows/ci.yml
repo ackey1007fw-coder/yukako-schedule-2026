@@ -56,7 +56,7 @@ jobs:
       - name: Site identity guard
         run: node scripts/check-site-identity.mjs main
 
-      - name: Verify responsive layout and video playback
+      - name: Verify responsive layout and source links
         env:
           PLAYWRIGHT_QA_DIR: ${{ runner.temp }}/yukako-browser-qa
         run: |
@@ -77,23 +77,22 @@ jobs:
               browser = await chromium.launch();
               for (const width of [390, 1440]) {
                 const page = await browser.newPage({ viewport: { width, height: 900 } });
+                await page.route("https://www.tiktok.com/**", route => route.fulfill({ status: 200, body: "<html><body>TikTok embed placeholder for layout test</body></html>", contentType: "text/html" }));
                 await page.goto("http://127.0.0.1:4173/#next-destination");
-                const video = page.locator("#next-destination video");
+                const video = page.locator("#next-destination iframe");
                 await video.scrollIntoViewIfNeeded();
-                await video.evaluate(async el => { el.muted = true; await el.play(); });
-                await page.waitForFunction(() => document.querySelector("#next-destination video").currentTime > 1);
                 const result = await page.evaluate(() => {
-                  const el = document.querySelector("#next-destination video");
+                  const el = document.querySelector("#next-destination iframe");
                   const box = el.getBoundingClientRect();
                   return { viewport: innerWidth, pageWidth: document.documentElement.scrollWidth,
-                    left: box.left, right: box.right, duration: el.duration,
-                    readyState: el.readyState, currentTime: el.currentTime, error: el.error?.code };
+                    left: box.left, right: box.right, source: el.src,
+                    anchor: document.querySelector('a[href="#next-destination"]')?.getAttribute("href") };
                 });
                 assert.ok(result.pageWidth <= width, JSON.stringify(result));
                 assert.ok(result.left >= 0 && result.right <= width, JSON.stringify(result));
-                assert.ok(result.duration > 89 && result.duration < 92, JSON.stringify(result));
-                assert.ok(result.readyState >= 2 && result.currentTime > 1 && !result.error, JSON.stringify(result));
-                console.log("Video QA passed:", JSON.stringify(result));
+                assert.equal(result.source, "https://www.tiktok.com/player/v1/7688935643463912725?autoplay=0");
+                assert.equal(result.anchor, "#next-destination");
+                console.log("Responsive layout QA passed:", JSON.stringify(result));
                 await page.close();
               }
             } finally {
