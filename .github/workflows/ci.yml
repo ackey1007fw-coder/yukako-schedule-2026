@@ -92,6 +92,13 @@ jobs:
                 assert.ok(result.left >= 0 && result.right <= width, JSON.stringify(result));
                 assert.equal(result.source, "https://www.tiktok.com/player/v1/7688935643463912725?autoplay=0");
                 assert.equal(result.anchor, "#next-destination");
+                const sequel = page.locator('#next-destination iframe[title*="後編"]');
+                await sequel.scrollIntoViewIfNeeded();
+                const sequelBox = await sequel.boundingBox();
+                assert.ok(sequelBox && sequelBox.x >= 0 && sequelBox.x + sequelBox.width <= width, JSON.stringify(sequelBox));
+                assert.equal(await sequel.getAttribute("src"), "https://www.tiktok.com/player/v1/7689265805757893909?autoplay=0");
+                assert.equal(await page.locator('#next-destination iframe').count(), 2);
+                assert.equal(await page.locator('#next-destination a[href="https://www.tiktok.com/@short_drama00/video/7689265805757893909"]').count(), 1);
                 console.log("Responsive layout QA passed:", JSON.stringify(result));
                 await page.close();
               }
