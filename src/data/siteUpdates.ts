@@ -74,7 +74,7 @@ const sourcePlatform = (url: string) => {
 // 専用セクションを持つ単発トピック。本文は各セクションが持つため、ここは見出しと導線のみ。
 const standaloneUpdatesAll: SiteUpdate[] = [
   {
-    id: "next-destination-parts-listed-2026-09-28",
+    id: "next-destination-part1-listed-2026-09-28",
     date: "2026.9.28",
     category: "出演作品",
     title: "主演ショートドラマ『次の目的地』前編・後編を掲載",
