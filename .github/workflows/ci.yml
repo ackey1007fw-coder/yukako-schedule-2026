@@ -55,3 +55,50 @@ jobs:
 
       - name: Site identity guard
         run: node scripts/check-site-identity.mjs main
+
+      - name: Verify responsive layout and video playback
+        env:
+          PLAYWRIGHT_QA_DIR: ${{ runner.temp }}/yukako-browser-qa
+        run: |
+          npm install --prefix "$PLAYWRIGHT_QA_DIR" --no-package-lock --ignore-scripts playwright@1.56.1
+          node "$PLAYWRIGHT_QA_DIR/node_modules/playwright/cli.js" install --with-deps chromium
+          node --input-type=commonjs <<'JS'
+          const assert = require("node:assert/strict");
+          const { spawn } = require("node:child_process");
+          const { chromium } = require(process.env.PLAYWRIGHT_QA_DIR + "/node_modules/playwright");
+          (async () => {
+            const server = spawn(process.execPath, ["scripts/serve-dist.mjs", "4173"], { stdio: "inherit" });
+            let browser;
+            try {
+              for (let n = 0; n < 80; n++) {
+                try { if ((await fetch("http://127.0.0.1:4173")).ok) break; } catch {}
+                await new Promise(resolve => setTimeout(resolve, 250));
+              }
+              browser = await chromium.launch();
+              for (const width of [390, 1440]) {
+                const page = await browser.newPage({ viewport: { width, height: 900 } });
+                await page.goto("http://127.0.0.1:4173/#next-destination");
+                const video = page.locator("#next-destination video");
+                await video.scrollIntoViewIfNeeded();
+                await video.evaluate(async el => { el.muted = true; await el.play(); });
+                await page.waitForFunction(() => document.querySelector("#next-destination video").currentTime > 1);
+                const result = await page.evaluate(() => {
+                  const el = document.querySelector("#next-destination video");
+                  const box = el.getBoundingClientRect();
+                  return { viewport: innerWidth, pageWidth: document.documentElement.scrollWidth,
+                    left: box.left, right: box.right, duration: el.duration,
+                    readyState: el.readyState, currentTime: el.currentTime, error: el.error?.code };
+                });
+                assert.ok(result.pageWidth <= width, JSON.stringify(result));
+                assert.ok(result.left >= 0 && result.right <= width, JSON.stringify(result));
+                assert.ok(result.duration > 89 && result.duration < 92, JSON.stringify(result));
+                assert.ok(result.readyState >= 2 && result.currentTime > 1 && !result.error, JSON.stringify(result));
+                console.log("Video QA passed:", JSON.stringify(result));
+                await page.close();
+              }
+            } finally {
+              if (browser) await browser.close();
+              server.kill();
+            }
+          })().catch(error => { console.error(error); process.exitCode = 1; });
+          JS
