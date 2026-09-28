@@ -79,7 +79,7 @@ jobs:
                 const page = await browser.newPage({ viewport: { width, height: 900 } });
                 await page.route("https://www.tiktok.com/**", route => route.fulfill({ status: 200, body: "<html><body>TikTok embed placeholder for layout test</body></html>", contentType: "text/html" }));
                 await page.goto("http://127.0.0.1:4173/#next-destination");
-                const video = page.locator("#next-destination iframe");
+                const video = page.locator('#next-destination iframe[title*="前編"]');
                 await video.scrollIntoViewIfNeeded();
                 const result = await page.evaluate(() => {
                   const el = document.querySelector("#next-destination iframe");
