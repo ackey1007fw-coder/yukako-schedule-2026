@@ -74,12 +74,12 @@ const sourcePlatform = (url: string) => {
 // 専用セクションを持つ単発トピック。本文は各セクションが持つため、ここは見出しと導線のみ。
 const standaloneUpdatesAll: SiteUpdate[] = [
   {
-    id: "next-destination-part1-listed-2026-09-28",
+    id: "next-destination-parts-listed-2026-09-28",
     date: "2026.9.28",
     category: "出演作品",
-    title: "主演ショートドラマ『次の目的地｜前編』を掲載",
-    summary: "ふたりドライブ。produced by NEXTAGE。約90秒のショートドラマを、TikTokの元投稿から。",
-    sourceUrl: "https://www.tiktok.com/@short_drama00/video/7688935643463912725",
+    title: "主演ショートドラマ『次の目的地』前編・後編を掲載",
+    summary: "ふたりドライブ。produced by NEXTAGE。前後編を元のTikTokプレーヤーで。",
+    sourceUrl: "https://www.tiktok.com/@short_drama00/video/7689265805757893909",
     anchor: "#next-destination"
   },
   {
