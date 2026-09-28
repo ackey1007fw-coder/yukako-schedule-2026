@@ -17,6 +17,7 @@ import { KakunodateTourSection } from "./components/KakunodateTourSection";
 import { AkitaInuTourSection } from "./components/AkitaInuTourSection";
 import { LatestInstagramSection } from "./components/LatestInstagramSection";
 import { LatestUpdatesSection } from "./components/LatestUpdatesSection";
+import { NextDestinationSection } from "./components/NextDestinationSection";
 import { LinksSection } from "./components/LinksSection";
 import { MissGrandJapanManagementSection } from "./components/MissGrandJapanManagementSection";
 import { NowProducingSection } from "./components/NowProducingSection";
@@ -166,6 +167,9 @@ function App() {
         </nav>
         <SectionReveal>
           <LatestUpdatesSection />
+        </SectionReveal>
+        <SectionReveal>
+          <NextDestinationSection />
         </SectionReveal>
         <SectionReveal>
           <StreamRecapsSection />

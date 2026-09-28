@@ -55,3 +55,49 @@ jobs:
 
       - name: Site identity guard
         run: node scripts/check-site-identity.mjs main
+
+      - name: Verify responsive layout and source links
+        env:
+          PLAYWRIGHT_QA_DIR: ${{ runner.temp }}/yukako-browser-qa
+        run: |
+          npm install --prefix "$PLAYWRIGHT_QA_DIR" --no-package-lock --ignore-scripts playwright@1.56.1
+          node "$PLAYWRIGHT_QA_DIR/node_modules/playwright/cli.js" install --with-deps chromium
+          node --input-type=commonjs <<'JS'
+          const assert = require("node:assert/strict");
+          const { spawn } = require("node:child_process");
+          const { chromium } = require(process.env.PLAYWRIGHT_QA_DIR + "/node_modules/playwright");
+          (async () => {
+            const server = spawn(process.execPath, ["scripts/serve-dist.mjs", "4173"], { stdio: "inherit" });
+            let browser;
+            try {
+              for (let n = 0; n < 80; n++) {
+                try { if ((await fetch("http://127.0.0.1:4173")).ok) break; } catch {}
+                await new Promise(resolve => setTimeout(resolve, 250));
+              }
+              browser = await chromium.launch();
+              for (const width of [390, 1440]) {
+                const page = await browser.newPage({ viewport: { width, height: 900 } });
+                await page.route("https://www.tiktok.com/**", route => route.fulfill({ status: 200, body: "<html><body>TikTok embed placeholder for layout test</body></html>", contentType: "text/html" }));
+                await page.goto("http://127.0.0.1:4173/#next-destination");
+                const video = page.locator("#next-destination iframe");
+                await video.scrollIntoViewIfNeeded();
+                const result = await page.evaluate(() => {
+                  const el = document.querySelector("#next-destination iframe");
+                  const box = el.getBoundingClientRect();
+                  return { viewport: innerWidth, pageWidth: document.documentElement.scrollWidth,
+                    left: box.left, right: box.right, source: el.src,
+                    anchor: document.querySelector('a[href="#next-destination"]')?.getAttribute("href") };
+                });
+                assert.ok(result.pageWidth <= width, JSON.stringify(result));
+                assert.ok(result.left >= 0 && result.right <= width, JSON.stringify(result));
+                assert.equal(result.source, "https://www.tiktok.com/player/v1/7688935643463912725?autoplay=0");
+                assert.equal(result.anchor, "#next-destination");
+                console.log("Responsive layout QA passed:", JSON.stringify(result));
+                await page.close();
+              }
+            } finally {
+              if (browser) await browser.close();
+              server.kill();
+            }
+          })().catch(error => { console.error(error); process.exitCode = 1; });
+          JS
