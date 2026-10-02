@@ -14,6 +14,10 @@ const driveYukakoPhotos: GalleryPhoto[] = Array.from({ length: 118 }, (_, index)
 
 export const galleryPhotos: GalleryPhoto[] = [
   {
+    src: "/images/yukako-october-portrait-2026-10-01.jpg",
+    alt: "夕暮れの海辺で、白いTシャツに淡い色のキャミソール姿で両手を髪に添える吉井優花子さん（2026.10.1 Xより）"
+  },
+  {
     src: "/images/yukako-summer-portrait-2026-09-25.jpg",
     alt: "夕暮れの海辺で、白いTシャツと淡い黄色の衣装姿で振り返って微笑む吉井優花子さん（2026.9.25 Xより）"
   },
@@ -99,8 +103,8 @@ export const galleryUpdate: {
   note: string;
   url: string;
 } = {
-  date: "2026.9.25",
+  date: "2026.10.1",
   platform: "X",
-  note: "海辺のポートレート写真を追加",
-  url: "https://x.com/mokoopy/status/2103488688424644773"
+  note: "「10月もよろしくね☺️🍁」——海辺のポートレート写真を追加",
+  url: "https://x.com/mokoopy/status/2105673651819598269"
 };
