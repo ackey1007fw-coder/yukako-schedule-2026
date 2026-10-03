@@ -17,7 +17,7 @@ export const news: NewsItem[] = [
     label: "X",
     text: "「10月もよろしくね☺️🍁」——#ポートレート #秋田県。海辺で両手を髪に添えた一枚。",
     url: "https://x.com/mokoopy/status/2105673651819598269",
-    listedAt: "2026.10.2"
+    listedAt: "2026.10.4"
   },
   {
     date: "2026.9.26",
