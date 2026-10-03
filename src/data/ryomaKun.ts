@@ -32,7 +32,7 @@ export const ryomaKunMoments = [
   },
   {
     label: "記録",
-    text: "A-root赤坂での上演記録写真49枚と、本人による振り返り投稿の20枚をこのページに収蔵。"
+    text: "A-root赤坂での上演記録写真49枚、本人による振り返り投稿の20枚、SNS宣伝用の稽古場ムービー2本とそのスチール13枚をこのページに収蔵。"
   }
 ];
 
@@ -97,6 +97,112 @@ export const ryomaKunProducerDuties = [
   "方言・殺陣・踊り指導管轄",
   "フライヤー・ブロマイド作成"
 ];
+
+/** プロデュースの手応えとして綴られた一文（2026年5月16日の投稿の原文どおり）。 */
+export const ryomaKunProducerAnswer =
+  "お客様にもキャストにも楽しんでもらえた舞台になったことが、今回の答えだと思っています。";
+
+export type RyomaKunPromoVideo = {
+  group: string;
+  role: string;
+  src: string;
+  poster: string;
+  /** スクリーンリーダー用の事実描写。見出し・キャプションに流用しない。 */
+  label: string;
+  duration: string;
+  body: string;
+};
+
+/**
+ * SNS宣伝担当として本人が編集した、班ごとの稽古場ムービー2本。
+ * 2026年5月16日の投稿（Instagram @yoppy_777）で改めて公開されたもの。
+ */
+export const ryomaKunPromoVideos: RyomaKunPromoVideo[] = [
+  {
+    group: "B班",
+    role: "坂本龍馬役",
+    src: "/videos/ryoma-kun-promo-bban-2026-05-16.mp4",
+    poster: "/images/ryoma-kun-2026/yukako-ryoma-kun-2026-promo-bban-poster.jpg",
+    label:
+      "『かわええのう、龍馬くん』B班の稽古場ムービー。紅い着物に刀を差した坂本龍馬役の吉井優花子さんと、全員女性のキャストによる稽古風景（約29秒・音声あり）",
+    duration: "約29秒",
+    body: "紅い着物に刀、腕を組んでカメラを見る龍馬から。殺陣も踊りも、全員女性のB班が稽古場でつくっていく過程がそのまま入っています。"
+  },
+  {
+    group: "C班",
+    role: "おりょう役",
+    src: "/videos/ryoma-kun-promo-cban-2026-05-16.mp4",
+    poster: "/images/ryoma-kun-2026/yukako-ryoma-kun-2026-promo-cban-poster.jpg",
+    label:
+      "『かわええのう、龍馬くん』C班の稽古場ムービー。淡い桜色の着物のおりょう役・吉井優花子さんと、キャストによる稽古風景（約28秒・音声あり）",
+    duration: "約28秒",
+    body: "大千穐楽を飾ったC班から。淡い桜色の着物のおりょうが龍馬と手を取り合う場面は、稽古場の段階でもう涙。"
+  }
+];
+
+/**
+ * 稽古場ムービーから切り出したスチール13枚。並び順は受け取った順のまま。
+ * altは事実描写のみ。紅い着物の出演者は複数いるため、顔がはっきり確認できるカットだけ本人名を書く。
+ */
+const rehearsalStillEntries: { alt: string; caption?: string }[] = [
+  {
+    alt: "稽古場で向かい合って座る、淡い桜色の着物のおりょう役・吉井優花子さんと、紺の着物の龍馬役の出演者",
+    caption: "C班・おりょうと龍馬"
+  },
+  {
+    alt: "稽古場で手を取り合う、淡い桜色の着物のおりょう役・吉井優花子さんと、紺の着物の龍馬役の出演者"
+  },
+  {
+    alt: "稽古場で向かい合って立つ、青い着物に刀を差した出演者と、紅い着物に茶の袴で刀を提げた坂本龍馬役の出演者"
+  },
+  {
+    alt: "稽古場の床に横たわる紅い着物の坂本龍馬役・吉井優花子さんと、その傍らにかがみ込む青い着物の出演者"
+  },
+  {
+    alt: "稽古場の床で向かい合い、笑い合う紅い着物の出演者と淡い桜色の着物の出演者"
+  },
+  {
+    alt: "稽古場の床で向かい合って座る、水色の絣の着物の出演者と紅い着物の出演者"
+  },
+  {
+    alt: "稽古場の床で徳利と盃を並べる花柄の着物の出演者と、その後ろで大きく笑う紅い着物の出演者",
+    caption: "宴の場面の稽古"
+  },
+  {
+    alt: "稽古場で土鍋と酒の徳利を囲み、青い着物の出演者の隣で大きく笑う紅い着物の出演者"
+  },
+  {
+    alt: "稽古場で土鍋を挟んで座る、紅い着物の出演者と藤色の着物の出演者"
+  },
+  {
+    alt: "稽古場で向かい合って立つ、黒い着物に灰色の襟巻きの出演者と、紅い着物に刀を差した坂本龍馬役の出演者"
+  },
+  {
+    alt: "紅い着物の出演者の背に顔をうずめる、黄土色の花柄の着物の出演者"
+  },
+  {
+    alt: "稽古場に立つ紅い着物に茶の袴の坂本龍馬役・吉井優花子さんと、奥に座る青い着物の出演者"
+  },
+  {
+    alt: "稽古場で腕を組み、刀を手に微笑む紅い着物の坂本龍馬役・吉井優花子さん",
+    caption: "B班・坂本龍馬"
+  }
+];
+
+export const ryomaKunRehearsalStills: RyomaKunPhoto[] = rehearsalStillEntries.map(
+  (entry, index) => ({
+    src: `/images/ryoma-kun-2026/yukako-ryoma-kun-2026-rehearsal-${String(index + 1).padStart(2, "0")}.jpg`,
+    alt: entry.alt,
+    caption: entry.caption
+  })
+);
+
+export const ryomaKunPromoSource = {
+  label: "2026年5月16日の投稿",
+  url: "https://www.instagram.com/p/DYZwPx1mQ2e/",
+  /** 投稿本文の表現（原文どおり）。 */
+  note: "SNS宣伝投稿の際に作った動画"
+};
 
 type LookbackEntry = {
   alt: string;
