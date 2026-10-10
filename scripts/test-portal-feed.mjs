@@ -246,6 +246,50 @@ assert.equal(
   "the 4-event source limit applies only to past events"
 );
 
+// 開演時刻を公開しない期間予定も、古い掲載日や件数制限で落とさず最終日まで保護する。
+const dateOnlyPeriod = {
+  ...fixtureCandidate({
+    dataset: "events",
+    id: "yukako:event:fixture-date-only-period",
+    publishedAt: "2025-01-01T00:00:00+09:00"
+  }),
+  selectionStartsAt: "2026-11-26T00:00:00+09:00",
+  selectionThroughDate: "2026-11-30"
+};
+const crowdedPeriodCandidates = [dateOnlyPeriod, ...newerPastEvents, ...fillerCandidates];
+for (const generatedAt of [
+  "2026-11-25T12:00:00Z",
+  "2026-11-28T12:00:00Z",
+  "2026-11-30T14:59:59Z"
+]) {
+  const selection = selectFeedCandidates(crowdedPeriodCandidates, generatedAt);
+  assert.equal(selection.length, 20);
+  assert.ok(selection.some(({ item }) => item.id === dateOnlyPeriod.item.id));
+  assert.equal(selection.filter(({ dataset }) => dataset === "events").length, 5);
+  const goldenOnDate = (await generatePortalFeed(generatedAt)).items.find(
+    (item) => item.id === goldenItems[0].id
+  );
+  assert.ok(goldenOnDate, "実際の期間予定も公演中・千秋楽までfeedに残る");
+  assert.equal(goldenOnDate.startsAt, undefined);
+  assert.equal(JSON.stringify(goldenOnDate).includes("selectionStartsAt"), false);
+}
+assert.ok(!selectFeedCandidates(crowdedPeriodCandidates, "2026-11-30T15:00:00Z")
+  .some(({ item }) => item.id === dateOnlyPeriod.item.id), "翌日の日本時間0:00で期間予定の保護を終える");
+
+const crowdedFuturePeriods = selectFeedCandidates([
+  dateOnlyPeriod,
+  ...Array.from({ length: 21 }, (_, index) => fixtureCandidate({
+    dataset: "events",
+    id: `yukako:event:fixture-after-period-${index}`,
+    publishedAt: "2026-11-25T00:00:00+09:00",
+    startsAt: `2026-11-27T${pad(index)}:00:00+09:00`
+  }))
+], "2026-11-25T12:00:00Z");
+assert.equal(crowdedFuturePeriods.length, 20);
+assert.ok(crowdedFuturePeriods.some(({ item }) => item.id === dateOnlyPeriod.item.id),
+  "期間予定も内部の開始日で、近い順の20件に含める");
+assert.ok(!crowdedFuturePeriods.some(({ item }) => item.id.endsWith("after-period-20")));
+
 // 今日・未来予定だけで20件を超える場合は、JST基準で開始が近い20件を残す。
 const tooManyUpcomingEvents = Array.from({ length: 21 }, (_, index) =>
   fixtureCandidate({

@@ -43,6 +43,10 @@ type SourceDataset = "siteUpdates" | "news" | "events" | "archive";
 export type PortalFeedCandidate = {
   dataset: SourceDataset;
   dedupeKeys: string[];
+  /** 選択・並べ替え専用。公開feedの開演時刻とは分ける。 */
+  selectionStartsAt?: string;
+  /** 日付単位の公演期間を、最終日まで保護する。 */
+  selectionThroughDate?: string;
   item: PortalFeedItem;
 };
 
@@ -292,6 +296,10 @@ const eventCandidates: PortalFeedCandidate[] = events.flatMap((event) => {
     {
       dataset: "events",
       dedupeKeys,
+      selectionStartsAt: startsAt,
+      selectionThroughDate: isDateOnly(event.startAt)
+        ? event.endAt ?? event.startAt
+        : undefined,
       item: {
         id: `yukako:event:${event.id}`,
         personId: PERSON_ID,
@@ -325,9 +333,10 @@ const jstDateOf = (value: string) => {
 };
 
 const isTodayOrFutureEvent = (candidate: PortalFeedCandidate, referenceJstDate: string) => {
-  if (candidate.dataset !== "events" || !candidate.item.startsAt) return false;
-  const startsJstDate = jstDateOf(candidate.item.startsAt);
-  return Boolean(startsJstDate && startsJstDate >= referenceJstDate);
+  if (candidate.dataset !== "events") return false;
+  const startsAt = candidate.selectionStartsAt ?? candidate.item.startsAt;
+  const throughJstDate = candidate.selectionThroughDate ?? (startsAt ? jstDateOf(startsAt) : undefined);
+  return Boolean(throughJstDate && throughJstDate >= referenceJstDate);
 };
 
 const dedupeCandidates = (
@@ -393,7 +402,8 @@ export const selectFeedCandidates = (
     .filter(({ item }) => protectedIds.has(item.id))
     .sort(
       (a, b) =>
-        Date.parse(a.item.startsAt as string) - Date.parse(b.item.startsAt as string) ||
+        Date.parse((a.selectionStartsAt ?? a.item.startsAt) as string) -
+          Date.parse((b.selectionStartsAt ?? b.item.startsAt) as string) ||
         publishedNewestFirst(a, b)
     )
     .slice(0, maxItems);
