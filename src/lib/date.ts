@@ -2,10 +2,16 @@ import type { ScheduleEvent } from "../types";
 
 export const toDateKey = (iso: string) => iso.slice(0, 10);
 
-export const eventStartDate = (event: ScheduleEvent) => new Date(event.startAt);
+export const isDateOnly = (value: string) => /^\d{4}-\d{2}-\d{2}$/.test(value);
 
-export const eventEndDate = (event: ScheduleEvent) =>
-  new Date(event.endAt ?? event.startAt);
+export const eventStartDate = (event: ScheduleEvent) =>
+  new Date(isDateOnly(event.startAt) ? `${event.startAt}T00:00:00+09:00` : event.startAt);
+
+export const eventEndDate = (event: ScheduleEvent) => {
+  const end = event.endAt ?? event.startAt;
+  // 期間だけが分かる予定は日本時間の最終日いっぱいまで残す。
+  return new Date(isDateOnly(end) ? `${end}T23:59:59.999+09:00` : end);
+};
 
 export const isEventPast = (event: ScheduleEvent, now = new Date()) =>
   eventEndDate(event).getTime() < now.getTime();

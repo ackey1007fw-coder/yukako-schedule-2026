@@ -79,6 +79,20 @@ jobs:
                 const page = await browser.newPage({ viewport: { width, height: 900 } });
                 await page.route("https://www.tiktok.com/**", route => route.fulfill({ status: 200, body: "<html><body>TikTok embed placeholder for layout test</body></html>", contentType: "text/html" }));
                 await page.goto("http://127.0.0.1:4173/#next-destination");
+                const golden = page.locator("#event-golden-and-glass-2026-11");
+                await golden.scrollIntoViewIfNeeded();
+                assert.equal(await golden.count(), 1);
+                assert.match(await golden.innerText(), /10月15日（木）20:00（日本時間）/);
+                assert.match(await golden.innerText(), /C班のマリリン・モンロー役/);
+                assert.equal(await golden.getByRole("link", { name: "チケット予約", exact: true }).count(), 0);
+                await golden.locator("summary").click();
+                const calendar = await golden.getByRole("link", { name: "カレンダー追加" }).getAttribute("href");
+                assert.equal(new URL(calendar).searchParams.get("dates"), "20261126/20261201");
+                const goldenSchema = await page.evaluate(() => JSON.parse(document.getElementById("yukako-events-jsonld").textContent)["@graph"].find(node => node["@id"].endsWith("#event-golden-and-glass-2026-11")));
+                assert.equal(goldenSchema.startDate, "2026-11-26");
+                assert.equal(goldenSchema.endDate, "2026-11-30");
+                const goldenBox = await golden.boundingBox();
+                assert.ok(goldenBox && goldenBox.x >= 0 && goldenBox.x + goldenBox.width <= width, JSON.stringify(goldenBox));
                 const video = page.locator('#next-destination iframe[title*="前編"]');
                 await video.scrollIntoViewIfNeeded();
                 const result = await page.evaluate(() => {

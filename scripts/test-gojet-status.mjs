@@ -33,6 +33,29 @@ try {
   const { siteUpdates: latestSiteUpdates, updateTimestamp: auditUpdateTimestamp } = await server.ssrLoadModule(
     "/src/data/siteUpdates.ts"
   );
+  const { events: goldenGlassEvents } = await server.ssrLoadModule("/src/data/events.ts");
+  const { isEventPast, getEventsForDay } = await server.ssrLoadModule("/src/lib/date.ts");
+  const { googleCalendarUrl } = await server.ssrLoadModule("/src/lib/share.ts");
+  const goldenGlass = goldenGlassEvents.find((event) => event.id === "golden-and-glass-2026-11");
+  assert.ok(goldenGlass);
+  // 日付単位の公演期間を、千秋楽の朝や最終回の開演時刻で終了扱いにしない。
+  assert.equal(isEventPast(goldenGlass, new Date("2026-11-30T23:59:59+09:00")), false);
+  assert.equal(isEventPast(goldenGlass, new Date("2026-12-01T00:00:00+09:00")), true);
+  for (const day of [26, 27, 28, 29, 30]) {
+    assert.ok(getEventsForDay([goldenGlass], "2026-11", day).includes(goldenGlass));
+  }
+  assert.equal(getEventsForDay([goldenGlass], "2026-11", 25).length, 0);
+  assert.equal(getEventsForDay([goldenGlass], "2026-12", 1).length, 0);
+  assert.equal(new URL(googleCalendarUrl(goldenGlass)).searchParams.get("dates"), "20261126/20261201");
+  assert.match(goldenGlass.summary, /2026年10月15日（木）20:00（日本時間）/);
+  assert.match(goldenGlass.summary, /C班のマリリン・モンロー役/);
+  assert.equal(goldenGlass.links.some((link) => link.kind === "ticket"), false);
+  const goldenUpdates = latestSiteUpdates.filter((update) => update.id === goldenGlass.id);
+  assert.equal(goldenUpdates.length, 1);
+  assert.equal(goldenUpdates[0].anchor, `#event-${goldenGlass.id}`);
+  assert.equal(goldenUpdates[0].imageLayout, "contain");
+  assert.equal(latestSiteUpdates.filter((update) => update.sourceUrl === "https://x.com/yukako_produce/status/2108875455629758737").length, 1);
+  assert.ok(existsSync(new URL(`../public${goldenGlass.image}`, import.meta.url)));
 
   // 先頭は8/24 19:16のプロデュース公演アカウント（メグのオリジナル楽曲・歌詞カード）。
   const originalSongsMegPost = gojetFeatureUpdates[0];

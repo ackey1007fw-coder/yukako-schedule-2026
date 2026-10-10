@@ -20,7 +20,9 @@ export type ScheduleEvent = {
   category: EventCategory;
   /** この予定をサイトへ掲載した日。出来事の開始日時とは分けて扱う。 */
   listedAt?: string;
+  /** ISO日時、または期間のみの予定は YYYY-MM-DD（日本時間・日付単位）。 */
   startAt: string;
+  /** 日付のみの場合はその日を含む。日時の場合は従来の表示境界。 */
   endAt?: string;
   /** 公演日が飛び飛びの場合の実施日リスト（"YYYY-MM-DD"）。カレンダー表示に使用 */
   dates?: string[];

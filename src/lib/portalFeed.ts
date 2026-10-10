@@ -4,6 +4,7 @@ import { news, type NewsItem } from "../data/news";
 import { profile } from "../data/profile";
 import { siteUpdates } from "../data/siteUpdates";
 import { isReusableInstagramProfileUrl } from "./sourceUrl";
+import { isDateOnly } from "./date";
 
 const PERSON_ID = "yukako" as const;
 const SITE_URL = "https://yukako-schedule-2026.vercel.app/";
@@ -281,7 +282,8 @@ const eventCandidates: PortalFeedCandidate[] = events.flatMap((event) => {
     event.links.find((link) => link.kind === "info") ??
     event.links.find((link) => link.kind === "ticket");
   const eventTopic = topicKey(event.id);
-  const dedupeKeys = [`event:${event.id}`];
+  // 同じ安定IDの専用NEWSカード・news.siteUpdateIdとも1つの話題にまとめる。
+  const dedupeKeys = [`event:${event.id}`, `update:${event.id}`];
   if (eventTopicCounts.get(eventTopic) === 1) {
     dedupeKeys.push(`topic:${eventTopic}`);
   }
@@ -299,7 +301,8 @@ const eventCandidates: PortalFeedCandidate[] = events.flatMap((event) => {
         url: absoluteSiteUrl(`#event-${event.id}`),
         sourceUrl: source?.url,
         publishedAt,
-        startsAt,
+        // 公演期間だけの予定から架空の開演時刻（00:00）を配信しない。
+        startsAt: isDateOnly(event.startAt) ? undefined : startsAt,
         // events.endAt には表示境界や最終回の開始時刻も含まれるため、
         // 確認済みの終了時刻を表す専用フィールドができるまでは公開しない。
         image: toPortalImageUrl(event.image)

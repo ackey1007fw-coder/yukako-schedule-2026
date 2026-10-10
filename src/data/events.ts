@@ -2,6 +2,37 @@ import type { ScheduleEvent } from "../types";
 
 export const events: ScheduleEvent[] = [
   {
+    id: "golden-and-glass-2026-11",
+    title: "ミュージカル『Golden & Glass』",
+    shortTitle: "Golden & Glass",
+    category: "stage",
+    listedAt: "2026-10-11",
+    // 公演全体の期間。日付のみで保持し、初回開演・終演時刻を意味させない。
+    startAt: "2026-11-26",
+    endAt: "2026-11-30",
+    dates: ["2026-11-26", "2026-11-27", "2026-11-28", "2026-11-29", "2026-11-30"],
+    displayDate: "2026年11月26日（木）〜30日（月）｜C班出演：26日19:00／27日12:00／28日15:30／29日12:00／30日19:00（日本時間）",
+    venue: "Air Studio 両国（東京・両国）",
+    image: "/images/yukako-golden-and-glass-poster-2026-10-10.jpg",
+    summary:
+      "HP公開・予約受付開始：2026年10月15日（木）20:00（日本時間）。吉井優花子さんのプロデュース第2弾。マリリン・モンロー生誕100周年のミュージカル再演に、新キャラクター・ダンサー・楽曲が加わります。プロデュースに加え、C班のマリリン・モンロー役で出演。脚本・演出は多賀雅人さん。全体はA・B・Cの3班、優花子さんの出演はC班の5公演です。予約先URL、受付方法・開場時刻・終演時刻は続報待ち。",
+    badges: ["プロデュース公演", "C班出演", "マリリン・モンロー役", "予約開始 10/15 20:00"],
+    links: [
+      {
+        label: "公演・予約開始の案内（公演アカウント X）",
+        url: "https://x.com/yukako_produce/status/2108875455629758737",
+        kind: "info"
+      },
+      {
+        label: "プロデュース・出演の発表（吉井優花子 X）",
+        url: "https://x.com/mokoopy/status/2108881564763635894",
+        kind: "sns"
+      }
+    ],
+    isImportant: true,
+    isNextFocus: true
+  },
+  {
     id: "miss-grand-japan-2026-final-mc",
     title: "MISS GRAND JAPAN & MR GAY JAPAN 2026 FINAL COMPETITION",
     shortTitle: "MGJ 2026 FINAL（MC）",

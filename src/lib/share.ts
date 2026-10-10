@@ -1,5 +1,6 @@
 import type { ScheduleEvent } from "../types";
 import { addShareUtm } from "./engagement";
+import { isDateOnly } from "./date";
 
 export const SITE_URL = "https://yukako-schedule-2026.vercel.app/";
 
@@ -8,6 +9,18 @@ const toCalDate = (iso: string) =>
   new Date(iso).toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
 
 export const googleCalendarUrl = (event: ScheduleEvent) => {
+  if (isDateOnly(event.startAt) && isDateOnly(event.endAt ?? event.startAt)) {
+    const endDate = new Date(`${event.endAt ?? event.startAt}T00:00:00Z`);
+    endDate.setUTCDate(endDate.getUTCDate() + 1);
+    const params = new URLSearchParams({
+      action: "TEMPLATE",
+      text: event.title,
+      dates: `${event.startAt.replace(/-/g, "")}/${endDate.toISOString().slice(0, 10).replace(/-/g, "")}`,
+      details: `${event.summary}\n${event.displayDate}\n${SITE_URL}`
+    });
+    if (event.venue) params.set("location", event.venue);
+    return `https://calendar.google.com/calendar/render?${params.toString()}`;
+  }
   const startMs = new Date(event.startAt).getTime();
   let endIso = event.endAt ?? event.startAt;
   // 複数公演や長期間(24h超)のイベントは、初回ぶん(2時間)だけ登録して

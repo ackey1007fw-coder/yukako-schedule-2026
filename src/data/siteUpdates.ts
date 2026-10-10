@@ -74,6 +74,24 @@ const sourcePlatform = (url: string) => {
 // 専用セクションを持つ単発トピック。本文は各セクションが持つため、ここは見出しと導線のみ。
 const standaloneUpdatesAll: SiteUpdate[] = [
   {
+    id: "golden-and-glass-2026-11",
+    date: "2026.10.10",
+    category: "舞台",
+    title: "『Golden & Glass』11/26〜30｜予約開始は10/15（木）20:00",
+    summary: "HP公開・予約開始は日本時間20:00。吉井優花子さんがプロデュース、C班マリリン・モンロー役で出演。会場はAir Studio 両国。新キャラクター・ダンサー・楽曲を加えた再演。",
+    image: {
+      src: "/images/yukako-golden-and-glass-poster-2026-10-10.jpg",
+      alt: "ミュージカル『Golden & Glass』の告知ポスター。吉井優花子プロデュース、脚本・演出 多賀雅人、2026年11月26日〜30日"
+    },
+    imageLayout: "contain",
+    sourceUrl: "https://x.com/yukako_produce/status/2108875455629758737",
+    additionalSource: {
+      url: "https://x.com/mokoopy/status/2108881564763635894",
+      label: "本人のプロデュース・出演発表"
+    },
+    anchor: "#event-golden-and-glass-2026-11"
+  },
+  {
     id: "next-destination-part1-listed-2026-09-28",
     date: "2026.9.28",
     category: "出演作品",
@@ -94,7 +112,8 @@ const standaloneUpdatesAll: SiteUpdate[] = [
       alt: "赤い客席の劇場ステージ上で、白いキャップに黒い服、両手を大きく広げて立つ吉井優花子さん。画面中央に次回出演は来年、直近では11月末のプロデュース舞台の文字"
     },
     imageLayout: "contain",
-    sourceUrl: "https://www.instagram.com/yoppy_777"
+    sourceUrl: "https://www.instagram.com/yoppy_777",
+    detailAnchor: "#event-golden-and-glass-2026-11"
   },
   {
     id: "mgj-next-body-and-soul-2026-09-18",
@@ -413,16 +432,18 @@ const standaloneCoversNews = (item: (typeof news)[number]) =>
   );
 
 // 本文・投稿日は news を正本にし、告知を読むための補足だけを元投稿URLで結び付ける。
-const newsContext: Partial<Record<string, Pick<SiteUpdate, "summary" | "additionalSource">>> = {
+const newsContext: Partial<Record<string, Pick<SiteUpdate, "summary" | "additionalSource" | "anchor">>> = {
   "https://x.com/mokoopy/status/2103827646480355682": {
-    summary: "本番は 2026.11.26〜11.30（東京）。気になる方・紹介したい方は本人へDM。",
+    summary: "本番は 2026.11.26〜11.30（東京）。9/26時点の募集記録です。現在の募集状況を示すものではありません。最新の公演・予約案内はスケジュールへ。",
+    anchor: "#event-golden-and-glass-2026-11",
     additionalSource: {
       url: "https://x.com/mokoopy/status/2099829333292675102",
       label: "出演者募集の元投稿"
     }
   },
   "https://x.com/mokoopy/status/2099829333292675102": {
-    summary: "9/15時点で、タイトル・会場・開演は未発表。応募条件の詳細は本人の元投稿へ。",
+    summary: "9/15時点で、タイトル・会場・開演は未発表。過去の募集記録です。現在の募集状況を示すものではありません。最新の公演・予約案内はスケジュールへ。",
+    anchor: "#event-golden-and-glass-2026-11",
     additionalSource: {
       url: "https://x.com/yukako_produce/status/2099831161489084736",
       label: "プロデュースアカウントの告知"

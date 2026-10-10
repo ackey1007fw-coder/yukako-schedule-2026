@@ -18,6 +18,13 @@ assert.equal(first.personId, "yukako");
 assert.equal(first.siteUrl, "https://yukako-schedule-2026.vercel.app/");
 assert.equal(first.generatedAt, fixedGeneratedAt);
 assert.equal(first.items.length, 20, "feed must backfill deduped candidates up to 20 items");
+const goldenItems = first.items.filter((item) => item.id === "yukako:event:golden-and-glass-2026-11" || [
+  "https://x.com/yukako_produce/status/2108875455629758737",
+  "https://x.com/mokoopy/status/2108881564763635894"
+].includes(item.sourceUrl));
+assert.equal(goldenItems.length, 1, "公演・専用NEWSカード・newsを同じ話題として重複させない");
+assert.equal(goldenItems[0].id, "yukako:event:golden-and-glass-2026-11");
+assert.equal(goldenItems[0].startsAt, undefined, "公演期間だけの予定に00:00開演を捏造しない");
 assert.deepEqual(
   first.items.map((item) => item.id),
   second.items.map((item) => item.id),
