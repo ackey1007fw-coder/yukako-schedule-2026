@@ -17,7 +17,8 @@ export const news: NewsItem[] = [
     label: "X",
     text: "プロデュース第二弾『Golden & Glass』🌹 11/26〜30。HP公開・予約開始は10/15（木）20:00予定。#ゆかマリリン",
     url: "https://x.com/yukako_produce/status/2108875455629758737",
-    listedAt: "2026.10.11"
+    listedAt: "2026.10.11",
+    siteUpdateId: "yukako-golden-glass-2026-11"
   },
   {
     date: "2026.10.1",
