@@ -18,6 +18,13 @@ assert.equal(first.personId, "yukako");
 assert.equal(first.siteUrl, "https://yukako-schedule-2026.vercel.app/");
 assert.equal(first.generatedAt, fixedGeneratedAt);
 assert.equal(first.items.length, 20, "feed must backfill deduped candidates up to 20 items");
+const goldenItems = first.items.filter((item) => item.id === "yukako:event:yukako-golden-glass-2026-11" || [
+  "https://x.com/yukako_produce/status/2108875455629758737",
+  "https://x.com/mokoopy/status/2108881564763635894"
+].includes(item.sourceUrl));
+assert.equal(goldenItems.length, 1, "情報解禁NEWSと公演を共有フィードで重複させない");
+assert.equal(goldenItems[0].id, "yukako:event:yukako-golden-glass-2026-11");
+assert.equal(goldenItems[0].startsAt, "2026-11-26T19:00:00+09:00");
 assert.deepEqual(
   first.items.map((item) => item.id),
   second.items.map((item) => item.id),
@@ -238,6 +245,30 @@ assert.equal(
   5,
   "the 4-event source limit applies only to past events"
 );
+
+// 初回を過ぎても、終演時刻未発表の公演は最終日まで件数制限から保護する。
+const periodCandidate = {
+  ...fixtureCandidate({
+    dataset: "events",
+    id: "yukako:event:fixture-period",
+    publishedAt: "2025-01-01T00:00:00+09:00",
+    startsAt: "2026-11-26T19:00:00+09:00"
+  }),
+  selectionThroughDate: "2026-11-30"
+};
+const crowdedPeriodCandidates = [periodCandidate, ...newerPastEvents, ...fillerCandidates];
+for (const generatedAt of ["2026-11-25T12:00:00Z", "2026-11-28T12:00:00Z", "2026-11-30T14:59:59Z"]) {
+  const selection = selectFeedCandidates(crowdedPeriodCandidates, generatedAt);
+  assert.equal(selection.length, 20);
+  assert.ok(selection.some(({ item }) => item.id === periodCandidate.item.id));
+  assert.equal(selection.filter(({ dataset }) => dataset === "events").length, 5);
+  const goldenOnDate = (await generatePortalFeed(generatedAt)).items.find((item) => item.id === goldenItems[0].id);
+  assert.ok(goldenOnDate);
+  assert.equal(goldenOnDate.endsAt, undefined);
+  assert.equal(JSON.stringify(goldenOnDate).includes("selectionThroughDate"), false);
+}
+assert.ok(!selectFeedCandidates(crowdedPeriodCandidates, "2026-11-30T15:00:00Z")
+  .some(({ item }) => item.id === periodCandidate.item.id));
 
 // 今日・未来予定だけで20件を超える場合は、JST基準で開始が近い20件を残す。
 const tooManyUpcomingEvents = Array.from({ length: 21 }, (_, index) =>

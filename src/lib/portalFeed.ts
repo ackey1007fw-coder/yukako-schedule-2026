@@ -42,6 +42,8 @@ type SourceDataset = "siteUpdates" | "news" | "events" | "archive";
 export type PortalFeedCandidate = {
   dataset: SourceDataset;
   dedupeKeys: string[];
+  /** 日付のみの公演最終日。選択専用で、公開する終演時刻ではない。 */
+  selectionThroughDate?: string;
   item: PortalFeedItem;
 };
 
@@ -281,7 +283,8 @@ const eventCandidates: PortalFeedCandidate[] = events.flatMap((event) => {
     event.links.find((link) => link.kind === "info") ??
     event.links.find((link) => link.kind === "ticket");
   const eventTopic = topicKey(event.id);
-  const dedupeKeys = [`event:${event.id}`];
+  // NEWSのsiteUpdateIdと同じ公演を、共有フィードでは1件にまとめる。
+  const dedupeKeys = [`event:${event.id}`, `update:${event.id}`];
   if (eventTopicCounts.get(eventTopic) === 1) {
     dedupeKeys.push(`topic:${eventTopic}`);
   }
@@ -290,6 +293,9 @@ const eventCandidates: PortalFeedCandidate[] = events.flatMap((event) => {
     {
       dataset: "events",
       dedupeKeys,
+      selectionThroughDate: event.endAt && /^\d{4}-\d{2}-\d{2}$/.test(event.endAt)
+        ? event.endAt
+        : undefined,
       item: {
         id: `yukako:event:${event.id}`,
         personId: PERSON_ID,
@@ -323,8 +329,8 @@ const jstDateOf = (value: string) => {
 
 const isTodayOrFutureEvent = (candidate: PortalFeedCandidate, referenceJstDate: string) => {
   if (candidate.dataset !== "events" || !candidate.item.startsAt) return false;
-  const startsJstDate = jstDateOf(candidate.item.startsAt);
-  return Boolean(startsJstDate && startsJstDate >= referenceJstDate);
+  const throughJstDate = candidate.selectionThroughDate ?? jstDateOf(candidate.item.startsAt);
+  return Boolean(throughJstDate && throughJstDate >= referenceJstDate);
 };
 
 const dedupeCandidates = (
