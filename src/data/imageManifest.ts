@@ -487,6 +487,7 @@ export const imageManifest = {
   "/images/yukako-gojet-produce-announce-flyer-2026-06-11.jpg": {"width":3072,"height":4096,"widths":[360,480,720,960,1280,1600,3072]},
   "/images/yukako-gojet-produce-announce-message-2026-06-11.jpg": {"width":1122,"height":1488,"widths":[360,480,720,960,1122]},
   "/images/yukako-gojet-produce-announce-microphone-2026-06-11.jpg": {"width":1658,"height":2210,"widths":[360,480,720,960,1280,1600,1658]},
+  "/images/yukako-golden-glass-poster-2026-10-10.jpg": {"width":1055,"height":1491,"widths":[360,480,720,960,1055]},
   "/images/yukako-hero-hall.jpg": {"width":1170,"height":1560,"widths":[360,480,720,960,1170]},
   "/images/yukako-iburigakko-popcorn-2026-08-17.jpg": {"width":1462,"height":2048,"widths":[360,480,720,960,1280,1462]},
   "/images/yukako-iburigakko-popcorn-menu-2026-01-18.jpg": {"width":2048,"height":2037,"widths":[360,480,720,960,1280,1600,2048]},

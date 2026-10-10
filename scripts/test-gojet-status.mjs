@@ -1065,6 +1065,20 @@ try {
   );
   const { events } = await server.ssrLoadModule("/src/data/events.ts");
 
+  // 終演時刻のない複数日公演を最終日の朝に終了扱いにせず、カレンダーにも推測の時刻を出さない。
+  const { isEventPast: isGoldenGlassPast, getEventsForDay: goldenGlassEventsForDay } = await server.ssrLoadModule("/src/lib/date.ts");
+  const { googleCalendarUrl: goldenGlassCalendarUrl } = await server.ssrLoadModule("/src/lib/share.ts");
+  const goldenGlass = events.find((event) => event.id === "yukako-golden-glass-2026-11");
+  assert.ok(goldenGlass);
+  assert.equal(isGoldenGlassPast(goldenGlass, new Date("2026-11-30T23:59:59+09:00")), false);
+  assert.equal(isGoldenGlassPast(goldenGlass, new Date("2026-12-01T00:00:01+09:00")), true);
+  assert.equal(goldenGlassEventsForDay(events, "2026-11", 30).filter(event => event.id === goldenGlass.id).length, 1);
+  assert.equal(goldenGlassEventsForDay(events, "2026-12", 1).filter(event => event.id === goldenGlass.id).length, 0);
+  assert.equal(new URL(goldenGlassCalendarUrl(goldenGlass)).searchParams.get("dates"), "20261126/20261201");
+  const timedFixture = { ...goldenGlass, endAt: "2026-11-30T21:00:00+09:00" };
+  assert.equal(isGoldenGlassPast(timedFixture, new Date("2026-11-30T20:59:59+09:00")), false);
+  assert.equal(isGoldenGlassPast(timedFixture, new Date("2026-11-30T21:00:01+09:00")), true);
+
   const gojetEvent = events.find((event) => event.id === "yukajet-gojet-2026-07");
   assert.ok(gojetEvent, "#ゆかJET のイベントデータが見つからない");
 
