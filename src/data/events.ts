@@ -2,6 +2,37 @@ import type { ScheduleEvent } from "../types";
 
 export const events: ScheduleEvent[] = [
   {
+    id: "yukako-golden-glass-2026-11",
+    title: "ミュージカル『Golden & Glass』",
+    shortTitle: "Golden & Glass",
+    category: "stage",
+    listedAt: "2026-10-11",
+    // 本人が出演するC班の初回。公演全体は同日12:00のA班から。
+    startAt: "2026-11-26T19:00:00+09:00",
+    // 公演最終日だけを保持する。終演時刻は未発表。
+    endAt: "2026-11-30",
+    dates: ["2026-11-26", "2026-11-27", "2026-11-28", "2026-11-29", "2026-11-30"],
+    displayDate: "2026年11月26日（木）〜30日（月）／HP公開・予約開始予定：10月15日（木）20:00（日本時間）",
+    venue: "Air Studio 両国（東京・両国）",
+    image: "/images/yukako-golden-glass-poster-2026-10-10.jpg",
+    summary: "吉井優花子さんプロデュース第二弾、#ゆかマリリン。マリリン・モンロー生誕100周年を記念した再演に、新キャラクター・ダンサー・楽曲を追加。脚本・演出は多賀雅人さん。優花子さんはC班のマリリン・モンロー役。C班の開演は11/26（木）19:00、27（金）12:00、28（土）15:30、29（日）12:00、30（月）19:00。一般席4,700円、特典付き前方席6,000円、2回目以降500円引き。アーカイブ配信3,700円。予約先は10/15のHP公開時の案内へ。",
+    badges: ["舞台", "プロデュース公演", "C班マリリン役", "#ゆかマリリン", "予約10/15 20:00予定"],
+    links: [
+      {
+        label: "情報解禁・HP公開と予約開始の案内（プロデュース X）",
+        url: "https://x.com/yukako_produce/status/2108875455629758737",
+        kind: "info"
+      },
+      {
+        label: "出演案内・公演概要（吉井優花子 X）",
+        url: "https://x.com/mokoopy/status/2108881564763635894",
+        kind: "sns"
+      }
+    ],
+    isImportant: true,
+    isNextFocus: true
+  },
+  {
     id: "miss-grand-japan-2026-final-mc",
     title: "MISS GRAND JAPAN & MR GAY JAPAN 2026 FINAL COMPETITION",
     shortTitle: "MGJ 2026 FINAL（MC）",

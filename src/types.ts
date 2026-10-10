@@ -21,6 +21,7 @@ export type ScheduleEvent = {
   /** この予定をサイトへ掲載した日。出来事の開始日時とは分けて扱う。 */
   listedAt?: string;
   startAt: string;
+  /** 日時、または終演時刻が未発表の場合の最終日（YYYY-MM-DD・日本時間で当日を含む）。 */
   endAt?: string;
   /** 公演日が飛び飛びの場合の実施日リスト（"YYYY-MM-DD"）。カレンダー表示に使用 */
   dates?: string[];
