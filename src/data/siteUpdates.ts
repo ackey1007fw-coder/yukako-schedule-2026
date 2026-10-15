@@ -414,6 +414,18 @@ const standaloneCoversNews = (item: (typeof news)[number]) =>
 
 // 本文・投稿日は news を正本にし、告知を読むための補足だけを元投稿URLで結び付ける。
 const newsContext: Partial<Record<string, Pick<SiteUpdate, "summary" | "additionalSource" | "image" | "imageLayout" | "anchor">>> = {
+  "https://x.com/mokoopy/status/2110384385052840256": {
+    summary: "プロデュース第二弾の顔合わせ・読み合わせを終え、キャストが輝く舞台へ。優花子さんはプロデューサーとC班マリリン役の両方に挑戦。公演の詳細と申込先は出演予定へ。",
+    anchor: "#schedule",
+    additionalSource: {
+      url: "https://x.com/yukako_produce/status/2110347096163492272",
+      label: "公演アカウントの顔合わせ報告"
+    }
+  },
+  "https://x.com/yukako_produce/status/2110347096163492272": {
+    summary: "A・B・C班のキャストが集まり、読み合わせから本格始動。公演は11月26日〜30日、Air Studio両国にて。",
+    anchor: "#schedule"
+  },
   "https://yukamarilyn.hp.peraichi.com/": {
     summary: "公演HPと来場・配信チケット、応援コンテンツの申込先が公開。マリリン・モンロー生誕100周年を記念した再演を、優花子さんがプロデュース。C班のマリリン役で出演します。出演回はスケジュールへ。",
     image: {
