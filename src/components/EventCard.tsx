@@ -21,17 +21,18 @@ export function EventCard({ event, isNext = false, compact = false, now }: Event
   const upcoming = !isEventPast(event, now);
   const ticketDate = formatTicketDate(event.startAt);
   const uniqueLinks = event.links.filter((link, index, links) => links.findIndex((candidate) => candidate.url === link.url) === index);
-  const ticketOrStream = upcoming
-    ? uniqueLinks.find((link) => link.kind === "ticket") ?? uniqueLinks.find((link) => link.kind === "stream")
-    : undefined;
+  const isGoldenGlass = event.id === "yukako-golden-glass-2026-11";
+  const ticketLink = upcoming ? uniqueLinks.find((link) => link.kind === "ticket") : undefined;
+  const streamLink = upcoming ? uniqueLinks.find((link) => link.kind === "stream") : undefined;
+  const supportLink = upcoming ? uniqueLinks.find((link) => link.kind === "support") : undefined;
   const archiveLink = !upcoming ? uniqueLinks.find((link) => link.kind === "archive") : undefined;
-  const infoLink = uniqueLinks.find((link) => link.kind === "info" && link.url !== ticketOrStream?.url);
+  const infoLink = uniqueLinks.find((link) => link.kind === "info" && link.url !== ticketLink?.url && link.url !== streamLink?.url);
   const mapLink = uniqueLinks.find((link) => link.kind === "map");
   const snsLink = uniqueLinks.find((link) => link.kind === "sns");
   const recordLink = !upcoming && !archiveLink && !infoLink ? snsLink : undefined;
   const shareText = upcoming ? `${event.title}を応援しています！` : `${event.title}の活動記録を見ました`;
   const shareContent = event.id === "yukajet-gojet-2026-07" ? "yukajet_share" : "event_share";
-  const hasActions = Boolean(ticketOrStream || archiveLink || infoLink || mapLink || recordLink);
+  const hasActions = Boolean(ticketLink || streamLink || supportLink || archiveLink || infoLink || mapLink || recordLink);
 
   return (
     <article className={`yukako-ticket-card yukako-card yukako-card-interactive group relative grid overflow-hidden bg-white ${event.isImportant || isNext ? "border-champagne/70" : "border-rosefog/25"} ${compact ? "sm:grid-cols-[112px_1fr]" : "sm:grid-cols-[132px_1fr]"}`}>
@@ -58,9 +59,12 @@ export function EventCard({ event, isNext = false, compact = false, now }: Event
         </div>
         <p className={`${compact ? "mt-4 line-clamp-4" : "mt-5"} leading-8 text-ink/70`}>{event.summary}</p>
         {hasActions && <div className="mt-6 grid gap-3 sm:grid-cols-2">
-          {ticketOrStream && <ExternalButton href={ticketOrStream.url} variant="gold" onClick={() => trackPortalEvent(ticketOrStream.kind === "stream" ? "stream_click" : "ticket_click", { event_id: event.id, placement: "event_card" })}>{ticketOrStream.kind === "stream" ? "配信を見る" : "チケット予約"}</ExternalButton>}
+          {infoLink && isGoldenGlass && <ExternalButton href={infoLink.url} variant="light">公演ホームページ</ExternalButton>}
+          {ticketLink && <ExternalButton href={ticketLink.url} variant="gold" onClick={() => trackPortalEvent("ticket_click", { event_id: event.id, placement: "event_card" })}>{isGoldenGlass ? "来場チケット" : "チケット予約"}</ExternalButton>}
+          {streamLink && <ExternalButton href={streamLink.url} variant="gold" onClick={() => trackPortalEvent("stream_click", { event_id: event.id, placement: "event_card" })}>{isGoldenGlass ? "配信チケット" : streamLink.label}</ExternalButton>}
+          {supportLink && <ExternalButton href={supportLink.url} variant="light">応援コンテンツ</ExternalButton>}
           {archiveLink && <ExternalButton href={archiveLink.url} variant="gold">アーカイブを見る</ExternalButton>}
-          {infoLink && <ExternalButton href={infoLink.url} variant="light">{upcoming ? "詳細を見る" : "当時の案内を見る"}</ExternalButton>}
+          {infoLink && !isGoldenGlass && <ExternalButton href={infoLink.url} variant="light">{upcoming ? "詳細を見る" : "当時の案内を見る"}</ExternalButton>}
           {recordLink && <ExternalButton href={recordLink.url} variant="light">投稿を見る</ExternalButton>}
           {mapLink && <ExternalButton href={mapLink.url} variant="light">地図を開く</ExternalButton>}
         </div>}

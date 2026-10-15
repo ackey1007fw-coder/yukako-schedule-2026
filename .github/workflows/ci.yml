@@ -82,9 +82,19 @@ jobs:
                 const golden = page.locator("#event-yukako-golden-glass-2026-11");
                 await golden.scrollIntoViewIfNeeded();
                 assert.equal(await golden.count(), 1);
-                assert.match(await golden.innerText(), /10月15日（木）20:00（日本時間）/);
+                assert.match(await golden.innerText(), /公演HP公開・来場／配信チケット受付中/);
                 assert.match(await golden.innerText(), /C班のマリリン・モンロー役/);
-                assert.equal(await golden.getByRole("link", { name: "チケット予約", exact: true }).count(), 0);
+                const goldenDestinations = [
+                  ["公演ホームページ", "https://yukamarilyn.hp.peraichi.com/"],
+                  ["来場チケット", "https://forms.gle/2VimGm3T5ovuGXv28"],
+                  ["配信チケット", "https://forms.gle/cgb2BP1GTUFnHo8j8"],
+                  ["応援コンテンツ", "https://forms.gle/3dX9Cr9TbBmgcXu59"]
+                ];
+                for (const [label, href] of goldenDestinations) {
+                  const action = golden.getByRole("link", { name: label, exact: true });
+                  assert.equal(await action.count(), 1);
+                  assert.equal(await action.getAttribute("href"), href);
+                }
                 await golden.locator("summary").click();
                 const calendar = await golden.getByRole("link", { name: "カレンダー追加" }).getAttribute("href");
                 assert.equal(new URL(calendar).searchParams.get("dates"), "20261126/20261201");

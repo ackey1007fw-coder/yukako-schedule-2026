@@ -414,8 +414,8 @@ const standaloneCoversNews = (item: (typeof news)[number]) =>
 
 // 本文・投稿日は news を正本にし、告知を読むための補足だけを元投稿URLで結び付ける。
 const newsContext: Partial<Record<string, Pick<SiteUpdate, "summary" | "additionalSource" | "image" | "imageLayout" | "anchor">>> = {
-  "https://x.com/yukako_produce/status/2108875455629758737": {
-    summary: "マリリン・モンロー生誕100周年を記念したミュージカルの再演。新キャラクター・ダンサー・楽曲を加えて、Air Studio 両国へ。優花子さんはプロデューサーとC班マリリン・モンロー役。公演日・出演回・料金は出演予定に。",
+  "https://yukamarilyn.hp.peraichi.com/": {
+    summary: "公演HPと来場・配信チケット、応援コンテンツの申込先が公開。マリリン・モンロー生誕100周年を記念した再演を、優花子さんがプロデュース。C班のマリリン役で出演します。出演回はスケジュールへ。",
     image: {
       src: "/images/yukako-golden-glass-poster-2026-10-10.jpg",
       alt: "赤い幕と金色の照明、白いドレス姿の人物を背景に、Golden & Glass、吉井優花子プロデュース、2026年11月26日〜30日の文字が入った告知フライヤー"
@@ -423,19 +423,19 @@ const newsContext: Partial<Record<string, Pick<SiteUpdate, "summary" | "addition
     imageLayout: "contain",
     anchor: "#schedule",
     additionalSource: {
-      url: "https://x.com/mokoopy/status/2108881564763635894",
-      label: "優花子さんの出演案内・公演概要"
+      url: "https://x.com/yukako_produce/status/2108875455629758737",
+      label: "10月10日の情報解禁（プロデュース X）"
     }
   },
   "https://x.com/mokoopy/status/2103827646480355682": {
-    summary: "9/26の募集当時の案内。本番は 2026.11.26〜11.30（東京）。10/10に『Golden & Glass』として情報解禁。現在の公演情報・予約開始予定は出演予定へ。",
+    summary: "9/26の募集当時の案内。本番は 2026.11.26〜11.30（東京）。10/10に『Golden & Glass』として情報解禁。現在の公演情報・申込先は出演予定へ。",
     additionalSource: {
       url: "https://x.com/mokoopy/status/2099829333292675102",
       label: "出演者募集の元投稿"
     }
   },
   "https://x.com/mokoopy/status/2099829333292675102": {
-    summary: "9/15時点で、タイトル・会場・開演は未発表。応募条件の詳細は当時の元投稿へ。10/10に『Golden & Glass』として情報解禁。現在の公演情報・予約開始予定は出演予定へ。",
+    summary: "9/15時点で、タイトル・会場・開演は未発表。応募条件の詳細は当時の元投稿へ。10/10に『Golden & Glass』として情報解禁。現在の公演情報・申込先は出演予定へ。",
     additionalSource: {
       url: "https://x.com/yukako_produce/status/2099831161489084736",
       label: "プロデュースアカウントの告知"

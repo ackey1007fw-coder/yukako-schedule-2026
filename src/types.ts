@@ -10,7 +10,7 @@ export type EventLink = {
   label: string;
   url: string;
   /** map = 会場の地図。archive = 終了後に見られる公式アーカイブ */
-  kind?: "ticket" | "stream" | "info" | "sns" | "map" | "archive";
+  kind?: "ticket" | "stream" | "info" | "support" | "sns" | "map" | "archive";
 };
 
 export type ScheduleEvent = {
