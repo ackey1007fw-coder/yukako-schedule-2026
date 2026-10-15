@@ -21,6 +21,20 @@ export const news: NewsItem[] = [
     siteUpdateId: "yukako-golden-glass-2026-11"
   },
   {
+    date: "2026.10.14",
+    label: "X",
+    text: "#ゆかマリリン🌹 顔合わせ・読み合わせへ。優花子さんはプロデューサーとして作品を支えながら、C班マリリン役にも挑戦！",
+    url: "https://x.com/mokoopy/status/2110384385052840256",
+    listedAt: "2026.10.16"
+  },
+  {
+    date: "2026.10.14",
+    label: "X",
+    text: "『Golden & Glass』本格始動✨ 顔合わせ・読み合わせを実施。A・B・C班、それぞれの色が見えてきた一日。#ゆかマリリン",
+    url: "https://x.com/yukako_produce/status/2110347096163492272",
+    listedAt: "2026.10.16"
+  },
+  {
     date: "2026.10.1",
     label: "X",
     text: "「10月もよろしくね☺️🍁」——#ポートレート #秋田県。海辺で両手を髪に添えた一枚。",
