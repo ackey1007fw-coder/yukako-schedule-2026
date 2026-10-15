@@ -61,7 +61,7 @@ export function EventCard({ event, isNext = false, compact = false, now }: Event
         {hasActions && <div className="mt-6 grid gap-3 sm:grid-cols-2">
           {infoLink && isGoldenGlass && <ExternalButton href={infoLink.url} variant="light">公演ホームページ</ExternalButton>}
           {ticketLink && <ExternalButton href={ticketLink.url} variant="gold" onClick={() => trackPortalEvent("ticket_click", { event_id: event.id, placement: "event_card" })}>{isGoldenGlass ? "来場チケット" : "チケット予約"}</ExternalButton>}
-          {streamLink && <ExternalButton href={streamLink.url} variant="gold" onClick={() => trackPortalEvent("stream_click", { event_id: event.id, placement: "event_card" })}>配信チケット</ExternalButton>}
+          {streamLink && <ExternalButton href={streamLink.url} variant="gold" onClick={() => trackPortalEvent("stream_click", { event_id: event.id, placement: "event_card" })}>{isGoldenGlass ? "配信チケット" : streamLink.label}</ExternalButton>}
           {supportLink && <ExternalButton href={supportLink.url} variant="light">応援コンテンツ</ExternalButton>}
           {archiveLink && <ExternalButton href={archiveLink.url} variant="gold">アーカイブを見る</ExternalButton>}
           {infoLink && !isGoldenGlass && <ExternalButton href={infoLink.url} variant="light">{upcoming ? "詳細を見る" : "当時の案内を見る"}</ExternalButton>}

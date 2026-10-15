@@ -6,7 +6,8 @@ export const events: ScheduleEvent[] = [
     title: "ミュージカル『Golden & Glass』",
     shortTitle: "Golden & Glass",
     category: "stage",
-    listedAt: "2026-10-11",
+    // 10/15の公演HP・申込先公開に合わせて、共有フィードの掲載日を更新。
+    listedAt: "2026-10-15",
     // 本人が出演するC班の初回。公演全体は同日12:00のA班から。
     startAt: "2026-11-26T19:00:00+09:00",
     // 公演最終日だけを保持する。終演時刻は未発表。

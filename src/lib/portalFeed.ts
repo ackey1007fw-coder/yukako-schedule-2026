@@ -278,7 +278,12 @@ const eventCandidates: PortalFeedCandidate[] = events.flatMap((event) => {
   const startsAt = toJstIso(event.startAt);
   if (!publishedAt || !startsAt) return [];
 
+  // Golden & Glass の10/15申込案内は公演HPを一次導線にする。
+  // 他の公演は従来どおり本人SNSを優先して、過去の配信／出演履歴を維持。
   const source =
+    (event.id === "yukako-golden-glass-2026-11"
+      ? event.links.find((link) => link.kind === "info")
+      : undefined) ??
     event.links.find((link) => link.kind === "sns") ??
     event.links.find((link) => link.kind === "info") ??
     event.links.find((link) => link.kind === "ticket");

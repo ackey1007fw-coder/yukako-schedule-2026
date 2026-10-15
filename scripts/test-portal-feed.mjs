@@ -19,12 +19,15 @@ assert.equal(first.siteUrl, "https://yukako-schedule-2026.vercel.app/");
 assert.equal(first.generatedAt, fixedGeneratedAt);
 assert.equal(first.items.length, 20, "feed must backfill deduped candidates up to 20 items");
 const goldenItems = first.items.filter((item) => item.id === "yukako:event:yukako-golden-glass-2026-11" || [
+  "https://yukamarilyn.hp.peraichi.com/",
   "https://x.com/yukako_produce/status/2108875455629758737",
   "https://x.com/mokoopy/status/2108881564763635894"
 ].includes(item.sourceUrl));
 assert.equal(goldenItems.length, 1, "情報解禁NEWSと公演を共有フィードで重複させない");
 assert.equal(goldenItems[0].id, "yukako:event:yukako-golden-glass-2026-11");
 assert.equal(goldenItems[0].startsAt, "2026-11-26T19:00:00+09:00");
+assert.equal(goldenItems[0].publishedAt, "2026-10-15T00:00:00+09:00", "チケット解禁後の最新掲載日を共有フィードに反映");
+assert.equal(goldenItems[0].sourceUrl, "https://yukamarilyn.hp.peraichi.com/", "最新の申込案内は公演HPを優先");
 assert.deepEqual(
   first.items.map((item) => item.id),
   second.items.map((item) => item.id),
