@@ -10,7 +10,7 @@
 | D-03 | 2026-07-02 | Site Identity Guard（name / room_id / title / 本番URL ほか）と Image Overwrite Guard をCI必須に | 取り違え・同名上書きを機械で止める（#32 / #34） | `scripts/check-site-identity.mjs` / `.github/workflows/` |
 | D-04 | 2026-07 | 配色はクリムゾン×ゴールド×アイボリー。白背景の金文字は `champagneInk`、暗い背景は `champagne`。里季サイトのピンク系は使わない | 2サイトの視覚的な差別化とWCAGコントラスト | `tailwind.config.ts` |
 | D-05 | 2026-07 | 写真はトリミングしない（モバイル全体表示、PCのみ `object-cover`）。告知画像はサムネイルでも `object-contain`。顔のAI生成禁止 | 本人への敬意と、情報の読みやすさ | `AGENTS.md` 画像手順 |
-| D-06 | 2026-07 | 本人スナップは `photos.ts`、告知画像は `gojetPromo.ts` | ギャラリーの性格を保つ | `docs/CODEX.md` 写真の振り分け |
+| D-06 | 2026-07 | 本人スナップは `photos.ts`、#ゆかJET の告知画像は `gojetPromo.ts`。他公演の告知画像はその公演の特集データ（`events.ts` / `siteUpdates.ts` 等） | ギャラリーの性格を保つ | `docs/CODEX.md` 写真の振り分け |
 | D-07 | 2026-07 | 文体ガイド（レポート調禁止・感情の代弁禁止・カギ括弧は原文のみ）をサイト上の全日本語に適用。alt は事実描写で別ルール | ファンが運営する温度のあるサイトにする | `AGENTS.md` 文体ガイド |
 | D-08 | 2026-07 | Codex＝データ更新、Claude＝UI/レビュー/文言/CI の分担。レーンは最優先であって専有ではない | 速さと品質の両立 | `docs/CODEX.md` / `docs/SONNET.md` |
 | D-09 | 2026-07-27 | CI green かつマージ前チェックリストを満たせば、AIが自分の判断で squash merge。オーナーの「マージして」は待たない。戻すときは revert PR | 更新を止めない（#125） | `AGENTS.md` PR / マージ方針 |
