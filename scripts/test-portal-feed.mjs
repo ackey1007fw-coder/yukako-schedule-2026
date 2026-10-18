@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
+import { extractNewsItems } from "./lib/addNewsCore.mjs";
 import { generatePortalFeed, loadPortalFeedModule } from "./generate-portal-feed.mjs";
 
 const fixedGeneratedAt = "2026-08-18T00:00:00.000Z";
@@ -16,7 +17,17 @@ assert.equal(first.version, 1);
 assert.equal(first.personId, "yukako");
 assert.equal(first.siteUrl, "https://yukako-schedule-2026.vercel.app/");
 assert.equal(first.generatedAt, fixedGeneratedAt);
-assert.ok(first.items.length > 0 && first.items.length <= 20);
+assert.equal(first.items.length, 20, "feed must backfill deduped candidates up to 20 items");
+const goldenItems = first.items.filter((item) => item.id === "yukako:event:yukako-golden-glass-2026-11" || [
+  "https://yukamarilyn.hp.peraichi.com/",
+  "https://x.com/yukako_produce/status/2108875455629758737",
+  "https://x.com/mokoopy/status/2108881564763635894"
+].includes(item.sourceUrl));
+assert.equal(goldenItems.length, 1, "情報解禁NEWSと公演を共有フィードで重複させない");
+assert.equal(goldenItems[0].id, "yukako:event:yukako-golden-glass-2026-11");
+assert.equal(goldenItems[0].startsAt, "2026-11-26T19:00:00+09:00");
+assert.equal(goldenItems[0].publishedAt, "2026-10-15T00:00:00+09:00", "チケット解禁後の最新掲載日を共有フィードに反映");
+assert.equal(goldenItems[0].sourceUrl, "https://yukamarilyn.hp.peraichi.com/", "最新の申込案内は公演HPを優先");
 assert.deepEqual(
   first.items.map((item) => item.id),
   second.items.map((item) => item.id),
@@ -72,16 +83,65 @@ assert.equal(
     ?.startsAt,
   "2026-09-20T11:30:00+09:00"
 );
-const babySharkStory = first.items.find(
-  (item) => item.type === "news" && item.title.includes("大垣・福山・久留米")
+// 掲載日の変換は実データの候補で検証し、過去記事を最新20件へ永久固定しない。
+const newsSource = await readFile(path.resolve(import.meta.dirname, "..", "src/data/news.ts"), "utf8");
+const newsItems = extractNewsItems(newsSource);
+const babySharkStoryNews = newsItems.find(
+  (item) => item.date === "2026.8.21" && item.text.includes("大垣・福山・久留米")
 );
-assert.equal(babySharkStory?.sourceUrl, "https://www.instagram.com/yoppy_777");
-assert.equal(babySharkStory?.publishedAt, "2026-08-21T00:00:00+09:00");
+assert.ok(babySharkStoryNews, "8/21 Story must remain in the news data");
+const babySharkStory = createNewsCandidate(babySharkStoryNews);
+assert.equal(babySharkStory?.item.sourceUrl, "https://www.instagram.com/yoppy_777");
+assert.equal(babySharkStory?.item.publishedAt, "2026-08-21T00:00:00+09:00");
 
-const lateListedNews = first.items.find(
-  (item) => item.sourceUrl === "https://x.com/mokoopy/status/2012824363620331966"
+const theaterStoryId = "theater-next-year-story-2026-09-21";
+const theaterStoryNews = newsItems.find((item) => item.siteUpdateId === theaterStoryId);
+assert.ok(theaterStoryNews, "Story identity must survive the news CLI parser");
+assert.equal(
+  theaterStoryNews.text,
+  "「次回出演は来年♪みんな来てね😊」——直近では11月末のプロデュース舞台。「頑張るぞ〜✨（凄い作品レベルです）」"
 );
-assert.equal(lateListedNews?.publishedAt, "2026-08-18T00:00:00+09:00");
+const theaterStoryCandidate = createNewsCandidate(theaterStoryNews);
+assert.ok(theaterStoryCandidate);
+const storyFeed = await generatePortalFeed("2026-09-21T00:00:00.000Z");
+const theaterStories = storyFeed.items.filter(
+  (item) => item.id === `yukako:update:${theaterStoryId}` || item.id === theaterStoryCandidate.item.id
+);
+assert.equal(theaterStories.length, 1, "the same Story must occupy exactly one feed slot");
+assert.equal(theaterStories[0].id, `yukako:update:${theaterStoryId}`);
+assert.equal(theaterStories[0].title, "「次回出演は来年♪みんな来てね😊」——11月末はプロデュース舞台");
+assert.equal(theaterStories[0].summary, "直近では11月末のプロデュース舞台。「頑張るぞ〜✨（凄い作品レベルです）」");
+assert.equal(theaterStories[0].image, `${siteOrigin}/images/yukako-theater-arms-open-story-2026-09-21.jpg`);
+// 同じプロフィール・同日の別Storyまで消さず、明示した専用カードだけと統合する。
+const otherSameDayStory = createNewsCandidate({
+  date: theaterStoryNews.date,
+  label: "Instagram",
+  text: "別のStory",
+  url: theaterStoryNews.url
+});
+const storySelection = selectFeedCandidates([
+  { dataset: "siteUpdates", dedupeKeys: [`update:${theaterStoryId}`], item: theaterStories[0] },
+  theaterStoryCandidate,
+  otherSameDayStory,
+  babySharkStory
+], "2026-09-21T00:00:00.000Z");
+assert.equal(storySelection.length, 3);
+assert.ok(storySelection.some(({ item }) => item.id === otherSameDayStory.item.id));
+assert.ok(storySelection.some(({ item }) => item.id === babySharkStory.item.id));
+
+const lateListedNews = newsItems.find(
+  (item) => item.url === "https://x.com/mokoopy/status/2012824363620331966"
+);
+assert.ok(lateListedNews, "late-listed source news must remain in the data");
+assert.equal(createNewsCandidate(lateListedNews)?.item.publishedAt, "2026-08-18T00:00:00+09:00");
+const castingNews = newsItems.find(
+  (item) => item.url === "https://x.com/mokoopy/status/2099829333292675102"
+);
+assert.ok(castingNews, "casting announcement must remain in the news data");
+const castingCandidate = createNewsCandidate(castingNews);
+assert.equal(castingCandidate?.item.publishedAt, "2026-09-16T00:00:00+09:00");
+assert.equal(castingCandidate?.item.type, "news");
+assert.equal(castingCandidate?.item.startsAt, undefined);
 
 assert.equal(
   toPortalImageUrl("/images/example.jpg"),
@@ -189,6 +249,30 @@ assert.equal(
   "the 4-event source limit applies only to past events"
 );
 
+// 初回を過ぎても、終演時刻未発表の公演は最終日まで件数制限から保護する。
+const periodCandidate = {
+  ...fixtureCandidate({
+    dataset: "events",
+    id: "yukako:event:fixture-period",
+    publishedAt: "2025-01-01T00:00:00+09:00",
+    startsAt: "2026-11-26T19:00:00+09:00"
+  }),
+  selectionThroughDate: "2026-11-30"
+};
+const crowdedPeriodCandidates = [periodCandidate, ...newerPastEvents, ...fillerCandidates];
+for (const generatedAt of ["2026-11-25T12:00:00Z", "2026-11-28T12:00:00Z", "2026-11-30T14:59:59Z"]) {
+  const selection = selectFeedCandidates(crowdedPeriodCandidates, generatedAt);
+  assert.equal(selection.length, 20);
+  assert.ok(selection.some(({ item }) => item.id === periodCandidate.item.id));
+  assert.equal(selection.filter(({ dataset }) => dataset === "events").length, 5);
+  const goldenOnDate = (await generatePortalFeed(generatedAt)).items.find((item) => item.id === goldenItems[0].id);
+  assert.ok(goldenOnDate);
+  assert.equal(goldenOnDate.endsAt, undefined);
+  assert.equal(JSON.stringify(goldenOnDate).includes("selectionThroughDate"), false);
+}
+assert.ok(!selectFeedCandidates(crowdedPeriodCandidates, "2026-11-30T15:00:00Z")
+  .some(({ item }) => item.id === periodCandidate.item.id));
+
 // 今日・未来予定だけで20件を超える場合は、JST基準で開始が近い20件を残す。
 const tooManyUpcomingEvents = Array.from({ length: 21 }, (_, index) =>
   fixtureCandidate({
@@ -208,6 +292,32 @@ assert.ok(
 );
 assert.ok(
   !cappedUpcomingSelection.some(({ item }) => item.id.endsWith("upcoming-20"))
+);
+
+// 残り枠が1件しかないときは、source列挙順ではなく公開日時が新しい候補を残す。
+const scarceSlotSelection = selectFeedCandidates(
+  [
+    ...tooManyUpcomingEvents.slice(0, 19),
+    fixtureCandidate({
+      dataset: "siteUpdates",
+      id: "yukako:update:fixture-old-diversity",
+      publishedAt: "2026-08-01T00:00:00+09:00"
+    }),
+    fixtureCandidate({
+      dataset: "archive",
+      id: "yukako:story:fixture-new-diversity",
+      publishedAt: "2026-08-21T00:00:00+09:00"
+    })
+  ],
+  "2026-08-21T15:00:00.000Z"
+);
+assert.equal(scarceSlotSelection.length, 20);
+assert.ok(
+  scarceSlotSelection.some(({ item }) => item.id === "yukako:story:fixture-new-diversity"),
+  "when diversity slots are scarce, the newest filler must win"
+);
+assert.ok(
+  !scarceSlotSelection.some(({ item }) => item.id === "yukako:update:fixture-old-diversity")
 );
 
 const distPath = path.resolve(import.meta.dirname, "..", "dist", "portal-feed.json");

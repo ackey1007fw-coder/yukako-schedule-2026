@@ -4,8 +4,14 @@ export const toDateKey = (iso: string) => iso.slice(0, 10);
 
 export const eventStartDate = (event: ScheduleEvent) => new Date(event.startAt);
 
-export const eventEndDate = (event: ScheduleEvent) =>
-  new Date(event.endAt ?? event.startAt);
+export const eventEndDate = (event: ScheduleEvent) => {
+  const end = event.endAt ?? event.startAt;
+  // 日付のみの最終日は日本時間の一日を含める。終演時刻として公開しない。
+  if (/^\d{4}-\d{2}-\d{2}$/.test(end)) {
+    return new Date(new Date(`${end}T00:00:00+09:00`).getTime() + 86400000);
+  }
+  return new Date(end);
+};
 
 export const isEventPast = (event: ScheduleEvent, now = new Date()) =>
   eventEndDate(event).getTime() < now.getTime();

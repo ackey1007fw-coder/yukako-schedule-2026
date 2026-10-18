@@ -95,6 +95,7 @@ export function ShowroomSection() {
             </div>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <ExternalButton href={profile.showroom.url} variant="primary">SHOWROOMを開く</ExternalButton>
+              <a href="#stream-recaps" className="inline-flex min-h-12 items-center justify-center border border-rosefog/40 bg-white px-4 py-3 text-sm font-bold text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-rosefog">配信コーナーへ</a>
               <a href="#links" className="inline-flex min-h-12 items-center justify-center gap-2 border border-rosefog/40 bg-white px-4 py-3 text-sm font-bold text-ink transition hover:bg-porcelain"><Sparkles className="h-4 w-4" aria-hidden="true" />SNSも見る</a>
             </div>
           </div>

@@ -44,6 +44,10 @@ Recommended: Vercel
 - Build Command: `pnpm build`
 - Output Directory: `dist`
 
+## 配信コーナー
+
+ホームの `#stream-recaps` に配信の記録を掲載します。更新手順は [docs/STREAM-RECAPS.md](./docs/STREAM-RECAPS.md)。
+
 ## Analytics
 
 Vercel Web Analytics is included through `@vercel/analytics/react` in `src/App.tsx`.

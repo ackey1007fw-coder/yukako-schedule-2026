@@ -29,6 +29,7 @@ export type BabySharkUpdate = {
   title: string;
   body: string[];
   videos?: BabySharkVideo[];
+  photos?: BabySharkImage[];
   sourceUrl?: string;
   sourceLabel?: string;
   kind:
@@ -175,6 +176,14 @@ export const babySharkLive = {
    */
   images: [
     {
+      id: "hetty-babyshark-2026-09-18",
+      src: "/images/baby-shark/baby-shark-hetty-with-babyshark-2026-09-18.jpg",
+      alt: "赤いスパンコールのヤドカリ衣装で、ベイビーシャークの着ぐるみと並んで微笑む吉井優花子さん",
+      caption: "ヘッティーとベイビーシャーク（2026.9.18）",
+      objectPosition: "center 22%",
+      kind: "gallery"
+    },
+    {
       id: "pearl",
       src: "/images/baby-shark/baby-shark-pearl.jpg",
       alt: "海賊のパール役の衣装を着た吉井優花子さん",
@@ -214,6 +223,13 @@ export const babySharkLive = {
   tour2026: {
     sources: [
       {
+        id: "instagram-2026-09-18",
+        date: "2026-09-18",
+        dateLabel: "2026年9月18日",
+        url: "https://www.instagram.com/p/DdbEOcelBoI/",
+        label: "9/18のInstagram投稿を見る"
+      },
+      {
         id: "instagram-2026-05-28",
         date: "2026-05-28",
         dateLabel: "2026年5月28日",
@@ -229,12 +245,20 @@ export const babySharkLive = {
       }
     ] satisfies BabySharkTourSource[],
     officialUrl: "https://babyshark-live-japan.com/ticket/",
-    image: {
-      src: "/images/baby-shark/baby-shark-schedule-2026.jpg",
-      alt: "ベイビーシャークライブ2026年の公演日程。神奈川・海老名公演は5月30日（土）海老名市文化会館 大ホール ①12:30 ②14:50（お見送り有）、埼玉・大宮公演は6月7日（日）大宮ソニックシティ 大ホール ①11:00 ②13:30（お見送り有）、岐阜・大垣公演は8月22日（土）大垣市スイトピアセンター 文化ホール ①12:30 ②14:30（お見送り有）",
-      caption: "本人の5/28 Instagram告知より（海老名・大宮・大垣）",
-      available: true
-    },
+    images: [
+      {
+        src: "/images/baby-shark/baby-shark-schedule-fukuyama-kurume-2026-09-18.jpg",
+        alt: "ベイビーシャークライブ2026年の公演日程。広島・福山公演は9月19日（土）ふくやま芸術文化ホール リーデンローズ ①11:30 ②14:00（お見送り有）、福岡・久留米公演は9月20日（日）久留米シティプラザ ザ・グランドホール ①11:30 ②14:00（お見送り有）",
+        caption: "本人の9/18 Instagram告知より（福山・久留米）",
+        available: true
+      },
+      {
+        src: "/images/baby-shark/baby-shark-schedule-2026.jpg",
+        alt: "ベイビーシャークライブ2026年の公演日程。神奈川・海老名公演は5月30日（土）海老名市文化会館 大ホール ①12:30 ②14:50（お見送り有）、埼玉・大宮公演は6月7日（日）大宮ソニックシティ 大ホール ①11:00 ②13:30（お見送り有）、岐阜・大垣公演は8月22日（土）大垣市スイトピアセンター 文化ホール ①12:30 ②14:30（お見送り有）",
+        caption: "本人の5/28 Instagram告知より（海老名・大宮・大垣）",
+        available: true
+      }
+    ],
     dates: [
       {
         id: "ebina-2026-05-30",
@@ -404,6 +428,36 @@ export const babySharkLive = {
       ],
       sourceUrl: "https://www.instagram.com/yoppy_777",
       sourceLabel: "優花子さんのInstagramを見る",
+      kind: "announcement"
+    },
+    {
+      id: "instagram-2026-09-18",
+      date: "2026-09-18",
+      dateLabel: "2026年9月18日",
+      title: "次は福山、そして久留米へ",
+      body: [
+        "「8月は大垣でみんなに会えてとっても嬉しかったよ☺️」",
+        "広島・福山は9月19日（土）、福岡・久留米は9月20日（日）。どちらも①11:30／②14:00で、2回目は終演後お見送り有。",
+        "みんなで一緒にリーフヴィルで\"宝探し\"をしよう！✨ ——🐚ヘッティー＆パール🏴‍☠️"
+      ],
+      photos: [
+        {
+          id: "schedule-fukuyama-kurume-2026-09-18",
+          src: "/images/baby-shark/baby-shark-schedule-fukuyama-kurume-2026-09-18.jpg",
+          alt: "ベイビーシャークライブの福山・久留米公演日程。9月19日（土）ふくやま芸術文化ホール リーデンローズ ①11:30 ②14:00（お見送り有）、9月20日（日）久留米シティプラザ ザ・グランドホール ①11:30 ②14:00（お見送り有）",
+          caption: "福山・久留米の出演回",
+          kind: "schedule"
+        },
+        {
+          id: "hetty-babyshark-2026-09-18-update",
+          src: "/images/baby-shark/baby-shark-hetty-with-babyshark-2026-09-18.jpg",
+          alt: "赤いスパンコールのヤドカリ衣装で、ベイビーシャークの着ぐるみと並んで微笑む吉井優花子さん",
+          caption: "🐚ヘッティー＆パール",
+          kind: "gallery"
+        }
+      ],
+      sourceUrl: "https://www.instagram.com/p/DdbEOcelBoI/",
+      sourceLabel: "Instagramの元投稿を見る",
       kind: "announcement"
     }
   ] satisfies BabySharkUpdate[],

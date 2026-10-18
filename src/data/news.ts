@@ -7,9 +7,104 @@ export type NewsItem = {
   // サイトに載せた日。過去投稿を後から追加するときだけ入れる。
   // Footer の「掲載情報更新」は listedAt ?? date の新しい方を見る。省略時は date。
   listedAt?: string;
+  // 同じ投稿の専用カードがある場合、そのidをportal feedの重複判定に使う。
+  siteUpdateId?: string;
 };
 
 export const news: NewsItem[] = [
+  {
+    date: "2026.10.15",
+    label: "公演HP",
+    text: "『Golden & Glass』🌹 公演HP公開！来場・配信チケットと応援コンテンツの申込先はこちら。#ゆかマリリン",
+    url: "https://yukamarilyn.hp.peraichi.com/",
+    listedAt: "2026.10.15",
+    siteUpdateId: "yukako-golden-glass-2026-11"
+  },
+  {
+    date: "2026.10.14",
+    label: "X",
+    text: "#ゆかマリリン🌹 顔合わせ・読み合わせへ。優花子さんはプロデューサーとして作品を支えながら、C班マリリン役にも挑戦！",
+    url: "https://x.com/mokoopy/status/2110384385052840256",
+    listedAt: "2026.10.16"
+  },
+  {
+    date: "2026.10.14",
+    label: "X",
+    text: "『Golden & Glass』本格始動✨ 顔合わせ・読み合わせを実施。A・B・C班、それぞれの色が見えてきた一日。#ゆかマリリン",
+    url: "https://x.com/yukako_produce/status/2110347096163492272",
+    listedAt: "2026.10.16"
+  },
+  {
+    date: "2026.10.1",
+    label: "X",
+    text: "「10月もよろしくね☺️🍁」——#ポートレート #秋田県。海辺で両手を髪に添えた一枚。",
+    url: "https://x.com/mokoopy/status/2105673651819598269",
+    listedAt: "2026.10.4"
+  },
+  {
+    date: "2026.9.26",
+    label: "X",
+    text: "9/26時点の募集記録。11月末プロデュース公演の女性ダンサーを引き続き募集。詳細は引用元の出演者募集へ。",
+    url: "https://x.com/mokoopy/status/2103827646480355682"
+  },
+  {
+    date: "2026.9.25",
+    label: "X",
+    text: "「今年の夏も楽しかった✨」——#ポートレート #秋田県。海辺で振り返る一枚。",
+    url: "https://x.com/mokoopy/status/2103488688424644773",
+    listedAt: "2026.9.26"
+  },
+  {
+    date: "2026.9.22",
+    label: "X",
+    text: "「全然思うままにできてない🥹」——#ゆかJET の投稿について、想いは大きいけれど、丁寧に進めるには時間がかかると綴る。",
+    url: "https://x.com/mokoopy/status/2102347563152322664"
+  },
+  {
+    date: "2026.9.21",
+    label: "Instagram",
+    text:
+      "「次回出演は来年♪みんな来てね😊」——直近では11月末のプロデュース舞台。「頑張るぞ〜✨（凄い作品レベルです）」",
+    url: "https://www.instagram.com/yoppy_777",
+    siteUpdateId: "theater-next-year-story-2026-09-21"
+  },
+  {
+    date: "2026.9.18",
+    label: "Instagram",
+    text:
+      "MGJ NEXTでSPEED『Body & Soul』。TaTaさん・優花子さん・MEIKOさんの3人。「何歳でも人生楽しもう」",
+    url: "https://www.instagram.com/reel/DdbLANUy4Aj/"
+  },
+  {
+    date: "2026.9.18",
+    label: "Instagram",
+    text:
+      "「8月は大垣でみんなに会えてとっても嬉しかったよ」——次は福山9/19、久留米9/20。🐚ヘッティー＆パール",
+    url: "https://www.instagram.com/p/DdbEOcelBoI/"
+  },
+  {
+    date: "2026.9.15",
+    label: "X",
+    text:
+      "9/15時点の出演者募集。本番は 2026.11.26〜11.30（東京）。女性キャスト／男性キャスト／女性ダンサー。",
+    url: "https://x.com/mokoopy/status/2099829333292675102",
+    listedAt: "2026.9.16"
+  },
+  {
+    date: "2026.9.11",
+    label: "X",
+    text:
+      "MISS GRAND JAPAN 2025日本大会から1年。思いやりの心を評価された「MISS PEACE」と、その経験や仲間との出会いが今の活力になっていることを振り返っています。",
+    url: "https://x.com/mokoopy/status/2098071506643480765"
+  },
+  {
+    date: "2026.9.10",
+    label: "X",
+    text:
+      "9/10時点の記録。11月の舞台の案が進んでいる。歌えて真摯に取り組む役者さんを探している。#ゆかJET の投稿もこれから。タイトル・会場・開演は未発表。",
+    url: "https://x.com/mokoopy/status/2097938152237506926",
+    listedAt: "2026.9.11"
+  },
   {
     date: "2026.9.5",
     label: "Instagram",
@@ -31,7 +126,7 @@ export const news: NewsItem[] = [
   {
     date: "2026.9.1",
     label: "X",
-    text: "「こりゃ難しいなと思ってる(色々な理由で)」——次のプロデュース舞台。タイトル・会場・日程は未発表。",
+    text: "9/1時点の記録。「こりゃ難しいなと思ってる(色々な理由で)」——次のプロデュース舞台。当時はタイトル・会場・日程は未発表。",
     url: "https://x.com/mokoopy/status/2094455042506178857"
   },
   {

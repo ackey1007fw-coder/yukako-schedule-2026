@@ -48,17 +48,34 @@ function pickFeatured(updates: SiteUpdate[], count: number) {
   return picked;
 }
 
+function AdditionalSourceLink({ source }: { source: SiteUpdate["additionalSource"] }) {
+  if (!source) return null;
+  return (
+    <a
+      href={source.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="inline-flex max-w-full items-center gap-1 text-ink/60 underline underline-offset-4 transition hover:text-rosefog"
+    >
+      <ExternalLink className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+      <span>{source.label}</span>
+    </a>
+  );
+}
+
+type LatestUpdatesSectionProps = { updates?: SiteUpdate[] };
+
 // トップページ上部の「最新情報」。散らばった更新を新しい順に集約して見せる。
 // 先頭3件をカードで、それ以降は「すべて見る」トグルの一覧で表示する（ルーターがないためページは増やさない）。
-export function LatestUpdatesSection() {
+export function LatestUpdatesSection({ updates = siteUpdates }: LatestUpdatesSectionProps = {}) {
   const [showAll, setShowAll] = useState(false);
   const [category, setCategory] = useState(ALL_CATEGORIES);
 
-  const featured = useMemo(() => pickFeatured(siteUpdates, FEATURED_COUNT), []);
+  const featured = useMemo(() => pickFeatured(updates, FEATURED_COUNT), [updates]);
   const rest = useMemo(() => {
     const featuredIds = new Set(featured.map((update) => update.id));
-    return siteUpdates.filter((update) => !featuredIds.has(update.id));
-  }, [featured]);
+    return updates.filter((update) => !featuredIds.has(update.id));
+  }, [updates, featured]);
   const categories = useMemo(
     () => [ALL_CATEGORIES, ...new Set(rest.map((update) => update.category))],
     [rest],
@@ -80,7 +97,7 @@ export function LatestUpdatesSection() {
         <div className="grid gap-4 sm:grid-cols-3">
           {featured.map((update, index) => {
             const related = update.relatedId
-              ? siteUpdates.find((item) => item.id === update.relatedId)
+              ? updates.find((item) => item.id === update.relatedId)
               : undefined;
             const detailAnchor = detailAnchorOf(update);
 
@@ -187,6 +204,7 @@ export function LatestUpdatesSection() {
                       {sourceLinkLabel(update.sourceUrl)}
                     </a>
                   )}
+                  <AdditionalSourceLink source={update.additionalSource} />
                 </p>
               </div>
             </article>
@@ -287,6 +305,7 @@ export function LatestUpdatesSection() {
                           {sourceLinkLabel(update.sourceUrl)}
                         </a>
                       )}
+                      <AdditionalSourceLink source={update.additionalSource} />
                     </p>
                   </li>
                     );

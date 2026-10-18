@@ -30,7 +30,7 @@ try {
   const { gojetFeatureUpdates } = await server.ssrLoadModule(
     "/src/data/gojetFeatureUpdates.ts"
   );
-  const { siteUpdates: latestSiteUpdates } = await server.ssrLoadModule(
+  const { siteUpdates: latestSiteUpdates, updateTimestamp: auditUpdateTimestamp } = await server.ssrLoadModule(
     "/src/data/siteUpdates.ts"
   );
 
@@ -69,17 +69,161 @@ try {
     (update) => update.anchor === "#gojet-original-songs-meg-2026-08-24"
   );
   assert.ok(originalSongsMegUpdate, "最新情報にオリジナル楽曲②の記事が無い");
+  const castCallUpdate = latestSiteUpdates.find(
+    (update) => update.sourceUrl === "https://x.com/mokoopy/status/2099829333292675102"
+  );
+  assert.ok(castCallUpdate, "9/15 出演者募集が最新情報から消えている");
+  // 履歴の内容検証と、新しい順の表示契約を分離する。特定記事を永久に先頭へ固定しない。
+  for (let index = 1; index < latestSiteUpdates.length; index += 1) {
+    assert.ok(
+      auditUpdateTimestamp(latestSiteUpdates[index - 1].date) >= auditUpdateTimestamp(latestSiteUpdates[index].date),
+      "最新情報が投稿日降順になっていない"
+    );
+  }
+  assert.equal(castCallUpdate.additionalSource?.url, "https://x.com/yukako_produce/status/2099831161489084736");
+  assert.equal(castCallUpdate.additionalSource?.label, "プロデュースアカウントの告知");
+  assert.match(castCallUpdate.summary ?? "", /9\/15時点/);
+  assert.match(castCallUpdate.summary ?? "", /タイトル・会場・開演は未発表/);
+  assert.equal(castCallUpdate.date, "2026.9.15");
+  assert.equal(castCallUpdate.category, "X");
+  assert.match(castCallUpdate.title ?? "", /出演者募集/);
+  assert.match(castCallUpdate.title ?? "", /2026\.11\.26〜11\.30（東京）/);
+  assert.doesNotMatch(castCallUpdate.title ?? "", /11月公演決定/);
+  assert.doesNotMatch(castCallUpdate.title ?? "", /公式|公認/);
   assert.equal(
-    latestSiteUpdates[0]?.sourceUrl,
-    "https://www.instagram.com/p/Dc6OokunNfi/",
-    "9/5 秋田犬が最新情報の先頭に出ていない"
+    latestSiteUpdates.filter(
+      (update) =>
+        update.sourceUrl === "https://x.com/mokoopy/status/2099829333292675102"
+    ).length,
+    1,
+    "9/15 出演者募集が最新情報に重複している"
   );
-  assert.equal(latestSiteUpdates[0]?.id, "akita-inu-omagari-2026-09-05");
-  assert.equal(latestSiteUpdates[0]?.category, "Instagram");
-  assert.match(
-    latestSiteUpdates[0]?.title ?? "",
-    /秋田・大曲で秋田犬になりました/
+  const dancerCallUpdate = latestSiteUpdates.find(
+    (update) => update.sourceUrl === "https://x.com/mokoopy/status/2103827646480355682"
   );
+  assert.ok(dancerCallUpdate, "9/26 女性ダンサー募集が最新情報から消えている");
+  assert.equal(dancerCallUpdate.date, "2026.9.26");
+  assert.equal(dancerCallUpdate.category, "X");
+  assert.match(dancerCallUpdate.title ?? "", /女性ダンサーを引き続き募集/);
+  assert.match(dancerCallUpdate.summary ?? "", /2026\.11\.26〜11\.30（東京）/);
+  assert.equal(dancerCallUpdate.additionalSource?.url, "https://x.com/mokoopy/status/2099829333292675102");
+  assert.equal(dancerCallUpdate.additionalSource?.label, "出演者募集の元投稿");
+  assert.doesNotMatch(dancerCallUpdate.title ?? "", /公式|公認/);
+  assert.equal(
+    latestSiteUpdates.filter(
+      (update) =>
+        update.sourceUrl === "https://x.com/mokoopy/status/2103827646480355682"
+    ).length,
+    1,
+    "9/26 女性ダンサー募集が最新情報に重複している"
+  );
+  const mgjNextUpdate = latestSiteUpdates.find(
+    (update) => update.id === "mgj-next-body-and-soul-2026-09-12"
+  );
+  assert.ok(mgjNextUpdate, "9/12 MGJ NEXT Body & Soulが最新情報から消えている");
+  assert.equal(
+    mgjNextUpdate.sourceUrl,
+    "https://www.instagram.com/reel/DIoCRxxTKMS/"
+  );
+  assert.equal(mgjNextUpdate.category, "MGJ NEXT");
+  assert.match(mgjNextUpdate.title ?? "", /Body & Soul/);
+  assert.equal(
+    mgjNextUpdate.image?.src,
+    "/images/yukako-mgj-next-body-and-soul-2026-09-12.jpg"
+  );
+  assert.equal(mgjNextUpdate.imageLayout, "contain");
+  const theaterStoryUpdate = latestSiteUpdates.find(
+    (update) => update.id === "theater-next-year-story-2026-09-21"
+  );
+  assert.ok(theaterStoryUpdate, "9/21 劇場ストーリーズが最新情報から消えている");
+  assert.equal(theaterStoryUpdate.date, "2026.9.21");
+  assert.equal(theaterStoryUpdate.category, "Instagram");
+  assert.equal(theaterStoryUpdate.sourceUrl, "https://www.instagram.com/yoppy_777");
+  assert.equal(
+    theaterStoryUpdate.image?.src,
+    "/images/yukako-theater-arms-open-story-2026-09-21.jpg"
+  );
+  assert.equal(theaterStoryUpdate.imageLayout, "contain");
+  assert.match(theaterStoryUpdate.title ?? "", /次回出演は来年/);
+  assert.match(theaterStoryUpdate.summary ?? "", /11月末のプロデュース舞台/);
+  assert.doesNotMatch(theaterStoryUpdate.title ?? "", /公式|公認/);
+  assert.ok(
+    existsSync(new URL("../public/images/yukako-theater-arms-open-story-2026-09-21.jpg", import.meta.url)),
+    "9/21 劇場ストーリーズの写真が public/images に無い"
+  );
+  assert.equal(
+    latestSiteUpdates.filter((update) => update.id === "theater-next-year-story-2026-09-21").length,
+    1,
+    "9/21 劇場ストーリーズが最新情報に重複している"
+  );
+  const mgjNextNewUpdate = latestSiteUpdates.find(
+    (update) => update.id === "mgj-next-body-and-soul-2026-09-18"
+  );
+  assert.ok(mgjNextNewUpdate, "9/18 MGJ NEXT Body & Soulが最新情報から消えている");
+  assert.equal(
+    mgjNextNewUpdate.sourceUrl,
+    "https://www.instagram.com/reel/DdbLANUy4Aj/"
+  );
+  assert.equal(mgjNextNewUpdate.category, "MGJ NEXT");
+  assert.match(mgjNextNewUpdate.title ?? "", /Body & Soul/);
+  assert.equal(
+    mgjNextNewUpdate.image?.src,
+    "/images/yukako-mgj-next-body-and-soul-2026-09-18.jpg"
+  );
+  assert.equal(mgjNextNewUpdate.imageLayout, "contain");
+  assert.equal(mgjNextNewUpdate.anchor, "#latest-reel");
+  assert.ok(
+    existsSync(new URL("../public/videos/yukako-mgj-next-body-and-soul-2026-09-18.mp4", import.meta.url)),
+    "9/18 Body & Soulの動画が public/videos に無い"
+  );
+  assert.ok(
+    existsSync(new URL("../public/images/yukako-mgj-next-body-and-soul-2026-09-18.jpg", import.meta.url)),
+    "9/18 Body & Soulのポスターが public/images に無い"
+  );
+  assert.equal(
+    latestSiteUpdates.filter(
+      (update) => update.sourceUrl === "https://www.instagram.com/reel/DdbLANUy4Aj/"
+    ).length,
+    1,
+    "9/18 Body & Soulが最新情報に重複している"
+  );
+  const missPeaceUpdate = latestSiteUpdates.find(
+    (update) => update.id === "miss-grand-japan-miss-peace-reflection-2026-09-11"
+  );
+  assert.ok(missPeaceUpdate, "9/11 MISS PEACE振り返りが最新情報から消えている");
+  assert.ok(
+    existsSync(new URL("../public/images/yukako-mgj-miss-peace-reflection-2026-09-11.jpg", import.meta.url)),
+    "9/11 MISS PEACE振り返りの写真が public/images に無い"
+  );
+  assert.equal(
+    latestSiteUpdates.filter((update) => update.sourceUrl === "https://x.com/mokoopy/status/2098071506643480765").length,
+    1,
+    "9/11 MISS PEACE振り返りが最新情報に重複している"
+  );
+  const novemberStagePlanUpdate = latestSiteUpdates.find(
+    (update) =>
+      update.sourceUrl === "https://x.com/mokoopy/status/2097938152237506926"
+  );
+  assert.ok(novemberStagePlanUpdate, "9/10 11月舞台の案の最新情報が消えている");
+  assert.equal(novemberStagePlanUpdate.date, "2026.9.10");
+  assert.equal(novemberStagePlanUpdate.category, "X");
+  assert.match(novemberStagePlanUpdate.title ?? "", /11月の舞台の案/);
+  assert.match(novemberStagePlanUpdate.title ?? "", /タイトル・会場・開演は未発表/);
+  assert.doesNotMatch(novemberStagePlanUpdate.title ?? "", /11月公演決定/);
+  assert.match(novemberStagePlanUpdate.title ?? "", /#ゆかJET の投稿もこれから。/);
+  assert.doesNotMatch(novemberStagePlanUpdate.title ?? "", /と本人が書いている/);
+  assert.equal(
+    latestSiteUpdates.filter(
+      (update) =>
+        update.sourceUrl === "https://x.com/mokoopy/status/2097938152237506926"
+    ).length,
+    1,
+    "9/10 11月舞台の案が最新情報に重複している"
+  );
+  const akitaInuOmagariUpdate = latestSiteUpdates.find(
+    (update) => update.id === "akita-inu-omagari-2026-09-05"
+  );
+  assert.ok(akitaInuOmagariUpdate, "9/5 秋田犬の最新情報が消えている");
   const akitaInuShinchanUpdate = latestSiteUpdates.find(
     (update) => update.id === "akita-inu-shinchan-2026-09-02"
   );
@@ -112,13 +256,13 @@ try {
     1,
     "9/2 あきたいぬ投稿が最新情報に重複している"
   );
-  assert.equal(latestSiteUpdates[0]?.anchor, "#akita-inu");
+  assert.equal(akitaInuOmagariUpdate?.anchor, "#akita-inu");
   assert.equal(
-    latestSiteUpdates[0]?.image?.src,
+    akitaInuOmagariUpdate?.image?.src,
     "/images/yukako-omagari-shinchan-statue-2026-09-05.jpg"
   );
   assert.equal(
-    latestSiteUpdates[0]?.imageLayout,
+    akitaInuOmagariUpdate?.imageLayout,
     "contain",
     "秋田犬の縦写真が最新情報サムネイルで切り抜かれてしまう"
   );
@@ -357,13 +501,71 @@ try {
   const { news, latestNewsListingDate } = await server.ssrLoadModule(
     "/src/data/news.ts"
   );
-  assert.equal(
-    news[0]?.url,
-    "https://www.instagram.com/p/Dc6OokunNfi/",
-    "NewsBar先頭が9/5秋田犬のInstagramからずれている"
+  const theaterStoryNews = news.find(
+    (item) =>
+      item.date === "2026.9.21" && item.url === "https://www.instagram.com/yoppy_777"
   );
-  assert.equal(news[0]?.date, "2026.9.5");
-  assert.match(news[0]?.text ?? "", /秋田犬/);
+  assert.ok(theaterStoryNews, "news.ts に9/21 劇場ストーリーズが無い");
+  assert.match(theaterStoryNews.text ?? "", /次回出演は来年/);
+  assert.match(theaterStoryNews.text ?? "", /11月末のプロデュース舞台/);
+  assert.equal(
+    news.filter(
+      (item) =>
+        item.date === "2026.9.21" && item.url === "https://www.instagram.com/yoppy_777"
+    ).length,
+    1,
+    "news.ts に9/21 劇場ストーリーズが重複登録されている"
+  );
+  const castCallNews = news.find((item) => item.url === castCallUpdate.sourceUrl);
+  assert.ok(castCallNews, "news.ts に9/15 出演者募集が無い");
+  assert.equal(castCallUpdate.title, castCallNews.text, "告知本文は news.ts を正本にする");
+  assert.equal(castCallNews.date, "2026.9.15");
+  assert.equal(castCallNews.listedAt, "2026.9.16");
+  assert.match(castCallNews.text ?? "", /出演者募集/);
+  assert.match(castCallNews.text ?? "", /2026\.11\.26〜11\.30（東京）/);
+  assert.match(castCallNews.text ?? "", /女性キャスト／男性キャスト／女性ダンサー/);
+  assert.doesNotMatch(castCallNews.text ?? "", /11月公演決定/);
+  assert.doesNotMatch(castCallNews.text ?? "", /公式|公認/);
+  assert.equal(
+    news.filter((item) => item.url === "https://x.com/mokoopy/status/2099829333292675102")
+      .length,
+    1,
+    "news.ts に9/15 出演者募集が重複登録されている"
+  );
+  const dancerCallNews = news.find((item) => item.url === dancerCallUpdate.sourceUrl);
+  assert.ok(dancerCallNews, "news.ts に9/26 女性ダンサー募集が無い");
+  assert.equal(dancerCallUpdate.title, dancerCallNews.text, "9/26本文は news.ts を正本にする");
+  assert.equal(dancerCallNews.date, "2026.9.26");
+  assert.match(dancerCallNews.text ?? "", /女性ダンサーを引き続き募集/);
+  assert.doesNotMatch(dancerCallNews.text ?? "", /公式|公認/);
+  assert.equal(
+    news.filter((item) => item.url === "https://x.com/mokoopy/status/2103827646480355682")
+      .length,
+    1,
+    "news.ts に9/26 女性ダンサー募集が重複登録されている"
+  );
+  const missPeaceNews = news.find((item) => item.url === missPeaceUpdate.sourceUrl);
+  assert.ok(missPeaceNews, "news.ts に9/11 MISS PEACE振り返りが無い");
+  assert.equal(missPeaceNews.date, "2026.9.11");
+  assert.match(missPeaceNews.text ?? "", /MISS PEACE/);
+  assert.equal(
+    news.filter((item) => item.url === "https://x.com/mokoopy/status/2098071506643480765").length,
+    1,
+    "news.ts に9/11 MISS PEACE振り返りが重複登録されている"
+  );
+  const novemberStagePlanNews = news.find((item) => item.url === novemberStagePlanUpdate.sourceUrl);
+  assert.ok(novemberStagePlanNews, "news.ts に9/10 11月舞台の案が無い");
+  assert.equal(novemberStagePlanNews.date, "2026.9.10");
+  assert.equal(novemberStagePlanNews.listedAt, "2026.9.11");
+  assert.match(novemberStagePlanNews.text ?? "", /タイトル・会場・開演は未発表/);
+  assert.doesNotMatch(novemberStagePlanNews.text ?? "", /11月公演決定/);
+  assert.equal(
+    news.filter(
+      (item) => item.url === "https://x.com/mokoopy/status/2097938152237506926"
+    ).length,
+    1,
+    "news.ts に9/10 11月舞台の案が重複登録されている"
+  );
   assert.equal(
     news.filter((item) => item.date === "2026.9.5").length,
     1,
@@ -419,9 +621,14 @@ try {
   assert.equal(popcornOriginNews.date, "2026.1.18");
   assert.equal(popcornOriginNews.listedAt, "2026.8.18");
   assert.equal(
-    latestNewsListingDate(news),
-    "2026.9.5",
-    "Footerの掲載情報更新日が9/5（秋田犬）からずれている"
+    latestNewsListingDate([novemberStagePlanNews, castCallNews]),
+    "2026.9.16",
+    "投稿日9/15と掲載日9/16を取り違えている"
+  );
+  assert.equal(
+    latestNewsListingDate([castCallNews, { ...castCallNews, date: "2026.9.17", listedAt: "2026.9.18" }]),
+    "2026.9.18",
+    "新しい記事の掲載日を反映できない"
   );
   const streamingFinalUpdate = latestSiteUpdates.find(
     (update) => update.anchor === "#gojet-streaming-viewing-final-day-2026-08-10"
@@ -858,6 +1065,20 @@ try {
   );
   const { events } = await server.ssrLoadModule("/src/data/events.ts");
 
+  // 終演時刻のない複数日公演を最終日の朝に終了扱いにせず、カレンダーにも推測の時刻を出さない。
+  const { isEventPast: isGoldenGlassPast, getEventsForDay: goldenGlassEventsForDay } = await server.ssrLoadModule("/src/lib/date.ts");
+  const { googleCalendarUrl: goldenGlassCalendarUrl } = await server.ssrLoadModule("/src/lib/share.ts");
+  const goldenGlass = events.find((event) => event.id === "yukako-golden-glass-2026-11");
+  assert.ok(goldenGlass);
+  assert.equal(isGoldenGlassPast(goldenGlass, new Date("2026-11-30T23:59:59+09:00")), false);
+  assert.equal(isGoldenGlassPast(goldenGlass, new Date("2026-12-01T00:00:01+09:00")), true);
+  assert.equal(goldenGlassEventsForDay(events, "2026-11", 30).filter(event => event.id === goldenGlass.id).length, 1);
+  assert.equal(goldenGlassEventsForDay(events, "2026-12", 1).filter(event => event.id === goldenGlass.id).length, 0);
+  assert.equal(new URL(goldenGlassCalendarUrl(goldenGlass)).searchParams.get("dates"), "20261126/20261201");
+  const timedFixture = { ...goldenGlass, endAt: "2026-11-30T21:00:00+09:00" };
+  assert.equal(isGoldenGlassPast(timedFixture, new Date("2026-11-30T20:59:59+09:00")), false);
+  assert.equal(isGoldenGlassPast(timedFixture, new Date("2026-11-30T21:00:01+09:00")), true);
+
   const gojetEvent = events.find((event) => event.id === "yukajet-gojet-2026-07");
   assert.ok(gojetEvent, "#ゆかJET のイベントデータが見つからない");
 
@@ -1222,6 +1443,36 @@ try {
     "MGJ FINAL が開演時刻と同時に終了扱いになる"
   );
 
+  const novemberCastCall = events.find(
+    (event) => event.id === "yukako-produce-2026-11-cast-call"
+  );
+  assert.equal(
+    novemberCastCall,
+    undefined,
+    "出演者募集は本人出演が未確認のため events.ts に入れない"
+  );
+  assert.ok(
+    !events.some(
+      (event) =>
+        event.links.some(
+          (link) =>
+            link.url === "https://x.com/mokoopy/status/2099829333292675102" ||
+            link.url === "https://x.com/mokoopy/status/2103827646480355682" ||
+            link.url === "https://x.com/yukako_produce/status/2099831161489084736"
+        )
+    ),
+    "出演者募集を予定カードへ入れない"
+  );
+  assert.ok(
+    !gojetFeatureUpdates.some(
+      (update) =>
+        update.postUrl === "https://x.com/mokoopy/status/2099829333292675102" ||
+        update.postUrl === "https://x.com/mokoopy/status/2103827646480355682" ||
+        update.postUrl === "https://x.com/yukako_produce/status/2099831161489084736"
+    ),
+    "出演者募集を #ゆかJET 第1弾アーカイブへ混ぜない"
+  );
+
   // 10. トップの「最新情報」記事にも、本人投稿の写真と記事内導線を出す。
   const { LatestUpdatesSection } = await server.ssrLoadModule(
     "/src/components/LatestUpdatesSection.tsx"
@@ -1253,20 +1504,37 @@ try {
     1,
     "8/23のX投稿が最新情報に重複している"
   );
-  const latestUpdatesHtml = renderToStaticMarkup(createElement(LatestUpdatesSection));
-  assert.ok(latestUpdatesHtml.includes("秋田・大曲で秋田犬になりました"));
-  assert.ok(latestUpdatesHtml.includes("#akita-inu"));
-  assert.ok(latestUpdatesHtml.includes("あきたいぬ"));
-  assert.ok(
-    latestUpdatesHtml.includes("https://x.com/mokoopy/status/2095128310351385016")
-  );
-  assert.ok(
-    latestUpdatesHtml.includes("/images/yukako-akita-inu-shinchan-2026-09-02.jpg")
-  );
-  assert.ok(
-    latestUpdatesHtml.includes("https://www.instagram.com/p/Dc6OokunNfi/")
-  );
+  // 新着が増えても、過去記事を初期3枚へ強制するテストにはしない。
+  const fixtureUpdates = [castCallUpdate, mgjNextUpdate, missPeaceUpdate];
+  const latestUpdatesHtml = renderToStaticMarkup(createElement(LatestUpdatesSection, { updates: fixtureUpdates }));
+  assert.ok(latestUpdatesHtml.includes("Body &amp; Soul"));
+  assert.ok(latestUpdatesHtml.includes('href="#mgj-next-body-and-soul-2026-09-12"'));
+  assert.ok(latestUpdatesHtml.includes("https://www.instagram.com/reel/DIoCRxxTKMS/"));
+  assert.ok(latestUpdatesHtml.includes("出演者募集"));
+  assert.ok(latestUpdatesHtml.includes("https://x.com/mokoopy/status/2099829333292675102"));
+  assert.ok(latestUpdatesHtml.includes("MISS PEACE"));
+  assert.ok(latestUpdatesHtml.includes("https://x.com/mokoopy/status/2098071506643480765"));
+  assert.ok(!latestUpdatesHtml.includes("11月公演決定"));
   assert.ok(latestUpdatesHtml.includes("sm:object-contain"));
+  assert.match(latestUpdatesHtml, /9\/15時点で、タイトル・会場・開演は未発表/);
+  assert.ok(latestUpdatesHtml.includes('href="https://x.com/yukako_produce/status/2099831161489084736" target="_blank" rel="noopener noreferrer"'));
+  assert.equal(latestUpdatesHtml.split('href="https://x.com/mokoopy/status/2099829333292675102"').length - 1, 1);
+  assert.equal(latestUpdatesHtml.split('href="https://x.com/yukako_produce/status/2099831161489084736"').length - 1, 1);
+  const futureFixture = {
+    id: "newer-news-fixture", date: "2026.9.17", category: "X", title: "新しい記事のテスト",
+    sourceUrl: "https://example.com/newer-news-fixture"
+  };
+  const afterNewNewsHtml = renderToStaticMarkup(createElement(LatestUpdatesSection, {
+    updates: [futureFixture, ...fixtureUpdates]
+  }));
+  assert.ok(afterNewNewsHtml.includes(futureFixture.sourceUrl));
+  assert.ok(!afterNewNewsHtml.includes(castCallUpdate.sourceUrl), "同カテゴリの新着追加後も9/15記事を先頭に固定している");
+  assert.match(afterNewNewsHtml, /過去の更新をすべて見る（残り1件）/);
+  // 実際に App が使うのは NewsBar ではなく PriorityBanner。
+  const currentBannerHtml = renderToStaticMarkup(createElement(PriorityBanner, { now: new Date("2026-09-17T09:00:00+09:00") }));
+  const currentHref = latestSiteUpdates[0].anchor || latestSiteUpdates[0].sourceUrl;
+  const escapedHref = renderToStaticMarkup(createElement("a", { href: currentHref })).match(/href="[^"]*"/)?.[0];
+  assert.ok(escapedHref && currentBannerHtml.includes(escapedHref), "PriorityBanner が実データの最新記事を参照していない");
   const { AkitaInuTourSection } = await server.ssrLoadModule(
     "/src/components/AkitaInuTourSection.tsx"
   );
@@ -1296,11 +1564,31 @@ try {
   const { galleryPhotos } = await server.ssrLoadModule("/src/data/photos.ts");
   assert.equal(
     galleryPhotos[0]?.src,
-    "/images/yukako-omagari-akita-inu-members-2026-09-05.jpg",
-    "ギャラリー先頭に秋田犬ツアーメンバーの写真が無い"
+    "/images/yukako-october-portrait-2026-10-01.jpg",
+    "ギャラリー先頭に10/1 海辺ポートレート写真が無い"
+  );
+  assert.equal(
+    galleryPhotos[1]?.src,
+    "/images/yukako-summer-portrait-2026-09-25.jpg",
+    "ギャラリー先頭に9/25 海辺ポートレート写真が無い"
   );
   assert.equal(
     galleryPhotos[2]?.src,
+    "/images/yukako-theater-arms-open-story-2026-09-21.jpg",
+    "ギャラリー先頭付近から9/21 劇場ストーリーズ写真が消えている"
+  );
+  assert.equal(
+    galleryPhotos[3]?.src,
+    "/images/baby-shark/baby-shark-hetty-with-babyshark-2026-09-18.jpg",
+    "ギャラリー先頭付近から9/18 ベイビーシャーク ヘッティー写真が消えている"
+  );
+  assert.equal(
+    galleryPhotos[4]?.src,
+    "/images/yukako-mgj-miss-peace-reflection-2026-09-11.jpg",
+    "ギャラリー先頭付近から9/11 MISS PEACE振り返りの写真が消えている"
+  );
+  assert.equal(
+    galleryPhotos[7]?.src,
     "/images/yukako-omagari-shinchan-statue-2026-09-05.jpg",
     "ギャラリー先頭付近にしんちゃん像の写真が無い"
   );

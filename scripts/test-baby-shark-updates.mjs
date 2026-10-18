@@ -98,7 +98,7 @@ try {
     "/src/data/babySharkLive.ts"
   );
   const { events } = await server.ssrLoadModule("/src/data/events.ts");
-  const { news, latestNewsListingDate } = await server.ssrLoadModule("/src/data/news.ts");
+  const { news } = await server.ssrLoadModule("/src/data/news.ts");
   const { socialLinks } = await server.ssrLoadModule("/src/data/links.ts");
   const { siteUpdates } = await server.ssrLoadModule("/src/data/siteUpdates.ts");
   const { BabySharkLivePage } = await server.ssrLoadModule(
@@ -160,8 +160,42 @@ try {
   );
   assert.ok(babySharkNews, "news.ts に8/21 BABY SHARK LIVE! Storyが無い");
   assert.match(babySharkNews.text ?? "", /大垣・福山・久留米/);
-  assert.equal(news[0]?.date, "2026.8.23");
-  assert.equal(latestNewsListingDate(news), "2026.8.23");
+
+  const feedPostUpdate = babySharkLive.updates.find(
+    (update) => update.id === "instagram-2026-09-18"
+  );
+  assert.ok(feedPostUpdate, "9/18 Instagramの活動記録が無い");
+  assert.equal(feedPostUpdate.sourceUrl, "https://www.instagram.com/p/DdbEOcelBoI/");
+  assert.equal(feedPostUpdate.sourceLabel, "Instagramの元投稿を見る");
+  assert.match(feedPostUpdate.body.join("\n"), /福山/);
+  assert.match(feedPostUpdate.body.join("\n"), /久留米/);
+  assert.equal(feedPostUpdate.photos?.length, 2);
+  feedPostUpdate.photos?.forEach((photo) => {
+    assert.ok(
+      existsSync(new URL(`../public${photo.src}`, import.meta.url)),
+      `9/18告知画像が無い: public${photo.src}`
+    );
+  });
+
+  const feedPostNews = news.find(
+    (item) => item.url === "https://www.instagram.com/p/DdbEOcelBoI/"
+  );
+  assert.ok(feedPostNews, "news.ts に9/18 BABY SHARK LIVE! 投稿が無い");
+  assert.equal(feedPostNews.date, "2026.9.18");
+  assert.match(feedPostNews.text ?? "", /福山9\/19/);
+  assert.match(feedPostNews.text ?? "", /久留米9\/20/);
+  assert.equal(
+    news.filter((item) => item.url === "https://www.instagram.com/p/DdbEOcelBoI/").length,
+    1,
+    "9/18 Instagramがnews.tsに重複している"
+  );
+  assert.equal(
+    siteUpdates.filter(
+      (update) => update.sourceUrl === "https://www.instagram.com/p/DdbEOcelBoI/"
+    ).length,
+    1,
+    "9/18 InstagramがLatest Updatesに重複している"
+  );
   assert.equal(
     siteUpdates.filter(
       (update) =>
@@ -170,10 +204,20 @@ try {
     1,
     "8/21 StoryがLatest Updatesに重複している"
   );
-  assert.equal(
-    siteUpdates[0]?.sourceUrl,
-    "https://x.com/mokoopy/status/2091511016077377631",
-    "8/23 MGJ FINAL開催後報告がLatest Updatesの先頭に出ていない"
+
+  const fukuyamaEvent = events.find((item) => item.id === "babyshark-live-2026-09-19");
+  const kurumeEvent = events.find((item) => item.id === "babyshark-live-2026-09-20");
+  assert.ok(
+    fukuyamaEvent?.links.some(
+      (link) => link.url === "https://www.instagram.com/p/DdbEOcelBoI/"
+    ),
+    "福山公演に9/18 Instagramへのリンクが無い"
+  );
+  assert.ok(
+    kurumeEvent?.links.some(
+      (link) => link.url === "https://www.instagram.com/p/DdbEOcelBoI/"
+    ),
+    "久留米公演に9/18 Instagramへのリンクが無い"
   );
 
   const html = renderToStaticMarkup(createElement(BabySharkLivePage));
@@ -188,6 +232,10 @@ try {
   );
   assert.match(html, /優花子さんのInstagramを見る/);
   assert.match(html, /Instagram（@yoppy_777）へ/);
+  assert.match(html, /Instagramの元投稿を見る/);
+  assert.match(html, /DdbEOcelBoI/);
+  assert.match(html, /baby-shark-schedule-fukuyama-kurume-2026-09-18\.jpg/);
+  assert.match(html, /baby-shark-hetty-with-babyshark-2026-09-18\.jpg/);
   assert.doesNotMatch(html, /元ストーリーを見る/);
 } finally {
   await server.close();

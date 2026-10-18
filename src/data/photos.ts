@@ -14,6 +14,26 @@ const driveYukakoPhotos: GalleryPhoto[] = Array.from({ length: 118 }, (_, index)
 
 export const galleryPhotos: GalleryPhoto[] = [
   {
+    src: "/images/yukako-october-portrait-2026-10-01.jpg",
+    alt: "夕暮れの海辺で、白いTシャツに淡い色のキャミソール姿で両手を髪に添える吉井優花子さん（2026.10.1 Xより）"
+  },
+  {
+    src: "/images/yukako-summer-portrait-2026-09-25.jpg",
+    alt: "夕暮れの海辺で、白いTシャツと淡い黄色の衣装姿で振り返って微笑む吉井優花子さん（2026.9.25 Xより）"
+  },
+  {
+    src: "/images/yukako-theater-arms-open-story-2026-09-21.jpg",
+    alt: "赤い客席の劇場ステージ上で、白いキャップに黒い服、両手を大きく広げて立つ吉井優花子さん（2026.9.21 Instagramストーリーズより）"
+  },
+  {
+    src: "/images/baby-shark/baby-shark-hetty-with-babyshark-2026-09-18.jpg",
+    alt: "赤いスパンコールのヤドカリ衣装で、ベイビーシャークの着ぐるみと並んで微笑む吉井優花子さん（2026.9.18 Instagramより）"
+  },
+  {
+    src: "/images/yukako-mgj-miss-peace-reflection-2026-09-11.jpg",
+    alt: "赤を基調としたステージ衣装で、片腕を上げてポーズを取る女性（2025年のMISS GRAND JAPAN日本大会を振り返る2026.9.11 X投稿より）"
+  },
+  {
     src: "/images/yukako-omagari-akita-inu-members-2026-09-05.jpg",
     alt: "秋田犬の被り物をした4人の集合。左から2人目が吉井優花子さん（2026.9.5 Instagramより）"
   },
@@ -83,8 +103,8 @@ export const galleryUpdate: {
   note: string;
   url: string;
 } = {
-  date: "2026.9.5",
-  platform: "Instagram",
-  note: "秋田犬・しんちゃんの写真を追加",
-  url: "#akita-inu"
+  date: "2026.10.1",
+  platform: "X",
+  note: "「10月もよろしくね☺️🍁」——海辺のポートレート写真を追加",
+  url: "https://x.com/mokoopy/status/2105673651819598269"
 };

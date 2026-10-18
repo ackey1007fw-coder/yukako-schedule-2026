@@ -16,6 +16,8 @@ export type SiteUpdate = {
   imageLayout?: "portrait-preview" | "contain";
   // 元投稿（X / Instagram など）への外部リンク
   sourceUrl?: string;
+  // 同じ告知を補う別アカウントの出典。独立した更新カードにはしない。
+  additionalSource?: { url: string; label: string };
   // サイト内で詳しく読めるセクションへのアンカー
   anchor?: string;
   // 最新情報カードから、そのセクション内のより具体的な位置へ直接飛ばす場合だけ指定する。
@@ -71,6 +73,73 @@ const sourcePlatform = (url: string) => {
 
 // 専用セクションを持つ単発トピック。本文は各セクションが持つため、ここは見出しと導線のみ。
 const standaloneUpdatesAll: SiteUpdate[] = [
+  {
+    id: "next-destination-part1-listed-2026-09-28",
+    date: "2026.9.28",
+    category: "出演作品",
+    title: "主演ショートドラマ『次の目的地』前編・後編を掲載",
+    summary: "ふたりドライブ。produced by NEXTAGE。前後編を元のTikTokプレーヤーで。",
+    sourceUrl: "https://www.tiktok.com/@short_drama00/video/7689265805757893909",
+    anchor: "#next-destination"
+  },
+  {
+    id: "theater-next-year-story-2026-09-21",
+    date: "2026.9.21",
+    category: "Instagram",
+    title: "「次回出演は来年♪みんな来てね😊」——11月末はプロデュース舞台",
+    summary:
+      "直近では11月末のプロデュース舞台。「頑張るぞ〜✨（凄い作品レベルです）」",
+    image: {
+      src: "/images/yukako-theater-arms-open-story-2026-09-21.jpg",
+      alt: "赤い客席の劇場ステージ上で、白いキャップに黒い服、両手を大きく広げて立つ吉井優花子さん。画面中央に次回出演は来年、直近では11月末のプロデュース舞台の文字"
+    },
+    imageLayout: "contain",
+    sourceUrl: "https://www.instagram.com/yoppy_777"
+  },
+  {
+    id: "mgj-next-body-and-soul-2026-09-18",
+    date: "2026.9.18",
+    category: "MGJ NEXT",
+    title: "アラサーの本気で『Body & Soul』——3人のダンス",
+    summary:
+      "「ど素人がSPEEDさんのBody&Soulを踊りました」。TaTaさん、優花子さん、MEIKOさんの3人。「何歳でも人生楽しもう」",
+    image: {
+      src: "/images/yukako-mgj-next-body-and-soul-2026-09-18.jpg",
+      alt: "屋外で3人が両手を上げて踊る縦位置の動画サムネイル。画面中央にBodyの文字"
+    },
+    imageLayout: "contain",
+    sourceUrl: "https://www.instagram.com/reel/DdbLANUy4Aj/",
+    anchor: "#latest-reel"
+  },
+  {
+    id: "baby-shark-fukuyama-kurume-2026-09-18",
+    date: "2026.9.18",
+    category: "Instagram",
+    title: "「8月は大垣でみんなに会えてとっても嬉しかったよ」——次は福山と久留米",
+    summary:
+      "9月19日（土）ふくやま芸術文化ホール リーデンローズ、9月20日（日）久留米シティプラザ。①11:30／②14:00、2回目はお見送り有。🐚ヘッティー＆パール",
+    image: {
+      src: "/images/baby-shark/baby-shark-hetty-with-babyshark-2026-09-18.jpg",
+      alt: "赤いスパンコールのヤドカリ衣装で、ベイビーシャークの着ぐるみと並んで微笑む吉井優花子さん"
+    },
+    imageLayout: "contain",
+    sourceUrl: "https://www.instagram.com/p/DdbEOcelBoI/",
+    anchor: "#baby-shark-live"
+  },
+  {
+    id: "miss-grand-japan-miss-peace-reflection-2026-09-11",
+    date: "2026.9.11 00:30",
+    category: "Miss Grand Japan",
+    title: "MISS GRAND JAPANから1年——「MISS PEACE」と今につながる経験",
+    summary:
+      "2025年の日本大会で思いやりの心を評価された「MISS PEACE」。当時の経験や出会った仲間が、今の活力になっていると振り返りました。",
+    image: {
+      src: "/images/yukako-mgj-miss-peace-reflection-2026-09-11.jpg",
+      alt: "赤を基調としたステージ衣装で、片腕を上げてポーズを取る女性"
+    },
+    imageLayout: "contain",
+    sourceUrl: "https://x.com/mokoopy/status/2098071506643480765"
+  },
   {
     id: "akita-inu-omagari-2026-09-05",
     date: "2026.9.5",
@@ -256,6 +325,21 @@ const standaloneUpdatesAll: SiteUpdate[] = [
     anchor: "#gojet-yell-card"
   },
   {
+    id: "mgj-next-body-and-soul-2026-09-12",
+    date: "2026.9.12",
+    category: "MGJ NEXT",
+    title: "MGJ NEXTで『Body & Soul』——3人のダンスRepost",
+    summary:
+      "TaTaさん、吉井優花子さん、千葉サラさんの3人でSPEED『Body & Soul』。元投稿は2025年4月19日。",
+    image: {
+      src: "/images/yukako-mgj-next-body-and-soul-2026-09-12.jpg",
+      alt: "スタジオで3人がダンスする縦位置の動画サムネイル"
+    },
+    imageLayout: "contain",
+    sourceUrl: "https://www.instagram.com/reel/DIoCRxxTKMS/",
+    anchor: "#mgj-next-body-and-soul-2026-09-12"
+  },
+  {
     id: "latest-instagram-reel",
     date: siteContent.latestInstagram.publishedAt,
     category: "Instagram",
@@ -263,7 +347,7 @@ const standaloneUpdatesAll: SiteUpdate[] = [
     summary:
       "秋田のアイスイベント「あいぱく® AKITA 2026」へ。食べた4種類と、西武秋田店での開催情報はリールで。#PR",
     sourceUrl: siteContent.latestInstagram.reelUrl,
-    anchor: "#latest-reel"
+    anchor: "#previous-instagram-reel"
   },
   {
     id: "gallery-update",
@@ -275,17 +359,20 @@ const standaloneUpdatesAll: SiteUpdate[] = [
   }
 ];
 
-// 専用セクションと同じ日付・同じアンカーのフォト更新は、最新情報カードを二重にしない。
+// 同じ日付で、同じアンカーまたは同じ元投稿を持つフォト更新は、最新情報カードを二重にしない。
 // ギャラリー自体の New 表示は photos.ts の galleryUpdate が担う。
 const standaloneUpdates: SiteUpdate[] = standaloneUpdatesAll.filter((update) => {
   if (update.id !== "gallery-update") return true;
-  return !standaloneUpdatesAll.some(
-    (other) =>
-      other.id !== "gallery-update" &&
-      Boolean(other.anchor) &&
-      other.anchor === update.anchor &&
-      other.date.startsWith(update.date.split(" ")[0])
-  );
+  return !standaloneUpdatesAll.some((other) => {
+    if (other.id === "gallery-update") return false;
+    if (!other.date.startsWith(update.date.split(" ")[0])) return false;
+    const sameAnchor = Boolean(other.anchor) && other.anchor === update.anchor;
+    const sameSource =
+      Boolean(other.sourceUrl) &&
+      Boolean(update.sourceUrl) &&
+      normalizeUrl(other.sourceUrl ?? "") === normalizeUrl(update.sourceUrl ?? "");
+    return sameAnchor || sameSource;
+  });
 });
 
 const gojetUpdates: SiteUpdate[] = gojetFeatureUpdates.map((update, index) => ({
@@ -325,6 +412,49 @@ const standaloneCoversNews = (item: (typeof news)[number]) =>
       update.date.startsWith(item.date)
   );
 
+// 本文・投稿日は news を正本にし、告知を読むための補足だけを元投稿URLで結び付ける。
+const newsContext: Partial<Record<string, Pick<SiteUpdate, "summary" | "additionalSource" | "image" | "imageLayout" | "anchor">>> = {
+  "https://x.com/mokoopy/status/2110384385052840256": {
+    summary: "プロデュース第二弾の顔合わせ・読み合わせを終え、キャストが輝く舞台へ。優花子さんはプロデューサーとC班マリリン役の両方に挑戦。公演の詳細と申込先は出演予定へ。",
+    anchor: "#schedule",
+    additionalSource: {
+      url: "https://x.com/yukako_produce/status/2110347096163492272",
+      label: "公演アカウントの顔合わせ報告"
+    }
+  },
+  "https://x.com/yukako_produce/status/2110347096163492272": {
+    summary: "A・B・C班のキャストが集まり、読み合わせから本格始動。公演は11月26日〜30日、Air Studio両国にて。",
+    anchor: "#schedule"
+  },
+  "https://yukamarilyn.hp.peraichi.com/": {
+    summary: "公演HPと来場・配信チケット、応援コンテンツの申込先が公開。マリリン・モンロー生誕100周年を記念した再演を、優花子さんがプロデュース。C班のマリリン役で出演します。出演回はスケジュールへ。",
+    image: {
+      src: "/images/yukako-golden-glass-poster-2026-10-10.jpg",
+      alt: "赤い幕と金色の照明、白いドレス姿の人物を背景に、Golden & Glass、吉井優花子プロデュース、2026年11月26日〜30日の文字が入った告知フライヤー"
+    },
+    imageLayout: "contain",
+    anchor: "#schedule",
+    additionalSource: {
+      url: "https://x.com/yukako_produce/status/2108875455629758737",
+      label: "10月10日の情報解禁（プロデュース X）"
+    }
+  },
+  "https://x.com/mokoopy/status/2103827646480355682": {
+    summary: "9/26の募集当時の案内。本番は 2026.11.26〜11.30（東京）。10/10に『Golden & Glass』として情報解禁。現在の公演情報・申込先は出演予定へ。",
+    additionalSource: {
+      url: "https://x.com/mokoopy/status/2099829333292675102",
+      label: "出演者募集の元投稿"
+    }
+  },
+  "https://x.com/mokoopy/status/2099829333292675102": {
+    summary: "9/15時点で、タイトル・会場・開演は未発表。応募条件の詳細は当時の元投稿へ。10/10に『Golden & Glass』として情報解禁。現在の公演情報・申込先は出演予定へ。",
+    additionalSource: {
+      url: "https://x.com/yukako_produce/status/2099831161489084736",
+      label: "プロデュースアカウントの告知"
+    }
+  }
+};
+
 const newsUpdates: SiteUpdate[] = news
   .filter((item) => !knownUrls.has(normalizeUrl(item.url)))
   .filter((item) => !standaloneCoversNews(item))
@@ -334,7 +464,8 @@ const newsUpdates: SiteUpdate[] = news
     category: item.label,
     title: item.text,
     sourceUrl: item.url.startsWith("#") ? undefined : item.url,
-    anchor: item.url.startsWith("#") ? item.url : undefined
+    anchor: item.url.startsWith("#") ? item.url : undefined,
+    ...newsContext[item.url]
   }));
 
 // concat順（単発 → gojet → news）を保ったまま日付降順に安定ソート。

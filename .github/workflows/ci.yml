@@ -44,8 +44,100 @@ jobs:
       - name: Gojet status tests
         run: pnpm test:gojet
 
+      - name: Stream recap tests
+        run: pnpm test:stream-recaps
+
       - name: Build
         run: pnpm build
 
+      - name: Portal feed regression tests
+        run: pnpm test:portal-feed
+
       - name: Site identity guard
         run: node scripts/check-site-identity.mjs main
+
+      - name: Verify responsive layout and source links
+        env:
+          PLAYWRIGHT_QA_DIR: ${{ runner.temp }}/yukako-browser-qa
+        run: |
+          npm install --prefix "$PLAYWRIGHT_QA_DIR" --no-package-lock --ignore-scripts playwright@1.56.1
+          node "$PLAYWRIGHT_QA_DIR/node_modules/playwright/cli.js" install --with-deps chromium
+          node --input-type=commonjs <<'JS'
+          const assert = require("node:assert/strict");
+          const { spawn } = require("node:child_process");
+          const { chromium } = require(process.env.PLAYWRIGHT_QA_DIR + "/node_modules/playwright");
+          (async () => {
+            const server = spawn(process.execPath, ["scripts/serve-dist.mjs", "4173"], { stdio: "inherit" });
+            let browser;
+            try {
+              for (let n = 0; n < 80; n++) {
+                try { if ((await fetch("http://127.0.0.1:4173")).ok) break; } catch {}
+                await new Promise(resolve => setTimeout(resolve, 250));
+              }
+              browser = await chromium.launch();
+              for (const width of [390, 1440]) {
+                const page = await browser.newPage({ viewport: { width, height: 900 } });
+                await page.route("https://www.tiktok.com/**", route => route.fulfill({ status: 200, body: "<html><body>TikTok embed placeholder for layout test</body></html>", contentType: "text/html" }));
+                await page.goto("http://127.0.0.1:4173/#next-destination");
+                const golden = page.locator("#event-yukako-golden-glass-2026-11");
+                await golden.scrollIntoViewIfNeeded();
+                assert.equal(await golden.count(), 1);
+                assert.match(await golden.innerText(), /公演HP公開・来場／配信チケット受付中/);
+                assert.match(await golden.innerText(), /C班のマリリン・モンロー役/);
+                const goldenDestinations = [
+                  ["公演ホームページ", "https://yukamarilyn.hp.peraichi.com/"],
+                  ["来場チケット", "https://forms.gle/2VimGm3T5ovuGXv28"],
+                  ["配信チケット", "https://forms.gle/cgb2BP1GTUFnHo8j8"],
+                  ["応援コンテンツ", "https://forms.gle/3dX9Cr9TbBmgcXu59"]
+                ];
+                for (const [label, href] of goldenDestinations) {
+                  const action = golden.getByRole("link", { name: label, exact: true });
+                  assert.equal(await action.count(), 1);
+                  assert.equal(await action.getAttribute("href"), href);
+                }
+                await golden.locator("summary").click();
+                const calendar = await golden.getByRole("link", { name: "カレンダー追加" }).getAttribute("href");
+                assert.equal(new URL(calendar).searchParams.get("dates"), "20261126/20261201");
+                const goldenSchema = await page.evaluate(() => JSON.parse(document.getElementById("yukako-events-jsonld").textContent)["@graph"].find(node => node["@id"].endsWith("#event-yukako-golden-glass-2026-11")));
+                assert.equal(goldenSchema.startDate, "2026-11-26T19:00:00+09:00");
+                assert.equal(goldenSchema.endDate, "2026-11-30");
+                const goldenBox = await golden.boundingBox();
+                assert.ok(goldenBox && goldenBox.x >= 0 && goldenBox.x + goldenBox.width <= width, JSON.stringify(goldenBox));
+                const poster = page.locator('#updates img[src*="yukako-golden-glass-poster"]');
+                assert.equal(await poster.count(), 1);
+                await poster.scrollIntoViewIfNeeded();
+                await poster.evaluate(image => image.decode());
+                const posterStyle = await poster.evaluate(image => ({ width: image.naturalWidth, fit: getComputedStyle(image).objectFit }));
+                assert.ok(posterStyle.width > 0);
+                if (width >= 640) assert.equal(posterStyle.fit, "contain");
+                console.log("Golden & Glass QA passed:", width);
+                const video = page.locator('#next-destination iframe[title*="前編"]');
+                await video.scrollIntoViewIfNeeded();
+                const result = await page.evaluate(() => {
+                  const el = document.querySelector("#next-destination iframe");
+                  const box = el.getBoundingClientRect();
+                  return { viewport: innerWidth, pageWidth: document.documentElement.scrollWidth,
+                    left: box.left, right: box.right, source: el.src,
+                    anchor: document.querySelector('a[href="#next-destination"]')?.getAttribute("href") };
+                });
+                assert.ok(result.pageWidth <= width, JSON.stringify(result));
+                assert.ok(result.left >= 0 && result.right <= width, JSON.stringify(result));
+                assert.equal(result.source, "https://www.tiktok.com/player/v1/7688935643463912725?autoplay=0");
+                // 導線は再編される場合があるため、セクション自体の表示と幅を確かめる。
+                assert.ok(result.viewport > 0);
+                const sequel = page.locator('#next-destination iframe[title*="後編"]');
+                await sequel.scrollIntoViewIfNeeded();
+                const sequelBox = await sequel.boundingBox();
+                assert.ok(sequelBox && sequelBox.x >= 0 && sequelBox.x + sequelBox.width <= width, JSON.stringify(sequelBox));
+                assert.equal(await sequel.getAttribute("src"), "https://www.tiktok.com/player/v1/7689265805757893909?autoplay=0");
+                assert.equal(await page.locator('#next-destination iframe').count(), 2);
+                assert.equal(await page.locator('#next-destination a[href="https://www.tiktok.com/@short_drama00/video/7689265805757893909"]').count(), 1);
+                console.log("Responsive layout QA passed:", JSON.stringify(result));
+                await page.close();
+              }
+            } finally {
+              if (browser) await browser.close();
+              server.kill();
+            }
+          })().catch(error => { console.error(error); process.exitCode = 1; });
+          JS

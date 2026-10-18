@@ -42,12 +42,14 @@ type SourceDataset = "siteUpdates" | "news" | "events" | "archive";
 export type PortalFeedCandidate = {
   dataset: SourceDataset;
   dedupeKeys: string[];
+  /** 日付のみの公演最終日。選択専用で、公開する終演時刻ではない。 */
+  selectionThroughDate?: string;
   item: PortalFeedItem;
 };
 
 const sourceLimits: Record<SourceDataset, number> = {
   siteUpdates: 8,
-  news: 5,
+  news: 6,
   events: 4,
   archive: 3
 };
@@ -174,7 +176,10 @@ export const createNewsCandidate = (item: NewsItem): PortalFeedCandidate | undef
 
   return {
     dataset: "news",
-    dedupeKeys: dedupeKey ? [dedupeKey] : [`news:${stableHash(stableMaterial)}`],
+    dedupeKeys: [
+      ...(dedupeKey ? [dedupeKey] : [`news:${stableHash(stableMaterial)}`]),
+      ...(item.siteUpdateId ? [`update:${item.siteUpdateId}`] : [])
+    ],
     item: {
       id: `yukako:news:${stableHash(stableMaterial)}`,
       personId: PERSON_ID,
@@ -209,7 +214,7 @@ const siteUpdateCandidates: PortalFeedCandidate[] = siteUpdates.flatMap((update)
         normalizedUrl(update.sourceUrl) ?? `${anchor}|${update.date}|${update.title}`
       )}`
     : update.id;
-  const dedupeKeys = [`topic:${topicKey(stableLocalId)}`];
+  const dedupeKeys = [`topic:${topicKey(stableLocalId)}`, `update:${update.id}`];
   const externalKey = sourceKey(update.sourceUrl);
   if (externalKey) dedupeKeys.push(externalKey);
 
@@ -273,12 +278,18 @@ const eventCandidates: PortalFeedCandidate[] = events.flatMap((event) => {
   const startsAt = toJstIso(event.startAt);
   if (!publishedAt || !startsAt) return [];
 
+  // Golden & Glass の10/15申込案内は公演HPを一次導線にする。
+  // 他の公演は従来どおり本人SNSを優先して、過去の配信／出演履歴を維持。
   const source =
+    (event.id === "yukako-golden-glass-2026-11"
+      ? event.links.find((link) => link.kind === "info")
+      : undefined) ??
     event.links.find((link) => link.kind === "sns") ??
     event.links.find((link) => link.kind === "info") ??
     event.links.find((link) => link.kind === "ticket");
   const eventTopic = topicKey(event.id);
-  const dedupeKeys = [`event:${event.id}`];
+  // NEWSのsiteUpdateIdと同じ公演を、共有フィードでは1件にまとめる。
+  const dedupeKeys = [`event:${event.id}`, `update:${event.id}`];
   if (eventTopicCounts.get(eventTopic) === 1) {
     dedupeKeys.push(`topic:${eventTopic}`);
   }
@@ -287,6 +298,9 @@ const eventCandidates: PortalFeedCandidate[] = events.flatMap((event) => {
     {
       dataset: "events",
       dedupeKeys,
+      selectionThroughDate: event.endAt && /^\d{4}-\d{2}-\d{2}$/.test(event.endAt)
+        ? event.endAt
+        : undefined,
       item: {
         id: `yukako:event:${event.id}`,
         personId: PERSON_ID,
@@ -320,16 +334,18 @@ const jstDateOf = (value: string) => {
 
 const isTodayOrFutureEvent = (candidate: PortalFeedCandidate, referenceJstDate: string) => {
   if (candidate.dataset !== "events" || !candidate.item.startsAt) return false;
-  const startsJstDate = jstDateOf(candidate.item.startsAt);
-  return Boolean(startsJstDate && startsJstDate >= referenceJstDate);
+  const throughJstDate = candidate.selectionThroughDate ?? jstDateOf(candidate.item.startsAt);
+  return Boolean(throughJstDate && throughJstDate >= referenceJstDate);
 };
 
 const dedupeCandidates = (
   candidates: readonly PortalFeedCandidate[],
-  protectedIds = new Set<string>()
+  protectedIds = new Set<string>(),
+  limits?: Readonly<Record<SourceDataset, number>>
 ) => {
   const seen = new Set<string>();
   const kept: PortalFeedCandidate[] = [];
+  const keptByDataset = new Map<SourceDataset, number>();
 
   const prioritized = [...candidates].sort(
     (a, b) =>
@@ -339,10 +355,17 @@ const dedupeCandidates = (
   );
 
   for (const candidate of prioritized) {
+    const isProtected = protectedIds.has(candidate.item.id);
+    const keptCount = keptByDataset.get(candidate.dataset) ?? 0;
+    if (!isProtected && limits && keptCount >= limits[candidate.dataset]) continue;
+
     const duplicate = candidate.dedupeKeys.some((key) => seen.has(key));
     // 重複候補の別キーも記録し、event -> update -> news のような連鎖重複を止める。
     candidate.dedupeKeys.forEach((key) => seen.add(key));
-    if (!duplicate) kept.push(candidate);
+    if (duplicate) continue;
+
+    kept.push(candidate);
+    if (!isProtected) keptByDataset.set(candidate.dataset, keptCount + 1);
   }
 
   return kept;
@@ -363,19 +386,17 @@ export const selectFeedCandidates = (
   const protectedIds = new Set(protectedEvents.map(({ item }) => item.id));
 
   // sourceLimits.events は過去予定の補充上限。今日・未来予定は上限を迂回して全て候補へ入れる。
-  const fallbackCandidates = (Object.keys(sourceLimits) as SourceDataset[]).flatMap(
-    (dataset) =>
-      candidates
-        .filter(
-          (candidate) =>
-            candidate.dataset === dataset &&
-            (dataset !== "events" || !protectedIds.has(candidate.item.id))
-        )
-        .sort(publishedNewestFirst)
-        .slice(0, sourceLimits[dataset])
+  // 重複候補が上限枠を消費しないよう、全候補をdedupeへ渡して採用件数で上限を数える。
+  const fallbackCandidates = candidates.filter(
+    (candidate) =>
+      candidate.dataset !== "events" || !protectedIds.has(candidate.item.id)
   );
 
-  const deduped = dedupeCandidates([...protectedEvents, ...fallbackCandidates], protectedIds);
+  const deduped = dedupeCandidates(
+    [...protectedEvents, ...fallbackCandidates],
+    protectedIds,
+    sourceLimits
+  );
   const dedupedProtectedEvents = deduped
     .filter(({ item }) => protectedIds.has(item.id))
     .sort(
@@ -385,13 +406,32 @@ export const selectFeedCandidates = (
     )
     .slice(0, maxItems);
   const remainingSlots = maxItems - dedupedProtectedEvents.length;
-  const fillers = deduped
+  const nonProtectedFillers = deduped
     .filter(({ item }) => !protectedIds.has(item.id))
-    .sort(publishedNewestFirst)
-    .slice(0, remainingSlots);
+    .sort(publishedNewestFirst);
 
-  // 選択時は今日・未来予定を保護するが、公開配列はcontractどおりpublishedAt降順に戻す。
-  return [...dedupedProtectedEvents, ...fillers].sort(publishedNewestFirst);
+  // feedが十分な枠を持つときは、各データソースを最低1件は残す。
+  // 新しい更新や保護予定が増えても archive/news などの種類ごと丸ごと消えないようにする。
+  const representedDatasets = new Set(dedupedProtectedEvents.map(({ dataset }) => dataset));
+  const diversityCandidates = (Object.keys(sourceLimits) as SourceDataset[])
+    .filter((dataset) => !representedDatasets.has(dataset))
+    .flatMap((dataset) => {
+      const candidate = nonProtectedFillers.find((item) => item.dataset === dataset);
+      return candidate ? [candidate] : [];
+    });
+  // 全sourceを残せるだけの枠がある場合だけ多様性を保証する。
+  // 枠が足りない場合は、種類の列挙順ではなく公開日時の新しい候補を優先する。
+  const requiredFillers =
+    diversityCandidates.length <= remainingSlots ? diversityCandidates : [];
+  const requiredIds = new Set(requiredFillers.map(({ item }) => item.id));
+  const additionalFillers = nonProtectedFillers
+    .filter(({ item }) => !requiredIds.has(item.id))
+    .slice(0, Math.max(0, remainingSlots - requiredFillers.length));
+
+  // 選択時は今日・未来予定とソース多様性を保護するが、公開配列はcontractどおりpublishedAt降順に戻す。
+  return [...dedupedProtectedEvents, ...requiredFillers, ...additionalFillers].sort(
+    publishedNewestFirst
+  );
 };
 
 export const createPortalFeed = (generatedAt = new Date().toISOString()): PortalFeed => {
