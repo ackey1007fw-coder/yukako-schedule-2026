@@ -40,7 +40,7 @@
 ## 4. 未完了・次にやること
 
 - 『Golden & Glass』の予約開始・タイムテーブル・配信の続報反映、公演期間中の更新、終演後のアーカイブ化。
-- Open PR 7本（2026-10-18 時点。#27 / #66 / #133 / #161 / #181 / #194 と Draft #171）。7月〜9月の古いものが多い。着手前に同じファイルを触っていないか確認し、整理はオーナーに提案する。
+- 7月〜9月の古い Open PR が残っている。本数・番号は変わるので**着手時に GitHub で確認**し、同じファイルを触っていないか見る。整理はオーナーに提案する。
 - **要確認**: `pending-media/yukajet/` に第三者（観劇したお客さん）のStory画像2枚が公開repoに置かれている（#110 由来、未掲載のまま）。本人・第三者の承認範囲が不明なら、公開repoから外すべきかオーナーに確認する。勝手に削除しない。
 
 ## 5. 日々の更新の型
@@ -55,7 +55,9 @@
 pnpm install --frozen-lockfile
 pnpm typecheck && pnpm test:add-news && pnpm test:gojet && pnpm build
 node scripts/check-site-identity.mjs main
-git diff --check
+git diff --check                      # 未ステージの変更
+git diff --cached --check             # ステージ済みの変更
+git diff --check origin/main...HEAD   # コミット済みのPR差分（最新のbaseを取得後）
 ```
 
 一般の `pnpm test` はない。触った領域のテスト（`test:portal-feed` / `test:stream-recaps` など）を追加で実行する。UI変更は 390px で `scrollWidth` が viewport を超えないことを確認。
