@@ -81,6 +81,14 @@ export const galleryPhotos: GalleryPhoto[] = [
     src: "/images/yukako-omagari-hanabi-komachi-megenai-2026-08-29.jpg",
     alt: "ピンクの『こまちめげない』Tシャツの文字を指さして微笑む吉井優花子さん（2026.8.29 Xより）"
   },
+  {
+    src: "/images/yukako-seaside-2026-08-19.jpg",
+    alt: "白いTシャツにイエローのキャミソールワンピースで、海辺で自撮りする吉井優花子さん（2026.8.19 Xより）"
+  },
+  {
+    src: "/images/yukako-omoriyama-zoo-kangaroo-2026-08-18.jpg",
+    alt: "大森山動物園でガラス越しのアカカンガルーを指さす吉井優花子さん（2026.8.18 Xより）"
+  },
   ...driveYukakoPhotos,
   { src: "/images/yukako-selfie-2026-07-01.jpg", alt: "白Tシャツにピンクのベストで微笑む吉井優花子さん（2026.7.1 Xより）" },
   { src: "/images/yukako-stage-back.jpg", alt: "舞台上から客席を見つめる吉井優花子さん" },
