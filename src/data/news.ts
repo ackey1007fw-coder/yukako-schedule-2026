@@ -13,6 +13,13 @@ export type NewsItem = {
 
 export const news: NewsItem[] = [
   {
+    date: "2026.10.20",
+    label: "X",
+    text: "『Golden & Glass』歌・ダンス稽古の動画が公開中✨ 11月26日〜30日の本番へ。#ゆかマリリン",
+    url: "https://x.com/yukako_produce/status/2112484292324700222",
+    listedAt: "2026.10.21"
+  },
+  {
     date: "2026.10.15",
     label: "公演HP",
     text: "『Golden & Glass』🌹 公演HP公開！来場・配信チケットと応援コンテンツの申込先はこちら。#ゆかマリリン",

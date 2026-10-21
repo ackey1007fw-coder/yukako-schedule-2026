@@ -414,6 +414,10 @@ const standaloneCoversNews = (item: (typeof news)[number]) =>
 
 // 本文・投稿日は news を正本にし、告知を読むための補足だけを元投稿URLで結び付ける。
 const newsContext: Partial<Record<string, Pick<SiteUpdate, "summary" | "additionalSource" | "image" | "imageLayout" | "anchor">>> = {
+  "https://x.com/yukako_produce/status/2112484292324700222": {
+    summary: "キャストが振付を合わせる、約35秒の稽古場の一幕。マリリン・モンローをモチーフにしたオリジナルミュージカル。公演詳細・来場／配信チケットは出演予定へ。",
+    anchor: "#schedule"
+  },
   "https://x.com/mokoopy/status/2110384385052840256": {
     summary: "プロデュース第二弾の顔合わせ・読み合わせを終え、キャストが輝く舞台へ。優花子さんはプロデューサーとC班マリリン役の両方に挑戦。公演の詳細と申込先は出演予定へ。",
     anchor: "#schedule",
