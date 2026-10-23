@@ -8,6 +8,7 @@ import {
 import { getResponsiveImageProps } from "../lib/responsiveImage";
 import { PhotoLightbox } from "./PhotoLightbox";
 import { SectionHeader } from "./SectionHeader";
+import { XPostEmbed } from "./XPostEmbed";
 
 type AccountFilter = "all" | XArchiveAccount;
 
@@ -31,6 +32,7 @@ export function XPostArchiveSection() {
   const [query, setQuery] = useState("");
   const [limit, setLimit] = useState(PAGE_SIZE);
   const [viewer, setViewer] = useState<Viewer | null>(null);
+  const [embeddedPosts, setEmbeddedPosts] = useState<Set<string>>(new Set());
 
   const filtered = useMemo(() => {
     const term = query.trim().toLocaleLowerCase("ja");
@@ -168,13 +170,28 @@ export function XPostArchiveSection() {
                       </span>
                     )}
                   </div>
-                  <h3 className="line-clamp-3 break-words text-base font-bold leading-7 text-ink">
+                  <h3 className={`${post.embedXPost ? "" : "line-clamp-3 "}break-words text-base font-bold leading-7 text-ink`}>
                     {post.title}
                   </h3>
                   {post.summary && (
                     <p className="mt-2 line-clamp-3 break-words text-sm leading-6 text-ink/70">
                       {post.summary}
                     </p>
+                  )}
+                  {post.embedXPost && (
+                    <div className="mt-4 min-w-0 [&_iframe]:max-w-full">
+                      {embeddedPosts.has(post.id) ? (
+                        <XPostEmbed url={post.sourceUrl} label="『Golden & Glass』10月23日の稽古映像付き投稿" />
+                      ) : (
+                        <button
+                          type="button"
+                          onClick={() => setEmbeddedPosts((current) => new Set([...current, post.id]))}
+                          className="min-h-11 w-full rounded-lg border border-rosefog/30 bg-porcelain px-3 py-2 text-sm font-bold text-rosefog hover:bg-rosefog/5"
+                        >
+                          稽古映像を表示（X）
+                        </button>
+                      )}
+                    </div>
                   )}
                   <div className="mt-auto flex flex-wrap items-center gap-x-4 gap-y-3 pt-5 text-sm font-bold">
                     <a

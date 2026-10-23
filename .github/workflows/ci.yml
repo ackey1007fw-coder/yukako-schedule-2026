@@ -81,6 +81,8 @@ jobs:
               for (const width of [390, 1440]) {
                 const page = await browser.newPage({ viewport: { width, height: 900 } });
                 await page.route("https://www.tiktok.com/**", route => route.fulfill({ status: 200, body: "<html><body>TikTok embed placeholder for layout test</body></html>", contentType: "text/html" }));
+                // Xが利用できない環境でも、元投稿への導線を失わない。
+                await page.route("https://platform.twitter.com/**", route => route.abort());
                 await page.goto("http://127.0.0.1:4173/#next-destination");
                 const golden = page.locator("#event-yukako-golden-glass-2026-11");
                 await golden.scrollIntoViewIfNeeded();
@@ -119,6 +121,19 @@ jobs:
                 assert.equal(await xArchive.count(), 1);
                 await xArchive.scrollIntoViewIfNeeded();
                 assert.equal(await xArchive.locator("article").count(), 12);
+                const goldenPostUrl = "https://x.com/yukako_produce/status/2113599620542824827";
+                assert.equal(await page.locator('#updates a[href="' + goldenPostUrl + '"]').count(), 1);
+                const goldenPost = xArchive.locator("article").filter({ has: page.locator('a[href="' + goldenPostUrl + '"]') });
+                assert.equal(await goldenPost.count(), 1);
+                const goldenHeading = goldenPost.locator("h3");
+                assert.match(await goldenHeading.innerText(), /新曲を含む全12曲/);
+                assert.match(await goldenHeading.innerText(), /歌唱映像を販売中（期限なし･寄り撮影）/);
+                assert.equal(await goldenHeading.evaluate(el => el.scrollHeight <= el.clientHeight), true, "販売条件を省略せず表示");
+                await goldenPost.getByRole("button", { name: "稽古映像を表示（X）", exact: true }).click();
+                const fallback = goldenPost.getByRole("link", { name: "Xで投稿を見る", exact: false });
+                await fallback.waitFor({ state: "visible" });
+                assert.equal(await fallback.getAttribute("href"), goldenPostUrl);
+                assert.equal(await goldenPost.locator("video").count(), 0, "動画を自己ホストしない");
                 const xImage = xArchive.locator("article img").first();
                 await xImage.scrollIntoViewIfNeeded();
                 await xImage.evaluate(image => image.decode());

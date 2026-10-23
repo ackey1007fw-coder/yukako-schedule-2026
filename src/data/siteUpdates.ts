@@ -16,6 +16,7 @@ export type SiteUpdate = {
   imageLayout?: "portrait-preview" | "contain";
   // 元投稿（X / Instagram など）への外部リンク
   sourceUrl?: string;
+  embedXPost?: boolean;
   // 同じ告知を補う別アカウントの出典。独立した更新カードにはしない。
   additionalSource?: { url: string; label: string };
   // サイト内で詳しく読めるセクションへのアンカー
@@ -468,6 +469,7 @@ const newsUpdates: SiteUpdate[] = news
     category: item.label,
     title: item.text,
     sourceUrl: item.url.startsWith("#") ? undefined : item.url,
+    embedXPost: item.embedXPost,
     anchor: item.url.startsWith("#") ? item.url : undefined,
     ...newsContext[item.url]
   }));

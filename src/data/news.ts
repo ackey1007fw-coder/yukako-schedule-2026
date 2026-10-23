@@ -9,9 +9,19 @@ export type NewsItem = {
   listedAt?: string;
   // 同じ投稿の専用カードがある場合、そのidをportal feedの重複判定に使う。
   siteUpdateId?: string;
+  // 元投稿の動画をX公式ウィジェットで表示する。動画ファイルは取得しない。
+  embedXPost?: boolean;
 };
 
 export const news: NewsItem[] = [
+  {
+    date: "2026.10.23",
+    label: "X",
+    text: "『Golden & Glass』新曲を含む全12曲🎶 キャストの歌とダンスを劇場・配信で。応援コンテンツの歌唱映像を販売中（期限なし･寄り撮影）。稽古映像は元投稿へ。#ゆかマリリン",
+    url: "https://x.com/yukako_produce/status/2113599620542824827",
+    listedAt: "2026.10.24",
+    embedXPost: true
+  },
   {
     date: "2026.10.21",
     label: "X",

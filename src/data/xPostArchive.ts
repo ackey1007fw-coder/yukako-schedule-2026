@@ -16,6 +16,7 @@ export type XArchivePost = {
   category: string;
   account: XArchiveAccount;
   sourceUrl: string;
+  embedXPost?: boolean;
   detailAnchor?: string;
   images: XArchiveImage[];
 };
@@ -112,6 +113,7 @@ export function collectXArchivePosts(updates: SiteUpdate[]): XArchivePost[] {
     const existing = posts.get(key);
     if (existing) {
       existing.images = uniqueImages([...existing.images, ...images]);
+      existing.embedXPost ||= update.embedXPost;
       continue;
     }
 
@@ -123,6 +125,7 @@ export function collectXArchivePosts(updates: SiteUpdate[]): XArchivePost[] {
       category: update.category,
       account: identity.account,
       sourceUrl: identity.sourceUrl,
+      embedXPost: update.embedXPost,
       detailAnchor: update.detailAnchor ?? update.anchor,
       images
     });
