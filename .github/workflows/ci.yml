@@ -5,6 +5,12 @@ name: CI
 on:
   pull_request:
     branches: [main]
+  workflow_dispatch:
+    inputs:
+      verify_production:
+        description: "公開済みの本番サイトでも表示を検証する"
+        type: boolean
+        default: false
 
 concurrency:
   group: ci-pr-${{ github.event.pull_request.number }}
@@ -62,6 +68,7 @@ jobs:
       - name: Verify responsive layout and source links
         env:
           PLAYWRIGHT_QA_DIR: ${{ runner.temp }}/yukako-browser-qa
+          VERIFY_PRODUCTION: ${{ github.event_name == 'workflow_dispatch' && inputs.verify_production }}
         run: |
           npm install --prefix "$PLAYWRIGHT_QA_DIR" --no-package-lock --ignore-scripts playwright@1.56.1
           node "$PLAYWRIGHT_QA_DIR/node_modules/playwright/cli.js" install --with-deps chromium
@@ -70,11 +77,13 @@ jobs:
           const { spawn } = require("node:child_process");
           const { chromium } = require(process.env.PLAYWRIGHT_QA_DIR + "/node_modules/playwright");
           (async () => {
-            const server = spawn(process.execPath, ["scripts/serve-dist.mjs", "4173"], { stdio: "inherit" });
+            const verifyProduction = process.env.VERIFY_PRODUCTION === "true";
+            const baseUrl = verifyProduction ? "https://yukako-schedule-2026.vercel.app" : "http://127.0.0.1:4173";
+            const server = verifyProduction ? undefined : spawn(process.execPath, ["scripts/serve-dist.mjs", "4173"], { stdio: "inherit" });
             let browser;
             try {
               for (let n = 0; n < 80; n++) {
-                try { if ((await fetch("http://127.0.0.1:4173")).ok) break; } catch {}
+                try { if ((await fetch(baseUrl)).ok) break; } catch {}
                 await new Promise(resolve => setTimeout(resolve, 250));
               }
               browser = await chromium.launch();
@@ -83,7 +92,7 @@ jobs:
                 await page.route("https://www.tiktok.com/**", route => route.fulfill({ status: 200, body: "<html><body>TikTok embed placeholder for layout test</body></html>", contentType: "text/html" }));
                 // Xが利用できない環境でも、元投稿への導線を失わない。
                 await page.route("https://platform.twitter.com/**", route => route.abort());
-                await page.goto("http://127.0.0.1:4173/#next-destination");
+                await page.goto(baseUrl + "/#next-destination");
                 const golden = page.locator("#event-yukako-golden-glass-2026-11");
                 await golden.scrollIntoViewIfNeeded();
                 assert.equal(await golden.count(), 1);
@@ -129,8 +138,10 @@ jobs:
                 assert.match(await goldenHeading.innerText(), /新曲を含む全12曲/);
                 assert.match(await goldenHeading.innerText(), /歌唱映像を販売中（期限なし･寄り撮影）/);
                 assert.equal(await goldenHeading.evaluate(el => el.scrollHeight <= el.clientHeight), true, "販売条件を省略せず表示");
-                await goldenPost.getByRole("button", { name: "稽古映像を表示（X）", exact: true }).click();
-                const fallback = goldenPost.getByRole("link", { name: "『Golden & Glass』10月23日の稽古映像付き投稿（Xで開く）", exact: true });
+                await goldenPost.scrollIntoViewIfNeeded();
+                if (verifyProduction) await page.screenshot({ path: process.env.RUNNER_TEMP + "/golden-glass-production-" + width + ".png" });
+                await goldenPost.getByRole("button", { name: "添付映像を表示（X）", exact: true }).click();
+                const fallback = goldenPost.getByRole("link", { name: "2026.10.23 @yukako_produceの映像付き投稿（Xで開く）", exact: true });
                 await fallback.waitFor({ state: "visible" });
                 assert.equal(await fallback.getAttribute("href"), goldenPostUrl);
                 assert.equal(await goldenPost.locator("video").count(), 0, "動画を自己ホストしない");
@@ -173,7 +184,15 @@ jobs:
               }
             } finally {
               if (browser) await browser.close();
-              server.kill();
+              if (server) server.kill();
             }
           })().catch(error => { console.error(error); process.exitCode = 1; });
           JS
+
+      - name: Save production display screenshots
+        if: github.event_name == 'workflow_dispatch' && inputs.verify_production
+        uses: actions/upload-artifact@v4
+        with:
+          name: golden-glass-production-display
+          path: ${{ runner.temp }}/golden-glass-production-*.png
+          if-no-files-found: error

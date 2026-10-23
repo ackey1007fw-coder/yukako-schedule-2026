@@ -181,14 +181,14 @@ export function XPostArchiveSection() {
                   {post.embedXPost && (
                     <div className="mt-4 min-w-0 [&_iframe]:max-w-full">
                       {embeddedPosts.has(post.id) ? (
-                        <XPostEmbed url={post.sourceUrl} label="『Golden & Glass』10月23日の稽古映像付き投稿" />
+                        <XPostEmbed url={post.sourceUrl} label={`${post.date} ${accountLabel[post.account]}の映像付き投稿`} />
                       ) : (
                         <button
                           type="button"
                           onClick={() => setEmbeddedPosts((current) => new Set([...current, post.id]))}
                           className="min-h-11 w-full rounded-lg border border-rosefog/30 bg-porcelain px-3 py-2 text-sm font-bold text-rosefog hover:bg-rosefog/5"
                         >
-                          稽古映像を表示（X）
+                          添付映像を表示（X）
                         </button>
                       )}
                     </div>
