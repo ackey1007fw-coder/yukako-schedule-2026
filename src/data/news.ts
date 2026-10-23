@@ -29,7 +29,7 @@ export const news: NewsItem[] = [
   {
     date: "2026.10.15",
     label: "公演HP",
-    text: "『Golden & Glass』🌹 公演HP公開！来場・配信チケットと応援コンテンツの申込先はこちら。#ゆかマリリン",
+    text: "『Golden & Glass』🌹 作品の世界観・キャスト情報は公演HPへ。来場・配信チケット、応援コンテンツも受付中。#ゆかマリリン",
     url: "https://yukamarilyn.hp.peraichi.com/",
     listedAt: "2026.10.15",
     siteUpdateId: "yukako-golden-glass-2026-11"
