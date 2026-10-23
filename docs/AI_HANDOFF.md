@@ -1,6 +1,6 @@
 # AI_HANDOFF — yukako-schedule-2026
 
-> 最終更新: 2026-10-18（Claude Code が、これまでの制作・運用の全体を次のAIへ引き継ぐために作成）
+> 最終更新: 2026-10-23（X投稿・写真アーカイブを追加。過去の制作運用は引き続き本書と各PR参照）
 > 読む順番: `AGENTS.md` → `README.md` → **このファイル** → `docs/DECISION_LOG.md` → `docs/AI_PROJECT_MEMORY_SKILL.md` → 自分の担当指示書（Claude=`docs/SONNET.md` / Codex=`docs/CODEX.md`）→ 対象コード・テスト
 
 「いまの状態」のセーブデータです。ルール本体は `AGENTS.md`。ここはルールを追加・緩和しません。
@@ -30,6 +30,7 @@
 - **#ゆかJET**（プロデュース公演）特集：チーム、キャストの声、エールカード、千秋楽レポート、オリジナル楽曲、告知資料（`gojetPromo.ts`）
 - 出演アーカイブ: お嬢様はバンドがやりたい、龍馬くん、BABY SHARK LIVE!、MISS GRAND JAPAN（MC・運営）、秋田との絆（竿燈・角館・大曲花火・秋田犬）、主演ショートドラマ『次の目的地』前後編
 - 配信コーナー `#stream-recaps`（`docs/STREAM-RECAPS.md`）、SHOWROOM（`room_id=347571`）、フォトギャラリー（本人スナップのみ）、クリップ、歩み、プロフィール
+- X投稿・写真アーカイブ `#x-posts`：`src/data/xPostArchive.ts` が既存の `siteUpdates`（news / #ゆかJET を含む）を元投稿URLで集約。個人 @mokoopy と公演 @yukako_produce のみを対象に、重複排除・写真の拡大・検索・絞り込み。未収録のX投稿を自動取得する機能ではない。`pnpm test:x-archive` でURLと実画像を検証。
 
 ## 3. 現在地点（2026-10-18 時点）
 

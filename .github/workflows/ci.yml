@@ -47,6 +47,9 @@ jobs:
       - name: Stream recap tests
         run: pnpm test:stream-recaps
 
+      - name: X post archive and media tests
+        run: pnpm test:x-archive
+
       - name: Build
         run: pnpm build
 
@@ -111,6 +114,24 @@ jobs:
                 assert.ok(posterStyle.width > 0);
                 if (width >= 640) assert.equal(posterStyle.fit, "contain");
                 console.log("Golden & Glass QA passed:", width);
+                // X投稿アーカイブ：本人投稿の写真・出典・スマホ幅を実画面で確認
+                const xArchive = page.locator("#x-posts");
+                assert.equal(await xArchive.count(), 1);
+                await xArchive.scrollIntoViewIfNeeded();
+                assert.equal(await xArchive.locator("article").count(), 12);
+                const xImage = xArchive.locator("article img").first();
+                await xImage.scrollIntoViewIfNeeded();
+                await xImage.evaluate(image => image.decode());
+                const photoResult = await xImage.evaluate(image => ({ width: image.naturalWidth, fit: getComputedStyle(image).objectFit }));
+                assert.ok(photoResult.width > 0, "Xアーカイブの実写真を表示できる");
+                assert.equal(photoResult.fit, "contain", "X写真を切り抜かない");
+                assert.ok(await xArchive.locator('a[href^="https://x.com/"]').count() > 0);
+                await xArchive.getByRole("button", { name: "優花子さん @mokoopy" }).click();
+                await xArchive.getByRole("button", { name: "写真・画像付きのみ" }).click();
+                assert.ok(await xArchive.locator("article img").count() > 0);
+                const xPageWidth = await page.evaluate(() => document.documentElement.scrollWidth);
+                assert.ok(xPageWidth <= width, "X投稿一覧で横スクロールしない: " + xPageWidth);
+                console.log("X archive photo QA passed:", width);
                 const video = page.locator('#next-destination iframe[title*="前編"]');
                 await video.scrollIntoViewIfNeeded();
                 const result = await page.evaluate(() => {

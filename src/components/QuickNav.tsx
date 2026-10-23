@@ -40,6 +40,7 @@ const updatesItem = { label: "更新", href: "#updates", Icon: Megaphone };
 const moreItems = [
   { label: "配信コーナー", href: "#stream-recaps" },
   { label: "最新情報", href: "#updates" },
+  { label: "X投稿・写真アーカイブ", href: "#x-posts" },
   { label: "#ゆかJET", href: "#next" },
   { label: "これまでの歩み", href: "#highlights" },
   { label: "ベイビーシャーク", href: "#baby-shark-live" },
