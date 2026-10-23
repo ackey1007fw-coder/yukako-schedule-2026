@@ -30,6 +30,7 @@
 - **#ゆかJET**（プロデュース公演）特集：チーム、キャストの声、エールカード、千秋楽レポート、オリジナル楽曲、告知資料（`gojetPromo.ts`）
 - 出演アーカイブ: お嬢様はバンドがやりたい、龍馬くん、BABY SHARK LIVE!、MISS GRAND JAPAN（MC・運営）、秋田との絆（竿燈・角館・大曲花火・秋田犬）、主演ショートドラマ『次の目的地』前後編
 - 配信コーナー `#stream-recaps`（`docs/STREAM-RECAPS.md`）、SHOWROOM（`room_id=347571`）、フォトギャラリー（本人スナップのみ）、クリップ、歩み、プロフィール
+- X投稿・写真アーカイブ `#x-posts`：`src/data/xPostArchive.ts` が既存の `siteUpdates`（news / #ゆかJET を含む）を元投稿URLで集約。個人 @mokoopy と公演 @yukako_produce のみを対象に、重複排除・写真の拡大・検索・絞り込み。未収録のX投稿を自動取得する機能ではない。`pnpm test:x-archive` でURLと実画像を検証。
 
 ## 3. 現在地点（2026-10-18 時点）
 
