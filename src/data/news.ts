@@ -14,6 +14,14 @@ export type NewsItem = {
 };
 
 export const news: NewsItem[] = [
+  // 2026.10.23 22:35 JST 本人X。新規オフショットは元投稿へ（写真ファイルの取得・複製なし）。
+  {
+    date: "2026.10.23",
+    label: "X",
+    text: "『Golden & Glass』の稽古から🌹 優花子さんの新しいオフショットと稽古動画の紹介は本人Xへ。#ゆかマリリン",
+    url: "https://x.com/mokoopy/status/2113625367936373199",
+    listedAt: "2026.10.24"
+  },
   {
     date: "2026.10.23",
     label: "X",
@@ -21,6 +29,14 @@ export const news: NewsItem[] = [
     url: "https://x.com/yukako_produce/status/2113599620542824827",
     listedAt: "2026.10.24",
     embedXPost: true
+  },
+  // 2026.10.22 22:00 JST 本人X。新しい写真4点は元投稿で表示する。
+  {
+    date: "2026.10.22",
+    label: "X",
+    text: "『Golden & Glass』の歌唱写真やキャスト集合写真、登場人物ガイドなど4枚の写真を公開🌹 元投稿はこちら。#ゆかマリリン",
+    url: "https://x.com/mokoopy/status/2113254122300575911",
+    listedAt: "2026.10.24"
   },
   {
     date: "2026.10.21",
