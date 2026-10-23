@@ -1,4 +1,4 @@
-import { CalendarCheck, MapPin, Megaphone, MessageCircleHeart } from "lucide-react";
+import { CalendarCheck, MapPin, Megaphone, MessageCircleHeart, Ticket } from "lucide-react";
 import { profile } from "../data/profile";
 import { getResponsiveImageProps } from "../lib/responsiveImage";
 import type { ScheduleEvent, SocialLink } from "../types";
@@ -24,6 +24,9 @@ const socialShortLabels: Record<string, string> = {
 export function Hero({ nextEvent, socialLinks }: HeroProps) {
   const showroomLink = socialLinks.find((link) => link.kind === "showroom");
   const mainSocials = socialLinks.slice(0, 5);
+  const goldenGlassHomepage = nextEvent?.id === "yukako-golden-glass-2026-11"
+    ? nextEvent.links.find((link) => link.url === "https://yukamarilyn.hp.peraichi.com/")?.url
+    : undefined;
 
   return (
     <section
@@ -91,6 +94,14 @@ export function Hero({ nextEvent, socialLinks }: HeroProps) {
                   <CalendarCheck className="h-4 w-4" aria-hidden="true" />
                   {nextEvent ? "出演予定を見る" : "これまでの歩みを見る"}
                 </a>
+                {goldenGlassHomepage && (
+                  <ExternalButton href={goldenGlassHomepage} variant="gold" className="px-5">
+                    <span className="inline-flex items-center gap-2">
+                      <Ticket className="h-4 w-4" aria-hidden="true" />
+                      公演HP・チケット案内
+                    </span>
+                  </ExternalButton>
+                )}
                 <a
                   href="#updates"
                   className="yukako-button yukako-button-ghost min-h-12 px-4 py-3 text-sm shadow-sm"
