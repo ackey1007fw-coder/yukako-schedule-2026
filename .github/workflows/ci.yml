@@ -47,6 +47,9 @@ jobs:
       - name: Stream recap tests
         run: pnpm test:stream-recaps
 
+      - name: X post archive and media tests
+        run: pnpm test:x-archive
+
       - name: Build
         run: pnpm build
 
