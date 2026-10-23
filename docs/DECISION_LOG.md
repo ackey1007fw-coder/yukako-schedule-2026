@@ -19,3 +19,4 @@
 | D-12 | 2026-08-19 | 親ポータル「応援アーカイブ」へ feed を提供、フッターに戻り導線 | 複数の応援サイトを横断で見られるように | `scripts/generate-portal-feed.mjs` / `pnpm test:portal-feed` |
 | D-13 | 既知 | プロフィールの血液型「AB型」はオーナーが明示確認した事実。一次情報がWeb検索で見つからないことだけを理由に削除しない | オーナー判断の保持 | `src/data/profile.ts` |
 | D-14 | 2026-10-18 | オーナーの明示依頼により Project Memory（HANDOFF / DECISION_LOG / SKILL）を導入 | 複数AI・複数チャットで説明し直しなく引き継ぐ | `docs/` |
+| D-15 | 2026-10-23 | X投稿のアーカイブは既存の確認済み `siteUpdates` を正本に、元投稿のstatus IDで重複排除。本人 @mokoopy と公演 @yukako_produce 以外を除外。写真は元投稿に対応する既存自己ホスト画像のみ。Xタイムラインをスクレイピングしない | 元投稿・写真の取り違えを防ぎ、従来のNEWS/特集更新を一度の登録で一覧へ反映するため | `src/data/xPostArchive.ts` / `#x-posts` / `pnpm test:x-archive` |
