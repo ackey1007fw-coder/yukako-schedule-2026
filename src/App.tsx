@@ -41,6 +41,7 @@ import { SupportersSection } from "./components/SupportersSection";
 import { StructuredData } from "./components/StructuredData";
 import { TodayNextPanel } from "./components/TodayNextPanel";
 import { WorkCreditsSection } from "./components/WorkCreditsSection";
+import { XPostArchiveSection } from "./components/XPostArchiveSection";
 import {
   getMonthKeysFromEvents,
   isEventPast,
@@ -164,9 +165,18 @@ function App() {
               </a>
             ))}
           </div>
+          <div className="mx-auto mt-4 max-w-7xl text-center">
+            <a href="#x-posts" className="inline-flex min-h-11 items-center gap-2 text-sm font-bold text-rosefog underline underline-offset-4 hover:text-ink">
+              優花子さんのX投稿を写真付きで振り返る
+              <ArrowDownRight className="h-4 w-4" aria-hidden="true" />
+            </a>
+          </div>
         </nav>
         <SectionReveal>
           <LatestUpdatesSection />
+        </SectionReveal>
+        <SectionReveal>
+          <XPostArchiveSection />
         </SectionReveal>
         <SectionReveal>
           <NextDestinationSection />
