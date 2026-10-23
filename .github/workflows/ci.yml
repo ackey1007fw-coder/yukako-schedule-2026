@@ -130,7 +130,7 @@ jobs:
                 assert.match(await goldenHeading.innerText(), /歌唱映像を販売中（期限なし･寄り撮影）/);
                 assert.equal(await goldenHeading.evaluate(el => el.scrollHeight <= el.clientHeight), true, "販売条件を省略せず表示");
                 await goldenPost.getByRole("button", { name: "稽古映像を表示（X）", exact: true }).click();
-                const fallback = goldenPost.getByRole("link", { name: "Xで投稿を見る", exact: false });
+                const fallback = goldenPost.getByRole("link", { name: "『Golden & Glass』10月23日の稽古映像付き投稿（Xで開く）", exact: true });
                 await fallback.waitFor({ state: "visible" });
                 assert.equal(await fallback.getAttribute("href"), goldenPostUrl);
                 assert.equal(await goldenPost.locator("video").count(), 0, "動画を自己ホストしない");
