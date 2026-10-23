@@ -1,6 +1,6 @@
 # AI_HANDOFF — yukako-schedule-2026
 
-> 最終更新: 2026-10-18（Claude Code が、これまでの制作・運用の全体を次のAIへ引き継ぐために作成）
+> 最終更新: 2026-10-23（X投稿・写真アーカイブを追加。過去の制作運用は引き続き本書と各PR参照）
 > 読む順番: `AGENTS.md` → `README.md` → **このファイル** → `docs/DECISION_LOG.md` → `docs/AI_PROJECT_MEMORY_SKILL.md` → 自分の担当指示書（Claude=`docs/SONNET.md` / Codex=`docs/CODEX.md`）→ 対象コード・テスト
 
 「いまの状態」のセーブデータです。ルール本体は `AGENTS.md`。ここはルールを追加・緩和しません。
