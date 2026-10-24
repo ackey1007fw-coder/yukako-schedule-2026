@@ -1,3 +1,4 @@
+import { goldenGlassPostPhotos } from "./goldenGlassPhotos";
 import { gojetFeatureUpdates } from "./gojetFeatureUpdates";
 import { siteUpdates, updateTimestamp, type SiteUpdate } from "./siteUpdates";
 
@@ -37,6 +38,7 @@ export function getXArchiveIdentity(url?: string) {
 // 本人のX投稿に紐付けて、すでにサイト内で自己ホストしている実写真のみ。
 // 別の日の似た写真を自動で流用しない。新しい画像は元投稿との照合後に追加する。
 const verifiedXPostPhotos: Record<string, XArchiveImage[]> = {
+  ...goldenGlassPostPhotos,
   "2105673651819598269": [{
     src: "/images/yukako-october-portrait-2026-10-01.jpg",
     alt: "2026年10月1日のX投稿。夕暮れの海辺で髪に手を添える吉井優花子さん"

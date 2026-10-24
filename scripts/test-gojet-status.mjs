@@ -1562,35 +1562,42 @@ try {
     "角館セクションに緑の中で微笑む写真が無い"
   );
   const { galleryPhotos } = await server.ssrLoadModule("/src/data/photos.ts");
-  assert.equal(
-    galleryPhotos[0]?.src,
-    "/images/yukako-october-portrait-2026-10-01.jpg",
-    "ギャラリー先頭に10/1 海辺ポートレート写真が無い"
-  );
-  assert.equal(
-    galleryPhotos[1]?.src,
-    "/images/yukako-summer-portrait-2026-09-25.jpg",
-    "ギャラリー先頭に9/25 海辺ポートレート写真が無い"
-  );
-  assert.equal(
-    galleryPhotos[2]?.src,
-    "/images/yukako-theater-arms-open-story-2026-09-21.jpg",
-    "ギャラリー先頭付近から9/21 劇場ストーリーズ写真が消えている"
-  );
-  assert.equal(
-    galleryPhotos[3]?.src,
-    "/images/baby-shark/baby-shark-hetty-with-babyshark-2026-09-18.jpg",
-    "ギャラリー先頭付近から9/18 ベイビーシャーク ヘッティー写真が消えている"
-  );
+  assert.deepEqual(galleryPhotos.slice(0, 4).map(photo => photo.src), [
+    "/images/yukako-golden-glass-offshot-2026-10-23-01.webp",
+    "/images/yukako-golden-glass-rehearsal-2026-10-22-01.webp",
+    "/images/yukako-golden-glass-rehearsal-2026-10-22-02.webp",
+    "/images/yukako-golden-glass-rehearsal-2026-10-22-03.webp"
+  ]);
+  assert.ok(!galleryPhotos.some(photo => photo.src.includes("character-guide")), "告知資料を人物ギャラリーに混ぜない");
   assert.equal(
     galleryPhotos[4]?.src,
-    "/images/yukako-mgj-miss-peace-reflection-2026-09-11.jpg",
-    "ギャラリー先頭付近から9/11 MISS PEACE振り返りの写真が消えている"
+    "/images/yukako-october-portrait-2026-10-01.jpg",
+    "既存ギャラリーに10/1 海辺ポートレート写真が無い"
+  );
+  assert.equal(
+    galleryPhotos[5]?.src,
+    "/images/yukako-summer-portrait-2026-09-25.jpg",
+    "既存ギャラリーに9/25 海辺ポートレート写真が無い"
+  );
+  assert.equal(
+    galleryPhotos[6]?.src,
+    "/images/yukako-theater-arms-open-story-2026-09-21.jpg",
+    "既存ギャラリーから9/21 劇場ストーリーズ写真が消えている"
   );
   assert.equal(
     galleryPhotos[7]?.src,
+    "/images/baby-shark/baby-shark-hetty-with-babyshark-2026-09-18.jpg",
+    "既存ギャラリーから9/18 ベイビーシャーク ヘッティー写真が消えている"
+  );
+  assert.equal(
+    galleryPhotos[8]?.src,
+    "/images/yukako-mgj-miss-peace-reflection-2026-09-11.jpg",
+    "既存ギャラリーから9/11 MISS PEACE振り返りの写真が消えている"
+  );
+  assert.equal(
+    galleryPhotos[11]?.src,
     "/images/yukako-omagari-shinchan-statue-2026-09-05.jpg",
-    "ギャラリー先頭付近にしんちゃん像の写真が無い"
+    "既存ギャラリーにしんちゃん像の写真が無い"
   );
   assert.ok(
     galleryPhotos.some(

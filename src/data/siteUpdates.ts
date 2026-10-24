@@ -1,3 +1,4 @@
+import { goldenGlassPostPhotos } from "./goldenGlassPhotos";
 import { gojetFeatureUpdates } from "./gojetFeatureUpdates";
 import { news } from "./news";
 import { galleryUpdate } from "./photos";
@@ -415,6 +416,8 @@ const standaloneCoversNews = (item: (typeof news)[number]) =>
 
 // 本文・投稿日は news を正本にし、告知を読むための補足だけを元投稿URLで結び付ける。
 const newsContext: Partial<Record<string, Pick<SiteUpdate, "summary" | "additionalSource" | "image" | "imageLayout" | "anchor">>> = {
+  "https://x.com/mokoopy/status/2113625367936373199": { image: goldenGlassPostPhotos["2113625367936373199"][0], imageLayout: "contain" },
+  "https://x.com/mokoopy/status/2113254122300575911": { image: goldenGlassPostPhotos["2113254122300575911"][0], imageLayout: "contain" },
   "https://x.com/yukako_produce/status/2112484292324700222": {
     summary: "キャストが振付を合わせる、約35秒の稽古場の一幕。マリリン・モンローをモチーフにしたオリジナルミュージカル。公演詳細・来場／配信チケットは出演予定へ。",
     anchor: "#schedule"
