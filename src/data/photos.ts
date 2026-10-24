@@ -1,3 +1,5 @@
+import { goldenGlassPostPhotos } from "./goldenGlassPhotos";
+
 export type GalleryPhoto = {
   src: string;
   alt: string;
@@ -13,6 +15,8 @@ const driveYukakoPhotos: GalleryPhoto[] = Array.from({ length: 118 }, (_, index)
 });
 
 export const galleryPhotos: GalleryPhoto[] = [
+  ...goldenGlassPostPhotos["2113625367936373199"],
+  ...goldenGlassPostPhotos["2113254122300575911"].slice(0, 3),
   {
     src: "/images/yukako-october-portrait-2026-10-01.jpg",
     alt: "夕暮れの海辺で、白いTシャツに淡い色のキャミソール姿で両手を髪に添える吉井優花子さん（2026.10.1 Xより）"

@@ -151,7 +151,7 @@ jobs:
                   ["2113254122300575911", "2026.10.22", /3班それぞれの演出を劇場・配信で/]
                 ]) {
                   const url = "https://x.com/mokoopy/status/" + id;
-                  assert.equal(await page.locator('#updates a[href="' + url + '"]').count(), 1, "NEWSの出典を1件だけ掲載");
+                  assert.equal(await page.locator('#updates a:not([aria-hidden="true"])[href="' + url + '"]').count(), 1, "NEWSの出典を1件だけ掲載");
                   const post = xArchive.locator("article").filter({ has: page.locator('a[href="' + url + '"]') });
                   assert.equal(await post.count(), 1, "本人投稿を重複なく掲載");
                   assert.match(await post.locator("h3").innerText(), title);
@@ -160,7 +160,21 @@ jobs:
                   const source = post.getByRole("link", { name: date + " @mokoopyの投稿（Xで開く）", exact: true });
                   await source.waitFor({ state: "visible" });
                   assert.equal(await source.getAttribute("href"), url);
-                  assert.equal(await post.locator("img,video").count(), 0, "本人のメディアを複製しない");
+                  assert.equal(await post.locator("video").count(), 0, "引用動画を自己ホストしない");
+                  assert.equal(await post.locator("img").count(), id === "2113625367936373199" ? 1 : 4, "元投稿の全画像を掲載");
+                  for (const photo of await post.locator("img").all()) {
+                    await photo.scrollIntoViewIfNeeded();
+                    await photo.evaluate(image => image.decode());
+                    assert.ok(await photo.evaluate(image => image.naturalWidth > 0 && getComputedStyle(image).objectFit === "contain"), "画像と文字を切り抜かない");
+                  }
+                  if (id === "2113254122300575911") {
+                    await post.getByRole("button", { name: /の画像4を拡大$/ }).click();
+                    const dialog = page.getByRole("dialog");
+                    await dialog.locator("img").evaluate(image => image.decode());
+                    assert.match(await dialog.locator("img").getAttribute("src"), /character-guide/);
+                    assert.equal(await dialog.locator("img").evaluate(image => getComputedStyle(image).objectFit), "contain");
+                    await dialog.getByRole("button", { name: "閉じる", exact: true }).click();
+                  }
                   const box = await post.boundingBox();
                   assert.ok(box && box.x >= 0 && box.x + box.width <= width, JSON.stringify(box));
                 }

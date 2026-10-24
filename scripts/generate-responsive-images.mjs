@@ -8,7 +8,7 @@ const imagesRoot = path.join(root, "public", "images");
 const optimizedRoot = path.join(imagesRoot, "optimized");
 const manifestPath = path.join(root, "src", "data", "imageManifest.ts");
 const targetWidths = [360, 480, 720, 960, 1280, 1600];
-const imageExtensions = new Set([".jpg", ".jpeg", ".png"]);
+const imageExtensions = new Set([".jpg", ".jpeg", ".png", ".webp"]);
 
 const toPosix = (value) => value.split(path.sep).join("/");
 
