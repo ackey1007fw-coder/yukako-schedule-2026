@@ -9,18 +9,19 @@ export type NewsItem = {
   listedAt?: string;
   // 同じ投稿の専用カードがある場合、そのidをportal feedの重複判定に使う。
   siteUpdateId?: string;
-  // 元投稿の動画をX公式ウィジェットで表示する。動画ファイルは取得しない。
+  // 元投稿の写真・動画をX公式ウィジェットで表示する。メディアファイルは取得しない。
   embedXPost?: boolean;
 };
 
 export const news: NewsItem[] = [
-  // 2026.10.23 22:35 JST 本人X。新規オフショットは元投稿へ（写真ファイルの取得・複製なし）。
+  // 本人Xを直接照合済み。稽古3日目の動画は引用先、オフショットはこの投稿の添付。
   {
     date: "2026.10.23",
     label: "X",
-    text: "『Golden & Glass』の稽古から🌹 優花子さんの新しいオフショットと稽古動画の紹介は本人Xへ。#ゆかマリリン",
+    text: "『Golden & Glass』稽古3日目の動画とオフショット🌹 応援コンテンツの案内も、優花子さんの元投稿へ。#ゆかマリリン",
     url: "https://x.com/mokoopy/status/2113625367936373199",
-    listedAt: "2026.10.24"
+    listedAt: "2026.10.24",
+    embedXPost: true
   },
   {
     date: "2026.10.23",
@@ -30,13 +31,14 @@ export const news: NewsItem[] = [
     listedAt: "2026.10.24",
     embedXPost: true
   },
-  // 2026.10.22 22:00 JST 本人X。新しい写真4点は元投稿で表示する。
+  // 本人Xの本文・添付画像リンク4点を直接照合済み。写真の細かな内容は説明に補わない。
   {
     date: "2026.10.22",
     label: "X",
-    text: "『Golden & Glass』の歌唱写真やキャスト集合写真、登場人物ガイドなど4枚の写真を公開🌹 元投稿はこちら。#ゆかマリリン",
+    text: "『Golden & Glass』11/26〜30、Air Studio 両国へ🌹 3班それぞれの演出を劇場・配信で。公演紹介と添付画像は本人Xへ。#ゆかマリリン",
     url: "https://x.com/mokoopy/status/2113254122300575911",
-    listedAt: "2026.10.24"
+    listedAt: "2026.10.24",
+    embedXPost: true
   },
   {
     date: "2026.10.21",
