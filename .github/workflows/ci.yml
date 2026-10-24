@@ -145,6 +145,7 @@ jobs:
                 await fallback.waitFor({ state: "visible" });
                 assert.equal(await fallback.getAttribute("href"), goldenPostUrl);
                 assert.equal(await goldenPost.locator("video").count(), 0, "動画を自己ホストしない");
+                await page.locator("#updates").getByRole("button", { name: /^過去の更新をすべて見る/ }).click();
                 for (const [id, date, title] of [
                   ["2113625367936373199", "2026.10.23", /稽古3日目の動画とオフショット/],
                   ["2113254122300575911", "2026.10.22", /3班それぞれの演出を劇場・配信で/]
