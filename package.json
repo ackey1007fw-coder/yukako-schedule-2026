@@ -22,7 +22,8 @@
     "build": "tsc -b && node node_modules/vite/bin/vite.js build",
     "postbuild": "node scripts/generate-archive-pages.mjs && node scripts/generate-works-pages.mjs && node scripts/generate-portal-feed.mjs",
     "preview": "vite preview --host 127.0.0.1",
-    "serve:dist": "node scripts/serve-dist.mjs"
+    "serve:dist": "node scripts/serve-dist.mjs",
+    "test:stream-schedule": "node scripts/test-stream-schedule.mjs"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",

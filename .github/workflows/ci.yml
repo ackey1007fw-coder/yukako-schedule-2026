@@ -50,6 +50,9 @@ jobs:
       - name: Gojet status tests
         run: pnpm test:gojet
 
+      - name: Stream schedule tests
+        run: pnpm test:stream-schedule
+
       - name: Stream recap tests
         run: pnpm test:stream-recaps
 
@@ -214,6 +217,21 @@ jobs:
                 assert.equal(await page.locator('#next-destination a[href="https://www.tiktok.com/@short_drama00/video/7689265805757893909"]').count(), 1);
                 console.log("Responsive layout QA passed:", JSON.stringify(result));
                 await page.close();
+                // 固定JST日付で、手入力の配信予定が今日欄と配信欄へ出ることを検証。
+                if (!verifyProduction) {
+                  const schedulePage = await browser.newPage({ viewport: { width, height: 900 } });
+                  await schedulePage.clock.setFixedTime(new Date("2026-10-31T12:00:00+09:00"));
+                  await schedulePage.route("**/api/showroom*", route => route.fulfill({ status: 200, body: "{}", contentType: "application/json" }));
+                  await schedulePage.goto(baseUrl + "/#today");
+                  const today = schedulePage.locator("#today");
+                  assert.match(await today.innerText(), /SHOWROOM配信/);
+                  assert.match(await today.innerText(), /21:30/);
+                  assert.doesNotMatch(await today.innerText(), /今日は予定なし/);
+                  assert.equal(await today.getByRole("link").first().getAttribute("href"), "https://www.showroom-live.com/room/profile?room_id=347571");
+                  assert.match(await schedulePage.locator("#showroom").innerText(), /21:30 開始/);
+                  assert.ok(await schedulePage.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+                  await schedulePage.close();
+                }
               }
             } finally {
               if (browser) await browser.close();
