@@ -4,6 +4,8 @@ import {
   gojetTimetable,
   type GojetTimetableDay
 } from "../data/gojetTimetable";
+import { streamSchedule } from "../data/streamSchedule";
+import { profile } from "../data/profile";
 import type { ScheduleEvent } from "../types";
 import { FinaleBadge } from "./FinaleBadge";
 
@@ -123,6 +125,8 @@ const GojetAppearancePanel = ({
 
 export function TodayNextPanel({ todayEvents, nextEvent, now = new Date() }: TodayNextPanelProps) {
   const todayKey = getJstDateKey(now);
+  const todayStream = streamSchedule.filter((slot) => slot.date === todayKey)
+    .sort((a, b) => a.time.localeCompare(b.time))[0];
   const todayGojetDay = gojetTimetable.find((day) => day.date === todayKey);
 
   if (todayGojetDay) {
@@ -153,12 +157,26 @@ export function TodayNextPanel({ todayEvents, nextEvent, now = new Date() }: Tod
   return (
     <section id="today" className="scroll-mt-32 bg-porcelain px-4 py-6 sm:px-6 lg:px-8">
       <div className="mx-auto grid max-w-7xl gap-3 sm:grid-cols-2">
-        <Panel
-          eyebrow={todayEvents.length > 1 ? `今日の予定 ${todayEvents.length}件` : "今日の予定"}
-          event={todayEvents[0]}
-          empty="今日は予定なし"
-          Icon={CalendarClock}
-        />
+        {todayEvents.length === 0 && todayStream ? (
+          <a
+            href={profile.showroom.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="yukako-card yukako-lift min-w-0 border-rosefog/25 bg-white p-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-champagne sm:p-5"
+          >
+            <span className="block text-[11px] font-black uppercase tracking-[0.16em] text-champagneInk">今日の予定</span>
+            <strong className="mt-1 block font-display text-xl leading-tight text-ink">SHOWROOM配信</strong>
+            <span className="mt-2 block text-sm font-bold text-ink/70">{todayStream.time}〜 開始予定（日本時間）</span>
+            <span className="mt-1 block text-xs text-ink/55">最新の予定は本人ルームで確認</span>
+          </a>
+        ) : (
+          <Panel
+            eyebrow={todayEvents.length > 1 ? `今日の予定 ${todayEvents.length}件` : "今日の予定"}
+            event={todayEvents[0]}
+            empty="今日は予定なし"
+            Icon={CalendarClock}
+          />
+        )}
         <Panel
           eyebrow="次の予定"
           event={nextEvent}
