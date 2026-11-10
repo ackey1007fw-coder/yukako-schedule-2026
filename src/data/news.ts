@@ -14,6 +14,95 @@ export type NewsItem = {
 };
 
 export const news: NewsItem[] = [
+  // 2026.10.24以降の本人・プロデュース公開X。dateはJSTの元投稿日、listedAtはサイト掲載日。
+  // 画像は自己ホストせず、元投稿はX埋め込みで見る。
+  {
+    date: "2026.11.8",
+    label: "X",
+    text: "『Golden & Glass』稽古——マリリン像が濃くなってきた🌹 観劇チケットも受付中。#ゆかマリリン",
+    url: "https://x.com/mokoopy/status/2119418679708590485",
+    listedAt: "2026.11.10",
+    embedXPost: true
+  },
+  {
+    date: "2026.11.7",
+    label: "X",
+    text: "C班マリリン役、稽古は次の課題までしっかり進行中🔥 台詞も歌も入れて。#ゆかマリリン",
+    url: "https://x.com/mokoopy/status/2118850431283868057",
+    listedAt: "2026.11.10",
+    embedXPost: true
+  },
+  {
+    date: "2026.11.5",
+    label: "X",
+    text: "マリリン・モンローがモチーフのオリジナルミュージカル『Golden & Glass』🎶 11/26〜30・配信あり。#ゆかマリリン",
+    url: "https://x.com/mokoopy/status/2118276885256019999",
+    listedAt: "2026.11.10",
+    embedXPost: true
+  },
+  {
+    date: "2026.11.3",
+    label: "X",
+    text: "芝居稽古スタート🔥 マリリン役として突き詰める。11/26〜11/30、Air Studio両国。#ゆかマリリン",
+    url: "https://x.com/mokoopy/status/2117607799660364205",
+    listedAt: "2026.11.10",
+    embedXPost: true
+  },
+  {
+    date: "2026.11.2",
+    label: "X",
+    text: "プロデュースアカウントより——芝居稽古が始まりました✨ 公演HP・応援コンテンツは元投稿へ。#ゆかマリリン",
+    url: "https://x.com/yukako_produce/status/2117248959324578297",
+    listedAt: "2026.11.10",
+    embedXPost: true
+  },
+  {
+    date: "2026.11.2",
+    label: "X",
+    text: "ハロウィン配信👻 5年目はキラキラうさちゃん。歌って盛り上がった一夜。#秋田の優花子",
+    url: "https://x.com/mokoopy/status/2116926474284564895",
+    listedAt: "2026.11.10",
+    embedXPost: true
+  },
+  {
+    date: "2026.10.31",
+    label: "X",
+    text: "10/31 21:30〜ハロウィン配信の案内（終了済み）。あわせて『Golden & Glass』も。",
+    url: "https://x.com/mokoopy/status/2116228320031559998",
+    listedAt: "2026.11.10"
+  },
+  {
+    date: "2026.10.29",
+    label: "X",
+    text: "『Golden & Glass』登場人物紹介スレッド①〜⑩——マリリンから始まるキャスト案内。詳細は元投稿へ。#ゆかマリリン",
+    url: "https://x.com/yukako_produce/status/2115776663099466163",
+    listedAt: "2026.11.10",
+    embedXPost: true
+  },
+  {
+    date: "2026.10.27",
+    label: "X",
+    text: "エールカードと歌唱動画など、応援コンテンツの案内🌹 #ゆかマリリン",
+    url: "https://x.com/mokoopy/status/2115065668471255285",
+    listedAt: "2026.11.10",
+    embedXPost: true
+  },
+  {
+    date: "2026.10.26",
+    label: "X",
+    text: "撮影のため秋田へ👹 11月舞台のセリフも覚える。",
+    url: "https://x.com/mokoopy/status/2114703503935561817",
+    listedAt: "2026.11.10",
+    embedXPost: true
+  },
+  {
+    date: "2026.10.26",
+    label: "X",
+    text: "マリリンの台詞覚え中❤️‍🔥 流れをまとめて、録音合わせで練習中。#ゆかマリリン",
+    url: "https://x.com/mokoopy/status/2114374310303555744",
+    listedAt: "2026.11.10",
+    embedXPost: true
+  },
   // 本人Xを直接照合済み。稽古3日目の動画は引用先、オフショットはこの投稿の添付。
   {
     date: "2026.10.23",

@@ -23,6 +23,7 @@ jobs:
   quality:
     name: Quality checks
     runs-on: ubuntu-24.04
+    timeout-minutes: 45
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -66,16 +67,23 @@ jobs:
         run: node scripts/check-site-identity.mjs main
 
       - name: Verify responsive layout and source links
+        timeout-minutes: 10
         env:
           PLAYWRIGHT_QA_DIR: ${{ runner.temp }}/yukako-browser-qa
           VERIFY_PRODUCTION: ${{ github.event_name == 'workflow_dispatch' && inputs.verify_production }}
         run: |
           npm install --prefix "$PLAYWRIGHT_QA_DIR" --no-package-lock --ignore-scripts playwright@1.56.1
-          node "$PLAYWRIGHT_QA_DIR/node_modules/playwright/cli.js" install --with-deps chromium
           node --input-type=commonjs <<'JS'
           const assert = require("node:assert/strict");
           const { spawn } = require("node:child_process");
           const { chromium } = require(process.env.PLAYWRIGHT_QA_DIR + "/node_modules/playwright");
+          const log = (...args) => process.stdout.write(args.map(String).join(" ") + "\n");
+          const decodeImage = (locator) => locator.evaluate(async (image) => {
+            await Promise.race([
+              image.decode().catch(() => undefined),
+              new Promise((resolve) => setTimeout(resolve, 8000))
+            ]);
+          });
           (async () => {
             const verifyProduction = process.env.VERIFY_PRODUCTION === "true";
             const baseUrl = verifyProduction ? "https://yukako-schedule-2026.vercel.app" : "http://127.0.0.1:4173";
@@ -86,9 +94,13 @@ jobs:
                 try { if ((await fetch(baseUrl)).ok) break; } catch {}
                 await new Promise(resolve => setTimeout(resolve, 250));
               }
-              browser = await chromium.launch();
+              log("preview server ready");
+              // ランナー付属の Chrome を使う。playwright install chromium の zip 展開がここで何度も止まるため。
+              browser = await chromium.launch({ channel: "chrome", timeout: 30000 });
               for (const width of [390, 1440]) {
                 const page = await browser.newPage({ viewport: { width, height: 900 } });
+                page.setDefaultTimeout(30000);
+                page.setDefaultNavigationTimeout(30000);
                 await page.route("https://www.tiktok.com/**", route => route.fulfill({ status: 200, body: "<html><body>TikTok embed placeholder for layout test</body></html>", contentType: "text/html" }));
                 // Xが利用できない環境でも、元投稿への導線を失わない。
                 await page.route("https://platform.twitter.com/**", route => route.abort());
@@ -118,21 +130,33 @@ jobs:
                 const goldenBox = await golden.boundingBox();
                 assert.ok(goldenBox && goldenBox.x >= 0 && goldenBox.x + goldenBox.width <= width, JSON.stringify(goldenBox));
                 const poster = page.locator('#updates img[src*="yukako-golden-glass-poster"]');
-                assert.equal(await poster.count(), 1);
-                await poster.scrollIntoViewIfNeeded();
-                await poster.evaluate(image => image.decode());
-                const posterStyle = await poster.evaluate(image => ({ width: image.naturalWidth, fit: getComputedStyle(image).objectFit }));
-                assert.ok(posterStyle.width > 0);
-                if (width >= 640) assert.equal(posterStyle.fit, "contain");
-                console.log("Golden & Glass QA passed:", width);
+                // 公演HPカードは最新から14日を超えると先頭3枚から外れる。フライヤーはカードにあるときだけ見る。
+                if (await poster.count() > 0) {
+                  assert.equal(await poster.count(), 1);
+                  await poster.scrollIntoViewIfNeeded();
+                  await decodeImage(poster);
+                  const posterStyle = await poster.evaluate(image => ({ width: image.naturalWidth, fit: getComputedStyle(image).objectFit }));
+                  assert.ok(posterStyle.width > 0);
+                  if (width >= 640) assert.equal(posterStyle.fit, "contain");
+                }
+                log("Golden & Glass QA passed:", width);
                 // X投稿アーカイブ：本人投稿の写真・出典・スマホ幅を実画面で確認
                 const xArchive = page.locator("#x-posts");
                 assert.equal(await xArchive.count(), 1);
                 await xArchive.scrollIntoViewIfNeeded();
                 assert.equal(await xArchive.locator("article").count(), 12);
+                const latestNewsUrl = "https://x.com/mokoopy/status/2119418679708590485";
                 const goldenPostUrl = "https://x.com/yukako_produce/status/2113599620542824827";
+                const articleWithUrl = (url) => xArchive.locator('article:has(a[href="' + url + '"])');
+                assert.equal(await page.locator('#updates a[href="' + latestNewsUrl + '"]').count(), 1, "最新NEWSを先頭カードに載せる");
+                await page.locator("#updates").getByRole("button", { name: /^過去の更新をすべて見る/ }).click();
                 assert.equal(await page.locator('#updates a[href="' + goldenPostUrl + '"]').count(), 1);
-                const goldenPost = xArchive.locator("article").filter({ has: page.locator('a[href="' + goldenPostUrl + '"]') });
+                const loadMoreArchive = xArchive.getByRole("button", { name: "過去の投稿をもっと見る" });
+                for (let n = 0; n < 5 && await articleWithUrl(goldenPostUrl).count() === 0; n++) {
+                  assert.equal(await loadMoreArchive.count(), 1, "Xアーカイブに過去投稿の続きがある");
+                  await loadMoreArchive.click();
+                }
+                const goldenPost = articleWithUrl(goldenPostUrl);
                 assert.equal(await goldenPost.count(), 1);
                 const goldenHeading = goldenPost.locator("h3");
                 assert.match(await goldenHeading.innerText(), /新曲を含む全12曲/);
@@ -145,14 +169,13 @@ jobs:
                 await fallback.waitFor({ state: "visible" });
                 assert.equal(await fallback.getAttribute("href"), goldenPostUrl);
                 assert.equal(await goldenPost.locator("video").count(), 0, "動画を自己ホストしない");
-                await page.locator("#updates").getByRole("button", { name: /^過去の更新をすべて見る/ }).click();
                 for (const [id, date, title] of [
                   ["2113625367936373199", "2026.10.23", /稽古3日目の動画とオフショット/],
                   ["2113254122300575911", "2026.10.22", /3班それぞれの演出を劇場・配信で/]
                 ]) {
                   const url = "https://x.com/mokoopy/status/" + id;
                   assert.equal(await page.locator('#updates a:not([aria-hidden="true"])[href="' + url + '"]').count(), 1, "NEWSの出典を1件だけ掲載");
-                  const post = xArchive.locator("article").filter({ has: page.locator('a[href="' + url + '"]') });
+                  const post = articleWithUrl(url);
                   assert.equal(await post.count(), 1, "本人投稿を重複なく掲載");
                   assert.match(await post.locator("h3").innerText(), title);
                   assert.ok((await post.innerText()).includes(date), "元投稿日を表示");
@@ -164,13 +187,13 @@ jobs:
                   assert.equal(await post.locator("img").count(), id === "2113625367936373199" ? 1 : 4, "元投稿の全画像を掲載");
                   for (const photo of await post.locator("img").all()) {
                     await photo.scrollIntoViewIfNeeded();
-                    await photo.evaluate(image => image.decode());
+                    await decodeImage(photo);
                     assert.ok(await photo.evaluate(image => image.naturalWidth > 0 && getComputedStyle(image).objectFit === "contain"), "画像と文字を切り抜かない");
                   }
                   if (id === "2113254122300575911") {
                     await post.getByRole("button", { name: /の画像4を拡大$/ }).click();
                     const dialog = page.getByRole("dialog");
-                    await dialog.locator("img").evaluate(image => image.decode());
+                    await decodeImage(dialog.locator("img"));
                     assert.match(await dialog.locator("img").getAttribute("src"), /character-guide/);
                     assert.equal(await dialog.locator("img").evaluate(image => getComputedStyle(image).objectFit), "contain");
                     await dialog.getByRole("button", { name: "閉じる", exact: true }).click();
@@ -180,7 +203,7 @@ jobs:
                 }
                 const xImage = xArchive.locator("article img").first();
                 await xImage.scrollIntoViewIfNeeded();
-                await xImage.evaluate(image => image.decode());
+                await decodeImage(xImage);
                 const photoResult = await xImage.evaluate(image => ({ width: image.naturalWidth, fit: getComputedStyle(image).objectFit }));
                 assert.ok(photoResult.width > 0, "Xアーカイブの実写真を表示できる");
                 assert.equal(photoResult.fit, "contain", "X写真を切り抜かない");
@@ -190,7 +213,7 @@ jobs:
                 assert.ok(await xArchive.locator("article img").count() > 0);
                 const xPageWidth = await page.evaluate(() => document.documentElement.scrollWidth);
                 assert.ok(xPageWidth <= width, "X投稿一覧で横スクロールしない: " + xPageWidth);
-                console.log("X archive photo QA passed:", width);
+                log("X archive photo QA passed:", width);
                 const video = page.locator('#next-destination iframe[title*="前編"]');
                 await video.scrollIntoViewIfNeeded();
                 const result = await page.evaluate(() => {
@@ -212,14 +235,14 @@ jobs:
                 assert.equal(await sequel.getAttribute("src"), "https://www.tiktok.com/player/v1/7689265805757893909?autoplay=0");
                 assert.equal(await page.locator('#next-destination iframe').count(), 2);
                 assert.equal(await page.locator('#next-destination a[href="https://www.tiktok.com/@short_drama00/video/7689265805757893909"]').count(), 1);
-                console.log("Responsive layout QA passed:", JSON.stringify(result));
+                log("Responsive layout QA passed:", JSON.stringify(result));
                 await page.close();
               }
             } finally {
               if (browser) await browser.close();
               if (server) server.kill();
             }
-          })().catch(error => { console.error(error); process.exitCode = 1; });
+          })().then(() => process.exit(0)).catch(error => { console.error(error); process.exit(1); });
           JS
 
       - name: Save production display screenshots
