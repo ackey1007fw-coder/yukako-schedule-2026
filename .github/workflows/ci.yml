@@ -23,6 +23,7 @@ jobs:
   quality:
     name: Quality checks
     runs-on: ubuntu-24.04
+    timeout-minutes: 45
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -66,6 +67,7 @@ jobs:
         run: node scripts/check-site-identity.mjs main
 
       - name: Verify responsive layout and source links
+        timeout-minutes: 20
         env:
           PLAYWRIGHT_QA_DIR: ${{ runner.temp }}/yukako-browser-qa
           VERIFY_PRODUCTION: ${{ github.event_name == 'workflow_dispatch' && inputs.verify_production }}
@@ -89,6 +91,8 @@ jobs:
               browser = await chromium.launch();
               for (const width of [390, 1440]) {
                 const page = await browser.newPage({ viewport: { width, height: 900 } });
+                page.setDefaultTimeout(30000);
+                page.setDefaultNavigationTimeout(30000);
                 await page.route("https://www.tiktok.com/**", route => route.fulfill({ status: 200, body: "<html><body>TikTok embed placeholder for layout test</body></html>", contentType: "text/html" }));
                 // Xが利用できない環境でも、元投稿への導線を失わない。
                 await page.route("https://platform.twitter.com/**", route => route.abort());
@@ -118,12 +122,15 @@ jobs:
                 const goldenBox = await golden.boundingBox();
                 assert.ok(goldenBox && goldenBox.x >= 0 && goldenBox.x + goldenBox.width <= width, JSON.stringify(goldenBox));
                 const poster = page.locator('#updates img[src*="yukako-golden-glass-poster"]');
-                assert.equal(await poster.count(), 1);
-                await poster.scrollIntoViewIfNeeded();
-                await poster.evaluate(image => image.decode());
-                const posterStyle = await poster.evaluate(image => ({ width: image.naturalWidth, fit: getComputedStyle(image).objectFit }));
-                assert.ok(posterStyle.width > 0);
-                if (width >= 640) assert.equal(posterStyle.fit, "contain");
+                // 公演HPカードは最新から14日を超えると先頭3枚から外れる。フライヤーはカードにあるときだけ見る。
+                if (await poster.count() > 0) {
+                  assert.equal(await poster.count(), 1);
+                  await poster.scrollIntoViewIfNeeded();
+                  await poster.evaluate(image => image.decode());
+                  const posterStyle = await poster.evaluate(image => ({ width: image.naturalWidth, fit: getComputedStyle(image).objectFit }));
+                  assert.ok(posterStyle.width > 0);
+                  if (width >= 640) assert.equal(posterStyle.fit, "contain");
+                }
                 console.log("Golden & Glass QA passed:", width);
                 // X投稿アーカイブ：本人投稿の写真・出典・スマホ幅を実画面で確認
                 const xArchive = page.locator("#x-posts");
