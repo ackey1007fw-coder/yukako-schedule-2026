@@ -66,35 +66,13 @@ jobs:
       - name: Site identity guard
         run: node scripts/check-site-identity.mjs main
 
-      - name: Cache Playwright Chromium
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/ms-playwright
-          key: playwright-1.56.1-chromium-linux
-
-      - name: Install Playwright Chromium
-        timeout-minutes: 6
-        env:
-          PLAYWRIGHT_QA_DIR: ${{ runner.temp }}/yukako-browser-qa
-        run: |
-          npm install --prefix "$PLAYWRIGHT_QA_DIR" --no-package-lock --ignore-scripts playwright@1.56.1
-          install_chromium() {
-            local extra="$1"
-            timeout 150 node "$PLAYWRIGHT_QA_DIR/node_modules/playwright/cli.js" install $extra chromium
-          }
-          if ! install_chromium --with-deps; then
-            echo "Chromium install stalled; clearing cache and retrying without apt"
-            rm -rf "$HOME/.cache/ms-playwright"
-            install_chromium
-          fi
-          echo "PLAYWRIGHT_CHROMIUM_READY"
-
       - name: Verify responsive layout and source links
         timeout-minutes: 10
         env:
           PLAYWRIGHT_QA_DIR: ${{ runner.temp }}/yukako-browser-qa
           VERIFY_PRODUCTION: ${{ github.event_name == 'workflow_dispatch' && inputs.verify_production }}
         run: |
+          npm install --prefix "$PLAYWRIGHT_QA_DIR" --no-package-lock --ignore-scripts playwright@1.56.1
           node --input-type=commonjs <<'JS'
           const assert = require("node:assert/strict");
           const { spawn } = require("node:child_process");
@@ -117,7 +95,8 @@ jobs:
                 await new Promise(resolve => setTimeout(resolve, 250));
               }
               log("preview server ready");
-              browser = await chromium.launch({ timeout: 30000 });
+              // ランナー付属の Chrome を使う。playwright install chromium の zip 展開がここで何度も止まるため。
+              browser = await chromium.launch({ channel: "chrome", timeout: 30000 });
               for (const width of [390, 1440]) {
                 const page = await browser.newPage({ viewport: { width, height: 900 } });
                 page.setDefaultTimeout(30000);
