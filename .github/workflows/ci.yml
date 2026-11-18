@@ -145,7 +145,7 @@ jobs:
                 assert.equal(await xArchive.count(), 1);
                 await xArchive.scrollIntoViewIfNeeded();
                 assert.equal(await xArchive.locator("article").count(), 12);
-                const latestNewsUrl = "https://x.com/mokoopy/status/2119418679708590485";
+                const latestNewsUrl = "https://x.com/mokoopy/status/2123107414807662882";
                 const goldenPostUrl = "https://x.com/yukako_produce/status/2113599620542824827";
                 const articleWithUrl = (url) => xArchive.locator('article:has(a[href="' + url + '"])');
                 assert.equal(await page.locator('#updates a[href="' + latestNewsUrl + '"]').count(), 1, "最新NEWSを先頭カードに載せる");
