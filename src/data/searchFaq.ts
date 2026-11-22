@@ -49,10 +49,9 @@ export const searchFaqs: SearchFaq[] = [
   },
   {
     question: "配信で観られる？",
-    answer:
-      "A班・B班・C班の本編と全キャストLIVEのアーカイブ配信は、2026年8月10日をもって終了しました。配信終了までの記録は#ゆかJET特集に残しています。",
-    href: "#gojet-streaming-viewing-ended-2026-08-09",
-    linkLabel: "配信終了の活動記録を見る"
+    answer: "配信の有無・申込先は、各公演の出演予定をご確認ください。",
+    href: "#schedule",
+    linkLabel: "出演予定を見る"
   },
   {
     question: "会場はどこ？",
