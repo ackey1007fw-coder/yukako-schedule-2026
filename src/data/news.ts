@@ -14,6 +14,13 @@ export type NewsItem = {
 };
 
 export const news: NewsItem[] = [
+  {
+    date: "2026.11.23",
+    label: "Instagram",
+    text: "MGJ NEXTの物語動画に優花子さんが出演🎬 TaTaさんの実体験をもとにしたお話です。TaTaさん、ガキさんと共演、出演協力はカイさん。#LGBTQ",
+    url: "https://www.instagram.com/reel/DgFHclas0ca/",
+    listedAt: "2026.11.23"
+  },
   // 2026.10.24以降の本人・プロデュース公開X。dateはJSTの元投稿日、listedAtはサイト掲載日。
   // 画像は自己ホストせず、元投稿はX埋め込みで見る。
   {
